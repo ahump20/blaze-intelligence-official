@@ -29,6 +29,7 @@
     "test": "craco test",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://blaze-intelligence-official.vercel.app",
   "eslintConfig": {
     "extends": [
       "react-app",
