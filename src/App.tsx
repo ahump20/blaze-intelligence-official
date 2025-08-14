@@ -1,5 +1,6 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { trackPageView } from './utils/analytics';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Elements } from '@stripe/react-stripe-js';
@@ -50,6 +51,18 @@ const auth0Config = {
   },
 };
 
+// Page tracking component
+const PageTracker: React.FC = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Track page view on route change
+    trackPageView(location.pathname + location.search, document.title);
+  }, [location]);
+
+  return null;
+};
+
 function App() {
   return (
     <HelmetProvider>
@@ -60,6 +73,7 @@ function App() {
               <SportsDataProvider>
                 <Router>
                   <div className="min-h-screen bg-gray-50">
+                    <PageTracker />
                     <Navigation />
                     <RealTimeUpdates />
                     <Routes>

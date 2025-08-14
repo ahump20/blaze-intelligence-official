@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
+import { identifyUser, trackEvent } from '../utils/analytics';
 
 interface User {
   id: string;
@@ -70,19 +71,62 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           };
 
           setUser(userData);
+          
+          // Track user identification for analytics
+          identifyUser(userData.id, {
+            email: userData.email,
+            name: userData.name,
+            subscription_plan: userData.subscription?.plan || 'free',
+            subscription_status: userData.subscription?.status || 'active',
+            favorite_sports: userData.preferences?.favoriteSports,
+            signup_date: new Date().toISOString(),
+          });
+
+          // Track login event
+          trackEvent({
+            action: 'login',
+            category: 'authentication',
+            label: 'successful',
+            custom_parameters: {
+              user_id: userData.id,
+              plan: userData.subscription?.plan || 'free',
+            },
+          });
         } catch (error) {
           console.error('Failed to initialize user:', error);
           // Create default user profile
-          setUser({
+          const defaultUser: User = {
             id: auth0User.sub!,
             email: auth0User.email!,
             name: auth0User.name!,
             picture: auth0User.picture,
-            subscription: { plan: 'free', status: 'active' },
+            subscription: { plan: 'free' as const, status: 'active' as const },
             preferences: {
               favoriteTeams: [],
               favoriteSports: ['football', 'basketball'],
               notifications: true,
+            },
+          };
+          
+          setUser(defaultUser);
+
+          // Track new user signup
+          identifyUser(defaultUser.id, {
+            email: defaultUser.email,
+            name: defaultUser.name,
+            subscription_plan: 'free',
+            subscription_status: 'active',
+            is_new_user: true,
+            signup_date: new Date().toISOString(),
+          });
+
+          trackEvent({
+            action: 'signup',
+            category: 'authentication',
+            label: 'new_user',
+            custom_parameters: {
+              user_id: defaultUser.id,
+              plan: 'free',
             },
           });
         }
@@ -102,6 +146,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = () => {
+    // Track logout event before clearing user data
+    if (user) {
+      trackEvent({
+        action: 'logout',
+        category: 'authentication',
+        label: 'user_initiated',
+        custom_parameters: {
+          user_id: user.id,
+          plan: user.subscription?.plan || 'free',
+          session_duration: Date.now(), // Could calculate actual duration
+        },
+      });
+    }
+
     auth0Logout({
       logoutParams: {
         returnTo: window.location.origin,

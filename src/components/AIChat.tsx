@@ -9,6 +9,7 @@ import {
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { trackAIChat, trackEvent } from '../utils/analytics';
 
 interface Message {
   id: string;
@@ -156,8 +157,23 @@ const AIChat: React.FC = () => {
     
     if (!canAccessFeature('ai_insights')) {
       toast.error('AI insights require a Professional or Enterprise plan');
+      trackEvent({
+        action: 'feature_blocked',
+        category: 'conversion',
+        label: 'ai_insights',
+        custom_parameters: {
+          user_plan: user?.subscription?.plan || 'free',
+          blocked_feature: 'ai_insights',
+        },
+      });
       return;
     }
+
+    // Track message sent
+    trackAIChat('message_sent', {
+      message_length: input.trim().length,
+      user_plan: user?.subscription?.plan || 'free',
+    });
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -182,7 +198,16 @@ const AIChat: React.FC = () => {
     setMessages(prev => [...prev, thinkingMessage]);
 
     try {
+      const startTime = Date.now();
       const aiResponse = await generateAIResponse(userMessage.content);
+      const responseTime = Date.now() - startTime;
+      
+      // Track response received
+      trackAIChat('response_received', {
+        response_time_ms: responseTime,
+        response_length: aiResponse.length,
+        user_plan: user?.subscription?.plan || 'free',
+      });
       
       // Remove thinking message and add real response
       setMessages(prev => {
@@ -228,7 +253,16 @@ const AIChat: React.FC = () => {
     <>
       {/* Chat Toggle Button */}
       <motion.button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          const newIsOpen = !isOpen;
+          setIsOpen(newIsOpen);
+          
+          // Track chat open/close
+          trackAIChat(newIsOpen ? 'chat_opened' : 'chat_closed', {
+            user_plan: user?.subscription?.plan || 'free',
+            messages_count: messages.length,
+          });
+        }}
         className="fixed bottom-6 right-6 w-14 h-14 gradient-blaze rounded-full shadow-lg flex items-center justify-center z-40"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
