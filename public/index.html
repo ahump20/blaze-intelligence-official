@@ -3,28 +3,76 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#f83b3b" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Blaze Intelligence - Advanced Sports Analytics Platform</title>
+    <meta name="title" content="Blaze Intelligence - Advanced Sports Analytics Platform" />
+    <meta name="description" content="AI-powered sports analytics platform with real-time data, predictions, and advanced ML algorithms. Get instant insights for football, basketball, baseball and more." />
+    <meta name="keywords" content="sports analytics, AI predictions, real-time sports data, machine learning, sports intelligence, game predictions, player stats" />
+    <meta name="author" content="Austin Humphrey" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://blaze-intelligence-enhanced.vercel.app/" />
+    <meta property="og:title" content="Blaze Intelligence - Advanced Sports Analytics Platform" />
+    <meta property="og:description" content="AI-powered sports analytics platform with real-time data, predictions, and advanced ML algorithms. Get instant insights for football, basketball, baseball and more." />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    <meta property="og:site_name" content="Blaze Intelligence" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://blaze-intelligence-enhanced.vercel.app/" />
+    <meta property="twitter:title" content="Blaze Intelligence - Advanced Sports Analytics Platform" />
+    <meta property="twitter:description" content="AI-powered sports analytics platform with real-time data, predictions, and advanced ML algorithms. Get instant insights for football, basketball, baseball and more." />
+    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.png" />
+    <meta property="twitter:creator" content="@BlazeIntel" />
+    
+    <!-- Apple Meta Tags -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Blaze Intelligence" />
+    
+    <!-- PWA Manifest -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api.openai.com" />
+    <link rel="preconnect" href="https://api.stripe.com" />
+    
+    <!-- DNS Prefetch for external APIs -->
+    <link rel="dns-prefetch" href="//api.sportradar.us" />
+    <link rel="dns-prefetch" href="//auth0.com" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Blaze Intelligence",
+      "description": "AI-powered sports analytics platform with real-time data, predictions, and advanced ML algorithms",
+      "url": "https://blaze-intelligence-enhanced.vercel.app/",
+      "applicationCategory": "Sports Analytics",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Blaze Intelligence",
+        "url": "https://blazeintelligence.com"
+      }
+    }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

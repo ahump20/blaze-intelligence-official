@@ -1,7 +1,11 @@
 {
-  "name": "blaze-intelligence-official",
-  "version": "0.1.0",
-  "private": true,
+  "name": "blaze-intelligence-enhanced",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Advanced Sports Analytics Platform with AI-Powered Intelligence, Real-time Data, and Commercial Features",
+  "keywords": ["sports", "analytics", "ai", "react", "typescript", "real-time", "predictions"],
+  "author": "Austin Humphrey <info@blazeintelligence.com>",
+  "license": "MIT",
   "dependencies": {
     "@auth0/auth0-react": "^2.4.0",
     "@headlessui/react": "^2.2.7",
@@ -38,10 +42,26 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build:analyze": "npm run build && npx source-map-explorer 'build/static/js/*.js'",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "test:coverage": "craco test --coverage --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "predeploy": "npm run build",
+    "deploy": "./deploy.sh",
+    "serve": "npx serve -s build",
+    "clean": "rm -rf build node_modules/.cache"
   },
-  "homepage": "https://blaze-intelligence-official.vercel.app",
+  "homepage": "https://blaze-intelligence-enhanced.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahump20/blaze-intelligence-enhanced.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahump20/blaze-intelligence-enhanced/issues"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
