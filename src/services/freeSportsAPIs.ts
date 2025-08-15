@@ -256,7 +256,7 @@ export class FreeSportsAPIService extends EventEmitter {
   // ESPN Hidden API (All Major Sports)
   // ============================================
 
-  async getESPNScoreboard(sport: 'nfl' | 'nba' | 'mlb' | 'nhl', date?: string): Promise<any> {
+  async getESPNScoreboard(sport: 'nfl' | 'nba' | 'mlb' | 'nhl' | 'ncaab', date?: string): Promise<any> {
     const cacheKey = `espn-scoreboard-${sport}-${date || 'today'}`;
     const cached = this.getFromCache(cacheKey);
     if (cached) return cached;
@@ -401,9 +401,9 @@ export class FreeSportsAPIService extends EventEmitter {
     try {
       // Initialize MLB MCP Server
       if (this.isMCPAvailable('mlb-api-mcp')) {
-        const { MLBMCPServer } = await import('mlb-api-mcp');
-        servers.mlb = new MLBMCPServer();
-        console.log('MLB MCP Server initialized');
+        // const { MLBMCPServer } = await import('mlb-api-mcp');
+        // servers.mlb = new MLBMCPServer();
+        console.log('MLB MCP Server not available - package not installed');
       }
     } catch (error) {
       console.log('MLB MCP Server not available');
@@ -412,9 +412,9 @@ export class FreeSportsAPIService extends EventEmitter {
     try {
       // Initialize NHL MCP Server
       if (this.isMCPAvailable('nhl-mcp')) {
-        const { NHLMCPServer } = await import('nhl-mcp');
-        servers.nhl = new NHLMCPServer();
-        console.log('NHL MCP Server initialized');
+        // const { NHLMCPServer } = await import('nhl-mcp');
+        // servers.nhl = new NHLMCPServer();
+        console.log('NHL MCP Server not available - package not installed');
       }
     } catch (error) {
       console.log('NHL MCP Server not available');

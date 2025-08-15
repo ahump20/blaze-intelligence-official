@@ -282,9 +282,7 @@ export class MLBIntegrationHub extends EventEmitter {
 
     // Initialize Champion Engine if enabled
     if (this.config.enableChampionAnalysis) {
-      this.championEngine = new ChampionEnigmaEngine({
-        enableGPU: false
-      });
+      this.championEngine = new ChampionEnigmaEngine();
     }
   }
 
@@ -663,7 +661,7 @@ export class MLBIntegrationHub extends EventEmitter {
     }
 
     // Send to all subscribed channels
-    for (const channelId of this.subscribedChannels) {
+    for (const channelId of Array.from(this.subscribedChannels)) {
       try {
         const channel = await this.discordClient.channels.fetch(channelId) as TextChannel;
         if (channel) {

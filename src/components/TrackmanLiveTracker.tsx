@@ -119,9 +119,7 @@ const TrackmanLiveTracker: React.FC<TrackmanLiveTrackerProps> = ({
 
         // Initialize Champion Engine if enabled
         if (enableChampionAnalysis) {
-          championEngine.current = new ChampionEnigmaEngine({
-            enableGPU: false
-          });
+          championEngine.current = new ChampionEnigmaEngine();
         }
 
         // Set up event listeners
@@ -133,12 +131,12 @@ const TrackmanLiveTracker: React.FC<TrackmanLiveTrackerProps> = ({
           console.log('✅ Trackman connected');
 
           // Start streaming if game mode
-          if (mode === 'game' && gameId) {
+          if (mode === 'game' && gameId && trackmanService.current) {
             trackmanService.current.streamGameData(gameId);
           }
 
           // Subscribe to player if specified
-          if (playerId) {
+          if (playerId && trackmanService.current) {
             trackmanService.current.subscribeToPlayer(playerId);
           }
         });
@@ -297,31 +295,37 @@ const TrackmanLiveTracker: React.FC<TrackmanLiveTrackerProps> = ({
     if (!championEngine.current) return;
 
     // Analyze pitch for champion qualities
-    const analysis = await championEngine.current.analyzePitch({
-      velocity: pitch.releaseSpeed,
-      spinRate: pitch.spinRate,
-      movement: {
-        vertical: pitch.verticalMovement,
-        horizontal: pitch.horizontalMovement
-      },
-      location: {
-        height: pitch.plateHeight,
-        side: pitch.plateSide
-      },
-      situation: {
-        balls: pitch.balls,
-        strikes: pitch.strikes,
-        outs: pitch.outs
+    const analysis = await championEngine.current.analyzeAthlete(
+      pitch.pitcherId || 'unknown',
+      `Pitcher ${pitch.pitcherId}`,
+      'baseball',
+      undefined,
+      {
+        velocity: pitch.releaseSpeed,
+        spinRate: pitch.spinRate,
+        movement: {
+          vertical: pitch.verticalMovement,
+          horizontal: pitch.horizontalMovement
+        },
+        location: {
+          height: pitch.plateHeight,
+          side: pitch.plateSide
+        },
+        situation: {
+          balls: pitch.balls,
+          strikes: pitch.strikes,
+          outs: pitch.outs
+        }
       }
-    });
+    );
 
     // Update champion metrics
     setChampionMetrics({
-      clutchRating: analysis.clutchFactor || 0,
+      clutchRating: analysis.dimensions.clutchGene || 0,
       consistencyScore: calculateConsistency(recentPitches),
-      dominanceIndex: analysis.dominanceScore || 0,
+      dominanceIndex: analysis.dimensions.killerInstinct || 0,
       arsenalDiversity: calculateArsenalDiversity(recentPitches),
-      tunnelEffectiveness: analysis.tunnelScore || 0
+      tunnelEffectiveness: analysis.championScore || 0
     });
   };
 

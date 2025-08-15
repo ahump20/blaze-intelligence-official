@@ -9,7 +9,7 @@ import { EventEmitter } from 'events';
 import { CollegeSportsIntegrationService } from './collegeSportsIntegration';
 import { FreeSportsAPIService } from './freeSportsAPIs';
 import { ChampionEnigmaEngine } from './championEnigmaEngine';
-import { KafkaProducer, KafkaConsumer } from 'kafkajs';
+import { Kafka, Producer, Consumer } from 'kafkajs';
 import Redis from 'ioredis';
 import WebSocket from 'ws';
 
@@ -203,8 +203,8 @@ export class BlazeIntelligenceSports extends EventEmitter {
   private collegeService: CollegeSportsIntegrationService;
   private freeSportsAPI: FreeSportsAPIService;
   private championEngine: ChampionEnigmaEngine;
-  private kafkaProducer?: KafkaProducer;
-  private kafkaConsumer?: KafkaConsumer;
+  private kafkaProducer?: Producer;
+  private kafkaConsumer?: Consumer;
   private redis: Redis;
   private wsConnections: Map<string, WebSocket>;
   private cache: Map<string, { data: any; timestamp: number }>;
@@ -240,10 +240,7 @@ export class BlazeIntelligenceSports extends EventEmitter {
       theOddsApiKey: config.theOddsApiKey
     });
 
-    this.championEngine = new ChampionEnigmaEngine({
-      modelsPath: config.mlModelsPath,
-      enableGPU: false
-    });
+    this.championEngine = new ChampionEnigmaEngine();
 
     // Initialize Redis
     this.redis = new Redis(config.redisUrl || 'redis://localhost:6379');
@@ -349,12 +346,13 @@ export class BlazeIntelligenceSports extends EventEmitter {
         athlete.championProfile = {
           dimensions: championAnalysis.dimensions,
           archetype: championAnalysis.archetype,
-          confidence: championAnalysis.confidence,
-          historicalComparison: championAnalysis.historicalMatches?.[0]?.name,
+          confidence: typeof championAnalysis.confidence === 'object' ? 
+            championAnalysis.confidence.overall : championAnalysis.confidence,
+          historicalComparison: championAnalysis.comparison?.historicalMatch,
           projectedCeiling: this.calculateCeiling(championAnalysis)
         };
         
-        athlete.enigmaScore = championAnalysis.overallScore;
+        athlete.enigmaScore = championAnalysis.championScore;
         athlete.archetype = championAnalysis.archetype;
       }
 

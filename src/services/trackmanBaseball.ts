@@ -9,7 +9,7 @@ import axios, { AxiosInstance } from 'axios';
 import { EventEmitter } from 'events';
 import WebSocket from 'ws';
 import Redis from 'ioredis';
-import { KafkaProducer, KafkaConsumer } from 'kafkajs';
+import { Kafka, Producer, Consumer } from 'kafkajs';
 
 // ============================================
 // Types and Interfaces
@@ -270,7 +270,7 @@ export class TrackmanBaseballService extends EventEmitter {
   private api: AxiosInstance;
   private redis: Redis;
   private ws?: WebSocket;
-  private kafkaProducer?: KafkaProducer;
+  private kafkaProducer?: Producer;
   private accessToken?: string;
   private tokenExpiry?: Date;
   private cache: Map<string, { data: any; timestamp: number }>;
@@ -907,7 +907,9 @@ export class TrackmanBaseballService extends EventEmitter {
     });
 
     this.kafkaProducer = kafka.producer();
-    await this.kafkaProducer.connect();
+    if (this.kafkaProducer) {
+      await this.kafkaProducer.connect();
+    }
 
     console.log('Kafka producer connected for Trackman data');
   }
