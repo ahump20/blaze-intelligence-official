@@ -25,6 +25,7 @@ import AIChat from './components/AIChat';
 import UserProfile from './components/UserProfile';
 import SubscriptionManager from './components/SubscriptionManager';
 import RealTimeUpdates from './components/RealTimeUpdates';
+import CognitivePerformanceDashboard from './components/CognitivePerformanceDashboard';
 
 // Context Providers
 import { AuthProvider } from './contexts/AuthContext';
@@ -95,6 +96,7 @@ function App() {
                       <Route path="/contact" element={<ContactSection />} />
                       <Route path="/profile" element={<UserProfile />} />
                       <Route path="/subscription" element={<SubscriptionManager />} />
+                      <Route path="/cognitive" element={<CognitivePerformanceDashboard />} />
                     </Routes>
                     <AIChat />
                     <Toaster
