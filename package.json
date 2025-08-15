@@ -74,7 +74,7 @@
     "serve": "npx serve -s build",
     "clean": "rm -rf build node_modules/.cache"
   },
-  "homepage": "https://blaze-intelligence.com",
+  "homepage": "https://ahump20.github.io/blaze-intelligence-official",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ahump20/blaze-intelligence-official.git"
