@@ -1,0 +1,125 @@
+{
+  "schemas": {
+    "statcast.pitch.v1": {
+      "type": "record",
+      "name": "PitchEvent",
+      "namespace": "com.cardinals.statcast",
+      "fields": [
+        {"name": "pitch_id", "type": "string"},
+        {"name": "session_id", "type": "string"},
+        {"name": "pitcher_id", "type": "string"},
+        {"name": "event_ts", "type": {"type": "long", "logicalType": "timestamp-millis"}},
+        {"name": "pitch_type", "type": ["null", "string"], "default": null},
+        {"name": "release_speed_mph", "type": ["null", "double"], "default": null},
+        {"name": "spin_rate_rpm", "type": ["null", "double"], "default": null},
+        {"name": "spin_axis_deg", "type": ["null", "double"], "default": null},
+        {"name": "extension_ft", "type": ["null", "double"], "default": null},
+        {"name": "release_pos_x_ft", "type": ["null", "double"], "default": null},
+        {"name": "release_pos_y_ft", "type": ["null", "double"], "default": null},
+        {"name": "release_pos_z_ft", "type": ["null", "double"], "default": null},
+        {"name": "vbreak_in", "type": ["null", "double"], "default": null},
+        {"name": "hbreak_in", "type": ["null", "double"], "default": null},
+        {"name": "plate_x_ft", "type": ["null", "double"], "default": null},
+        {"name": "plate_z_ft", "type": ["null", "double"], "default": null},
+        {"name": "tracking_qa", "type": "double", "default": 0.0},
+        {"name": "ingest_ts", "type": {"type": "long", "logicalType": "timestamp-millis"}}
+      ]
+    },
+    "env.busch.v1": {
+      "type": "record",
+      "name": "EnvObservation",
+      "namespace": "com.cardinals.env",
+      "fields": [
+        {"name": "venue_id", "type": "string"},
+        {"name": "obs_ts", "type": {"type": "long", "logicalType": "timestamp-millis"}},
+        {"name": "temperature_f", "type": "float"},
+        {"name": "humidity_pct", "type": "float"},
+        {"name": "baro_hpa", "type": "float"},
+        {"name": "wind_mph", "type": "float"},
+        {"name": "wind_dir_deg", "type": "float"},
+        {"name": "precip_bool", "type": "boolean"},
+        {"name": "mound_hardness_idx_0_1", "type": ["null", "float"], "default": null},
+        {"name": "clay_moisture_idx_0_1", "type": ["null", "float"], "default": null},
+        {"name": "rig_vibration_idx_0_1", "type": ["null", "float"], "default": null}
+      ]
+    },
+    "calibration.status.v1": {
+      "type": "record",
+      "name": "CalibrationStatus",
+      "namespace": "com.cardinals.calibration",
+      "fields": [
+        {"name": "venue_id", "type": "string"},
+        {"name": "session_id", "type": ["null", "string"], "default": null},
+        {"name": "detected_ts", "type": {"type": "long", "logicalType": "timestamp-millis"}},
+        {"name": "calibration_confidence", "type": "float"},
+        {"name": "action", "type": {"type": "enum", "name": "CalAction", "symbols": ["NONE", "REBASELINE", "FALLBACK", "ALERT"]}}
+      ]
+    },
+    "features.pitcher_live_5m.v2": {
+      "type": "record",
+      "name": "PitcherLive5m",
+      "namespace": "com.cardinals.features",
+      "fields": [
+        {"name": "pitcher_id", "type": "string"},
+        {"name": "feature_ts", "type": {"type": "long", "logicalType": "timestamp-millis"}},
+        {"name": "velo_delta_5", "type": ["null", "float"], "default": null},
+        {"name": "spin_consistency_20", "type": ["null", "float"], "default": null},
+        {"name": "release_height_var_25", "type": ["null", "float"], "default": null},
+        {"name": "command_var_20", "type": ["null", "float"], "default": null},
+        {"name": "tempo_ewma", "type": ["null", "float"], "default": null},
+        {"name": "env_adjusted_vbreak", "type": ["null", "float"], "default": null},
+        {"name": "feature_qa_min_5m", "type": ["null", "float"], "default": null},
+        {"name": "late_data_frac_5m", "type": ["null", "float"], "default": null},
+        {"name": "calibration_confidence", "type": ["null", "float"], "default": null}
+      ]
+    },
+    "context.game.v1": {
+      "type": "record",
+      "name": "GameContext",
+      "namespace": "com.cardinals.game",
+      "fields": [
+        {"name": "session_id", "type": "string"},
+        {"name": "event_ts", "type": {"type": "long", "logicalType": "timestamp-millis"}},
+        {"name": "inning", "type": "int"},
+        {"name": "outs", "type": "int"},
+        {"name": "base_state", "type": "string"},
+        {"name": "score_diff", "type": "int"},
+        {"name": "leverage_index", "type": "double"},
+        {"name": "batter_id", "type": "string"},
+        {"name": "batter_hand", "type": "string"}
+      ]
+    },
+    "biomech.markerless.v1": {
+      "type": "record",
+      "name": "BiomechSummary",
+      "namespace": "com.cardinals.biomech",
+      "fields": [
+        {"name": "biomech_id", "type": "string"},
+        {"name": "session_id", "type": "string"},
+        {"name": "ts_window", "type": {"type": "long", "logicalType": "timestamp-millis"}},
+        {"name": "arm_slot_deg_mean", "type": ["null", "double"], "default": null},
+        {"name": "hip_shoulder_sep_deg", "type": ["null", "double"], "default": null},
+        {"name": "stride_len_ft", "type": ["null", "double"], "default": null},
+        {"name": "trunk_tilt_deg", "type": ["null", "double"], "default": null},
+        {"name": "pelvis_rot_vel_deg_s", "type": ["null", "double"], "default": null},
+        {"name": "elbow_valgus_nm_est", "type": ["null", "double"], "default": null},
+        {"name": "kinematic_qa", "type": "double", "default": 0.0}
+      ]
+    },
+    "wearable.imu.v1": {
+      "type": "record",
+      "name": "WearableSample",
+      "namespace": "com.cardinals.wearable",
+      "fields": [
+        {"name": "pitcher_id", "type": "string"},
+        {"name": "sample_ts", "type": {"type": "long", "logicalType": "timestamp-millis"}},
+        {"name": "hr_bpm", "type": ["null", "int"], "default": null},
+        {"name": "hrv_rmssd_ms", "type": ["null", "double"], "default": null},
+        {"name": "accel_g", "type": ["null", "double"], "default": null},
+        {"name": "gyro_dps", "type": ["null", "double"], "default": null},
+        {"name": "rpe_1_10", "type": ["null", "int"], "default": null},
+        {"name": "sleep_hours_prior", "type": ["null", "double"], "default": null}
+      ]
+    }
+  }
+}

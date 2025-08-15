@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "private": false,
   "description": "Advanced Sports Analytics Platform with AI-Powered Intelligence, Real-time Data, and Commercial Features",
-  "keywords": ["sports", "analytics", "ai", "react", "typescript", "real-time", "predictions"],
+  "keywords": [
+    "sports",
+    "analytics",
+    "ai",
+    "react",
+    "typescript",
+    "real-time",
+    "predictions"
+  ],
   "author": "Austin Humphrey <info@blazeintelligence.com>",
   "license": "MIT",
   "dependencies": {
@@ -50,17 +58,17 @@
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "type-check": "tsc --noEmit",
     "predeploy": "npm run build",
-    "deploy": "./deploy.sh",
+    "deploy": "gh-pages -d build",
     "serve": "npx serve -s build",
     "clean": "rm -rf build node_modules/.cache"
   },
-  "homepage": "https://blaze-intelligence-enhanced.vercel.app",
+  "homepage": "https://ahump20.github.io/blaze-intelligence-official",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahump20/blaze-intelligence-enhanced.git"
+    "url": "git+https://github.com/ahump20/blaze-intelligence-official.git"
   },
   "bugs": {
-    "url": "https://github.com/ahump20/blaze-intelligence-enhanced/issues"
+    "url": "https://github.com/ahump20/blaze-intelligence-official/issues"
   },
   "eslintConfig": {
     "extends": [
@@ -84,7 +92,13 @@
     "@craco/craco": "^7.1.0",
     "@tailwindcss/postcss": "^4.1.12",
     "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.12"
-  }
+  },
+  "main": "craco.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "type": "commonjs"
 }

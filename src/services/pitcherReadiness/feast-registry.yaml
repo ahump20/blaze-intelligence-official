@@ -1,0 +1,270 @@
+# Feast Feature Registry Configuration
+# Cardinals Pitcher Readiness System @ Busch Stadium
+
+project: cardinals_readiness
+provider: local
+registry:
+  path: s3://cardinals-feast-registry/registry.pb
+  cache_ttl_seconds: 60
+online_store:
+  type: redis
+  connection_string: "redis://redis-cluster:6379"
+  key_ttl_seconds: 300
+offline_store:
+  type: file
+  path: s3://cardinals-feast-offline/data/
+
+# =====================================================
+# ENTITIES
+# =====================================================
+
+entities:
+  - name: pitcher
+    description: "MLB pitcher entity"
+    value_type: STRING
+    join_keys:
+      - pitcher_id
+    tags:
+      team: "STL"
+      sport: "baseball"
+
+  - name: session
+    description: "Game or training session"
+    value_type: STRING
+    join_keys:
+      - session_id
+    tags:
+      venue: "busch_iii"
+
+# =====================================================
+# DATA SOURCES
+# =====================================================
+
+data_sources:
+  - name: pitcher_features_kafka
+    type: STREAM
+    event_timestamp_column: feature_ts
+    created_timestamp_column: ingest_ts
+    stream_source:
+      format: avro
+      bootstrap_servers: "kafka-broker:9092"
+      topic: "features.pitcher_live_5m.v2"
+      schema_registry_url: "http://schema-registry:8081"
+      watermark_delay_threshold: 7  # seconds
+
+  - name: baseline_norms_postgres
+    type: BATCH
+    batch_source:
+      type: postgres
+      host: "postgres-primary"
+      port: 5432
+      database: "cardinals"
+      table: "baseline_norms"
+      query: |
+        SELECT 
+          pitcher_id,
+          metric_name,
+          long_term_mean,
+          sd,
+          season_mean,
+          sd_season,
+          season_label,
+          n_samples,
+          update_ts
+        FROM baseline_norms
+        WHERE season_label = '2024'
+
+  - name: workload_postgres
+    type: BATCH
+    batch_source:
+      type: postgres
+      host: "postgres-primary"
+      port: 5432
+      database: "cardinals"
+      table: "workload_day"
+      query: |
+        SELECT 
+          pitcher_id,
+          date_utc,
+          pitches_game,
+          pitches_pen,
+          high_stress_pitches,
+          total_throws,
+          days_rest,
+          travel_miles_48h,
+          travel_timezones_48h
+        FROM workload_day
+        WHERE date_utc >= current_date - interval '30 days'
+
+# =====================================================
+# FEATURE VIEWS
+# =====================================================
+
+feature_views:
+  # Version 2 - Production (with late data handling)
+  - name: fv_pitcher_live_5m_v2
+    entities:
+      - pitcher
+    ttl: 300s  # 5 minutes
+    batch_source: pitcher_features_kafka
+    stream_source: pitcher_features_kafka
+    online: true
+    tags:
+      version: "v2"
+      production: "true"
+      late_data_aware: "true"
+    schema:
+      - name: velo_delta_5
+        dtype: FLOAT
+        description: "5-pitch velocity delta from baseline"
+      - name: spin_consistency_20
+        dtype: FLOAT
+        description: "20-pitch spin rate consistency"
+      - name: release_height_var_25
+        dtype: FLOAT
+        description: "25-pitch release height variance"
+      - name: command_var_20
+        dtype: FLOAT
+        description: "20-pitch command variance"
+      - name: tempo_ewma
+        dtype: FLOAT
+        description: "Exponentially weighted tempo"
+      - name: env_adjusted_vbreak
+        dtype: FLOAT
+        description: "Environment-adjusted vertical break"
+      - name: feature_qa_min_5m
+        dtype: FLOAT
+        description: "Minimum tracking quality in 5 minutes"
+      - name: late_data_frac_5m
+        dtype: FLOAT
+        description: "Fraction of late-arriving data"
+      - name: calibration_confidence
+        dtype: FLOAT
+        description: "Camera calibration confidence"
+
+  # Version 1 - Legacy (for comparison during cutover)
+  - name: fv_pitcher_live_5m_v1
+    entities:
+      - pitcher
+    ttl: 300s
+    batch_source: pitcher_features_kafka
+    online: true
+    tags:
+      version: "v1"
+      production: "false"
+      deprecated: "true"
+      sunset_date: "2025-09-01"
+    schema:
+      - name: velo_delta_5
+        dtype: FLOAT
+      - name: spin_consistency_20
+        dtype: FLOAT
+      - name: release_height_var_25
+        dtype: FLOAT
+      - name: command_var_20
+        dtype: FLOAT
+      - name: tempo_ewma
+        dtype: FLOAT
+
+  # Baseline norms view
+  - name: fv_baseline_norms
+    entities:
+      - pitcher
+    ttl: 86400s  # 24 hours
+    batch_source: baseline_norms_postgres
+    online: true
+    tags:
+      refresh_schedule: "daily"
+      season: "2024"
+    schema:
+      - name: release_speed_mph_mean
+        dtype: FLOAT
+      - name: release_speed_mph_sd
+        dtype: FLOAT
+      - name: spin_rate_rpm_mean
+        dtype: FLOAT
+      - name: spin_rate_rpm_sd
+        dtype: FLOAT
+      - name: vbreak_in_mean
+        dtype: FLOAT
+      - name: vbreak_in_sd
+        dtype: FLOAT
+      - name: n_samples
+        dtype: INT64
+
+  # Workload features
+  - name: fv_workload_rolling
+    entities:
+      - pitcher
+    ttl: 3600s  # 1 hour
+    batch_source: workload_postgres
+    online: true
+    tags:
+      window: "30_days"
+    schema:
+      - name: pitches_3d
+        dtype: INT32
+        description: "Total pitches last 3 days"
+      - name: pitches_7d
+        dtype: INT32
+        description: "Total pitches last 7 days"
+      - name: high_stress_7d
+        dtype: INT32
+        description: "High stress pitches last 7 days"
+      - name: days_rest_current
+        dtype: INT32
+        description: "Current days of rest"
+      - name: travel_fatigue_48h
+        dtype: FLOAT
+        description: "Travel fatigue index"
+
+# =====================================================
+# FEATURE SERVICES
+# =====================================================
+
+feature_services:
+  - name: pitcher_readiness_service
+    description: "Real-time pitcher readiness features"
+    features:
+      - fv_pitcher_live_5m_v2:*  # All v2 features
+      - fv_baseline_norms:release_speed_mph_mean
+      - fv_baseline_norms:spin_rate_rpm_mean
+      - fv_workload_rolling:pitches_7d
+      - fv_workload_rolling:days_rest_current
+    tags:
+      sla: "p99_50ms"
+      criticality: "high"
+
+  - name: pitcher_readiness_cutover
+    description: "A/B testing service for v1 to v2 cutover"
+    features:
+      - fv_pitcher_live_5m_v1:*
+      - fv_pitcher_live_5m_v2:*
+    tags:
+      experiment: "late_data_handling"
+      cutover_date: "2025-08-15"
+
+# =====================================================
+# MONITORING & VALIDATION
+# =====================================================
+
+validation_rules:
+  - name: feature_freshness
+    feature_view: fv_pitcher_live_5m_v2
+    condition: "age(feature_ts) < 5 minutes"
+    alert_threshold: 0.95
+
+  - name: late_data_threshold
+    feature_view: fv_pitcher_live_5m_v2
+    condition: "late_data_frac_5m < 0.2"
+    alert_threshold: 0.90
+
+  - name: calibration_quality
+    feature_view: fv_pitcher_live_5m_v2
+    condition: "calibration_confidence > 0.7"
+    alert_threshold: 0.95
+
+  - name: tracking_quality
+    feature_view: fv_pitcher_live_5m_v2
+    condition: "feature_qa_min_5m > 0.85"
+    alert_threshold: 0.90

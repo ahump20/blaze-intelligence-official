@@ -1,0 +1,501 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "cardinals-pitcher-readiness",
+    "title": "Cardinals Pitcher Readiness - Busch Stadium",
+    "tags": ["mlb", "cardinals", "pitching", "readiness", "real-time"],
+    "timezone": "America/Chicago",
+    "schemaVersion": 30,
+    "version": 1,
+    "refresh": "5s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+        "type": "graph",
+        "title": "Velocity Delta from Baseline (5-pitch)",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "pitcher_velo_delta_5{pitcher_id=~\"$pitcher\"}",
+            "legendFormat": "{{pitcher_name}}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {
+            "label": "MPH Delta",
+            "format": "short",
+            "min": -5,
+            "max": 5
+          }
+        ],
+        "thresholds": [
+          {"value": -2, "colorMode": "critical", "fill": true, "line": true},
+          {"value": -1, "colorMode": "warning", "fill": false, "line": true}
+        ],
+        "alert": {
+          "name": "Velocity Drop Alert",
+          "conditions": [
+            {
+              "evaluator": {"params": [-2], "type": "lt"},
+              "operator": {"type": "and"},
+              "query": {"params": ["A", "5m", "now"]},
+              "reducer": {"params": [], "type": "avg"},
+              "type": "query"
+            }
+          ],
+          "message": "Pitcher velocity drop > 2 mph from baseline"
+        }
+      },
+      {
+        "id": 2,
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+        "type": "graph",
+        "title": "Calibration Confidence & Data Quality",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "calibration_confidence{venue=\"busch_iii\"}",
+            "legendFormat": "Calibration",
+            "refId": "A"
+          },
+          {
+            "expr": "feature_qa_min_5m{pitcher_id=~\"$pitcher\"}",
+            "legendFormat": "Tracking QA",
+            "refId": "B"
+          },
+          {
+            "expr": "1 - late_data_frac_5m{pitcher_id=~\"$pitcher\"}",
+            "legendFormat": "On-Time Data",
+            "refId": "C"
+          }
+        ],
+        "yaxes": [
+          {
+            "label": "Quality Score",
+            "format": "percentunit",
+            "min": 0,
+            "max": 1
+          }
+        ],
+        "thresholds": [
+          {"value": 0.7, "colorMode": "critical", "fill": true, "line": true},
+          {"value": 0.85, "colorMode": "warning", "fill": false, "line": true}
+        ]
+      },
+      {
+        "id": 3,
+        "gridPos": {"h": 6, "w": 8, "x": 0, "y": 8},
+        "type": "stat",
+        "title": "Readiness Index",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "readiness_index{pitcher_id=~\"$pitcher\"}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "graphMode": "area",
+          "colorMode": "background",
+          "orientation": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "red", "value": null},
+                {"color": "yellow", "value": 60},
+                {"color": "green", "value": 80}
+              ]
+            },
+            "unit": "percent",
+            "min": 0,
+            "max": 100
+          }
+        }
+      },
+      {
+        "id": 4,
+        "gridPos": {"h": 6, "w": 8, "x": 8, "y": 8},
+        "type": "stat",
+        "title": "Fatigue Index",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "fatigue_index{pitcher_id=~\"$pitcher\"}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "graphMode": "area",
+          "colorMode": "background",
+          "orientation": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 40},
+                {"color": "red", "value": 70}
+              ]
+            },
+            "unit": "percent",
+            "min": 0,
+            "max": 100
+          }
+        }
+      },
+      {
+        "id": 5,
+        "gridPos": {"h": 6, "w": 8, "x": 16, "y": 8},
+        "type": "stat",
+        "title": "Risk Index",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "risk_index{pitcher_id=~\"$pitcher\"}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "graphMode": "area",
+          "colorMode": "background",
+          "orientation": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 30},
+                {"color": "red", "value": 60}
+              ]
+            },
+            "unit": "percent",
+            "min": 0,
+            "max": 100
+          }
+        }
+      },
+      {
+        "id": 6,
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 14},
+        "type": "graph",
+        "title": "Spin Rate Consistency (20-pitch)",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "spin_consistency_20{pitcher_id=~\"$pitcher\"}",
+            "legendFormat": "{{pitcher_name}}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {
+            "label": "Normalized StdDev",
+            "format": "short",
+            "min": 0,
+            "max": 0.2
+          }
+        ],
+        "thresholds": [
+          {"value": 0.15, "colorMode": "warning", "fill": false, "line": true}
+        ]
+      },
+      {
+        "id": 7,
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 14},
+        "type": "graph",
+        "title": "Command Variance (20-pitch)",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "command_var_20{pitcher_id=~\"$pitcher\"}",
+            "legendFormat": "{{pitcher_name}}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {
+            "label": "Variance (ft²)",
+            "format": "short",
+            "min": 0
+          }
+        ],
+        "thresholds": [
+          {"value": 1.5, "colorMode": "warning", "fill": false, "line": true},
+          {"value": 2.0, "colorMode": "critical", "fill": true, "line": true}
+        ]
+      },
+      {
+        "id": 8,
+        "gridPos": {"h": 6, "w": 12, "x": 0, "y": 22},
+        "type": "heatmap",
+        "title": "Release Point Consistency Heat Map",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "release_height_var_25{pitcher_id=~\"$pitcher\"}",
+            "format": "heatmap",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "calculate": false,
+          "yAxis": {
+            "axisLabel": "Release Height (ft)",
+            "axisPlacement": "left"
+          },
+          "color": {
+            "mode": "spectrum",
+            "scheme": "RdYlGn",
+            "reverse": true
+          }
+        }
+      },
+      {
+        "id": 9,
+        "gridPos": {"h": 6, "w": 12, "x": 12, "y": 22},
+        "type": "graph",
+        "title": "Environment-Adjusted Vertical Break",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "env_adjusted_vbreak{pitcher_id=~\"$pitcher\"}",
+            "legendFormat": "Adjusted VBreak",
+            "refId": "A"
+          },
+          {
+            "expr": "temperature_f{venue=\"busch_iii\"}",
+            "legendFormat": "Temperature (°F)",
+            "refId": "B",
+            "yaxis": 2
+          }
+        ],
+        "yaxes": [
+          {
+            "label": "Break (inches)",
+            "format": "short"
+          },
+          {
+            "label": "Temperature (°F)",
+            "format": "short",
+            "show": true
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 28},
+        "type": "table",
+        "title": "Active Alerts & Recommendations",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "ALERTS{alertname=~\".*pitcher.*\"}",
+            "format": "table",
+            "instant": true,
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "showHeader": true
+        },
+        "fieldConfig": {
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "severity"},
+              "properties": [
+                {
+                  "id": "custom.displayMode",
+                  "value": "color-background"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {"color": "green", "value": null},
+                      {"color": "yellow", "value": 1},
+                      {"color": "red", "value": 2}
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": 11,
+        "gridPos": {"h": 6, "w": 8, "x": 0, "y": 36},
+        "type": "gauge",
+        "title": "Pitch Count (Session)",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "pitch_count_session{pitcher_id=~\"$pitcher\"}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "orientation": "auto",
+          "showThresholdLabels": true,
+          "showThresholdMarkers": true
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": 0},
+                {"color": "yellow", "value": 15},
+                {"color": "orange", "value": 25},
+                {"color": "red", "value": 35}
+              ]
+            },
+            "min": 0,
+            "max": 50,
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 12,
+        "gridPos": {"h": 6, "w": 8, "x": 8, "y": 36},
+        "type": "stat",
+        "title": "End-to-End Latency",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.99, end_to_end_latency_ms)",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "graphMode": "area",
+          "colorMode": "value",
+          "orientation": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 3000},
+                {"color": "red", "value": 5000}
+              ]
+            },
+            "unit": "ms"
+          }
+        }
+      },
+      {
+        "id": 13,
+        "gridPos": {"h": 6, "w": 8, "x": 16, "y": 36},
+        "type": "piechart",
+        "title": "Data Quality Distribution",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum by (quality) (data_quality_distribution)",
+            "legendFormat": "{{quality}}",
+            "refId": "A"
+          }
+        ],
+        "options": {
+          "pieType": "donut",
+          "displayLabels": ["name", "percent"],
+          "legendDisplayMode": "list",
+          "legendPlacement": "right"
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "pitcher",
+          "type": "query",
+          "datasource": "Prometheus",
+          "query": "label_values(pitcher_id)",
+          "regex": "",
+          "multi": true,
+          "includeAll": true,
+          "current": {
+            "selected": true,
+            "text": "STL_656427",
+            "value": "STL_656427"
+          },
+          "options": [
+            {"text": "All", "value": "$__all"},
+            {"text": "Ryan Helsley", "value": "STL_656427"},
+            {"text": "Jordan Hicks", "value": "STL_571945"},
+            {"text": "Miles Mikolas", "value": "STL_621111"}
+          ]
+        },
+        {
+          "name": "session_type",
+          "type": "custom",
+          "current": {
+            "selected": true,
+            "text": "GAME",
+            "value": "GAME"
+          },
+          "options": [
+            {"text": "GAME", "value": "GAME"},
+            {"text": "BULLPEN", "value": "BULLPEN"},
+            {"text": "LIVE_BP", "value": "LIVE_BP"}
+          ]
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "datasource": "Prometheus",
+          "enable": true,
+          "expr": "calibration_shift_event",
+          "name": "Calibration Events",
+          "iconColor": "orange",
+          "step": "10s",
+          "tagKeys": "venue,reason",
+          "textFormat": "Calibration {{reason}}"
+        },
+        {
+          "datasource": "Prometheus",
+          "enable": true,
+          "expr": "pitch_event{pitch_type=\"FF\",release_speed_mph>100}",
+          "name": "100+ MPH Pitches",
+          "iconColor": "red",
+          "step": "1s",
+          "textFormat": "{{release_speed_mph}} mph"
+        }
+      ]
+    },
+    "links": [
+      {
+        "title": "Pitcher Profile",
+        "type": "link",
+        "url": "https://cardinals.mlb.com/player/${pitcher}",
+        "targetBlank": true
+      },
+      {
+        "title": "Feature Store",
+        "type": "link",
+        "url": "http://feast-ui.cardinals.local/features/${pitcher}",
+        "targetBlank": true
+      }
+    ]
+  }
+}

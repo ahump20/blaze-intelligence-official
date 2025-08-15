@@ -43,6 +43,11 @@ const Navigation: React.FC = () => {
             <Link to="/analytics" className="text-gray-700 hover:text-blaze-500 transition-colors">
               Analytics
             </Link>
+            {isAuthenticated && (
+              <Link to="/pitcher-readiness" className="text-gray-700 hover:text-blaze-500 transition-colors">
+                Pitcher Readiness
+              </Link>
+            )}
             <Link to="/demo" className="text-gray-700 hover:text-blaze-500 transition-colors">
               Demo
             </Link>

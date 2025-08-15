@@ -1,0 +1,285 @@
+# Docker Compose for Cardinals Pitcher Readiness System
+# Local development and testing environment
+
+version: '3.8'
+
+services:
+  # =====================================================
+  # KAFKA ECOSYSTEM
+  # =====================================================
+  
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    hostname: zookeeper
+    container_name: cardinals-zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-logs:/var/lib/zookeeper/log
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    hostname: kafka
+    container_name: cardinals-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "9997:9997"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka:29092
+      KAFKA_CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      KAFKA_CONFLUENT_METRICS_ENABLE: 'true'
+      KAFKA_CONFLUENT_SUPPORT_CUSTOMER_ID: anonymous
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+      KAFKA_JMX_PORT: 9997
+      KAFKA_JMX_HOSTNAME: kafka
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.4.0
+    hostname: schema-registry
+    container_name: cardinals-schema-registry
+    depends_on:
+      - kafka
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka:29092
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
+  # =====================================================
+  # POSTGRESQL DATABASE
+  # =====================================================
+  
+  postgres:
+    image: postgres:15-alpine
+    hostname: postgres
+    container_name: cardinals-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: cardinals
+      POSTGRES_USER: cardinals_user
+      POSTGRES_PASSWORD: cardinals_password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./init-data.sql:/docker-entrypoint-initdb.d/02-init-data.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cardinals_user -d cardinals"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =====================================================
+  # FLINK CLUSTER
+  # =====================================================
+  
+  flink-jobmanager:
+    image: flink:1.17.1-scala_2.12-java11
+    hostname: flink-jobmanager
+    container_name: cardinals-flink-jobmanager
+    ports:
+      - "8080:8081"
+    command: jobmanager
+    environment:
+      - FLINK_PROPERTIES=
+        jobmanager.rpc.address: flink-jobmanager
+        parallelism.default: 4
+        state.checkpoints.dir: file:///tmp/flink-checkpoints
+        state.savepoints.dir: file:///tmp/flink-savepoints
+        execution.checkpointing.interval: 60s
+        execution.checkpointing.min-pause: 10s
+        execution.checkpointing.timeout: 10min
+        table.exec.source.idle-timeout: 30s
+    volumes:
+      - flink-checkpoints:/tmp/flink-checkpoints
+      - flink-savepoints:/tmp/flink-savepoints
+      - ./flink-job.sql:/opt/flink/flink-job.sql
+      - ./flink-libs:/opt/flink/lib/custom
+
+  flink-taskmanager:
+    image: flink:1.17.1-scala_2.12-java11
+    hostname: flink-taskmanager
+    container_name: cardinals-flink-taskmanager
+    depends_on:
+      - flink-jobmanager
+    command: taskmanager
+    scale: 2
+    environment:
+      - FLINK_PROPERTIES=
+        jobmanager.rpc.address: flink-jobmanager
+        taskmanager.numberOfTaskSlots: 4
+        parallelism.default: 4
+        taskmanager.memory.process.size: 2g
+        taskmanager.memory.flink.size: 1.5g
+    volumes:
+      - flink-checkpoints:/tmp/flink-checkpoints
+      - flink-savepoints:/tmp/flink-savepoints
+      - ./flink-libs:/opt/flink/lib/custom
+
+  # =====================================================
+  # REDIS (Feature Store)
+  # =====================================================
+  
+  redis:
+    image: redis:7-alpine
+    hostname: redis
+    container_name: cardinals-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+
+  # =====================================================
+  # MONITORING STACK
+  # =====================================================
+  
+  prometheus:
+    image: prom/prometheus:v2.45.0
+    hostname: prometheus
+    container_name: cardinals-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--storage.tsdb.retention.time=7d'
+      - '--web.enable-lifecycle'
+
+  grafana:
+    image: grafana/grafana:10.0.3
+    hostname: grafana
+    container_name: cardinals-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=cardinals
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana-provisioning:/etc/grafana/provisioning
+      - ./grafana-dashboard.json:/var/lib/grafana/dashboards/pitcher-readiness.json
+
+  # =====================================================
+  # KAFKA TOOLS & UTILITIES
+  # =====================================================
+  
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    hostname: kafka-ui
+    container_name: cardinals-kafka-ui
+    depends_on:
+      - kafka
+      - schema-registry
+    ports:
+      - "8082:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: cardinals
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081
+      KAFKA_CLUSTERS_0_METRICS_PORT: 9997
+      KAFKA_CLUSTERS_0_METRICS_TYPE: JMX
+
+  # =====================================================
+  # APPLICATION SERVICES
+  # =====================================================
+  
+  pitcher-readiness-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    hostname: pitcher-readiness-api
+    container_name: cardinals-api
+    depends_on:
+      - postgres
+      - redis
+      - kafka
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://cardinals_user:cardinals_password@postgres:5432/cardinals
+      REDIS_URL: redis://redis:6379
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      SCHEMA_REGISTRY_URL: http://schema-registry:8081
+    volumes:
+      - ./api:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Test data generator
+  data-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile.generator
+    hostname: data-generator
+    container_name: cardinals-data-generator
+    depends_on:
+      - kafka
+      - schema-registry
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      GENERATOR_MODE: ${GENERATOR_MODE:-helsley}
+      PITCH_RATE: ${PITCH_RATE:-20}
+    volumes:
+      - ./test-helsley.py:/app/test-helsley.py
+      - ./calibration-decay.py:/app/calibration-decay.py
+    profiles:
+      - testing
+
+  # =====================================================
+  # FEAST FEATURE STORE
+  # =====================================================
+  
+  feast-registry:
+    image: feastdev/feature-server:0.32.0
+    hostname: feast-registry
+    container_name: cardinals-feast
+    depends_on:
+      - redis
+      - postgres
+    ports:
+      - "6566:6566"
+    environment:
+      FEAST_REDIS_CONN_STRING: redis:6379
+      FEAST_POSTGRES_CONN_STRING: postgresql://cardinals_user:cardinals_password@postgres:5432/cardinals
+    volumes:
+      - ./feast-registry.yaml:/feature_repo/feature_store.yaml
+    command: feast serve --host 0.0.0.0 --port 6566
+
+volumes:
+  zookeeper-data:
+  zookeeper-logs:
+  kafka-data:
+  postgres-data:
+  redis-data:
+  prometheus-data:
+  grafana-data:
+  flink-checkpoints:
+  flink-savepoints:
+
+networks:
+  default:
+    name: cardinals-network
+    driver: bridge

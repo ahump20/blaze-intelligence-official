@@ -1,0 +1,6 @@
+[submodule "mlb-data-lab"]
+	path = mlb-data-lab
+	url = https://github.com/ahump20/mlb-data-lab.git
+[submodule "mlb-gameday-bot"]
+	path = mlb-gameday-bot
+	url = https://github.com/ahump20/mlb-gameday-bot.git
