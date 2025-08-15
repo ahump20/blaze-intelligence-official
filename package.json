@@ -74,13 +74,13 @@
     "serve": "npx serve -s build",
     "clean": "rm -rf build node_modules/.cache"
   },
-  "homepage": "https://ahump20.github.io/blaze-intelligence-official",
+  "homepage": "https://ahump20.github.io/austin-humphrey-portfolio",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahump20/blaze-intelligence-official.git"
+    "url": "git+https://github.com/ahump20/austin-humphrey-portfolio.git"
   },
   "bugs": {
-    "url": "https://github.com/ahump20/blaze-intelligence-official/issues"
+    "url": "https://github.com/ahump20/austin-humphrey-portfolio/issues"
   },
   "eslintConfig": {
     "extends": [
