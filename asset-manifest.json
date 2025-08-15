@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/blaze-intelligence-official/static/css/main.284198f7.css",
-    "main.js": "/blaze-intelligence-official/static/js/main.2c8aeefd.js",
-    "index.html": "/blaze-intelligence-official/index.html",
-    "main.284198f7.css.map": "/blaze-intelligence-official/static/css/main.284198f7.css.map",
-    "main.2c8aeefd.js.map": "/blaze-intelligence-official/static/js/main.2c8aeefd.js.map"
+    "main.css": "/static/css/main.284198f7.css",
+    "main.js": "/static/js/main.513b1ab8.js",
+    "index.html": "/index.html",
+    "main.284198f7.css.map": "/static/css/main.284198f7.css.map",
+    "main.513b1ab8.js.map": "/static/js/main.513b1ab8.js.map"
   },
   "entrypoints": [
     "static/css/main.284198f7.css",
-    "static/js/main.2c8aeefd.js"
+    "static/js/main.513b1ab8.js"
   ]
 }
