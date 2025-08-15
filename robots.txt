@@ -1,0 +1,23 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Allow search engines to crawl all pages
+Allow: /dashboard
+Allow: /analytics
+Allow: /demo
+Allow: /contact
+Allow: /profile
+Allow: /subscription
+
+# Block sensitive areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /build/
+
+# Sitemap location
+Sitemap: https://blaze-intelligence-enhanced.vercel.app/sitemap.xml
+
+# Crawl delay for courtesy
+Crawl-delay: 1
