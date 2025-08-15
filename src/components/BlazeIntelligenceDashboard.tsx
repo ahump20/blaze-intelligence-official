@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ChartBarIcon, BoltIcon, UserGroupIcon, DocumentTextIcon, ArrowTrendingUpIcon, PlayIcon, HomeIcon, UsersIcon, ClockIcon, CogIcon, FolderIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, BoltIcon, UserGroupIcon, DocumentTextIcon, ArrowTrendingUpIcon, PlayIcon, HomeIcon, UsersIcon, ClockIcon, CogIcon, FolderIcon, PhoneIcon, BeakerIcon } from '@heroicons/react/24/outline';
+import TrackmanAnalytics from './TrackmanAnalytics';
 
 interface GameData {
   id: string;
@@ -73,6 +74,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
     { id: 'projects', name: 'Projects', icon: <FolderIcon className="h-5 w-5" /> },
     { id: 'live', name: 'Live Data', icon: <PlayIcon className="h-5 w-5" /> },
     { id: 'analytics', name: 'Analytics', icon: <ArrowTrendingUpIcon className="h-5 w-5" /> },
+    { id: 'trackman', name: 'Trackman', icon: <BeakerIcon className="h-5 w-5" /> },
     { id: 'contact', name: 'Contact', icon: <PhoneIcon className="h-5 w-5" /> }
   ];
 
@@ -541,6 +543,10 @@ const BlazeIntelligenceDashboard: React.FC = () => {
               </div>
             </div>
           </section>
+        )}
+
+        {selectedTab === 'trackman' && (
+          <TrackmanAnalytics />
         )}
 
         {selectedTab === 'contact' && (
