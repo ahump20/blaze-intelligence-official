@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ChartBarIcon, BoltIcon, UserGroupIcon, DocumentTextIcon, ArrowTrendingUpIcon, PlayIcon, HomeIcon, UsersIcon, ClockIcon, CogIcon, FolderIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon, BoltIcon, UserGroupIcon, DocumentTextIcon, ArrowTrendingUpIcon, PlayIcon, HomeIcon, UsersIcon, ClockIcon, CogIcon, FolderIcon, PhoneIcon, BeakerIcon } from '@heroicons/react/24/outline';
+import TrackmanAnalytics from './TrackmanAnalytics';
 
 interface GameData {
   id: string;
@@ -47,38 +48,20 @@ const BlazeIntelligenceDashboard: React.FC = () => {
   const features = [
     {
       icon: <ChartBarIcon className="h-8 w-8" />,
-      title: 'Real-Time Analytics',
-      description: 'Live MLB game tracking with Statcast metrics, exit velocity, launch angle, and spin rate analysis.',
-      status: 'Active'
-    },
-    {
-      icon: <BoltIcon className="h-8 w-8" />,
-      title: 'Trackman Integration',
-      description: 'Professional-grade Doppler radar ball tracking with pitch-by-pitch analysis.',
+      title: 'Sports Analytics',
+      description: 'Leveraging data from sources like MLB StatsAPI and pybaseball to deliver predictive models, performance analysis and strategic insights.',
       status: 'Active'
     },
     {
       icon: <UserGroupIcon className="h-8 w-8" />,
-      title: 'Champion Enigma Engine',
-      description: 'AI-powered biometric analysis quantifying intangible athlete traits and performance predictors.',
+      title: 'AI Integration',
+      description: 'Developing custom AI solutions—from code review bots and CLI tools to advanced transcription services using cutting‑edge models.',
       status: 'Active'
     },
     {
-      icon: <DocumentTextIcon className="h-8 w-8" />,
-      title: 'MLB Data Lab',
-      description: 'Advanced Python-based analytics with automated player summary sheet generation.',
-      status: 'Active'
-    },
-    {
-      icon: <ArrowTrendingUpIcon className="h-8 w-8" />,
-      title: 'Predictive Modeling',
-      description: 'Machine learning algorithms for game outcomes, player performance, and injury prevention.',
-      status: 'Beta'
-    },
-    {
-      icon: <PlayIcon className="h-8 w-8" />,
-      title: 'Discord Integration',
-      description: 'Real-time game notifications and updates via Discord bot with rich embeds.',
+      icon: <BoltIcon className="h-8 w-8" />,
+      title: 'Web & App Development',
+      description: 'Building responsive, data‑driven web applications and interactive dashboards that provide intuitive experiences and powerful visuals.',
       status: 'Active'
     }
   ];
@@ -91,6 +74,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
     { id: 'projects', name: 'Projects', icon: <FolderIcon className="h-5 w-5" /> },
     { id: 'live', name: 'Live Data', icon: <PlayIcon className="h-5 w-5" /> },
     { id: 'analytics', name: 'Analytics', icon: <ArrowTrendingUpIcon className="h-5 w-5" /> },
+    { id: 'trackman', name: 'Trackman', icon: <BeakerIcon className="h-5 w-5" /> },
     { id: 'contact', name: 'Contact', icon: <PhoneIcon className="h-5 w-5" /> }
   ];
 
@@ -176,39 +160,38 @@ const BlazeIntelligenceDashboard: React.FC = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {selectedTab === 'overview' && (
           <section className="flex flex-col justify-center items-center text-center min-h-screen relative pt-16">
-            <h3 className="text-xl md:text-2xl font-semibold">Hello, Welcome to</h3>
+            <h3 className="text-xl md:text-2xl font-semibold">Hello, It's Me</h3>
             <h1 className="text-5xl md:text-6xl font-bold my-4" style={{ 
               fontFamily: "'Space Grotesk', sans-serif",
               color: '#EAEAEA' 
             }}>
-              Blaze Intelligence
+              Austin Humphrey
             </h1>
             <h3 className="text-2xl md:text-3xl font-semibold">
-              Advanced <span style={{ color: '#BF5700' }}>Sports Analytics</span>
+              I am a <span style={{ color: '#BF5700' }}>Sports Technologist</span>
             </h3>
             <p className="mt-4 max-w-2xl mx-auto px-4 leading-relaxed">
-              Combining real-time MLB data, professional Trackman radar tracking, AI-powered athlete analysis, 
-              and advanced predictive modeling built by <span style={{ color: '#FFA500' }}>Austin Humphrey</span> 
-              for unprecedented sports insights.
+              Athlete‑scholar combining strategic depth with psychological insight. UT‑Austin IR grad now pursuing an MS in Entertainment Business at Full Sail, 
+              building <span style={{ color: '#FFA500' }}>"Blaze Intelligence"</span> to revolutionize sports analytics.
             </p>
             <div className="flex justify-center space-x-4 mt-8">
               <div className="glass-effect text-green-400 px-4 py-2 rounded-full">
-                🟢 Live Tracking Active
+                🎯 Full Sail MS Student
               </div>
               <div className="glass-effect px-4 py-2 rounded-full" style={{ color: '#BF5700' }}>
-                ⚾ {liveGames.filter(g => g.status === 'Live').length} Games Live
+                🤘 Hook 'Em Horns
               </div>
             </div>
             <div className="social-media mt-6 flex space-x-4">
-              <a href="https://www.linkedin.com/in/ahump20" target="_blank" aria-label="LinkedIn" 
+              <a href="https://www.linkedin.com/in/ahump20" target="_blank" rel="noreferrer" aria-label="LinkedIn" 
                 className="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover-lift hover:text-[#BF5700] transition-colors">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-              <a href="https://github.com/ahump20" target="_blank" aria-label="GitHub"
+              <a href="https://github.com/ahump20" target="_blank" rel="noreferrer" aria-label="GitHub"
                 className="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover-lift hover:text-[#BF5700] transition-colors">
                 <i className="fab fa-github"></i>
               </a>
-              <a href="https://x.com/a_hump20" target="_blank" aria-label="Twitter"
+              <a href="https://x.com/a_hump20" target="_blank" rel="noreferrer" aria-label="Twitter"
                 className="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover-lift hover:text-[#BF5700] transition-colors">
                 <i className="fab fa-twitter"></i>
               </a>
@@ -224,20 +207,20 @@ const BlazeIntelligenceDashboard: React.FC = () => {
               </div>
               <div className="w-full md:w-7/12">
                 <h2 className="text-3xl font-bold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  About <span style={{ color: '#BF5700' }}>Blaze Intelligence</span>
+                  About <span style={{ color: '#BF5700' }}>Me</span>
                 </h2>
-                <h3 className="text-xl md:text-2xl font-semibold mb-2">Sports Technology Platform</h3>
+                <h3 className="text-xl md:text-2xl font-semibold mb-2">Sports Technologist & Analyst</h3>
                 <p className="leading-relaxed mb-4">
-                  Born from a passion for <span style={{ color: '#BF5700' }}>baseball analytics</span> and championship-level excellence, 
-                  Blaze Intelligence represents the convergence of professional sports data science and cutting-edge AI technology. 
-                  Built by <span style={{ color: '#BF5700' }}>Austin Humphrey</span>, a Texas-trained analyst with experience from 
-                  <span style={{ color: '#BF5700' }}> UT-Austin</span> to the professional ranks, this platform delivers 
-                  real-time insights that help teams, scouts, and analysts make championship-caliber decisions.
+                  Born in <span style={{ color: '#BF5700' }}>Memphis, TN</span> and raised in the competitive heart of Texas, 
+                  my journey has been a blend of athletic discipline and academic rigor. From the baseball diamonds of 
+                  <span style={{ color: '#BF5700' }}> Boerne</span> to the global studies classrooms at the University of Texas, 
+                  I've always been driven to understand the patterns that define success.
                 </p>
                 <p className="leading-relaxed mb-4">
-                  From Trackman radar integration to Champion Enigma Engine biometric analysis, we're building the future 
-                  of sports intelligence with the same <span style={{ color: '#FFA500' }}>Texas swagger</span> and 
-                  <span style={{ color: '#FFA500' }}> blue-collar work ethic</span> that defines championship programs.
+                  After a top‑ranked finance internship at <span style={{ color: '#BF5700' }}>Northwestern Mutual</span> and 
+                  media sales at Spectrum Reach, I'm channeling that diverse experience into my Master's at Full Sail University 
+                  focusing on the Entertainment Business. My mission is to build Blaze Intelligence, a platform merging deep data 
+                  analytics with an intuitive understanding of the game—whether that game is played on the field, in the market, or on a screen.
                 </p>
                 <a href="#contact" className="inline-block mt-4 py-3 px-6 rounded-lg font-semibold transition-colors hover-lift"
                   style={{ 
@@ -258,28 +241,32 @@ const BlazeIntelligenceDashboard: React.FC = () => {
           <section className="py-16 px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                Platform <span style={{ color: '#BF5700' }}>Development</span>
+                My <span style={{ color: '#BF5700' }}>Journey</span>
               </h2>
               <div className="timeline">
                 <div className="timeline-item">
-                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>Q1 2024 – Foundation</h4>
-                  <p>Initial development of Blaze Intelligence platform with core MLB Stats API integration and real-time data processing.</p>
+                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>1995 – Born in Memphis, TN</h4>
+                  <p>My story begins in the birthplace of rock 'n' roll, where early exposure to baseball and community shaped my love for sports.</p>
                 </div>
                 <div className="timeline-item">
-                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>Q2 2024 – Champion Engine</h4>
-                  <p>Built proprietary Champion Enigma Engine for AI-powered biometric analysis and intangible athlete trait quantification.</p>
+                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>2005 – Move to Boerne, TX</h4>
+                  <p>Relocated to the Texas Hill Country, excelling in varsity baseball, football and track at Boerne‑Samuel V. Champion High School.</p>
                 </div>
                 <div className="timeline-item">
-                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>Q3 2024 – Trackman Integration</h4>
-                  <p>Integrated professional-grade Trackman Baseball API for Doppler radar ball tracking and advanced pitch analysis.</p>
+                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>2013–2017 – University of Texas at Austin</h4>
+                  <p>Pursued a BA in International Relations & Global Studies with minors in Economics, Political Science & European Studies.</p>
                 </div>
                 <div className="timeline-item">
-                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>Q4 2024 – MLB Data Lab</h4>
-                  <p>Deployed comprehensive MLB Data Lab with Discord bot integration and automated player summary sheet generation.</p>
+                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>2017 – Top‑Ranked Internship</h4>
+                  <p>Joined Northwestern Mutual as a Financial Representative intern, ranked top 10 nationally and won the "Power of 10" award.</p>
                 </div>
                 <div className="timeline-item">
-                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>Q1 2025 – Live Platform</h4>
-                  <p>Launched production platform with real-time analytics dashboard and GitHub Pages deployment for public access.</p>
+                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>2018–2022 – Professional Experience</h4>
+                  <p>Transitioned into media sales at Spectrum Reach and continued building expertise at the intersection of business and sports.</p>
+                </div>
+                <div className="timeline-item">
+                  <h4 style={{ color: '#FFA500', fontFamily: "'Space Grotesk', sans-serif" }}>2024 – Graduate Studies</h4>
+                  <p>Enrolled in the MS in Entertainment Business at Full Sail University and began developing Blaze Intelligence.</p>
                 </div>
               </div>
             </div>
@@ -320,7 +307,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
           <section style={{ backgroundColor: '#141414' }} className="py-16 px-8 rounded-lg">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                Our <span style={{ color: '#BF5700' }}>Services</span>
+                My <span style={{ color: '#BF5700' }}>Services</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {features.map((feature, index) => (
@@ -355,39 +342,39 @@ const BlazeIntelligenceDashboard: React.FC = () => {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div className="glass-effect p-6 flex flex-col rounded-lg hover-lift transition-transform">
-                  <img src="https://austin-humphrey-portfolio.pages.dev/images/biometrics.jpeg" alt="Champion Enigma Engine" className="rounded mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Champion Enigma Engine</h3>
-                  <p className="flex-grow text-sm leading-relaxed">AI-powered biometric analysis system for quantifying intangible athlete traits, performance prediction, and injury risk assessment.</p>
+                  <img src="https://austin-humphrey-portfolio.pages.dev/images/biometrics.jpeg" alt="Biometric Sports Analyzer" className="rounded mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Biometric Sports Analyzer</h3>
+                  <p className="flex-grow text-sm leading-relaxed">Interactive dashboard for analyzing athlete biometric data, providing insights into performance, fatigue and injury risk.</p>
                   <a href="#analytics" onClick={() => setSelectedTab('analytics')} className="inline-block mt-4 py-2 px-4 rounded-lg font-semibold transition-colors hover-lift"
                     style={{ backgroundColor: '#8B3F00', color: '#000' }}
                     onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#BF5700'}
                     onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#8B3F00'}
                   >
-                    View Analytics
+                    Read More
                   </a>
                 </div>
                 <div className="glass-effect p-6 flex flex-col rounded-lg hover-lift transition-transform">
-                  <img src="https://austin-humphrey-portfolio.pages.dev/images/claude.png" alt="MLB Integration Hub" className="rounded mb-4" />
-                  <h3 className="text-xl font-bold mb-2">MLB Integration Hub</h3>
-                  <p className="flex-grow text-sm leading-relaxed">Unified platform combining MLB Gameday Bot, Data Lab, and Trackman Baseball for comprehensive real-time analytics.</p>
-                  <a href="#live" onClick={() => setSelectedTab('live')} className="inline-block mt-4 py-2 px-4 rounded-lg font-semibold transition-colors hover-lift"
+                  <img src="https://austin-humphrey-portfolio.pages.dev/images/claude.png" alt="AI‑Powered Code Review" className="rounded mb-4" />
+                  <h3 className="text-xl font-bold mb-2">AI‑Powered Code Review</h3>
+                  <p className="flex-grow text-sm leading-relaxed">A GitHub Action that uses generative AI to automatically review pull requests, providing feedback on code quality and style.</p>
+                  <a href="https://github.com/ahump20/claude-code-action" target="_blank" rel="noreferrer" className="inline-block mt-4 py-2 px-4 rounded-lg font-semibold transition-colors hover-lift"
                     style={{ backgroundColor: '#8B3F00', color: '#000' }}
                     onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#BF5700'}
                     onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#8B3F00'}
                   >
-                    View Live Data
+                    View on GitHub
                   </a>
                 </div>
                 <div className="glass-effect p-6 flex flex-col rounded-lg hover-lift transition-transform">
-                  <img src="https://austin-humphrey-portfolio.pages.dev/images/whisper.png" alt="Pitcher Readiness System" className="rounded mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Pitcher Readiness System</h3>
-                  <p className="flex-grow text-sm leading-relaxed">Real-time pitcher readiness assessment system deployed at Busch Stadium for the St. Louis Cardinals organization.</p>
-                  <a href="https://github.com/ahump20/blaze-intelligence-official" target="_blank" className="inline-block mt-4 py-2 px-4 rounded-lg font-semibold transition-colors hover-lift"
+                  <img src="https://austin-humphrey-portfolio.pages.dev/images/whisper.png" alt="AI Audio Transcription" className="rounded mb-4" />
+                  <h3 className="text-xl font-bold mb-2">AI Audio Transcription</h3>
+                  <p className="flex-grow text-sm leading-relaxed">Implementing OpenAI's Whisper model for high‑accuracy, multilingual audio transcription—ideal for interviews and media content.</p>
+                  <a href="https://github.com/ahump20/whisper" target="_blank" rel="noreferrer" className="inline-block mt-4 py-2 px-4 rounded-lg font-semibold transition-colors hover-lift"
                     style={{ backgroundColor: '#8B3F00', color: '#000' }}
                     onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#BF5700'}
                     onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#8B3F00'}
                   >
-                    View Code
+                    Explore Repo
                   </a>
                 </div>
               </div>
@@ -558,6 +545,10 @@ const BlazeIntelligenceDashboard: React.FC = () => {
           </section>
         )}
 
+        {selectedTab === 'trackman' && (
+          <TrackmanAnalytics />
+        )}
+
         {selectedTab === 'contact' && (
           <section style={{ backgroundColor: '#141414' }} className="py-16 px-8 rounded-lg">
             <div className="max-w-3xl mx-auto text-center">
@@ -610,7 +601,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                 <a href="mailto:austin@blazeintelligence.com" className="glass-effect px-4 py-2 rounded-lg hover-lift hover:text-[#BF5700] transition-colors">
                   📧 austin@blazeintelligence.com
                 </a>
-                <a href="https://www.linkedin.com/in/ahump20" target="_blank" className="glass-effect px-4 py-2 rounded-lg hover-lift hover:text-[#BF5700] transition-colors">
+                <a href="https://www.linkedin.com/in/ahump20" target="_blank" rel="noreferrer" className="glass-effect px-4 py-2 rounded-lg hover-lift hover:text-[#BF5700] transition-colors">
                   💼 LinkedIn
                 </a>
               </div>
