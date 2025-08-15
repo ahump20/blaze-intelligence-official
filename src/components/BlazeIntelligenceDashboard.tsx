@@ -200,15 +200,15 @@ const BlazeIntelligenceDashboard: React.FC = () => {
               </div>
             </div>
             <div className="social-media mt-6 flex space-x-4">
-              <a href="https://www.linkedin.com/in/ahump20" target="_blank" aria-label="LinkedIn" 
+              <a href="https://www.linkedin.com/in/ahump20" target="_blank" rel="noreferrer" aria-label="LinkedIn" 
                 className="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover-lift hover:text-[#BF5700] transition-colors">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-              <a href="https://github.com/ahump20" target="_blank" aria-label="GitHub"
+              <a href="https://github.com/ahump20" target="_blank" rel="noreferrer" aria-label="GitHub"
                 className="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover-lift hover:text-[#BF5700] transition-colors">
                 <i className="fab fa-github"></i>
               </a>
-              <a href="https://x.com/a_hump20" target="_blank" aria-label="Twitter"
+              <a href="https://x.com/a_hump20" target="_blank" rel="noreferrer" aria-label="Twitter"
                 className="w-10 h-10 rounded-full glass-effect flex items-center justify-center hover-lift hover:text-[#BF5700] transition-colors">
                 <i className="fab fa-twitter"></i>
               </a>
@@ -382,7 +382,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                   <img src="https://austin-humphrey-portfolio.pages.dev/images/whisper.png" alt="Pitcher Readiness System" className="rounded mb-4" />
                   <h3 className="text-xl font-bold mb-2">Pitcher Readiness System</h3>
                   <p className="flex-grow text-sm leading-relaxed">Real-time pitcher readiness assessment system deployed at Busch Stadium for the St. Louis Cardinals organization.</p>
-                  <a href="https://github.com/ahump20/blaze-intelligence-official" target="_blank" className="inline-block mt-4 py-2 px-4 rounded-lg font-semibold transition-colors hover-lift"
+                  <a href="https://github.com/ahump20/blaze-intelligence-official" target="_blank" rel="noreferrer" className="inline-block mt-4 py-2 px-4 rounded-lg font-semibold transition-colors hover-lift"
                     style={{ backgroundColor: '#8B3F00', color: '#000' }}
                     onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#BF5700'}
                     onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#8B3F00'}
@@ -610,7 +610,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                 <a href="mailto:austin@blazeintelligence.com" className="glass-effect px-4 py-2 rounded-lg hover-lift hover:text-[#BF5700] transition-colors">
                   📧 austin@blazeintelligence.com
                 </a>
-                <a href="https://www.linkedin.com/in/ahump20" target="_blank" className="glass-effect px-4 py-2 rounded-lg hover-lift hover:text-[#BF5700] transition-colors">
+                <a href="https://www.linkedin.com/in/ahump20" target="_blank" rel="noreferrer" className="glass-effect px-4 py-2 rounded-lg hover-lift hover:text-[#BF5700] transition-colors">
                   💼 LinkedIn
                 </a>
               </div>
