@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials - Blaze Intelligence</title>
+    <link rel="stylesheet" href="loading.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#CC5500">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Blaze Intelligence">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
+    <style>
+        :root {
+            --burnt-orange: #CC5500;
+            --dark-burnt-orange: #8B3A00;
+            --light-burnt-orange: #FF6B35;
+            --black: #000000;
+            --dark-gray: #0A0A0A;
+            --medium-gray: #1a1a1a;
+            --light-gray: #2d2d2d;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(204, 85, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(204, 85, 0, 0.5);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(204,85,0,0.1) 0%, transparent 100%);
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--light-burnt-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: #999;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--dark-gray);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--burnt-orange);
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #999;
+            font-size: 16px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 80px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--burnt-orange);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .testimonial-card {
+            background: var(--dark-gray);
+            border: 1px solid rgba(204, 85, 0, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 20px 50px rgba(204, 85, 0, 0.3);
+        }
+        
+        .testimonial-card.featured {
+            border-color: var(--burnt-orange);
+            background: linear-gradient(135deg, rgba(204, 85, 0, 0.1), rgba(139, 58, 0, 0.05));
+        }
+        
+        .quote-icon {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            width: 40px;
+            height: 40px;
+            background: var(--burnt-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .testimonial-text {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: #ccc;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .author-info h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+        
+        .author-title {
+            color: var(--burnt-orange);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .author-org {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Case Studies */
+        .case-studies {
+            padding: 80px 20px;
+            background: var(--dark-gray);
+        }
+        
+        .case-study-card {
+            background: var(--black);
+            border: 1px solid rgba(204, 85, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .case-study-card:hover {
+            border-color: var(--burnt-orange);
+            box-shadow: 0 15px 40px rgba(204, 85, 0, 0.2);
+        }
+        
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .case-title {
+            font-size: 24px;
+            color: var(--burnt-orange);
+        }
+        
+        .case-category {
+            background: rgba(204, 85, 0, 0.2);
+            color: var(--burnt-orange);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .case-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .result-metric {
+            text-align: center;
+            padding: 20px;
+            background: rgba(204, 85, 0, 0.1);
+            border-radius: 12px;
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--burnt-orange);
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .metric-label {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Video Testimonials */
+        .video-testimonials {
+            padding: 80px 20px;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .video-card {
+            background: var(--dark-gray);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(204, 85, 0, 0.2);
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 15px 40px rgba(204, 85, 0, 0.3);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--burnt-orange);
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+        
+        .video-info {
+            padding: 20px;
+        }
+        
+        .video-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+        
+        .video-description {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .cta-subtitle {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--burnt-orange);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--burnt-orange);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .case-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .case-results {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">🔥</div>
+                <span>BLAZE INTELLIGENCE</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/app.html">Dashboard</a></li>
+                <li><a href="/pricing.html">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="/app.html" class="cta-button">Free Trial</a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-title">Trusted by Champions</h1>
+            <p class="hero-subtitle">See how elite teams and athletes are using Blaze Intelligence to gain the winning edge</p>
+        </section>
+        
+        <!-- Stats Bar -->
+        <section class="stats-bar">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Teams Using Blaze</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">73%</span>
+                    <span class="stat-label">Average Win Rate Improvement</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">92%</span>
+                    <span class="stat-label">Customer Satisfaction</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50M+</span>
+                    <span class="stat-label">Data Points Analyzed</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials -->
+        <section class="testimonials-section">
+            <div class="container">
+                <h2 class="section-title">What Champions Are Saying</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card featured">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">"Blaze Intelligence transformed how we analyze opponents and prepare our players. The injury prediction alone has saved us countless games. This isn't just analytics—it's competitive intelligence."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">CM</div>
+                            <div class="author-info">
+                                <h4>Coach Martinez</h4>
+                                <div class="author-title">Head Coach</div>
+                                <div class="author-org">Texas State Basketball</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">"The real-time insights during games are incredible. Our staff makes better decisions because we have data that our opponents don't. It's like having a crystal ball."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JW</div>
+                            <div class="author-info">
+                                <h4>Jennifer Williams</h4>
+                                <div class="author-title">Head Coach</div>
+                                <div class="author-org">Metro University Women's Basketball</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">"As a player, understanding my efficiency metrics and matchup advantages has elevated my game to another level. The personalized insights are game-changing."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MJ</div>
+                            <div class="author-info">
+                                <h4>Marcus Johnson</h4>
+                                <div class="author-title">Point Guard</div>
+                                <div class="author-org">Austin Elite Basketball</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">"The ROI was immediate. Better draft picks, fewer injuries, more wins. Blaze pays for itself in the first month. Every serious program needs this."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">DR</div>
+                            <div class="author-info">
+                                <h4>David Rodriguez</h4>
+                                <div class="author-title">Athletic Director</div>
+                                <div class="author-org">Central Valley College</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">"Our high school team went from .500 to conference champions in one season. The recruiting insights alone are worth the investment."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">TK</div>
+                            <div class="author-info">
+                                <h4>Coach Thompson</h4>
+                                <div class="author-title">Head Coach</div>
+                                <div class="author-org">Liberty High School</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="quote-icon">"</div>
+                        <p class="testimonial-text">"The formation analysis for football is unmatched. We've optimized our play calling and dramatically improved our offensive efficiency."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">BS</div>
+                            <div class="author-info">
+                                <h4>Coach Stevens</h4>
+                                <div class="author-title">Offensive Coordinator</div>
+                                <div class="author-org">Riverside University</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Case Studies -->
+        <section class="case-studies">
+            <div class="container">
+                <h2 class="section-title">Success Stories</h2>
+                
+                <div class="case-study-card">
+                    <div class="case-header">
+                        <h3 class="case-title">University of Texas Basketball</h3>
+                        <span class="case-category">College Basketball</span>
+                    </div>
+                    <p style="color: #ccc; line-height: 1.6;">After implementing Blaze Intelligence, the Longhorns transformed their program from a bubble team to March Madness contenders. The combination of injury prevention and opponent analysis was the difference maker.</p>
+                    <div class="case-results">
+                        <div class="result-metric">
+                            <span class="metric-value">+18</span>
+                            <div class="metric-label">Additional Wins</div>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">65%</span>
+                            <div class="metric-label">Injury Reduction</div>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">Elite 8</span>
+                            <div class="metric-label">Tournament Result</div>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">$2.1M</span>
+                            <div class="metric-label">Revenue Increase</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="case-study-card">
+                    <div class="case-header">
+                        <h3 class="case-title">Westlake High School Football</h3>
+                        <span class="case-category">High School Football</span>
+                    </div>
+                    <p style="color: #ccc; line-height: 1.6;">A Texas powerhouse used Blaze Intelligence to optimize their recruiting and game planning. The result was their first state championship in 15 years and 12 college scholarships for players.</p>
+                    <div class="case-results">
+                        <div class="result-metric">
+                            <span class="metric-value">16-0</span>
+                            <div class="metric-label">Perfect Season</div>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">12</span>
+                            <div class="metric-label">D1 Scholarships</div>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">State</span>
+                            <div class="metric-label">Championship</div>
+                        </div>
+                        <div class="result-metric">
+                            <span class="metric-value">350%</span>
+                            <div class="metric-label">Recruiting Efficiency</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Video Testimonials -->
+        <section class="video-testimonials">
+            <div class="container">
+                <h2 class="section-title">Hear From Champions</h2>
+                <div class="video-grid">
+                    <div class="video-card" onclick="playVideo('coach-interview')">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Coach's Perspective</h3>
+                            <p class="video-description">How college coaches use Blaze Intelligence for recruiting and game preparation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card" onclick="playVideo('player-story')">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Player Development</h3>
+                            <p class="video-description">Professional athletes share how data analytics improved their performance</p>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card" onclick="playVideo('gm-insights')">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Front Office Impact</h3>
+                            <p class="video-description">General Managers discuss the competitive advantage of advanced analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="cta-title">Join the Champions</h2>
+                <p class="cta-subtitle">Start your free trial today and see why elite teams choose Blaze Intelligence</p>
+                <div class="cta-buttons">
+                    <a href="/app.html" class="btn-primary">Start Free Trial</a>
+                    <a href="#contact" class="btn-secondary">Schedule Demo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        function playVideo(videoId) {
+            // In a real implementation, this would open a video modal or navigate to video page
+            alert(`Playing video: ${videoId}\n\nIn production, this would open the video player with testimonial content.`);
+        }
+        
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

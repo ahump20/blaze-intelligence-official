@@ -6,6 +6,14 @@
     <title>Blaze Intelligence - Professional Sports Analytics Platform</title>
     <meta name="description" content="Elite sports analytics platform trusted by professional teams and athletes. Real-time game analysis, injury prevention, and performance optimization.">
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#CC5500">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Blaze Intelligence">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
     <!-- Three.js for 3D Graphics -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
@@ -379,6 +387,32 @@
             color: #999;
         }
         
+        .live-stat {
+            position: relative;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            background: rgba(76, 175, 80, 0.05);
+        }
+        
+        .live-stat::before {
+            content: '●';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #4CAF50;
+            font-size: 12px;
+            animation: pulse 2s infinite;
+        }
+        
+        .stat-timestamp {
+            font-size: 12px;
+            color: #4CAF50;
+            margin-top: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
         /* Video Section */
         .video-section {
             padding: 100px 20px;
@@ -431,6 +465,178 @@
             box-shadow: 0 10px 30px rgba(204, 85, 0, 0.6);
         }
         
+        /* Contact Section */
+        .contact-section {
+            padding: 120px 20px;
+            background: var(--dark-gray);
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+        
+        .contact-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            color: var(--burnt-orange);
+        }
+        
+        .contact-subtitle {
+            font-size: 18px;
+            color: #999;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(204, 85, 0, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(204, 85, 0, 0.2);
+        }
+        
+        .contact-icon {
+            font-size: 32px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--burnt-orange);
+            border-radius: 50%;
+        }
+        
+        .contact-method h4 {
+            color: var(--white);
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .contact-method p {
+            color: #999;
+            font-size: 16px;
+        }
+        
+        /* Contact Form */
+        .contact-form-container {
+            background: var(--black);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(204, 85, 0, 0.2);
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-group label {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 16px;
+            background: var(--dark-gray);
+            border: 1px solid rgba(204, 85, 0, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--burnt-orange);
+            box-shadow: 0 0 0 3px rgba(204, 85, 0, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--burnt-orange);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(204, 85, 0, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .form-note {
+            color: #666;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
         /* CTA Section */
         .cta-section {
             padding: 120px 20px;
@@ -493,19 +699,203 @@
             color: #666;
         }
         
+        /* Mobile Navigation */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--black);
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            z-index: 2000;
+        }
+        
+        .mobile-menu.open {
+            right: 0;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu li {
+            margin-bottom: 20px;
+        }
+        
+        .mobile-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(204, 85, 0, 0.2);
+        }
+        
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1500;
+            display: none;
+        }
+        
+        .mobile-overlay.active {
+            display: block;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
             
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .hero {
+                padding: 0 20px;
+                text-align: center;
+            }
+            
+            .hero-title {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+                margin-bottom: 20px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+                margin-bottom: 40px;
+            }
+            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
+            }
+            
+            .primary-btn, .secondary-btn {
+                width: 100%;
+                max-width: 280px;
+                padding: 15px 30px;
+                font-size: 16px;
+            }
+            
+            .features {
+                padding: 60px 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+            
+            .stats {
+                padding: 60px 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            
+            .trust {
+                padding: 60px 20px;
             }
             
             .trust-logos {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .trust-logos img {
+                width: 80px;
+                height: 60px;
+            }
+            
+            .cta {
+                padding: 60px 20px;
+            }
+            
+            .cta-title {
+                font-size: 32px;
+            }
+            
+            footer {
+                padding: 40px 20px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
                 gap: 30px;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .feature-title {
+                font-size: 20px;
+            }
+            
+            .trust-logos img {
+                width: 70px;
+                height: 50px;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .contact-form-container {
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 16px;
             }
         }
     </style>
@@ -520,12 +910,16 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="#teams">For Teams</a></li>
-                <li><a href="#athletes">For Athletes</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/live.html">Live</a></li>
+                <li><a href="/metrics.html">Metrics</a></li>
+                <li><a href="/pricing.html">Pricing</a></li>
+                <li><a href="/docs.html">Docs</a></li>
+                <li><a href="/contact.html">Contact</a></li>
             </ul>
-            <a href="#demo" class="cta-button">Request Demo</a>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <a href="app.html" class="cta-button">Sign In</a>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            </div>
         </div>
     </nav>
     
@@ -573,12 +967,12 @@
                 <div class="feature-card">
                     <div class="feature-icon">🎯</div>
                     <h3 class="feature-title">Predictive Intelligence</h3>
-                    <p class="feature-description">73% accurate game predictions powered by ML. Anticipate opponent strategies and optimize your game plan.</p>
+                    <p class="feature-description">Advanced game predictions powered by ML. Anticipate opponent strategies and optimize your game plan.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">💪</div>
                     <h3 class="feature-title">Injury Prevention</h3>
-                    <p class="feature-description">78% accurate injury risk assessment. Monitor workload, biomechanics, and recovery to keep athletes healthy.</p>
+                    <p class="feature-description">AI-powered injury risk assessment. Monitor workload, biomechanics, and recovery to keep athletes healthy.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📹</div>
@@ -603,20 +997,22 @@
     <section class="stats">
         <div class="stats-container">
             <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Professional Teams</div>
+                <div class="stat-number" data-stat="accuracy">87%</div>
+                <div class="stat-label">Prediction Accuracy</div>
+            </div>
+            <div class="stat-card live-stat">
+                <div class="stat-number" data-stat="cardinalsReadiness">88%</div>
+                <div class="stat-label">Cardinals Readiness</div>
+                <div class="stat-timestamp" data-stat="dataFreshness">live</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">10K+</div>
-                <div class="stat-label">Elite Athletes</div>
+                <div class="stat-number" data-stat="dataPoints">2.8M+</div>
+                <div class="stat-label">Data Points</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">2M+</div>
-                <div class="stat-label">Games Analyzed</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">99.9%</div>
-                <div class="stat-label">Uptime</div>
+            <div class="stat-card live-stat">
+                <div class="stat-number" data-stat="winProbability">58%</div>
+                <div class="stat-label">Win Probability</div>
+                <div class="stat-timestamp" data-stat="readinessTimestamp">Today</div>
             </div>
         </div>
     </section>
@@ -636,14 +1032,127 @@
         </div>
     </section>
     
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2 class="contact-title">Get In Touch</h2>
+                    <p class="contact-subtitle">Ready to elevate your team's performance? Let's discuss how Blaze Intelligence can transform your game.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>ahump20@outlook.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <h4>Call Us</h4>
+                                <p>(210) 273-5538</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="contact-icon">💬</div>
+                            <div>
+                                <h4>Live Chat</h4>
+                                <p>Available 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="organization">Organization *</label>
+                            <input type="text" id="organization" name="organization" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="role">Your Role</label>
+                            <select id="role" name="role">
+                                <option value="">Select your role</option>
+                                <option value="head-coach">Head Coach</option>
+                                <option value="assistant-coach">Assistant Coach</option>
+                                <option value="athletic-director">Athletic Director</option>
+                                <option value="general-manager">General Manager</option>
+                                <option value="data-analyst">Data Analyst</option>
+                                <option value="player">Player</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sport">Primary Sport</label>
+                            <select id="sport" name="sport">
+                                <option value="">Select sport</option>
+                                <option value="basketball">Basketball</option>
+                                <option value="football">Football</option>
+                                <option value="baseball">Baseball</option>
+                                <option value="hockey">Hockey</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Tell us about your team and how we can help..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span class="checkmark"></span>
+                                Subscribe to our newsletter for the latest sports analytics insights
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" style="display: none;">Sending...</span>
+                        </button>
+                        
+                        <p class="form-note">We'll respond within 24 hours. For urgent inquiries, please call us directly.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section" id="demo">
         <div class="cta-container">
             <h2 class="cta-title">Ready to Transform Your Game?</h2>
             <p class="cta-subtitle">Join the elite teams already using Blaze Intelligence</p>
             <div class="hero-buttons">
-                <a href="#" class="btn-primary" style="background: white; color: var(--burnt-orange);">Start Free Trial</a>
-                <a href="#" class="btn-secondary" style="border-color: white; color: white;">Schedule Demo</a>
+                <a href="app.html" class="btn-primary" style="background: white; color: var(--burnt-orange);">Start Free Trial</a>
+                <a href="#contact" class="btn-secondary" style="border-color: white; color: white;">Get In Touch</a>
             </div>
         </div>
     </section>
@@ -681,18 +1190,28 @@
             <div class="footer-column">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="#">About</a></li>
+                    <li><a href="/why-we-win.html">Why We Win</a></li>
                     <li><a href="#">Careers</a></li>
                     <li><a href="#">Partners</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Data & Methods</h4>
+                <ul>
+                    <li><a href="/methods.html">Foundational Analysis</a></li>
+                    <li><a href="/sports.html">Coverage Matrix</a></li>
+                    <li><a href="/metrics.html">Methodology</a></li>
+                    <li><a href="/docs.html">API Documentation</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Blaze Intelligence. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2024 Blaze Intelligence. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="/methods.html">Data & Methods</a></p>
         </div>
     </footer>
     
+    <script src="src/js/marketing-stats.js"></script>
     <script>
         // Three.js Animation
         let scene, camera, renderer;
@@ -803,6 +1322,151 @@
                 }
             });
         });
+        
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.mobile-overlay');
+            
+            mobileMenu.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        function closeMobileMenu() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.mobile-overlay');
+            
+            mobileMenu.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+        
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+        
+        // Contact Form Handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = this.querySelector('.submit-btn');
+                    const btnText = submitBtn.querySelector('.btn-text');
+                    const btnLoading = submitBtn.querySelector('.btn-loading');
+                    
+                    // Show loading state
+                    submitBtn.disabled = true;
+                    btnText.style.display = 'none';
+                    btnLoading.style.display = 'inline';
+                    
+                    // Collect form data
+                    const formData = new FormData(this);
+                    const data = Object.fromEntries(formData);
+                    
+                    try {
+                        // Simulate API call (replace with actual endpoint)
+                        await simulateFormSubmission(data);
+                        
+                        // Show success message
+                        showFormMessage('Thank you! Your message has been sent. We\'ll get back to you within 24 hours.', 'success');
+                        
+                        // Reset form
+                        this.reset();
+                        
+                    } catch (error) {
+                        console.error('Form submission failed:', error);
+                        showFormMessage('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
+                    } finally {
+                        // Reset button state
+                        submitBtn.disabled = false;
+                        btnText.style.display = 'inline';
+                        btnLoading.style.display = 'none';
+                    }
+                });
+            }
+        });
+        
+        // Simulate form submission (replace with actual API endpoint)
+        async function simulateFormSubmission(data) {
+            // This would typically send to your contact form API
+            console.log('Form submission data:', data);
+            
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // For now, just log the data and pretend it succeeded
+            // In production, you'd send this to your backend:
+            // const response = await fetch('/api/contact', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // });
+            // 
+            // if (!response.ok) {
+            //     throw new Error('Failed to submit form');
+            // }
+        }
+        
+        // Show form message
+        function showFormMessage(message, type) {
+            // Remove existing messages
+            const existingMessage = document.querySelector('.form-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Create new message
+            const messageEl = document.createElement('div');
+            messageEl.className = `form-message ${type}`;
+            messageEl.style.cssText = `
+                padding: 16px;
+                margin: 20px 0;
+                border-radius: 8px;
+                font-weight: 500;
+                ${type === 'success' 
+                    ? 'background: rgba(76, 175, 80, 0.1); color: #4CAF50; border: 1px solid rgba(76, 175, 80, 0.3);'
+                    : 'background: rgba(244, 67, 54, 0.1); color: #F44336; border: 1px solid rgba(244, 67, 54, 0.3);'
+                }
+            `;
+            messageEl.textContent = message;
+            
+            // Insert message after form
+            const form = document.getElementById('contactForm');
+            form.parentNode.insertBefore(messageEl, form.nextSibling);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (messageEl.parentNode) {
+                    messageEl.remove();
+                }
+            }, 10000);
+        }
     </script>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#features" onclick="closeMobileMenu()">Features</a></li>
+            <li><a href="basketball.html">Basketball</a></li>
+            <li><a href="football.html">Football</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="/contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="app.html">Sign In</a></li>
+        </ul>
+    </div>
+    
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
 </body>
 </html>

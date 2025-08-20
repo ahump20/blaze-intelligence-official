@@ -1,0 +1,121 @@
+{
+  "timestamp": "2025-08-20T02:59:55.558Z",
+  "team": "St. Louis Cardinals",
+  "gameDay": true,
+  "readiness": {
+    "overall": 88,
+    "offense": {
+      "batting": 95,
+      "onBase": 86,
+      "situational": 93,
+      "clutch": 80
+    },
+    "defense": {
+      "fielding": 96,
+      "positioning": 88,
+      "communication": 87,
+      "range": 90
+    },
+    "pitching": {
+      "rotation": 84,
+      "bullpen": 84,
+      "command": 82,
+      "stamina": 93
+    },
+    "baserunning": {
+      "speed": 87,
+      "intelligence": 94,
+      "aggression": 86,
+      "timing": 93
+    }
+  },
+  "leverage": {
+    "high": [
+      {
+        "name": "Nolan Arenado",
+        "leverageScore": 94,
+        "situationalAdvantage": "medium",
+        "recommendation": "start"
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "leverageScore": 76,
+        "situationalAdvantage": "medium",
+        "recommendation": "situational"
+      },
+      {
+        "name": "Tyler O'Neill",
+        "leverageScore": 89,
+        "situationalAdvantage": "medium",
+        "recommendation": "situational"
+      }
+    ],
+    "situational": {
+      "runnersInScoringPosition": 75,
+      "latePressure": 86,
+      "clutchHitting": 76,
+      "defensiveShifts": 90
+    },
+    "matchups": [
+      {
+        "category": "Left-handed pitching",
+        "advantage": "Opponent",
+        "magnitude": 89
+      },
+      {
+        "category": "Power vs speed",
+        "advantage": "Cardinals",
+        "magnitude": 87
+      },
+      {
+        "category": "Bullpen depth",
+        "advantage": "Cardinals",
+        "magnitude": 81
+      }
+    ]
+  },
+  "injuries": {
+    "total": 1,
+    "injuries": [
+      {
+        "player": "Jordan Walker",
+        "injury": "Minor shoulder stiffness",
+        "status": "day-to-day",
+        "impactScore": 15,
+        "expectedReturn": "1-2 games"
+      }
+    ],
+    "teamHealthScore": 85,
+    "riskFactors": [
+      "Workload management"
+    ]
+  },
+  "weather": {
+    "condition": "Light Rain",
+    "temperature": 76,
+    "windSpeed": 10,
+    "humidity": 52,
+    "impact": "slight"
+  },
+  "predictions": {
+    "winProbability": 58,
+    "keyFactors": [
+      "Starting pitcher matchup favors Cardinals",
+      "Strong recent offensive performance",
+      "Bullpen well-rested",
+      "Home field advantage",
+      "Favorable weather conditions"
+    ],
+    "recommendations": [
+      "Aggressive baserunning early in game",
+      "Target opponent left-handed pitching",
+      "Use defensive shifts in key situations"
+    ]
+  },
+  "metadata": {
+    "dataQuality": "high",
+    "confidence": "validated",
+    "source": "Cardinals Analytics Tool",
+    "nextUpdate": "2025-08-20T03:09:55.558Z"
+  }
+}

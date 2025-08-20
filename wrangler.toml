@@ -1,0 +1,43 @@
+name = "blaze-intelligence-worker"
+main = "worker/index.js"
+compatibility_date = "2023-10-30"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "blaze-intelligence-db"
+database_id = "81dd9c1b-bb31-47be-a98e-3070d76186aa"
+
+# KV namespace bindings for agent data
+[[kv_namespaces]]
+binding = "READINESS_KV"
+id = "85747555ac4e46bd832049f4d2d728fd"
+
+[[kv_namespaces]]
+binding = "ANALYTICS_KV"
+id = "30fde31341b147f8aa5c0817aa34c9e0"
+
+# Environment variables
+[env.production.vars]
+ENVIRONMENT = "production"
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+
+# CRON triggers for automated agents
+[triggers]
+crons = [
+  # Cardinals Readiness Board - every 10 minutes
+  "*/10 * * * *",
+  # Digital-Combine Autopilot - every 30 minutes  
+  "*/30 * * * *"
+]
+
+# Worker settings
+[build]
+command = ""
+
+[vars]
+# Public variables (secrets in dashboard)
+API_BASE_URL = "https://blaze-intelligence-worker.austinhumphrey.workers.dev"

@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blaze Intelligence - Team Dashboard</title>
+    <link rel="stylesheet" href="loading.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#CC5500">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Blaze Intelligence">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
     
     <style>
         :root {
@@ -484,6 +493,148 @@
             height: 70px;
             font-size: 28px;
         }
+        
+        /* Mobile Navigation Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            /* Sidebar becomes overlay on mobile */
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 2000;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .mobile-overlay.active {
+                display: block;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .header-left {
+                gap: 15px;
+            }
+            
+            .team-selector {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            .dashboard-content {
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 24px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .stat-card {
+                padding: 20px;
+            }
+            
+            .game-card {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .game-teams {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .vs {
+                transform: rotate(90deg);
+            }
+            
+            .players-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            
+            .quick-actions {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .action-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .action-btn.main {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px 15px;
+            }
+            
+            .dashboard-content {
+                padding: 15px;
+            }
+            
+            .stat-value {
+                font-size: 28px;
+            }
+            
+            .players-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .player-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .user-profile .user-info {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -565,6 +716,7 @@
         <!-- Header -->
         <header class="header">
             <div class="header-left">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
                 <select class="team-selector">
                     <option>2024-25 Season</option>
                     <option>2023-24 Season</option>
@@ -634,12 +786,12 @@
                     <div class="game-teams">
                         <div class="team">
                             <div class="team-logo">LAL</div>
-                            <div class="team-name">Lakers</div>
+                            <div class="team-name">Grizzlies</div>
                         </div>
                         <span class="vs">vs</span>
                         <div class="team">
                             <div class="team-logo">GSW</div>
-                            <div class="team-name">Warriors</div>
+                            <div class="team-name">Longhorns</div>
                         </div>
                     </div>
                     <div class="game-info">
@@ -651,7 +803,7 @@
                     <div class="game-teams">
                         <div class="team">
                             <div class="team-logo">LAL</div>
-                            <div class="team-name">Lakers</div>
+                            <div class="team-name">Grizzlies</div>
                         </div>
                         <span class="vs">@</span>
                         <div class="team">
@@ -758,5 +910,49 @@
             <div class="action-btn main">+</div>
         </div>
     </main>
+    
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
+    
+    <script>
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+        
+        function closeMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+        
+        // Close mobile menu when clicking sidebar links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+    
+    <!-- Demo Data -->
+    <script src="demo-data.js"></script>
+    <!-- API Integration -->
+    <script src="api-integration.js"></script>
 </body>
 </html>
