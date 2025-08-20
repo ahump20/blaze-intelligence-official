@@ -12,10 +12,11 @@
     "security:scan": "echo 'Security scan placeholder'",
     "security:protect": "echo 'Security protect placeholder'",
     "build": "npm run validate:stats && npm run security:scan",
-    "deploy": "npm run build && npm run deploy:pages",
+    "deploy": "npm run build && npx wrangler pages deploy ./dist",
     "deploy:pages": "echo 'Deploy to Cloudflare Pages'",
     "start": "python3 -m http.server 8000",
-    "dev": "python3 -m http.server 8000"
+    "dev": "python3 -m http.server 8000",
+    "preview": "npx wrangler pages dev ./dist"
   },
   "repository": {
     "type": "git",
