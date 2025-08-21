@@ -1,43 +1,39 @@
-name = "blaze-intelligence-worker"
-main = "worker/index.js"
-compatibility_date = "2023-10-30"
-compatibility_flags = ["nodejs_compat"]
+name = "blaze-sports-data"
+main = "functions/worker.js"
+compatibility_date = "2025-08-20"
+workers_dev = true
 
-# D1 Database binding
-[[d1_databases]]
-binding = "DB"
-database_name = "blaze-intelligence-db"
-database_id = "81dd9c1b-bb31-47be-a98e-3070d76186aa"
+[triggers]
+crons = ["0 3 * * 1"]
 
-# KV namespace bindings for agent data
-[[kv_namespaces]]
-binding = "READINESS_KV"
-id = "85747555ac4e46bd832049f4d2d728fd"
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "blaze-sports-data-lake"
 
-[[kv_namespaces]]
-binding = "ANALYTICS_KV"
-id = "30fde31341b147f8aa5c0817aa34c9e0"
+[vars]
+NOTION_DATABASE_ID = "2556c055-8681-816c-97ad-d86fa4d0fa7a"
+GITHUB_REPO_OWNER = "blaze-intelligence"
+GITHUB_REPO_NAME = "sports-data-2025"
 
-# Environment variables
+[ai]
+binding = "AI"
+
+[placement]
+mode = "smart"
+
+[env.production]
+name = "blaze-sports-data-production"
+route = { pattern = "api.blaze-intelligence.com/*", zone_name = "blaze-intelligence.com" }
+
 [env.production.vars]
 ENVIRONMENT = "production"
 
-[env.staging.vars]
-ENVIRONMENT = "staging"
+# KV and D1 bindings commented out - need to be created first
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "blaze-sports-cache"
 
-# CRON triggers for automated agents
-[triggers]
-crons = [
-  # Cardinals Readiness Board - every 10 minutes
-  "*/10 * * * *",
-  # Digital-Combine Autopilot - every 30 minutes  
-  "*/30 * * * *"
-]
-
-# Worker settings
-[build]
-command = ""
-
-[vars]
-# Public variables (secrets in dashboard)
-API_BASE_URL = "https://blaze-intelligence-worker.austinhumphrey.workers.dev"
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "blaze-sports-metrics"
+# database_id = "blaze-sports-metrics-id"
