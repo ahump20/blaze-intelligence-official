@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence MLB Pilot Playbook — Blaze Intelligence</title>
+    <meta name="description" content="12-week implementation to prove quantified intangibles drive wins.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Blaze Intelligence MLB Pilot Playbook">
+    <meta property="og:description" content="12-week implementation to prove quantified intangibles drive wins.">
+    <meta property="og:site_name" content="Blaze Intelligence">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blaze Intelligence MLB Pilot Playbook">
+    <meta name="twitter:description" content="12-week implementation to prove quantified intangibles drive wins.">
+    
+    <!-- Theme -->
+    <meta name="theme-color" content="#BF5700">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://blaze-intelligence.com/pilot-playbook">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Blaze Intelligence MLB Pilot Playbook",
+      "description": "12-week implementation to prove quantified intangibles drive wins.",
+      "datePublished": "2025-08-20",
+      "dateModified": "2025-08-20",
+      "author": {
+        "@type": "Organization",
+        "name": "Blaze Intelligence",
+        "url": "https://blaze-intelligence.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Blaze Intelligence",
+        "url": "https://blaze-intelligence.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://blaze-intelligence.com/logo.png"
+        }
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --dark-burnt-orange: #8B3A00;
+            --black: #000000;
+            --dark-gray: #0A0A0A;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--burnt-orange);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 120px auto 80px;
+            padding: 0 20px;
+        }
+        
+        .prose {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .prose h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .prose h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--burnt-orange);
+        }
+        
+        .prose h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 30px 0 15px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .prose p {
+            margin: 20px 0;
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .prose ul, .prose ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .prose li {
+            margin: 10px 0;
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .prose strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .prose em {
+            color: var(--burnt-orange);
+            font-style: italic;
+        }
+        
+        .prose blockquote {
+            border-left: 4px solid var(--burnt-orange);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .prose code {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Consolas, monospace;
+            font-size: 0.9em;
+        }
+        
+        .prose pre {
+            background: var(--dark-gray);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+        
+        .prose pre code {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .prose hr {
+            border: none;
+            border-top: 1px solid rgba(191, 87, 0, 0.3);
+            margin: 40px 0;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h4 {
+            color: var(--burnt-orange);
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 8px 0;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+                font-size: 14px;
+            }
+            
+            .prose h1 {
+                font-size: 36px;
+            }
+            
+            .prose h2 {
+                font-size: 28px;
+            }
+            
+            main {
+                margin-top: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span>🔥</span>
+                <span>BLAZE INTELLIGENCE</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/manifesto">Manifesto</a>
+                <a href="/recruiting">Recruiting</a>
+            </div>
+        </div>
+    </nav>
+    
+    <main>
+        <article class="prose">
+            <h1>Blaze Intelligence MLB Pilot Playbook</h1>
+<h2>Executive Summary</h2>
+<p>A 12-week implementation to prove Champion Enigma Engine (CEE) delivers measurable competitive advantage through quantified intangibles.</p>
+<h2>Week 1-2: Data Integration Sprint</h2>
+<h3>Technical Setup</h3>
+<ul>
+<li><input disabled="" type="checkbox"> MLB StatsAPI connection (roster, game feeds)</li>
+<li><input disabled="" type="checkbox"> Statcast integration (exit velocity, launch angle, sprint speed)</li>
+<li><input disabled="" type="checkbox"> Internal video feed access (dugout, mound visits, at-bats)</li>
+<li><input disabled="" type="checkbox"> Wearables API (if available: Whoop, Oura, Catapult)</li>
+</ul>
+<h3>Baseline Collection</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 2024 season clutch situations catalog</li>
+<li><input disabled="" type="checkbox"> High-leverage at-bat library (9th inning, RISP)</li>
+<li><input disabled="" type="checkbox"> Injury/return-from-injury performance deltas</li>
+<li><input disabled="" type="checkbox"> Manager decision points with outcomes</li>
+</ul>
+<h2>Week 3-4: CEE Calibration</h2>
+<h3>Pattern Training</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Tag 100 clutch moments with outcomes</li>
+<li><input disabled="" type="checkbox"> Visual signal extraction from video</li>
+<li><input disabled="" type="checkbox"> Physiological baseline per player</li>
+<li><input disabled="" type="checkbox"> Decision latency benchmarks</li>
+</ul>
+<h3>Initial Scoring</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Generate first Champion Dimension scores</li>
+<li><input disabled="" type="checkbox"> Compare to traditional WAR/OPS+</li>
+<li><input disabled="" type="checkbox"> Identify signal/noise thresholds</li>
+<li><input disabled="" type="checkbox"> Create confidence intervals</li>
+</ul>
+<h2>Week 5-8: Live Implementation</h2>
+<h3>Daily Workflow Integration</h3>
+<ul>
+<li><strong>Morning</strong>: Readiness scores published to coaching staff</li>
+<li><strong>Pre-game</strong>: Individual CEE states + adjustment recommendations</li>
+<li><strong>In-game</strong>: Live pressure state monitoring, bullpen readiness alerts</li>
+<li><strong>Post-game</strong>: Performance vs. prediction audit, model updates</li>
+</ul>
+<h3>Deliverables</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Coach Cards: One-page player adjustments</li>
+<li><input disabled="" type="checkbox"> Readiness Dashboard: Team-wide view</li>
+<li><input disabled="" type="checkbox"> Clutch Probability Feed: Real-time situational forecasts</li>
+<li><input disabled="" type="checkbox"> Development Tracker: Week-over-week dimension changes</li>
+</ul>
+<h2>Week 9-10: Validation Sprint</h2>
+<h3>Metrics to Track</h3>
+<ul>
+<li><strong>Decision Lift</strong>: % improvement in high-leverage substitutions</li>
+<li><strong>Readiness Accuracy</strong>: Correlation of morning scores to game performance</li>
+<li><strong>Injury Prevention</strong>: False positive/negative rates on fatigue signals</li>
+<li><strong>Development Velocity</strong>: Behavioral change in targeted dimensions</li>
+</ul>
+<h3>A/B Testing</h3>
+<ul>
+<li>Control group: Traditional analytics only</li>
+<li>Test group: CEE-enhanced decisions</li>
+<li>Measure: Win probability added, run differential, injury days</li>
+</ul>
+<h2>Week 11-12: Scale &amp; Report</h2>
+<h3>Documentation</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Evidence portfolio: 10 decisive moments where CEE changed outcomes</li>
+<li><input disabled="" type="checkbox"> ROI calculation: Wins added, salary efficiency gained</li>
+<li><input disabled="" type="checkbox"> Coach testimonials: Workflow impact statements</li>
+<li><input disabled="" type="checkbox"> Player feedback: Development acceleration examples</li>
+</ul>
+<h3>Expansion Planning</h3>
+<ul>
+<li><input disabled="" type="checkbox"> API specification for league-wide deployment</li>
+<li><input disabled="" type="checkbox"> Multi-team comparison framework</li>
+<li><input disabled="" type="checkbox"> Youth/development league adaptation</li>
+<li><input disabled="" type="checkbox"> Scouting integration blueprint</li>
+</ul>
+<h2>Success Criteria</h2>
+<h3>Quantitative (Must Hit 3 of 4)</h3>
+<ol>
+<li><strong>+2 wins</strong> vs. projection through better deployment</li>
+<li><strong>15% reduction</strong> in high-leverage decision errors</li>
+<li><strong>80% correlation</strong> between readiness scores and performance</li>
+<li><strong>20% faster</strong> targeted behavior change in development</li>
+</ol>
+<h3>Qualitative (Must Hit 2 of 3)</h3>
+<ol>
+<li>Coaching staff daily active usage &gt;80%</li>
+<li>Player buy-in with voluntary biometric sharing &gt;60%</li>
+<li>Front office requests expansion to draft/trade evaluation</li>
+</ol>
+<h2>Risk Mitigation</h2>
+<h3>Data Gaps</h3>
+<ul>
+<li><strong>If biosignals unavailable</strong>: Default to video-only CEE (70% signal retention)</li>
+<li><strong>If video limited</strong>: Use broadcast + Statcast fusion</li>
+<li><strong>If resistance to change</strong>: Start with single coach champion, expand gradually</li>
+</ul>
+<h3>Technical Issues</h3>
+<ul>
+<li><strong>Latency concerns</strong>: Edge caching, pre-computed morning states</li>
+<li><strong>Integration friction</strong>: Dedicated Blaze operator for first 4 weeks</li>
+<li><strong>Model drift</strong>: Weekly recalibration, holdout validation</li>
+</ul>
+<h2>Investment &amp; Resources</h2>
+<h3>From Blaze</h3>
+<ul>
+<li>2 engineers (full-time for integration)</li>
+<li>1 data scientist (model tuning)</li>
+<li>1 baseball ops specialist (workflow design)</li>
+<li>24/7 on-call support during games</li>
+</ul>
+<h3>From Partner Org</h3>
+<ul>
+<li>Data access permissions</li>
+<li>1 analytics liaison</li>
+<li>Weekly 30-min coaching staff sync</li>
+<li>Champion coach to drive adoption</li>
+</ul>
+<h2>Timeline to Value</h2>
+<ul>
+<li><strong>Day 7</strong>: First readiness scores delivered</li>
+<li><strong>Day 21</strong>: Live in-game pressure states</li>
+<li><strong>Day 45</strong>: Measurable decision improvement</li>
+<li><strong>Day 84</strong>: Full ROI validation</li>
+</ul>
+<h2>Post-Pilot Path</h2>
+<h3>Success Scenario</h3>
+<ol>
+<li>Convert to annual subscription</li>
+<li>Expand to minor league system</li>
+<li>Add draft/trade evaluation module</li>
+<li>Co-develop proprietary dimensions</li>
+</ol>
+<h3>Scale Timeline</h3>
+<ul>
+<li><strong>Month 4-6</strong>: Full season implementation</li>
+<li><strong>Month 7-9</strong>: Multi-org pilots</li>
+<li><strong>Month 10-12</strong>: League-wide offering</li>
+</ul>
+<hr>
+<p><strong>Contact</strong>: <a href="mailto:partnerships@blaze-intelligence.com">partnerships@blaze-intelligence.com</a><br><strong>Technical</strong>: <a href="mailto:api@blaze-intelligence.com">api@blaze-intelligence.com</a><br><strong>Pilot Director</strong>: Austin Humphrey</p>
+
+        </article>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <a href="/manifesto">Manifesto</a>
+                <a href="/pilot-playbook">Pilot Playbook</a>
+                <a href="/recruiting">Global Recruiting Leaderboard</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="/pilot-playbook">MLB Pilot Playbook</a>
+                <a href="/investor-narrative">Investor Narrative</a>
+                <a href="/integration-hub">Integration Hub</a>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="mailto:austin@blaze-intelligence.com">Email Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="https://github.com/blaze-intelligence" target="_blank">GitHub</a>
+                <a href="https://twitter.com/blazeintel" target="_blank">Twitter</a>
+                <a href="https://linkedin.com/company/blaze-intelligence" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Blaze Intelligence. Belief with receipts.
+        </div>
+    </footer>
+    
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_TOKEN"}'></script>
+</body>
+</html>

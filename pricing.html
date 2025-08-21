@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Blaze Intelligence</title>
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --dark-burnt-orange: #8B3A00;
+            --white: #FFFFFF;
+            --black: #1D1D1F;
+            --light-gray: #F5F5F7;
+            --medium-gray: #86868B;
+            --success: #30D158;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+        
+        /* Clean Navigation */
+        .nav {
+            background: var(--white);
+            padding: 20px 40px;
+            box-shadow: 0 1px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            text-decoration: none;
+        }
+        
+        .cta-button {
+            background: var(--burnt-orange);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 18px 36px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background: var(--dark-burnt-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(191, 87, 0, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--black) 0%, #2D2D30 100%);
+            color: white;
+            padding: 100px 0 120px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        /* Pricing - Simple */
+        .pricing {
+            background: var(--light-gray);
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 400px;
+            margin: 40px auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            margin-bottom: 10px;
+        }
+        
+        .price-period {
+            color: var(--medium-gray);
+            margin-bottom: 30px;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        
+        .features-list li {
+            padding: 10px 0;
+            font-size: 16px;
+        }
+        
+        .features-list li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0 100px;
+            }
+            
+            .hero-content,
+            .container {
+                padding: 0 20px;
+            }
+            
+            .pricing {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script src="/src/js/simple-analytics.js"></script>
+    <!-- Clean Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="/" class="logo">🔥 Blaze</a>
+            <div class="user-info">
+                <a href="/athlete-dashboard.html" class="cta-button">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Simple.<br>Honest.<br>Pricing.</h1>
+            <p class="hero-subtitle">One price. Everything included. No surprises.</p>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing">
+        <div class="container">
+            <div class="pricing-card">
+                <div class="price">$99</div>
+                <div class="price-period">per month</div>
+                
+                <ul class="features-list">
+                    <li>Real-time readiness scores</li>
+                    <li>Game-day recommendations</li>
+                    <li>Performance tracking</li>
+                    <li>Mobile app access</li>
+                    <li>Cardinals live data</li>
+                    <li>24/7 support</li>
+                </ul>
+                
+                <a href="/contact.html" class="cta-button">Start Today</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

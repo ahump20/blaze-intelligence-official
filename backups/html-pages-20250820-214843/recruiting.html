@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Recruiting Leaderboard — Blaze Intelligence</title>
+    <meta name="description" content="Real-time recruiting intelligence powered by Champion Enigma scores. Track elite prospects across MLB, NFL, NCAA, and Texas HS.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Global Recruiting Leaderboard">
+    <meta property="og:description" content="Real-time recruiting intelligence powered by Champion Enigma scores.">
+    <meta property="og:site_name" content="Blaze Intelligence">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Global Recruiting Leaderboard">
+    <meta name="twitter:description" content="Real-time recruiting intelligence powered by Champion Enigma scores.">
+    
+    <!-- Theme -->
+    <meta name="theme-color" content="#BF5700">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://blaze-intelligence.com/recruiting">
+    
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Global Recruiting Leaderboard",
+      "description": "Real-time recruiting intelligence powered by Champion Enigma scores",
+      "url": "https://blaze-intelligence.com/recruiting",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Blaze Intelligence",
+        "url": "https://blaze-intelligence.com"
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --dark-burnt-orange: #8B3A00;
+            --black: #000000;
+            --dark-gray: #0A0A0A;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            opacity: 1;
+            color: var(--burnt-orange);
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 120px auto 80px;
+            padding: 0 20px;
+        }
+        
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: rgba(191, 87, 0, 0.2);
+            border: 1px solid var(--burnt-orange);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            color: var(--burnt-orange);
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        
+        .content-box {
+            background: var(--dark-gray);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content-box h2 {
+            color: var(--burnt-orange);
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .content-box p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 25px;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--burnt-orange);
+        }
+        
+        .feature-card h3 {
+            color: var(--burnt-orange);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--dark-burnt-orange) 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid var(--burnt-orange);
+            color: var(--burnt-orange);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--burnt-orange);
+            color: var(--white);
+        }
+        
+        .api-preview {
+            background: #0A0A0A;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'SF Mono', Consolas, monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+        
+        .api-preview code {
+            color: var(--burnt-orange);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+            padding: 40px 20px;
+            margin-top: 80px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            .content-box { padding: 20px; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span>🔥</span>
+                <span>BLAZE INTELLIGENCE</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/manifesto">Manifesto</a>
+                <a href="/recruiting" class="active">Recruiting</a>
+            </div>
+        </div>
+    </nav>
+    
+    <main>
+        <div class="hero-section">
+            <h1>Global Recruiting Leaderboard</h1>
+            <p class="subtitle">Real-time recruiting intelligence powered by Champion Enigma scores</p>
+            <div class="status-badge">API COMING SOON</div>
+        </div>
+        
+        <div class="content-box">
+            <h2>Automated Weekly Updates</h2>
+            <p>Every Sunday at 3 AM CST, our system refreshes recruiting data across all major leagues and development pathways. Champion Enigma scores, NIL valuations, and performance metrics update automatically.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🎯 MLB Pipeline</h3>
+                    <p>Perfect Game rankings, showcase results, and velocity tracking</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏈 NFL Draft Board</h3>
+                    <p>Combine metrics, pro day results, and athletic scores</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎓 NCAA Transfers</h3>
+                    <p>Portal movement, NIL valuations, and eligibility tracking</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⭐ Texas HS Elite</h3>
+                    <p>5-star prospects, commitment tracking, and state rankings</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-box">
+            <h2>Current Data Access</h2>
+            <p>While we build our public API, access the live leaderboard through our Notion database:</p>
+            
+            <div class="cta-section">
+                <a href="https://www.notion.so/blazeintelligence/Global-Recruiting-Leaderboard" target="_blank" class="btn-primary">
+                    View Live Leaderboard →
+                </a>
+                <a href="/pilot-playbook" class="btn-secondary">
+                    Learn About Pilots
+                </a>
+            </div>
+        </div>
+        
+        <div class="content-box">
+            <h2>Coming Soon: Public API</h2>
+            <p>Direct access to recruiting intelligence via REST API:</p>
+            
+            <div class="api-preview">
+                <code>GET /api/recruiting.json</code><br><br>
+                {<br>
+                &nbsp;&nbsp;"updated": "2025-08-20T08:00:00Z",<br>
+                &nbsp;&nbsp;"prospects": [<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": "txhs_henderson_001",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "Keisean Henderson",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"championEnigmaScore": 9.1,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"nilValuation": 450000,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"blazeScore": 94.2<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;]<br>
+                }
+            </div>
+            
+            <p>Features in development:</p>
+            <ul style="text-align: left; max-width: 600px; margin: 20px auto; color: rgba(255,255,255,0.8);">
+                <li>Real-time WebSocket updates during events</li>
+                <li>Historical trend analysis</li>
+                <li>Custom alerts for prospect movement</li>
+                <li>White-label integration options</li>
+                <li>Bulk export capabilities</li>
+            </ul>
+        </div>
+        
+        <div class="cta-section">
+            <h2 style="color: var(--burnt-orange); margin-bottom: 20px;">Ready to revolutionize your recruiting?</h2>
+            <a href="/investor-narrative" class="btn-secondary">Learn More</a>
+            <a href="mailto:recruiting@blaze-intelligence.com" class="btn-primary">Contact Sales</a>
+        </div>
+    </main>
+    
+    <footer>
+        © 2025 Blaze Intelligence. Belief with receipts.
+    </footer>
+    
+    <!-- Future: Client-side API fetch -->
+    <script>
+    // Placeholder for future API integration
+    async function loadRecruitingData() {
+        try {
+            const response = await fetch('/api/recruiting.json');
+            const data = await response.json();
+            // Render table when API is ready
+        } catch (error) {
+            console.log('API coming soon');
+        }
+    }
+    </script>
+</body>
+</html>

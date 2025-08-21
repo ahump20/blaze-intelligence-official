@@ -1,0 +1,567 @@
+{
+  "metadata": {
+    "generated": "2025-08-20T00:00:00Z",
+    "season": "2025-2026",
+    "version": "2.0.0",
+    "source": "Blaze Intelligence Data Pipeline",
+    "championEnigmaVersion": "3.0"
+  },
+  "mlb": {
+    "cardinals": {
+      "team_overview": {
+        "name": "St. Louis Cardinals",
+        "league": "National League",
+        "division": "Central",
+        "2024_record": "83-79",
+        "2025_projection": "87-75",
+        "playoff_odds": 0.72
+      },
+      "roster": [
+        {
+          "blazePlayerId": "mlb_goldschmidt_001",
+          "name": "Paul Goldschmidt",
+          "position": "1B",
+          "jerseyNumber": 46,
+          "age": 37,
+          "stats_2024": {
+            "avg": 0.245,
+            "hr": 22,
+            "rbi": 65,
+            "ops": 0.716,
+            "games": 154,
+            "war": 1.2
+          },
+          "projections_2025": {
+            "source": "FanGraphs_Steamer",
+            "avg": 0.254,
+            "hr": 23,
+            "rbi": 77,
+            "ops": 0.745,
+            "war": 2.1,
+            "confidence": 0.82
+          },
+          "championEnigmaScore": {
+            "clutchGene": 8.2,
+            "killerInstinct": 7.5,
+            "flowState": 7.8,
+            "mentalFortress": 8.9,
+            "overallChampionship": 8.1
+          },
+          "contract": {
+            "status": "Signed 1yr/$12.5M with NYY",
+            "affiliation": "New York Yankees"
+          }
+        },
+        {
+          "blazePlayerId": "mlb_arenado_001",
+          "name": "Nolan Arenado",
+          "position": "3B",
+          "jerseyNumber": 28,
+          "age": 34,
+          "stats_2024": {
+            "avg": 0.272,
+            "hr": 16,
+            "rbi": 71,
+            "ops": 0.719,
+            "games": 152,
+            "war": 2.5
+          },
+          "projections_2025": {
+            "source": "FanGraphs_Steamer",
+            "avg": 0.270,
+            "hr": 20,
+            "rbi": 75,
+            "ops": 0.755,
+            "war": 3.0,
+            "confidence": 0.85
+          },
+          "championEnigmaScore": {
+            "clutchGene": 8.7,
+            "killerInstinct": 8.1,
+            "flowState": 8.3,
+            "mentalFortress": 9.1,
+            "overallChampionship": 8.6
+          },
+          "contract": {
+            "years_remaining": 3,
+            "aav": 32500000,
+            "opt_out": true,
+            "affiliation": "St. Louis Cardinals"
+          }
+        },
+        {
+          "blazePlayerId": "mlb_contreras_001",
+          "name": "Willson Contreras",
+          "position": "C/DH",
+          "jerseyNumber": 40,
+          "age": 33,
+          "stats_2024": {
+            "avg": 0.262,
+            "hr": 15,
+            "rbi": 51,
+            "ops": 0.750,
+            "games": 84,
+            "war": 2.8
+          },
+          "projections_2025": {
+            "source": "FanGraphs_Steamer",
+            "avg": 0.265,
+            "hr": 18,
+            "rbi": 60,
+            "ops": 0.765,
+            "war": 3.1,
+            "confidence": 0.85
+          },
+          "championEnigmaScore": {
+            "clutchGene": 7.9,
+            "killerInstinct": 7.6,
+            "flowState": 8.0,
+            "mentalFortress": 8.2,
+            "overallChampionship": 7.9
+          },
+          "contract": {
+            "years_remaining": 2,
+            "aav": 18000000,
+            "affiliation": "St. Louis Cardinals"
+          }
+        }
+      ]
+    }
+  },
+  "nfl": {
+    "titans": {
+      "team_overview": {
+        "name": "Tennessee Titans",
+        "conference": "AFC",
+        "division": "South",
+        "2024_record": "6-11",
+        "2025_projection": "8-9",
+        "playoff_odds": 0.38
+      },
+      "roster": [
+        {
+          "blazePlayerId": "nfl_levis_001",
+          "name": "Will Levis",
+          "position": "QB",
+          "jerseyNumber": 8,
+          "age": 26,
+          "stats_2024": {
+            "passing_yards": 2091,
+            "passing_td": 13,
+            "int": 12,
+            "completion_pct": 58.4,
+            "qbr": 38.7,
+            "games": 12
+          },
+          "projections_2025": {
+            "source": "PFF_ESPN_Consensus",
+            "role": "Starting QB",
+            "passing_yards": 3200,
+            "passing_td": 20,
+            "int": 14,
+            "fantasy_points": 245.6,
+            "notes": "Second-year leap expected with improved weapons",
+            "confidence": 0.72
+          },
+          "championEnigmaScore": {
+            "clutchGene": 6.2,
+            "killerInstinct": 6.8,
+            "flowState": 5.9,
+            "mentalFortress": 6.5,
+            "overallChampionship": 6.4
+          }
+        },
+        {
+          "blazePlayerId": "nfl_pollard_001",
+          "name": "Tony Pollard",
+          "position": "RB",
+          "jerseyNumber": 20,
+          "age": 28,
+          "stats_2024": {
+            "rushing_yards": 1079,
+            "rushing_td": 5,
+            "receptions": 55,
+            "receiving_yards": 309,
+            "games": 16
+          },
+          "projections_2025": {
+            "source": "FantasyPros_Consensus",
+            "role": "Lead Back",
+            "rushing_yards": 1150,
+            "rushing_td": 8,
+            "fantasy_points_ppr": 198.5,
+            "confidence": 0.79
+          },
+          "championEnigmaScore": {
+            "clutchGene": 7.1,
+            "killerInstinct": 7.3,
+            "flowState": 7.8,
+            "mentalFortress": 7.5,
+            "overallChampionship": 7.4
+          }
+        }
+      ]
+    }
+  },
+  "ncaa_football": {
+    "high_value_nil": [
+      {
+        "blazePlayerId": "ncaa_manning_001",
+        "name": "Arch Manning",
+        "school": "Texas",
+        "position": "QB",
+        "jerseyNumber": 16,
+        "class": "Sophomore",
+        "nil_valuation": 6800000,
+        "stats_2024": {
+          "passing_yards": 259,
+          "passing_td": 2,
+          "rushing_yards": 67,
+          "rushing_td": 3,
+          "games": 4,
+          "role": "Backup to Quinn Ewers"
+        },
+        "projections_2025": {
+          "source": "247Sports_On3_Consensus",
+          "role": "Starting QB",
+          "passing_yards": 3500,
+          "td": 32,
+          "heisman_odds": "+800",
+          "draft_projection": "2027 1st Round"
+        },
+        "championEnigmaScore": {
+          "clutchGene": 8.5,
+          "killerInstinct": 8.2,
+          "flowState": 8.0,
+          "mentalFortress": 9.2,
+          "predatorMindset": 8.1,
+          "championAura": 9.5,
+          "winnerDNA": 9.8,
+          "beastMode": 7.9,
+          "overallChampionship": 8.7
+        },
+        "recruitingProfile": {
+          "highSchool": "Isidore Newman (LA)",
+          "stars": 5,
+          "nationalRank": 1,
+          "compositeScore": 0.9999
+        }
+      },
+      {
+        "blazePlayerId": "ncaa_beck_001",
+        "name": "Carson Beck",
+        "school": "Miami",
+        "position": "QB",
+        "jerseyNumber": 15,
+        "class": "Graduate",
+        "nil_valuation": 4300000,
+        "transferIncentive": 3500000,
+        "stats_2024": {
+          "passing_yards": 3485,
+          "passing_td": 28,
+          "int": 12,
+          "completion_pct": 0.647,
+          "qbr": 73.2,
+          "previousSchool": "Georgia"
+        },
+        "projections_2025": {
+          "source": "ESPN_CFF",
+          "role": "Starting QB - Transfer",
+          "passing_yards": 3800,
+          "passing_td": 35,
+          "accPlayerOfYear": true,
+          "draft_projection": "2026 1st-2nd Round"
+        },
+        "championEnigmaScore": {
+          "clutchGene": 7.8,
+          "killerInstinct": 7.5,
+          "flowState": 8.2,
+          "mentalFortress": 8.0,
+          "overallChampionship": 7.9
+        }
+      },
+      {
+        "player_id": "stewart_001",
+        "name": "Jeremiah Smith",
+        "school": "Ohio State",
+        "position": "WR",
+        "class": "Freshman",
+        "nil_valuation": 2800000,
+        "stats_2024": {
+          "receptions": 57,
+          "receiving_yards": 865,
+          "td": 10
+        },
+        "projections_2025": {
+          "receptions": 75,
+          "receiving_yards": 1200,
+          "td": 14,
+          "awards": ["Biletnikoff Finalist", "All-American"]
+        }
+      },
+      {
+        "blazePlayerId": "ncaa_nussmeier_001",
+        "name": "Garrett Nussmeier",
+        "school": "LSU",
+        "position": "QB",
+        "jerseyNumber": 13,
+        "class": "Senior",
+        "nil_valuation": 3700000,
+        "stats_2024": {
+          "passing_yards": 3405,
+          "passing_td": 28,
+          "int": 8,
+          "completion_pct": 0.632,
+          "games": 13
+        },
+        "projections_2025": {
+          "source": "PFF_College",
+          "role": "Starting QB",
+          "passing_yards": 3700,
+          "passing_td": 32,
+          "allSEC": true,
+          "heisman_odds": "+1000",
+          "draft_projection": "2026 1st Round"
+        },
+        "championEnigmaScore": {
+          "clutchGene": 8.0,
+          "killerInstinct": 7.7,
+          "flowState": 7.9,
+          "mentalFortress": 8.3,
+          "overallChampionship": 8.0
+        }
+      },
+      {
+        "blazePlayerId": "ncaa_underwood_001",
+        "name": "Bryce Underwood",
+        "school": "Michigan",
+        "position": "QB",
+        "jerseyNumber": "TBD",
+        "class": "Freshman",
+        "nil_valuation": 10500000,
+        "dealLength": "4 years",
+        "annualValue": 2625000,
+        "stats_2024": {
+          "highSchool": "Belleville HS (MI)",
+          "passing_yards": 3329,
+          "passing_td": 44,
+          "rushing_yards": 678,
+          "rushing_td": 11,
+          "stateChampionship": true
+        },
+        "projections_2025": {
+          "source": "247Sports",
+          "role": "Competing for Starting QB",
+          "notes": "Elite dual-threat, immediate impact expected"
+        },
+        "championEnigmaScore": {
+          "clutchGene": 8.8,
+          "killerInstinct": 8.5,
+          "flowState": 8.3,
+          "mentalFortress": 8.7,
+          "predatorMindset": 8.6,
+          "championAura": 9.0,
+          "winnerDNA": 9.1,
+          "beastMode": 8.4,
+          "overallChampionship": 8.7
+        },
+        "recruitingProfile": {
+          "highSchool": "Belleville (MI)",
+          "stars": 5,
+          "nationalRank": 1,
+          "compositeScore": 1.0000,
+          "recruitFlip": "From LSU to Michigan"
+        }
+      }
+    ],
+    "texas_longhorns": {
+      "team_overview": {
+        "ranking": 4,
+        "conference": "SEC",
+        "2024_record": "13-3",
+        "2025_projection": "11-1",
+        "playoff_odds": 0.89
+      },
+      "key_players": [
+        {
+          "name": "Arch Manning",
+          "position": "QB",
+          "role": "Starter"
+        },
+        {
+          "name": "Colin Simmons",
+          "position": "EDGE",
+          "class": "Sophomore",
+          "nil_valuation": 920000
+        },
+        {
+          "name": "Isaiah Bond",
+          "position": "WR",
+          "class": "Senior",
+          "nil_valuation": 750000
+        }
+      ]
+    }
+  },
+  "texas_hs_football": {
+    "top_recruits_2026": [
+      {
+        "blazePlayerId": "txhs_henderson_001",
+        "name": "Keisean Henderson",
+        "position": "QB/ATH",
+        "school": "Legacy School of Sports Sciences",
+        "location": "Spring, TX",
+        "rating": 0.9987,
+        "stars": 5,
+        "nationalRank": 3,
+        "stateRank": 1,
+        "stats_2024": {
+          "totalYards": 2847,
+          "totalTD": 38,
+          "dualThreat": true,
+          "playoffs": "State Semifinals"
+        },
+        "committed": "University of Houston",
+        "nil_potential": 450000,
+        "offers": ["Texas", "Alabama", "Ohio State", "LSU"],
+        "championEnigmaScore": {
+          "athleticism": 9.5,
+          "potential": 9.2,
+          "competitiveness": 9.0,
+          "overallProjection": 9.1
+        }
+      },
+      {
+        "blazePlayerId": "txhs_bentley_001",
+        "name": "Bowe Bentley",
+        "position": "QB",
+        "school": "Celina High School",
+        "location": "Celina, TX",
+        "rating": 0.9756,
+        "stars": 4,
+        "stateRank": 8,
+        "stats_2024": {
+          "passing_yards": 3211,
+          "passing_td": 47,
+          "rushing_yards": 923,
+          "rushing_td": 16,
+          "record": "16-0",
+          "championship": "4A-DII State Champion"
+        },
+        "committed": "Uncommitted",
+        "topContenders": ["TCU", "SMU", "Houston", "Kansas"],
+        "nil_potential": 580000,
+        "championEnigmaScore": {
+          "clutchGene": 9.2,
+          "winnerDNA": 9.5,
+          "leadership": 9.3,
+          "overallProjection": 8.8
+        }
+      },
+      {
+        "blazePlayerId": "txhs_moore_001",
+        "name": "Dakorien Moore",
+        "position": "WR",
+        "school": "Duncanville High School",
+        "location": "Duncanville, TX",
+        "rating": 0.9994,
+        "stars": 5,
+        "nationalRank": 2,
+        "stateRank": 1,
+        "stats_2024": {
+          "receivingYards": 1247,
+          "receivingTD": 18,
+          "trackSpeed": "10.58 100m",
+          "stateChampion": true
+        },
+        "committed": "Oregon",
+        "recruitFlip": "From LSU to Oregon (July 2024)",
+        "nil_potential": 680000,
+        "championEnigmaScore": {
+          "athleticism": 9.8,
+          "explosiveness": 9.7,
+          "potential": 9.5,
+          "overallProjection": 9.4
+        }
+      },
+      {
+        "blazePlayerId": "txhs_fasusi_001",
+        "name": "Michael Fasusi",
+        "position": "OT",
+        "school": "Lewisville High School",
+        "location": "Lewisville, TX",
+        "rating": 0.9982,
+        "stars": 5,
+        "nationalRank": 7,
+        "stateRank": 2,
+        "physicalProfile": {
+          "height": "6-6",
+          "weight": 315,
+          "wingspan": "84 inches",
+          "benchPress": 385
+        },
+        "committed": "Oklahoma",
+        "otherOffers": ["Texas", "Texas A&M", "Oregon", "USC"],
+        "nil_potential": 420000,
+        "championEnigmaScore": {
+          "physicality": 9.6,
+          "technique": 8.9,
+          "potential": 9.3,
+          "overallProjection": 9.2
+        }
+      }
+    ],
+    "texas_6a_championships": {
+      "2024_champion": "DeSoto",
+      "2024_runner_up": "Austin Vandegrift",
+      "2025_favorites": [
+        {
+          "school": "North Shore",
+          "odds": 0.22,
+          "key_player": "Kaleb Bailey (QB)",
+          "d1_commits": 8
+        },
+        {
+          "school": "Duncanville",
+          "odds": 0.18,
+          "key_player": "Zion Elee (RB)",
+          "d1_commits": 11
+        },
+        {
+          "school": "Lake Travis",
+          "odds": 0.15,
+          "key_player": "Chaston Ditta (QB)",
+          "d1_commits": 6
+        }
+      ]
+    }
+  },
+  "player_forecast_schema": {
+    "version": "1.0.0",
+    "fields": {
+      "player_id": "string",
+      "timestamp": "datetime",
+      "league": "enum[MLB,NFL,NCAA,HS]",
+      "performance_metrics": {
+        "current_form": "float[0-1]",
+        "injury_risk": "float[0-1]",
+        "consistency_score": "float[0-1]"
+      },
+      "projections": {
+        "short_term": "object",
+        "season_long": "object",
+        "confidence_interval": "float[0-1]"
+      },
+      "market_value": {
+        "nil_valuation": "integer",
+        "contract_value": "integer",
+        "market_trend": "enum[rising,stable,falling]"
+      },
+      "ai_insights": {
+        "breakout_potential": "float[0-1]",
+        "comparison_players": "array",
+        "key_factors": "array"
+      }
+    }
+  }
+}

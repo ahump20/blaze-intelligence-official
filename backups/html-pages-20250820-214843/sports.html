@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Coverage - Blaze Intelligence</title>
+    <link rel="stylesheet" href="loading.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#BF5700">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Blaze Intelligence">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --dark-burnt-orange: #8B3A00;
+            --light-burnt-orange: #BF5700;
+            --black: #000000;
+            --dark-gray: #0A0A0A;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(204, 85, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(204, 85, 0, 0.5);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(204,85,0,0.1) 0%, transparent 100%);
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--light-burnt-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: #999;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Sports Grid */
+        .sports-section {
+            padding: 80px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--burnt-orange);
+        }
+        
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .sport-card {
+            background: var(--dark-gray);
+            border: 1px solid rgba(204, 85, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sport-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 20px 40px rgba(204, 85, 0, 0.3);
+        }
+        
+        .sport-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--light-burnt-orange));
+        }
+        
+        .sport-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .sport-title {
+            font-size: 28px;
+            color: var(--burnt-orange);
+            margin-bottom: 15px;
+        }
+        
+        .sport-description {
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .sport-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .sport-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ccc;
+        }
+        
+        .sport-features li::before {
+            content: "⚡";
+            color: var(--burnt-orange);
+            font-weight: bold;
+        }
+        
+        .sport-button {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .sport-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(204, 85, 0, 0.4);
+        }
+        
+        /* Coverage Stats */
+        .coverage-section {
+            padding: 80px 20px;
+            background: var(--dark-gray);
+        }
+        
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .coverage-stat {
+            padding: 30px;
+            border-radius: 15px;
+            background: var(--black);
+            border: 1px solid rgba(204, 85, 0, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #ccc;
+            font-size: 16px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .cta-subtitle {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--burnt-orange);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--burnt-orange);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .sports-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .coverage-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">🔥</div>
+                <span>BLAZE INTELLIGENCE</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/solutions.html">Solutions</a></li>
+                <li><a href="/sports.html">Sports</a></li>
+                <li><a href="/pricing.html">Pricing</a></li>
+                <li><a href="/docs.html">Docs</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+            <a href="/trial.html" class="cta-button">Free Trial</a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-title">Complete Sports Coverage</h1>
+            <p class="hero-subtitle">Advanced analytics for every major sport. From youth leagues to professional teams, Blaze Intelligence delivers championship insights.</p>
+        </section>
+        
+        <!-- Sports Grid -->
+        <section class="sports-section">
+            <div class="container">
+                <h2 class="section-title">Supported Sports</h2>
+                <div class="sports-grid">
+                    <div class="sport-card">
+                        <div class="sport-icon">🏈</div>
+                        <h3 class="sport-title">Football</h3>
+                        <p class="sport-description">Comprehensive analytics for NFL and college football including play-by-play insights, formation analysis, and championship predictions.</p>
+                        <ul class="sport-features">
+                            <li>Real-time play analysis</li>
+                            <li>Formation effectiveness</li>
+                            <li>Player performance tracking</li>
+                            <li>Championship probability models</li>
+                            <li>Recruiting analytics</li>
+                        </ul>
+                        <a href="/football.html" class="sport-button">Explore Football</a>
+                    </div>
+                    
+                    <div class="sport-card">
+                        <div class="sport-icon">🏀</div>
+                        <h3 class="sport-title">Basketball</h3>
+                        <p class="sport-description">Advanced basketball analytics covering NBA, college, and youth basketball with shot tracking, player development, and team strategy.</p>
+                        <ul class="sport-features">
+                            <li>Shot chart analysis</li>
+                            <li>Player efficiency metrics</li>
+                            <li>Team chemistry tracking</li>
+                            <li>March Madness predictions</li>
+                            <li>NIL valuations</li>
+                        </ul>
+                        <a href="/basketball.html" class="sport-button">Explore Basketball</a>
+                    </div>
+                    
+                    <div class="sport-card">
+                        <div class="sport-icon">⚾</div>
+                        <h3 class="sport-title">Baseball</h3>
+                        <p class="sport-description">In-depth baseball analytics from Little League to MLB including pitch analysis, batting performance, and fielding metrics.</p>
+                        <ul class="sport-features">
+                            <li>Pitch velocity & movement</li>
+                            <li>Exit velocity tracking</li>
+                            <li>Defensive positioning</li>
+                            <li>Player development paths</li>
+                            <li>Injury prevention</li>
+                        </ul>
+                        <a href="#" class="sport-button">Explore Baseball</a>
+                    </div>
+                    
+                    <div class="sport-card">
+                        <div class="sport-icon">🏌️</div>
+                        <h3 class="sport-title">Golf</h3>
+                        <p class="sport-description">Professional golf analytics including swing analysis, course strategy, and performance optimization for individual athletes.</p>
+                        <ul class="sport-features">
+                            <li>Swing biomechanics</li>
+                            <li>Course management</li>
+                            <li>Weather impact analysis</li>
+                            <li>Mental performance tracking</li>
+                            <li>Tournament preparation</li>
+                        </ul>
+                        <a href="#" class="sport-button">Explore Golf</a>
+                    </div>
+                    
+                    <div class="sport-card">
+                        <div class="sport-icon">🏒</div>
+                        <h3 class="sport-title">Hockey</h3>
+                        <p class="sport-description">Fast-paced hockey analytics covering player tracking, power play effectiveness, and goaltender performance analysis.</p>
+                        <ul class="sport-features">
+                            <li>Player speed tracking</li>
+                            <li>Shot location analysis</li>
+                            <li>Power play optimization</li>
+                            <li>Goaltender metrics</li>
+                            <li>Line combination effectiveness</li>
+                        </ul>
+                        <a href="#" class="sport-button">Explore Hockey</a>
+                    </div>
+                    
+                    <div class="sport-card">
+                        <div class="sport-icon">⭐</div>
+                        <h3 class="sport-title">Multi-Sport</h3>
+                        <p class="sport-description">Comprehensive analytics for organizations managing multiple sports programs with unified insights and cross-sport comparisons.</p>
+                        <ul class="sport-features">
+                            <li>Cross-sport athlete tracking</li>
+                            <li>Multi-sport facilities</li>
+                            <li>Unified coaching tools</li>
+                            <li>Resource optimization</li>
+                            <li>Program comparisons</li>
+                        </ul>
+                        <a href="/solutions.html" class="sport-button">Explore Multi-Sport</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Coverage Stats -->
+        <section class="coverage-section">
+            <div class="container">
+                <h2 class="section-title">Our Reach</h2>
+                <div class="coverage-grid">
+                    <div class="coverage-stat">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Major Sports</span>
+                    </div>
+                    
+                    <div class="coverage-stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Leagues Covered</span>
+                    </div>
+                    
+                    <div class="coverage-stat">
+                        <span class="stat-number">Youth-Pro</span>
+                        <span class="stat-label">Complete Coverage</span>
+                    </div>
+                    
+                    <div class="coverage-stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Real-Time Data</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="cta-title">Start Analyzing Your Sport Today</h2>
+                <p class="cta-subtitle">Join teams across all sports using Blaze Intelligence to gain the competitive edge they need to win championships.</p>
+                <div class="cta-buttons">
+                    <a href="/trial.html" class="btn-primary">Start Free Trial</a>
+                    <a href="/live.html" class="btn-secondary">See Live Data</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

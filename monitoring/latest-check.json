@@ -1,0 +1,84 @@
+{
+  "timestamp": "2025-08-21T08:57:49.970Z",
+  "overall": "degraded",
+  "websites": [
+    {
+      "url": "https://blaze-intelligence.pages.dev",
+      "status": "up",
+      "ttfb": 182,
+      "totalTime": 291,
+      "httpCode": 200,
+      "downloadSize": 71754,
+      "timestamp": "2025-08-21T08:57:50.301Z",
+      "alerts": []
+    },
+    {
+      "url": "https://blaze-intelligence.com",
+      "status": "degraded",
+      "ttfb": 173,
+      "totalTime": 214,
+      "httpCode": 403,
+      "downloadSize": 8865,
+      "timestamp": "2025-08-21T08:57:50.532Z",
+      "alerts": [
+        "HTTP 403 error"
+      ]
+    },
+    {
+      "url": "https://blaze-sports-data.humphrey-austin20.workers.dev/health",
+      "status": "up",
+      "ttfb": 272,
+      "totalTime": 330,
+      "httpCode": 200,
+      "downloadSize": 126,
+      "timestamp": "2025-08-21T08:57:50.878Z",
+      "alerts": []
+    }
+  ],
+  "dataFiles": [
+    {
+      "name": "Cardinals Readiness",
+      "path": "./dist/src/data/enhanced-readiness.json",
+      "age": 67205,
+      "ageMinutes": 1,
+      "status": "fresh",
+      "critical": true,
+      "lastModified": "2025-08-21T08:56:43.673Z",
+      "alerts": []
+    },
+    {
+      "name": "Base Readiness",
+      "path": "./dist/src/data/readiness.json",
+      "age": 86060300,
+      "ageMinutes": 1434,
+      "status": "stale",
+      "critical": false,
+      "lastModified": "2025-08-20T09:03:30.578Z",
+      "alerts": [
+        "WARNING: Data is 1434 minutes old"
+      ]
+    }
+  ],
+  "alerts": [
+    {
+      "type": "performance",
+      "source": "https://blaze-intelligence.com",
+      "message": "HTTP 403 error",
+      "severity": "warning",
+      "timestamp": "2025-08-21T08:57:50.532Z"
+    },
+    {
+      "type": "data",
+      "source": "Base Readiness",
+      "message": "WARNING: Data is 1434 minutes old",
+      "severity": "warning",
+      "timestamp": "2025-08-21T08:57:49.970Z"
+    }
+  ],
+  "metrics": {
+    "checks": 1,
+    "alerts": 2,
+    "lastRun": "2025-08-21T08:57:49.970Z",
+    "status": "degraded"
+  }
+}

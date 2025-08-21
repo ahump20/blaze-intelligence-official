@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze - Your Performance</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --success: #30D158;
+            --warning: #FF9F0A;
+            --error: #FF453A;
+            --white: #FFFFFF;
+            --black: #000000;
+            --gray-1: #F2F2F7;
+            --gray-2: #E5E5EA;
+            --gray-3: #D1D1D6;
+            --gray-4: #8E8E93;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: var(--gray-1);
+            color: var(--black);
+            padding-bottom: 100px; /* Space for tab bar */
+            overflow-x: hidden;
+        }
+        
+        /* Mobile App Layout */
+        .app-container {
+            max-width: 414px;
+            margin: 0 auto;
+            background: var(--gray-1);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Status Bar */
+        .status-bar {
+            height: 44px;
+            background: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--white);
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-2);
+        }
+        
+        .greeting {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .date {
+            color: var(--gray-4);
+            font-size: 16px;
+        }
+        
+        /* Readiness Card */
+        .readiness-card {
+            background: var(--white);
+            margin: 20px;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+        
+        .readiness-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            position: relative;
+        }
+        
+        .ready {
+            background: linear-gradient(135deg, var(--success), #00C851);
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, var(--warning), #FF6B00);
+        }
+        
+        .readiness-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .readiness-subtitle {
+            color: var(--gray-4);
+            font-size: 16px;
+        }
+        
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--gray-2);
+            margin: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .stat {
+            background: var(--white);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--burnt-orange);
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray-4);
+            margin-top: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+        /* Performance Cards */
+        .performance-section {
+            margin: 20px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 0 5px;
+        }
+        
+        .performance-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .performance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .performance-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .performance-score {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--burnt-orange);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--burnt-orange);
+            border-radius: 2px;
+            transition: width 0.8s ease-out;
+        }
+        
+        /* Recommendations */
+        .recommendations {
+            margin: 20px;
+        }
+        
+        .recommendation {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--burnt-orange);
+        }
+        
+        .recommendation-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .recommendation-text {
+            color: var(--gray-4);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        /* Tab Bar */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 414px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--gray-2);
+            display: flex;
+            padding: 8px 0 25px;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            text-decoration: none;
+            color: var(--gray-4);
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            color: var(--burnt-orange);
+        }
+        
+        .tab-icon {
+            font-size: 24px;
+            margin-bottom: 2px;
+            display: block;
+        }
+        
+        /* Pull to Refresh */
+        .pull-refresh {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray-4);
+            font-size: 14px;
+        }
+        
+        /* Haptic Feedback */
+        .haptic {
+            transition: transform 0.1s ease;
+        }
+        
+        .haptic:active {
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>🔋 100%</span>
+        </div>
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="greeting">Good Morning</div>
+            <div class="date" id="currentDate">Tuesday, August 21</div>
+        </div>
+        
+        <!-- Readiness Card -->
+        <div class="readiness-card haptic">
+            <div class="readiness-circle ready" id="readinessCircle">
+                <span id="readinessScore">82</span>
+            </div>
+            <div class="readiness-title" id="readinessTitle">Ready to Play</div>
+            <div class="readiness-subtitle">Your team is primed for victory</div>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat">
+                <div class="stat-number" id="winProb">57%</div>
+                <div class="stat-label">Win Prob</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">61%</div>
+                <div class="stat-label">Playoffs</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">87</div>
+                <div class="stat-label">Proj Wins</div>
+            </div>
+        </div>
+        
+        <!-- Performance Section -->
+        <div class="performance-section">
+            <div class="section-title">Performance</div>
+            
+            <div class="performance-card haptic">
+                <div class="performance-header">
+                    <span class="performance-name">Offense</span>
+                    <span class="performance-score" id="offenseScore">78</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 78%" id="offenseProgress"></div>
+                </div>
+            </div>
+            
+            <div class="performance-card haptic">
+                <div class="performance-header">
+                    <span class="performance-name">Defense</span>
+                    <span class="performance-score" id="defenseScore">89</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 89%" id="defenseProgress"></div>
+                </div>
+            </div>
+            
+            <div class="performance-card haptic">
+                <div class="performance-header">
+                    <span class="performance-name">Pitching</span>
+                    <span class="performance-score" id="pitchingScore">94</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 94%" id="pitchingProgress"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recommendations -->
+        <div class="recommendations">
+            <div class="section-title">Today's Focus</div>
+            
+            <div class="recommendation haptic" id="rec1">
+                <div class="recommendation-title">Attack Early Counts</div>
+                <div class="recommendation-text">Be aggressive on first pitch strikes - opponents struggle early</div>
+            </div>
+            
+            <div class="recommendation haptic" id="rec2">
+                <div class="recommendation-title">Leverage Speed</div>
+                <div class="recommendation-text">Deploy baserunning early to pressure their defense</div>
+            </div>
+        </div>
+        
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <a href="#" class="tab active">
+                <span class="tab-icon">🏠</span>
+                Home
+            </a>
+            <a href="#" class="tab">
+                <span class="tab-icon">📊</span>
+                Stats
+            </a>
+            <a href="#" class="tab">
+                <span class="tab-icon">🎯</span>
+                Goals
+            </a>
+            <a href="#" class="tab">
+                <span class="tab-icon">⚙️</span>
+                Settings
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Update current date
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+        }
+        
+        // Update from Cardinals data
+        async function updateData() {
+            try {
+                const response = await fetch('/src/data/readiness.json');
+                const data = await response.json();
+                
+                if (data.readiness) {
+                    // Update readiness
+                    const score = data.readiness.overall;
+                    document.getElementById('readinessScore').textContent = score;
+                    
+                    const circle = document.getElementById('readinessCircle');
+                    const title = document.getElementById('readinessTitle');
+                    
+                    if (score >= 85) {
+                        circle.className = 'readiness-circle ready';
+                        title.textContent = 'Ready to Dominate';
+                    } else if (score >= 70) {
+                        circle.className = 'readiness-circle warning';
+                        title.textContent = 'Getting Ready';
+                    }
+                    
+                    // Update performance scores
+                    if (data.readiness.offense) {
+                        const offenseScore = data.readiness.offense.batting;
+                        document.getElementById('offenseScore').textContent = offenseScore;
+                        document.getElementById('offenseProgress').style.width = offenseScore + '%';
+                    }
+                    
+                    if (data.readiness.defense) {
+                        const defenseScore = data.readiness.defense.fielding;
+                        document.getElementById('defenseScore').textContent = defenseScore;
+                        document.getElementById('defenseProgress').style.width = defenseScore + '%';
+                    }
+                    
+                    if (data.readiness.pitching) {
+                        const pitchingScore = data.readiness.pitching.rotation;
+                        document.getElementById('pitchingScore').textContent = pitchingScore;
+                        document.getElementById('pitchingProgress').style.width = pitchingScore + '%';
+                    }
+                }
+                
+                // Update win probability
+                if (data.predictions && data.predictions.winProbability) {
+                    const winPercent = Math.round(data.predictions.winProbability * 100);
+                    document.getElementById('winProb').textContent = winPercent + '%';
+                }
+                
+                // Update recommendations
+                if (data.predictions && data.predictions.recommendations) {
+                    const recs = data.predictions.recommendations;
+                    if (recs.length > 0) {
+                        document.querySelector('#rec1 .recommendation-text').textContent = recs[0];
+                    }
+                    if (recs.length > 1) {
+                        document.querySelector('#rec2 .recommendation-text').textContent = recs[1];
+                    }
+                }
+                
+            } catch (error) {
+                console.log('Data update failed:', error);
+            }
+        }
+        
+        // Initialize
+        updateDate();
+        updateData();
+        
+        // Update every 30 seconds
+        setInterval(updateData, 30000);
+        
+        // Add haptic feedback simulation
+        document.querySelectorAll('.haptic').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                // Vibrate if supported
+                if (navigator.vibrate) {
+                    navigator.vibrate(10);
+                }
+            });
+        });
+        
+        // Pull to refresh simulation
+        let startY = 0;
+        let pullDistance = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            startY = e.touches[0].clientY;
+        });
+        
+        document.addEventListener('touchmove', function(e) {
+            if (window.scrollY === 0) {
+                pullDistance = e.touches[0].clientY - startY;
+                if (pullDistance > 0 && pullDistance < 100) {
+                    document.body.style.transform = `translateY(${pullDistance * 0.5}px)`;
+                }
+            }
+        });
+        
+        document.addEventListener('touchend', function() {
+            if (pullDistance > 60) {
+                // Trigger refresh
+                updateData();
+            }
+            document.body.style.transform = '';
+            pullDistance = 0;
+        });
+        
+        // Animate progress bars on load
+        setTimeout(() => {
+            document.querySelectorAll('.progress-fill').forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }, 500);
+    </script>
+</body>
+</html>

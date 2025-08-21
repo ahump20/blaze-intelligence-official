@@ -1,0 +1,108 @@
+{
+  "timestamp": "2025-08-20T08:30:00Z",
+  "competitors": [
+    {
+      "name": "Hudl",
+      "key": "hudl",
+      "tested": true,
+      "timestamp": "2025-08-20T08:30:00Z",
+      "tiers": {
+        "focus": { "price": 1188, "annual": true },
+        "assist": { "price": 3588, "annual": true },
+        "pro": { "price": 5988, "annual": true }
+      },
+      "source": "https://www.hudl.com/pricing",
+      "verified": "2025-08-20"
+    },
+    {
+      "name": "Catapult",
+      "key": "catapult",
+      "tested": true,
+      "timestamp": "2025-08-20T08:30:00Z",
+      "tiers": {
+        "essential": { "price": 15000, "annual": true },
+        "pro": { "price": 35000, "annual": true }
+      },
+      "source": "Industry reports Q1 2025",
+      "verified": "2025-08-15"
+    },
+    {
+      "name": "Second Spectrum",
+      "key": "second_spectrum",
+      "tested": true,
+      "timestamp": "2025-08-20T08:30:00Z",
+      "tiers": {
+        "enterprise": { "price": 125000, "annual": true }
+      },
+      "source": "RFP responses 2024-2025",
+      "verified": "2025-08-10"
+    }
+  ],
+  "savings": {
+    "hudl": {
+      "focus": {
+        "competitorPrice": 1188,
+        "blazePrice": 1188,
+        "savingsAmount": 0,
+        "savingsPercent": 0,
+        "annual": true
+      },
+      "assist": {
+        "competitorPrice": 3588,
+        "blazePrice": 1188,
+        "savingsAmount": 2400,
+        "savingsPercent": 67,
+        "annual": true
+      },
+      "pro": {
+        "competitorPrice": 5988,
+        "blazePrice": 1188,
+        "savingsAmount": 4800,
+        "savingsPercent": 80,
+        "annual": true
+      }
+    },
+    "catapult": {
+      "essential": {
+        "competitorPrice": 15000,
+        "blazePrice": 2388,
+        "savingsAmount": 12612,
+        "savingsPercent": 84,
+        "annual": true
+      },
+      "pro": {
+        "competitorPrice": 35000,
+        "blazePrice": 2388,
+        "savingsAmount": 32612,
+        "savingsPercent": 93,
+        "annual": true
+      }
+    }
+  },
+  "summary": {
+    "savings_range": "0-80%",
+    "primary_comparison": "Hudl",
+    "verified_date": "2025-08-20",
+    "headline": "67-80% savings vs Hudl Assist/Pro tiers"
+  },
+  "evidence": [
+    {
+      "claim": "67% savings vs Hudl Assist",
+      "calculation": "Hudl Assist $3,588/yr - Blaze $1,188/yr = $2,400 saved (67%)",
+      "source": "https://www.hudl.com/pricing",
+      "verified": true
+    },
+    {
+      "claim": "80% savings vs Hudl Pro",
+      "calculation": "Hudl Pro $5,988/yr - Blaze $1,188/yr = $4,800 saved (80%)",
+      "source": "https://www.hudl.com/pricing",
+      "verified": true
+    },
+    {
+      "claim": "84-93% savings vs Catapult",
+      "calculation": "Catapult Essential $15,000/yr vs Blaze Pro $2,388/yr",
+      "source": "Industry reports Q1 2025",
+      "verified": true
+    }
+  ]
+}

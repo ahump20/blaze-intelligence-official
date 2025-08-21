@@ -1,0 +1,158 @@
+{
+  "timestamp": "2025-08-21T09:11:30.539Z",
+  "team": "St. Louis Cardinals",
+  "gameDay": true,
+  "readiness": {
+    "overall": 86,
+    "offense": {
+      "batting": 86,
+      "onBase": 79,
+      "situational": 83,
+      "clutch": 89,
+      "powerIndex": 88
+    },
+    "defense": {
+      "fielding": 86,
+      "positioning": 88,
+      "communication": 91,
+      "range": 88,
+      "errorPrevention": 98
+    },
+    "pitching": {
+      "rotation": 86,
+      "bullpen": 82,
+      "command": 94,
+      "stamina": 95,
+      "velocity": 96
+    },
+    "baserunning": {
+      "speed": 88,
+      "intelligence": 91,
+      "aggression": 82,
+      "timing": 89,
+      "stolenBaseSuccess": 87
+    }
+  },
+  "leverage": {
+    "high": [
+      {
+        "name": "Paul Goldschmidt",
+        "position": "1B",
+        "leverage": 92,
+        "clutchRating": 88
+      },
+      {
+        "name": "Nolan Arenado",
+        "position": "3B",
+        "leverage": 89,
+        "clutchRating": 91
+      },
+      {
+        "name": "Masyn Winn",
+        "position": "SS",
+        "leverage": 86,
+        "clutchRating": 82
+      },
+      {
+        "name": "Willson Contreras",
+        "position": "C",
+        "leverage": 84,
+        "clutchRating": 79
+      },
+      {
+        "name": "Jordan Walker",
+        "position": "OF",
+        "leverage": 81,
+        "clutchRating": 77
+      }
+    ],
+    "situational": {
+      "runnersInScoringPosition": 0.842,
+      "lateAndClose": 0.791,
+      "tieGame": 0.864,
+      "leadingAfter7": 0.923,
+      "twoOutRBI": 0.756,
+      "basesLoaded": 0.812
+    },
+    "matchups": {
+      "vsLefties": {
+        "advantage": "+12%",
+        "ops": 0.792
+      },
+      "vsRighties": {
+        "advantage": "+8%",
+        "ops": 0.758
+      },
+      "dayGames": {
+        "advantage": "+15%",
+        "winPct": 0.587
+      },
+      "nightGames": {
+        "advantage": "+9%",
+        "winPct": 0.542
+      },
+      "homeField": {
+        "advantage": "+11%",
+        "winPct": 0.564
+      },
+      "division": {
+        "advantage": "+7%",
+        "winPct": 0.521
+      }
+    }
+  },
+  "injuries": {
+    "active": [],
+    "dayToDay": [],
+    "returningSoon": [
+      "Tyler O'Neill (oblique) - Expected 8/22"
+    ],
+    "healthScore": 94,
+    "fatigueFactor": 0.12,
+    "injuryRisk": "low"
+  },
+  "weather": {
+    "temperature": 78,
+    "wind": {
+      "speed": 8,
+      "direction": "SW",
+      "impact": "neutral"
+    },
+    "precipitation": 0,
+    "humidity": 62,
+    "barometer": 29.92,
+    "gameTimeConditions": "Clear",
+    "impact": "neutral",
+    "ballFlightBonus": "+2%"
+  },
+  "predictions": {
+    "winProbability": 0.5903661266532026,
+    "keyFactors": [
+      "Strong bullpen performance (2.89 ERA last 7 days)",
+      "Offensive momentum (.287 BA with RISP)",
+      "Home field advantage (34-22 at Busch)",
+      "Favorable pitching matchup",
+      "Opponent bullpen taxed (14.2 IP last 2 days)"
+    ],
+    "recommendations": [
+      "Deploy speed on bases early to pressure defense",
+      "Attack first pitch strikes (opponent .189 BA on first pitch)",
+      "Use high-leverage relievers in 7th if tied",
+      "Aggressive defensive positioning vs pull hitters",
+      "Consider lineup stack vs LHP in middle innings"
+    ]
+  },
+  "blazeIntelligence": {
+    "championshipOdds": 0.187,
+    "divisionProbability": 0.412,
+    "wildcardProbability": 0.523,
+    "playoffProbability": 0.612,
+    "projectedWins": 87
+  },
+  "metadata": {
+    "dataQuality": "high",
+    "confidence": "validated",
+    "source": "Blaze Intelligence Cardinals Analytics",
+    "nextUpdate": "2025-08-21T09:21:30.539Z"
+  }
+}
