@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Analytics - Blaze Intelligence</title>
+    <link rel="stylesheet" href="loading.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#BF5700">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Blaze Intelligence">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --dark-burnt-orange: #8B3A00;
+            --light-burnt-orange: #BF5700;
+            --black: #000000;
+            --dark-gray: #0A0A0A;
+            --medium-gray: #1a1a1a;
+            --light-gray: #2d2d2d;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(204, 85, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(204, 85, 0, 0.5);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(204,85,0,0.1) 0%, transparent 100%);
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--light-burnt-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: #999;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Stats Overview */
+        .stats-overview {
+            padding: 60px 20px;
+            background: var(--dark-gray);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--burnt-orange);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .stat-card {
+            background: var(--black);
+            border: 1px solid rgba(204, 85, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 15px 40px rgba(204, 85, 0, 0.3);
+        }
+        
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--burnt-orange);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #999;
+            font-size: 16px;
+        }
+        
+        /* Player Performance */
+        .player-performance {
+            padding: 80px 20px;
+        }
+        
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .player-card {
+            background: var(--dark-gray);
+            border: 1px solid rgba(204, 85, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .player-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 20px 50px rgba(204, 85, 0, 0.3);
+        }
+        
+        .player-photo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .player-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+        
+        .player-position {
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .player-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(204, 85, 0, 0.2);
+        }
+        
+        .player-stat {
+            text-align: center;
+        }
+        
+        .player-stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--burnt-orange);
+            display: block;
+        }
+        
+        .player-stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Game Analysis */
+        .game-analysis {
+            padding: 80px 20px;
+            background: var(--dark-gray);
+        }
+        
+        .games-grid {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .game-card {
+            background: var(--black);
+            border: 1px solid rgba(204, 85, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            border-color: var(--burnt-orange);
+            box-shadow: 0 15px 40px rgba(204, 85, 0, 0.2);
+        }
+        
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .game-teams {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .team {
+            text-align: center;
+        }
+        
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            background: var(--burnt-orange);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 10px;
+        }
+        
+        .team-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .vs {
+            font-size: 20px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .game-status {
+            padding: 8px 16px;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .game-predictions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .prediction-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(204, 85, 0, 0.1);
+            border-radius: 12px;
+        }
+        
+        .prediction-label {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .prediction-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--burnt-orange);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .hero {
+                padding: 60px 20px 40px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .players-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .game-teams {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .vs {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">🏀</div>
+                <span>BASKETBALL ANALYTICS</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/app.html">Dashboard</a></li>
+                <li><a href="/pricing.html">Pricing</a></li>
+            </ul>
+            <a href="/app.html" class="cta-button">View Dashboard</a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-title">Basketball Intelligence</h1>
+            <p class="hero-subtitle">Advanced analytics and insights for basketball teams at every level</p>
+        </section>
+        
+        <!-- Stats Overview -->
+        <section class="stats-overview">
+            <div class="container">
+                <h2 class="section-title">Team Performance Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value">73.2%</div>
+                        <div class="stat-label">Win Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-value">112.8</div>
+                        <div class="stat-label">Offensive Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🛡️</div>
+                        <div class="stat-value">103.5</div>
+                        <div class="stat-label">Defensive Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-value">47.2%</div>
+                        <div class="stat-label">Field Goal %</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏹</div>
+                        <div class="stat-value">38.9%</div>
+                        <div class="stat-label">3-Point %</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔄</div>
+                        <div class="stat-value">45.2</div>
+                        <div class="stat-label">Rebounds/Game</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Player Performance -->
+        <section class="player-performance">
+            <div class="container">
+                <h2 class="section-title">Star Players</h2>
+                <div class="players-grid">
+                    <div class="player-card">
+                        <div class="player-photo">23</div>
+                        <div class="player-name">LeBron James</div>
+                        <div class="player-position">Small Forward</div>
+                        <div class="player-stats">
+                            <div class="player-stat">
+                                <span class="player-stat-value">28.2</span>
+                                <span class="player-stat-label">PPG</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="player-stat-value">7.8</span>
+                                <span class="player-stat-label">RPG</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="player-stat-value">8.4</span>
+                                <span class="player-stat-label">APG</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-photo">3</div>
+                        <div class="player-name">Anthony Davis</div>
+                        <div class="player-position">Power Forward/Center</div>
+                        <div class="player-stats">
+                            <div class="player-stat">
+                                <span class="player-stat-value">24.8</span>
+                                <span class="player-stat-label">PPG</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="player-stat-value">12.3</span>
+                                <span class="player-stat-label">RPG</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="player-stat-value">2.8</span>
+                                <span class="player-stat-label">BPG</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-photo">1</div>
+                        <div class="player-name">D'Angelo Russell</div>
+                        <div class="player-position">Point Guard</div>
+                        <div class="player-stats">
+                            <div class="player-stat">
+                                <span class="player-stat-value">18.4</span>
+                                <span class="player-stat-label">PPG</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="player-stat-value">3.2</span>
+                                <span class="player-stat-label">RPG</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="player-stat-value">6.8</span>
+                                <span class="player-stat-label">APG</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Game Analysis -->
+        <section class="game-analysis">
+            <div class="container">
+                <h2 class="section-title">Upcoming Games & Predictions</h2>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-teams">
+                                <div class="team">
+                                    <div class="team-logo">LAL</div>
+                                    <div class="team-name">Grizzlies</div>
+                                </div>
+                                <span class="vs">vs</span>
+                                <div class="team">
+                                    <div class="team-logo">GSW</div>
+                                    <div class="team-name">Longhorns</div>
+                                </div>
+                            </div>
+                            <div class="game-status">Tomorrow 7:30 PM</div>
+                        </div>
+                        <div class="game-predictions">
+                            <div class="prediction-item">
+                                <div class="prediction-label">Win Probability</div>
+                                <div class="prediction-value">67.8%</div>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">Predicted Score</div>
+                                <div class="prediction-value">115-108</div>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">Key Factor</div>
+                                <div class="prediction-value">Home Court</div>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">Confidence</div>
+                                <div class="prediction-value">High</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-teams">
+                                <div class="team">
+                                    <div class="team-logo">PHX</div>
+                                    <div class="team-name">Suns</div>
+                                </div>
+                                <span class="vs">vs</span>
+                                <div class="team">
+                                    <div class="team-logo">LAL</div>
+                                    <div class="team-name">Grizzlies</div>
+                                </div>
+                            </div>
+                            <div class="game-status">Friday 9:00 PM</div>
+                        </div>
+                        <div class="game-predictions">
+                            <div class="prediction-item">
+                                <div class="prediction-label">Win Probability</div>
+                                <div class="prediction-value">52.3%</div>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">Predicted Score</div>
+                                <div class="prediction-value">109-112</div>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">Key Factor</div>
+                                <div class="prediction-label">Pace of Play</div>
+                            </div>
+                            <div class="prediction-item">
+                                <div class="prediction-label">Confidence</div>
+                                <div class="prediction-value">Medium</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+    
+    <!-- API Integration -->
+    <script src="api-integration.js"></script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Performance Made Simple</title>
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --dark-burnt-orange: #8B3A00;
+            --white: #FFFFFF;
+            --black: #1D1D1F;
+            --light-gray: #F5F5F7;
+            --medium-gray: #86868B;
+            --success: #30D158;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+        
+        /* Hero Section - iPhone Style */
+        .hero {
+            background: linear-gradient(135deg, var(--black) 0%, #2D2D30 100%);
+            color: white;
+            padding: 100px 0 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        .cta-button {
+            background: var(--burnt-orange);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 18px 36px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background: var(--dark-burnt-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(191, 87, 0, 0.3);
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Features - Simple Cards */
+        .features {
+            padding: 100px 0;
+            background: var(--light-gray);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 40px;
+        }
+        
+        .feature-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .feature-text {
+            color: var(--medium-gray);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        /* Testimonial */
+        .testimonial {
+            background: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .testimonial-quote {
+            font-size: 32px;
+            font-weight: 300;
+            line-height: 1.4;
+            margin-bottom: 30px;
+            color: var(--black);
+        }
+        
+        .testimonial-author {
+            font-size: 18px;
+            color: var(--medium-gray);
+        }
+        
+        /* Pricing - Simple */
+        .pricing {
+            background: var(--light-gray);
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 400px;
+            margin: 40px auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            margin-bottom: 10px;
+        }
+        
+        .price-period {
+            color: var(--medium-gray);
+            margin-bottom: 30px;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        
+        .features-list li {
+            padding: 10px 0;
+            font-size: 16px;
+        }
+        
+        .features-list li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0 100px;
+            }
+            
+            .hero-content,
+            .container,
+            .testimonial-content {
+                padding: 0 20px;
+            }
+            
+            .features,
+            .testimonial,
+            .pricing {
+                padding: 60px 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .testimonial-quote {
+                font-size: 24px;
+            }
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Performance.<br>Made Simple.</h1>
+            <p class="hero-subtitle">Get the insights you need to win. No complexity, no confusion. Just results.</p>
+            <a href="/athlete-dashboard.html" class="cta-button">See Your Performance</a>
+            <a href="#features" class="cta-button cta-secondary">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Built for Athletes</h2>
+                <p class="section-subtitle">Complex analytics made simple. Focus on what matters: winning.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Instant Insights</h3>
+                    <p class="feature-text">See your readiness score, win probability, and key recommendations in seconds. No charts to decipher.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Game-Day Focus</h3>
+                    <p class="feature-text">Get specific, actionable recommendations for today's game. Attack early counts. Leverage speed. Win.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Mobile First</h3>
+                    <p class="feature-text">Check your status on the bus, in the locker room, or on the field. Designed for athletes on the move.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial">
+        <div class="testimonial-content">
+            <p class="testimonial-quote">"Finally, analytics that actually help me play better. Simple, clear, and it works."</p>
+            <p class="testimonial-author">— College Baseball Player</p>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">One Price. Everything Included.</h2>
+                <p class="section-subtitle">No tiers, no confusion. Just great performance insights.</p>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="price">$99</div>
+                <div class="price-period">per month</div>
+                
+                <ul class="features-list">
+                    <li>Real-time readiness scores</li>
+                    <li>Game-day recommendations</li>
+                    <li>Performance tracking</li>
+                    <li>Mobile app access</li>
+                    <li>24/7 support</li>
+                </ul>
+                
+                <a href="/contact.html" class="cta-button">Start Today</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Simple scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Animate feature cards
+            document.querySelectorAll('.feature-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
