@@ -1,36 +1,36 @@
 {
-  "timestamp": "2025-08-21T02:53:56.426Z",
+  "timestamp": "2025-08-21T03:03:56.433Z",
   "team": "St. Louis Cardinals",
   "gameDay": true,
   "readiness": {
-    "overall": 89,
+    "overall": 84,
     "offense": {
-      "batting": 88,
-      "onBase": 81,
-      "situational": 92,
-      "clutch": 81,
-      "powerIndex": 81
+      "batting": 86,
+      "onBase": 75,
+      "situational": 86,
+      "clutch": 77,
+      "powerIndex": 92
     },
     "defense": {
       "fielding": 86,
-      "positioning": 96,
-      "communication": 90,
-      "range": 83,
+      "positioning": 93,
+      "communication": 87,
+      "range": 89,
       "errorPrevention": 97
     },
     "pitching": {
       "rotation": 90,
-      "bullpen": 80,
+      "bullpen": 92,
       "command": 83,
-      "stamina": 91,
-      "velocity": 97
+      "stamina": 93,
+      "velocity": 95
     },
     "baserunning": {
-      "speed": 81,
+      "speed": 75,
       "intelligence": 92,
-      "aggression": 83,
-      "timing": 86,
-      "stolenBaseSuccess": 73
+      "aggression": 78,
+      "timing": 87,
+      "stolenBaseSuccess": 81
     }
   },
   "leverage": {
@@ -126,7 +126,7 @@
     "ballFlightBonus": "+2%"
   },
   "predictions": {
-    "winProbability": 0.5066984688547201,
+    "winProbability": 0.548181442975399,
     "keyFactors": [
       "Strong bullpen performance (2.89 ERA last 7 days)",
       "Offensive momentum (.287 BA with RISP)",
@@ -153,6 +153,6 @@
     "dataQuality": "high",
     "confidence": "validated",
     "source": "Blaze Intelligence Cardinals Analytics",
-    "nextUpdate": "2025-08-21T03:03:56.427Z"
+    "nextUpdate": "2025-08-21T03:13:56.433Z"
   }
 }
