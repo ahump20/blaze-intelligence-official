@@ -1,4 +1,4 @@
-name = "blaze-connector-api"
+name = "blaze-billing"
 main = "functions/worker.js"
 compatibility_date = "2025-08-20"
 workers_dev = true
