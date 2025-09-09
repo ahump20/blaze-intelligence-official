@@ -27,22 +27,16 @@ class ChampionshipDashboard {
 
     async loadTeamsData() {
         try {
-            // Load data from multiple sources
-            const [mlbData, nflData, nbaData, nhlData, mlsData, ncaaData] = await Promise.all([
+            // Load data from core sports sources (MLB, NFL, NCAA Football)
+            const [mlbData, nflData, ncaaData] = await Promise.all([
                 this.fetchSportsRadarData('mlb'),
                 this.fetchSportsRadarData('nfl'),
-                this.fetchStaticData('nba'),
-                this.fetchStaticData('nhl'),
-                this.fetchStaticData('mls'),
                 this.fetchSportsRadarData('ncaafb')
             ]);
 
             this.teams = [
                 ...this.processMLBData(mlbData),
                 ...this.processNFLData(nflData),
-                ...this.processNBAData(nbaData),
-                ...this.processNHLData(nhlData),
-                ...this.processMLSData(mlsData),
                 ...this.processNCAAData(ncaaData)
             ];
 
@@ -66,15 +60,6 @@ class ChampionshipDashboard {
         }
     }
 
-    async fetchStaticData(league) {
-        // For leagues not covered by SportsRadar, use static data
-        const staticData = {
-            nba: this.getNBATeams(),
-            nhl: this.getNHLTeams(),
-            mls: this.getMLSTeams()
-        };
-        return staticData[league] || [];
-    }
 
     processMLBData(data) {
         if (!data || !data.leagues) return this.getFallbackMLBData();
@@ -256,7 +241,7 @@ class ChampionshipDashboard {
                 <div class="analytics-summary" data-aos="fade-up" data-aos-delay="100">
                     <div class="summary-grid">
                         <div class="summary-card">
-                            <div class="summary-value" id="totalTeams">227</div>
+                            <div class="summary-value" id="totalTeams">162</div>
                             <div class="summary-label">Total Teams</div>
                         </div>
                         <div class="summary-card">
@@ -264,11 +249,11 @@ class ChampionshipDashboard {
                             <div class="summary-label">Championships</div>
                         </div>
                         <div class="summary-card">
-                            <div class="summary-value" id="totalLeagues">6</div>
+                            <div class="summary-value" id="totalLeagues">3</div>
                             <div class="summary-label">Leagues</div>
                         </div>
                         <div class="summary-card">
-                            <div class="summary-value" id="filteredResults">227</div>
+                            <div class="summary-value" id="filteredResults">162</div>
                             <div class="summary-label">Filtered Results</div>
                         </div>
                     </div>
@@ -278,9 +263,6 @@ class ChampionshipDashboard {
                     <button class="filter-btn active" data-league="All Leagues">All Leagues</button>
                     <button class="filter-btn" data-league="MLB">MLB</button>
                     <button class="filter-btn" data-league="NFL">NFL</button>
-                    <button class="filter-btn" data-league="NBA">NBA</button>
-                    <button class="filter-btn" data-league="NHL">NHL</button>
-                    <button class="filter-btn" data-league="MLS">MLS</button>
                     <button class="filter-btn" data-league="NCAA Football">NCAA Football</button>
                 </div>
 
@@ -485,36 +467,6 @@ class ChampionshipDashboard {
         ].map(team => this.formatTeam(team, 'NCAA Football', team.division));
     }
 
-    // Additional static data methods for NBA, NHL, MLS would go here...
-    getNBATeams() { 
-        return [
-            { name: 'Lakers', market: 'Los Angeles', league: 'NBA', division: 'Pacific', founded: '1947', titles: 17 },
-            { name: 'Celtics', market: 'Boston', league: 'NBA', division: 'Atlantic', founded: '1946', titles: 18 },
-            { name: 'Warriors', market: 'Golden State', league: 'NBA', division: 'Pacific', founded: '1946', titles: 7 },
-            { name: 'Bulls', market: 'Chicago', league: 'NBA', division: 'Central', founded: '1966', titles: 6 },
-            { name: 'Spurs', market: 'San Antonio', league: 'NBA', division: 'Southwest', founded: '1967', titles: 5 }
-        ].map(team => this.formatTeam(team, 'NBA', team.division));
-    }
-    
-    getNHLTeams() { 
-        return [
-            { name: 'Canadiens', market: 'Montreal', league: 'NHL', division: 'Atlantic', founded: '1909', titles: 24 },
-            { name: 'Maple Leafs', market: 'Toronto', league: 'NHL', division: 'Atlantic', founded: '1917', titles: 13 },
-            { name: 'Red Wings', market: 'Detroit', league: 'NHL', division: 'Atlantic', founded: '1926', titles: 11 },
-            { name: 'Bruins', market: 'Boston', league: 'NHL', division: 'Atlantic', founded: '1924', titles: 6 },
-            { name: 'Rangers', market: 'New York', league: 'NHL', division: 'Metropolitan', founded: '1926', titles: 4 }
-        ].map(team => this.formatTeam(team, 'NHL', team.division));
-    }
-    
-    getMLSTeams() { 
-        return [
-            { name: 'Galaxy', market: 'LA', league: 'MLS', division: 'Western', founded: '1995', titles: 5 },
-            { name: 'Sounders FC', market: 'Seattle', league: 'MLS', division: 'Western', founded: '2007', titles: 2 },
-            { name: 'Atlanta United', market: 'Atlanta', league: 'MLS', division: 'Eastern', founded: '2014', titles: 1 },
-            { name: 'LAFC', market: 'Los Angeles', league: 'MLS', division: 'Western', founded: '2014', titles: 1 },
-            { name: 'Sporting KC', market: 'Kansas City', league: 'MLS', division: 'Western', founded: '1995', titles: 2 }
-        ].map(team => this.formatTeam(team, 'MLS', team.division));
-    }
     
     generateTeamId(name, market) {
         return (market + name).toLowerCase().replace(/[^a-z0-9]/g, '').substring(0, 10);
@@ -702,9 +654,6 @@ class ChampionshipDashboard {
         const colors = {
             'MLB': '#bf5700',
             'NFL': '#013369',
-            'NBA': '#c9082a',
-            'NHL': '#000000',
-            'MLS': '#00b04f',
             'NCAA Football': '#cc5500'
         };
         return colors[league] || '#666666';
