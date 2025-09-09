@@ -1,12 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install:*)",
-      "Bash(npm test:*)",
-      "Bash(npx wrangler pages deploy:*)",
-      "Bash(npx wrangler pages project create:*)"
-    ],
-    "deny": [],
-    "ask": []
+      "Bash(npx react-native init:*)",
+      "Bash(npx @react-native-community/cli:*)"
+    ]
   }
 }

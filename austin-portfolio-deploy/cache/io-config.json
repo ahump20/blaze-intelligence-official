@@ -1,0 +1,29 @@
+{
+  "buffer_sizes": {
+    "small_files": "4KB",
+    "medium_files": "64KB",
+    "large_files": "1MB"
+  },
+  "concurrent_limits": {
+    "read_operations": 6,
+    "write_operations": 2,
+    "total_operations": 8
+  },
+  "file_strategies": {
+    "json_data": {
+      "read_strategy": "streaming_parse",
+      "write_strategy": "atomic_write",
+      "backup_on_write": true
+    },
+    "log_files": {
+      "read_strategy": "tail_follow",
+      "write_strategy": "append_buffered",
+      "rotation_size": "10MB"
+    },
+    "cache_files": {
+      "read_strategy": "memory_mapped",
+      "write_strategy": "write_through",
+      "compression": true
+    }
+  }
+}

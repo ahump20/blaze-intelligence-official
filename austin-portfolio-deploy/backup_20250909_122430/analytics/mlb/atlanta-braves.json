@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-28T07:48:54.479Z",
+  "team": "Atlanta Braves",
+  "league": "MLB",
+  "division": "NL East",
+  "season": "2025",
+  "market_size": "large",
+  "readiness": {
+    "overall": 96.5,
+    "offense": 98.4,
+    "defense": 98.2,
+    "pitching": 99.5,
+    "baserunning": 96.3
+  },
+  "leverage": {
+    "current": 1.58,
+    "trend": "increasing",
+    "market_factors": [
+      {
+        "type": "regional_following",
+        "impact": 0.6
+      },
+      {
+        "type": "local_partnerships",
+        "impact": 0.5
+      },
+      {
+        "type": "media_coverage",
+        "impact": 0.4
+      }
+    ]
+  },
+  "performance_indicators": {
+    "wins_above_replacement": 29.8,
+    "run_differential": -36,
+    "pythagorean_wins": 85,
+    "strength_of_schedule": 0.537
+  },
+  "advanced_metrics": {
+    "offensive_war": 27.1,
+    "defensive_war": 23.8,
+    "pitching_war": 25.5,
+    "team_chemistry": 84
+  },
+  "metrics_count": 25,
+  "data_quality": {
+    "completeness": 95.25152636706781,
+    "accuracy": 97.73248867657679,
+    "freshness": 96.98612637140602
+  }
+}

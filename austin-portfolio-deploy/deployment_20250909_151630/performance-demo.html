@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze Intelligence - Live Performance Demo | 85ms Response Times</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+color: #e2e8f0;
+overflow-x: hidden;
+}
+
+.hero {
+padding: 4rem 2rem 2rem;
+text-align: center;
+background: rgba(0,0,0,0.3);
+backdrop-filter: blur(10px);
+}
+
+.hero h1 {
+font-size: 3rem;
+font-weight: 900;
+background: linear-gradient(45deg, #00ffff, #ff8c00);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-bottom: 1rem;
+}
+
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+.demo-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 3rem;
+margin: 3rem 0;
+}
+
+.demo-card {
+background: rgba(30, 41, 59, 0.9);
+border-radius: 16px;
+padding: 2rem;
+border: 1px solid rgba(0, 255, 255, 0.3);
+backdrop-filter: blur(15px);
+position: relative;
+overflow: hidden;
+}
+
+.demo-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 2px;
+background: linear-gradient(90deg, #00ffff, #ff8c00);
+}
+
+.competitor-card {
+border-color: rgba(255, 59, 59, 0.3);
+}
+
+.competitor-card::before {
+background: linear-gradient(90deg, #ff3b3b, #ff8c00);
+}
+
+.demo-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 2rem;
+}
+
+.platform-name {
+font-size: 1.5rem;
+font-weight: bold;
+}
+
+.status-indicator {
+width: 12px;
+height: 12px;
+border-radius: 50%;
+background: #10b981;
+box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+animation: pulse 2s infinite;
+}
+
+.competitor .status-indicator {
+background: #f59e0b;
+box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.5; }
+}
+
+.test-button {
+background: linear-gradient(45deg, #667eea, #764ba2);
+color: white;
+border: none;
+padding: 1rem 2rem;
+border-radius: 8px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
+width: 100%;
+font-size: 1.1rem;
+}
+
+.test-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.test-button:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+}
+
+.competitor .test-button {
+background: linear-gradient(45deg, #ef4444, #dc2626);
+}
+
+.results-display {
+margin: 2rem 0;
+padding: 1.5rem;
+background: rgba(0,0,0,0.3);
+border-radius: 12px;
+border: 1px solid rgba(255,255,255,0.1);
+min-height: 200px;
+}
+
+.response-time {
+font-size: 3rem;
+font-weight: 900;
+text-align: center;
+margin: 1rem 0;
+font-family: 'Courier New', monospace;
+}
+
+.blaze .response-time {
+color: #00ffff;
+text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.competitor .response-time {
+color: #f59e0b;
+text-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.performance-metrics {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 1rem;
+margin: 1rem 0;
+}
+
+.metric {
+text-align: center;
+padding: 1rem;
+background: rgba(255,255,255,0.05);
+border-radius: 8px;
+}
+
+.metric-value {
+font-size: 1.5rem;
+font-weight: bold;
+color: #00ffff;
+}
+
+.metric-label {
+font-size: 0.8rem;
+color: #94a3b8;
+text-transform: uppercase;
+}
+
+.loading-bar {
+width: 100%;
+height: 6px;
+background: rgba(255,255,255,0.1);
+border-radius: 3px;
+overflow: hidden;
+margin: 1rem 0;
+}
+
+.loading-progress {
+height: 100%;
+background: linear-gradient(90deg, #00ffff, #ff8c00);
+width: 0%;
+transition: width 0.3s ease;
+}
+
+.competitor .loading-progress {
+background: linear-gradient(90deg, #ef4444, #f59e0b);
+}
+
+.data-stream {
+font-family: 'Courier New', monospace;
+font-size: 0.9rem;
+color: #94a3b8;
+height: 100px;
+overflow-y: auto;
+background: rgba(0,0,0,0.5);
+padding: 1rem;
+border-radius: 8px;
+border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.comparison-banner {
+background: linear-gradient(45deg, rgba(16, 185, 129, 0.2), rgba(0, 255, 255, 0.2));
+padding: 2rem;
+border-radius: 16px;
+text-align: center;
+margin: 3rem 0;
+border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.speed-difference {
+font-size: 4rem;
+font-weight: 900;
+color: #10b981;
+margin: 1rem 0;
+text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+}
+
+@media (max-width: 768px) {
+.demo-grid {
+grid-template-columns: 1fr;
+gap: 2rem;
+}
+
+.hero h1 {
+font-size: 2rem;
+}
+}
+</style>
+
+<div class="demo-card blaze">
+<div class="demo-header">
+<span class="platform-name">🔥 Blaze Intelligence</span>
+<div class="status-indicator"></div>
+</div>
+
+<button class="test-button" onclick="runBlazeTest()" id="blazeButton">
+⚡ Test Blaze Performance
+</button>
+
+<div class="results-display">
+<div class="response-time" id="blazeTime">Ready</div>
+<div class="loading-bar">
+<div class="loading-progress" id="blazeProgress"></div>
+</div>
+<div class="performance-metrics">
+<div class="metric">
+<div class="metric-value" id="blazeRequests">0</div>
+<div class="metric-label">Requests</div>
+</div>
+<div class="metric">
+<div class="metric-value" id="blazeAvg">--ms</div>
+<div class="metric-label">Avg Response</div>
+</div>
+<div class="metric">
+<div class="metric-value" id="blazeUptime">99.9%</div>
+<div class="metric-label">Uptime</div>
+</div>
+</div>
+<div class="data-stream" id="blazeStream">
+[READY] Blaze Intelligence API ready for testing...
+</div>
+</div>
+</div>
+
+<div class="live-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+<div class="stat-card" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid rgba(0,255,255,0.2);">
+<div style="font-size: 1.5rem; font-weight: bold; color: #00ffff;" id="dataPointsLive">Comprehensive datasets</div>
+<div style="font-size: 0.8rem; color: #94a3b8;">Live Data Points</div>
+</div>
+<div class="stat-card" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid rgba(0,255,255,0.2);">
+<div style="font-size: 1.5rem; font-weight: bold; color: #00ffff;" id="accuracyLive">Digital Combine algorithms</div>
+<div style="font-size: 0.8rem; color: #94a3b8;">Prediction Accuracy</div>
+</div>
+<div class="stat-card" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid rgba(0,255,255,0.2);">
+<div style="font-size: 1.5rem; font-weight: bold; color: #00ffff;" id="uptimeLive">99.9%</div>
+<div style="font-size: 0.8rem; color: #94a3b8;">System Uptime</div>
+</div>
+<div class="stat-card" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid rgba(0,255,255,0.2);">
+<div style="font-size: 1.5rem; font-weight: bold; color: #10b981;" id="savingsLive">37%</div>
+<div style="font-size: 0.8rem; color: #94a3b8;">Average Savings</div>
+</div>
+</div>
+
+</body>
+</html>

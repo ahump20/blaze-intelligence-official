@@ -1,0 +1,19 @@
+{
+  "roster": {
+    "players": [
+      {
+        "name": "Paul Goldschmidt",
+        "position": "1B",
+        "avg": ".317",
+        "ops": ".891"
+      },
+      {
+        "name": "Nolan Arenado",
+        "position": "3B",
+        "avg": ".293",
+        "ops": ".824"
+      }
+    ],
+    "lastUpdated": "2025-09-01T09:44:04.211Z"
+  }
+}

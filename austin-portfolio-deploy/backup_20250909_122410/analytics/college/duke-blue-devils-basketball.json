@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-08-28T07:48:54.482Z",
+  "program": "Duke Blue Devils",
+  "sport": "basketball",
+  "conference": "ACC",
+  "division": "NCAA Division I",
+  "season": "2024-25",
+  "readiness": {
+    "overall": 88.2,
+    "talent_level": 81.2,
+    "coaching": 90.5,
+    "facilities": 89.6,
+    "recruiting": 88.7
+  },
+  "leverage": {
+    "current": 3.17,
+    "trend": "increasing",
+    "playoff_positioning": "moderate"
+  },
+  "academic_metrics": {
+    "apr_score": 954,
+    "graduation_rate": 93,
+    "academic_progress": 3.46
+  },
+  "nil_market": {
+    "total_valuation_millions": 9.5,
+    "avg_deal_value": 39631,
+    "top_earners": 9
+  },
+  "recruiting_data": {
+    "class_ranking": 8,
+    "commits": 17,
+    "transfer_portal_net": 1
+  },
+  "metrics_count": 22
+}

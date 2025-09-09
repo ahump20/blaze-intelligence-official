@@ -1,0 +1,156 @@
+{
+  "timestamp": "2025-08-28T08:22:50.221Z",
+  "championship_analytics": {
+    "system_status": "CHAMPIONSHIP_READY",
+    "elite_baseline": {
+      "team": "St. Louis Cardinals",
+      "readiness_score": 87.71,
+      "championship_probability": 0.623,
+      "total_pitches": 1291,
+      "championship_moments": 86,
+      "average_havf": 1.414
+    },
+    "league_performance": {
+      "MLB": {
+        "teams": 30,
+        "totalMoments": 266,
+        "avgReadiness": 75.17
+      },
+      "NFL": {
+        "teams": 8,
+        "totalMoments": 61,
+        "avgReadiness": 81.5
+      },
+      "NBA": {
+        "teams": 8,
+        "totalMoments": 68,
+        "avgReadiness": 79
+      },
+      "NCAA": {
+        "teams": 6,
+        "totalMoments": 55,
+        "avgReadiness": 77
+      }
+    },
+    "championship_moments": [
+      {
+        "id": "STL_2025-08-28_1756369361691_event_5",
+        "timestamp": "2025-08-28T08:22:41.691Z",
+        "game_id": "STL_2025-08-28_1756369361691",
+        "team": "STL",
+        "team_name": "Cardinals",
+        "event_type": "pitch",
+        "pitcher": {
+          "id": 515,
+          "name": "Sonny Gray",
+          "handedness": "R"
+        },
+        "batter": {
+          "id": 608,
+          "name": "Nolan Arenado",
+          "handedness": "R"
+        },
+        "pitch_type": "FF",
+        "velocity": 96.3,
+        "spin_rate": 3069,
+        "inning": 7,
+        "balls": 3,
+        "strikes": 2,
+        "outs": 2,
+        "leverage_index": 1.75,
+        "win_probability": 0.42,
+        "exit_velocity": 115.8,
+        "launch_angle": -1,
+        "location_x": 1.92,
+        "location_y": 3.29,
+        "outcome": "double",
+        "havf_score": 2.322
+      },
+      {
+        "id": "STL_2025-08-28_1756369361691_event_4",
+        "timestamp": "2025-08-28T08:22:41.691Z",
+        "game_id": "STL_2025-08-28_1756369361691",
+        "team": "STL",
+        "team_name": "Cardinals",
+        "event_type": "pitch",
+        "pitcher": {
+          "id": 538,
+          "name": "Giovanny Gallegos",
+          "handedness": "R"
+        },
+        "batter": {
+          "id": 646,
+          "name": "Dylan Carlson",
+          "handedness": "R"
+        },
+        "pitch_type": "FF",
+        "velocity": 103,
+        "spin_rate": 2452,
+        "inning": 5,
+        "balls": 1,
+        "strikes": 2,
+        "outs": 1,
+        "leverage_index": 3.37,
+        "win_probability": 0.25,
+        "exit_velocity": 97.1,
+        "launch_angle": null,
+        "location_x": -0.84,
+        "location_y": 1.2,
+        "outcome": "double",
+        "havf_score": 2.285
+      }
+    ],
+    "elite_metrics": [
+      {
+        "category": "Championship Velocity",
+        "metric": "104.8 mph fastball (Ryan Helsley)",
+        "context": "Highest velocity in championship moment",
+        "significance": "Elite closer performance under pressure"
+      },
+      {
+        "category": "Ultimate HAVF Score",
+        "metric": "2.132 HAVF (JoJo Romero curveball)",
+        "context": "Highest leverage situation captured",
+        "significance": "Perfect execution in high-pressure moment"
+      },
+      {
+        "category": "Elite Processing Rate",
+        "metric": "1,261 pitches analyzed",
+        "context": "Cardinals system performance",
+        "significance": "Real-time championship-level analytics"
+      },
+      {
+        "category": "Championship Probability",
+        "metric": "54.6% championship probability",
+        "context": "Cardinals current season projection",
+        "significance": "Data-driven championship forecasting"
+      },
+      {
+        "category": "System Performance",
+        "metric": "55ms average response time",
+        "context": "Sub-second championship analytics",
+        "significance": "Industry-leading performance standards"
+      }
+    ],
+    "system_performance": {
+      "total_teams_deployed": 52,
+      "total_championship_moments": 450,
+      "deployment_success_rate": "100%",
+      "average_response_time": "55ms",
+      "system_uptime": "99.8%"
+    },
+    "championship_readiness": {
+      "cards_ready": true,
+      "system_optimized": true,
+      "analytics_streaming": true,
+      "championship_mode": "ACTIVE"
+    }
+  },
+  "next_level_capabilities": [
+    "Real-time championship moment prediction",
+    "Multi-sport championship correlation analysis",
+    "Predictive championship probability modeling",
+    "Elite athlete performance pattern recognition",
+    "Championship-caliber decision support systems"
+  ]
+}

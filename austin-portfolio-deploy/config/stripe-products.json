@@ -1,0 +1,192 @@
+{
+  "products": {
+    "starter": {
+      "id": "prod_starter_blaze",
+      "name": "Starter Package",
+      "description": "Perfect for high school and youth programs",
+      "metadata": {
+        "tier": "starter",
+        "target_market": "youth_high_school",
+        "features": "1_team,basic_analytics,historical_data_1yr,5_users,email_support"
+      },
+      "prices": {
+        "monthly": {
+          "id": "price_starter_monthly",
+          "amount": 20000,
+          "currency": "usd",
+          "recurring": {
+            "interval": "month",
+            "interval_count": 1
+          },
+          "nickname": "Starter Monthly - Youth/HS Programs"
+        },
+        "annual": {
+          "id": "price_starter_annual",
+          "amount": 250000,
+          "currency": "usd",
+          "recurring": {
+            "interval": "year",
+            "interval_count": 1
+          },
+          "nickname": "Starter Annual - Save $1,500"
+        }
+      }
+    },
+    "professional": {
+      "id": "prod_professional_blaze",
+      "name": "Professional Package",
+      "description": "For college athletics departments and competitive programs",
+      "metadata": {
+        "tier": "professional",
+        "target_market": "college_minor_league",
+        "features": "5_teams,advanced_analytics,realtime_data,vision_ai_basic,25_users,api_access,priority_support"
+      },
+      "prices": {
+        "monthly": {
+          "id": "price_professional_monthly",
+          "amount": 100000,
+          "currency": "usd",
+          "recurring": {
+            "interval": "month",
+            "interval_count": 1
+          },
+          "nickname": "Professional Monthly - College/Minor League"
+        },
+        "annual": {
+          "id": "price_professional_annual",
+          "amount": 1000000,
+          "currency": "usd",
+          "recurring": {
+            "interval": "year",
+            "interval_count": 1
+          },
+          "nickname": "Professional Annual - Save $2,000"
+        }
+      }
+    },
+    "enterprise": {
+      "id": "prod_enterprise_blaze",
+      "name": "Enterprise Package",
+      "description": "For professional teams and organizations",
+      "metadata": {
+        "tier": "enterprise",
+        "target_market": "professional_teams",
+        "features": "unlimited_teams,full_platform,vision_ai_advanced,custom_integrations,unlimited_api,dedicated_manager,sla_guarantee"
+      },
+      "prices": {
+        "annual": {
+          "id": "price_enterprise_annual",
+          "amount": 5000000,
+          "currency": "usd",
+          "recurring": {
+            "interval": "year",
+            "interval_count": 1
+          },
+          "nickname": "Enterprise Annual - Professional Teams"
+        }
+      }
+    },
+    "championship": {
+      "id": "prod_championship_blaze",
+      "name": "Championship Package",
+      "description": "Full enterprise with Vision AI and custom solutions",
+      "metadata": {
+        "tier": "championship",
+        "target_market": "elite_professional",
+        "features": "all_enterprise_plus,vision_ai_full,custom_ml,white_label,dedicated_team,on_site_training"
+      },
+      "prices": {
+        "annual": {
+          "id": "price_championship_annual",
+          "amount": 25000000,
+          "currency": "usd",
+          "recurring": {
+            "interval": "year",
+            "interval_count": 1
+          },
+          "nickname": "Championship Annual - Elite Professional"
+        }
+      }
+    }
+  },
+  "one_time_services": {
+    "consultation": {
+      "id": "prod_consultation",
+      "name": "Strategic Analytics Consultation",
+      "description": "1-hour strategy session with Austin Humphrey",
+      "price": {
+        "amount": 50000,
+        "currency": "usd"
+      },
+      "metadata": {
+        "duration": "1_hour",
+        "deliverable": "strategy_report"
+      }
+    },
+    "demo": {
+      "id": "prod_demo",
+      "name": "Custom Platform Demo",
+      "description": "Personalized demo tailored to your organization",
+      "price": {
+        "amount": 25000,
+        "currency": "usd"
+      },
+      "metadata": {
+        "duration": "30_minutes",
+        "deliverable": "demo_session"
+      }
+    },
+    "implementation": {
+      "id": "prod_implementation",
+      "name": "Professional Implementation",
+      "description": "Full setup and onboarding service",
+      "price": {
+        "amount": 500000,
+        "currency": "usd"
+      },
+      "metadata": {
+        "duration": "2_weeks",
+        "deliverable": "full_setup"
+      }
+    }
+  },
+  "international_pricing": {
+    "regions": {
+      "latam": {
+        "currency": "usd",
+        "multiplier": 0.8,
+        "countries": ["mexico", "colombia", "venezuela", "dominican_republic", "puerto_rico"]
+      },
+      "asia_pacific": {
+        "currency": "usd",
+        "multiplier": 1.1,
+        "countries": ["japan", "south_korea", "australia"]
+      },
+      "europe": {
+        "currency": "eur",
+        "multiplier": 0.95,
+        "countries": ["united_kingdom", "netherlands", "italy"]
+      }
+    }
+  },
+  "revenue_targets": {
+    "q4_2025": {
+      "total": 325000,
+      "breakdown": {
+        "cardinals": 250000,
+        "titans": 50000,
+        "longhorns": 50000,
+        "starter_tier": 25000
+      }
+    },
+    "fy_2026": {
+      "total": 1875000,
+      "breakdown": {
+        "championship": 500000,
+        "enterprise": 750000,
+        "professional": 425000,
+        "starter": 200000
+      }
+    }
+  }
+}

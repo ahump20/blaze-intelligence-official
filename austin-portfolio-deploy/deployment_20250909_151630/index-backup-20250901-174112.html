@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze Intelligence | Championship Sports Analytics & AI Platform</title>
+<meta name="description" content="Revolutionary sports intelligence platform combining AI, computer vision, and advanced analytics. Serving MLB, NFL, NBA, NCAA with 94.6% accuracy and <100ms response times.">
+<meta name="keywords" content="sports analytics, AI, computer vision, MLB analytics, NFL analytics, NBA analytics, NCAA recruiting, sports intelligence, performance analytics, biomechanical analysis">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://blaze-intelligence.pages.dev/">
+<meta property="twitter:title" content="Blaze Intelligence | Championship Sports Analytics">
+<meta property="twitter:description" content="Where cognitive performance meets quarterly performance. Advanced AI-driven sports analytics.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="js/blaze-three-visuals.js"></script>
+<script src="js/blaze-real-time-data.js"></script>
+<script src="js/cardinals-readiness-board.js"></script>
+
+<script src="js/analytics-config.js"></script>
+<script src="js/ab-testing.js"></script>
+<script src="js/sentry-config.js"></script>
+</head>
+<body>
+<div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 lg:hidden transform translate-x-full transition-transform duration-300">
+<ul class="flex flex-col items-center justify-center h-full space-y-8">
+<li><a href="/about.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">About</a></li>
+<li><a href="/features.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Features</a></li>
+<li><a href="/analytics.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Analytics</a></li>
+<li><a href="/vision-ai-demo.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Vision AI</a></li>
+<li><a href="/video-showcase.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Videos</a></li>
+<li><a href="/dashboard.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Dashboard</a></li>
+<li><a href="/data.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Data</a></li>
+<li><a href="/blog/" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Insights</a></li>
+<li><a href="/contact.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Contact</a></li>
+</ul>
+</div>
+
+<main class="relative z-10">
+<div id="hero-3d-bg" class="hero-3d-container"></div>
+
+<div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+<div class="mb-12">
+<h1 class="text-7xl md:text-8xl lg:text-9xl font-black leading-none mb-6">
+<span class="gradient-text block">BLAZE</span>
+<span class="neon-text block">INTELLIGENCE</span>
+</h1>
+
+<p class="text-2xl md:text-4xl text-slate-300 mb-6 font-light">
+WHERE <span class="gradient-text font-bold">COGNITIVE PERFORMANCE</span>
+</p>
+<p class="text-2xl md:text-4xl text-slate-300 mb-8 font-light">
+MEETS <span class="neon-text font-bold">QUARTERLY PERFORMANCE</span>
+</p>
+
+<p class="text-lg md:text-xl text-orange-300 mb-8 max-w-3xl mx-auto">
+Revolutionary AI-powered sports analytics platform serving MLB, NFL, NBA, and NCAA organizations 
+with championship-level intelligence and real-time performance insights
+</p>
+</div>
+
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<a href="#analytics" class="cta-button text-white font-bold px-10 py-5 rounded-full flex items-center gap-3 text-lg">
+<i data-lucide="play" class="w-6 h-6"></i>
+View Live Demo
+</a>
+<a href="/vision-ai-demo.html" class="glass-card hover:bg-slate-700/50 text-white font-bold px-10 py-5 rounded-full transition-all duration-300 flex items-center gap-3 neon-border">
+<i data-lucide="brain" class="w-6 h-6"></i>
+Experience Vision AI
+</a>
+</div>
+</div>
+</section>
+
+<section id="analytics" class="py-20 lg:py-32 relative bg-gradient-to-b from-slate-900/50 to-black/90">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+<div class="metric-card reveal interactive-card" data-metric="cardinals">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-white">Cardinals Readiness</h3>
+<i data-lucide="activity" class="w-6 h-6 text-cyan-400"></i>
+</div>
+<div class="metric-value" id="cardinals-readiness">--</div>
+<p class="text-sm text-slate-400 mt-2">Live MLB Analytics</p>
+<div class="mt-4 h-16 chart-container">
+<canvas id="cardinals-chart"></canvas>
+</div>
+</div>
+
+<div class="metric-card reveal interactive-card" data-metric="titans">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-white">Titans Performance</h3>
+<i data-lucide="zap" class="w-6 h-6 text-orange-400"></i>
+</div>
+<div class="metric-value" id="titans-performance">--</div>
+<p class="text-sm text-slate-400 mt-2">NFL Analytics</p>
+<div class="mt-4 h-16 chart-container">
+<canvas id="titans-chart"></canvas>
+</div>
+</div>
+
+<div class="metric-card reveal interactive-card" data-metric="longhorns">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-white">Longhorns Recruiting</h3>
+<i data-lucide="target" class="w-6 h-6 text-yellow-400"></i>
+</div>
+<div class="metric-value" id="longhorns-recruiting">--</div>
+<p class="text-sm text-slate-400 mt-2">NCAA Pipeline</p>
+<div class="mt-4 h-16 chart-container">
+<canvas id="longhorns-chart"></canvas>
+</div>
+</div>
+
+<div class="metric-card reveal interactive-card" data-metric="grizzlies">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-white">Grizzlies Grit Index</h3>
+<i data-lucide="shield" class="w-6 h-6 text-green-400"></i>
+</div>
+<div class="metric-value" id="grizzlies-grit">--</div>
+<p class="text-sm text-slate-400 mt-2">NBA Character Analysis</p>
+<div class="mt-4 h-16 chart-container">
+<canvas id="grizzlies-chart"></canvas>
+</div>
+</div>
+</div>
+
+<section id="features" class="py-20 lg:py-32">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-6xl font-bold neon-text mb-6 reveal">CHAMPIONSHIP FEATURES</h2>
+<p class="text-xl text-slate-300 max-w-3xl mx-auto reveal">
+Advanced AI and computer vision technologies designed for professional sports organizations
+</p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="glass-card p-8 reveal">
+<div class="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6">
+<i data-lucide="activity" class="w-8 h-8 text-white"></i>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4">Multi-Sport Analytics</h3>
+<p class="text-slate-300 mb-6">
+Comprehensive analytics platform covering MLB, NFL, NBA, and NCAA with 
+real-time performance tracking and predictive modeling capabilities.
+</p>
+<ul class="space-y-2 text-sm text-slate-400">
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Live data from major leagues
+</li>
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Predictive performance models
+</li>
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Custom reporting dashboards
+</li>
+</ul>
+<a href="/dashboard.html" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold mt-6">
+View Dashboard <i data-lucide="arrow-right" class="w-4 h-4"></i>
+</a>
+</div>
+
+<section id="pricing" class="py-20 lg:py-32">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-6xl font-bold gradient-text mb-6 reveal">CHAMPIONSHIP PRICING</h2>
+<p class="text-xl text-slate-300 max-w-3xl mx-auto reveal">
+Flexible pricing options designed for organizations of all sizes, 
+with 67-80% savings compared to traditional sports analytics platforms
+</p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="glass-card p-8 reveal neon-border">
+<div class="text-center mb-8">
+<div class="inline-block px-3 py-1 bg-cyan-400/20 text-cyan-400 text-sm font-semibold rounded-full mb-4">
+MOST POPULAR
+</div>
+<h3 class="text-2xl font-bold text-white mb-2">Professional</h3>
+<div class="text-4xl font-black text-cyan-400 mb-2">$50,000</div>
+<p class="text-slate-400">per year</p>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Full analytics suite access</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Real-time data feeds</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Custom reporting</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>100,000 API calls/month</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Priority support</span>
+</li>
+</ul>
+<a href="#contact" class="w-full cta-button text-center text-white font-bold py-4 rounded-lg">
+Upgrade Now
+</a>
+</div>
+
+<section class="py-20 bg-gradient-to-b from-black to-slate-900/30 relative">
+<div class="max-w-7xl mx-auto px-4">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-black text-white mb-4">Watch How We Communicate</h2>
+<p class="text-xl text-slate-300">See our approach through different registers - from coaching to executive briefings</p>
+</div>
+
+<div class="grid md:grid-cols-2 gap-8 mb-12">
+<a href="/videos/dmk-final-presentation/" class="glass-card p-6 rounded-xl hover:scale-105 transition-transform group">
+<div class="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg mb-4 relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 bg-blue-500/80 rounded-full flex items-center justify-center group-hover:bg-cyan-400/80 transition-colors">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+<path d="M8 5v14l11-7z"/>
+</svg>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
+~12 min
+</div>
+</div>
+<h3 class="text-2xl font-bold text-white mb-2">Executive/Analytics Register</h3>
+<p class="text-slate-300 mb-3">
+Funnels, thresholds, and kill-criteria without hype. See how we turn complex 
+data into operator-ready decision frameworks.
+</p>
+<div class="flex items-center gap-2 text-cyan-400">
+<span class="text-sm font-semibold">Watch Video</span>
+<span>→</span>
+</div>
+</a>
+</div>
+
+<div class="text-center">
+<a href="/videos/" class="inline-flex items-center gap-3 px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:shadow-lg transition-all">
+<span>View All Videos</span>
+<span>→</span>
+</a>
+</div>
+</div>
+</section>
+
+<div class="grid md:grid-cols-3 gap-8 mb-12">
+<div class="glass-card p-6 rounded-xl">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center">
+<span class="text-2xl">⚾</span>
+</div>
+<div>
+<div class="font-bold text-white">MLB Analytics</div>
+<div class="text-sm text-slate-400">Advanced Metrics</div>
+</div>
+</div>
+<p class="text-slate-300 mb-4">
+Pattern recognition algorithms designed to identify player potential and 
+strategic opportunities using publicly available data sources.
+</p>
+<div class="flex items-center gap-2">
+<span class="text-cyan-400 font-bold">Demo Available</span>
+</div>
+</div>
+
+<div class="glass-card p-6 rounded-xl">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
+<span class="text-2xl">🏈</span>
+</div>
+<div>
+<div class="font-bold text-white">NFL Performance</div>
+<div class="text-sm text-slate-400">EPA & Advanced Stats</div>
+</div>
+</div>
+<p class="text-slate-300 mb-4">
+Comprehensive analysis tools for evaluating play efficiency and 
+player performance using next-generation statistical models.
+</p>
+<div class="flex items-center gap-2">
+<span class="text-cyan-400 font-bold">In Development</span>
+</div>
+</div>
+
+<div class="glass-card p-6 rounded-xl">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center">
+<span class="text-2xl">🏆</span>
+</div>
+<div>
+<div class="font-bold text-white">Youth Development</div>
+<div class="text-sm text-slate-400">Player Tracking</div>
+</div>
+</div>
+<p class="text-slate-300 mb-4">
+Tools designed to help youth programs track player development 
+and progression over time with measurable metrics.
+</p>
+<div class="flex items-center gap-2">
+<span class="text-cyan-400 font-bold">Coming Soon</span>
+</div>
+</div>
+</div>
+
+<section id="contact" class="py-20 lg:py-32">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<h2 class="text-4xl md:text-6xl font-bold neon-text mb-8 reveal">
+READY FOR CHAMPIONSHIP ANALYTICS?
+</h2>
+<p class="text-xl text-slate-300 mb-12 reveal">
+Let's discuss how Blaze Intelligence can help your team 
+gain competitive advantages through data-driven insights
+</p>
+
+<div class="flex flex-col sm:flex-row gap-6 justify-center reveal">
+<a href="mailto:austin@blaze-intelligence.pages.dev" class="cta-button text-white font-bold px-10 py-5 rounded-full flex items-center justify-center gap-3 text-lg">
+<i data-lucide="mail" class="w-6 h-6"></i>
+Schedule Demo
+</a>
+<a href="tel:+12102735538" class="glass-card hover:bg-slate-700/50 text-white font-bold px-10 py-5 rounded-full transition-all duration-300 flex items-center justify-center gap-3 neon-border">
+<i data-lucide="phone" class="w-6 h-6"></i>
+Call Now: (210) 273-5538
+</a>
+</div>
+
+<p class="text-slate-500 text-sm mt-8">
+Enterprise implementations available • Custom pricing for Fortune 500 • 24/7 support included
+</p>
+</div>
+</section>
+</main>
+

@@ -1,0 +1,195 @@
+{
+  "pipelineConfig": {
+    "pipelineName": "Blaze Intelligence Championship Pipeline",
+    "pipelineId": "blaze_championship",
+    "description": "Strategic sales pipeline for Blaze Intelligence sports analytics consulting",
+    "stages": [
+      {
+        "stageId": "scout",
+        "stageName": "Scout",
+        "displayOrder": 1,
+        "probability": 5,
+        "description": "Initial prospect identification and research phase",
+        "properties": {
+          "typical_duration": "3-7 days",
+          "key_activities": [
+            "Research organization and current analytics setup",
+            "Identify decision makers and budget authority",
+            "Assess competitive landscape position",
+            "Determine sport-specific analytics needs"
+          ],
+          "exit_criteria": [
+            "Contact information verified",
+            "Budget range qualified ($10K+ minimum)",
+            "Decision maker identified",
+            "Initial interest confirmed"
+          ]
+        }
+      },
+      {
+        "stageId": "contact",
+        "stageName": "First Contact",
+        "displayOrder": 2,
+        "probability": 15,
+        "description": "Initial outreach and qualification conversation",
+        "properties": {
+          "typical_duration": "5-10 days",
+          "key_activities": [
+            "Send personalized introduction email",
+            "Schedule discovery call",
+            "Present Blaze Intelligence overview",
+            "Assess specific pain points and goals"
+          ],
+          "exit_criteria": [
+            "Discovery call completed",
+            "Pain points identified",
+            "Budget confirmed",
+            "Timeline established"
+          ]
+        }
+      },
+      {
+        "stageId": "qualified",
+        "stageName": "Qualified Lead",
+        "displayOrder": 3,
+        "probability": 25,
+        "description": "Lead meets BANT criteria and shows genuine interest",
+        "properties": {
+          "typical_duration": "7-14 days",
+          "key_activities": [
+            "Deep-dive needs assessment",
+            "Custom ROI analysis presentation",
+            "Technical capability demonstration",
+            "Stakeholder mapping and expansion"
+          ],
+          "exit_criteria": [
+            "BANT criteria fully qualified",
+            "ROI presentation delivered",
+            "Technical fit confirmed",
+            "Multi-stakeholder engagement"
+          ]
+        }
+      },
+      {
+        "stageId": "demo",
+        "stageName": "Proof of Concept",
+        "displayOrder": 4,
+        "probability": 45,
+        "description": "Live demonstration and custom analytics preview",
+        "properties": {
+          "typical_duration": "10-21 days",
+          "key_activities": [
+            "Prepare sport-specific demo environment",
+            "Conduct live platform demonstration",
+            "Provide sample analytics output",
+            "Address technical objections"
+          ],
+          "exit_criteria": [
+            "Live demo completed successfully",
+            "Sample analytics delivered",
+            "Technical requirements confirmed",
+            "Implementation timeline agreed"
+          ]
+        }
+      },
+      {
+        "stageId": "proposal",
+        "stageName": "Proposal Sent",
+        "displayOrder": 5,
+        "probability": 65,
+        "description": "Formal proposal and contract negotiations",
+        "properties": {
+          "typical_duration": "14-30 days",
+          "key_activities": [
+            "Prepare custom proposal and pricing",
+            "Include competitive savings analysis",
+            "Define success metrics and KPIs",
+            "Negotiate contract terms"
+          ],
+          "exit_criteria": [
+            "Formal proposal submitted",
+            "Pricing approved by decision makers",
+            "Contract terms negotiated",
+            "Implementation plan approved"
+          ]
+        }
+      },
+      {
+        "stageId": "closing",
+        "stageName": "Championship Close",
+        "displayOrder": 6,
+        "probability": 85,
+        "description": "Final negotiations and contract signing",
+        "properties": {
+          "typical_duration": "7-14 days",
+          "key_activities": [
+            "Final contract review and approval",
+            "Execute legal agreements",
+            "Process initial payment",
+            "Schedule implementation kickoff"
+          ],
+          "exit_criteria": [
+            "Contract fully executed",
+            "Payment processed",
+            "Implementation team assigned",
+            "Kickoff meeting scheduled"
+          ]
+        }
+      },
+      {
+        "stageId": "won",
+        "stageName": "Won - Active Client",
+        "displayOrder": 7,
+        "probability": 100,
+        "description": "Deal closed successfully, client onboarding begins",
+        "properties": {
+          "typical_duration": "Ongoing",
+          "key_activities": [
+            "Client onboarding and training",
+            "Platform access provisioning",
+            "Success metrics tracking",
+            "Expansion opportunity identification"
+          ],
+          "success_metrics": [
+            "Time to first insight delivered",
+            "Client satisfaction scores",
+            "Platform adoption rates",
+            "Revenue retention and expansion"
+          ]
+        }
+      }
+    ],
+    "lostReasons": [
+      {
+        "reasonId": "budget_constraints",
+        "reasonName": "Budget Constraints",
+        "description": "Organization lacks sufficient budget for current fiscal year"
+      },
+      {
+        "reasonId": "timing_not_right",
+        "reasonName": "Timing Not Right",
+        "description": "Good fit but timing doesn't align with organization priorities"
+      },
+      {
+        "reasonId": "competitor_selected",
+        "reasonName": "Competitor Selected",
+        "description": "Organization chose alternative analytics solution"
+      },
+      {
+        "reasonId": "no_decision",
+        "reasonName": "No Decision Made",
+        "description": "Prospect went silent or postponed decision indefinitely"
+      },
+      {
+        "reasonId": "internal_solution",
+        "reasonName": "Internal Solution",
+        "description": "Organization decided to build analytics capabilities in-house"
+      },
+      {
+        "reasonId": "not_qualified",
+        "reasonName": "Not Qualified",
+        "description": "Organization doesn't meet minimum requirements for partnership"
+      }
+    ]
+  }
+}

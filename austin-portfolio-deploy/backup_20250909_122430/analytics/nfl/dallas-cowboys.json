@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-28T07:48:54.480Z",
+  "team": "Dallas Cowboys",
+  "league": "NFL",
+  "division": "NFC East",
+  "conference": "NFC",
+  "season": "2025",
+  "readiness": {
+    "overall": 85.6,
+    "offense": 86.6,
+    "defense": 87,
+    "special_teams": 91.5,
+    "coaching": 86.1
+  },
+  "leverage": {
+    "current": 3.03,
+    "trend": "increasing",
+    "playoff_implications": "moderate"
+  },
+  "performance_metrics": {
+    "point_differential": -54,
+    "third_down_conversion": 45.2,
+    "red_zone_efficiency": 71.5,
+    "turnover_differential": -6
+  },
+  "advanced_analytics": {
+    "epa_per_play": -0.081,
+    "dvoa_ranking": 2,
+    "win_probability_added": 0.21,
+    "clutch_performance": 81
+  },
+  "metrics_count": 30
+}

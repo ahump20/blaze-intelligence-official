@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-28T07:48:54.480Z",
+  "team": "Miami Dolphins",
+  "league": "NFL",
+  "division": "AFC East",
+  "conference": "AFC",
+  "season": "2025",
+  "readiness": {
+    "overall": 85.3,
+    "offense": 83.8,
+    "defense": 87.1,
+    "special_teams": 81.3,
+    "coaching": 84.7
+  },
+  "leverage": {
+    "current": 2.54,
+    "trend": "increasing",
+    "playoff_implications": "moderate"
+  },
+  "performance_metrics": {
+    "point_differential": -110,
+    "third_down_conversion": 39.6,
+    "red_zone_efficiency": 70.4,
+    "turnover_differential": 8
+  },
+  "advanced_analytics": {
+    "epa_per_play": -0.108,
+    "dvoa_ranking": 6,
+    "win_probability_added": 0.96,
+    "clutch_performance": 76
+  },
+  "metrics_count": 30
+}

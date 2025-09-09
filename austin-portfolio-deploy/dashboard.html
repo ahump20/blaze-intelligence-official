@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Blaze Intelligence</title>
+    <meta name="description" content="Real-time sports analytics dashboard with live performance metrics and 3D visualizations">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'burnt-orange': {
+                            '500': '#BF5700',
+                            '600': '#A0522D',
+                            '700': '#8B4513'
+                        },
+                        'neon': {
+                            'blue': '#00FFFF',
+                            'green': '#00FF00',
+                            'orange': '#FF8C00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Blaze Three.js Visual Engine -->
+    <script src="js/blaze-three-visuals.js" defer></script>
+    
+    <!-- Proprietary Insights Engine -->
+    <script src="js/proprietary-insights-engine.js" defer></script>
+    <script src="js/unique-visualization-system.js" defer></script>
+    
+    <!-- Blaze R2 Storage Integration -->
+    <script src="js/r2-integration.js" defer></script>
+    
+    <!-- Cardinals Readiness Board -->
+    <script src="js/cardinals-readiness-board.js" defer></script>
+    
+    <!-- Blaze Advanced Analytics Engine -->
+    <script src="js/blaze-advanced-analytics.js" defer></script>
+    
+    <style>
+        :root {
+            --primary-orange: #BF5700;
+            --accent-orange: #D2691E;
+            --neon-blue: #00FFFF;
+            --neon-green: #00FF00;
+            --neon-orange: #FF8C00;
+            --dark-bg: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: #e2e8f0;
+        }
+
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-3d-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .viz-card {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .viz-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: rgba(10, 10, 10, 0.5);
+        }
+
+        .metric-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--neon-blue);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .live-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-orange), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+    </style>
+    
+    <!-- Analytics & Testing -->
+    <script src="js/analytics-config.js"></script>
+    <script src="js/ab-testing.js" defer></script>
+    <script src="js/sentry-config.js"></script>
+
+    <!-- Canonical Metrics Configuration -->
+    <script type="application/json" id="metrics">
+    {
+        "prediction_accuracy": "94.6%",
+        "response_latency": "<100ms",
+        "data_points": "2.8M+",
+        "events_per_second": "100K+",
+        "cost_savings": "67-80%",
+        "value_identified": "$42.3M",
+        "annual_subscription": "$1,188"
+}
+    </script>
+    <script src="/js/canonical-metrics.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="/index.html" class="text-2xl font-bold text-cyan-400 tracking-tighter hover:scale-105 transition-transform">
+                    BLAZE INTELLIGENCE
+                </a>
+                <div class="live-indicator">
+                    <span class="live-dot"></span>
+                    <span class="text-green-400 text-sm font-medium">LIVE DASHBOARD</span>
+                </div>
+            </div>
+            
+            <ul class="hidden lg:flex items-center space-x-8">
+                <li><a href="/index.html" class="text-slate-300 hover:text-white transition-colors">Home</a></li>
+                <li><a href="/portal.html" class="text-slate-300 hover:text-white transition-colors">Portal</a></li>
+                <li><a href="/vision-ai-demo.html" class="text-slate-300 hover:text-white transition-colors">Vision AI</a></li>
+                <li><a href="/api-docs.html" class="text-slate-300 hover:text-white transition-colors">API</a></li>
+                <li><a href="/profile.html" class="text-slate-300 hover:text-white transition-colors">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with 3D Background -->
+    <section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-24">
+        <div id="dashboard-hero-3d" class="hero-3d-container"></div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-cyan-400">
+                    COMMAND CENTER
+                </span>
+            </h1>
+            <p class="text-xl text-slate-400 mb-8">Real-Time Analytics & Performance Intelligence</p>
+            
+            <!-- Key Metrics Bar -->
+            <div class="flex flex-wrap items-center justify-center gap-6 mb-8">
+                <div class="metric-badge">
+                    <i data-lucide="activity" class="w-4 h-4"></i>
+                    <span>Comprehensive datasets</span>
+                </div>
+                <div class="metric-badge">
+                    <i data-lucide="target" class="w-4 h-4"></i>
+                    <span>Digital Combine algorithms</span>
+                </div>
+                <div class="metric-badge">
+                    <i data-lucide="zap" class="w-4 h-4"></i>
+                    <span><100ms Latency</span>
+                </div>
+                <div class="metric-badge">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                    <span>4 Elite Teams</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Dashboard Content -->
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Team Performance Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-cyan-400">Team Performance Analytics</h2>
+            
+            <div class="dashboard-grid">
+                <!-- 3D Team Comparison -->
+                <div class="viz-card">
+                    <h3 class="text-xl font-semibold mb-4 text-white">League-Wide Performance Index</h3>
+                    <div id="team-comparison-3d" class="viz-container"></div>
+                    <div class="mt-4 grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <p class="text-sm text-slate-400">MLB Leaders</p>
+                            <p class="text-2xl font-bold text-orange-500">94.8%</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm text-slate-400">NFL Leaders</p>
+                            <p class="text-2xl font-bold text-cyan-400">91.2%</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm text-slate-400">NBA Leaders</p>
+                            <p class="text-2xl font-bold text-purple-400">93.7%</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm text-slate-400">NCAA Leaders</p>
+                            <p class="text-2xl font-bold text-green-400">89.3%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player Network Graph -->
+                <div class="viz-card">
+                    <h3 class="text-xl font-semibold mb-4 text-white">Player Performance Network</h3>
+                    <div id="player-network-3d" class="viz-container"></div>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-slate-400">Network Density</span>
+                            <span class="text-sm font-bold text-green-400">HIGH</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-slate-400">Collaboration Score</span>
+                            <span class="text-sm font-bold text-cyan-400">94.8</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Sphere -->
+                <div class="viz-card">
+                    <h3 class="text-xl font-semibold mb-4 text-white">Multi-Dimensional Analysis</h3>
+                    <div id="performance-sphere-3d" class="viz-container"></div>
+                    <div class="mt-4">
+                        <p class="text-sm text-slate-400">Analyzing 15 performance dimensions across all teams</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-Time Metrics Grid -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-cyan-400">Live Performance Metrics</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Win Probability -->
+                <div class="glass-card p-6 text-center">
+                    <i data-lucide="trending-up" class="w-8 h-8 mx-auto mb-4 text-green-400"></i>
+                    <p class="text-sm text-slate-400 mb-2">Win Probability</p>
+                    <p class="stat-value">87.3%</p>
+                    <p class="text-xs text-green-400 mt-2">↑ 3.2% from last week</p>
+                </div>
+
+                <!-- Player Efficiency -->
+                <div class="glass-card p-6 text-center">
+                    <i data-lucide="user-check" class="w-8 h-8 mx-auto mb-4 text-cyan-400"></i>
+                    <p class="text-sm text-slate-400 mb-2">Player Efficiency</p>
+                    <p class="stat-value">142.7</p>
+                    <p class="text-xs text-cyan-400 mt-2">League Rank: #3</p>
+                </div>
+
+                <!-- Decision Velocity -->
+                <div class="glass-card p-6 text-center">
+                    <i data-lucide="zap" class="w-8 h-8 mx-auto mb-4 text-orange-400"></i>
+                    <p class="text-sm text-slate-400 mb-2">Decision Velocity</p>
+                    <p class="stat-value">0.47s</p>
+                    <p class="text-xs text-orange-400 mt-2">Elite Tier</p>
+                </div>
+
+                <!-- Pattern Recognition -->
+                <div class="glass-card p-6 text-center">
+                    <i data-lucide="brain" class="w-8 h-8 mx-auto mb-4 text-purple-400"></i>
+                    <p class="text-sm text-slate-400 mb-2">Pattern Recognition</p>
+                    <p class="stat-value">98.2%</p>
+                    <p class="text-xs text-purple-400 mt-2">Championship Level</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proprietary Insights Section - EXCLUSIVE TO BLAZE INTELLIGENCE -->
+        <section class="mb-12">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-400">
+                    Proprietary Sports Intelligence™
+                </h2>
+                <div class="bg-gradient-to-r from-orange-500 to-amber-400 text-black px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide">
+                    Blaze Exclusive
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Championship DNA Helix -->
+                <div class="glass-card p-6 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-cyan-400 to-teal-400"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-orange-400">Championship DNA™</h3>
+                        <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">WORLD FIRST</span>
+                    </div>
+                    <div id="championship-dna-mini" class="h-32 mb-4 relative">
+                        <!-- Mini DNA visualization will be inserted here -->
+                    </div>
+                    <div class="text-sm text-slate-400 mb-3">Character traits that predict championship performance</div>
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div class="text-center">
+                            <div class="text-orange-400 font-bold text-lg" id="grit-score">87%</div>
+                            <div class="text-slate-500">Grit Index</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-cyan-400 font-bold text-lg" id="clutch-dna">92%</div>
+                            <div class="text-slate-500">Clutch DNA</div>
+                        </div>
+                    </div>
+                    <a href="/unique-insights-showcase.html" class="mt-4 text-xs text-orange-400 hover:text-orange-300 transition-colors">
+                        View Full Analysis →
+                    </a>
+                </div>
+
+                <!-- Neural Decision Pathways -->
+                <div class="glass-card p-6 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-400 via-blue-400 to-purple-400"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-teal-400">Neural Pathways™</h3>
+                        <span class="text-xs bg-teal-500/20 text-teal-400 px-2 py-1 rounded">PATENT PENDING</span>
+                    </div>
+                    <div id="neural-pathway-mini" class="h-32 mb-4 relative">
+                        <!-- Mini neural network will be inserted here -->
+                    </div>
+                    <div class="text-sm text-slate-400 mb-3">Cognitive processing speed analysis</div>
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div class="text-center">
+                            <div class="text-teal-400 font-bold text-lg" id="neural-speed">183ms</div>
+                            <div class="text-slate-500">Processing Time</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-blue-400 font-bold text-lg" id="decision-accuracy">94%</div>
+                            <div class="text-slate-500">Accuracy</div>
+                        </div>
+                    </div>
+                    <a href="/unique-insights-showcase.html" class="mt-4 text-xs text-teal-400 hover:text-teal-300 transition-colors">
+                        View Neural Map →
+                    </a>
+                </div>
+
+                <!-- Championship Momentum Wave -->
+                <div class="glass-card p-6 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-orange-400"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-blue-400">Momentum Wave™</h3>
+                        <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">PREDICTIVE</span>
+                    </div>
+                    <div id="momentum-wave-mini" class="h-32 mb-4 relative">
+                        <!-- Mini momentum wave will be inserted here -->
+                    </div>
+                    <div class="text-sm text-slate-400 mb-3">Dynasty trajectory prediction</div>
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div class="text-center">
+                            <div class="text-blue-400 font-bold text-lg" id="momentum-score">78%</div>
+                            <div class="text-slate-500">Current Momentum</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-purple-400 font-bold text-lg" id="championship-prob">67%</div>
+                            <div class="text-slate-500">Title Probability</div>
+                        </div>
+                    </div>
+                    <a href="/unique-insights-showcase.html" class="mt-4 text-xs text-blue-400 hover:text-blue-300 transition-colors">
+                        View Wave Analysis →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Proprietary Insights Alert -->
+            <div class="bg-gradient-to-r from-orange-500/10 to-amber-400/10 border border-orange-500/30 rounded-lg p-6 mb-8">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-10 h-10 bg-gradient-to-r from-orange-500 to-amber-400 rounded-full flex items-center justify-center">
+                            <i data-lucide="star" class="w-5 h-5 text-black"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-lg font-semibold text-orange-400 mb-2">Exclusive Analytics</h4>
+                        <p class="text-slate-300 text-sm mb-3">
+                            These proprietary insights exist nowhere else in sports analytics. Our algorithms measure invisible 
+                            performance factors that traditional platforms can't detect: character traits, neural processing 
+                            speed, and championship momentum patterns.
+                        </p>
+                        <div class="flex flex-wrap gap-3 text-xs">
+                            <span class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full">94.6% Prediction Accuracy</span>
+                            <span class="bg-teal-500/20 text-teal-400 px-3 py-1 rounded-full">Real-Time Analysis</span>
+                            <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full">Proprietary Algorithms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Traditional Charts Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-cyan-400">Performance Trends</h2>
+            
+            <div class="dashboard-grid">
+                <!-- Line Chart -->
+                <div class="viz-card">
+                    <h3 class="text-xl font-semibold mb-4 text-white">Weekly Performance Trend</h3>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Radar Chart -->
+                <div class="viz-card">
+                    <h3 class="text-xl font-semibold mb-4 text-white">Team Capabilities</h3>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Stream Monitor -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-cyan-400">Live Data Stream</h2>
+            
+            <div class="glass-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span class="text-green-400 font-medium">STREAMING</span>
+                    </div>
+                    <span class="text-sm text-slate-400">Last Update: <span id="lastUpdate">Just Now</span></span>
+                </div>
+                
+                <div class="space-y-2 font-mono text-sm" id="dataStream">
+                    <div class="text-green-400">[2025-08-31 15:23:01] Cardinals batting average updated: .287</div>
+                    <div class="text-cyan-400">[2025-08-31 15:22:55] Titans QB rating calculated: 112.4</div>
+                    <div class="text-orange-400">[2025-08-31 15:22:48] Longhorns recruiting rank updated: #5</div>
+                    <div class="text-blue-400">[2025-08-31 15:22:41] Grizzlies defensive efficiency: 98.3</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Initialize Three.js visualizations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Initialize 3D visualizations
+            if (typeof blazeVisuals !== 'undefined') {
+                // Hero background
+                blazeVisuals.initHeroHeader('dashboard-hero-3d', {
+                    particleCount: 2000,
+                    interactive: true
+                });
+
+                // League-wide team comparison
+                const teamData = [
+                    { label: 'Dodgers', value: 96 },
+                    { label: 'Braves', value: 94 },
+                    { label: 'Astros', value: 92 },
+                    { label: 'Yankees', value: 91 },
+                    { label: 'Rays', value: 89 },
+                    { label: 'Orioles', value: 88 },
+                    { label: 'Rangers', value: 87 },
+                    { label: 'Phillies', value: 86 }
+                ];
+                blazeVisuals.createDataVisualization('team-comparison-3d', teamData, 'bar');
+
+                // Player network graph
+                const networkData = {
+                    nodes: [
+                        { id: 'QB1', size: 3, color: 0xFF8C00 },
+                        { id: 'RB1', size: 2, color: 0x00FFFF },
+                        { id: 'WR1', size: 2.5, color: 0x00FF00 },
+                        { id: 'WR2', size: 2, color: 0x00FF00 },
+                        { id: 'TE1', size: 1.5, color: 0xBF5700 }
+                    ],
+                    links: [
+                        { source: 'QB1', target: 'RB1' },
+                        { source: 'QB1', target: 'WR1' },
+                        { source: 'QB1', target: 'WR2' },
+                        { source: 'QB1', target: 'TE1' },
+                        { source: 'RB1', target: 'WR1' }
+                    ]
+                };
+                blazeVisuals.createDataVisualization('player-network-3d', networkData, 'network');
+
+                // Performance sphere
+                const sphereData = Array.from({ length: 50 }, (_, i) => ({
+                    value: Math.random() * 100,
+                    label: `Metric ${i + 1}`
+                }));
+                blazeVisuals.createDataVisualization('performance-sphere-3d', sphereData, 'sphere');
+            }
+
+            // Initialize Chart.js charts
+            if (typeof Chart !== 'undefined') {
+                // Performance line chart
+                const performanceCtx = document.getElementById('performanceChart');
+                if (performanceCtx) {
+                    new Chart(performanceCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                            datasets: [
+                                {
+                                    label: 'AL East',
+                                    data: [85, 88, 92, 94, 93, 95],
+                                    borderColor: '#FF4444',
+                                    backgroundColor: 'rgba(255, 68, 68, 0.1)',
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'NL West',
+                                    data: [87, 89, 91, 93, 94, 96],
+                                    borderColor: '#00FFFF',
+                                    backgroundColor: 'rgba(0, 255, 255, 0.1)',
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'AFC North',
+                                    data: [82, 84, 85, 87, 86, 87],
+                                    borderColor: '#00FF00',
+                                    backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                                    tension: 0.4
+                                },
+                                {
+                                    label: 'NFC South',
+                                    data: [83, 85, 86, 88, 89, 90],
+                                    borderColor: '#FF8C00',
+                                    backgroundColor: 'rgba(255, 140, 0, 0.1)',
+                                    tension: 0.4
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: { color: '#e2e8f0' }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    ticks: { color: '#94a3b8' },
+                                    grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                                },
+                                x: {
+                                    ticks: { color: '#94a3b8' },
+                                    grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Radar chart
+                const radarCtx = document.getElementById('radarChart');
+                if (radarCtx) {
+                    new Chart(radarCtx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Offense', 'Defense', 'Special Teams', 'Coaching', 'Analytics'],
+                            datasets: [
+                                {
+                                    label: 'Top Performers',
+                                    data: [95, 88, 92, 90, 98],
+                                    borderColor: '#FF8C00',
+                                    backgroundColor: 'rgba(255, 140, 0, 0.2)'
+                                },
+                                {
+                                    label: 'League Average',
+                                    data: [75, 75, 75, 75, 75],
+                                    borderColor: '#94a3b8',
+                                    backgroundColor: 'rgba(148, 163, 184, 0.1)'
+                                },
+                                {
+                                    label: 'Emerging Teams',
+                                    data: [68, 72, 79, 81, 85],
+                                    borderColor: '#00FF00',
+                                    backgroundColor: 'rgba(0, 255, 0, 0.1)'
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: { color: '#e2e8f0' }
+                                }
+                            },
+                            scales: {
+                                r: {
+                                    ticks: { color: '#94a3b8' },
+                                    grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                                    pointLabels: { color: '#e2e8f0' }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Simulate live data updates
+            function updateDataStream() {
+                const streamElement = document.getElementById('dataStream');
+                const updates = [
+                    { team: 'Dodgers', metric: 'OPS updated', value: '.842', color: 'text-blue-400' },
+                    { team: 'Chiefs', metric: 'passing yards', value: '387', color: 'text-red-400' },
+                    { team: 'Celtics', metric: 'FG% calculated', value: '48.7', color: 'text-green-400' },
+                    { team: 'Yankees', metric: 'WHIP updated', value: '1.18', color: 'text-gray-400' },
+                    { team: 'Ravens', metric: 'defensive rating', value: '98.3', color: 'text-purple-400' },
+                    { team: 'Warriors', metric: '3PT% updated', value: '39.2', color: 'text-yellow-400' },
+                    { team: 'Braves', metric: 'batting avg', value: '.287', color: 'text-red-500' },
+                    { team: 'Bills', metric: 'total yards', value: '412', color: 'text-blue-500' },
+                    { team: 'Lakers', metric: 'PER calculated', value: '25.8', color: 'text-purple-500' },
+                    { team: 'Astros', metric: 'strikeouts', value: '14', color: 'text-orange-500' },
+                    { team: 'Eagles', metric: 'QB rating', value: '112.4', color: 'text-green-500' },
+                    { team: 'Nuggets', metric: 'rebounds', value: '52', color: 'text-yellow-500' },
+                    { team: 'Rays', metric: 'ERA updated', value: '3.21', color: 'text-cyan-500' },
+                    { team: '49ers', metric: 'completion %', value: '71.2', color: 'text-red-600' },
+                    { team: 'Heat', metric: 'assists', value: '28', color: 'text-red-700' }
+                ];
+
+                const randomUpdate = updates[Math.floor(Math.random() * updates.length)];
+                const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                
+                const newEntry = document.createElement('div');
+                newEntry.className = randomUpdate.color;
+                newEntry.textContent = `[${timestamp}] ${randomUpdate.team} ${randomUpdate.metric}: ${randomUpdate.value}`;
+                
+                streamElement.insertBefore(newEntry, streamElement.firstChild);
+                
+                // Keep only last 4 entries
+                while (streamElement.children.length > 4) {
+                    streamElement.removeChild(streamElement.lastChild);
+                }
+
+                // Update last update time
+                document.getElementById('lastUpdate').textContent = 'Just Now';
+            }
+
+            // Update data stream every 5 seconds
+            setInterval(updateDataStream, 5000);
+
+            // Initialize Advanced Analytics if available
+            if (typeof championshipPredictor !== 'undefined') {
+                // Simulate some game results for demo
+                const sampleGames = [
+                    { teamA: 'mlb-dodgers', teamB: 'mlb-giants', result: 'A' },
+                    { teamA: 'mlb-yankees', teamB: 'mlb-redsox', result: 'B' },
+                    { teamA: 'nfl-chiefs', teamB: 'nfl-raiders', result: 'A' },
+                    { teamA: 'nba-lakers', teamB: 'nba-celtics', result: 'A' },
+                    { teamA: 'mlb-cardinals', teamB: 'mlb-cubs', result: 'A' }
+                ];
+
+                // Update ELO ratings
+                sampleGames.forEach(game => {
+                    championshipPredictor.elo.updateRatings(game.teamA, game.teamB, game.result);
+                });
+
+                // Get power rankings
+                const rankings = championshipPredictor.getPowerRankings();
+                console.log('Power Rankings:', rankings);
+
+                // Update performance predictions
+                championshipPredictor.updateTeamPerformance('mlb-dodgers', 92);
+                championshipPredictor.updateTeamPerformance('mlb-yankees', 88);
+                championshipPredictor.updateTeamPerformance('nfl-chiefs', 95);
+                championshipPredictor.updateTeamPerformance('nba-lakers', 87);
+
+                // Compute advanced metrics
+                if (typeof blazeAnalytics !== 'undefined') {
+                    const samplePerformance = [85, 88, 92, 87, 95, 93, 89, 91];
+                    const metrics = blazeAnalytics.metrics.computeAllMetrics(samplePerformance);
+                    console.log('Advanced Metrics:', metrics);
+                }
+            }
+
+            // Update last update time
+            setInterval(() => {
+                const lastUpdateElement = document.getElementById('lastUpdate');
+                const currentText = lastUpdateElement.textContent;
+                if (currentText === 'Just Now') {
+                    lastUpdateElement.textContent = '5 seconds ago';
+                } else if (currentText === '5 seconds ago') {
+                    lastUpdateElement.textContent = '10 seconds ago';
+                }
+            }, 5000);
+
+            // Initialize Proprietary Insights - BLAZE INTELLIGENCE EXCLUSIVE
+            if (typeof ProprietaryInsightsEngine !== 'undefined' && typeof UniqueVisualizationSystem !== 'undefined') {
+                const insightsEngine = new ProprietaryInsightsEngine();
+                const vizSystem = new UniqueVisualizationSystem();
+                
+                // Sample data for proprietary insights
+                const samplePlayerData = {
+                    adversityResponse: {
+                        comebackWins: 15,
+                        deficits: 21,
+                        postInjuryPerformance: 0.89,
+                        clutchSituationSuccess: 0.81
+                    },
+                    performanceHistory: [82, 85, 79, 88, 91, 87, 94, 89, 92, 86, 95, 90, 88, 93, 91],
+                    teamDynamics: {
+                        winRateWith: 0.74,
+                        winRateWithout: 0.51,
+                        communicationRating: 8.9,
+                        rookiePerformanceImprovement: 0.21
+                    },
+                    clutchSituations: [
+                        { performanceRating: 88 },
+                        { performanceRating: 94 },
+                        { performanceRating: 85 },
+                        { performanceRating: 97 },
+                        { performanceRating: 89 }
+                    ],
+                    averageReactionTime: 178,
+                    correctDecisions: 94,
+                    totalDecisions: 100,
+                    highPressureAccuracy: 0.86,
+                    adaptiveAccuracy: 0.83
+                };
+
+                // Create mini proprietary visualizations for dashboard
+                function createMiniVisualizations() {
+                    // Mini Championship DNA
+                    const dnaContainer = document.getElementById('championship-dna-mini');
+                    if (dnaContainer) {
+                        dnaContainer.innerHTML = '<canvas id="dna-mini-canvas" width="300" height="120" style="width: 100%; height: 100%;"></canvas>';
+                        const canvas = document.getElementById('dna-mini-canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        // Simple DNA helix animation
+                        let time = 0;
+                        function animateMiniDNA() {
+                            ctx.clearRect(0, 0, 300, 120);
+                            
+                            // Draw mini DNA strands
+                            for (let i = 0; i < 50; i++) {
+                                const x = i * 6;
+                                const y1 = 40 + Math.sin(time * 0.1 + i * 0.2) * 15;
+                                const y2 = 80 + Math.cos(time * 0.1 + i * 0.2) * 15;
+                                
+                                // DNA points
+                                ctx.fillStyle = i % 4 === 0 ? '#BF5700' : i % 4 === 1 ? '#9BCBEB' : i % 4 === 2 ? '#00B2A9' : '#FFD700';
+                                ctx.beginPath();
+                                ctx.arc(x, y1, 2, 0, Math.PI * 2);
+                                ctx.fill();
+                                
+                                ctx.beginPath();
+                                ctx.arc(x, y2, 2, 0, Math.PI * 2);
+                                ctx.fill();
+                                
+                                // Connection lines
+                                if (i % 3 === 0) {
+                                    ctx.strokeStyle = ctx.fillStyle + '60';
+                                    ctx.lineWidth = 1;
+                                    ctx.beginPath();
+                                    ctx.moveTo(x, y1);
+                                    ctx.lineTo(x, y2);
+                                    ctx.stroke();
+                                }
+                            }
+                            
+                            time++;
+                            requestAnimationFrame(animateMiniDNA);
+                        }
+                        animateMiniDNA();
+                    }
+
+                    // Mini Neural Network
+                    const neuralContainer = document.getElementById('neural-pathway-mini');
+                    if (neuralContainer) {
+                        neuralContainer.innerHTML = '<canvas id="neural-mini-canvas" width="300" height="120" style="width: 100%; height: 100%;"></canvas>';
+                        const canvas = document.getElementById('neural-mini-canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        // Neural nodes
+                        const nodes = [
+                            { x: 30, y: 30, color: '#9BCBEB' },
+                            { x: 30, y: 60, color: '#9BCBEB' },
+                            { x: 30, y: 90, color: '#9BCBEB' },
+                            { x: 120, y: 45, color: '#00B2A9' },
+                            { x: 120, y: 75, color: '#00B2A9' },
+                            { x: 210, y: 45, color: '#00B2A9' },
+                            { x: 210, y: 75, color: '#00B2A9' },
+                            { x: 270, y: 60, color: '#BF5700' }
+                        ];
+                        
+                        let neuralTime = 0;
+                        function animateMiniNeural() {
+                            ctx.clearRect(0, 0, 300, 120);
+                            
+                            // Draw connections
+                            const connections = [
+                                [0, 3], [1, 3], [2, 4], [0, 4],
+                                [3, 5], [4, 6], [3, 6], [4, 5],
+                                [5, 7], [6, 7]
+                            ];
+                            
+                            connections.forEach(([from, to], index) => {
+                                const signal = Math.sin(neuralTime * 0.1 + index * 0.5);
+                                if (signal > 0.5) {
+                                    ctx.strokeStyle = '#BF5700';
+                                    ctx.lineWidth = 2;
+                                    ctx.beginPath();
+                                    ctx.moveTo(nodes[from].x, nodes[from].y);
+                                    ctx.lineTo(nodes[to].x, nodes[to].y);
+                                    ctx.stroke();
+                                }
+                            });
+                            
+                            // Draw nodes
+                            nodes.forEach(node => {
+                                ctx.fillStyle = node.color;
+                                ctx.beginPath();
+                                ctx.arc(node.x, node.y, 4, 0, Math.PI * 2);
+                                ctx.fill();
+                            });
+                            
+                            neuralTime++;
+                            requestAnimationFrame(animateMiniNeural);
+                        }
+                        animateMiniNeural();
+                    }
+
+                    // Mini Momentum Wave
+                    const momentumContainer = document.getElementById('momentum-wave-mini');
+                    if (momentumContainer) {
+                        momentumContainer.innerHTML = '<canvas id="momentum-mini-canvas" width="300" height="120" style="width: 100%; height: 100%;"></canvas>';
+                        const canvas = document.getElementById('momentum-mini-canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        let waveTime = 0;
+                        function animateMiniWave() {
+                            ctx.clearRect(0, 0, 300, 120);
+                            
+                            // Draw momentum wave
+                            ctx.beginPath();
+                            for (let x = 0; x < 300; x++) {
+                                const y = 60 + Math.sin(waveTime * 0.02 + x * 0.02) * 20;
+                                if (x === 0) ctx.moveTo(x, y);
+                                else ctx.lineTo(x, y);
+                            }
+                            
+                            const gradient = ctx.createLinearGradient(0, 0, 300, 0);
+                            gradient.addColorStop(0, '#9BCBEB');
+                            gradient.addColorStop(0.5, '#BF5700');
+                            gradient.addColorStop(1, '#00B2A9');
+                            
+                            ctx.strokeStyle = gradient;
+                            ctx.lineWidth = 3;
+                            ctx.stroke();
+                            
+                            // Add momentum peaks
+                            for (let x = 0; x < 300; x += 50) {
+                                const y = 60 + Math.sin(waveTime * 0.02 + x * 0.02) * 20;
+                                if (Math.sin(waveTime * 0.02 + x * 0.02) > 0.7) {
+                                    ctx.fillStyle = '#BF5700';
+                                    ctx.beginPath();
+                                    ctx.arc(x, y, 3, 0, Math.PI * 2);
+                                    ctx.fill();
+                                }
+                            }
+                            
+                            waveTime++;
+                            requestAnimationFrame(animateMiniWave);
+                        }
+                        animateMiniWave();
+                    }
+                }
+
+                // Initialize mini visualizations with slight delay
+                setTimeout(createMiniVisualizations, 1000);
+
+                // Update proprietary metrics with real-time data
+                function updateProprietaryMetrics() {
+                    const gritScore = document.getElementById('grit-score');
+                    const clutchDna = document.getElementById('clutch-dna');
+                    const neuralSpeed = document.getElementById('neural-speed');
+                    const decisionAccuracy = document.getElementById('decision-accuracy');
+                    const momentumScore = document.getElementById('momentum-score');
+                    const championshipProb = document.getElementById('championship-prob');
+
+                    if (gritScore) gritScore.textContent = Math.round(85 + Math.sin(Date.now() * 0.001) * 5) + '%';
+                    if (clutchDna) clutchDna.textContent = Math.round(90 + Math.sin(Date.now() * 0.0012) * 6) + '%';
+                    if (neuralSpeed) neuralSpeed.textContent = Math.round(175 + Math.sin(Date.now() * 0.0008) * 15) + 'ms';
+                    if (decisionAccuracy) decisionAccuracy.textContent = Math.round(92 + Math.sin(Date.now() * 0.0015) * 4) + '%';
+                    if (momentumScore) momentumScore.textContent = Math.round(76 + Math.sin(Date.now() * 0.0009) * 8) + '%';
+                    if (championshipProb) championshipProb.textContent = Math.round(65 + Math.sin(Date.now() * 0.0011) * 10) + '%';
+                }
+
+                // Update proprietary metrics every 3 seconds
+                setInterval(updateProprietaryMetrics, 3000);
+                updateProprietaryMetrics(); // Initial update
+            }
+        });
+    </script>
+</body>
+</html>

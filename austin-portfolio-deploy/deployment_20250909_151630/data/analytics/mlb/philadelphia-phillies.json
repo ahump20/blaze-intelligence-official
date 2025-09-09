@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-28T07:48:54.479Z",
+  "team": "Philadelphia Phillies",
+  "league": "MLB",
+  "division": "NL East",
+  "season": "2025",
+  "market_size": "large",
+  "readiness": {
+    "overall": 88.5,
+    "offense": 89.1,
+    "defense": 89.9,
+    "pitching": 91.6,
+    "baserunning": 88
+  },
+  "leverage": {
+    "current": 1.99,
+    "trend": "stable",
+    "market_factors": [
+      {
+        "type": "regional_following",
+        "impact": 0.6
+      },
+      {
+        "type": "local_partnerships",
+        "impact": 0.5
+      },
+      {
+        "type": "media_coverage",
+        "impact": 0.4
+      }
+    ]
+  },
+  "performance_indicators": {
+    "wins_above_replacement": 35.9,
+    "run_differential": 67,
+    "pythagorean_wins": 94,
+    "strength_of_schedule": 0.507
+  },
+  "advanced_metrics": {
+    "offensive_war": 28,
+    "defensive_war": 20.7,
+    "pitching_war": 24,
+    "team_chemistry": 83
+  },
+  "metrics_count": 25,
+  "data_quality": {
+    "completeness": 97.78955968271458,
+    "accuracy": 96.23244718269817,
+    "freshness": 97.40858280916186
+  }
+}

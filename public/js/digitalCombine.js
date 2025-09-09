@@ -146,16 +146,16 @@ class DigitalCombine {
         
         uploadZone?.addEventListener('dragover', (e) => {
             e.preventDefault();
-            uploadZone.classList.add('dragover');
+            uploadZone?.classList?.add('dragover');
         });
 
         uploadZone?.addEventListener('dragleave', () => {
-            uploadZone.classList.remove('dragover');
+            uploadZone?.classList?.remove('dragover');
         });
 
         uploadZone?.addEventListener('drop', (e) => {
             e.preventDefault();
-            uploadZone.classList.remove('dragover');
+            uploadZone?.classList?.remove('dragover');
             const files = e.dataTransfer.files;
             if (files.length > 0) {
                 this.handleFileUpload(files[0]);

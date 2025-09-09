@@ -1,0 +1,17 @@
+{
+  "roster": {
+    "players": [
+      {
+        "name": "Will Levis",
+        "position": "QB",
+        "completionPct": 62.1
+      },
+      {
+        "name": "Derrick Henry",
+        "position": "RB",
+        "rushingYards": 1234
+      }
+    ],
+    "lastUpdated": "2025-09-01T09:44:04.211Z"
+  }
+}

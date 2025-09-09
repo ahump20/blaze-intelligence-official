@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Three.js Visualization Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #000; 
+            color: #fff; 
+            margin: 0;
+            padding: 20px; 
+        }
+        .test-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        .viz-section { 
+            background: rgba(255,255,255,0.1); 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 8px; 
+        }
+        .viz-container {
+            width: 100%;
+            height: 400px;
+            background: #111;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .status { 
+            padding: 5px 10px; 
+            border-radius: 4px; 
+            margin: 5px 0; 
+            display: inline-block;
+        }
+        .success { 
+            background: #4CAF50; 
+        }
+        .error { 
+            background: #F44336; 
+        }
+        .test-controls {
+            margin: 10px 0;
+        }
+        button {
+            background: #BF5700;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #9B4500;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔥 Blaze Intelligence - Three.js Visualization Test</h1>
+        
+        <div class="viz-section">
+            <h2>Library Status</h2>
+            <div id="library-status"></div>
+        </div>
+        
+        <div class="viz-section">
+            <h2>Hero Visualization Test</h2>
+            <div class="test-controls">
+                <button onclick="testHeroViz()">Start Hero Visualization</button>
+                <button onclick="stopHeroViz()">Stop Hero Visualization</button>
+            </div>
+            <div id="hero-viz" class="viz-container"></div>
+            <div id="hero-status"></div>
+        </div>
+        
+        <div class="viz-section">
+            <h2>Biomechanics Visualization Test</h2>
+            <div class="test-controls">
+                <button onclick="testBiomechanicsViz()">Start Biomechanics Viz</button>
+            </div>
+            <div id="biomechanics-viz" class="viz-container"></div>
+            <div id="biomechanics-status"></div>
+        </div>
+        
+        <div class="viz-section">
+            <h2>Data Flow Visualization Test</h2>
+            <div class="test-controls">
+                <button onclick="testDataFlowViz()">Start Data Flow Viz</button>
+            </div>
+            <div id="dataflow-viz" class="viz-container"></div>
+            <div id="dataflow-status"></div>
+        </div>
+        
+        <div class="viz-section">
+            <h2>Metrics Visualization Test</h2>
+            <div class="test-controls">
+                <button onclick="testMetricsViz()">Start Metrics Viz</button>
+            </div>
+            <div id="metrics-viz" class="viz-container"></div>
+            <div id="metrics-status"></div>
+        </div>
+    </div>
+
+    <!-- Load Three.js and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="js/blaze-ultimate-three.js"></script>
+
+    <script>
+        let blazeThree = null;
+        let activeVisualizations = [];
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const libraryStatusEl = document.getElementById('library-status');
+            
+            // Test library loading
+            if (typeof THREE !== 'undefined') {
+                libraryStatusEl.innerHTML += '<div class="status success">✅ Three.js library loaded</div>';
+                
+                if (typeof BlazeUltimateThree !== 'undefined') {
+                    libraryStatusEl.innerHTML += '<div class="status success">✅ BlazeUltimateThree module loaded</div>';
+                    blazeThree = new BlazeUltimateThree();
+                    libraryStatusEl.innerHTML += '<div class="status success">✅ BlazeUltimateThree instance created</div>';
+                } else {
+                    libraryStatusEl.innerHTML += '<div class="status error">❌ BlazeUltimateThree module not found</div>';
+                }
+            } else {
+                libraryStatusEl.innerHTML += '<div class="status error">❌ Three.js library not found</div>';
+            }
+        });
+        
+        function testHeroViz() {
+            if (!blazeThree) {
+                document.getElementById('hero-status').innerHTML = '<div class="status error">❌ BlazeUltimateThree not available</div>';
+                return;
+            }
+            
+            try {
+                blazeThree.initHeroVisualization('hero-viz');
+                document.getElementById('hero-status').innerHTML = '<div class="status success">✅ Hero visualization started</div>';
+                activeVisualizations.push('hero');
+            } catch (error) {
+                document.getElementById('hero-status').innerHTML = `<div class="status error">❌ Hero viz error: ${error.message}</div>`;
+            }
+        }
+        
+        function stopHeroViz() {
+            try {
+                if (blazeThree && blazeThree.stop) {
+                    blazeThree.stop();
+                }
+                document.getElementById('hero-viz').innerHTML = '';
+                document.getElementById('hero-status').innerHTML = '<div class="status success">✅ Hero visualization stopped</div>';
+            } catch (error) {
+                document.getElementById('hero-status').innerHTML = `<div class="status error">❌ Stop error: ${error.message}</div>`;
+            }
+        }
+        
+        function testBiomechanicsViz() {
+            if (!blazeThree) {
+                document.getElementById('biomechanics-status').innerHTML = '<div class="status error">❌ BlazeUltimateThree not available</div>';
+                return;
+            }
+            
+            try {
+                blazeThree.createBiomechanicsViz('biomechanics-viz');
+                document.getElementById('biomechanics-status').innerHTML = '<div class="status success">✅ Biomechanics visualization started</div>';
+            } catch (error) {
+                document.getElementById('biomechanics-status').innerHTML = `<div class="status error">❌ Biomechanics viz error: ${error.message}</div>`;
+            }
+        }
+        
+        function testDataFlowViz() {
+            if (!blazeThree) {
+                document.getElementById('dataflow-status').innerHTML = '<div class="status error">❌ BlazeUltimateThree not available</div>';
+                return;
+            }
+            
+            try {
+                blazeThree.createDataFlowViz('dataflow-viz');
+                document.getElementById('dataflow-status').innerHTML = '<div class="status success">✅ Data flow visualization started</div>';
+            } catch (error) {
+                document.getElementById('dataflow-status').innerHTML = `<div class="status error">❌ Data flow viz error: ${error.message}</div>`;
+            }
+        }
+        
+        function testMetricsViz() {
+            if (!blazeThree) {
+                document.getElementById('metrics-status').innerHTML = '<div class="status error">❌ BlazeUltimateThree not available</div>';
+                return;
+            }
+            
+            try {
+                blazeThree.createMetricsViz('metrics-viz', 'performance');
+                document.getElementById('metrics-status').innerHTML = '<div class="status success">✅ Metrics visualization started</div>';
+            } catch (error) {
+                document.getElementById('metrics-status').innerHTML = `<div class="status error">❌ Metrics viz error: ${error.message}</div>`;
+            }
+        }
+        
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (blazeThree && blazeThree.stop) {
+                blazeThree.stop();
+            }
+        });
+    </script>
+</body>
+</html>

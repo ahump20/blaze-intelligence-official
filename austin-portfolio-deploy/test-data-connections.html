@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Data Connection Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #000; 
+            color: #fff; 
+            padding: 20px; 
+        }
+        .test-container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .test-section { 
+            background: rgba(255,255,255,0.1); 
+            padding: 20px; 
+            margin: 10px 0; 
+            border-radius: 8px; 
+        }
+        .status { 
+            padding: 5px 10px; 
+            border-radius: 4px; 
+            margin: 5px 0; 
+        }
+        .success { 
+            background: #4CAF50; 
+        }
+        .warning { 
+            background: #FF9800; 
+        }
+        .error { 
+            background: #F44336; 
+        }
+        .data-display { 
+            background: #1a1a1a; 
+            padding: 10px; 
+            border-radius: 4px; 
+            font-family: monospace; 
+            margin: 10px 0; 
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔥 Blaze Intelligence - Data Connection Test</h1>
+        
+        <div class="test-section">
+            <h2>Real-Time Data Status</h2>
+            <div id="data-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Cardinals Analytics</h2>
+            <div id="cardinals-data" class="data-display"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>League Data</h2>
+            <div id="league-data" class="data-display"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Three.js Status</h2>
+            <div id="threejs-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Live Updates</h2>
+            <div id="live-updates" class="data-display"></div>
+        </div>
+    </div>
+
+    <script src="js/blaze-ultimate-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const statusEl = document.getElementById('data-status');
+            const cardinalsEl = document.getElementById('cardinals-data');
+            const leagueEl = document.getElementById('league-data');
+            const threejsEl = document.getElementById('threejs-status');
+            const updatesEl = document.getElementById('live-updates');
+            
+            // Test data module
+            if (typeof BlazeUltimateData !== 'undefined') {
+                statusEl.innerHTML += '<div class="status success">✅ BlazeUltimateData module loaded</div>';
+                
+                try {
+                    const dataEngine = new BlazeUltimateData();
+                    await dataEngine.init();
+                    statusEl.innerHTML += '<div class="status success">✅ Data engine initialized</div>';
+                    
+                    // Test Cardinals data
+                    const cardinalsData = dataEngine.getData('cardinals');
+                    cardinalsEl.textContent = JSON.stringify(cardinalsData, null, 2);
+                    
+                    // Test league data
+                    const leagueData = dataEngine.getData('leagues');
+                    leagueEl.textContent = JSON.stringify(leagueData, null, 2);
+                    
+                    // Subscribe to updates
+                    dataEngine.subscribe('cardinals', (data) => {
+                        updatesEl.textContent = `Cardinals Update: ${new Date().toLocaleTimeString()}\n` + 
+                                              JSON.stringify(data, null, 2);
+                    });
+                    
+                    statusEl.innerHTML += '<div class="status success">✅ Live updates subscribed</div>';
+                    
+                } catch (error) {
+                    statusEl.innerHTML += `<div class="status error">❌ Data engine error: ${error.message}</div>`;
+                }
+            } else {
+                statusEl.innerHTML += '<div class="status error">❌ BlazeUltimateData module not found</div>';
+            }
+            
+            // Test Three.js
+            if (typeof THREE !== 'undefined') {
+                threejsEl.innerHTML = '<div class="status success">✅ Three.js library loaded</div>';
+                
+                if (typeof BlazeUltimateThree !== 'undefined') {
+                    threejsEl.innerHTML += '<div class="status success">✅ BlazeUltimateThree module loaded</div>';
+                } else {
+                    threejsEl.innerHTML += '<div class="status warning">⚠️ BlazeUltimateThree module not found</div>';
+                }
+            } else {
+                threejsEl.innerHTML = '<div class="status error">❌ Three.js library not found</div>';
+            }
+            
+            // Update counter
+            let updateCount = 0;
+            setInterval(() => {
+                updateCount++;
+                const timestamp = new Date().toLocaleTimeString();
+                updatesEl.innerHTML = `Live Update #${updateCount} at ${timestamp}<br>` + updatesEl.innerHTML;
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

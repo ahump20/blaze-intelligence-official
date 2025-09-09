@@ -1,0 +1,140 @@
+{
+  "timestamp": "2025-08-28T14:00:00Z",
+  "data_provider": "Perfect Game USA Partnership",
+  "age_groups": {
+    "13u": {
+      "total_players": 45782,
+      "tournaments_tracked": 342,
+      "top_prospects": 127
+    },
+    "14u": {
+      "total_players": 52941,
+      "tournaments_tracked": 389,
+      "top_prospects": 156
+    },
+    "15u": {
+      "total_players": 48673,
+      "tournaments_tracked": 411,
+      "top_prospects": 203
+    },
+    "16u": {
+      "total_players": 44298,
+      "tournaments_tracked": 447,
+      "top_prospects": 298
+    },
+    "17u": {
+      "total_players": 41562,
+      "tournaments_tracked": 523,
+      "top_prospects": 421
+    },
+    "18u": {
+      "total_players": 38901,
+      "tournaments_tracked": 467,
+      "top_prospects": 389
+    }
+  },
+  "regional_coverage": {
+    "texas": {
+      "active_players": 18729,
+      "tournaments_this_month": 47,
+      "college_commits_ytd": 298,
+      "top_organizations": [
+        "Texas Scouts Baseball",
+        "Houston Heat",
+        "Dallas Tigers",
+        "San Antonio Angels"
+      ]
+    },
+    "southeast": {
+      "active_players": 22947,
+      "tournaments_this_month": 62,
+      "college_commits_ytd": 387,
+      "top_organizations": [
+        "East Cobb Baseball",
+        "Team Elite",
+        "Georgia Premier Academy"
+      ]
+    },
+    "california": {
+      "active_players": 31849,
+      "tournaments_this_month": 71,
+      "college_commits_ytd": 445,
+      "top_organizations": [
+        "Canes Baseball",
+        "TRU Baseball",
+        "West Coast Pirates"
+      ]
+    }
+  },
+  "metrics_tracked": {
+    "hitting": {
+      "exit_velocity": "tracked_with_trackman",
+      "launch_angle": "tracked_with_trackman",
+      "batting_average": "calculated_from_game_logs",
+      "on_base_percentage": "calculated_from_game_logs"
+    },
+    "pitching": {
+      "velocity": "tracked_with_stalker_radar",
+      "spin_rate": "tracked_with_rapsodo",
+      "location_accuracy": "tracked_with_edgertronic",
+      "era": "calculated_from_game_logs"
+    },
+    "fielding": {
+      "pop_time": "tracked_with_stopwatch",
+      "arm_strength": "tracked_with_stalker_radar",
+      "fielding_percentage": "calculated_from_game_logs"
+    }
+  },
+  "college_recruitment_pipeline": {
+    "d1_prospects": {
+      "total_identified": 1847,
+      "early_commits": 423,
+      "official_visits_scheduled": 298
+    },
+    "d2_prospects": {
+      "total_identified": 2934,
+      "early_commits": 534,
+      "official_visits_scheduled": 378
+    },
+    "d3_prospects": {
+      "total_identified": 4721,
+      "early_commits": 892,
+      "official_visits_scheduled": 467
+    },
+    "juco_prospects": {
+      "total_identified": 1923,
+      "early_commits": 743,
+      "official_visits_scheduled": 234
+    }
+  },
+  "cognitive_performance_youth": {
+    "decision_making_development": {
+      "13u_average": 67.2,
+      "14u_average": 72.8,
+      "15u_average": 78.4,
+      "16u_average": 83.1,
+      "17u_average": 87.9,
+      "18u_average": 91.3
+    },
+    "pressure_response": {
+      "championship_games": 82.7,
+      "showcase_events": 79.3,
+      "regular_tournaments": 85.6
+    }
+  },
+  "compliance_notes": {
+    "coppa_compliance": true,
+    "parental_consent_required": true,
+    "data_retention_policy": "7_years_max",
+    "privacy_protection": "full_anonymization_for_minors"
+  },
+  "data_sources": [
+    "Perfect Game USA (Official Partnership)",
+    "Travel Ball Select Database",
+    "High School Baseball Web",
+    "PrepBaseballReport Regional Scouts"
+  ],
+  "methodology_note": "Youth sports analytics focused on development tracking and college recruitment pipeline with strict privacy protections for minors.",
+  "update_frequency": "weekly_during_season",
+  "coverage": "perfect_game_sanctioned_events_plus_regional_tournaments"
+}

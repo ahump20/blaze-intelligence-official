@@ -1,0 +1,24 @@
+{
+    "name": "Blaze Intelligence - Elite Sports Analytics",
+    "short_name": "Blaze Intelligence",
+    "description": "Institutional-grade sports intelligence platform combining Texas heritage with cutting-edge AI technology",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#BF5700",
+    "background_color": "#0a0a0a",
+    "icons": [
+        {
+            "src": "https://via.placeholder.com/192x192/BF5700/ffffff?text=BI",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://via.placeholder.com/512x512/BF5700/ffffff?text=BI",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "categories": ["sports", "analytics", "productivity"],
+    "lang": "en-US"
+}

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Blaze Intelligence</title>
+<meta name="description" content="Administrative dashboard for managing Blaze Intelligence platform">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<aside class="sidebar w-64 flex-shrink-0">
+<div class="p-6">
+<h1 class="text-2xl font-bold gradient-text">Blaze Admin</h1>
+<p class="text-sm text-gray-400 mt-1">System Management</p>
+</div>
+
+<nav class="px-4">
+<div class="sidebar-item active px-4 py-3 mb-2 rounded-lg cursor-pointer" onclick="showSection('overview')">
+<i class="fas fa-chart-line mr-3"></i> Overview
+</div>
+<div class="sidebar-item px-4 py-3 mb-2 rounded-lg cursor-pointer" onclick="showSection('users')">
+<i class="fas fa-users mr-3"></i> Users
+<span class="float-right notification-dot"></span>
+</div>
+<div class="sidebar-item px-4 py-3 mb-2 rounded-lg cursor-pointer" onclick="showSection('analytics')">
+<i class="fas fa-chart-bar mr-3"></i> Analytics
+</div>
+<div class="sidebar-item px-4 py-3 mb-2 rounded-lg cursor-pointer" onclick="showSection('ai-models')">
+<i class="fas fa-robot mr-3"></i> AI Models
+</div>
+<div class="sidebar-item px-4 py-3 mb-2 rounded-lg cursor-pointer" onclick="showSection('data-sources')">
+<i class="fas fa-database mr-3"></i> Data Sources
+</div>
+<div class="sidebar-item px-4 py-3 mb-2 rounded-lg cursor-pointer" onclick="showSection('billing')">
+<i class="fas fa-credit-card mr-3"></i> Billing
+</div>
+<div class="sidebar-item px-4 py-3 mb-2 rounded-lg cursor-pointer" onclick="showSection('settings')">
+<i class="fas fa-cog mr-3"></i> Settings
+</div>
+<div class="sidebar-item px-4 py-3 mb-2 rounded-lg cursor-pointer" onclick="showSection('logs')">
+<i class="fas fa-file-alt mr-3"></i> System Logs
+</div>
+</nav>
+
+<div class="absolute bottom-0 left-0 right-0 p-6">
+<div class="flex items-center">
+<img src="https://via.placeholder.com/40" alt="Admin" class="rounded-full mr-3">
+<div>
+<div class="font-medium">Austin Humphrey</div>
+<div class="text-sm text-gray-400">Administrator</div>
+</div>
+</div>
+<button onclick="logout()" class="mt-4 w-full py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 transition">
+<i class="fas fa-sign-out-alt mr-2"></i> Logout
+</button>
+</div>
+</aside>
+
+<header class="bg-black/50 backdrop-blur-lg border-b border-white/10 px-8 py-4">
+<div class="flex justify-between items-center">
+<div>
+<h2 class="text-2xl font-bold">Dashboard Overview</h2>
+<p class="text-gray-400">Welcome back, Austin</p>
+</div>
+<div class="flex items-center space-x-4">
+<button class="action-btn px-4 py-2 rounded-lg">
+<i class="fas fa-bell"></i>
+<span class="ml-2 bg-red-500 text-white text-xs rounded-full px-2">3</span>
+</button>
+<button class="action-btn px-4 py-2 rounded-lg">
+<i class="fas fa-sync-alt"></i>
+</button>
+<button class="bg-gradient-to-r from-orange-600 to-orange-500 px-6 py-2 rounded-lg font-medium">
+<i class="fas fa-plus mr-2"></i> New User
+</button>
+</div>
+</div>
+</header>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="stat-card p-6 rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-gray-400 text-sm">Total Users</p>
+<p class="text-3xl font-bold mt-1">1,247</p>
+</div>
+<div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+<i class="fas fa-users text-green-400"></i>
+</div>
+</div>
+<div class="flex items-center text-sm">
+<span class="text-green-400">↑ 12%</span>
+<span class="text-gray-400 ml-2">from last month</span>
+</div>
+</div>
+
+<div class="stat-card p-6 rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-gray-400 text-sm">API Calls Today</p>
+<p class="text-3xl font-bold mt-1">847K</p>
+</div>
+<div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+<i class="fas fa-server text-blue-400"></i>
+</div>
+</div>
+<div class="flex items-center text-sm">
+<span class="text-blue-400">↑ 23%</span>
+<span class="text-gray-400 ml-2">from yesterday</span>
+</div>
+</div>
+
+<div class="stat-card p-6 rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-gray-400 text-sm">Revenue (MRR)</p>
+<p class="text-3xl font-bold mt-1">$148K</p>
+</div>
+<div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center">
+<i class="fas fa-dollar-sign text-orange-400"></i>
+</div>
+</div>
+<div class="flex items-center text-sm">
+<span class="text-orange-400">↑ 8%</span>
+<span class="text-gray-400 ml-2">from last month</span>
+</div>
+</div>
+
+<div class="stat-card p-6 rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-gray-400 text-sm">System Health</p>
+<p class="text-3xl font-bold mt-1">99.95%</p>
+</div>
+<div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+<i class="fas fa-heartbeat text-green-400"></i>
+</div>
+</div>
+<div class="flex items-center text-sm">
+<span class="text-green-400">Operational</span>
+<span class="text-gray-400 ml-2">All systems</span>
+</div>
+</div>
+</div>
+
+<div class="mb-8">
+<h3 class="text-xl font-bold mb-4">Quick Actions</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<button class="quick-action p-4 rounded-lg text-center">
+<i class="fas fa-user-plus text-2xl mb-2 text-orange-400"></i>
+<p class="font-medium">Add User</p>
+</button>
+<button class="quick-action p-4 rounded-lg text-center">
+<i class="fas fa-chart-line text-2xl mb-2 text-blue-400"></i>
+<p class="font-medium">View Reports</p>
+</button>
+<button class="quick-action p-4 rounded-lg text-center">
+<i class="fas fa-cogs text-2xl mb-2 text-green-400"></i>
+<p class="font-medium">System Config</p>
+</button>
+<button class="quick-action p-4 rounded-lg text-center">
+<i class="fas fa-download text-2xl mb-2 text-purple-400"></i>
+<p class="font-medium">Export Data</p>
+</button>
+</div>
+</div>
+
+<section id="users-section" class="p-8 hidden">
+<div class="dashboard-card p-6 rounded-xl">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-bold">User Management</h3>
+<div class="flex space-x-4">
+<input type="search" placeholder="Search users..." 
+class="px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-orange-500">
+<button class="bg-gradient-to-r from-orange-600 to-orange-500 px-6 py-2 rounded-lg font-medium">
+<i class="fas fa-plus mr-2"></i> Add User
+</button>
+</div>
+</div>
+
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="border-b border-white/10">
+<th class="text-left py-3 px-4">User</th>
+<th class="text-left py-3 px-4">Organization</th>
+<th class="text-left py-3 px-4">Plan</th>
+<th class="text-left py-3 px-4">Status</th>
+<th class="text-left py-3 px-4">Last Active</th>
+<th class="text-left py-3 px-4">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="table-row border-b border-white/5">
+<td class="py-4 px-4">
+<div class="flex items-center">
+<img src="https://via.placeholder.com/32" alt="" class="rounded-full mr-3">
+<div>
+<p class="font-medium">John Mozeliak</p>
+<p class="text-sm text-gray-400">john@cardinals.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">St. Louis Cardinals</td>
+<td class="py-4 px-4">Professional</td>
+<td class="py-4 px-4">
+<span class="status-badge status-active">Active</span>
+</td>
+<td class="py-4 px-4 text-gray-400">2 min ago</td>
+<td class="py-4 px-4">
+<button class="action-btn px-3 py-1 rounded mr-2">
+<i class="fas fa-edit"></i>
+</button>
+<button class="action-btn px-3 py-1 rounded">
+<i class="fas fa-trash"></i>
+</button>
+</td>
+</tr>
+<tr class="table-row border-b border-white/5">
+<td class="py-4 px-4">
+<div class="flex items-center">
+<img src="https://via.placeholder.com/32" alt="" class="rounded-full mr-3">
+<div>
+<p class="font-medium">Mike Vrabel</p>
+<p class="text-sm text-gray-400">mike@titans.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">Tennessee Titans</td>
+<td class="py-4 px-4">Enterprise</td>
+<td class="py-4 px-4">
+<span class="status-badge status-active">Active</span>
+</td>
+<td class="py-4 px-4 text-gray-400">1 hour ago</td>
+<td class="py-4 px-4">
+<button class="action-btn px-3 py-1 rounded mr-2">
+<i class="fas fa-edit"></i>
+</button>
+<button class="action-btn px-3 py-1 rounded">
+<i class="fas fa-trash"></i>
+</button>
+</td>
+</tr>
+<tr class="table-row">
+<td class="py-4 px-4">
+<div class="flex items-center">
+<img src="https://via.placeholder.com/32" alt="" class="rounded-full mr-3">
+<div>
+<p class="font-medium">Steve Sarkisian</p>
+<p class="text-sm text-gray-400">sark@utexas.edu</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">Texas Longhorns</td>
+<td class="py-4 px-4">Professional</td>
+<td class="py-4 px-4">
+<span class="status-badge status-pending">Pending</span>
+</td>
+<td class="py-4 px-4 text-gray-400">3 days ago</td>
+<td class="py-4 px-4">
+<button class="action-btn px-3 py-1 rounded mr-2">
+<i class="fas fa-edit"></i>
+</button>
+<button class="action-btn px-3 py-1 rounded">
+<i class="fas fa-trash"></i>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+

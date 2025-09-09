@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Championship Sports Analytics Platform</title>
+    <meta name="description" content="Transform data into championships with pressure-first, investor-grade sports analytics powered by GPU acceleration and AI.">
+    
+    <!-- Championship Brand System -->
+    <link rel="stylesheet" href="/public/brand.css">
+    <link rel="stylesheet" href="/public/brand-components.css">
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Championship Page Specific Styles */
+        .hero-copy {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-content: center;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .hero-copy h1 {
+            margin: 0 0 16px;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+        
+        .hero-copy p {
+            margin: 0 0 32px;
+            font-size: clamp(16px, 2vw, 20px);
+            opacity: 0.9;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .section {
+            padding: 80px 20px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .section-header h2 {
+            margin: 0 0 16px;
+            font-size: 36px;
+            font-weight: 800;
+        }
+        
+        .section-header p {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(11, 11, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+            padding: 16px 24px;
+        }
+        
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--ink);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-menu a {
+            color: var(--muted);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--cyan);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+        }
+        
+        /* Pressure Stream Specific */
+        #wpTip {
+            position: absolute;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            color: var(--ink);
+            font-size: 12px;
+            display: none;
+            pointer-events: none;
+            z-index: 100;
+            box-shadow: var(--shadow-institutional);
+        }
+        
+        /* NIL Form */
+        #nilForm {
+            max-width: 840px;
+            margin: 24px auto;
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        
+        #nilForm label {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: var(--ink);
+            font-weight: 600;
+        }
+        
+        #nilForm input {
+            padding: 10px 14px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--ink);
+            font-family: var(--font);
+        }
+        
+        #nilForm button {
+            grid-column: 1 / -1;
+            justify-self: start;
+        }
+    </style>
+</head>
+<body>
+    <!-- Championship Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-brand gradient-text">Blaze Intelligence</a>
+            <ul class="nav-menu">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#pressure">Live Analytics</a></li>
+                <li><a href="#nil">NIL Valuation</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- GPU-Accelerated Hero Section -->
+    <section id="hero" class="viz" style="height: 100vh; position: relative; overflow: hidden; margin-top: 60px;">
+        <div class="hero-copy">
+            <span class="badge badge-championship">Championship Platform</span>
+            <h1 class="gradient-text">Transform Data into Championships</h1>
+            <p>Pressure-first, investor-grade sports analytics powered by GPU acceleration and AI</p>
+            <div class="hero-cta">
+                <a href="#pressure" class="btn">View Live Analytics</a>
+                <a href="/contact.html" class="btn btn-secondary">Request Demo</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Live Pressure Stream -->
+    <section class="section" id="pressure">
+        <div class="section-header">
+            <span class="badge badge-live">LIVE DATA</span>
+            <h2>Championship Pressure Stream</h2>
+            <p>Real-time win probability and pressure analytics from live games</p>
+        </div>
+        <div class="panel">
+            <div class="panel-header">
+                <h3 style="margin: 0;">Cardinals vs. Opponents</h3>
+                <div class="status">
+                    <span class="status-dot active"></span>
+                    <span>Live</span>
+                </div>
+            </div>
+            <canvas id="wpStream" width="1280" height="360" style="max-width: 100%; height: auto;"></canvas>
+            <div id="wpTip"></div>
+        </div>
+    </section>
+    
+    <!-- NIL Valuation Ribbon -->
+    <section class="section" id="nil">
+        <div class="section-header">
+            <span class="badge badge-beta">BETA</span>
+            <h2>NIL Valuation Engine</h2>
+            <p>Advanced 3D visualization of athlete marketability and engagement metrics</p>
+        </div>
+        <div id="nilRibbon" class="viz" style="height: 400px; margin-bottom: 24px;"></div>
+        <form id="nilForm" class="panel">
+            <div class="form-group">
+                <label for="foll">Followers</label>
+                <input id="foll" type="number" min="1000" step="1000" value="120000">
+            </div>
+            <div class="form-group">
+                <label for="eng">Engagement %</label>
+                <input id="eng" type="number" min="0" max="100" step="0.1" value="4.5">
+            </div>
+            <div class="form-group">
+                <label for="awd">Awards</label>
+                <input id="awd" type="number" min="0" max="10" step="1" value="3">
+            </div>
+            <button type="submit" class="btn">Update Valuation</button>
+        </form>
+    </section>
+    
+    <!-- Championship Features -->
+    <section class="section" id="features">
+        <div class="section-header">
+            <h2>Championship-Grade Features</h2>
+            <p>Institutional-quality analytics with ESPN-level visualization</p>
+        </div>
+        <div class="grid grid-3">
+            <div class="metric-card">
+                <div class="metric-value gradient-text">94.6%</div>
+                <div class="metric-label">Prediction Accuracy</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value gradient-text"><100ms</div>
+                <div class="metric-label">Response Latency</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value gradient-text">2.8M+</div>
+                <div class="metric-label">Data Points</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Championship Scripts -->
+    <script type="module">
+        // GPU-Accelerated Hero Shader
+        const setupHero = () => {
+            const el = document.querySelector('#hero');
+            const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            if (reduce) {
+                el.style.background = "center/cover no-repeat url('/assets/hero_bg_1600x900.png')";
+                return;
+            }
+            
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(el.clientWidth, el.clientHeight);
+            el.appendChild(renderer.domElement);
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(55, el.clientWidth / el.clientHeight, 0.1, 100);
+            camera.position.z = 5;
+            
+            const geometry = new THREE.PlaneGeometry(10, 6, 1, 1);
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    t: { value: 0 },
+                    uA: { value: new THREE.Color(0xBF5700) },
+                    uB: { value: new THREE.Color(0x9BCBEB) }
+                },
+                transparent: true,
+                vertexShader: `
+                    varying vec2 vUv;
+                    void main() {
+                        vUv = uv;
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    precision highp float;
+                    varying vec2 vUv;
+                    uniform float t;
+                    uniform vec3 uA, uB;
+                    
+                    float hash(vec2 p) {
+                        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+                    }
+                    
+                    float noise(in vec2 p) {
+                        vec2 i = floor(p), f = fract(p);
+                        float a = hash(i), b = hash(i + vec2(1., 0.));
+                        float c = hash(i + vec2(0., 1.)), d = hash(i + vec2(1., 1.));
+                        vec2 u = f * f * (3. - 2. * f);
+                        return mix(a, b, u.x) + (c - a) * u.y * (1. - u.x) + (d - b) * u.x * u.y;
+                    }
+                    
+                    void main() {
+                        vec2 uv = vUv * vec2(1.8, 1.0);
+                        float n = 0.;
+                        float amp = 0.5;
+                        vec2 p = uv * 3.0;
+                        
+                        for(int i = 0; i < 4; i++) {
+                            n += noise(p + t * 0.05) * amp;
+                            p = p * 1.9 + 10.0;
+                            amp *= 0.55;
+                        }
+                        
+                        float swirl = abs(sin(uv.x * 6.283 + t * .4)) * 0.35 + n * 0.25;
+                        vec3 col = mix(uA, uB, uv.x + 0.15 * sin(t * .2));
+                        col *= 0.25 + 0.75 * swirl;
+                        gl_FragColor = vec4(col, 0.9);
+                    }
+                `
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+            
+            const clock = new THREE.Clock();
+            
+            const animate = () => {
+                material.uniforms.t.value += clock.getDelta();
+                
+                // Handle resize
+                const width = el.clientWidth;
+                const height = el.clientHeight;
+                if (renderer.domElement.width !== width || renderer.domElement.height !== height) {
+                    renderer.setSize(width, height);
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                }
+                
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            };
+            
+            animate();
+        };
+        
+        // Initialize hero on load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupHero);
+        } else {
+            setupHero();
+        }
+    </script>
+    
+    <script type="module">
+        // Pressure Stream Visualization
+        const setupPressureStream = () => {
+            const canvas = document.querySelector('#wpStream');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const tip = document.querySelector('#wpTip');
+            const W = canvas.width, H = canvas.height;
+            const M = { l: 40, r: 28, t: 20, b: 24 };
+            let data = [];
+            const _twin = 18 * 60 * 1000;
+            let _t0 = Date.now();
+            
+            const x = t => M.l + (t - _t0) / _twin * (W - M.l - M.r);
+            const yWP = v => (H - M.b) - v * (H - M.t - M.b);
+            const yP = yWP;
+            
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                
+                // Pressure glow
+                const grd = ctx.createLinearGradient(0, M.t, 0, H - M.b);
+                grd.addColorStop(0, 'rgba(191, 87, 0, .25)');
+                grd.addColorStop(1, 'rgba(155, 203, 235, .08)');
+                ctx.fillStyle = grd;
+                
+                ctx.beginPath();
+                ctx.moveTo(M.l, yP(0));
+                data.forEach((d, i) => {
+                    const X = x(d.t), Y = yP(d.p);
+                    i ? ctx.lineTo(X, Y) : ctx.lineTo(X, Y);
+                });
+                if (data.length > 0) {
+                    ctx.lineTo(x(data[data.length - 1].t), yP(0));
+                }
+                ctx.closePath();
+                ctx.fill();
+                
+                // Win probability line
+                ctx.strokeStyle = '#9BCBEB';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                data.forEach((d, i) => {
+                    const X = x(d.t), Y = yWP(d.wp);
+                    i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+                });
+                ctx.stroke();
+                
+                // Event pins
+                ctx.fillStyle = '#BF5700';
+                data.filter(d => d.event).forEach(d => {
+                    ctx.beginPath();
+                    ctx.arc(x(d.t), yWP(d.wp), 3, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            }
+            
+            // Simulate live data
+            const simulateData = () => {
+                const now = Date.now();
+                const wp = 0.5 + Math.sin(now / 10000) * 0.3 + Math.random() * 0.1;
+                const p = Math.max(0, Math.min(1, wp + (Math.random() - 0.5) * 0.2));
+                const event = Math.random() > 0.95 ? { label: 'Scoring Play' } : null;
+                
+                data.push({ t: now, wp, p, event });
+                
+                // Keep only recent data
+                const tMax = now;
+                _t0 = tMax - _twin;
+                data = data.filter(x => x.t >= _t0);
+                
+                draw();
+            };
+            
+            // Start simulation
+            setInterval(simulateData, 500);
+            simulateData(); // Initial data
+            
+            // Tooltips
+            canvas.addEventListener('mousemove', e => {
+                const rect = canvas.getBoundingClientRect();
+                const mx = e.clientX - rect.left;
+                const my = e.clientY - rect.top;
+                
+                if (data.length === 0) return;
+                
+                const tGuess = _t0 + (mx - M.l) / (W - M.l - M.r) * _twin;
+                let closest = data[0];
+                let minDist = Math.abs(closest.t - tGuess);
+                
+                for (const d of data) {
+                    const dist = Math.abs(d.t - tGuess);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        closest = d;
+                    }
+                }
+                
+                if (tip) {
+                    tip.style.display = 'block';
+                    tip.style.left = (mx + 12) + 'px';
+                    tip.style.top = (my + 12) + 'px';
+                    tip.innerHTML = `
+                        <b>${(closest.wp * 100).toFixed(1)}% WP</b> · 
+                        Pressure ${(closest.p * 100).toFixed(0)}%
+                        ${closest.event ? ' · ' + closest.event.label : ''}
+                    `;
+                }
+            });
+            
+            canvas.addEventListener('mouseleave', () => {
+                if (tip) tip.style.display = 'none';
+            });
+        };
+        
+        // Initialize pressure stream
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupPressureStream);
+        } else {
+            setupPressureStream();
+        }
+    </script>
+    
+    <script type="module">
+        // NIL Ribbon Visualization
+        const setupNILRibbon = () => {
+            const el = document.querySelector('#nilRibbon');
+            if (!el) return;
+            
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(el.clientWidth, el.clientHeight);
+            el.appendChild(renderer.domElement);
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(50, el.clientWidth / el.clientHeight, 0.1, 100);
+            camera.position.set(0, 1.5, 8);
+            
+            scene.add(new THREE.HemisphereLight(0x88aaff, 0x080820, 0.9));
+            scene.add(new THREE.DirectionalLight(0xffffff, 0.5));
+            
+            const material = new THREE.MeshPhysicalMaterial({
+                color: 0x9BCBEB,
+                roughness: 0.2,
+                metalness: 0.6,
+                emissive: 0x072b36,
+                emissiveIntensity: 0.25,
+                transmission: 0.05,
+                clearcoat: 0.7
+            });
+            
+            let mesh;
+            
+            function build(L, twist, width, awards) {
+                if (mesh) scene.remove(mesh);
+                
+                const segments = 420;
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(segments * 2 * 3);
+                const indices = [];
+                
+                for (let i = 0; i < segments; i++) {
+                    const t = i / (segments - 1);
+                    const angle = twist * t - twist / 2;
+                    const x = (t - 0.5) * L;
+                    const w = width * (0.6 + 0.4 * Math.sin(t * Math.PI));
+                    const y = Math.sin(t * 6.283 * awards) * 0.5 * awards;
+                    
+                    positions.set([
+                        x, y + w / 2 * Math.cos(angle), w / 2 * Math.sin(angle)
+                    ], i * 6);
+                    
+                    positions.set([
+                        x, y - w / 2 * Math.cos(angle), -w / 2 * Math.sin(angle)
+                    ], i * 6 + 3);
+                    
+                    if (i < segments - 1) {
+                        const a = 2 * i, b = 2 * i + 1, c = 2 * i + 2, d = 2 * i + 3;
+                        indices.push(a, b, c, b, d, c);
+                    }
+                }
+                
+                geometry.setIndex(indices);
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                geometry.computeVertexNormals();
+                
+                mesh = new THREE.Mesh(geometry, material);
+                scene.add(mesh);
+            }
+            
+            function update(followers, engPct, awards) {
+                const L = Math.max(10, Math.log10(followers) * 8);
+                const twist = (engPct / 100) * Math.PI * 8;
+                const width = 1 + (engPct / 100) * 6;
+                build(L, twist, width, awards);
+            }
+            
+            // Initial ribbon
+            update(120000, 4.5, 3);
+            
+            // Animation loop
+            const animate = (t) => {
+                if (mesh) mesh.rotation.y = t / 3000;
+                
+                // Handle resize
+                const width = el.clientWidth;
+                const height = el.clientHeight;
+                if (renderer.domElement.width !== width || renderer.domElement.height !== height) {
+                    renderer.setSize(width, height);
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                }
+                
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            };
+            
+            animate(0);
+            
+            // Form handling
+            const form = document.querySelector('#nilForm');
+            if (form) {
+                form.addEventListener('submit', e => {
+                    e.preventDefault();
+                    const followers = +document.querySelector('#foll').value;
+                    const engagement = +document.querySelector('#eng').value;
+                    const awards = +document.querySelector('#awd').value;
+                    update(followers, engagement, awards);
+                });
+            }
+        };
+        
+        // Initialize NIL ribbon
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupNILRibbon);
+        } else {
+            setupNILRibbon();
+        }
+    </script>
+    
+    <!-- Championship Footer -->
+    <footer style="background: var(--panel); border-top: 1px solid var(--line); padding: 40px 20px; margin-top: 80px;">
+        <div style="max-width: 1280px; margin: 0 auto; text-align: center;">
+            <p class="gradient-text" style="font-size: 20px; font-weight: 800; margin: 0 0 8px;">
+                Blaze Intelligence
+            </p>
+            <p style="margin: 0; color: var(--muted);">
+                Championship Sports Analytics Platform · Boerne, Texas
+            </p>
+            <p style="margin: 16px 0 0; color: var(--muted); font-size: 14px;">
+                © 2025 Blaze Intelligence. All rights reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

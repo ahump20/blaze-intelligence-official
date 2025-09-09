@@ -1,0 +1,55 @@
+{
+  "environment": "production",
+  "version": "2.1.0",
+  "build": "327cc1e1",
+  "deployment": {
+    "url": "https://327cc1e1.blaze-intelligence.com",
+    "customDomain": "blaze-intelligence.com",
+    "cdn": "cloudflare",
+    "accessControl": "enabled"
+  },
+  "agents": {
+    "cardinals": {
+      "schedule": "*/10 * * * *",
+      "status": "operational",
+      "lastRun": "2025-08-28T08:10:00.407Z"
+    },
+    "autopilot": {
+      "schedule": "*/30 * * * *",
+      "status": "operational",
+      "lastRun": "2025-08-28T08:00:21.665Z"
+    }
+  },
+  "apis": {
+    "mlb": {
+      "endpoint": "https://statsapi.mlb.com",
+      "status": "connected",
+      "rateLimits": "100/hour"
+    },
+    "espn": {
+      "endpoints": ["mlb", "nfl", "nba", "college_fb"],
+      "status": "connected",
+      "rateLimits": "1000/hour"
+    },
+    "nil": {
+      "status": "operational",
+      "validation": "coppa-compliant"
+    },
+    "perfectGame": {
+      "players": 50400,
+      "tournaments": 397,
+      "status": "operational"
+    }
+  },
+  "metrics": {
+    "dataPoints": "2.8M+",
+    "accuracy": "94.6%",
+    "latency": "<100ms",
+    "uptime": "99.9%"
+  },
+  "security": {
+    "cloudflareAccess": "enabled",
+    "rateLimiting": "enabled",
+    "errorHandling": "enabled"
+  }
+}

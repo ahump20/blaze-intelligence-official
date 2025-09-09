@@ -1,0 +1,41 @@
+{
+  "l1_cache": {
+    "type": "memory",
+    "max_size_mb": 50,
+    "ttl_seconds": 300,
+    "items": [
+      "current_readiness",
+      "latest_insights",
+      "active_alerts"
+    ]
+  },
+  "l2_cache": {
+    "type": "disk",
+    "max_size_mb": 200,
+    "ttl_seconds": 1800,
+    "items": [
+      "hourly_aggregates",
+      "team_comparisons",
+      "trend_analysis"
+    ]
+  },
+  "l3_cache": {
+    "type": "compressed_disk",
+    "max_size_mb": 500,
+    "ttl_seconds": 86400,
+    "items": [
+      "historical_data",
+      "research_archive",
+      "performance_baselines"
+    ]
+  },
+  "cache_warming": {
+    "enabled": true,
+    "warm_on_startup": [
+      "cardinals_data",
+      "nil_calculator"
+    ],
+    "background_refresh": true,
+    "refresh_interval": 600
+  }
+}

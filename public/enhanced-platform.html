@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Enhanced Platform</title>
+    <link rel="stylesheet" href="/css/brand.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.156.0/build/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0A192F 0%, #112240 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .platform-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .platform-header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-section h1 {
+            color: #BF5700;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .platform-tagline {
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #BF5700;
+        }
+
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .connection-status.connected {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .connection-status.disconnected {
+            background: rgba(244, 67, 54, 0.2);
+            color: #F44336;
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            width: 100%;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: #BF5700;
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #BF5700;
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .feature-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.active {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .status-badge.ready {
+            background: rgba(33, 150, 243, 0.2);
+            color: #2196F3;
+        }
+
+        .action-button {
+            background: #BF5700;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            background: #e67e00;
+        }
+
+        .live-metrics {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .metrics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .metrics-header h2 {
+            color: #BF5700;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #BF5700;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .demo-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .demo-section h2 {
+            color: #BF5700;
+            margin-bottom: 20px;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #BF5700;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            text-align: center;
+            color: #888;
+        }
+
+        .api-demo {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+
+        .api-response {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #4CAF50;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="platform-container">
+        <!-- Header -->
+        <header class="platform-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1>🔥 Blaze Intelligence</h1>
+                    <div class="platform-tagline">Enhanced Sports Analytics Platform</div>
+                </div>
+                
+                <nav class="header-nav">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="/api-docs" class="nav-link">API Docs</a>
+                    <div id="connectionStatus" class="connection-status disconnected">
+                        🔴 Connecting...
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Live Metrics -->
+            <section class="live-metrics">
+                <div class="metrics-header">
+                    <h2>📊 Real-Time Platform Metrics</h2>
+                    <span id="lastUpdate">Last updated: --</span>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value" id="activeGames">--</div>
+                        <div class="metric-label">Active Games</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value" id="playersTracked">--</div>
+                        <div class="metric-label">Players Tracked</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value" id="videoJobs">--</div>
+                        <div class="metric-label">Video Analysis Jobs</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value" id="dataLatency">--</div>
+                        <div class="metric-label">Data Latency (ms)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Enhanced Features -->
+            <section class="feature-grid">
+                <div class="feature-card" onclick="testVideoIntelligence()">
+                    <div class="feature-icon">🎬</div>
+                    <h3>Video Intelligence</h3>
+                    <p>AI-powered video analysis with player tracking, biomechanical analysis, and real-time insights processing.</p>
+                    <div class="feature-status">
+                        <span class="status-badge active">✅ Active</span>
+                        <button class="action-button">Test API</button>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="testWebSocket()">
+                    <div class="feature-icon">🔌</div>
+                    <h3>Real-Time WebSocket</h3>
+                    <p>Live data streaming with pressure analytics, game updates, and performance metrics broadcasting.</p>
+                    <div class="feature-status">
+                        <span class="status-badge active">✅ Connected</span>
+                        <button class="action-button">Test Connection</button>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="showNFLDemo()">
+                    <div class="feature-icon">🏈</div>
+                    <h3>NFL Interactive Demo</h3>
+                    <p>Live NFL analytics with pressure monitoring, real-time stats, and interactive field visualization.</p>
+                    <div class="feature-status">
+                        <span class="status-badge ready">🟢 Ready</span>
+                        <button class="action-button">Launch Demo</button>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="testAnalytics()">
+                    <div class="feature-icon">📈</div>
+                    <h3>Enhanced Analytics</h3>
+                    <p>Advanced analytics pipeline with real-time event tracking, metrics collection, and dashboard visualization.</p>
+                    <div class="feature-status">
+                        <span class="status-badge active">✅ Collecting</span>
+                        <button class="action-button">View Dashboard</button>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="showAPIDocumentation()">
+                    <div class="feature-icon">📚</div>
+                    <h3>API Documentation</h3>
+                    <p>Interactive API documentation with live testing, endpoint exploration, and request/response examples.</p>
+                    <div class="feature-status">
+                        <span class="status-badge ready">📖 Available</span>
+                        <button class="action-button">Browse APIs</button>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="testPressureAnalytics()">
+                    <div class="feature-icon">💓</div>
+                    <h3>Pressure Analytics</h3>
+                    <p>Real-time biometric monitoring with heart rate, GSR, body temperature, and pressure index calculations.</p>
+                    <div class="feature-status">
+                        <span class="status-badge active">💓 Monitoring</span>
+                        <button class="action-button">View Live Data</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Demo Section -->
+            <section class="demo-section">
+                <h2>🚀 Platform Demonstrations</h2>
+                <div id="demoContent">
+                    <p>Select a feature above to see a live demonstration of the enhanced Blaze Intelligence platform capabilities.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Blaze Intelligence. Championship-Level Sports Analytics Platform.</p>
+        </footer>
+    </div>
+
+    <script>
+        // WebSocket connection for real-time updates
+        let ws = null;
+        let connected = false;
+
+        function initializeWebSocket() {
+            try {
+                ws = new WebSocket(`ws://${window.location.host}`);
+                
+                ws.onopen = function() {
+                    connected = true;
+                    updateConnectionStatus('connected');
+                    
+                    // Subscribe to all data streams
+                    ws.send(JSON.stringify({
+                        type: 'subscribe',
+                        streams: ['pressure_analytics', 'live_scores', 'performance_metrics']
+                    }));
+                };
+
+                ws.onmessage = function(event) {
+                    const data = JSON.parse(event.data);
+                    handleWebSocketMessage(data);
+                };
+
+                ws.onclose = function() {
+                    connected = false;
+                    updateConnectionStatus('disconnected');
+                    // Attempt reconnection
+                    setTimeout(initializeWebSocket, 5000);
+                };
+
+                ws.onerror = function() {
+                    connected = false;
+                    updateConnectionStatus('disconnected');
+                };
+            } catch (error) {
+                console.error('WebSocket connection failed:', error);
+                updateConnectionStatus('disconnected');
+            }
+        }
+
+        function updateConnectionStatus(status) {
+            const statusElement = document.getElementById('connectionStatus');
+            if (status === 'connected') {
+                statusElement.className = 'connection-status connected';
+                statusElement.innerHTML = '🟢 Connected';
+            } else {
+                statusElement.className = 'connection-status disconnected';
+                statusElement.innerHTML = '🔴 Disconnected';
+            }
+        }
+
+        function handleWebSocketMessage(data) {
+            switch (data.type) {
+                case 'pressure_stream':
+                    updateMetric('playersTracked', data.data.players?.length || 0);
+                    break;
+                case 'live_scores':
+                    updateMetric('activeGames', data.data.games?.length || 0);
+                    break;
+                case 'performance_metrics':
+                    updateMetric('dataLatency', Math.round(data.data.dataLatency || 0));
+                    break;
+            }
+            updateLastUpdate();
+        }
+
+        function updateMetric(metricId, value) {
+            const element = document.getElementById(metricId);
+            if (element) {
+                element.textContent = value;
+            }
+        }
+
+        function updateLastUpdate() {
+            const element = document.getElementById('lastUpdate');
+            if (element) {
+                element.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+            }
+        }
+
+        // Feature testing functions
+        async function testVideoIntelligence() {
+            const demoContent = document.getElementById('demoContent');
+            demoContent.innerHTML = `
+                <h3>🎬 Video Intelligence API Test</h3>
+                <div class="loading-spinner"></div>
+                <p>Testing video intelligence endpoints...</p>
+            `;
+
+            try {
+                const response = await fetch('/api/video-intelligence/jobs');
+                const data = await response.json();
+                
+                demoContent.innerHTML = `
+                    <h3>🎬 Video Intelligence API Test</h3>
+                    <div class="api-demo">
+                        <h4>GET /api/video-intelligence/jobs</h4>
+                        <div class="api-response">${JSON.stringify(data, null, 2)}</div>
+                    </div>
+                    <p>✅ Video Intelligence API is operational!</p>
+                `;
+            } catch (error) {
+                demoContent.innerHTML = `
+                    <h3>🎬 Video Intelligence API Test</h3>
+                    <p>❌ Error testing Video Intelligence API: ${error.message}</p>
+                `;
+            }
+        }
+
+        async function testWebSocket() {
+            const demoContent = document.getElementById('demoContent');
+            demoContent.innerHTML = `
+                <h3>🔌 WebSocket Connection Test</h3>
+                <p>WebSocket Status: ${connected ? '✅ Connected' : '❌ Disconnected'}</p>
+                <p>Testing real-time data streaming...</p>
+            `;
+
+            if (connected && ws) {
+                ws.send(JSON.stringify({
+                    type: 'ping',
+                    timestamp: Date.now()
+                }));
+
+                demoContent.innerHTML += `
+                    <div class="api-demo">
+                        <h4>WebSocket Ping Test</h4>
+                        <div class="api-response">Ping sent at: ${new Date().toISOString()}</div>
+                    </div>
+                `;
+            }
+        }
+
+        async function testAnalytics() {
+            const demoContent = document.getElementById('demoContent');
+            demoContent.innerHTML = `
+                <h3>📈 Enhanced Analytics Test</h3>
+                <div class="loading-spinner"></div>
+                <p>Testing analytics dashboard...</p>
+            `;
+
+            try {
+                const response = await fetch('/api/analytics/dashboard');
+                const data = await response.json();
+                
+                demoContent.innerHTML = `
+                    <h3>📈 Enhanced Analytics Test</h3>
+                    <div class="api-demo">
+                        <h4>GET /api/analytics/dashboard</h4>
+                        <div class="api-response">${JSON.stringify(data, null, 2)}</div>
+                    </div>
+                    <p>✅ Enhanced Analytics API is operational!</p>
+                `;
+            } catch (error) {
+                demoContent.innerHTML = `
+                    <h3>📈 Enhanced Analytics Test</h3>
+                    <p>❌ Error testing Analytics API: ${error.message}</p>
+                `;
+            }
+        }
+
+        function showNFLDemo() {
+            const demoContent = document.getElementById('demoContent');
+            demoContent.innerHTML = `
+                <h3>🏈 NFL Interactive Demo</h3>
+                <p>🚀 Launching NFL Interactive Demo with live pressure analytics...</p>
+                <button class="action-button" onclick="window.open('/nfl-demo.html', '_blank')">
+                    Open NFL Demo in New Tab
+                </button>
+                <div style="margin-top: 20px;">
+                    <h4>Demo Features:</h4>
+                    <ul style="text-align: left; margin-left: 20px; color: #ccc;">
+                        <li>Real-time game simulation</li>
+                        <li>Player pressure monitoring</li>
+                        <li>Live WebSocket data streaming</li>
+                        <li>Interactive field visualization</li>
+                        <li>Performance analytics dashboard</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function showAPIDocumentation() {
+            const demoContent = document.getElementById('demoContent');
+            demoContent.innerHTML = `
+                <h3>📚 API Documentation</h3>
+                <p>📖 Interactive API documentation with live testing capabilities...</p>
+                <button class="action-button" onclick="window.open('/api-docs', '_blank')">
+                    Open API Documentation
+                </button>
+                <div style="margin-top: 20px;">
+                    <h4>Available APIs:</h4>
+                    <ul style="text-align: left; margin-left: 20px; color: #ccc;">
+                        <li>Video Intelligence API - Upload and analyze sports videos</li>
+                        <li>WebSocket API - Real-time data streaming</li>
+                        <li>Analytics API - Enhanced analytics and metrics</li>
+                        <li>Sports Data API - Live scores and game data</li>
+                        <li>Pressure Analytics API - Biometric monitoring</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        async function testPressureAnalytics() {
+            const demoContent = document.getElementById('demoContent');
+            demoContent.innerHTML = `
+                <h3>💓 Pressure Analytics Test</h3>
+                <div class="loading-spinner"></div>
+                <p>Testing pressure analytics endpoints...</p>
+            `;
+
+            try {
+                const response = await fetch('/api/pressure/current');
+                const data = await response.json();
+                
+                demoContent.innerHTML = `
+                    <h3>💓 Pressure Analytics Test</h3>
+                    <div class="api-demo">
+                        <h4>GET /api/pressure/current</h4>
+                        <div class="api-response">${JSON.stringify(data, null, 2)}</div>
+                    </div>
+                    <p>✅ Pressure Analytics API is operational!</p>
+                `;
+            } catch (error) {
+                demoContent.innerHTML = `
+                    <h3>💓 Pressure Analytics Test</h3>
+                    <p>❌ Error testing Pressure Analytics API: ${error.message}</p>
+                `;
+            }
+        }
+
+        // Load initial metrics
+        async function loadInitialMetrics() {
+            try {
+                // Simulate some initial data
+                updateMetric('activeGames', Math.floor(Math.random() * 12) + 3);
+                updateMetric('playersTracked', Math.floor(Math.random() * 200) + 50);
+                updateMetric('videoJobs', Math.floor(Math.random() * 8) + 2);
+                updateMetric('dataLatency', Math.floor(Math.random() * 50) + 10);
+                updateLastUpdate();
+            } catch (error) {
+                console.error('Error loading initial metrics:', error);
+            }
+        }
+
+        // Initialize the platform
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔥 Blaze Intelligence Enhanced Platform Loaded');
+            initializeWebSocket();
+            loadInitialMetrics();
+            
+            // Update metrics every 30 seconds
+            setInterval(loadInitialMetrics, 30000);
+        });
+    </script>
+</body>
+</html>

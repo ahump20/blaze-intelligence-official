@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Game Youth Baseball Analytics | Blaze Intelligence</title>
+    <meta name="description" content="Advanced analytics platform for Perfect Game tournaments, youth baseball development, and prospect evaluation. Track, develop, and recruit the next generation of baseball stars.">
+    <meta name="keywords" content="Perfect Game, youth baseball, travel ball, prospect rankings, baseball analytics, player development">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/enhanced-charts.js" defer></script>
+    
+    <style>
+        body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .metric-card { background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(255, 140, 0, 0.3); }
+        .age-group-card { background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(30, 41, 59, 0.9)); }
+        .perfect-game-red { color: #E31E24; }
+        .perfect-game-blue { color: #003DA5; }
+    </style>
+    
+    <!-- Analytics & Testing -->
+    <script src="js/analytics-config.js"></script>
+    <script src="js/ab-testing.js" defer></script>
+    <script src="js/sentry-config.js"></script>
+</head>
+<body data-sport="youth-baseball" data-organization="perfect-game">
+    <!-- Navigation -->
+    <nav class="bg-black/50 backdrop-blur-lg border-b border-slate-800 px-4 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+                <span class="text-slate-500">×</span>
+                <span class="text-xl font-bold perfect-game-red">PERFECT GAME</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="/demo.html" class="text-slate-300 hover:text-white">Demo</a>
+                <a href="/contact.html" class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-6xl font-black mb-6">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">
+                    YOUTH BASEBALL ANALYTICS
+                </span>
+            </h1>
+            <p class="text-2xl text-slate-300 mb-8">
+                Professional-Grade Analytics for Perfect Game Tournaments & Travel Ball
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#features" class="px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700">
+                    Explore Features
+                </a>
+                <a href="/demo.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                    Live Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-green-400 mb-2">47,000+</div>
+                <div class="text-sm text-slate-400">Players Tracked</div>
+                <div class="text-xs text-slate-500">Ages 9-18</div>
+            </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-cyan-400 mb-2">2,800+</div>
+                <div class="text-sm text-slate-400">Teams Analyzed</div>
+                <div class="text-xs text-slate-500">Nationwide coverage</div>
+            </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-orange-400 mb-2">89.3%</div>
+                <div class="text-sm text-slate-400">Projection Accuracy</div>
+                <div class="text-xs text-slate-500">College commitment predictions</div>
+            </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold perfect-game-red mb-2">500+</div>
+                <div class="text-sm text-slate-400">MLB Prospects Identified</div>
+                <div class="text-xs text-slate-500">Since 2020</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Age Group Analytics -->
+    <section id="features" class="bg-slate-900/50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                AGE-SPECIFIC <span class="perfect-game-red">DEVELOPMENT TRACKING</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 13U-14U -->
+                <div class="age-group-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-green-400 mb-4">13U-14U Division</h3>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Avg Exit Velocity</span>
+                            <span class="font-bold">72.4 mph</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">60-Yard Dash</span>
+                            <span class="font-bold">7.82 sec</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Fastball Velocity</span>
+                            <span class="font-bold">68-75 mph</span>
+                        </div>
+                    </div>
+                    <div class="text-sm text-slate-400">
+                        <strong>Key Metrics:</strong> Mechanics consistency, growth projection, fundamental skills
+                    </div>
+                </div>
+                
+                <!-- 15U-16U -->
+                <div class="age-group-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4">15U-16U Division</h3>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Avg Exit Velocity</span>
+                            <span class="font-bold">83.7 mph</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">60-Yard Dash</span>
+                            <span class="font-bold">7.21 sec</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Fastball Velocity</span>
+                            <span class="font-bold">76-84 mph</span>
+                        </div>
+                    </div>
+                    <div class="text-sm text-slate-400">
+                        <strong>Key Metrics:</strong> Power development, pitch arsenal, defensive range
+                    </div>
+                </div>
+                
+                <!-- 17U-18U -->
+                <div class="age-group-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-orange-400 mb-4">17U-18U Division</h3>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Avg Exit Velocity</span>
+                            <span class="font-bold">91.2 mph</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">60-Yard Dash</span>
+                            <span class="font-bold">6.89 sec</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Fastball Velocity</span>
+                            <span class="font-bold">85-92 mph</span>
+                        </div>
+                    </div>
+                    <div class="text-sm text-slate-400">
+                        <strong>Key Metrics:</strong> College readiness, pro potential, advanced metrics
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Player Development Features -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold mb-12">COMPLETE <span class="perfect-game-blue">PLAYER DEVELOPMENT SUITE</span></h2>
+        
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Hitting Analytics -->
+            <div class="metric-card rounded-lg p-6">
+                <h3 class="text-xl font-bold text-green-400 mb-4">⚾ Hitting Analytics</h3>
+                <ul class="space-y-3 text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                        <div>
+                            <strong>Exit Velocity Tracking:</strong> Monitor power development over time
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                        <div>
+                            <strong>Launch Angle Optimization:</strong> Find ideal swing plane for each player
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                        <div>
+                            <strong>Approach Analysis:</strong> Plate discipline and pitch selection metrics
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                        <div>
+                            <strong>Spray Charts:</strong> Hit distribution and field usage patterns
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Pitching Analytics -->
+            <div class="metric-card rounded-lg p-6">
+                <h3 class="text-xl font-bold text-cyan-400 mb-4">🎯 Pitching Analytics</h3>
+                <ul class="space-y-3 text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mt-0.5"></i>
+                        <div>
+                            <strong>Velocity Progression:</strong> Track velo gains with age-appropriate targets
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mt-0.5"></i>
+                        <div>
+                            <strong>Spin Rate Analysis:</strong> Movement profiles for all pitch types
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mt-0.5"></i>
+                        <div>
+                            <strong>Command Zones:</strong> Strike zone heat maps and location consistency
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-cyan-400 mt-0.5"></i>
+                        <div>
+                            <strong>Arm Health Monitoring:</strong> Workload management and fatigue indicators
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournament Performance -->
+    <section class="bg-gradient-to-r from-red-900/20 to-blue-900/20 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                PERFECT GAME <span class="perfect-game-red">TOURNAMENT ANALYTICS</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-white mb-2">850+</div>
+                    <div class="text-sm text-slate-400">Tournaments Covered</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-green-400 mb-2">2.3M</div>
+                    <div class="text-sm text-slate-400">At-Bats Analyzed</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-cyan-400 mb-2">1.8M</div>
+                    <div class="text-sm text-slate-400">Pitches Tracked</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold perfect-game-red mb-2">24/7</div>
+                    <div class="text-sm text-slate-400">Real-Time Updates</div>
+                </div>
+            </div>
+            
+            <div class="mt-12 max-w-4xl mx-auto">
+                <div class="metric-card rounded-lg p-8">
+                    <h3 class="text-xl font-bold mb-6 text-center">Top Tournament Performance Metrics</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-slate-800/50 rounded">
+                            <span class="text-slate-300">WWBA Championships</span>
+                            <span class="font-bold text-green-400">3,847 Players Tracked</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-800/50 rounded">
+                            <span class="text-slate-300">PG All-American Classic</span>
+                            <span class="font-bold text-cyan-400">156 Future MLB Players</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-800/50 rounded">
+                            <span class="text-slate-300">Super25 Series</span>
+                            <span class="font-bold text-orange-400">892 D1 Commits</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recruiting Intelligence -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold mb-12">RECRUITING <span class="perfect-game-blue">INTELLIGENCE PLATFORM</span></h2>
+        
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="metric-card rounded-lg p-6">
+                <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="trending-up" class="w-6 h-6 text-green-400"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-3">Projection Models</h3>
+                <p class="text-slate-400 text-sm">
+                    AI-powered projections for college readiness and professional potential based on 
+                    development curves and performance trends.
+                </p>
+            </div>
+            
+            <div class="metric-card rounded-lg p-6">
+                <div class="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="users" class="w-6 h-6 text-cyan-400"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-3">Peer Comparisons</h3>
+                <p class="text-slate-400 text-sm">
+                    Compare players against age-group percentiles and historical players with similar 
+                    profiles at the same development stage.
+                </p>
+            </div>
+            
+            <div class="metric-card rounded-lg p-6">
+                <div class="w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="school" class="w-6 h-6 text-orange-400"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-3">College Matching</h3>
+                <p class="text-slate-400 text-sm">
+                    Match players with appropriate college programs based on performance metrics, 
+                    academic profile, and geographic preferences.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Sample Player Card -->
+        <div class="mt-12 max-w-3xl mx-auto">
+            <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg p-6 border border-slate-700">
+                <h4 class="text-lg font-bold mb-4 text-white">Sample Player Profile</h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="text-sm text-slate-400 mb-1">Position</div>
+                        <div class="font-semibold mb-3">SS/2B</div>
+                        
+                        <div class="text-sm text-slate-400 mb-1">Class</div>
+                        <div class="font-semibold mb-3">2026</div>
+                        
+                        <div class="text-sm text-slate-400 mb-1">Perfect Game Grade</div>
+                        <div class="font-semibold text-green-400">9.5</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-slate-400 mb-1">60-Yard Dash</div>
+                        <div class="font-semibold mb-3">6.74 sec</div>
+                        
+                        <div class="text-sm text-slate-400 mb-1">Exit Velocity</div>
+                        <div class="font-semibold mb-3">94 mph</div>
+                        
+                        <div class="text-sm text-slate-400 mb-1">College Projection</div>
+                        <div class="font-semibold text-cyan-400">D1 - Power 5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="bg-slate-900/50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">YOUTH BASEBALL ANALYTICS PLANS</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Team Plan -->
+                <div class="metric-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-green-400 mb-2">Team Plan</h3>
+                    <div class="text-3xl font-bold mb-4">$299<span class="text-lg text-slate-400">/month</span></div>
+                    <ul class="space-y-2 text-sm text-slate-300 mb-6">
+                        <li>• Up to 25 players</li>
+                        <li>• Tournament performance tracking</li>
+                        <li>• Development reports</li>
+                        <li>• Basic video analysis</li>
+                        <li>• Email support</li>
+                    </ul>
+                    <button class="w-full px-4 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700">
+                        Start Free Trial
+                    </button>
+                </div>
+                
+                <!-- Organization Plan -->
+                <div class="metric-card rounded-lg p-6 border-2 border-cyan-500">
+                    <div class="text-xs text-cyan-400 font-bold mb-2">MOST POPULAR</div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-2">Organization Plan</h3>
+                    <div class="text-3xl font-bold mb-4">$799<span class="text-lg text-slate-400">/month</span></div>
+                    <ul class="space-y-2 text-sm text-slate-300 mb-6">
+                        <li>• Unlimited players</li>
+                        <li>• Multiple teams/age groups</li>
+                        <li>• Advanced analytics suite</li>
+                        <li>• Recruiting intelligence</li>
+                        <li>• Video breakdown tools</li>
+                        <li>• Priority support</li>
+                    </ul>
+                    <button class="w-full px-4 py-2 bg-cyan-600 text-white font-semibold rounded hover:bg-cyan-700">
+                        Start Free Trial
+                    </button>
+                </div>
+                
+                <!-- Elite Plan -->
+                <div class="metric-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-orange-400 mb-2">Elite Plan</h3>
+                    <div class="text-3xl font-bold mb-4">Custom</div>
+                    <ul class="space-y-2 text-sm text-slate-300 mb-6">
+                        <li>• National organizations</li>
+                        <li>• Custom integrations</li>
+                        <li>• White-label options</li>
+                        <li>• On-site training</li>
+                        <li>• Dedicated analyst</li>
+                        <li>• 24/7 phone support</li>
+                    </ul>
+                    <button class="w-full px-4 py-2 bg-orange-600 text-white font-semibold rounded hover:bg-orange-700">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="max-w-4xl mx-auto px-4 py-16 text-center">
+        <h2 class="text-4xl font-bold mb-6">
+            Give Your Players <span class="perfect-game-red">Professional Analytics</span>
+        </h2>
+        <p class="text-xl text-slate-300 mb-8">
+            Join 500+ youth organizations using Blaze Intelligence to develop the next generation of baseball stars.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/demo.html" class="px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700">
+                See Live Demo
+            </a>
+            <a href="/contact.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                Schedule Consultation
+            </a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Track page view
+            if (window.BlazeAnalytics) {
+                window.BlazeAnalytics.track('page_view', {
+                    page_title: 'Perfect Game Analytics',
+                    sport: 'Youth Baseball',
+                    organization: 'Perfect Game'
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze Intelligence - Unified Command Center</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/recharts@2.8.0/umd/Recharts.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+font-family: 'Inter', sans-serif;
+}
+
+.neural-particle {
+position: absolute;
+width: 4px;
+height: 4px;
+background: #BF5700;
+border-radius: 50%;
+animation: neuralFloat 6s infinite ease-in-out;
+opacity: 0.6;
+}
+
+@keyframes neuralFloat {
+0%, 100% { 
+transform: translateY(0px) rotate(0deg);
+opacity: 0.3;
+}
+50% { 
+transform: translateY(-20px) rotate(180deg);
+opacity: 0.8;
+}
+}
+
+.consciousness-glow {
+box-shadow: 0 0 20px rgba(191, 87, 0, 0.3);
+animation: consciousnessGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes consciousnessGlow {
+0% { box-shadow: 0 0 20px rgba(191, 87, 0, 0.2); }
+100% { box-shadow: 0 0 40px rgba(191, 87, 0, 0.6); }
+}
+
+.ai-consciousness-meter {
+background: linear-gradient(90deg, #BF5700 0%, #FFB500 50%, #00B2A9 100%);
+animation: consciousnessFlow 4s ease-in-out infinite;
+}
+
+@keyframes consciousnessFlow {
+0%, 100% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+}
+
+.neural-network-bg {
+background: radial-gradient(circle at 25% 25%, rgba(191, 87, 0, 0.1) 0%, transparent 50%),
+radial-gradient(circle at 75% 75%, rgba(0, 178, 169, 0.1) 0%, transparent 50%);
+}
+
+.slider-orange::-webkit-slider-thumb {
+appearance: none;
+width: 16px;
+height: 16px;
+border-radius: 50%;
+background: #BF5700;
+cursor: pointer;
+box-shadow: 0 0 8px rgba(191, 87, 0, 0.5);
+}
+
+.slider-teal::-webkit-slider-thumb {
+appearance: none;
+width: 16px;
+height: 16px;
+border-radius: 50%;
+background: #00B2A9;
+cursor: pointer;
+box-shadow: 0 0 8px rgba(0, 178, 169, 0.5);
+}
+
+.slider-yellow::-webkit-slider-thumb {
+appearance: none;
+width: 16px;
+height: 16px;
+border-radius: 50%;
+background: #FFB500;
+cursor: pointer;
+box-shadow: 0 0 8px rgba(255, 181, 0, 0.5);
+}
+
+.data-stream {
+animation: dataFlow 2s linear infinite;
+}
+
+@keyframes dataFlow {
+0% { transform: translateX(-100%); }
+100% { transform: translateX(100%); }
+}
+
+.ai-thought {
+animation: thoughtBubble 8s ease-in-out infinite;
+}
+
+@keyframes thoughtBubble {
+0%, 100% { opacity: 0.7; transform: scale(1); }
+50% { opacity: 1; transform: scale(1.02); }
+}
+</style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 text-white overflow-x-hidden">
+<div id="main-content">
+<section id="dashboard-page" class="pt-16 min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 hidden">
+<div class="p-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="bg-gray-900/50 rounded-xl border border-gray-700 p-4 consciousness-glow">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-sm font-semibold text-orange-400">AI Consciousness Level</h3>
+<span id="consciousness-value" class="text-lg font-bold text-orange-300">87.6%</span>
+</div>
+<input 
+id="consciousness-slider" 
+type="range" 
+min="60" 
+max="100" 
+value="87.6" 
+step="0.1"
+class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-orange"
+/>
+</div>
+<div class="bg-gray-900/50 rounded-xl border border-gray-700 p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-sm font-semibold text-teal-400">Neural Sensitivity</h3>
+<span id="sensitivity-value" class="text-lg font-bold text-teal-300">75%</span>
+</div>
+<input 
+id="sensitivity-slider" 
+type="range" 
+min="30" 
+max="100" 
+value="75" 
+class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-teal"
+/>
+</div>
+<div class="bg-gray-900/50 rounded-xl border border-gray-700 p-4">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-sm font-semibold text-yellow-400">Prediction Depth</h3>
+<span id="depth-value" class="text-lg font-bold text-yellow-300">68%</span>
+</div>
+<input 
+id="depth-slider" 
+type="range" 
+min="40" 
+max="95" 
+value="68" 
+class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-yellow"
+/>
+</div>
+</div>
+
+<div class="grid grid-cols-12 gap-4">
+</div>
+
+<div class="col-span-12 lg:col-span-4 bg-gray-900/50 rounded-xl border border-gray-700 p-4">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-sm font-semibold text-teal-400 flex items-center gap-2">
+<i data-lucide="bot" class="w-4 h-4"></i>
+CONSCIOUSNESS AI ANALYSIS
+</h2>
+<button id="main-analyze-btn" class="px-3 py-1 bg-teal-500/20 text-teal-400 rounded text-xs hover:bg-teal-500/30 transition flex items-center gap-1">
+<i data-lucide="zap" class="w-3 h-3"></i>
+ANALYZE
+</button>
+</div>
+
+<div id="ai-analysis-container" class="bg-black/30 rounded-lg p-3 min-h-[300px] max-h-[400px] overflow-y-auto">
+<div class="flex flex-col items-center justify-center h-full text-gray-500 text-xs space-y-2">
+<i data-lucide="brain" class="w-8 h-8 text-gray-600"></i>
+<p>AI Consciousness ready for analysis...</p>
+<p class="text-orange-400">Click ANALYZE to begin</p>
+</div>
+</div>
+
+<div class="col-span-12 bg-gray-900/50 rounded-xl border border-gray-700 p-4">
+<h2 class="text-sm font-semibold text-orange-400 mb-4 flex items-center gap-2">
+<i data-lucide="gauge" class="w-4 h-4"></i>
+ADVANCED CONSCIOUSNESS METRICS & PREDICTIONS
+</h2>
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+<div class="bg-black/30 rounded-lg p-4 border border-orange-500/20">
+<p class="text-xs text-gray-400 mb-2">Composite AI Score</p>
+<div id="composite-score" class="text-3xl font-bold text-transparent bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text">0.0</div>
+<p class="text-[10px] text-gray-500 mt-1">Consciousness-Enhanced</p>
+</div>
+<div class="bg-black/30 rounded-lg p-4 border border-teal-500/20">
+<p class="text-xs text-gray-400 mb-2">Neural Efficiency</p>
+<div id="neural-efficiency" class="text-3xl font-bold text-teal-300">0.0%</div>
+<p class="text-[10px] text-gray-500 mt-1">Synaptic Optimization</p>
+</div>
+<div class="bg-black/30 rounded-lg p-4 border border-yellow-500/20">
+<p class="text-xs text-gray-400 mb-2">Consciousness Stability</p>
+<div id="consciousness-stability" class="text-3xl font-bold text-yellow-300">0.0</div>
+<p class="text-[10px] text-gray-500 mt-1">Deviation Index</p>
+</div>
+<div class="bg-black/30 rounded-lg p-4 border border-green-500/20">
+<p class="text-xs text-gray-400 mb-2">AI Integration Level</p>
+<div id="ai-integration" class="text-3xl font-bold text-green-300">0.0%</div>
+<p class="text-[10px] text-gray-500 mt-1">Multi-Modal Sync</p>
+</div>
+<div class="bg-black/30 rounded-lg p-4 border border-purple-500/20">
+<p class="text-xs text-gray-400 mb-2">Session History</p>
+<div id="session-count" class="text-3xl font-bold text-purple-300">0</div>
+<p class="text-[10px] text-gray-500 mt-1">AI Analyses Complete</p>
+</div>
+</div>
+</div>
+</div>
+

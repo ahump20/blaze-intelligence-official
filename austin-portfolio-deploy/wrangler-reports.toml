@@ -1,0 +1,39 @@
+name = "blaze-report-worker"
+main = "report-worker.js"
+compatibility_date = "2024-09-01"
+
+# KV Namespaces for report storage
+[[kv_namespaces]]
+binding = "REPORTS"
+id = "5b419dd02bb849b08ef7c34c870519ac"
+
+[[kv_namespaces]]
+binding = "SCHEDULES"
+id = "336448f2f7ca4ce48444050f7ed8880f"
+
+# Queue for async report sending
+[[queues.producers]]
+binding = "REPORT_QUEUE"
+queue = "report-queue"
+
+[[queues.consumers]]
+queue = "report-queue"
+max_batch_size = 10
+max_batch_timeout = 30
+
+# Scheduled triggers for automated reports
+[triggers]
+crons = [
+    "0 9 * * *",      # Daily report at 9 AM UTC
+    "0 9 * * MON",    # Weekly report on Monday at 9 AM UTC  
+    "0 9 1 * *"       # Monthly report on 1st at 9 AM UTC
+]
+
+# Environment variables
+[vars]
+REPORT_SENDER_EMAIL = "analytics@blaze-intelligence.com"
+REPORT_DOMAIN = "https://blaze-intelligence.com"
+
+# Secrets (set via wrangler secret put)
+# MAILGUN_API_KEY
+# MAILGUN_DOMAIN

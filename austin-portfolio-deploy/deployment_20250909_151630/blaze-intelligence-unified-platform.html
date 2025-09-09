@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Blaze Intelligence | Unified Championship Platform</title>
+
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+-webkit-tap-highlight-color: transparent;
+}
+
+:root {
+--burnt-orange: #BF5700;
+--cardinal-blue: #9BCBEB;
+--deep-space: #0B0B0F;
+--panel: rgba(13, 13, 13, 0.95);
+--text: #E5E5E5;
+--muted: #999;
+--success: #10b981;
+--warning: #f59e0b;
+--danger: #ef4444;
+--safe-area-top: env(safe-area-inset-top);
+--safe-area-bottom: env(safe-area-inset-bottom);
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+background: var(--deep-space);
+color: var(--text);
+min-height: 100vh;
+overflow-x: hidden;
+padding-top: var(--safe-area-top);
+position: relative;
+}
+
+/* WebGL Background */
+#webglCanvas {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+}
+
+/* Header with Live Connection Status */
+.unified-header {
+background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(155, 203, 235, 0.1));
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid rgba(155, 203, 235, 0.2);
+position: sticky;
+top: 0;
+z-index: 1000;
+padding: 1rem;
+}
+
+.header-content {
+max-width: 1400px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 1rem;
+}
+
+.logo-section {
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+
+.logo {
+font-size: 1.5rem;
+font-weight: 900;
+background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.connection-status {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.5rem 1rem;
+background: rgba(16, 185, 129, 0.1);
+border: 1px solid var(--success);
+border-radius: 20px;
+font-size: 0.85rem;
+}
+
+.status-dot {
+width: 8px;
+height: 8px;
+background: var(--success);
+border-radius: 50%;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { 
+opacity: 1;
+box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+}
+50% { 
+opacity: 0.7;
+box-shadow: 0 0 0 4px rgba(16, 185, 129, 0);
+}
+}
+
+.deployment-tabs {
+display: flex;
+gap: 0.5rem;
+background: var(--panel);
+padding: 0.25rem;
+border-radius: 12px;
+overflow-x: auto;
+scrollbar-width: none;
+}
+
+.deployment-tabs::-webkit-scrollbar {
+display: none;
+}
+
+.tab-btn {
+padding: 0.75rem 1.25rem;
+background: transparent;
+border: none;
+color: var(--muted);
+font-weight: 600;
+cursor: pointer;
+border-radius: 8px;
+transition: all 0.3s;
+white-space: nowrap;
+position: relative;
+}
+
+.tab-btn.active {
+background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+color: white;
+}
+
+.tab-btn:hover:not(.active) {
+background: rgba(155, 203, 235, 0.1);
+color: var(--cardinal-blue);
+}
+
+/* Main Dashboard Container */
+.dashboard-container {
+max-width: 1400px;
+margin: 2rem auto;
+padding: 0 1rem;
+}
+
+/* Live Score Ticker */
+.score-ticker {
+background: var(--panel);
+border: 1px solid rgba(155, 203, 235, 0.2);
+border-radius: 12px;
+padding: 1rem;
+margin-bottom: 2rem;
+overflow: hidden;
+position: relative;
+}
+
+.ticker-content {
+display: flex;
+gap: 3rem;
+animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+0% { transform: translateX(0); }
+100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+display: flex;
+align-items: center;
+gap: 1rem;
+white-space: nowrap;
+}
+
+.league-badge {
+padding: 0.25rem 0.75rem;
+background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+border-radius: 4px;
+font-weight: 700;
+font-size: 0.75rem;
+}
+
+.score {
+font-size: 1.25rem;
+font-weight: 800;
+color: var(--cardinal-blue);
+}
+
+/* Analytics Grid */
+.analytics-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 1.5rem;
+margin-bottom: 2rem;
+}
+
+.analytics-card {
+background: var(--panel);
+border: 1px solid rgba(155, 203, 235, 0.2);
+border-radius: 12px;
+padding: 1.5rem;
+position: relative;
+overflow: hidden;
+transition: all 0.3s;
+}
+
+.analytics-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 3px;
+background: linear-gradient(90deg, var(--burnt-orange), var(--cardinal-blue));
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.3s;
+}
+
+.analytics-card:hover::before {
+transform: scaleX(1);
+}
+
+.analytics-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 20px 40px rgba(191, 87, 0, 0.2);
+}
+
+.card-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 1rem;
+}
+
+.card-title {
+font-weight: 700;
+color: var(--cardinal-blue);
+}
+
+.live-badge {
+padding: 0.25rem 0.5rem;
+background: rgba(16, 185, 129, 0.2);
+border: 1px solid var(--success);
+border-radius: 4px;
+font-size: 0.7rem;
+font-weight: 700;
+color: var(--success);
+animation: pulse 2s infinite;
+}
+
+.metric-value {
+font-size: 2.5rem;
+font-weight: 900;
+background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+margin: 0.5rem 0;
+}
+
+.metric-label {
+color: var(--muted);
+font-size: 0.85rem;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+
+.metric-change {
+display: inline-flex;
+align-items: center;
+gap: 0.25rem;
+margin-top: 0.5rem;
+padding: 0.25rem 0.5rem;
+background: rgba(16, 185, 129, 0.1);
+border-radius: 4px;
+color: var(--success);
+font-size: 0.85rem;
+font-weight: 600;
+}
+
+.metric-change.negative {
+background: rgba(239, 68, 68, 0.1);
+color: var(--danger);
+}
+
+/* Real-time Chart */
+.chart-container {
+height: 200px;
+margin-top: 1rem;
+position: relative;
+}
+
+canvas {
+width: 100% !important;
+height: 100% !important;
+}
+
+/* Pressure Stream Visualization */
+#pressureStream {
+width: 100%;
+height: 150px;
+margin-top: 1rem;
+}
+
+/* NIL Ribbon 3D */
+#nilRibbon {
+width: 100%;
+height: 300px;
+margin-top: 1rem;
+border-radius: 8px;
+overflow: hidden;
+}
+
+/* Team Performance Matrix */
+.team-matrix {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 1rem;
+margin-top: 1rem;
+}
+
+.team-stat {
+display: flex;
+justify-content: space-between;
+padding: 0.75rem;
+background: rgba(155, 203, 235, 0.05);
+border-radius: 8px;
+border: 1px solid rgba(155, 203, 235, 0.1);
+}
+
+.team-stat-label {
+color: var(--muted);
+font-size: 0.85rem;
+}
+
+.team-stat-value {
+color: var(--cardinal-blue);
+font-weight: 700;
+}
+
+/* AI Assistant Interface */
+.ai-assistant {
+position: fixed;
+bottom: 2rem;
+right: 2rem;
+z-index: 999;
+}
+
+.ai-fab {
+width: 60px;
+height: 60px;
+background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+box-shadow: 0 10px 30px rgba(191, 87, 0, 0.4);
+transition: all 0.3s;
+font-size: 1.5rem;
+}
+
+.ai-fab:hover {
+transform: scale(1.1);
+box-shadow: 0 15px 40px rgba(191, 87, 0, 0.6);
+}
+
+.ai-panel {
+position: absolute;
+bottom: 70px;
+right: 0;
+width: 350px;
+max-height: 500px;
+background: var(--panel);
+border: 1px solid rgba(155, 203, 235, 0.3);
+border-radius: 12px;
+padding: 1.5rem;
+display: none;
+flex-direction: column;
+box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.ai-panel.active {
+display: flex;
+}
+
+.ai-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 1rem;
+padding-bottom: 1rem;
+border-bottom: 1px solid rgba(155, 203, 235, 0.2);
+}
+
+.ai-title {
+font-weight: 700;
+color: var(--cardinal-blue);
+}
+
+.ai-messages {
+flex: 1;
+overflow-y: auto;
+margin-bottom: 1rem;
+max-height: 300px;
+}
+
+.ai-message {
+padding: 0.75rem;
+margin-bottom: 0.5rem;
+border-radius: 8px;
+background: rgba(155, 203, 235, 0.05);
+font-size: 0.9rem;
+line-height: 1.5;
+}
+
+.ai-message.user {
+background: rgba(191, 87, 0, 0.1);
+margin-left: 2rem;
+}
+
+.ai-message.assistant {
+background: rgba(155, 203, 235, 0.1);
+margin-right: 2rem;
+}
+
+.ai-input-group {
+display: flex;
+gap: 0.5rem;
+}
+
+.ai-input {
+flex: 1;
+padding: 0.75rem;
+background: rgba(155, 203, 235, 0.05);
+border: 1px solid rgba(155, 203, 235, 0.2);
+border-radius: 8px;
+color: var(--text);
+font-size: 0.9rem;
+}
+
+.ai-input:focus {
+outline: none;
+border-color: var(--cardinal-blue);
+box-shadow: 0 0 0 3px rgba(155, 203, 235, 0.1);
+}
+
+.ai-send {
+padding: 0.75rem 1rem;
+background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+border: none;
+border-radius: 8px;
+color: white;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s;
+}
+
+.ai-send:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(191, 87, 0, 0.4);
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+.header-content {
+flex-direction: column;
+}
+
+.deployment-tabs {
+width: 100%;
+justify-content: flex-start;
+}
+
+.analytics-grid {
+grid-template-columns: 1fr;
+}
+
+.team-matrix {
+grid-template-columns: 1fr;
+}
+
+.ai-panel {
+width: calc(100vw - 4rem);
+right: -1rem;
+}
+
+.ai-assistant {
+bottom: 1rem;
+right: 1rem;
+}
+}
+
+/* Loading State */
+.loading-spinner {
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 3px solid rgba(155, 203, 235, 0.3);
+border-top-color: var(--cardinal-blue);
+border-radius: 50%;
+animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+to { transform: rotate(360deg); }
+}
+
+/* Notification Toast */
+.toast {
+position: fixed;
+top: calc(var(--safe-area-top) + 1rem);
+right: 1rem;
+padding: 1rem 1.5rem;
+background: var(--panel);
+border: 1px solid var(--cardinal-blue);
+border-radius: 8px;
+color: var(--text);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+transform: translateX(400px);
+transition: transform 0.3s;
+z-index: 2000;
+}
+
+.toast.show {
+transform: translateX(0);
+}
+
+.toast-title {
+font-weight: 700;
+color: var(--cardinal-blue);
+margin-bottom: 0.25rem;
+}
+
+.toast-message {
+font-size: 0.9rem;
+color: var(--muted);
+}
+</style>
+</head>
+<body>
+<header class="unified-header">
+<div class="header-content">
+<div class="logo-section">
+<div class="logo">🔥 Blaze Intelligence</div>
+<div class="connection-status">
+<div class="status-dot"></div>
+<span id="connectionStatus">LIVE • 4 Deployments</span>
+</div>
+</div>
+
+<div class="deployment-tabs">
+<button class="tab-btn active" data-deployment="unified">Unified View</button>
+<button class="tab-btn" data-deployment="production">Production</button>
+<button class="tab-btn" data-deployment="ios">iOS App</button>
+<button class="tab-btn" data-deployment="championship">Championship</button>
+<button class="tab-btn" data-deployment="localhost">Local Dev</button>
+</div>
+</div>
+</header>
+
+<div class="score-ticker">
+<div class="ticker-content" id="tickerContent">
+<div class="analytics-grid">
+<div class="analytics-card">
+<div class="card-header">
+<h3 class="card-title">Live Pressure Stream</h3>
+<span class="live-badge">STREAMING</span>
+</div>
+<canvas id="pressureStream"></canvas>
+<div class="metric-label" style="margin-top: 1rem;">Championship Pressure Index</div>
+</div>
+
+<div class="analytics-card">
+<div class="card-header">
+<h3 class="card-title">Multi-League Dashboard</h3>
+<span class="live-badge">REAL-TIME</span>
+</div>
+<div class="chart-container">
+<canvas id="leagueChart"></canvas>
+</div>
+</div>
+
+<div class="analytics-card">
+<div class="card-header">
+<h3 class="card-title">System Performance</h3>
+<span class="live-badge">MONITORING</span>
+</div>
+<div class="team-matrix">
+<div class="team-stat">
+<span class="team-stat-label">API Latency</span>
+<span class="team-stat-value" id="apiLatency">42ms</span>
+</div>
+<div class="team-stat">
+<span class="team-stat-label">Data Points</span>
+<span class="team-stat-value" id="dataPoints">2.8M+</span>
+</div>
+<div class="team-stat">
+<span class="team-stat-label">Accuracy</span>
+<span class="team-stat-value" id="accuracy">94.6%</span>
+</div>
+<div class="team-stat">
+<span class="team-stat-label">Uptime</span>
+<span class="team-stat-value" id="uptime">99.9%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="toast" id="toast">
+<div class="toast-title" id="toastTitle">System Update</div>
+<div class="toast-message" id="toastMessage">Connected to live data stream</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+
+<script>
+// Global State Management
+const state = {
+currentDeployment: 'unified',
+liveData: {
+mlb: { score: 0, lastUpdate: Date.now() },
+nfl: { score: 0, lastUpdate: Date.now() },
+nba: { score: 0, lastUpdate: Date.now() }
+},
+websocketConnected: false,
+deployments: {
+production: 'https://90990792.blaze-intelligence.pages.dev',
+ios: 'https://90990792.blaze-intelligence.pages.dev/blaze-intelligence-ios-app.html',
+championship: 'https://90990792.blaze-intelligence.pages.dev/blaze-intelligence-championship.html',
+localhost: 'http://localhost:8090'
+}
+};
+
+// WebGL Background Animation
+function initWebGL() {
+const canvas = document.getElementById('webglCanvas');
+const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+if (!gl) {
+console.log('WebGL not supported, falling back to canvas');
+initCanvasBackground();
+return;
+}
+
+function resizeCanvas() {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+gl.viewport(0, 0, canvas.width, canvas.height);
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Simple gradient shader
+const vertexShaderSource = `
+attribute vec2 position;
+void main() {
+gl_Position = vec4(position, 0.0, 1.0);
+}
+`;
+
+const fragmentShaderSource = `
+precision mediump float;
+uniform vec2 resolution;
+uniform float time;
+
+void main() {
+vec2 uv = gl_FragCoord.xy / resolution.xy;
+float wave = sin(uv.x * 10.0 + time) * 0.1;
+vec3 color = mix(
+vec3(0.749, 0.341, 0.0), // Burnt Orange
+vec3(0.608, 0.796, 0.922), // Cardinal Blue
+uv.y + wave
+);
+gl_FragColor = vec4(color * 0.1, 1.0);
+}
+`;
+
+function createShader(type, source) {
+const shader = gl.createShader(type);
+gl.shaderSource(shader, source);
+gl.compileShader(shader);
+return shader;
+}
+
+const vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderSource);
+const fragmentShader = createShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+const program = gl.createProgram();
+gl.attachShader(program, vertexShader);
+gl.attachShader(program, fragmentShader);
+gl.linkProgram(program);
+gl.useProgram(program);
+
+const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+const buffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+const position = gl.getAttribLocation(program, 'position');
+gl.enableVertexAttribArray(position);
+gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+const resolution = gl.getUniformLocation(program, 'resolution');
+const time = gl.getUniformLocation(program, 'time');
+
+function render(t) {
+gl.uniform2f(resolution, canvas.width, canvas.height);
+gl.uniform1f(time, t * 0.001);
+gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+requestAnimationFrame(render);
+}
+render(0);
+}
+
+// Fallback Canvas Background
+function initCanvasBackground() {
+const canvas = document.getElementById('webglCanvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+function animate() {
+const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+gradient.addColorStop(0, 'rgba(191, 87, 0, 0.05)');
+gradient.addColorStop(0.5, 'rgba(155, 203, 235, 0.03)');
+gradient.addColorStop(1, 'rgba(191, 87, 0, 0.05)');
+
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+requestAnimationFrame(animate);
+}
+animate();
+}
+
+// Initialize Pressure Stream
+function initPressureStream() {
+const canvas = document.getElementById('pressureStream');
+const ctx = canvas.getContext('2d');
+
+canvas.width = canvas.offsetWidth;
+canvas.height = 150;
+
+const data = [];
+const maxPoints = 50;
+
+function generateData() {
+const value = 50 + Math.sin(Date.now() / 1000) * 30 + (Math.random() - 0.5) * 20;
+data.push(value);
+if (data.length > maxPoints) data.shift();
+}
+
+function draw() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+// Grid
+ctx.strokeStyle = 'rgba(155, 203, 235, 0.1)';
+ctx.lineWidth = 1;
+for (let i = 0; i <= 4; i++) {
+const y = (canvas.height / 4) * i;
+ctx.beginPath();
+ctx.moveTo(0, y);
+ctx.lineTo(canvas.width, y);
+ctx.stroke();
+}
+
+// Data line
+if (data.length > 1) {
+const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+gradient.addColorStop(0, '#9BCBEB');
+gradient.addColorStop(0.5, '#BF5700');
+gradient.addColorStop(1, '#9BCBEB');
+
+ctx.strokeStyle = gradient;
+ctx.lineWidth = 3;
+ctx.beginPath();
+
+data.forEach((value, i) => {
+const x = (canvas.width / (maxPoints - 1)) * i;
+const y = canvas.height - (value / 100) * canvas.height;
+
+if (i === 0) ctx.moveTo(x, y);
+else ctx.lineTo(x, y);
+});
+
+ctx.stroke();
+
+// Fill
+ctx.lineTo(canvas.width, canvas.height);
+ctx.lineTo(0, canvas.height);
+ctx.closePath();
+
+const fillGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+fillGradient.addColorStop(0, 'rgba(155, 203, 235, 0.3)');
+fillGradient.addColorStop(1, 'transparent');
+ctx.fillStyle = fillGradient;
+ctx.fill();
+}
+}
+
+setInterval(() => {
+generateData();
+draw();
+}, 200);
+}
+
+// Initialize NIL 3D Ribbon
+function initNILRibbon() {
+const container = document.getElementById('nilRibbon');
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / 300, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+renderer.setSize(container.offsetWidth, 300);
+renderer.setClearColor(0x000000, 0);
+container.appendChild(renderer.domElement);
+
+// Create ribbon geometry
+const curve = new THREE.CatmullRomCurve3([
+new THREE.Vector3(-5, 0, 0),
+new THREE.Vector3(-2, 2, 1),
+new THREE.Vector3(0, 0, 0),
+new THREE.Vector3(2, -2, -1),
+new THREE.Vector3(5, 0, 0)
+]);
+
+const tubeGeometry = new THREE.TubeGeometry(curve, 100, 0.5, 8, false);
+const material = new THREE.MeshPhysicalMaterial({
+color: 0xBF5700,
+metalness: 0.7,
+roughness: 0.2,
+clearcoat: 1.0,
+clearcoatRoughness: 0.1
+});
+
+const ribbon = new THREE.Mesh(tubeGeometry, material);
+scene.add(ribbon);
+
+// Lighting
+const light1 = new THREE.PointLight(0xBF5700, 1);
+light1.position.set(5, 5, 5);
+scene.add(light1);
+
+const light2 = new THREE.PointLight(0x9BCBEB, 1);
+light2.position.set(-5, -5, 5);
+scene.add(light2);
+
+const ambientLight = new THREE.AmbientLight(0x404040);
+scene.add(ambientLight);
+
+camera.position.z = 10;
+
+function animate() {
+requestAnimationFrame(animate);
+ribbon.rotation.x += 0.005;
+ribbon.rotation.y += 0.01;
+renderer.render(scene, camera);
+}
+animate();
+
+// Update NIL value periodically
+setInterval(() => {
+const value = Math.floor(Math.random() * 500000 + 100000);
+document.getElementById('nilValue').textContent = '$' + value.toLocaleString();
+
+// Update ribbon color based on value
+const hue = (value / 600000) * 0.3;
+ribbon.material.color.setHSL(hue, 0.8, 0.5);
+}, 3000);
+}
+
+// Initialize League Performance Chart
+function initLeagueChart() {
+const ctx = document.getElementById('leagueChart').getContext('2d');
+
+const chart = new Chart(ctx, {
+type: 'bar',
+data: {
+labels: ['MLB', 'NFL', 'NBA', 'NCAA'],
+datasets: [{
+label: 'Performance Index',
+data: [85, 78, 92, 88],
+backgroundColor: [
+'rgba(191, 87, 0, 0.6)',
+'rgba(155, 203, 235, 0.6)',
+'rgba(191, 87, 0, 0.6)',
+'rgba(155, 203, 235, 0.6)'
+],
+borderColor: [
+'#BF5700',
+'#9BCBEB',
+'#BF5700',
+'#9BCBEB'
+],
+borderWidth: 2
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: { display: false }
+},
+scales: {
+y: {
+beginAtZero: true,
+max: 100,
+grid: { color: 'rgba(155, 203, 235, 0.1)' },
+ticks: { color: '#999' }
+},
+x: {
+grid: { color: 'rgba(155, 203, 235, 0.1)' },
+ticks: { color: '#999' }
+}
+}
+}
+});
+
+// Update chart with live data
+setInterval(() => {
+chart.data.datasets[0].data = chart.data.datasets[0].data.map(v => 
+Math.max(60, Math.min(100, v + (Math.random() - 0.5) * 10))
+);
+chart.update();
+}, 3000);
+}
+
+// WebSocket Connection Simulation
+function connectWebSocket() {
+// Simulate WebSocket connection
+state.websocketConnected = true;
+updateConnectionStatus('LIVE • Connected');
+showToast('System Update', 'Connected to live data stream');
+
+// Simulate live data updates
+setInterval(() => {
+// Update Cardinals score
+const leagues = ['MLB', 'NFL', 'NBA'];
+const league = leagues[Math.floor(Math.random() * leagues.length)];
+const score = Math.floor(Math.random() * 10);
+
+updateLiveScore(league, score);
+
+// Update metrics
+updateMetrics();
+}, 5000);
+}
+
+// Update Live Score
+function updateLiveScore(league, score) {
+state.liveData[league.toLowerCase()] = {
+score: score,
+lastUpdate: Date.now()
+};
+
+// Update Cardinals score display
+const totalScore = Object.values(state.liveData).reduce((sum, data) => sum + data.score, 0);
+const scoreElement = document.getElementById('cardinalsScore');
+const currentScore = parseInt(scoreElement.textContent);
+
+animateValue('cardinalsScore', totalScore);
+
+// Update change indicator
+const changeElement = document.getElementById('cardinalsChange');
+const change = totalScore - currentScore;
+if (change > 0) {
+changeElement.innerHTML = `<span>↑</span><span>+${change} points</span>`;
+changeElement.classList.remove('negative');
+} else if (change < 0) {
+changeElement.innerHTML = `<span>↓</span><span>${change} points</span>`;
+changeElement.classList.add('negative');
+}
+
+// Update ticker
+updateTicker(league, score);
+}
+
+// Update Ticker
+function updateTicker(league, score) {
+const tickerContent = document.getElementById('tickerContent');
+const tickerItem = document.createElement('div');
+tickerItem.className = 'ticker-item';
+tickerItem.innerHTML = `
+<span class="league-badge">${league}</span>
+<span>Cardinals</span>
+<span class="score">${score}</span>
+<span style="color: var(--muted);">• ${new Date().toLocaleTimeString()}</span>
+`;
+
+// Clone for seamless scrolling
+const clone = tickerItem.cloneNode(true);
+tickerContent.appendChild(tickerItem);
+tickerContent.appendChild(clone);
+
+// Remove old items if too many
+while (tickerContent.children.length > 20) {
+tickerContent.removeChild(tickerContent.firstChild);
+}
+}
+
+// Update Metrics
+function updateMetrics() {
+// Win Probability
+const winProb = (50 + Math.random() * 50).toFixed(1) + '%';
+document.getElementById('winProb').textContent = winProb;
+
+// Efficiency
+const efficiency = (70 + Math.random() * 30).toFixed(1) + '%';
+document.getElementById('efficiency').textContent = efficiency;
+
+// Momentum
+const momentum = ['Rising', 'Stable', 'Strong', 'Peak'][Math.floor(Math.random() * 4)];
+document.getElementById('momentum').textContent = momentum;
+
+// Risk Level
+const risk = ['Low', 'Medium', 'Controlled'][Math.floor(Math.random() * 3)];
+document.getElementById('riskLevel').textContent = risk;
+
+// AI Predictions
+document.getElementById('nextPlay').textContent = ['Run 68%', 'Pass 72%', 'Blitz 45%'][Math.floor(Math.random() * 3)];
+document.getElementById('scoreProb').textContent = (20 + Math.random() * 60).toFixed(0) + '%';
+document.getElementById('injuryRisk').textContent = ['Low', 'Medium', 'Minimal'][Math.floor(Math.random() * 3)];
+document.getElementById('optimalSub').textContent = ['2nd Q', '3rd Q', '4th Q'][Math.floor(Math.random() * 3)];
+
+// System Performance
+document.getElementById('apiLatency').textContent = (20 + Math.random() * 80).toFixed(0) + 'ms';
+document.getElementById('dataPoints').textContent = '2.8M+';
+document.getElementById('accuracy').textContent = (92 + Math.random() * 5).toFixed(1) + '%';
+document.getElementById('uptime').textContent = '99.9%';
+}
+
+// Animate Value
+function animateValue(id, value, duration = 1000) {
+const element = document.getElementById(id);
+const start = parseInt(element.textContent) || 0;
+const startTime = Date.now();
+
+function update() {
+const elapsed = Date.now() - startTime;
+const progress = Math.min(elapsed / duration, 1);
+const current = Math.floor(start + (value - start) * easeOutCubic(progress));
+element.textContent = current;
+
+if (progress < 1) {
+requestAnimationFrame(update);
+}
+}
+update();
+}
+
+function easeOutCubic(t) {
+return 1 - Math.pow(1 - t, 3);
+}
+
+// Tab Switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+btn.addEventListener('click', function() {
+document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+this.classList.add('active');
+
+state.currentDeployment = this.dataset.deployment;
+
+if (state.currentDeployment !== 'unified') {
+// In production, this would load the specific deployment
+showToast('Deployment Switch', `Switched to ${this.textContent}`);
+
+// Simulate loading deployment-specific data
+setTimeout(() => {
+updateMetrics();
+}, 500);
+}
+});
+});
+
+// AI Assistant Functions
+function toggleAI() {
+const panel = document.getElementById('aiPanel');
+panel.classList.toggle('active');
+}
+
+function handleAIInput(event) {
+if (event.key === 'Enter') {
+sendAIMessage();
+}
+}
+
+function sendAIMessage() {
+const input = document.getElementById('aiInput');
+const message = input.value.trim();
+
+if (!message) return;
+
+// Add user message
+addAIMessage(message, 'user');
+input.value = '';
+
+// Simulate AI response
+setTimeout(() => {
+const responses = [
+"Based on current analytics, the Cardinals have a 73% win probability with strong momentum in the 4th quarter.",
+"The pressure index indicates a critical moment approaching. Recommend defensive adjustment.",
+"NIL valuation trending upward based on recent performance metrics and social engagement.",
+"System performing optimally with sub-100ms latency across all deployments."
+];
+
+const response = responses[Math.floor(Math.random() * responses.length)];
+addAIMessage(response, 'assistant');
+}, 1000);
+}
+
+function addAIMessage(text, sender) {
+const messagesContainer = document.getElementById('aiMessages');
+const messageDiv = document.createElement('div');
+messageDiv.className = `ai-message ${sender}`;
+messageDiv.textContent = text;
+messagesContainer.appendChild(messageDiv);
+messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+// Toast Notifications
+function showToast(title, message) {
+const toast = document.getElementById('toast');
+document.getElementById('toastTitle').textContent = title;
+document.getElementById('toastMessage').textContent = message;
+
+toast.classList.add('show');
+
+setTimeout(() => {
+toast.classList.remove('show');
+}, 3000);
+}
+
+// Update Connection Status
+function updateConnectionStatus(status) {
+document.getElementById('connectionStatus').textContent = status;
+}
+
+// Cross-Platform Sync
+function syncAcrossPlatforms() {
+// Broadcast state updates to all deployments
+const syncData = {
+timestamp: Date.now(),
+deployment: state.currentDeployment,
+liveData: state.liveData,
+metrics: {
+winProb: document.getElementById('winProb').textContent,
+efficiency: document.getElementById('efficiency').textContent
+}
+};
+
+// In production, this would use WebSocket or SSE to sync
+localStorage.setItem('blazeSync', JSON.stringify(syncData));
+
+// Listen for changes from other tabs/windows
+window.addEventListener('storage', (e) => {
+if (e.key === 'blazeSync') {
+const data = JSON.parse(e.newValue);
+// Update UI with synced data
+console.log('Synced data from', data.deployment);
+}
+});
+}
+
+// Initialize Everything
+function init() {
+initWebGL();
+initPressureStream();
+initNILRibbon();
+initLeagueChart();
+connectWebSocket();
+syncAcrossPlatforms();
+
+// Initial metrics update
+updateMetrics();
+
+// Show welcome toast
+setTimeout(() => {
+showToast('Welcome to Blaze Intelligence', 'All systems operational');
+}, 1000);
+}
+
+// Start when DOM is ready
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', init);
+} else {
+init();
+}
+
+// Handle visibility changes
+document.addEventListener('visibilitychange', () => {
+if (!document.hidden) {
+// Refresh data when tab becomes visible
+updateMetrics();
+showToast('Data Refreshed', 'Live stream reconnected');
+}
+});
+
+// Export for debugging
+window.blazeState = state;
+</script>
+</body>
+</html>

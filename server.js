@@ -11,6 +11,8 @@ import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
 import Stripe from 'stripe';
 import multer from 'multer';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 import SportsDataService from './src/services/sportsDataService.js';
 import mlbAdapter from './src/data/mlb/adapter.js';
 import nflAdapter from './src/data/nfl/adapter.js';
@@ -31,6 +33,10 @@ import MonitoringDashboard from './src/backend/monitoring-dashboard.js';
 import BackupSystem from './src/backend/backup-system.js';
 import ballDontLieService from './src/services/ballDontLieService.js';
 import aiAnalyticsService from './src/services/aiAnalyticsService.js';
+import SportsWebSocketServer from './src/websocket/sports-websocket-server.js';
+import VideoAnalysisEngine from './src/video-intelligence/analyzer.js';
+import { analytics } from './src/analytics/enhanced-analytics.js';
+import { createServer } from 'http';
 
 // Load environment variables
 dotenv.config();
@@ -40,6 +46,9 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Create HTTP server for WebSocket support
+const server = createServer(app);
 
 // Trust proxy for rate limiting to work correctly
 // Use specific trust proxy setting for Replit environment
@@ -56,6 +65,26 @@ const cacheLayer = new RedisCacheLayer();
 const logger = new ProductionLogger();
 const monitoring = new MonitoringDashboard(cacheLayer, logger);
 const backupSystem = new BackupSystem(logger);
+
+// Initialize enhanced services
+const videoAnalysisEngine = new VideoAnalysisEngine();
+let sportsWebSocket;
+
+// Configure multer for video uploads
+const upload = multer({
+  dest: './uploads/video-analysis/',
+  limits: {
+    fileSize: 500 * 1024 * 1024 // 500MB
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['video/mp4', 'video/avi', 'video/mov', 'video/quicktime'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only video files are allowed.'));
+    }
+  }
+});
 
 // Initialize AI services with API keys
 const openai = process.env.OPENAI_API_KEY ? new OpenAI({
@@ -114,6 +143,47 @@ const apiLimiter = rateLimit({
 
 // Apply rate limiting to API routes
 app.use('/api/', apiLimiter);
+
+// Swagger API Documentation
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Blaze Intelligence API',
+      version: '2.0.0',
+      description: 'Professional-grade sports analytics platform API with real-time performance tracking, predictive modeling, and AI-powered insights.',
+      contact: {
+        name: 'Blaze Intelligence',
+        url: 'https://blazeintelligence.com'
+      }
+    },
+    servers: [
+      {
+        url: process.env.NODE_ENV === 'production' ? 'https://api.blazeintelligence.com' : 'http://localhost:5000',
+        description: process.env.NODE_ENV === 'production' ? 'Production server' : 'Development server'
+      }
+    ],
+  },
+  apis: ['./server.js', './server/**/*.js'], // Path to the API docs
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+
+// Serve API documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customCss: `
+    .swagger-ui .topbar { display: none; }
+    .swagger-ui { font-family: 'Inter', sans-serif; }
+    .swagger-ui .info .title { color: #BF5700; }
+  `,
+  customSiteTitle: 'Blaze Intelligence API Documentation'
+}));
+
+// Serve static OpenAPI spec
+app.get('/api-docs.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
 
 // Authentication routes (no auth required)
 app.use('/api/auth', authRoutes);
@@ -1253,6 +1323,158 @@ import pressureAnalyticsRoutes from './src/api/pressure-analytics.js';
 // Mount Pressure Analytics API
 app.use('/api', pressureAnalyticsRoutes);
 
+// Video Intelligence API Routes
+app.post('/api/video-intelligence/analyze', upload.single('video'), async (req, res) => {
+  try {
+    const { config } = req.body;
+    const videoFile = req.file;
+    
+    if (!videoFile) {
+      return res.status(400).json({ error: 'No video file provided' });
+    }
+
+    const analysisConfig = JSON.parse(config || '{}');
+    const jobId = await videoAnalysisEngine.processVideo(videoFile.path, analysisConfig);
+    
+    analytics.trackVideoAnalysis(jobId, 0, { 
+      fileSize: videoFile.size, 
+      sport: analysisConfig.sport 
+    });
+    
+    res.json({ 
+      jobId, 
+      status: 'queued',
+      estimatedTime: 180
+    });
+  } catch (error) {
+    console.error('Video analysis error:', error);
+    res.status(500).json({ error: 'Analysis failed' });
+  }
+});
+
+app.get('/api/video-intelligence/job/:jobId', async (req, res) => {
+  try {
+    const job = videoAnalysisEngine.getJobStatus(req.params.jobId);
+    if (!job) {
+      return res.status(404).json({ error: 'Job not found' });
+    }
+    res.json(job);
+  } catch (error) {
+    console.error('Job status error:', error);
+    res.status(500).json({ error: 'Failed to get job status' });
+  }
+});
+
+app.get('/api/video-intelligence/jobs', async (req, res) => {
+  try {
+    const jobs = videoAnalysisEngine.getAllJobs();
+    res.json({ jobs });
+  } catch (error) {
+    console.error('Jobs list error:', error);
+    res.status(500).json({ error: 'Failed to get jobs list' });
+  }
+});
+
+// Enhanced Analytics API Routes
+app.post('/api/analytics/collect', async (req, res) => {
+  try {
+    const { events, metadata } = req.body;
+    
+    // Process analytics events
+    events.forEach(event => {
+      analytics.track(event.type, event.data, event.metadata);
+    });
+    
+    res.json({ 
+      status: 'success',
+      eventsProcessed: events.length,
+      timestamp: Date.now()
+    });
+  } catch (error) {
+    console.error('Analytics collect error:', error);
+    res.status(500).json({ error: 'Failed to collect analytics' });
+  }
+});
+
+app.post('/api/analytics/query', async (req, res) => {
+  try {
+    const queryParams = req.body;
+    const results = await analytics.query(queryParams);
+    res.json(results);
+  } catch (error) {
+    console.error('Analytics query error:', error);
+    res.status(500).json({ error: 'Query failed' });
+  }
+});
+
+app.get('/api/analytics/dashboard', async (req, res) => {
+  try {
+    const dashboardData = await analytics.getDashboardData();
+    const metrics = analytics.getAllMetrics();
+    
+    res.json({
+      data: dashboardData,
+      metrics,
+      timestamp: Date.now()
+    });
+  } catch (error) {
+    console.error('Analytics dashboard error:', error);
+    res.status(500).json({ error: 'Failed to get dashboard data' });
+  }
+});
+
+// WebSocket connection endpoint
+app.post('/api/websocket/connect', (req, res) => {
+  try {
+    const { streams, clientId } = req.body;
+    
+    res.json({
+      wsUrl: `ws://${req.get('host')}`,
+      connectionId: `conn_${Date.now()}`,
+      availableStreams: sportsWebSocket?.getAvailableStreams() || []
+    });
+  } catch (error) {
+    console.error('WebSocket connect error:', error);
+    res.status(500).json({ error: 'Failed to establish WebSocket connection' });
+  }
+});
+
+// API Documentation spec endpoint
+app.get('/api/docs/spec.json', (req, res) => {
+  res.json({
+    openapi: '3.0.0',
+    info: {
+      title: 'Blaze Intelligence API',
+      description: 'Professional-grade sports analytics platform API',
+      version: '2.0.0'
+    },
+    servers: [{ url: '/api', description: 'Production API Server' }],
+    paths: {
+      '/sports/live': {
+        get: {
+          summary: 'Get live sports data',
+          description: 'Retrieve real-time sports scores and game updates',
+          tags: ['Sports Data']
+        }
+      },
+      '/video-intelligence/analyze': {
+        post: {
+          summary: 'Analyze sports video',
+          description: 'Upload and analyze sports video with AI-powered insights',
+          tags: ['Video Intelligence']
+        }
+      },
+      '/analytics/pressure': {
+        get: {
+          summary: 'Get pressure analytics',
+          description: 'Retrieve real-time pressure and biometric data',
+          tags: ['Analytics']
+        }
+      }
+    }
+  });
+});
+
 // MLB API Routes (Real Data)
 app.get('/api/mlb/teams/:id', async (req, res) => {
   try {
@@ -1658,9 +1880,13 @@ app.use((req, res) => {
 });
 
 // Start server with production initialization
-app.listen(PORT, '0.0.0.0', async () => {
+server.listen(PORT, '0.0.0.0', async () => {
   console.log(`🔥 Blaze Intelligence server running on port ${PORT}`);
   console.log(`🚀 Access your app at: http://localhost:${PORT}`);
+  
+  // Initialize WebSocket server
+  sportsWebSocket = new SportsWebSocketServer(server);
+  console.log(`🔌 WebSocket server initialized`);
   
   // Log startup details
   logger.logStartup({ port: PORT, environment: process.env.NODE_ENV });

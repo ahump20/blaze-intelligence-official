@@ -1,0 +1,181 @@
+{
+  "agent_id": "digital-combine-autopilot",
+  "name": "Digital Combine Autopilot",
+  "description": "Automated 30-minute cycle for research, analytics generation, and deployment",
+  "version": "1.0.0",
+  "schedule": {
+    "interval": "30m",
+    "timezone": "America/Chicago",
+    "active_hours": "06:00-23:00"
+  },
+  "workflow": {
+    "tasks": [
+      {
+        "id": "research_phase",
+        "name": "Sports Data Research",
+        "duration": "8m",
+        "actions": [
+          {
+            "type": "api_fetch",
+            "endpoint": "https://statsapi.mlb.com/api/v1/teams/138",
+            "store_as": "cardinals_roster"
+          },
+          {
+            "type": "api_fetch", 
+            "endpoint": "https://statsapi.mlb.com/api/v1/teams/158",
+            "store_as": "titans_stats"
+          },
+          {
+            "type": "web_scrape",
+            "url": "https://www.baseball-reference.com/teams/STL/2025.shtml",
+            "selectors": {
+              "team_stats": ".stats_table tbody tr",
+              "recent_games": "#team_schedule tbody tr:last-child(5)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "analytics_generation",
+        "name": "Generate Digital Combine Metrics",
+        "duration": "12m",
+        "actions": [
+          {
+            "type": "calculate_metrics",
+            "algorithms": [
+              "champion_readiness_score",
+              "cognitive_leverage_index", 
+              "prescriptive_scouting_rating",
+              "enigma_engine_factor"
+            ],
+            "inputs": ["cardinals_roster", "titans_stats", "recent_games"]
+          },
+          {
+            "type": "trend_analysis",
+            "lookback_period": "30d",
+            "forecast_period": "7d"
+          },
+          {
+            "type": "generate_insights",
+            "templates": [
+              "readiness_board_update",
+              "performance_summary",
+              "predictive_analysis"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "content_creation",
+        "name": "Create Blog Content",
+        "duration": "8m",
+        "actions": [
+          {
+            "type": "blog_post_generation",
+            "topics": ["cardinals", "titans", "longhorns", "digital_combine"],
+            "output_format": "html_with_frontmatter",
+            "target_length": "800-1200_words"
+          },
+          {
+            "type": "update_data_files",
+            "files": [
+              "data/blaze-metrics.json",
+              "data/dashboard-config.json",
+              "data/blog-index.json"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "deployment_phase", 
+        "name": "Deploy Updates",
+        "duration": "2m",
+        "actions": [
+          {
+            "type": "git_operations",
+            "steps": [
+              "git add .",
+              "git commit -m 'Digital Combine Autopilot: $(date) update'",
+              "git push origin main"
+            ]
+          },
+          {
+            "type": "cloudflare_deploy",
+            "project": "blaze-intelligence-lsl",
+            "wait_for_build": true
+          },
+          {
+            "type": "health_check",
+            "endpoints": [
+              "https://blaze-intelligence.com/api/health",
+              "https://blaze-storage.humphrey-austin20.workers.dev/api/health"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "data_sources": {
+    "mlb": {
+      "api": "https://statsapi.mlb.com/api/v1/",
+      "rate_limit": "1000/hour",
+      "priority_teams": ["STL", "ARI", "MIL", "CHC"]
+    },
+    "nfl": {
+      "api": "https://api.sportsdata.io/v3/nfl/",
+      "rate_limit": "500/hour", 
+      "priority_teams": ["TEN", "HOU", "IND", "JAX"]
+    },
+    "cfb": {
+      "api": "https://api.collegefootballdata.com/",
+      "rate_limit": "200/hour",
+      "priority_teams": ["Texas", "Oklahoma", "Baylor", "TCU"]
+    }
+  },
+  "output_targets": {
+    "r2_storage": {
+      "bucket": "blaze-intelligence-data",
+      "paths": {
+        "metrics": "sports-data/general/",
+        "blog_content": "sports-data/blog/",
+        "dashboard_data": "sports-data/dashboards/"
+      }
+    },
+    "cloudflare_pages": {
+      "project": "blaze-intelligence-lsl", 
+      "branch": "main",
+      "build_command": "npm run build",
+      "output_directory": "dist"
+    }
+  },
+  "monitoring": {
+    "success_webhooks": [
+      "https://hooks.zapier.com/hooks/catch/success/"
+    ],
+    "error_webhooks": [
+      "https://hooks.zapier.com/hooks/catch/error/"
+    ],
+    "metrics": {
+      "execution_time": "target_25m",
+      "success_rate": "target_95%",
+      "data_freshness": "max_35m"
+    }
+  },
+  "fallback_strategies": {
+    "api_failure": "use_cached_data",
+    "deployment_failure": "retry_once_then_alert",
+    "content_generation_failure": "use_template_content"
+  },
+  "permissions": {
+    "required_secrets": [
+      "CLOUDFLARE_API_TOKEN",
+      "GITHUB_TOKEN", 
+      "MLB_API_KEY",
+      "NFL_API_KEY"
+    ],
+    "r2_access": "read_write",
+    "pages_access": "deploy"
+  },
+  "created": "2025-09-01T09:00:00Z",
+  "last_modified": "2025-09-01T09:00:00Z"
+}

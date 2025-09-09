@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Austin Humphrey | Blaze Intelligence Founder</title>
+<meta name="description" content="Austin Humphrey - Founder of Blaze Intelligence, Sports Analytics Expert">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="js/blaze-three-visuals.js" defer></script>
+
+<style>
+body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+.glass-nav { background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 255, 255, 0.2); }
+.hero-3d-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+.profile-card { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(15px); border: 1px solid rgba(255, 140, 0, 0.2); border-radius: 1rem; padding: 2rem; }
+.achievement-badge { background: linear-gradient(135deg, #BF5700, #FF8C00); padding: 0.5rem 1rem; border-radius: 0.5rem; display: inline-block; font-weight: 600; }
+.stat-card { background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 0.75rem; padding: 1.5rem; transition: all 0.3s; }
+.stat-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2); }
+</style>
+</head>
+<body>
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+<ul class="hidden lg:flex items-center space-x-8">
+<li><a href="/index.html" class="text-slate-300 hover:text-white">Home</a></li>
+<li><a href="/dashboard.html" class="text-slate-300 hover:text-white">Dashboard</a></li>
+<li><a href="/about.html" class="text-slate-300 hover:text-white">About</a></li>
+<li><a href="/contact.html" class="text-slate-300 hover:text-white">Contact</a></li>
+</ul>
+</div>
+</nav>
+
+<section class="relative min-h-screen pt-24">
+<div id="profile-hero-3d" class="hero-3d-container"></div>
+
+<div class="relative z-10 max-w-7xl mx-auto px-4">
+<div class="grid md:grid-cols-4 gap-6 mb-12 max-w-4xl mx-auto">
+<div class="stat-card text-center">
+<p class="text-3xl font-bold text-orange-400">#20</p>
+<p class="text-sm text-slate-400">Jersey Number</p>
+</div>
+<div class="stat-card text-center">
+<p class="text-3xl font-bold text-cyan-400">98%</p>
+<p class="text-sm text-slate-400">Pattern Recognition</p>
+</div>
+<div class="stat-card text-center">
+<p class="text-3xl font-bold text-green-400">Top 10%</p>
+<p class="text-sm text-slate-400">Northwestern Mutual</p>
+</div>
+<div class="stat-card text-center">
+<p class="text-3xl font-bold text-blue-400">2025</p>
+<p class="text-sm text-slate-400">MS Graduation</p>
+</div>
+</div>
+
+<div class="grid lg:grid-cols-2 gap-12 mb-16">
+<div class="profile-card">
+<h2 class="text-2xl font-bold text-cyan-400 mb-6">Professional Excellence</h2>
+<div class="space-y-4">
+<div>
+<h3 class="text-lg font-semibold text-orange-400 mb-2">Education</h3>
+<ul class="space-y-2 text-slate-300">
+<li>• BA International Relations - UT Austin (2020)</li>
+<li>• Minors: Economics & European Studies</li>
+<li>• MS Entertainment Business (Sports) - Full Sail (2025)</li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-orange-400 mb-2">Career Highlights</h3>
+<ul class="space-y-2 text-slate-300">
+<li>• Northwestern Mutual "Power of 10" Award Winner</li>
+<li>• Spectrum Reach - Sports Marketing Specialist</li>
+<li>• Founded Blaze Intelligence (2023)</li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-orange-400 mb-2">Core Competencies</h3>
+<div class="flex flex-wrap gap-2">
+<span class="achievement-badge text-white text-sm">Pattern Recognition</span>
+<span class="achievement-badge text-white text-sm">Strategic Analysis</span>
+<span class="achievement-badge text-white text-sm">Financial Modeling</span>
+<span class="achievement-badge text-white text-sm">AI Development</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mb-16">
+<h2 class="text-3xl font-bold text-center text-cyan-400 mb-8">Innovation Portfolio</h2>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="stat-card">
+<div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-3">
+<i data-lucide="cpu" class="w-6 h-6 text-orange-400"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Cardinals Analytics MCP</h3>
+<p class="text-sm text-slate-400">Production-ready server with real-time baseball analytics</p>
+</div>
+<div class="stat-card">
+<div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-3">
+<i data-lucide="brain" class="w-6 h-6 text-cyan-400"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Decision Velocity Model™</h3>
+<p class="text-sm text-slate-400">Cognitive framework for elite performance analysis</p>
+</div>
+<div class="stat-card">
+<div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-3">
+<i data-lucide="eye" class="w-6 h-6 text-green-400"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Vision AI Platform</h3>
+<p class="text-sm text-slate-400">Biomechanical & micro-expression detection system</p>
+</div>
+</div>
+</div>
+

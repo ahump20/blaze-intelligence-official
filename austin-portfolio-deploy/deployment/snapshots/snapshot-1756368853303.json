@@ -1,0 +1,71 @@
+{
+  "timestamp": "2025-08-28T08:14:13.271Z",
+  "git": {
+    "commit": "1e04e2ec44174ca38184dee089ef0830650196e7",
+    "branch": "main"
+  },
+  "config": {
+    "environment": "production",
+    "version": "2.1.0",
+    "build": "327cc1e1",
+    "deployment": {
+      "url": "https://327cc1e1.blaze-intelligence.com",
+      "customDomain": "blaze-intelligence.com",
+      "cdn": "cloudflare",
+      "accessControl": "enabled"
+    },
+    "agents": {
+      "cardinals": {
+        "schedule": "*/10 * * * *",
+        "status": "operational",
+        "lastRun": "2025-08-28T08:10:00.407Z"
+      },
+      "autopilot": {
+        "schedule": "*/30 * * * *",
+        "status": "operational",
+        "lastRun": "2025-08-28T08:00:21.665Z"
+      }
+    },
+    "apis": {
+      "mlb": {
+        "endpoint": "https://statsapi.mlb.com",
+        "status": "connected",
+        "rateLimits": "100/hour"
+      },
+      "espn": {
+        "endpoints": [
+          "mlb",
+          "nfl",
+          "nba",
+          "college_fb"
+        ],
+        "status": "connected",
+        "rateLimits": "1000/hour"
+      },
+      "nil": {
+        "status": "operational",
+        "validation": "coppa-compliant"
+      },
+      "perfectGame": {
+        "players": 50400,
+        "tournaments": 397,
+        "status": "operational"
+      }
+    },
+    "metrics": {
+      "dataPoints": "2.8M+",
+      "accuracy": "94.6%",
+      "latency": "<100ms",
+      "uptime": "99.9%"
+    },
+    "security": {
+      "cloudflareAccess": "enabled",
+      "rateLimiting": "enabled",
+      "errorHandling": "enabled"
+    }
+  },
+  "agents": {
+    "status": "captured",
+    "crontab": "# Set PATH for cron jobs\nPATH=/usr/local/bin:/usr/bin:/bin\n\n# Austin Humphrey Portfolio Auto-Analysis\n0 9 * * 1 cd /Users/AustinHumphrey && /usr/local/bin/node scripts/multi_ai_integration.js\n\n# Blaze Intelligence Production Jobs\n0 2 * * * cd /Users/AustinHumphrey && python3 test-blaze-system.py >> logs/daily.log 2>&1\n*/10 * * * * cd /Users/AustinHumphrey && /usr/local/bin/node blaze-universal-readiness-board.js >> logs/readiness.log 2>&1\n0 */4 * * * cd /Users/AustinHumphrey && ./blaze-continuous-deployment.sh >> logs/deployment.log 2>&1\n\n# Phase 2 Automation Agents\n*/10 * * * * /usr/local/bin/node scripts/update-cardinals.js >> /Users/AustinHumphrey/logs/cardinals.log 2>&1\n*/10 * * * * cd /Users/AustinHumphrey/austin-portfolio-deploy && /usr/local/bin/node scripts/cardinals-readiness-board.js >> /Users/AustinHumphrey/logs/readiness-board.log 2>&1\n*/30 * * * * cd /Users/AustinHumphrey/austin-portfolio-deploy && /usr/local/bin/node scripts/digital-combine-autopilot.js >> /Users/AustinHumphrey/logs/autopilot.log 2>&1"
+  }
+}

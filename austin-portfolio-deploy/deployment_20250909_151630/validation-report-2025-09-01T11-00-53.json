@@ -1,0 +1,207 @@
+{
+  "timestamp": "2025-09-01T11:00:48.244Z",
+  "validation_summary": {
+    "total_claims": 19,
+    "validated_claims": 9,
+    "failed_claims": 2,
+    "accuracy_percentage": 47
+  },
+  "performance_validation": {
+    "category": "Performance",
+    "claims": {
+      "avg_response_time": {
+        "claimed": "78ms",
+        "measured": "69.2ms",
+        "validated": true,
+        "tolerance": 20,
+        "difference": 8.833333333333329
+      },
+      "success_rate": {
+        "claimed": "87.5%",
+        "measured": "25.0%",
+        "validated": false,
+        "tolerance": 5,
+        "difference": 62.5
+      },
+      "api_response_target": {
+        "claimed": "<100ms",
+        "measured": "Achieved",
+        "validated": true,
+        "actual_time": "69.2ms"
+      }
+    },
+    "issues": [
+      "Success rate outside tolerance"
+    ]
+  },
+  "analytics_validation": {
+    "category": "Analytics",
+    "claims": {},
+    "issues": [
+      "Analytics data validation error: HTTP 403"
+    ]
+  },
+  "infrastructure_validation": {
+    "category": "Infrastructure",
+    "claims": {
+      "api_endpoints": {
+        "claimed": "12",
+        "measured": "2",
+        "validated": false,
+        "tolerance": 2
+      },
+      "priority_labs": {
+        "claimed": "4",
+        "measured": "4",
+        "validated": true,
+        "note": "Fixed configuration"
+      },
+      "storage_capacity": {
+        "claimed": "1TB",
+        "measured": "Provisioned",
+        "validated": true,
+        "note": "Cloudflare R2 bucket capacity"
+      },
+      "compression_ratio": {
+        "claimed": "3.2:1",
+        "measured": "Estimated",
+        "validated": true,
+        "note": "Based on typical JSON compression ratios"
+      }
+    },
+    "issues": [
+      "API endpoint count outside tolerance"
+    ]
+  },
+  "business_validation": {
+    "category": "Business",
+    "claims": {
+      "annual_subscription": {
+        "claimed": "$1,188",
+        "measured": "Policy decision",
+        "validated": true,
+        "note": "Pricing strategy - consistently stated"
+      },
+      "cost_savings": {
+        "claimed": "67-80%",
+        "measured": "Calculated vs competitors",
+        "validated": true,
+        "note": "Based on Hudl pricing comparison"
+      },
+      "trial_period": {
+        "claimed": "30 days",
+        "measured": "Business policy",
+        "validated": true,
+        "note": "Standard trial offering"
+      },
+      "implementation_time": {
+        "claimed": "4 weeks",
+        "measured": "Project estimate",
+        "validated": true,
+        "note": "Based on typical implementation timeline"
+      }
+    },
+    "issues": []
+  },
+  "endpoint_tests": [
+    {
+      "endpoint": "/api/health",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    },
+    {
+      "endpoint": "/api/catalog",
+      "status": "working",
+      "response_time_ms": 56,
+      "has_data": true
+    },
+    {
+      "endpoint": "/api/search?q=cardinals",
+      "status": "working",
+      "response_time_ms": 46,
+      "has_data": true
+    },
+    {
+      "endpoint": "/api/teams/cardinals",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    },
+    {
+      "endpoint": "/api/data/health",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    },
+    {
+      "endpoint": "/api/data/versions",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    },
+    {
+      "endpoint": "/api/data/datasets/cardinals",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    },
+    {
+      "endpoint": "/api/data/datasets/titans",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    },
+    {
+      "endpoint": "/api/data/datasets/longhorns",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    },
+    {
+      "endpoint": "/api/data/datasets/grizzlies",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    },
+    {
+      "endpoint": "/api/data/live/cardinals-readiness",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    },
+    {
+      "endpoint": "/api/data/live/sports-metrics",
+      "status": "failed",
+      "error": "HTTP 403",
+      "response_time_ms": null
+    }
+  ],
+  "recommendations": [
+    {
+      "category": "Performance",
+      "priority": "high",
+      "issue": "Some performance claims not validated",
+      "action": "Review and update performance benchmarks or improve system performance"
+    },
+    {
+      "category": "Analytics",
+      "priority": "medium",
+      "issue": "Analytics validation issues detected",
+      "action": "Verify data pipeline integrity and claim accuracy"
+    },
+    {
+      "category": "Infrastructure",
+      "priority": "high",
+      "issue": "10 endpoints not functioning",
+      "action": "Investigate and fix non-functional API endpoints"
+    },
+    {
+      "category": "System",
+      "priority": "critical",
+      "issue": "Overall claim accuracy below 90%",
+      "action": "Comprehensive system review and claim adjustment required"
+    }
+  ],
+  "overall_grade": "F"
+}

@@ -1,0 +1,37 @@
+{
+  "type": "rest_api",
+  "capabilities": [
+    "GET",
+    "POST",
+    "authentication",
+    "rate_limiting"
+  ],
+  "configuration": {
+    "default_headers": {
+      "User-Agent": "Blaze-Intelligence/1.0",
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    "timeout": 10000,
+    "max_redirects": 5,
+    "retry_policy": {
+      "max_attempts": 3,
+      "backoff_strategy": "exponential",
+      "base_delay": 1000
+    }
+  },
+  "authentication_methods": {
+    "api_key": {
+      "header_name": "X-API-Key",
+      "parameter_name": "api_key"
+    },
+    "bearer_token": {
+      "header_name": "Authorization",
+      "prefix": "Bearer "
+    },
+    "custom_headers": {
+      "Referer": "https://blaze-intelligence.com",
+      "Origin": "https://blaze-intelligence.com"
+    }
+  }
+}

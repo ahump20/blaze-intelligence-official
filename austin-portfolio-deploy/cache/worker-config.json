@@ -1,0 +1,22 @@
+{
+  "max_workers": 4,
+  "worker_types": {
+    "data_ingestion": {
+      "count": 2,
+      "memory_limit": "512MB"
+    },
+    "analytics_processing": {
+      "count": 1,
+      "memory_limit": "1GB"
+    },
+    "report_generation": {
+      "count": 1,
+      "memory_limit": "256MB"
+    }
+  },
+  "scheduling": {
+    "algorithm": "fair_share",
+    "task_timeout": 30000,
+    "max_queue_size": 100
+  }
+}

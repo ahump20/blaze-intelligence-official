@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-28T07:48:54.481Z",
+  "team": "Denver Nuggets",
+  "league": "NBA",
+  "division": "Northwest",
+  "conference": "Western",
+  "season": "2024-25",
+  "readiness": {
+    "overall": 89.3,
+    "offense": 93.8,
+    "defense": 85.9,
+    "rebounding": 86.4,
+    "depth": 88.6
+  },
+  "leverage": {
+    "current": 2.31,
+    "trend": "increasing",
+    "championship_odds": 0.062
+  },
+  "efficiency_metrics": {
+    "offensive_rating": 109.9,
+    "defensive_rating": 105.3,
+    "net_rating": -5.4,
+    "pace": 103.4
+  },
+  "advanced_stats": {
+    "effective_fg_percentage": 52.1,
+    "turnover_rate": 15.7,
+    "offensive_rebound_rate": 25.8,
+    "free_throw_rate": 22.8
+  },
+  "metrics_count": 28
+}

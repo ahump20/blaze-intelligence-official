@@ -1,0 +1,958 @@
+{
+  "league": "NFL",
+  "summary": {
+    "total_teams": 32,
+    "total_championships": 100,
+    "avg_competitive_index": 100,
+    "avg_legacy_score": 50,
+    "top_performers": [
+      {
+        "name": "Green Bay Packers",
+        "score": 166
+      },
+      {
+        "name": "New York Giants",
+        "score": 145
+      },
+      {
+        "name": "Chicago Bears",
+        "score": 134
+      },
+      {
+        "name": "New England Patriots",
+        "score": 121
+      },
+      {
+        "name": "Pittsburgh Steelers",
+        "score": 118
+      }
+    ]
+  },
+  "teams": [
+    {
+      "id": "notre-dame-fighting-irish",
+      "name": "Notre Dame Fighting Irish",
+      "league": "NCAA Football",
+      "division": "Independent",
+      "founded": 1887,
+      "championships": 13,
+      "metrics": {
+        "competitive_index": 195,
+        "legacy_score": 130,
+        "blaze_intelligence_score": 192,
+        "prediction_accuracy": 94.6,
+        "data_points": 57146
+      },
+      "analytics": {
+        "injury_risk": 0.2650373966660551,
+        "performance_trend": "rising",
+        "playoff_probability": 0.8480128415664312,
+        "roster_efficiency": 0.7830305883791594
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "michigan-wolverines",
+      "name": "Michigan Wolverines",
+      "league": "NCAA Football",
+      "division": "Big Ten",
+      "founded": 1879,
+      "championships": 12,
+      "metrics": {
+        "competitive_index": 185,
+        "legacy_score": 125,
+        "blaze_intelligence_score": 191,
+        "prediction_accuracy": 94.6,
+        "data_points": 39644
+      },
+      "analytics": {
+        "injury_risk": 0.0329416915046753,
+        "performance_trend": "declining",
+        "playoff_probability": 0.7763741857100082,
+        "roster_efficiency": 0.934276678370028
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "alabama-crimson-tide",
+      "name": "Alabama Crimson Tide",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1892,
+      "championships": 18,
+      "metrics": {
+        "competitive_index": 225,
+        "legacy_score": 145,
+        "blaze_intelligence_score": 189,
+        "prediction_accuracy": 94.6,
+        "data_points": 40984
+      },
+      "analytics": {
+        "injury_risk": 0.05906354827760382,
+        "performance_trend": "declining",
+        "playoff_probability": 0.9588718558582163,
+        "roster_efficiency": 0.7049506449460053
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "usc-trojans",
+      "name": "USC Trojans",
+      "league": "NCAA Football",
+      "division": "Pac-12",
+      "founded": 1888,
+      "championships": 11,
+      "metrics": {
+        "competitive_index": 175,
+        "legacy_score": 115,
+        "blaze_intelligence_score": 166,
+        "prediction_accuracy": 94.6,
+        "data_points": 25653
+      },
+      "analytics": {
+        "injury_risk": 0.2583772238557176,
+        "performance_trend": "stable",
+        "playoff_probability": 0.898038069056144,
+        "roster_efficiency": 0.7561277038632656
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "green-bay-packers",
+      "name": "Green Bay Packers",
+      "league": "NFL",
+      "division": "NFC North",
+      "founded": 1919,
+      "championships": 13,
+      "metrics": {
+        "competitive_index": 177,
+        "legacy_score": 106,
+        "blaze_intelligence_score": 159,
+        "prediction_accuracy": 94.6,
+        "data_points": 52483
+      },
+      "analytics": {
+        "injury_risk": 0.08999611206612783,
+        "performance_trend": "rising",
+        "playoff_probability": 0.30738278936321245,
+        "roster_efficiency": 0.7683023585176535
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "oklahoma-sooners",
+      "name": "Oklahoma Sooners",
+      "league": "NCAA Football",
+      "division": "Big 12",
+      "founded": 1895,
+      "championships": 7,
+      "metrics": {
+        "competitive_index": 155,
+        "legacy_score": 100,
+        "blaze_intelligence_score": 151,
+        "prediction_accuracy": 94.6,
+        "data_points": 13412
+      },
+      "analytics": {
+        "injury_risk": 0.05237059421380758,
+        "performance_trend": "stable",
+        "playoff_probability": 0.4492279792249395,
+        "roster_efficiency": 0.9061824538410005
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "ohio-state-buckeyes",
+      "name": "Ohio State Buckeyes",
+      "league": "NCAA Football",
+      "division": "Big Ten",
+      "founded": 1890,
+      "championships": 8,
+      "metrics": {
+        "competitive_index": 165,
+        "legacy_score": 105,
+        "blaze_intelligence_score": 147,
+        "prediction_accuracy": 94.6,
+        "data_points": 24713
+      },
+      "analytics": {
+        "injury_risk": 0.20636289266569155,
+        "performance_trend": "rising",
+        "playoff_probability": 0.8653255760419929,
+        "roster_efficiency": 0.8282303180455168
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "chicago-bears",
+      "name": "Chicago Bears",
+      "league": "NFL",
+      "division": "NFC North",
+      "founded": 1920,
+      "championships": 9,
+      "metrics": {
+        "competitive_index": 132,
+        "legacy_score": 86,
+        "blaze_intelligence_score": 142,
+        "prediction_accuracy": 94.6,
+        "data_points": 41221
+      },
+      "analytics": {
+        "injury_risk": 0.1834256751248499,
+        "performance_trend": "rising",
+        "playoff_probability": 0.6292318414406897,
+        "roster_efficiency": 0.7563599256236593
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "new-york-giants",
+      "name": "New York Giants",
+      "league": "NFL",
+      "division": "NFC East",
+      "founded": 1925,
+      "championships": 8,
+      "metrics": {
+        "competitive_index": 135,
+        "legacy_score": 82,
+        "blaze_intelligence_score": 139,
+        "prediction_accuracy": 94.6,
+        "data_points": 56258
+      },
+      "analytics": {
+        "injury_risk": 0.04244264871809278,
+        "performance_trend": "stable",
+        "playoff_probability": 0.8798113241921355,
+        "roster_efficiency": 0.9110651357300206
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "texas-longhorns",
+      "name": "Texas Longhorns",
+      "league": "NCAA Football",
+      "division": "Big 12",
+      "founded": 1893,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 145,
+        "legacy_score": 95,
+        "blaze_intelligence_score": 129,
+        "prediction_accuracy": 94.6,
+        "data_points": 51853
+      },
+      "analytics": {
+        "injury_risk": 0.01643930916166638,
+        "performance_trend": "stable",
+        "playoff_probability": 0.9227654749041452,
+        "roster_efficiency": 0.7672717859843483
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "pittsburgh-steelers",
+      "name": "Pittsburgh Steelers",
+      "league": "NFL",
+      "division": "AFC North",
+      "founded": 1933,
+      "championships": 6,
+      "metrics": {
+        "competitive_index": 128,
+        "legacy_score": 72,
+        "blaze_intelligence_score": 124,
+        "prediction_accuracy": 94.6,
+        "data_points": 22697
+      },
+      "analytics": {
+        "injury_risk": 0.20440132652966472,
+        "performance_trend": "rising",
+        "playoff_probability": 0.9111954150131027,
+        "roster_efficiency": 0.8418604154437429
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "san-francisco-49ers",
+      "name": "San Francisco 49ers",
+      "league": "NFL",
+      "division": "NFC West",
+      "founded": 1946,
+      "championships": 5,
+      "metrics": {
+        "competitive_index": 115,
+        "legacy_score": 60,
+        "blaze_intelligence_score": 119,
+        "prediction_accuracy": 94.6,
+        "data_points": 42957
+      },
+      "analytics": {
+        "injury_risk": 0.2993602272963919,
+        "performance_trend": "stable",
+        "playoff_probability": 0.3012527916667571,
+        "roster_efficiency": 0.9225842320603526
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "lsu-tigers",
+      "name": "LSU Tigers",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1893,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 135,
+        "legacy_score": 90,
+        "blaze_intelligence_score": 114,
+        "prediction_accuracy": 94.6,
+        "data_points": 29298
+      },
+      "analytics": {
+        "injury_risk": 0.06927198756755117,
+        "performance_trend": "rising",
+        "playoff_probability": 0.9515228232262529,
+        "roster_efficiency": 0.8116011226606695
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "florida-gators",
+      "name": "Florida Gators",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1906,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 115,
+        "legacy_score": 75,
+        "blaze_intelligence_score": 110,
+        "prediction_accuracy": 94.6,
+        "data_points": 28260
+      },
+      "analytics": {
+        "injury_risk": 0.04210626932765651,
+        "performance_trend": "rising",
+        "playoff_probability": 0.5852827523049549,
+        "roster_efficiency": 0.8568409158655426
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "new-england-patriots",
+      "name": "New England Patriots",
+      "league": "NFL",
+      "division": "AFC East",
+      "founded": 1960,
+      "championships": 6,
+      "metrics": {
+        "competitive_index": 125,
+        "legacy_score": 58,
+        "blaze_intelligence_score": 108,
+        "prediction_accuracy": 94.6,
+        "data_points": 57674
+      },
+      "analytics": {
+        "injury_risk": 0.2228328493013026,
+        "performance_trend": "rising",
+        "playoff_probability": 0.7378010897575635,
+        "roster_efficiency": 0.9217651895288144
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "philadelphia-eagles",
+      "name": "Philadelphia Eagles",
+      "league": "NFL",
+      "division": "NFC East",
+      "founded": 1933,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 108,
+        "legacy_score": 62,
+        "blaze_intelligence_score": 106,
+        "prediction_accuracy": 94.6,
+        "data_points": 11615
+      },
+      "analytics": {
+        "injury_risk": 0.22622180076874876,
+        "performance_trend": "rising",
+        "playoff_probability": 0.6884469397923345,
+        "roster_efficiency": 0.7519311270887843
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "dallas-cowboys",
+      "name": "Dallas Cowboys",
+      "league": "NFL",
+      "division": "NFC East",
+      "founded": 1960,
+      "championships": 5,
+      "metrics": {
+        "competitive_index": 116,
+        "legacy_score": 58,
+        "blaze_intelligence_score": 103,
+        "prediction_accuracy": 94.6,
+        "data_points": 47055
+      },
+      "analytics": {
+        "injury_risk": 0.20585451437361177,
+        "performance_trend": "rising",
+        "playoff_probability": 0.336093026957348,
+        "roster_efficiency": 0.8571126252785402
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "denver-broncos",
+      "name": "Denver Broncos",
+      "league": "NFL",
+      "division": "AFC West",
+      "founded": 1960,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 101,
+        "legacy_score": 48,
+        "blaze_intelligence_score": 100,
+        "prediction_accuracy": 94.6,
+        "data_points": 55101
+      },
+      "analytics": {
+        "injury_risk": 0.1330005315359938,
+        "performance_trend": "stable",
+        "playoff_probability": 0.2466858883191149,
+        "roster_efficiency": 0.9541011336163663
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "georgia-bulldogs",
+      "name": "Georgia Bulldogs",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1892,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 125,
+        "legacy_score": 85,
+        "blaze_intelligence_score": 100,
+        "prediction_accuracy": 94.6,
+        "data_points": 13436
+      },
+      "analytics": {
+        "injury_risk": 0.12197278159422437,
+        "performance_trend": "stable",
+        "playoff_probability": 0.39213121710251236,
+        "roster_efficiency": 0.9272926982544724
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "detroit-lions",
+      "name": "Detroit Lions",
+      "league": "NFL",
+      "division": "NFC North",
+      "founded": 1930,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 97,
+        "legacy_score": 59,
+        "blaze_intelligence_score": 98,
+        "prediction_accuracy": 94.6,
+        "data_points": 27282
+      },
+      "analytics": {
+        "injury_risk": 0.26977887219844726,
+        "performance_trend": "declining",
+        "playoff_probability": 0.42316307291863214,
+        "roster_efficiency": 0.9050653985658839
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "kansas-city-chiefs",
+      "name": "Kansas City Chiefs",
+      "league": "NFL",
+      "division": "AFC West",
+      "founded": 1960,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 103,
+        "legacy_score": 48,
+        "blaze_intelligence_score": 97,
+        "prediction_accuracy": 94.6,
+        "data_points": 13660
+      },
+      "analytics": {
+        "injury_risk": 0.27619668597721714,
+        "performance_trend": "stable",
+        "playoff_probability": 0.9772010534502242,
+        "roster_efficiency": 0.9501339984762085
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "cleveland-browns",
+      "name": "Cleveland Browns",
+      "league": "NFL",
+      "division": "AFC North",
+      "founded": 1946,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 103,
+        "legacy_score": 56,
+        "blaze_intelligence_score": 97,
+        "prediction_accuracy": 94.6,
+        "data_points": 46122
+      },
+      "analytics": {
+        "injury_risk": 0.27967986924103916,
+        "performance_trend": "stable",
+        "playoff_probability": 0.4740095275097222,
+        "roster_efficiency": 0.7446883173908312
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "las-vegas-raiders",
+      "name": "Las Vegas Raiders",
+      "league": "NFL",
+      "division": "AFC West",
+      "founded": 1960,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 98,
+        "legacy_score": 48,
+        "blaze_intelligence_score": 95,
+        "prediction_accuracy": 94.6,
+        "data_points": 40891
+      },
+      "analytics": {
+        "injury_risk": 0.15479689817563472,
+        "performance_trend": "stable",
+        "playoff_probability": 0.8931331509203038,
+        "roster_efficiency": 0.8033115747925768
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "indianapolis-colts",
+      "name": "Indianapolis Colts",
+      "league": "NFL",
+      "division": "AFC South",
+      "founded": 1953,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 112,
+        "legacy_score": 55,
+        "blaze_intelligence_score": 92,
+        "prediction_accuracy": 94.6,
+        "data_points": 34350
+      },
+      "analytics": {
+        "injury_risk": 0.2571183439842243,
+        "performance_trend": "declining",
+        "playoff_probability": 0.6915225025029472,
+        "roster_efficiency": 0.7484504240855512
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "buffalo-bills",
+      "name": "Buffalo Bills",
+      "league": "NFL",
+      "division": "AFC East",
+      "founded": 1960,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 105,
+        "legacy_score": 43,
+        "blaze_intelligence_score": 91,
+        "prediction_accuracy": 94.6,
+        "data_points": 33289
+      },
+      "analytics": {
+        "injury_risk": 0.2354563366816519,
+        "performance_trend": "rising",
+        "playoff_probability": 0.8166901612575219,
+        "roster_efficiency": 0.9887191017324036
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "washington-commanders",
+      "name": "Washington Commanders",
+      "league": "NFL",
+      "division": "NFC East",
+      "founded": 1932,
+      "championships": 5,
+      "metrics": {
+        "competitive_index": 112,
+        "legacy_score": 65,
+        "blaze_intelligence_score": 90,
+        "prediction_accuracy": 94.6,
+        "data_points": 37223
+      },
+      "analytics": {
+        "injury_risk": 0.16107147945485448,
+        "performance_trend": "declining",
+        "playoff_probability": 0.5172230883426263,
+        "roster_efficiency": 0.941184750808848
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "tampa-bay-buccaneers",
+      "name": "Tampa Bay Buccaneers",
+      "league": "NFL",
+      "division": "NFC South",
+      "founded": 1976,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 92,
+        "legacy_score": 40,
+        "blaze_intelligence_score": 74,
+        "prediction_accuracy": 94.6,
+        "data_points": 46760
+      },
+      "analytics": {
+        "injury_risk": 0.15764278402994966,
+        "performance_trend": "stable",
+        "playoff_probability": 0.7440757463814924,
+        "roster_efficiency": 0.8595834518379845
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "tennessee-titans",
+      "name": "Tennessee Titans",
+      "league": "NFL",
+      "division": "AFC South",
+      "founded": 1960,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 95,
+        "legacy_score": 43,
+        "blaze_intelligence_score": 74,
+        "prediction_accuracy": 94.6,
+        "data_points": 35871
+      },
+      "analytics": {
+        "injury_risk": 0.27459421703770387,
+        "performance_trend": "stable",
+        "playoff_probability": 0.33657003353380743,
+        "roster_efficiency": 0.7015449327330466
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "los-angeles-rams",
+      "name": "Los Angeles Rams",
+      "league": "NFL",
+      "division": "NFC West",
+      "founded": 1936,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 95,
+        "legacy_score": 52,
+        "blaze_intelligence_score": 72,
+        "prediction_accuracy": 94.6,
+        "data_points": 17016
+      },
+      "analytics": {
+        "injury_risk": 0.1134459267203996,
+        "performance_trend": "rising",
+        "playoff_probability": 0.669135651399352,
+        "roster_efficiency": 0.9758288379562876
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "arizona-cardinals",
+      "name": "Arizona Cardinals",
+      "league": "NFL",
+      "division": "NFC West",
+      "founded": 1898,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 76,
+        "legacy_score": 55,
+        "blaze_intelligence_score": 70,
+        "prediction_accuracy": 94.6,
+        "data_points": 13330
+      },
+      "analytics": {
+        "injury_risk": 0.14271594386039402,
+        "performance_trend": "declining",
+        "playoff_probability": 0.7811507331655767,
+        "roster_efficiency": 0.7352068358144943
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "baltimore-ravens",
+      "name": "Baltimore Ravens",
+      "league": "NFL",
+      "division": "AFC North",
+      "founded": 1996,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 76,
+        "legacy_score": 36,
+        "blaze_intelligence_score": 70,
+        "prediction_accuracy": 94.6,
+        "data_points": 44241
+      },
+      "analytics": {
+        "injury_risk": 0.23688568276700597,
+        "performance_trend": "stable",
+        "playoff_probability": 0.31466565826651466,
+        "roster_efficiency": 0.965202762951306
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "miami-dolphins",
+      "name": "Miami Dolphins",
+      "league": "NFL",
+      "division": "AFC East",
+      "founded": 1966,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 96,
+        "legacy_score": 40,
+        "blaze_intelligence_score": 67,
+        "prediction_accuracy": 94.6,
+        "data_points": 53101
+      },
+      "analytics": {
+        "injury_risk": 0.2686228412293108,
+        "performance_trend": "stable",
+        "playoff_probability": 0.8646295157071786,
+        "roster_efficiency": 0.9265182268693569
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "seattle-seahawks",
+      "name": "Seattle Seahawks",
+      "league": "NFL",
+      "division": "NFC West",
+      "founded": 1976,
+      "championships": 1,
+      "metrics": {
+        "competitive_index": 85,
+        "legacy_score": 35,
+        "blaze_intelligence_score": 66,
+        "prediction_accuracy": 94.6,
+        "data_points": 40518
+      },
+      "analytics": {
+        "injury_risk": 0.04790072109855485,
+        "performance_trend": "stable",
+        "playoff_probability": 0.37881968383275866,
+        "roster_efficiency": 0.700016679056031
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "atlanta-falcons",
+      "name": "Atlanta Falcons",
+      "league": "NFL",
+      "division": "NFC South",
+      "founded": 1966,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 85,
+        "legacy_score": 32,
+        "blaze_intelligence_score": 65,
+        "prediction_accuracy": 94.6,
+        "data_points": 12484
+      },
+      "analytics": {
+        "injury_risk": 0.08181227241507928,
+        "performance_trend": "rising",
+        "playoff_probability": 0.5635778889531095,
+        "roster_efficiency": 0.9785216151305172
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "carolina-panthers",
+      "name": "Carolina Panthers",
+      "league": "NFL",
+      "division": "NFC South",
+      "founded": 1995,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 80,
+        "legacy_score": 26,
+        "blaze_intelligence_score": 63,
+        "prediction_accuracy": 94.6,
+        "data_points": 37366
+      },
+      "analytics": {
+        "injury_risk": 0.24577390939320873,
+        "performance_trend": "declining",
+        "playoff_probability": 0.7211187914082429,
+        "roster_efficiency": 0.7754610546657644
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "cincinnati-bengals",
+      "name": "Cincinnati Bengals",
+      "league": "NFL",
+      "division": "AFC North",
+      "founded": 1968,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 70,
+        "legacy_score": 31,
+        "blaze_intelligence_score": 59,
+        "prediction_accuracy": 94.6,
+        "data_points": 19918
+      },
+      "analytics": {
+        "injury_risk": 0.0812039048222358,
+        "performance_trend": "stable",
+        "playoff_probability": 0.5816817886968741,
+        "roster_efficiency": 0.924298668817513
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "los-angeles-chargers",
+      "name": "Los Angeles Chargers",
+      "league": "NFL",
+      "division": "AFC West",
+      "founded": 1960,
+      "championships": 1,
+      "metrics": {
+        "competitive_index": 86,
+        "legacy_score": 38,
+        "blaze_intelligence_score": 54,
+        "prediction_accuracy": 94.6,
+        "data_points": 24891
+      },
+      "analytics": {
+        "injury_risk": 0.0970762618593157,
+        "performance_trend": "rising",
+        "playoff_probability": 0.25045809003280867,
+        "roster_efficiency": 0.8694259052626702
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "new-orleans-saints",
+      "name": "New Orleans Saints",
+      "league": "NFL",
+      "division": "NFC South",
+      "founded": 1967,
+      "championships": 1,
+      "metrics": {
+        "competitive_index": 88,
+        "legacy_score": 36,
+        "blaze_intelligence_score": 52,
+        "prediction_accuracy": 94.6,
+        "data_points": 56041
+      },
+      "analytics": {
+        "injury_risk": 0.14983515399888442,
+        "performance_trend": "rising",
+        "playoff_probability": 0.9805846740071129,
+        "roster_efficiency": 0.8176690669593404
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "new-york-jets",
+      "name": "New York Jets",
+      "league": "NFL",
+      "division": "AFC East",
+      "founded": 1960,
+      "championships": 1,
+      "metrics": {
+        "competitive_index": 82,
+        "legacy_score": 38,
+        "blaze_intelligence_score": 52,
+        "prediction_accuracy": 94.6,
+        "data_points": 24942
+      },
+      "analytics": {
+        "injury_risk": 0.01880855475765253,
+        "performance_trend": "stable",
+        "playoff_probability": 0.5322485049835297,
+        "roster_efficiency": 0.986548684062287
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "minnesota-vikings",
+      "name": "Minnesota Vikings",
+      "league": "NFL",
+      "division": "NFC North",
+      "founded": 1961,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 88,
+        "legacy_score": 38,
+        "blaze_intelligence_score": 48,
+        "prediction_accuracy": 94.6,
+        "data_points": 55848
+      },
+      "analytics": {
+        "injury_risk": 0.11673891036086334,
+        "performance_trend": "rising",
+        "playoff_probability": 0.29697612589796735,
+        "roster_efficiency": 0.97755359167058
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "jacksonville-jaguars",
+      "name": "Jacksonville Jaguars",
+      "league": "NFL",
+      "division": "AFC South",
+      "founded": 1995,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 72,
+        "legacy_score": 26,
+        "blaze_intelligence_score": 48,
+        "prediction_accuracy": 94.6,
+        "data_points": 15126
+      },
+      "analytics": {
+        "injury_risk": 0.18971174413771794,
+        "performance_trend": "stable",
+        "playoff_probability": 0.29683047216368164,
+        "roster_efficiency": 0.824365908941781
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "houston-texans",
+      "name": "Houston Texans",
+      "league": "NFL",
+      "division": "AFC South",
+      "founded": 2002,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 68,
+        "legacy_score": 20,
+        "blaze_intelligence_score": 46,
+        "prediction_accuracy": 94.6,
+        "data_points": 53651
+      },
+      "analytics": {
+        "injury_risk": 0.04136000608680657,
+        "performance_trend": "stable",
+        "playoff_probability": 0.6992314528044574,
+        "roster_efficiency": 0.9668527583818008
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    }
+  ],
+  "updated": "2025-09-09T12:57:25.167Z"
+}

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sports Data Hub • Blaze Intelligence</title>
+<meta name="description" content="Comprehensive sports datasets, analytics APIs, and downloadable intelligence resources for competitive advantage.">
+<link rel="canonical" href="https://blaze-intelligence-lsl.pages.dev/data">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<div id="particle-bg" class="particle-bg"></div>
+
+<section class="py-20 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-green-600/10 via-slate-900 to-blue-900/10"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="text-center mb-16">
+<h1 class="text-5xl md:text-6xl font-bold text-white mb-6 hero-title">
+Sports Data
+<span class="neon-text">Intelligence Hub</span>
+</h1>
+<p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
+Access comprehensive datasets, real-time analytics APIs, and downloadable intelligence resources 
+powering competitive advantage across professional and collegiate sports.
+</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 glow-effect">
+Browse All Datasets
+</button>
+<button class="border border-orange-500 hover:bg-orange-500/10 text-orange-400 px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+API Documentation
+</button>
+</div>
+</div>
+
+<div class="glass-card p-6 rounded-2xl mb-16">
+<h3 class="text-xl font-bold text-white mb-4">Real-Time Data Flow</h3>
+<div class="data-viz-container">
+<canvas id="dataFlowChart"></canvas>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-2xl font-bold text-white">Priority Lab Datasets</h2>
+<a href="/sports" class="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors">View All Labs →</a>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="h-20 mb-4">
+<canvas id="cardinalsChart"></canvas>
+</div>
+
+<div class="flex items-center justify-between text-xs text-slate-400 mb-4">
+<span class="live-update">Updated: <span class="live-timestamp">2 mins ago</span></span>
+<span>156KB</span>
+</div>
+<button class="w-full bg-red-500/20 hover:bg-red-500/30 text-red-400 font-medium py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105">
+Download Dataset
+</button>
+</div>
+
+<div class="h-20 mb-4">
+<canvas id="titansChart"></canvas>
+</div>
+
+<div class="flex items-center justify-between text-xs text-slate-400 mb-4">
+<span>Updated: 1 day ago</span>
+<span>2.3MB</span>
+</div>
+<button class="w-full bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 font-medium py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105">
+Download Dataset
+</button>
+</div>
+
+<div class="h-20 mb-4">
+<canvas id="longhornsChart"></canvas>
+</div>
+
+<div class="flex items-center justify-between text-xs text-slate-400 mb-4">
+<span>Updated: 6 hours ago</span>
+<span>892KB</span>
+</div>
+<button class="w-full bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-medium py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105">
+Download Dataset
+</button>
+</div>
+
+<div class="h-20 mb-4">
+<canvas id="grizzliesChart"></canvas>
+</div>
+
+<div class="flex items-center justify-between text-xs text-slate-400 mb-4">
+<span>Updated: 3 hours ago</span>
+<span>1.2MB</span>
+</div>
+<button class="w-full bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 font-medium py-2 px-4 rounded-lg transition-all duration-300 hover:scale-105">
+Download Dataset
+</button>
+</div>
+</div>
+</div>
+</section>
+
+<div class="glass-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-500">
+<div class="flex flex-col lg:flex-row items-start gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center pulse-indicator">
+<svg class="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="10"/>
+</svg>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white">MLB Complete Dataset 2025</h3>
+<div class="flex items-center gap-4 text-sm text-slate-400">
+<span class="live-update">Updated <span class="live-timestamp">hourly</span></span>
+<span>JSON/CSV</span>
+<span>847MB</span>
+<span class="text-green-400">✓ Live</span>
+</div>
+</div>
+</div>
+<p class="text-slate-300 mb-4">
+Comprehensive MLB dataset including all 30 teams with advanced metrics: WAR, OPS+, FIP, DRS, 
+Statcast data, pitch-by-pitch analysis, player projections, and injury tracking.
+</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Statcast</span>
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Advanced Metrics</span>
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Player Tracking</span>
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Projections</span>
+</div>
+<div class="glass-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-500" data-sport="youth">
+<div class="flex flex-col lg:flex-row items-start gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+<svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="8"/>
+<path d="M12 4l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" fill="#0a0a0a"/>
+</svg>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white">Perfect Game Youth Intelligence</h3>
+<div class="flex items-center gap-4 text-sm text-slate-400">
+<span>Updated weekly</span>
+<span>JSON</span>
+<span>156MB</span>
+<span class="text-blue-400">✓ Verified</span>
+</div>
+</div>
+</div>
+<p class="text-slate-300 mb-4">
+Complete youth baseball analytics from Perfect Game showcases: 13U-18U performance data, 
+recruiting intelligence, development trajectories, and college commitment tracking.
+</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Perfect Game</span>
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Recruiting</span>
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Youth Development</span>
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">College Commits</span>
+</div>
+<div class="glass-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-500">
+<div class="flex flex-col lg:flex-row items-start gap-6">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+<svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+</svg>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white">NIL Valuation Intelligence</h3>
+<div class="flex items-center gap-4 text-sm text-slate-400">
+<span>Updated daily</span>
+<span>JSON</span>
+<span>89MB</span>
+<span class="text-purple-400">✓ Premium</span>
+</div>
+</div>
+</div>
+<p class="text-slate-300 mb-4">
+Comprehensive Name, Image, Likeness (NIL) valuation data for college athletes across all sports: 
+market values, deal structures, performance correlation, and transfer portal impact analysis.
+</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">NIL Valuations</span>
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Transfer Portal</span>
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Market Analysis</span>
+<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">Performance Correlation</span>
+</div>
+<section class="py-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-white mb-4">Real-Time API Access</h2>
+<p class="text-lg text-slate-300 max-w-2xl mx-auto">
+Access live sports data through our high-performance APIs with sub-100ms latency and 99.9% uptime.
+</p>
+<div class="mt-6 flex justify-center">
+<div class="glass-card p-4 rounded-lg">
+<div class="text-2xl font-bold text-green-400 live-metric" data-target="99.9">99.9%</div>
+<div class="text-sm text-slate-400">API Uptime</div>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+<div class="glass-card p-6 rounded-2xl api-endpoint">
+<h3 class="text-xl font-bold text-white mb-4">Live Analytics API</h3>
+<div class="bg-slate-800/50 rounded-lg p-4 mb-4 font-mono text-sm">
+<div class="text-green-400 mb-1">GET</div>
+<div class="text-slate-300">/api/teams/{team}/analytics</div>
+<div class="text-xs text-slate-400 mt-2">Response Time: <span class="text-green-400 live-metric" data-target="78">78ms</span></div>
+</div>
+<p class="text-slate-300 mb-4">Real-time team analytics, performance metrics, and predictive intelligence.</p>
+<ul class="text-sm text-slate-400 space-y-1 mb-4">
+<li>• Live performance data</li>
+<li>• Advanced metrics calculation</li>
+<li>• Predictive modeling results</li>
+<li>• Historical trend analysis</li>
+</ul>
+<div class="h-16">
+<canvas id="apiUsageChart1"></canvas>
+</div>
+</div>
+
+<div class="glass-card p-6 rounded-2xl api-endpoint">
+<h3 class="text-xl font-bold text-white mb-4">Search & Discovery</h3>
+<div class="bg-slate-800/50 rounded-lg p-4 mb-4 font-mono text-sm">
+<div class="text-blue-400 mb-1">GET</div>
+<div class="text-slate-300">/api/search?q=query</div>
+<div class="text-xs text-slate-400 mt-2">Response Time: <span class="text-blue-400 live-metric" data-target="65">65ms</span></div>
+</div>
+<p class="text-slate-300 mb-4">Search across all datasets, players, teams, and intelligence resources.</p>
+<ul class="text-sm text-slate-400 space-y-1 mb-4">
+<li>• Full-text search capability</li>
+<li>• Faceted filtering options</li>
+<li>• Auto-complete suggestions</li>
+<li>• Related content discovery</li>
+</ul>
+<div class="h-16">
+<canvas id="apiUsageChart2"></canvas>
+</div>
+</div>
+</div>
+
+<footer class="py-12 bg-black/50 border-t border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row items-center justify-between">
+<div class="text-center md:text-left mb-4 md:mb-0">
+<div class="text-2xl font-bold neon-text mb-2">BLAZE INTELLIGENCE</div>
+<div class="text-slate-400">Where cognitive performance meets quarterly performance.</div>
+</div>
+<div class="flex items-center gap-4">
+<a href="https://x.com/BISportsIntel" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-orange-400 transition-colors">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+</svg>
+</a>
+<div class="text-slate-500 text-sm">© 2025 Blaze Intelligence</div>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+// Global variables
+let charts = {};
+let liveUpdateInterval;
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+initializeParticleBackground();
+initializeCharts();
+initializeSearch();
+initializeFilters();
+startLiveUpdates();
+initializeAnimations();
+});
+
+// Particle background
+function initializeParticleBackground() {
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000, 0);
+document.getElementById('particle-bg').appendChild(renderer.domElement);
+
+// Create particles
+const geometry = new THREE.BufferGeometry();
+const particleCount = 100;
+const positions = new Float32Array(particleCount * 3);
+
+for(let i = 0; i < particleCount * 3; i += 3) {
+positions[i] = (Math.random() - 0.5) * 20;
+positions[i + 1] = (Math.random() - 0.5) * 20;
+positions[i + 2] = (Math.random() - 0.5) * 20;
+}
+
+geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+const material = new THREE.PointsMaterial({
+color: 0xFF8C00,
+size: 0.02,
+transparent: true,
+opacity: 0.6
+});
+
+const particles = new THREE.Points(geometry, material);
+scene.add(particles);
+
+camera.position.z = 5;
+
+function animate() {
+requestAnimationFrame(animate);
+particles.rotation.x += 0.001;
+particles.rotation.y += 0.001;
+renderer.render(scene, camera);
+}
+animate();
+
+// Handle resize
+window.addEventListener('resize', () => {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+});
+}
+
+// Initialize all charts
+function initializeCharts() {
+// Data flow chart
+const dataFlowCtx = document.getElementById('dataFlowChart').getContext('2d');
+charts.dataFlow = new Chart(dataFlowCtx, {
+type: 'line',
+data: {
+labels: Array.from({length: 20}, (_, i) => i),
+datasets: [{
+label: 'Data Points/Second',
+data: Array.from({length: 20}, () => Math.random() * 1000 + 500),
+borderColor: '#FF8C00',
+backgroundColor: 'rgba(255, 140, 0, 0.1)',
+tension: 0.4,
+fill: true
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: { legend: { display: false } },
+scales: {
+x: { display: false },
+y: { display: false }
+}
+}
+});
+
+// Team mini charts
+initializeTeamCharts();
+
+// Feature dataset charts
+initializeFeatureCharts();
+
+// API charts
+initializeAPICharts();
+}
+
+function initializeTeamCharts() {
+const teams = ['cardinals', 'titans', 'longhorns', 'grizzlies'];
+const colors = ['#EF4444', '#3B82F6', '#F97316', '#06B6D4'];
+
+teams.forEach((team, index) => {
+const ctx = document.getElementById(`${team}Chart`).getContext('2d');
+charts[team] = new Chart(ctx, {
+type: 'line',
+data: {
+labels: Array.from({length: 10}, (_, i) => i),
+datasets: [{
+data: Array.from({length: 10}, () => Math.random() * 100 + 50),
+borderColor: colors[index],
+backgroundColor: colors[index] + '20',
+tension: 0.4,
+fill: true,
+pointRadius: 0
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: { legend: { display: false } },
+scales: {
+x: { display: false },
+y: { display: false }
+}
+}
+});
+});
+}
+
+function initializeFeatureCharts() {
+const featureCharts = [
+'mlbUsageChart', 'youthDistributionChart', 'nilTrendsChart'
+];
+const chartColors = ['#EF4444', '#10B981', '#8B5CF6'];
+
+featureCharts.forEach((chartId, index) => {
+const ctx = document.getElementById(chartId).getContext('2d');
+charts[chartId] = new Chart(ctx, {
+type: 'bar',
+data: {
+labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+datasets: [{
+data: Array.from({length: 6}, () => Math.random() * 100 + 20),
+backgroundColor: chartColors[index] + '40',
+borderColor: chartColors[index],
+borderWidth: 1
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: { legend: { display: false } },
+scales: {
+x: { display: false },
+y: { display: false }
+}
+}
+});
+});
+}
+
+function initializeAPICharts() {
+const apiCharts = ['apiUsageChart1', 'apiUsageChart2', 'apiStatusChart'];
+const colors = ['#10B981', '#3B82F6', '#8B5CF6'];
+
+apiCharts.forEach((chartId, index) => {
+const ctx = document.getElementById(chartId).getContext('2d');
+charts[chartId] = new Chart(ctx, {
+type: 'line',
+data: {
+labels: Array.from({length: 12}, (_, i) => i),
+datasets: [{
+data: Array.from({length: 12}, () => Math.random() * 100 + 30),
+borderColor: colors[index],
+backgroundColor: colors[index] + '20',
+tension: 0.4,
+fill: true,
+pointRadius: 0
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: { legend: { display: false } },
+scales: {
+x: { display: false },
+y: { display: false }
+}
+}
+});
+});
+}
+
+// Search functionality
+function initializeSearch() {
+const searchInput = document.getElementById('dataSearch');
+const suggestionsContainer = document.getElementById('searchSuggestions');
+
+const sampleSuggestions = [
+'Cardinals batting average',
+'Titans defense metrics',
+'Longhorns recruiting rankings',
+'Grizzlies grit index',
+'MLB Statcast data',
+'Perfect Game showcases',
+'NIL valuations',
+'EPA per play',
+'WAR projections',
+'Transfer portal tracker'
+];
+
+searchInput.addEventListener('input', function() {
+const query = this.value.toLowerCase().trim();
+
+if (query.length > 1) {
+const matches = sampleSuggestions.filter(suggestion => 
+suggestion.toLowerCase().includes(query)
+).slice(0, 5);
+
+if (matches.length > 0) {
+suggestionsContainer.innerHTML = matches.map(match => 
+`<div class="suggestion-item">${match}</div>`
+).join('');
+suggestionsContainer.classList.remove('hidden');
+} else {
+suggestionsContainer.classList.add('hidden');
+}
+} else {
+suggestionsContainer.classList.add('hidden');
+}
+
+// Filter datasets
+filterDatasets();
+});
+
+// Handle suggestion clicks
+suggestionsContainer.addEventListener('click', function(e) {
+if (e.target.classList.contains('suggestion-item')) {
+searchInput.value = e.target.textContent;
+suggestionsContainer.classList.add('hidden');
+filterDatasets();
+}
+});
+
+// Hide suggestions when clicking outside
+document.addEventListener('click', function(e) {
+if (!e.target.closest('.search-container')) {
+suggestionsContainer.classList.add('hidden');
+}
+});
+}
+
+// Filter functionality
+function initializeFilters() {
+const filters = ['sportFilter', 'typeFilter', 'formatFilter'];
+
+filters.forEach(filterId => {
+document.getElementById(filterId).addEventListener('change', filterDatasets);
+});
+}
+
+function filterDatasets() {
+const searchQuery = document.getElementById('dataSearch').value.toLowerCase();
+const sportFilter = document.getElementById('sportFilter').value;
+const typeFilter = document.getElementById('typeFilter').value;
+const formatFilter = document.getElementById('formatFilter').value;
+
+const datasets = document.querySelectorAll('.dataset-card');
+let visibleCount = 0;
+
+datasets.forEach(dataset => {
+const sport = dataset.getAttribute('data-sport') || '';
+const type = dataset.getAttribute('data-type') || '';
+const format = dataset.getAttribute('data-format') || '';
+const text = dataset.textContent.toLowerCase();
+
+const matchesSearch = !searchQuery || text.includes(searchQuery);
+const matchesSport = !sportFilter || sport === sportFilter;
+const matchesType = !typeFilter || type === typeFilter;
+const matchesFormat = !formatFilter || format === formatFilter;
+
+if (matchesSearch && matchesSport && matchesType && matchesFormat) {
+dataset.style.display = 'block';
+gsap.fromTo(dataset, 
+{ opacity: 0, y: 20 }, 
+{ opacity: 1, y: 0, duration: 0.3, delay: visibleCount * 0.05 }
+);
+visibleCount++;
+} else {
+dataset.style.display = 'none';
+}
+});
+
+updateActiveFilters(searchQuery, sportFilter, typeFilter, formatFilter);
+}
+
+function updateActiveFilters(search, sport, type, format) {
+const container = document.getElementById('activeFilters');
+const filters = [];
+
+if (search) filters.push(`Search: "${search}"`);
+if (sport) filters.push(`Sport: ${sport.toUpperCase()}`);
+if (type) filters.push(`Type: ${type}`);
+if (format) filters.push(`Format: ${format.toUpperCase()}`);
+
+container.innerHTML = filters.map(filter => 
+`<span class="text-xs bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full border border-orange-500/30">
+${filter}
+</span>`
+).join('');
+}
+
+// Live updates
+function startLiveUpdates() {
+liveUpdateInterval = setInterval(() => {
+updateLiveMetrics();
+updateCharts();
+updateTimestamps();
+}, 2000);
+}
+
+function updateLiveMetrics() {
+const liveMetrics = document.querySelectorAll('.live-metric');
+liveMetrics.forEach(metric => {
+const target = parseFloat(metric.getAttribute('data-target')) || 100;
+const variation = target * 0.1;
+const newValue = target + (Math.random() - 0.5) * variation;
+
+if (metric.textContent.includes('%')) {
+metric.textContent = newValue.toFixed(1) + '%';
+} else if (metric.textContent.includes('ms')) {
+metric.textContent = Math.floor(newValue) + 'ms';
+} else if (metric.textContent.includes('M+')) {
+metric.textContent = (newValue / 1000000).toFixed(1) + 'M+';
+} else if (metric.textContent.includes('K')) {
+metric.textContent = (newValue / 1000).toFixed(1) + 'K';
+} else if (metric.textContent.includes('GB')) {
+metric.textContent = Math.floor(newValue) + 'GB';
+} else {
+metric.textContent = Math.floor(newValue).toLocaleString();
+}
+});
+}
+
+function updateCharts() {
+Object.values(charts).forEach(chart => {
+if (chart && chart.data && chart.data.datasets) {
+chart.data.datasets.forEach(dataset => {
+if (dataset.data) {
+// Shift data left and add new point
+dataset.data.shift();
+dataset.data.push(Math.random() * 100 + 20);
+}
+});
+chart.update('none');
+}
+});
+}
+
+function updateTimestamps() {
+const timestamps = document.querySelectorAll('.live-timestamp');
+const timeOptions = ['1 min ago', '2 mins ago', '3 mins ago', 'just now', '30 secs ago'];
+
+timestamps.forEach(timestamp => {
+timestamp.textContent = timeOptions[Math.floor(Math.random() * timeOptions.length)];
+});
+}
+
+// Animations
+function initializeAnimations() {
+// Hero title animation
+gsap.fromTo('.hero-title', 
+{ opacity: 0, y: 30 }, 
+{ opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
+);
+
+// Stagger dataset cards
+gsap.fromTo('.dataset-card', 
+{ opacity: 0, y: 20 }, 
+{ opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.3 }
+);
+
+// Float animation for glass cards
+gsap.to('.glass-card', {
+y: '+=5',
+duration: 3,
+ease: 'power1.inOut',
+yoyo: true,
+repeat: -1,
+stagger: {
+each: 0.2,
+from: 'random'
+}
+});
+}
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+if (liveUpdateInterval) {
+clearInterval(liveUpdateInterval);
+}
+});
+</script>
+</body>
+</html>

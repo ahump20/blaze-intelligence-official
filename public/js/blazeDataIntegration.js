@@ -616,9 +616,15 @@ class BlazeDataIntegration {
                 this.players.forEach(player => {
                     this.updatePlayerStats(player);
                 });
+            } else {
+                // Unexpected data structure - reinitialize
+                console.warn('Players data structure corrupted, reinitializing...', typeof this.players);
+                this.loadFallbackData();
             }
         } catch (error) {
             console.error('Error in simulateDataUpdate:', error);
+            // Try to recover by loading fallback data
+            this.loadFallbackData();
         }
     }
 

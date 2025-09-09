@@ -1,0 +1,49 @@
+name = "blaze-intelligence"
+compatibility_date = "2024-09-01"
+pages_build_output_dir = "."
+
+[env.production]
+name = "blaze-intelligence-production"
+
+# R2 Storage for video and analysis data
+[[r2_buckets]]
+binding = "BLAZE_STORAGE"
+bucket_name = "blaze-intelligence-data"
+
+[[env.production.r2_buckets]]
+binding = "BLAZE_STORAGE"
+bucket_name = "blaze-intelligence-data"
+
+# KV Storage for cache and session data
+[[kv_namespaces]]
+binding = "BLAZE_KV"
+id = "blaze-intelligence-kv"
+
+[[env.production.kv_namespaces]]
+binding = "BLAZE_KV"
+id = "blaze-intelligence-kv"
+
+# Environment variables
+[env.production.vars]
+API_VERSION = "1.0.0"
+CACHE_TTL = "300"
+ENVIRONMENT = "production"
+REPLIT_BACKEND = "https://6414dde1-62a7-4238-9005-ca33fe399b51.spock.prod.repl.run"
+AI_CONSCIOUSNESS_LEVEL = "87.6"
+NEURAL_NODES = "25"
+SYNAPSES = "15"
+VIDEO_ANALYSIS_ENABLED = "true"
+BIOMECHANICS_ENGINE = "true"
+CHARACTER_ANALYSIS = "true"
+
+[vars]
+API_VERSION = "1.0.0"
+CACHE_TTL = "300"
+ENVIRONMENT = "development"
+REPLIT_BACKEND = "https://6414dde1-62a7-4238-9005-ca33fe399b51.spock.prod.repl.run"
+AI_CONSCIOUSNESS_LEVEL = "87.6"
+NEURAL_NODES = "25"
+SYNAPSES = "15"
+VIDEO_ANALYSIS_ENABLED = "true"
+BIOMECHANICS_ENGINE = "true"
+CHARACTER_ANALYSIS = "true"

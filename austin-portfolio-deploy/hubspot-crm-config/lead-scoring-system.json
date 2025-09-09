@@ -1,0 +1,180 @@
+{
+  "leadScoringConfig": {
+    "scoringModelName": "Blaze Intelligence Lead Qualification Score",
+    "scoringModelId": "blaze_qualification_score",
+    "description": "Automated lead scoring system for sports analytics prospects",
+    "maxScore": 100,
+    "qualificationThresholds": {
+      "hot_lead": 75,
+      "warm_lead": 50,
+      "cold_lead": 25,
+      "disqualified": 0
+    },
+    "scoringCriteria": {
+      "organizationType": {
+        "weight": 25,
+        "description": "Type and level of sports organization",
+        "scoring": {
+          "professional_mlb": 25,
+          "professional_nfl": 25,
+          "professional_nba": 25,
+          "power5_college": 20,
+          "mid_major_college": 15,
+          "division2_college": 12,
+          "division3_college": 8,
+          "junior_college": 5,
+          "high_school": 10,
+          "youth_select": 8,
+          "perfect_game_affiliate": 15,
+          "international_professional": 20,
+          "kbo_npb": 18,
+          "independent_league": 10,
+          "other": 5
+        }
+      },
+      "budgetRange": {
+        "weight": 30,
+        "description": "Annual analytics budget availability",
+        "scoring": {
+          "250k_plus": 30,
+          "100k_249k": 25,
+          "50k_99k": 20,
+          "25k_49k": 15,
+          "10k_24k": 10,
+          "5k_9k": 5,
+          "under_5k": 0
+        }
+      },
+      "timeline": {
+        "weight": 15,
+        "description": "Implementation timeline urgency",
+        "scoring": {
+          "immediate": 15,
+          "30_days": 12,
+          "60_days": 10,
+          "90_days": 8,
+          "6_months": 5,
+          "12_months": 3,
+          "exploring": 1,
+          "no_timeline": 0
+        }
+      },
+      "currentAnalytics": {
+        "weight": 10,
+        "description": "Existing analytics infrastructure",
+        "scoring": {
+          "no_analytics": 10,
+          "basic_stats": 8,
+          "spreadsheet_based": 6,
+          "competitor_solution": 4,
+          "custom_in_house": 3,
+          "enterprise_solution": 2
+        }
+      },
+      "sportFocus": {
+        "weight": 10,
+        "description": "Primary sport and coverage needs",
+        "scoring": {
+          "baseball": 10,
+          "football": 10,
+          "basketball": 8,
+          "multi_sport": 10,
+          "other_sport": 3
+        }
+      },
+      "decisionMakerAccess": {
+        "weight": 10,
+        "description": "Access to key decision makers",
+        "scoring": {
+          "direct_access": 10,
+          "one_degree": 8,
+          "two_degrees": 5,
+          "unknown": 2,
+          "no_access": 0
+        }
+      }
+    },
+    "behavioralScoring": {
+      "website_engagement": {
+        "page_views": 1,
+        "time_on_site": 2,
+        "demo_request": 15,
+        "pricing_page": 10,
+        "case_studies": 8,
+        "blog_engagement": 3,
+        "resource_downloads": 5
+      },
+      "email_engagement": {
+        "email_opens": 1,
+        "email_clicks": 3,
+        "reply_to_outreach": 10,
+        "forwarded_email": 5,
+        "unsubscribed": -20
+      },
+      "meeting_behavior": {
+        "attended_demo": 15,
+        "brought_stakeholders": 10,
+        "asked_technical_questions": 8,
+        "requested_proposal": 12,
+        "no_show": -10,
+        "cancelled_meeting": -5
+      }
+    },
+    "negativeScoring": {
+      "budget_mismatch": -20,
+      "competitor_preference": -15,
+      "no_decision_authority": -10,
+      "unrealistic_expectations": -15,
+      "poor_fit_sport": -10,
+      "unresponsive": -25
+    },
+    "autoQualificationRules": [
+      {
+        "ruleName": "Enterprise Tier Auto-Qualification",
+        "conditions": {
+          "organizationType": ["professional_mlb", "professional_nfl", "professional_nba"],
+          "budgetRange": ["100k_plus"],
+          "timeline": ["immediate", "30_days", "60_days"]
+        },
+        "action": "auto_qualify_hot",
+        "score_bonus": 10
+      },
+      {
+        "ruleName": "College Program Fast Track",
+        "conditions": {
+          "organizationType": ["power5_college"],
+          "budgetRange": ["50k_plus"],
+          "currentAnalytics": ["no_analytics", "basic_stats"]
+        },
+        "action": "auto_qualify_warm",
+        "score_bonus": 5
+      },
+      {
+        "ruleName": "Perfect Game Pipeline",
+        "conditions": {
+          "organizationType": ["perfect_game_affiliate", "youth_select"],
+          "budgetRange": ["10k_plus"],
+          "sportFocus": ["baseball", "multi_sport"]
+        },
+        "action": "auto_qualify_warm",
+        "score_bonus": 8
+      },
+      {
+        "ruleName": "International Market Priority",
+        "conditions": {
+          "organizationType": ["international_professional", "kbo_npb"],
+          "budgetRange": ["25k_plus"]
+        },
+        "action": "auto_qualify_warm",
+        "score_bonus": 7
+      }
+    ],
+    "scoreDecay": {
+      "enabled": true,
+      "decayRate": 2,
+      "decayInterval": "weekly",
+      "minimumScore": 0,
+      "description": "Score decreases by 2 points weekly without engagement"
+    }
+  }
+}

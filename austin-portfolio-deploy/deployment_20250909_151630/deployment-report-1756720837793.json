@@ -1,0 +1,41 @@
+{
+  "deployment_id": "blaze-1756720837793",
+  "timestamp": "2025-09-01T10:00:37.793Z",
+  "duration_seconds": 20,
+  "components": {
+    "r2_storage_worker": "✅ Deployed",
+    "cardinals_readiness_board": "✅ Integrated",
+    "digital_combine_metrics": "✅ Active",
+    "main_site": "✅ Deployed",
+    "demo_enhancements": "✅ Updated"
+  },
+  "urls": {
+    "main_site": "https://9fe11de3.blaze-intelligence.com",
+    "storage_worker": "https://blaze-storage.humphrey-austin20.workers.dev",
+    "r2_browser": "https://9fe11de3.blaze-intelligence.com/r2-browser.html"
+  },
+  "metrics": {
+    "files_deployed": "All integration files",
+    "data_uploaded": "Sample datasets",
+    "tests_passed": 1
+  },
+  "log": [
+    "[2025-09-01T10:00:17.973Z] INFO: 🚀 Starting comprehensive Blaze Intelligence deployment...",
+    "[2025-09-01T10:00:17.973Z] INFO: Verifying deployment prerequisites...",
+    "[2025-09-01T10:00:19.207Z] SUCCESS: ✅ All prerequisites verified",
+    "[2025-09-01T10:00:19.208Z] INFO: Deploying R2 Storage Worker...",
+    "[2025-09-01T10:00:23.934Z] SUCCESS: ✅ Storage Worker deployed: https://blaze-storage.humphrey-austin20.workers.dev",
+    "[2025-09-01T10:00:23.934Z] INFO: Testing Storage Worker health...",
+    "[2025-09-01T10:00:24.136Z] SUCCESS: ✅ Storage Worker health check passed",
+    "[2025-09-01T10:00:24.137Z] INFO: Uploading sample data to R2...",
+    "[2025-09-01T10:00:26.391Z] SUCCESS: ✅ Sample data upload completed: 4/4 successful",
+    "[2025-09-01T10:00:26.391Z] INFO: Deploying main Blaze Intelligence site...",
+    "[2025-09-01T10:00:36.781Z] SUCCESS: ✅ Main site deployed: https://9fe11de3.blaze-intelligence.com",
+    "[2025-09-01T10:00:36.781Z] INFO: Testing main site integrations...",
+    "[2025-09-01T10:00:37.139Z] SUCCESS: ✅ Homepage test passed",
+    "[2025-09-01T10:00:37.369Z] WARNING: ⚠️  Dashboard test failed - content not found",
+    "[2025-09-01T10:00:37.606Z] WARNING: ⚠️  Demo test failed - content not found",
+    "[2025-09-01T10:00:37.792Z] WARNING: ⚠️  R2 Browser test failed - content not found",
+    "[2025-09-01T10:00:37.792Z] WARNING: Integration tests completed: 1/4 passed"
+  ]
+}

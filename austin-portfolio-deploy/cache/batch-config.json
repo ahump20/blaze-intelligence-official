@@ -1,0 +1,20 @@
+{
+  "batch_size": 100,
+  "max_concurrent_batches": 3,
+  "timeout_ms": 5000,
+  "retry_attempts": 2,
+  "processing_modes": {
+    "cardinals_data": {
+      "batch_size": 50,
+      "priority": "high"
+    },
+    "league_data": {
+      "batch_size": 100,
+      "priority": "medium"
+    },
+    "research_insights": {
+      "batch_size": 25,
+      "priority": "low"
+    }
+  }
+}

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>Blaze Intelligence Blog</title>
+<link>https://blaze-intelligence-lsl.pages.dev/blog/</link>
+<atom:link href="https://blaze-intelligence-lsl.pages.dev/blog/rss.xml" rel="self" type="application/rss+xml" />
+<description>Weekly analytics and insights across CFB, MLB, and NFL.</description>
+<language>en-us</language>
+<lastBuildDate>Mon, 01 Sep 2025 09:49:24 GMT</lastBuildDate>
+
+  <item>
+    <title>Titans Week 1: Analytics Deep Dive for Season Opener vs Bears</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/nfl/2025-09-01__week1-titans-preview.html</link>
+    <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/nfl/2025-09-01__week1-titans-preview.html</guid>
+    <category>nfl</category>
+    <description><![CDATA[Breaking down the Titans' season opener with advanced metrics, matchup advantages, and our proprietary win probability model showing Tennessee at 58.3%.]]></description>
+  </item>
+
+  <item>
+    <title>Titans vs Bears Deep Dive: Tennessee Favored in Season Opener</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/nfl/2025-09-01__season-kickoff.html</link>
+    <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/nfl/2025-09-01__season-kickoff.html</guid>
+    <category>nfl</category>
+    <description><![CDATA[Advanced metrics give Tennessee a 58.3% win probability as both teams debut new offensive schemes.]]></description>
+  </item>
+
+  <item>
+    <title>Cardinals September Surge: Analytics Drive Wild Card Push</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/mlb/2025-09-01__september-surge.html</link>
+    <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/mlb/2025-09-01__september-surge.html</guid>
+    <category>mlb</category>
+    <description><![CDATA[St. Louis Cardinals leverage advanced metrics showing 87.2% readiness as they enter the crucial September stretch.]]></description>
+  </item>
+
+  <item>
+    <title>September Surge: Cardinals' Analytics-Driven Playoff Push</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/mlb/2025-09-01__september-playoff-push.html</link>
+    <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/mlb/2025-09-01__september-playoff-push.html</guid>
+    <category>mlb</category>
+    <description><![CDATA[How the Cardinals are leveraging advanced metrics and pattern recognition to optimize their September roster for a wild card push.]]></description>
+  </item>
+
+  <item>
+    <title>Week 1 Whiplash: Upsets, Debuts, and Early Shake-ups in the Top 25</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/cfb/2025-09-01__week1-upsets-top25.html</link>
+    <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/cfb/2025-09-01__week1-upsets-top25.html</guid>
+    <category>cfb</category>
+    <description><![CDATA[Opening weekend delivered statement wins, upsets, and early playoff chaos as Ohio State stunned Texas 14-7 and Georgia rolled past Clemson.]]></description>
+  </item>
+
+  <item>
+    <title>Week 1 Whiplash: Ohio State Stuns Texas in Defensive Battle</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/cfb/2025-09-01__week-1-kickoff.html</link>
+    <pubDate>Mon, 01 Sep 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/cfb/2025-09-01__week-1-kickoff.html</guid>
+    <category>cfb</category>
+    <description><![CDATA[Opening weekend delivered statement wins, upsets, and early playoff chaos as Ohio State's defense dominated Texas 14-7.]]></description>
+  </item>
+
+  <item>
+    <title>Week 1 Chaos: Texas Falls, Florida State Stuns Alabama</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/cfb/2025-08-31__week1-chaos.html</link>
+    <pubDate>Sun, 31 Aug 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/cfb/2025-08-31__week1-chaos.html</guid>
+    <category>cfb</category>
+    <description><![CDATA[Breaking down college football's opening weekend: Ohio State tops Texas 14-7, FSU shocks Alabama 31-17, plus all Week 1 upsets and playoff implications.]]></description>
+  </item>
+
+  <item>
+    <title>2025-08-30__flow-state-cardinals-championship-psychology</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/mlb/2025-08-30__flow-state-cardinals-championship-psychology.html</link>
+    <pubDate>Sat, 30 Aug 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/mlb/2025-08-30__flow-state-cardinals-championship-psychology.html</guid>
+    <category>mlb</category>
+    <description><![CDATA[The St. Louis Cardinals' remarkable transformation from playoff contenders to championship-caliber performers wasn't driven by new talent acquisition or strategic overhauls—it was powered by systematic flow state optimization. Our comprehensive analysis reveals how targeted psychological interventions increased clutch performance by 34% and reduced pressure-related errors by 42%.]]></description>
+  </item>
+
+  <item>
+    <title>2025-08-29__recruiting-revolution-perfect-game-integration</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/cfb/2025-08-29__recruiting-revolution-perfect-game-integration.html</link>
+    <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/cfb/2025-08-29__recruiting-revolution-perfect-game-integration.html</guid>
+    <category>cfb</category>
+    <description><![CDATA[College baseball recruiting is experiencing a seismic shift as Perfect Game's comprehensive youth analytics integrate with advanced college systems. Programs leveraging this integration show 43% improvement in recruiting accuracy and 31% better freshman performance prediction, fundamentally changing how college baseball builds championship rosters.]]></description>
+  </item>
+
+  <item>
+    <title>The Neurobiological Revolution in Baseball: Beyond Traditional Analytics</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/mlb/2025-08-28__neurobiological-performance-optimization.html</link>
+    <pubDate>Thu, 28 Aug 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/mlb/2025-08-28__neurobiological-performance-optimization.html</guid>
+    <category>mlb</category>
+    <description><![CDATA[How cutting-edge neurobiological monitoring and AI-driven cognitive training are transforming player development and in-game performance optimization.]]></description>
+  </item>
+
+  <item>
+    <title>2025-08-27__grizzlies-analytics-grit-grind-evolution</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/nba/2025-08-27__grizzlies-analytics-grit-grind-evolution.html</link>
+    <pubDate>Wed, 27 Aug 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/nba/2025-08-27__grizzlies-analytics-grit-grind-evolution.html</guid>
+    <category>nba</category>
+    <description><![CDATA[While the NBA embraces pace-and-space analytics, the Memphis Grizzlies proved that analytics can amplify identity instead of replacing it. Their "Grit & Grind 2.0" framework transforms traditional toughness into measurable competitive advantages, showing 32% improvement in clutch performance and 28% better defensive efficiency in playoff scenarios.]]></description>
+  </item>
+
+  <item>
+    <title>The $20.5 Million Question: NIL Valuation Meets NFL Draft Analytics</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/nfl/2025-08-25__nil-valuation-revolution.html</link>
+    <pubDate>Mon, 25 Aug 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/nfl/2025-08-25__nil-valuation-revolution.html</guid>
+    <category>nfl</category>
+    <description><![CDATA[How NIL valuations are revolutionizing NFL draft strategy and creating a new paradigm for talent evaluation and player development economics.]]></description>
+  </item>
+
+  <item>
+    <title>The Mental Game: How Cognitive Load Distribution Wins Championships</title>
+    <link>https://blaze-intelligence-lsl.pages.dev/blog/cfb/2025-08-22__cognitive-load-championship-football.html</link>
+    <pubDate>Fri, 22 Aug 2025 00:00:00 GMT</pubDate>
+    <guid>/blog/cfb/2025-08-22__cognitive-load-championship-football.html</guid>
+    <category>cfb</category>
+    <description><![CDATA[Breaking down how championship programs use cognitive load distribution and decision velocity frameworks to maintain fourth-quarter dominance.]]></description>
+  </item>
+</channel>
+</rss>

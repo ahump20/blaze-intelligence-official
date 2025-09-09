@@ -1,0 +1,627 @@
+{
+  "baseName": "Blaze Intelligence - Analytics Dashboard",
+  "description": "Performance metrics, competitive intelligence, and operational KPIs",
+  "tables": {
+    "platform_metrics": {
+      "name": "Platform Metrics", 
+      "description": "Live system performance and usage analytics",
+      "fields": [
+        {
+          "name": "Metric Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "Metric Type",
+          "type": "singleSelect",
+          "options": [
+            "System Performance",
+            "User Engagement",
+            "Data Processing",
+            "API Usage",
+            "Revenue Performance",
+            "Client Satisfaction",
+            "Competitive Intelligence"
+          ],
+          "required": true
+        },
+        {
+          "name": "Accuracy Rate (%)",
+          "type": "number",
+          "description": "Current system accuracy - target 94.6%"
+        },
+        {
+          "name": "Average Latency (ms)", 
+          "type": "number",
+          "description": "Response time - target <100ms"
+        },
+        {
+          "name": "Data Points Processed",
+          "type": "number",
+          "description": "Daily data processing volume"
+        },
+        {
+          "name": "Cumulative Data Points",
+          "type": "number", 
+          "description": "Total data points in system - target 2.8M+"
+        },
+        {
+          "name": "Active Users",
+          "type": "number"
+        },
+        {
+          "name": "API Requests",
+          "type": "number"
+        },
+        {
+          "name": "System Uptime (%)",
+          "type": "number"
+        },
+        {
+          "name": "Error Rate (%)",
+          "type": "number"
+        },
+        {
+          "name": "Client Satisfaction Score",
+          "type": "number",
+          "description": "NPS or CSAT score"
+        },
+        {
+          "name": "Revenue Impact ($)",
+          "type": "currency"
+        },
+        {
+          "name": "Notes",
+          "type": "longText"
+        },
+        {
+          "name": "Data Source",
+          "type": "singleSelect",
+          "options": [
+            "Live Platform",
+            "Client Feedback",
+            "Manual Entry", 
+            "Third-party Integration",
+            "System Logs"
+          ]
+        }
+      ],
+      "sampleData": [
+        {
+          "Metric Date": "2024-08-30",
+          "Metric Type": "System Performance",
+          "Accuracy Rate (%)": 94.6,
+          "Average Latency (ms)": 87,
+          "Data Points Processed": 45000,
+          "Cumulative Data Points": 2850000,
+          "System Uptime (%)": 99.9,
+          "Error Rate (%)": 0.1,
+          "Data Source": "Live Platform",
+          "Notes": "Peak performance maintained. Vision AI processing at optimal levels."
+        },
+        {
+          "Metric Date": "2024-08-29", 
+          "Metric Type": "User Engagement",
+          "Active Users": 156,
+          "API Requests": 12500,
+          "Client Satisfaction Score": 4.8,
+          "Data Source": "Live Platform",
+          "Notes": "High engagement from Cardinals analytics team during playoff preparation."
+        }
+      ]
+    },
+    "business_kpis": {
+      "name": "Business KPIs",
+      "description": "Key business performance indicators and targets",
+      "fields": [
+        {
+          "name": "KPI Name",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "KPI Category",
+          "type": "singleSelect", 
+          "options": [
+            "Revenue",
+            "Sales Performance",
+            "Client Success",
+            "Product Performance",
+            "Operational Efficiency",
+            "Market Position"
+          ]
+        },
+        {
+          "name": "Current Value",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "Target Value",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "Unit",
+          "type": "singleLineText",
+          "description": "%, $, count, etc."
+        },
+        {
+          "name": "Performance %",
+          "type": "formula",
+          "formula": "IF({Target Value} > 0, ({Current Value} / {Target Value}) * 100, 0)"
+        },
+        {
+          "name": "Status",
+          "type": "formula",
+          "formula": "IF({Performance %} >= 100, '🟢 On Target', IF({Performance %} >= 80, '🟡 Close', '🔴 Behind'))"
+        },
+        {
+          "name": "Period",
+          "type": "singleSelect",
+          "options": ["Daily", "Weekly", "Monthly", "Quarterly", "Annually"]
+        },
+        {
+          "name": "Last Updated", 
+          "type": "date"
+        },
+        {
+          "name": "Trend",
+          "type": "singleSelect",
+          "options": ["🔺 Increasing", "🔻 Decreasing", "➡️ Stable"]
+        },
+        {
+          "name": "Action Required",
+          "type": "longText"
+        }
+      ],
+      "sampleData": [
+        {
+          "KPI Name": "Q4 2024 Revenue Target",
+          "KPI Category": "Revenue",
+          "Current Value": 0,
+          "Target Value": 325000,
+          "Unit": "$",
+          "Period": "Quarterly",
+          "Last Updated": "2024-08-30",
+          "Trend": "➡️ Stable",
+          "Action Required": "Close Cardinals deal ($250K) and Titans deal ($50K) to hit target"
+        },
+        {
+          "KPI Name": "Annual Revenue 2025",
+          "KPI Category": "Revenue", 
+          "Current Value": 0,
+          "Target Value": 1875000,
+          "Unit": "$",
+          "Period": "Annually",
+          "Last Updated": "2024-08-30",
+          "Trend": "🔺 Increasing",
+          "Action Required": "Execute expansion strategy with existing clients and add 8-10 new clients"
+        },
+        {
+          "KPI Name": "System Accuracy Rate",
+          "KPI Category": "Product Performance",
+          "Current Value": 94.6,
+          "Target Value": 94.6,
+          "Unit": "%",
+          "Period": "Daily",
+          "Last Updated": "2024-08-30",
+          "Trend": "➡️ Stable",
+          "Action Required": "Maintain current performance levels. Monitor for any degradation."
+        },
+        {
+          "KPI Name": "Average Response Time",
+          "KPI Category": "Product Performance",
+          "Current Value": 87,
+          "Target Value": 100,
+          "Unit": "ms", 
+          "Period": "Daily",
+          "Last Updated": "2024-08-30",
+          "Trend": "➡️ Stable",
+          "Action Required": "Performance exceeding target. Continue optimization efforts."
+        },
+        {
+          "KPI Name": "Client Satisfaction (NPS)",
+          "KPI Category": "Client Success",
+          "Current Value": 85,
+          "Target Value": 90,
+          "Unit": "score",
+          "Period": "Monthly",
+          "Last Updated": "2024-08-15",
+          "Trend": "🔺 Increasing",
+          "Action Required": "Focus on support response times and feature enhancement requests"
+        }
+      ]
+    },
+    "competitive_tracking": {
+      "name": "Competitive Tracking",
+      "description": "Monitor competitor activities, pricing, and market positioning",
+      "fields": [
+        {
+          "name": "Date Recorded",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "Competitor",
+          "type": "singleSelect",
+          "options": ["Hudl", "Synergy", "Second Spectrum", "Stats Inc", "Catapult", "Other"],
+          "required": true
+        },
+        {
+          "name": "Intelligence Type",
+          "type": "singleSelect",
+          "options": [
+            "Pricing Update",
+            "Product Release", 
+            "Client Win/Loss",
+            "Partnership Announcement",
+            "Funding News",
+            "Leadership Change",
+            "Market Position",
+            "Technology Update"
+          ]
+        },
+        {
+          "name": "Source",
+          "type": "singleSelect",
+          "options": [
+            "Company Website",
+            "Press Release",
+            "Industry Report",
+            "Client Intel",
+            "Social Media",
+            "Trade Publication",
+            "Conference/Event",
+            "Direct Observation"
+          ]
+        },
+        {
+          "name": "Summary",
+          "type": "longText",
+          "required": true
+        },
+        {
+          "name": "Impact Level",
+          "type": "singleSelect",
+          "options": ["High", "Medium", "Low"]
+        },
+        {
+          "name": "Blaze Response Required",
+          "type": "checkbox"
+        },
+        {
+          "name": "Response Strategy",
+          "type": "longText"
+        },
+        {
+          "name": "Market Share Impact",
+          "type": "singleSelect",
+          "options": ["Positive for Blaze", "Negative for Blaze", "Neutral", "Unknown"]
+        },
+        {
+          "name": "Follow-up Required",
+          "type": "checkbox"
+        }
+      ],
+      "sampleData": [
+        {
+          "Date Recorded": "2024-08-25",
+          "Competitor": "Hudl",
+          "Intelligence Type": "Pricing Update",
+          "Source": "Client Intel",
+          "Summary": "Hudl raised Assist pricing by 15% for 2025 renewals. New pricing: $46,000/year for team plan (previously $40,000).",
+          "Impact Level": "Medium",
+          "Blaze Response Required": true,
+          "Response Strategy": "Update competitive positioning to emphasize 78% savings vs new Hudl pricing. Proactively reach out to Hudl clients with renewal coming up.",
+          "Market Share Impact": "Positive for Blaze"
+        },
+        {
+          "Date Recorded": "2024-08-20",
+          "Competitor": "Second Spectrum",
+          "Intelligence Type": "Client Win/Loss",
+          "Source": "Industry Report",
+          "Summary": "Lost Lakers renewal to internal solution. Lakers building custom analytics platform in-house.",
+          "Impact Level": "Low",
+          "Blaze Response Required": false,
+          "Market Share Impact": "Neutral",
+          "Follow-up Required": false
+        }
+      ]
+    },
+    "client_health": {
+      "name": "Client Health Scores",
+      "description": "Monitor client satisfaction and retention risk",
+      "fields": [
+        {
+          "name": "Client Organization",
+          "type": "linkedRecord",
+          "linkedTable": "organizations"
+        },
+        {
+          "name": "Health Score Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "Overall Health Score",
+          "type": "rating",
+          "max": 5,
+          "required": true
+        },
+        {
+          "name": "Usage Score",
+          "type": "rating",
+          "max": 5,
+          "description": "Platform engagement and adoption"
+        },
+        {
+          "name": "Satisfaction Score", 
+          "type": "rating",
+          "max": 5,
+          "description": "Client feedback and NPS"
+        },
+        {
+          "name": "Support Score",
+          "type": "rating",
+          "max": 5,
+          "description": "Support ticket resolution and response"
+        },
+        {
+          "name": "Business Value Score",
+          "type": "rating",
+          "max": 5,
+          "description": "ROI achievement and business impact"
+        },
+        {
+          "name": "Risk Level",
+          "type": "formula",
+          "formula": "IF({Overall Health Score} >= 4, '🟢 Low Risk', IF({Overall Health Score} >= 3, '🟡 Medium Risk', '🔴 High Risk'))"
+        },
+        {
+          "name": "Renewal Probability (%)",
+          "type": "number"
+        },
+        {
+          "name": "Expansion Opportunity",
+          "type": "currency"
+        },
+        {
+          "name": "Key Issues",
+          "type": "multipleSelect",
+          "options": [
+            "Low Usage",
+            "Performance Complaints",
+            "Support Issues",
+            "Budget Constraints",
+            "Champion Departure",
+            "Competing Solution",
+            "Feature Gaps",
+            "Integration Problems"
+          ]
+        },
+        {
+          "name": "Action Plan",
+          "type": "longText"
+        },
+        {
+          "name": "Next Check-in Date",
+          "type": "date"
+        }
+      ]
+    },
+    "roi_tracking": {
+      "name": "ROI Tracking",
+      "description": "Track return on investment for clients and internal operations",
+      "fields": [
+        {
+          "name": "ROI Category",
+          "type": "singleSelect",
+          "options": [
+            "Client Cost Savings",
+            "Performance Improvement",
+            "Time Savings", 
+            "Revenue Generation",
+            "Risk Reduction",
+            "Operational Efficiency"
+          ]
+        },
+        {
+          "name": "Client Organization",
+          "type": "linkedRecord",
+          "linkedTable": "organizations"
+        },
+        {
+          "name": "Measurement Period",
+          "type": "singleLineText"
+        },
+        {
+          "name": "Baseline Value",
+          "type": "currency",
+          "description": "Pre-Blaze Intelligence metrics"
+        },
+        {
+          "name": "Current Value", 
+          "type": "currency",
+          "description": "Post-implementation metrics"
+        },
+        {
+          "name": "Improvement Value",
+          "type": "formula",
+          "formula": "{Current Value} - {Baseline Value}"
+        },
+        {
+          "name": "ROI Percentage",
+          "type": "formula",
+          "formula": "IF({Baseline Value} > 0, (({Current Value} - {Baseline Value}) / {Baseline Value}) * 100, 0)"
+        },
+        {
+          "name": "Annualized Impact",
+          "type": "currency"
+        },
+        {
+          "name": "Verification Method",
+          "type": "singleSelect",
+          "options": [
+            "Client Reported",
+            "Third-party Audit",
+            "Platform Analytics",
+            "Performance Metrics",
+            "Cost Analysis"
+          ]
+        },
+        {
+          "name": "Documentation",
+          "type": "longText"
+        },
+        {
+          "name": "Approved for Case Study",
+          "type": "checkbox"
+        }
+      ],
+      "sampleData": [
+        {
+          "ROI Category": "Client Cost Savings",
+          "Measurement Period": "Annual", 
+          "Baseline Value": 40000,
+          "Current Value": 25000,
+          "Annualized Impact": 15000,
+          "Verification Method": "Client Reported",
+          "Documentation": "Cardinals reported 67% cost savings vs previous Hudl Assist subscription. Verified through procurement documentation.",
+          "Approved for Case Study": true
+        }
+      ]
+    }
+  },
+  "views": {
+    "platform_metrics": [
+      {
+        "name": "Daily Performance Dashboard",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Metric Date",
+            "condition": "is within",
+            "value": "last 7 days"
+          }
+        ],
+        "sorts": [
+          {
+            "field": "Metric Date",
+            "direction": "desc"
+          }
+        ]
+      },
+      {
+        "name": "System Health",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Metric Type",
+            "condition": "is",
+            "value": "System Performance"
+          }
+        ]
+      }
+    ],
+    "business_kpis": [
+      {
+        "name": "Behind Target",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Performance %",
+            "condition": "is less than",
+            "value": 80
+          }
+        ]
+      },
+      {
+        "name": "Revenue KPIs",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "KPI Category",
+            "condition": "is", 
+            "value": "Revenue"
+          }
+        ]
+      }
+    ],
+    "client_health": [
+      {
+        "name": "At Risk Clients",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Overall Health Score",
+            "condition": "is less than or equal to",
+            "value": 2
+          }
+        ]
+      }
+    ]
+  },
+  "automations": [
+    {
+      "name": "Performance Alert System",
+      "trigger": "Record created in Platform Metrics",
+      "conditions": [
+        {
+          "field": "Accuracy Rate (%)",
+          "condition": "is less than",
+          "value": 94
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com",
+          "subject": "🚨 Performance Alert: Accuracy Below Target",
+          "body": "System accuracy has dropped to {Accuracy Rate (%)}% on {Metric Date}\\n\\nTarget: 94.6%\\nCurrent: {Accuracy Rate (%)}%\\n\\nImmediate investigation required."
+        }
+      ]
+    },
+    {
+      "name": "Client Health Alert",
+      "trigger": "Record updated in Client Health Scores",
+      "conditions": [
+        {
+          "field": "Overall Health Score",
+          "condition": "is less than or equal to", 
+          "value": 2
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com",
+          "subject": "🚨 Client at Risk: {Client Organization}",
+          "body": "Client: {Client Organization}\\nHealth Score: {Overall Health Score}/5\\nRisk Level: {Risk Level}\\nRenewal Probability: {Renewal Probability (%)}%\\n\\nImmediate action required:\\n{Action Plan}"
+        }
+      ]
+    },
+    {
+      "name": "Competitive Intelligence Alert",
+      "trigger": "Record created in Competitive Tracking", 
+      "conditions": [
+        {
+          "field": "Impact Level",
+          "value": "High"
+        },
+        {
+          "field": "Blaze Response Required",
+          "value": true
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com",
+          "subject": "🚨 High Impact Competitive Intel: {Competitor}",
+          "body": "Competitor: {Competitor}\\nType: {Intelligence Type}\\nImpact: {Impact Level}\\nSource: {Source}\\n\\nSummary: {Summary}\\n\\nResponse Strategy: {Response Strategy}"
+        }
+      ]
+    }
+  ]
+}

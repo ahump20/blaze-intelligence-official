@@ -1,0 +1,76 @@
+{
+  "global": {
+    "system": {
+      "uptime": 99.61,
+      "responseTime": 76,
+      "accuracy": 96,
+      "dataPoints": 2737344,
+      "usersActive": 12286,
+      "apiCalls": 5892079,
+      "errorRate": 0.17,
+      "throughput": 1015
+    },
+    "business": {
+      "clientSatisfaction": 96.9,
+      "revenue": 1081662,
+      "growth": 29,
+      "retention": 89.8,
+      "acquisition": 291,
+      "churnRate": 4.8,
+      "ltv": 166201,
+      "cac": 10582
+    }
+  },
+  "injury_prevention": {
+    "riskAssessment": {
+      "overall": 75.4,
+      "categories": {
+        "acute": 24.7,
+        "chronic": 2.5,
+        "overuse": 1.9,
+        "traumatic": 4.8
+      }
+    },
+    "preventionPrograms": {
+      "active": 22,
+      "compliance": 96.2,
+      "effectiveness": 94.6,
+      "costSavings": 1326769
+    },
+    "recoveryMetrics": {
+      "averageTime": 19,
+      "successRate": 95.8,
+      "returnToPlay": 90,
+      "reinjuryRate": 3.3
+    }
+  },
+  "social_community": {
+    "users": {
+      "total": 119934,
+      "active": 48269,
+      "coaches": 12918,
+      "athletes": 62873,
+      "fans": 42123
+    },
+    "engagement": {
+      "posts": 27068,
+      "comments": 134723,
+      "likes": 692356,
+      "shares": 55910,
+      "dailyActive": 31.3
+    },
+    "communities": {
+      "cardinals": 15039,
+      "titans": 14225,
+      "longhorns": 19267,
+      "grizzlies": 11928,
+      "general": 33559
+    },
+    "mentorship": {
+      "activePairs": 1418,
+      "satisfaction": 92.6,
+      "completionRate": 82.9,
+      "outcomes": "Significant improvement in mentee performance metrics"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+name = "blaze-intelligence-storage"
+main = "src/storage-worker.js"
+compatibility_date = "2024-09-01"
+
+[[r2_buckets]]
+binding = "BLAZE_STORAGE"
+bucket_name = "blaze-intelligence-data"
+
+[env.production]
+name = "blaze-intelligence-storage-prod"
+
+[[env.production.r2_buckets]]
+binding = "BLAZE_STORAGE"
+bucket_name = "blaze-intelligence-data-prod"

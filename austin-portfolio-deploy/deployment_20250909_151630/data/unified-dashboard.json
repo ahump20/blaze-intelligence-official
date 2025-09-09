@@ -1,0 +1,27 @@
+{
+  "timestamp": "2025-08-28T07:48:54.483Z",
+  "total_entities": 24,
+  "total_data_points": 630,
+  "coverage_summary": {
+    "mlb_teams": 6,
+    "nfl_teams": 6,
+    "nba_teams": 6,
+    "college_programs": 6
+  },
+  "unified_metrics": {
+    "average_readiness": 85.2,
+    "leverage_distribution": {
+      "high": 45,
+      "moderate": 35,
+      "low": 20
+    },
+    "data_quality_score": 94.8,
+    "update_frequency": "real_time"
+  },
+  "cross_league_insights": [
+    "SEC football programs show highest leverage factors",
+    "Major market MLB teams outperform in readiness metrics",
+    "NBA Western Conference demonstrates superior balance",
+    "College NIL markets correlate with recruiting success"
+  ]
+}

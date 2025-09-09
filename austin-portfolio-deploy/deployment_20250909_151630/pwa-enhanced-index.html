@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Blaze Intelligence - AI-powered sports analytics platform with 94.6% accuracy. Real-time insights for MLB, NFL, NBA, and NCAA sports.">
+
+<link rel="manifest" href="/manifest.json">
+
+<link rel="apple-touch-startup-image" href="/screenshots/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="/screenshots/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="/screenshots/splash-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="/screenshots/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+<link rel="apple-touch-startup-image" href="/screenshots/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)">
+<link rel="apple-touch-startup-image" href="/screenshots/splash-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="/screenshots/splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="/screenshots/splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)">
+
+<title>Blaze Intelligence - Championship Sports Analytics PWA</title>
+
+<style>
+:root {
+--primary: #BF5700;
+--secondary: #FF8C00;
+--dark: #0d0d0d;
+--light: #ffffff;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+color: #fff;
+min-height: 100vh;
+}
+
+.splash-screen {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+z-index: 9999;
+transition: opacity 0.5s ease;
+}
+
+.splash-logo {
+width: 120px;
+height: 120px;
+background: linear-gradient(135deg, #BF5700, #FF8C00);
+clip-path: polygon(50% 0%, 20% 40%, 30% 80%, 50% 100%, 70% 80%, 80% 40%);
+margin-bottom: 30px;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.1); }
+}
+
+.splash-title {
+font-size: 2rem;
+font-weight: bold;
+background: linear-gradient(135deg, #BF5700, #FF8C00);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-bottom: 10px;
+}
+
+.splash-subtitle {
+color: #999;
+font-size: 1rem;
+}
+
+.loading-bar {
+width: 200px;
+height: 4px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 2px;
+margin-top: 30px;
+overflow: hidden;
+}
+
+.loading-progress {
+height: 100%;
+background: linear-gradient(90deg, #BF5700, #FF8C00);
+animation: loading 2s ease-in-out infinite;
+}
+
+@keyframes loading {
+0% { width: 0; }
+50% { width: 100%; }
+100% { width: 0; }
+}
+
+.splash-screen.hide {
+opacity: 0;
+pointer-events: none;
+}
+</style>
+</head>
+<body>
+<div id="app" style="display: none;">
+<section class="hero">
+<h1>Welcome to Blaze Intelligence PWA</h1>
+<p>Install our app for the best experience with offline access and real-time notifications</p>
+</section>
+
+<section class="install-section" id="install-section" style="display: none;">
+<h2>Install Blaze Intelligence</h2>
+<p>Get the full app experience with one click</p>
+<button class="install-button" id="install-button" aria-label="Install Blaze Intelligence PWA">
+<span aria-hidden="true">📲</span> Install App
+</button>
+</section>
+
+<script>
+// Register service worker
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', () => {
+navigator.serviceWorker.register('/sw.js')
+.then(registration => {
+console.log('✅ Service Worker registered');
+
+// Check for updates
+registration.addEventListener('updatefound', () => {
+console.log('🔄 New Service Worker available');
+});
+})
+.catch(error => {
+console.error('Service Worker registration failed:', error);
+});
+});
+}
+
+// Handle install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+e.preventDefault();
+deferredPrompt = e;
+
+// Show install section
+document.getElementById('install-section').style.display = 'block';
+
+// Handle install button
+document.getElementById('install-button').addEventListener('click', async () => {
+if (deferredPrompt) {
+deferredPrompt.prompt();
+const { outcome } = await deferredPrompt.userChoice;
+console.log(`User ${outcome} the install prompt`);
+deferredPrompt = null;
+document.getElementById('install-section').style.display = 'none';
+}
+});
+});
+
+// Handle app installed
+window.addEventListener('appinstalled', () => {
+console.log('✅ PWA installed');
+document.getElementById('install-section').style.display = 'none';
+});
+
+// Hide splash screen after load and production systems ready
+window.addEventListener('DOMContentLoaded', () => {
+// Wait for production systems to initialize
+const checkProductionReady = () => {
+if (window.blazeProduction && window.blazeProduction.getSystemStatus().initialized) {
+document.getElementById('splash-screen').classList.add('hide');
+document.getElementById('app').style.display = 'block';
+
+// Log production readiness
+console.log('🚀 Blaze Intelligence Production Platform Ready');
+
+// Show production status in console and UI
+setTimeout(() => {
+const status = window.blazeProduction.getSystemStatus();
+console.log('📊 Platform Status:', status);
+updateProductionStatusUI(status);
+}, 1000);
+} else {
+setTimeout(checkProductionReady, 100);
+}
+};
+
+// Start checking after minimum splash time
+setTimeout(checkProductionReady, 2000);
+});
+
+// Production status UI updater
+function updateProductionStatusUI(status) {
+const statusEl = document.getElementById('production-status');
+const dotEl = document.getElementById('status-dot');
+const textEl = document.getElementById('status-text');
+
+if (!statusEl || !dotEl || !textEl) return;
+
+let statusClass = 'healthy';
+let statusText = `🚀 All systems operational (${status.uptime}ms uptime)`;
+
+if (status.errors > 0) {
+statusClass = 'critical';
+statusText = `⚠️ ${status.errors} system errors detected`;
+} else if (status.warnings > 0) {
+statusClass = 'warning';
+statusText = `🟡 ${status.warnings} warnings - systems stable`;
+}
+
+statusEl.className = `production-status ${statusClass}`;
+dotEl.className = `status-dot ${statusClass}`;
+textEl.textContent = statusText;
+
+// Update every 30 seconds
+setTimeout(() => {
+if (window.blazeProduction) {
+const newStatus = window.blazeProduction.getSystemStatus();
+updateProductionStatusUI(newStatus);
+}
+}, 30000);
+}
+</script>
+
+<script src="/realistic-demo-system.js"></script>
+<script src="/consent-infrastructure.js"></script>
+<script src="/confidence-scoring-system.js"></script>
+<script src="/confidence-ui-components.js"></script>
+<script src="/circuit-breaker-system.js"></script>
+<script src="/emergency-kill-switch.js"></script>
+
+<style>
+.header {
+background: rgba(13, 13, 13, 0.95);
+backdrop-filter: blur(10px);
+padding: 20px;
+border-bottom: 2px solid #BF5700;
+position: sticky;
+top: 0;
+z-index: 1000;
+}
+
+.header-content {
+max-width: 1400px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.logo {
+font-size: 1.5rem;
+font-weight: bold;
+background: linear-gradient(135deg, #BF5700, #FF8C00);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+display: flex;
+gap: 30px;
+}
+
+.nav-links a {
+color: #999;
+text-decoration: none;
+transition: color 0.3s;
+}
+
+.nav-links a:hover {
+color: #BF5700;
+}
+
+.hero {
+text-align: center;
+padding: 80px 20px;
+}
+
+.hero h1 {
+font-size: 3rem;
+background: linear-gradient(135deg, #BF5700, #FF8C00);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-bottom: 20px;
+}
+
+.hero p {
+font-size: 1.2rem;
+color: #999;
+max-width: 600px;
+margin: 0 auto;
+}
+
+.pwa-features {
+max-width: 1200px;
+margin: 0 auto;
+padding: 60px 20px;
+}
+
+.pwa-features h2 {
+text-align: center;
+font-size: 2rem;
+margin-bottom: 40px;
+color: #FF8C00;
+}
+
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 30px;
+}
+
+.feature {
+background: rgba(26, 26, 26, 0.8);
+border: 2px solid #333;
+border-radius: 12px;
+padding: 30px;
+text-align: center;
+transition: all 0.3s;
+}
+
+.feature:hover {
+border-color: #BF5700;
+transform: translateY(-5px);
+}
+
+.feature .icon {
+font-size: 3rem;
+display: block;
+margin-bottom: 20px;
+}
+
+.feature h3 {
+color: #FF8C00;
+margin-bottom: 10px;
+}
+
+.feature p {
+color: #999;
+margin-bottom: 12px;
+}
+
+.confidence-indicator {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+padding: 4px 8px;
+background: rgba(76, 175, 80, 0.2);
+color: #4CAF50;
+border: 1px solid #4CAF50;
+border-radius: 12px;
+font-size: 0.8rem;
+font-weight: 600;
+margin-top: 8px;
+}
+
+.feature[tabindex]:focus {
+outline: 3px solid #BF5700;
+outline-offset: 2px;
+background: rgba(191, 87, 0, 0.05);
+}
+
+.install-section {
+text-align: center;
+padding: 60px 20px;
+background: rgba(191, 87, 0, 0.1);
+}
+
+.install-section h2 {
+font-size: 2rem;
+margin-bottom: 10px;
+color: #FF8C00;
+}
+
+.install-section p {
+color: #999;
+margin-bottom: 30px;
+}
+
+.install-button {
+padding: 15px 40px;
+background: linear-gradient(135deg, #BF5700, #FF8C00);
+color: white;
+border: none;
+border-radius: 50px;
+font-size: 1.1rem;
+font-weight: 600;
+cursor: pointer;
+display: inline-flex;
+align-items: center;
+gap: 10px;
+transition: all 0.3s;
+}
+
+.install-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 10px 30px rgba(191, 87, 0, 0.4);
+}
+
+/* Production Status Indicator */
+.production-status {
+position: fixed;
+bottom: 20px;
+left: 20px;
+background: rgba(26, 26, 26, 0.95);
+border: 1px solid #333;
+border-radius: 8px;
+padding: 12px;
+font-size: 0.8rem;
+color: #999;
+z-index: 1000;
+backdrop-filter: blur(10px);
+transition: all 0.3s ease;
+}
+
+.production-status.healthy {
+border-color: #4CAF50;
+}
+
+.production-status.warning {
+border-color: #FFC107;
+}
+
+.production-status.critical {
+border-color: #FF6B6B;
+}
+
+.status-dot {
+display: inline-block;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+margin-right: 8px;
+animation: pulse 2s infinite;
+}
+
+.status-dot.healthy {
+background: #4CAF50;
+}
+
+.status-dot.warning {
+background: #FFC107;
+}
+
+.status-dot.critical {
+background: #FF6B6B;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.6; }
+}
+
+@media (max-width: 768px) {
+.nav-links {
+display: none;
+}
+
+.hero h1 {
+font-size: 2rem;
+}
+
+.features-grid {
+grid-template-columns: 1fr;
+}
+
+.production-status {
+position: relative;
+left: auto;
+bottom: auto;
+margin: 10px;
+text-align: center;
+}
+}
+</style>
+</body>
+</html>

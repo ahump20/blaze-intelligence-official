@@ -1,0 +1,188 @@
+{
+  "name": "Dataset Versioner Agent",
+  "version": "1.0.0", 
+  "description": "Hourly agent that versions analytics datasets and maintains R2 storage with immutable snapshots",
+  "schedule": "0 * * * *",
+  "type": "dataset_management",
+  "priority": "high",
+  "timeout_minutes": 10,
+  "retry_attempts": 2,
+  "environment": {
+    "required": [
+      "BLAZE_STORAGE",
+      "CLOUDFLARE_API_TOKEN",
+      "CLOUDFLARE_ACCOUNT_ID"
+    ]
+  },
+  "inputs": {
+    "watch_paths": [
+      {
+        "path": "data/dashboard-config.json",
+        "team": "Cardinals",
+        "sport": "MLB",
+        "type": "live_analytics"
+      },
+      {
+        "path": "data/analytics/titans-latest.json", 
+        "team": "Titans",
+        "sport": "NFL",
+        "type": "weekly_analytics"
+      },
+      {
+        "path": "data/analytics/longhorns-latest.json",
+        "team": "Longhorns", 
+        "sport": "NCAA",
+        "type": "daily_analytics"
+      },
+      {
+        "path": "data/analytics/grizzlies-latest.json",
+        "team": "Grizzlies",
+        "sport": "NBA", 
+        "type": "game_analytics"
+      },
+      {
+        "path": "data/youth-baseball/*.json",
+        "team": "Youth",
+        "sport": "Perfect Game",
+        "type": "youth_analytics",
+        "pattern": true
+      }
+    ]
+  },
+  "processing": {
+    "steps": [
+      {
+        "name": "detect_changes",
+        "description": "Compare current files with last known versions",
+        "method": "content_hash",
+        "threshold": "any_change"
+      },
+      {
+        "name": "validate_data",
+        "description": "Ensure data integrity before versioning",
+        "checks": [
+          "valid_json",
+          "required_fields_present", 
+          "data_freshness",
+          "schema_compliance"
+        ]
+      },
+      {
+        "name": "create_version",
+        "description": "Generate immutable versioned copy",
+        "version_format": "{team}_{type}_{timestamp}_{hash_short}.json",
+        "timestamp_format": "YYYYMMDD_HHmmss"
+      },
+      {
+        "name": "update_indexes",
+        "description": "Update dataset indexes and metadata",
+        "indexes": [
+          "data/indexes/datasets.json",
+          "data/catalog/index.json"
+        ]
+      }
+    ]
+  },
+  "outputs": {
+    "versioned_datasets": {
+      "path_pattern": "data/versions/{team}/{year}/{month}/{versioned_filename}",
+      "retention": {
+        "live_data": "keep_all",
+        "daily_data": "30_days", 
+        "weekly_data": "90_days",
+        "monthly_data": "1_year"
+      }
+    },
+    "current_pointers": {
+      "path": "data/current/{team}_current.json",
+      "description": "Always points to latest version"
+    },
+    "change_log": {
+      "path": "data/logs/dataset_changes.jsonl",
+      "format": "jsonlines",
+      "fields": [
+        "timestamp",
+        "team", 
+        "dataset_path",
+        "version_created",
+        "change_type",
+        "change_summary"
+      ]
+    }
+  },
+  "r2_storage": {
+    "bucket": "blaze-intelligence-data",
+    "prefix": "datasets/",
+    "immutable_versions": true,
+    "compression": "gzip",
+    "metadata": {
+      "team": "from_processing",
+      "sport": "from_processing",
+      "version": "from_processing",
+      "created_by": "dataset-versioner-agent"
+    }
+  },
+  "triggers": {
+    "file_changes": {
+      "enabled": true,
+      "immediate": true,
+      "description": "Trigger immediately when watched files change"
+    },
+    "scheduled": {
+      "enabled": true,
+      "description": "Hourly check for any missed changes"
+    }
+  },
+  "health_checks": [
+    {
+      "name": "storage_accessibility",
+      "description": "Verify R2 storage is accessible",
+      "timeout_seconds": 10
+    },
+    {
+      "name": "version_integrity",
+      "description": "Validate that versions match source data",
+      "sample_size": 3
+    },
+    {
+      "name": "retention_policy",
+      "description": "Ensure old versions are cleaned up per policy",
+      "check_frequency": "daily"
+    }
+  ],
+  "notifications": {
+    "new_version": {
+      "channel": "notion",
+      "template": "New dataset version: {team} {dataset_type} v{version_id}. Changes: {change_summary}",
+      "frequency": "immediate"
+    },
+    "retention_cleanup": {
+      "channel": "notion", 
+      "template": "Dataset cleanup: {cleanup_count} old versions removed per retention policy",
+      "frequency": "daily_summary"
+    },
+    "failure": {
+      "channel": "notion",
+      "template": "Dataset versioning failed for {team}: {error_message}",
+      "escalation": "immediate"
+    }
+  },
+  "integration": {
+    "pages_deployment": {
+      "trigger_rebuild": true,
+      "condition": "any_priority_lab_change",
+      "priority_labs": ["Cardinals", "Titans", "Longhorns", "Grizzlies"]
+    },
+    "api_cache": {
+      "invalidate": true,
+      "endpoints": ["/api/teams/{team}", "/api/datasets"]
+    }
+  },
+  "deployment": {
+    "trigger": "cloudflare_cron",
+    "worker": "blaze-intelligence-versioner",
+    "environment": "production", 
+    "deploy_preview": false,
+    "post_to_notion": true
+  }
+}

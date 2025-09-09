@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Overview | Blaze Intelligence Championship Analytics</title>
+    <meta name="description" content="Watch our comprehensive platform overview video showcasing Blaze Intelligence's championship-level sports analytics capabilities.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blaze Intelligence Platform Overview">
+    <meta property="og:description" content="Championship-level sports analytics platform demonstration">
+    <meta property="og:type" content="video.other">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        body { 
+            background: #0a0a0a; 
+            color: #e2e8f0; 
+            font-family: 'Inter', sans-serif; 
+        }
+        .glass-card { 
+            background: rgba(30, 41, 59, 0.9); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 1rem;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 1rem;
+        }
+        .feature-point {
+            transition: all 0.3s ease;
+        }
+        .feature-point:hover {
+            transform: translateX(10px);
+        }
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+                <ul class="hidden md:flex items-center gap-8">
+                    <li><a href="/features.html" class="text-slate-300 hover:text-white">Features</a></li>
+                    <li><a href="/analytics.html" class="text-slate-300 hover:text-white">Analytics</a></li>
+                    <li><a href="/presentation.html" class="text-white font-medium">Overview</a></li>
+                    <li><a href="/demo" class="text-slate-300 hover:text-white">Live Demo</a></li>
+                    <li><a href="/pricing.html" class="text-slate-300 hover:text-white">Pricing</a></li>
+                    <li><a href="/contact.html" class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-8 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 rounded-full px-4 py-2 mb-6">
+                <span class="pulse-dot w-2 h-2 bg-orange-500 rounded-full"></span>
+                <span class="text-orange-400 text-sm font-medium">VIDEO PRESENTATION</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-black mb-6">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-cyan-400">
+                    PLATFORM OVERVIEW
+                </span>
+            </h1>
+            <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                Discover how Blaze Intelligence revolutionizes sports analytics with AI-powered insights,
+                real-time data processing, and championship-level intelligence.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Video Section -->
+    <section class="py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <!-- Video Player -->
+            <div class="glass-card p-2 rounded-2xl mb-8">
+                <div class="video-container">
+                    <iframe
+                        src="https://customer-mpdvoybjqct2pzls.cloudflarestream.com/eec1d7b09566f8acbcbadab3a0df5924/iframe?poster=https%3A%2F%2Fcustomer-mpdvoybjqct2pzls.cloudflarestream.com%2Feec1d7b09566f8acbcbadab3a0df5924%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+                        loading="lazy"
+                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                        allowfullscreen="true"
+                    ></iframe>
+                </div>
+            </div>
+
+            <!-- Video Info -->
+            <div class="glass-card p-8 rounded-2xl">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-2">Blaze Intelligence Platform Demonstration</h2>
+                        <div class="flex items-center gap-4 text-sm text-slate-400">
+                            <span class="flex items-center gap-1">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                Full Presentation
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i data-lucide="users" class="w-4 h-4"></i>
+                                For Teams & Organizations
+                            </span>
+                        </div>
+                    </div>
+                    <button class="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 flex items-center gap-2">
+                        <i data-lucide="download" class="w-5 h-5"></i>
+                        Download Deck
+                    </button>
+                </div>
+
+                <div class="prose prose-invert max-w-none">
+                    <p class="text-slate-300 text-lg leading-relaxed">
+                        This comprehensive overview demonstrates how Blaze Intelligence delivers championship-level analytics
+                        across MLB, NFL, NBA, and NCAA sports. Watch as we showcase our real-time data processing capabilities,
+                        AI-powered predictive models, and innovative Vision AI technology.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Takeaways -->
+    <section class="py-16 px-4 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Key Platform Highlights</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Real-Time Analytics -->
+                <div class="feature-point glass-card p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="activity" class="w-5 h-5 text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">Real-Time Data Processing</h3>
+                            <p class="text-sm text-slate-300">Process 2.8M+ data points per second with sub-100ms latency for instant game insights.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Predictions -->
+                <div class="feature-point glass-card p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="brain" class="w-5 h-5 text-orange-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">94.6% Prediction Accuracy</h3>
+                            <p class="text-sm text-slate-300">Industry-leading ML models for game outcomes, player performance, and strategic recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision AI -->
+                <div class="feature-point glass-card p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="video" class="w-5 h-5 text-green-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">Vision AI Technology</h3>
+                            <p class="text-sm text-slate-300">Computer vision for biomechanical analysis and character assessment from video.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cost Savings -->
+                <div class="feature-point glass-card p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="trending-down" class="w-5 h-5 text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">67-80% Cost Savings</h3>
+                            <p class="text-sm text-slate-300">Significant savings compared to traditional platforms like Hudl Pro Suite.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Sport -->
+                <div class="feature-point glass-card p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="layers" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">Multi-Sport Coverage</h3>
+                            <p class="text-sm text-slate-300">Comprehensive analytics for MLB, NFL, NBA, NCAA, and youth sports.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Integration -->
+                <div class="feature-point glass-card p-6 rounded-xl">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="plug" class="w-5 h-5 text-red-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2">Seamless Integration</h3>
+                            <p class="text-sm text-slate-300">RESTful APIs and webhooks for easy integration with existing systems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Chapters -->
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Presentation Chapters</h2>
+            
+            <div class="glass-card p-8 rounded-2xl">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 cursor-pointer transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="text-cyan-400 font-mono">00:00</span>
+                            <span class="text-white font-medium">Introduction & Platform Overview</span>
+                        </div>
+                        <i data-lucide="play-circle" class="w-5 h-5 text-slate-400"></i>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 cursor-pointer transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="text-cyan-400 font-mono">02:15</span>
+                            <span class="text-white font-medium">Real-Time Analytics Dashboard</span>
+                        </div>
+                        <i data-lucide="play-circle" class="w-5 h-5 text-slate-400"></i>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 cursor-pointer transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="text-cyan-400 font-mono">05:30</span>
+                            <span class="text-white font-medium">AI Predictive Modeling</span>
+                        </div>
+                        <i data-lucide="play-circle" class="w-5 h-5 text-slate-400"></i>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 cursor-pointer transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="text-cyan-400 font-mono">08:45</span>
+                            <span class="text-white font-medium">Vision AI Demonstration</span>
+                        </div>
+                        <i data-lucide="play-circle" class="w-5 h-5 text-slate-400"></i>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 cursor-pointer transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="text-cyan-400 font-mono">12:00</span>
+                            <span class="text-white font-medium">Team Performance Analytics</span>
+                        </div>
+                        <i data-lucide="play-circle" class="w-5 h-5 text-slate-400"></i>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 cursor-pointer transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="text-cyan-400 font-mono">15:30</span>
+                            <span class="text-white font-medium">ROI & Cost Comparison</span>
+                        </div>
+                        <i data-lucide="play-circle" class="w-5 h-5 text-slate-400"></i>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800/70 cursor-pointer transition-colors">
+                        <div class="flex items-center gap-3">
+                            <span class="text-cyan-400 font-mono">18:00</span>
+                            <span class="text-white font-medium">Q&A & Next Steps</span>
+                        </div>
+                        <i data-lucide="play-circle" class="w-5 h-5 text-slate-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Resources -->
+    <section class="py-16 px-4 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Related Resources</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Live Demo -->
+                <a href="/demo" class="glass-card p-6 rounded-xl hover:scale-105 transition-transform">
+                    <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="play" class="w-6 h-6 text-orange-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Interactive Demo</h3>
+                    <p class="text-sm text-slate-300 mb-4">Experience the Cardinals Command Center with live data updates.</p>
+                    <span class="text-orange-400 text-sm font-medium flex items-center gap-1">
+                        Explore Demo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <!-- Case Studies -->
+                <a href="/blog" class="glass-card p-6 rounded-xl hover:scale-105 transition-transform">
+                    <div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="file-text" class="w-6 h-6 text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Case Studies</h3>
+                    <p class="text-sm text-slate-300 mb-4">Real-world examples of championship analytics in action.</p>
+                    <span class="text-cyan-400 text-sm font-medium flex items-center gap-1">
+                        Read Studies <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <!-- API Docs -->
+                <a href="/api-docs" class="glass-card p-6 rounded-xl hover:scale-105 transition-transform">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="code-2" class="w-6 h-6 text-green-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">API Documentation</h3>
+                    <p class="text-sm text-slate-300 mb-4">Technical documentation for platform integration.</p>
+                    <span class="text-green-400 text-sm font-medium flex items-center gap-1">
+                        View Docs <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Ready to Transform Your Analytics?</h2>
+            <p class="text-xl text-slate-300 mb-8">
+                Schedule a personalized demonstration and see how Blaze Intelligence can deliver
+                championship-level insights for your organization.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/contact.html" class="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 flex items-center justify-center gap-2">
+                    <i data-lucide="calendar" class="w-5 h-5"></i>
+                    Schedule Demo
+                </a>
+                <a href="/pricing.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600 flex items-center justify-center gap-2">
+                    <i data-lucide="dollar-sign" class="w-5 h-5"></i>
+                    View Pricing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/50 border-t border-slate-800 py-8 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="text-slate-400 text-sm">
+                    © 2025 Blaze Intelligence. All rights reserved.
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="/privacy.html" class="text-slate-400 hover:text-white text-sm">Privacy Policy</a>
+                    <a href="/terms.html" class="text-slate-400 hover:text-white text-sm">Terms of Service</a>
+                    <a href="/contact.html" class="text-slate-400 hover:text-white text-sm">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Optional: Add chapter navigation functionality
+            const chapterLinks = document.querySelectorAll('[data-chapter]');
+            chapterLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const time = this.getAttribute('data-chapter');
+                    // You could implement seeking to specific timestamps here
+                    console.log('Navigate to:', time);
+                });
+            });
+        });
+    </script>
+
+    <!-- Alternative Video Embed Methods (commented out for reference) -->
+    <!-- 
+    Option 1: Direct HLS Stream
+    <video 
+        id="blazeVideo"
+        class="w-full h-full rounded-xl"
+        controls
+        poster="https://customer-mpdvoybjqct2pzls.cloudflarestream.com/eec1d7b09566f8acbcbadab3a0df5924/thumbnails/thumbnail.jpg"
+    >
+        <source src="https://customer-mpdvoybjqct2pzls.cloudflarestream.com/eec1d7b09566f8acbcbadab3a0df5924/manifest/video.m3u8" type="application/x-mpegURL">
+    </video>
+
+    Option 2: Stream Embed Script
+    <script src="https://embed.cloudflarestream.com/embed/sdk.latest.js"></script>
+    <stream src="eec1d7b09566f8acbcbadab3a0df5924" controls></stream>
+    -->
+</body>
+</html>

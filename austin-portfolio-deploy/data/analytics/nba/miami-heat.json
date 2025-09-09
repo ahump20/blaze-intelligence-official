@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-28T07:48:54.481Z",
+  "team": "Miami Heat",
+  "league": "NBA",
+  "division": "Southeast",
+  "conference": "Eastern",
+  "season": "2024-25",
+  "readiness": {
+    "overall": 83.7,
+    "offense": 78.9,
+    "defense": 88.6,
+    "rebounding": 81.2,
+    "depth": 80.9
+  },
+  "leverage": {
+    "current": 2.42,
+    "trend": "decreasing",
+    "championship_odds": 0.162
+  },
+  "efficiency_metrics": {
+    "offensive_rating": 105.9,
+    "defensive_rating": 108.9,
+    "net_rating": 1.5,
+    "pace": 103
+  },
+  "advanced_stats": {
+    "effective_fg_percentage": 58.8,
+    "turnover_rate": 16.5,
+    "offensive_rebound_rate": 32.4,
+    "free_throw_rate": 18.8
+  },
+  "metrics_count": 28
+}

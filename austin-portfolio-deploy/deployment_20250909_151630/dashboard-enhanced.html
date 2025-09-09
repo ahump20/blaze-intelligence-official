@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Championship Command Center • Blaze Intelligence</title>
+<meta name="description" content="Real-time championship analytics dashboard with live performance metrics, predictive models, and video intelligence integration">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'burnt-orange': {
+'500': '#BF5700',
+'600': '#A0522D',
+'700': '#8B4513'
+},
+'neon': {
+'blue': '#00FFFF',
+'green': '#00FF00',
+'orange': '#FF8C00'
+}
+}
+}
+}
+}
+</script>
+
+<style>
+:root {
+--primary-orange: #BF5700;
+--accent-orange: #D2691E;
+--neon-blue: #00FFFF;
+--neon-green: #00FF00;
+--neon-orange: #FF8C00;
+--dark-bg: #0a0a0a;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+background: var(--dark-bg);
+color: #e2e8f0;
+overflow-x: hidden;
+}
+
+.glass-nav {
+background: rgba(10, 10, 10, 0.95);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+box-shadow: 0 4px 30px rgba(0, 255, 255, 0.1);
+}
+
+.glass-card {
+background: rgba(30, 41, 59, 0.8);
+backdrop-filter: blur(15px);
+-webkit-backdrop-filter: blur(15px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+overflow: hidden;
+}
+
+.glass-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--neon-orange), transparent);
+transition: left 0.6s ease;
+}
+
+.glass-card:hover::before {
+left: 100%;
+}
+
+.glass-card:hover {
+border-color: rgba(255, 140, 0, 0.3);
+transform: translateY(-2px);
+box-shadow: 0 10px 40px rgba(255, 140, 0, 0.1);
+}
+
+.hero-3d-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+opacity: 0.3;
+}
+
+.dashboard-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 1.5rem;
+padding: 1.5rem;
+}
+
+.metric-card {
+background: linear-gradient(135deg, rgba(255, 140, 0, 0.05), rgba(191, 87, 0, 0.05));
+border: 1px solid rgba(255, 140, 0, 0.2);
+padding: 1.5rem;
+border-radius: 16px;
+transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(191, 87, 0, 0.1));
+border-color: rgba(255, 140, 0, 0.4);
+transform: scale(1.02);
+}
+
+.live-indicator {
+display: inline-block;
+width: 8px;
+height: 8px;
+background: #10B981;
+border-radius: 50%;
+animation: pulse 2s infinite;
+margin-right: 8px;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+.neon-text {
+background: linear-gradient(135deg, #FF8C00 0%, #BF5700 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+filter: drop-shadow(0 0 20px rgba(255, 140, 0, 0.5));
+}
+
+.chart-container {
+position: relative;
+height: 300px;
+padding: 1rem;
+}
+
+.video-feed {
+background: rgba(0, 0, 0, 0.8);
+border: 1px solid rgba(0, 255, 255, 0.3);
+border-radius: 12px;
+overflow: hidden;
+position: relative;
+}
+
+.video-feed::after {
+content: 'LIVE FEED';
+position: absolute;
+top: 10px;
+right: 10px;
+background: rgba(255, 0, 0, 0.8);
+color: white;
+padding: 4px 12px;
+border-radius: 4px;
+font-size: 12px;
+font-weight: bold;
+animation: blink 1s infinite;
+}
+
+@keyframes blink {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.7; }
+}
+
+.stat-badge {
+display: inline-flex;
+align-items: center;
+padding: 0.25rem 0.75rem;
+background: rgba(255, 140, 0, 0.1);
+border: 1px solid rgba(255, 140, 0, 0.3);
+border-radius: 9999px;
+font-size: 0.875rem;
+font-weight: 500;
+transition: all 0.3s ease;
+}
+
+.stat-badge:hover {
+background: rgba(255, 140, 0, 0.2);
+border-color: rgba(255, 140, 0, 0.5);
+transform: translateY(-1px);
+}
+
+.performance-bar {
+height: 8px;
+background: rgba(51, 65, 85, 0.5);
+border-radius: 4px;
+overflow: hidden;
+position: relative;
+}
+
+.performance-fill {
+height: 100%;
+background: linear-gradient(90deg, var(--neon-orange), var(--primary-orange));
+border-radius: 4px;
+transition: width 0.5s ease;
+position: relative;
+overflow: hidden;
+}
+
+.performance-fill::after {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+0% { left: -100%; }
+100% { left: 100%; }
+}
+
+.alert-box {
+background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(185, 28, 28, 0.1));
+border: 1px solid rgba(239, 68, 68, 0.3);
+border-radius: 12px;
+padding: 1rem;
+margin-bottom: 1rem;
+}
+
+.success-box {
+background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.data-table {
+width: 100%;
+border-collapse: separate;
+border-spacing: 0;
+}
+
+.data-table th {
+background: rgba(51, 65, 85, 0.5);
+padding: 12px;
+text-align: left;
+font-weight: 600;
+color: #E2E8F0;
+border-bottom: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.data-table td {
+padding: 12px;
+border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+transition: background 0.2s ease;
+}
+
+.data-table tr:hover td {
+background: rgba(255, 140, 0, 0.05);
+}
+
+.tab-button {
+padding: 0.75rem 1.5rem;
+background: transparent;
+border: 1px solid rgba(255, 140, 0, 0.3);
+color: #94A3B8;
+transition: all 0.3s ease;
+cursor: pointer;
+}
+
+.tab-button.active {
+background: linear-gradient(135deg, rgba(255, 140, 0, 0.2), rgba(191, 87, 0, 0.2));
+border-color: var(--neon-orange);
+color: white;
+}
+
+.command-input {
+background: rgba(15, 23, 42, 0.9);
+border: 1px solid rgba(255, 140, 0, 0.3);
+color: var(--neon-green);
+font-family: 'Source Code Pro', monospace;
+padding: 12px;
+border-radius: 8px;
+width: 100%;
+}
+
+.command-input:focus {
+outline: none;
+border-color: var(--neon-orange);
+box-shadow: 0 0 20px rgba(255, 140, 0, 0.2);
+}
+</style>
+</head>
+<body>
+<nav class="glass-nav sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center">
+<a href="/" class="text-2xl font-bold neon-text">BLAZE INTELLIGENCE</a>
+<span class="ml-4 text-sm text-slate-400">Command Center</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="live-indicator"></span>
+<span class="text-sm text-slate-300">Live Analytics</span>
+<div class="text-sm text-slate-400">
+<span id="current-time">12:00:00</span>
+</div>
+</div>
+</div>
+</div>
+</nav>
+
+<section class="border-b border-slate-800 bg-gradient-to-b from-slate-900/50 to-transparent">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="metric-card">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-slate-400">Data Points</span>
+<span class="stat-badge text-green-400">↑ 12%</span>
+</div>
+<div class="text-3xl font-bold text-white" id="dataPoints">2.8M+</div>
+<div class="performance-bar mt-2">
+<div class="performance-fill" style="width: 85%"></div>
+</div>
+</div>
+<div class="metric-card">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-slate-400">Accuracy</span>
+<span class="stat-badge text-blue-400">Elite</span>
+</div>
+<div class="text-3xl font-bold text-white" id="accuracy">94.6%</div>
+<div class="performance-bar mt-2">
+<div class="performance-fill" style="width: 94.6%"></div>
+</div>
+</div>
+<div class="metric-card">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-slate-400">API Latency</span>
+<span class="stat-badge text-cyan-400">Optimal</span>
+</div>
+<div class="text-3xl font-bold text-white" id="latency">85ms</div>
+<div class="performance-bar mt-2">
+<div class="performance-fill" style="width: 91%"></div>
+</div>
+</div>
+<div class="metric-card">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-slate-400">Active Feeds</span>
+<span class="live-indicator"></span>
+</div>
+<div class="text-3xl font-bold text-white" id="activeFeeds">1,247</div>
+<div class="performance-bar mt-2">
+<div class="performance-fill" style="width: 78%"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="dashboard-content">
+<div class="glass-card p-6 rounded-2xl lg:col-span-2">
+<h2 class="text-xl font-bold text-white mb-4">Priority Labs Performance</h2>
+<div class="chart-container">
+<canvas id="labsPerformanceChart"></canvas>
+</div>
+<div class="grid grid-cols-4 gap-2 mt-4">
+<div class="text-center">
+<div class="text-2xl font-bold text-red-400">86.6%</div>
+<div class="text-xs text-slate-400">Cardinals</div>
+</div>
+<div class="text-center">
+<div class="text-2xl font-bold text-blue-400">73%</div>
+<div class="text-xs text-slate-400">Titans</div>
+</div>
+<div class="text-center">
+<div class="text-2xl font-bold text-orange-400">89%</div>
+<div class="text-xs text-slate-400">Longhorns</div>
+</div>
+<div class="text-center">
+<div class="text-2xl font-bold text-purple-400">94.2%</div>
+<div class="text-xs text-slate-400">Grizzlies</div>
+</div>
+</div>
+</div>
+
+<div class="glass-card p-6 rounded-2xl">
+<h2 class="text-xl font-bold text-white mb-4">Video Analysis Active</h2>
+<div class="video-feed h-48 mb-4 flex items-center justify-center">
+<div class="text-center">
+<div class="text-4xl mb-2">🎥</div>
+<div class="text-sm text-slate-400">3 Active Streams</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="text-center">
+<div class="text-lg font-bold text-green-400">97.3%</div>
+<div class="text-xs text-slate-400">Form Score</div>
+</div>
+<div class="text-center">
+<div class="text-lg font-bold text-blue-400">Elite</div>
+<div class="text-xs text-slate-400">Character</div>
+</div>
+<div class="text-center">
+<div class="text-lg font-bold text-orange-400">A+</div>
+<div class="text-xs text-slate-400">Projection</div>
+</div>
+</div>
+</div>
+
+<div class="glass-card p-6 rounded-2xl lg:col-span-2">
+<h2 class="text-xl font-bold text-white mb-4">International Pipeline Intelligence</h2>
+<table class="data-table">
+<thead>
+<tr>
+<th>Region</th>
+<th>Prospects</th>
+<th>MLB Ready</th>
+<th>Success Rate</th>
+<th>Trend</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="text-white">Dominican Republic</td>
+<td>147</td>
+<td class="text-green-400">23</td>
+<td>32%</td>
+<td class="text-green-400">↑</td>
+</tr>
+<tr>
+<td class="text-white">Japan (NPB)</td>
+<td>8</td>
+<td class="text-blue-400">8</td>
+<td>78%</td>
+<td class="text-blue-400">→</td>
+</tr>
+<tr>
+<td class="text-white">Korea (KBO)</td>
+<td>12</td>
+<td class="text-orange-400">12</td>
+<td>67%</td>
+<td class="text-green-400">↑</td>
+</tr>
+<tr>
+<td class="text-white">Venezuela</td>
+<td>89</td>
+<td class="text-yellow-400">15</td>
+<td>28%</td>
+<td class="text-yellow-400">→</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="tab-cardinals" class="tab-content hidden">
+<div class="dashboard-grid">
+<div class="glass-card p-6 rounded-2xl lg:col-span-2">
+<h2 class="text-2xl font-bold text-red-400 mb-4">Cardinals Intelligence Dashboard</h2>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="metric-card">
+<div class="text-sm text-slate-400 mb-1">Overall Readiness</div>
+<div class="text-3xl font-bold text-white">86.6%</div>
+<div class="text-sm text-green-400">↑ 2.3% from yesterday</div>
+</div>
+<div class="metric-card">
+<div class="text-sm text-slate-400 mb-1">Leverage Factor</div>
+<div class="text-3xl font-bold text-orange-400">2.85x</div>
+<div class="text-sm text-green-400">HIGH OPPORTUNITY</div>
+</div>
+</div>
+<div class="chart-container">
+<canvas id="cardinalsChart"></canvas>
+</div>
+</div>
+<div class="glass-card p-6 rounded-2xl">
+<h3 class="text-lg font-bold text-white mb-4">Component Breakdown</h3>
+<div class="space-y-3">
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm text-slate-400">Offense</span>
+<span class="text-sm font-bold text-white">87.1%</span>
+</div>
+<div class="performance-bar">
+<div class="performance-fill" style="width: 87.1%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm text-slate-400">Defense</span>
+<span class="text-sm font-bold text-white">88.5%</span>
+</div>
+<div class="performance-bar">
+<div class="performance-fill" style="width: 88.5%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm text-slate-400">Pitching</span>
+<span class="text-sm font-bold text-white">85.4%</span>
+</div>
+<div class="performance-bar">
+<div class="performance-fill" style="width: 85.4%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-1">
+<span class="text-sm text-slate-400">Baserunning</span>
+<span class="text-sm font-bold text-white">84.3%</span>
+</div>
+<div class="performance-bar">
+<div class="performance-fill" style="width: 84.3%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<footer class="py-6 border-t border-slate-800 mt-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between">
+<div class="text-sm text-slate-400">
+© 2025 Blaze Intelligence • Championship Command Center
+</div>
+<div class="flex items-center gap-4">
+<a href="/methods" class="text-sm text-slate-400 hover:text-orange-400">Methods & Definitions</a>
+<span class="text-slate-600">|</span>
+<span class="text-sm text-slate-400">v2.0.0</span>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+// Global variables
+let charts = {};
+let currentTab = 'overview';
+let liveUpdateInterval;
+
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', function() {
+initialize3DBackground();
+initializeCharts();
+startLiveUpdates();
+initializeCommandTerminal();
+updateClock();
+});
+
+// 3D Background
+function initialize3DBackground() {
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000, 0);
+document.getElementById('hero-3d').appendChild(renderer.domElement);
+
+// Create grid of particles
+const geometry = new THREE.BufferGeometry();
+const particleCount = 500;
+const positions = new Float32Array(particleCount * 3);
+const colors = new Float32Array(particleCount * 3);
+
+for(let i = 0; i < particleCount * 3; i += 3) {
+positions[i] = (Math.random() - 0.5) * 50;
+positions[i + 1] = (Math.random() - 0.5) * 50;
+positions[i + 2] = (Math.random() - 0.5) * 50;
+
+const color = new THREE.Color();
+color.setHSL(0.08 + Math.random() * 0.1, 0.7, 0.5);
+colors[i] = color.r;
+colors[i + 1] = color.g;
+colors[i + 2] = color.b;
+}
+
+geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+const material = new THREE.PointsMaterial({
+size: 0.5,
+vertexColors: true,
+transparent: true,
+opacity: 0.6,
+blending: THREE.AdditiveBlending
+});
+
+const particles = new THREE.Points(geometry, material);
+scene.add(particles);
+
+// Add connecting lines
+const lineGeometry = new THREE.BufferGeometry();
+const linePositions = new Float32Array(100 * 6);
+
+for(let i = 0; i < 100 * 6; i += 6) {
+linePositions[i] = (Math.random() - 0.5) * 30;
+linePositions[i + 1] = (Math.random() - 0.5) * 30;
+linePositions[i + 2] = (Math.random() - 0.5) * 30;
+linePositions[i + 3] = (Math.random() - 0.5) * 30;
+linePositions[i + 4] = (Math.random() - 0.5) * 30;
+linePositions[i + 5] = (Math.random() - 0.5) * 30;
+}
+
+lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+
+const lineMaterial = new THREE.LineBasicMaterial({
+color: 0xFF8C00,
+transparent: true,
+opacity: 0.1
+});
+
+const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+scene.add(lines);
+
+camera.position.z = 20;
+
+// Animation
+function animate() {
+requestAnimationFrame(animate);
+
+particles.rotation.x += 0.0005;
+particles.rotation.y += 0.0005;
+lines.rotation.x -= 0.0003;
+lines.rotation.y -= 0.0003;
+
+renderer.render(scene, camera);
+}
+animate();
+
+// Handle resize
+window.addEventListener('resize', () => {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+});
+}
+
+// Initialize Charts
+function initializeCharts() {
+// Labs Performance Chart
+const labsCtx = document.getElementById('labsPerformanceChart');
+if (labsCtx) {
+charts.labsPerformance = new Chart(labsCtx.getContext('2d'), {
+type: 'radar',
+data: {
+labels: ['Cardinals', 'Titans', 'Longhorns', 'Grizzlies'],
+datasets: [{
+label: 'Current Performance',
+data: [86.6, 73, 89, 94.2],
+borderColor: '#FF8C00',
+backgroundColor: 'rgba(255, 140, 0, 0.2)',
+pointBackgroundColor: '#FF8C00',
+pointBorderColor: '#fff',
+pointHoverBackgroundColor: '#fff',
+pointHoverBorderColor: '#FF8C00'
+}, {
+label: 'League Average',
+data: [75, 65, 70, 80],
+borderColor: '#64748B',
+backgroundColor: 'rgba(100, 116, 139, 0.1)',
+pointBackgroundColor: '#64748B',
+pointBorderColor: '#fff',
+pointHoverBackgroundColor: '#fff',
+pointHoverBorderColor: '#64748B'
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: {
+labels: { color: '#E2E8F0' }
+}
+},
+scales: {
+r: {
+grid: { color: 'rgba(100, 116, 139, 0.2)' },
+angleLines: { color: 'rgba(100, 116, 139, 0.2)' },
+pointLabels: { color: '#E2E8F0' },
+ticks: { 
+color: '#94A3B8',
+backdropColor: 'transparent'
+}
+}
+}
+}
+});
+}
+
+// Data Flow Chart
+const dataFlowCtx = document.getElementById('dataFlowChart');
+if (dataFlowCtx) {
+charts.dataFlow = new Chart(dataFlowCtx.getContext('2d'), {
+type: 'line',
+data: {
+labels: Array.from({length: 20}, (_, i) => i),
+datasets: [{
+label: 'Data Points/Sec',
+data: Array.from({length: 20}, () => Math.random() * 1000 + 500),
+borderColor: '#10B981',
+backgroundColor: 'rgba(16, 185, 129, 0.1)',
+tension: 0.4,
+fill: true,
+pointRadius: 0
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: { display: false }
+},
+scales: {
+x: { display: false },
+y: { 
+display: true,
+grid: { color: 'rgba(100, 116, 139, 0.2)' },
+ticks: { color: '#94A3B8' }
+}
+}
+}
+});
+}
+
+// Cardinals Chart
+const cardinalsCtx = document.getElementById('cardinalsChart');
+if (cardinalsCtx) {
+charts.cardinals = new Chart(cardinalsCtx.getContext('2d'), {
+type: 'line',
+data: {
+labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+datasets: [{
+label: 'Readiness Score',
+data: [78, 81, 79, 83, 85, 86.6],
+borderColor: '#EF4444',
+backgroundColor: 'rgba(239, 68, 68, 0.1)',
+tension: 0.4,
+fill: true
+}, {
+label: 'Leverage Factor',
+data: [1.8, 2.1, 2.0, 2.3, 2.5, 2.85],
+borderColor: '#F97316',
+backgroundColor: 'rgba(249, 115, 22, 0.1)',
+tension: 0.4,
+fill: true,
+yAxisID: 'y1'
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: {
+labels: { color: '#E2E8F0' }
+}
+},
+scales: {
+x: {
+grid: { color: 'rgba(100, 116, 139, 0.2)' },
+ticks: { color: '#94A3B8' }
+},
+y: {
+position: 'left',
+grid: { color: 'rgba(100, 116, 139, 0.2)' },
+ticks: { color: '#94A3B8' }
+},
+y1: {
+position: 'right',
+grid: { drawOnChartArea: false },
+ticks: { color: '#94A3B8' }
+}
+}
+}
+});
+}
+}
+
+// Tab Switching
+function switchTab(tabName) {
+// Hide all tabs
+document.querySelectorAll('.tab-content').forEach(tab => {
+tab.classList.add('hidden');
+});
+
+// Show selected tab
+const selectedTab = document.getElementById(`tab-${tabName}`);
+if (selectedTab) {
+selectedTab.classList.remove('hidden');
+}
+
+// Update button states
+document.querySelectorAll('.tab-button').forEach(button => {
+button.classList.remove('active');
+});
+event.target.classList.add('active');
+
+currentTab = tabName;
+
+// Animate content
+gsap.fromTo(selectedTab, 
+{ opacity: 0, y: 20 }, 
+{ opacity: 1, y: 0, duration: 0.3 }
+);
+}
+
+// Live Updates
+function startLiveUpdates() {
+liveUpdateInterval = setInterval(() => {
+// Update metrics
+updateMetrics();
+
+// Update charts
+updateCharts();
+
+// Simulate new alerts
+if (Math.random() > 0.9) {
+addNewAlert();
+}
+}, 3000);
+}
+
+function updateMetrics() {
+// Data Points
+const dataPointsEl = document.getElementById('dataPoints');
+if (dataPointsEl) {
+const current = parseFloat(dataPointsEl.textContent.replace('M+', ''));
+const newValue = (current + Math.random() * 0.01).toFixed(2);
+dataPointsEl.textContent = newValue + 'M+';
+}
+
+// Accuracy
+const accuracyEl = document.getElementById('accuracy');
+if (accuracyEl) {
+const variation = (Math.random() - 0.5) * 0.2;
+const newAccuracy = Math.min(100, Math.max(90, 94.6 + variation));
+accuracyEl.textContent = newAccuracy.toFixed(1) + '%';
+}
+
+// Latency
+const latencyEl = document.getElementById('latency');
+if (latencyEl) {
+const newLatency = Math.floor(85 + (Math.random() - 0.5) * 20);
+latencyEl.textContent = newLatency + 'ms';
+}
+
+// Active Feeds
+const feedsEl = document.getElementById('activeFeeds');
+if (feedsEl) {
+const newFeeds = Math.floor(1247 + (Math.random() - 0.5) * 100);
+feedsEl.textContent = newFeeds.toLocaleString();
+}
+}
+
+function updateCharts() {
+// Update data flow chart
+if (charts.dataFlow) {
+charts.dataFlow.data.datasets[0].data.shift();
+charts.dataFlow.data.datasets[0].data.push(Math.random() * 1000 + 500);
+charts.dataFlow.update('none');
+}
+}
+
+function addNewAlert() {
+// This would add new alerts to the alert section
+console.log('New alert generated');
+}
+
+// Command Terminal
+function initializeCommandTerminal() {
+const commandInput = document.getElementById('commandInput');
+if (commandInput) {
+commandInput.addEventListener('keypress', function(e) {
+if (e.key === 'Enter') {
+processCommand(this.value);
+this.value = '';
+}
+});
+}
+}
+
+function processCommand(command) {
+console.log('Processing command:', command);
+// Command processing logic would go here
+}
+
+// Clock
+function updateClock() {
+const clockEl = document.getElementById('current-time');
+if (clockEl) {
+setInterval(() => {
+const now = new Date();
+clockEl.textContent = now.toLocaleTimeString();
+}, 1000);
+}
+}
+
+// Cleanup
+window.addEventListener('beforeunload', () => {
+if (liveUpdateInterval) {
+clearInterval(liveUpdateInterval);
+}
+});
+</script>
+</body>
+</html>

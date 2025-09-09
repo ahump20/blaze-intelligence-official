@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Admin | Blaze Intelligence CMS</title>
+<meta name="description" content="Manage blog content and analytics insights with Blaze Intelligence Notion CMS integration.">
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/tokens.css">
+
+<style>
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+background: var(--blaze-dark);
+color: #e2e8f0;
+}
+
+h1, h2, h3 {
+font-family: 'Space Grotesk', sans-serif;
+}
+
+.glass {
+background: var(--glass-bg);
+backdrop-filter: blur(16px);
+border: 1px solid rgba(255, 255, 255, 0.12);
+border-radius: 16px;
+}
+
+.blog-post-card {
+transition: all 0.3s ease;
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.blog-post-card:hover {
+border-color: var(--blaze-orange);
+transform: translateY(-2px);
+}
+
+.status-draft {
+background: rgba(245, 158, 11, 0.2);
+border-color: rgba(245, 158, 11, 0.3);
+color: #fbbf24;
+}
+
+.status-published {
+background: rgba(16, 185, 129, 0.2);
+border-color: rgba(16, 185, 129, 0.3);
+color: #10b981;
+}
+
+.status-archived {
+background: rgba(107, 114, 128, 0.2);
+border-color: rgba(107, 114, 128, 0.3);
+color: #9ca3af;
+}
+</style>
+</head>
+<body>
+<main class="max-w-7xl mx-auto px-6 py-8">
+<div class="grid md:grid-cols-4 gap-6 mb-8">
+<div class="glass p-6">
+<div class="flex items-center justify-between mb-2">
+<div class="text-2xl font-bold" id="total-posts">0</div>
+<i data-lucide="file-text" class="w-8 h-8 text-blue-400"></i>
+</div>
+<div class="text-slate-400">Total Posts</div>
+</div>
+
+<div class="glass p-6">
+<div class="flex items-center justify-between mb-2">
+<div class="text-2xl font-bold" id="published-posts">0</div>
+<i data-lucide="eye" class="w-8 h-8 text-green-400"></i>
+</div>
+<div class="text-slate-400">Published</div>
+</div>
+
+<div class="glass p-6">
+<div class="flex items-center justify-between mb-2">
+<div class="text-2xl font-bold" id="draft-posts">0</div>
+<i data-lucide="edit" class="w-8 h-8 text-yellow-400"></i>
+</div>
+<div class="text-slate-400">Drafts</div>
+</div>
+
+<div class="glass p-6">
+<div class="flex items-center justify-between mb-2">
+<div class="text-2xl font-bold" id="insights-count">0</div>
+<i data-lucide="lightbulb" class="w-8 h-8" style="color: var(--blaze-orange);"></i>
+</div>
+<div class="text-slate-400">Insights</div>
+</div>
+</div>
+
+<div id="posts-tab-content" class="tab-content">
+<div id="posts-grid" class="grid gap-6">
+<div id="insights-tab-content" class="tab-content hidden">
+<div id="insights-grid" class="grid md:grid-cols-2 gap-6">
+<div id="analytics-tab-content" class="tab-content hidden">
+<div class="glass p-8">
+<h3 class="text-2xl font-bold mb-6">Content Performance Analytics</h3>
+<div class="grid md:grid-cols-2 gap-8">
+<div>
+<h4 class="font-semibold mb-4">Top Performing Posts</h4>
+<div id="top-posts" class="space-y-3">
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+

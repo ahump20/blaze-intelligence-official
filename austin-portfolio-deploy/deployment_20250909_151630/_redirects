@@ -1,0 +1,16 @@
+# Blaze Intelligence Unified Routing
+/video-intelligence /blaze-video-intelligence-production.html 200
+/command-center /blaze-unified-command-center.html 200
+/vision-ai /blaze-vision-ai-scouting.html 200
+/ai-symphony /blaze-ai-symphony.html 200
+
+# API proxying to Replit
+/api/* https://6414dde1-62a7-4238-9005-ca33fe399b51.spock.prod.repl.run/api/:splat 200
+
+# Fallbacks
+/dashboard /dashboard.html 200
+/pricing /pricing.html 200
+/contact /contact.html 200
+
+# Catch-all
+/* /index.html 200

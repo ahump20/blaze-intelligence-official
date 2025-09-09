@@ -1,0 +1,747 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Blaze Intelligence API",
+    "version": "2.0.0",
+    "description": "Professional-grade sports analytics platform API with real-time performance tracking, predictive modeling, and AI-powered insights.",
+    "contact": {
+      "name": "Blaze Intelligence",
+      "url": "https://blazeintelligence.com",
+      "email": "api@blazeintelligence.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Development server"
+    },
+    {
+      "url": "https://api.blazeintelligence.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/healthz": {
+      "get": {
+        "tags": ["System"],
+        "summary": "Health check endpoint",
+        "description": "Returns the current health status of the API and its dependencies.",
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "healthy"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "uptime": {
+                      "type": "number",
+                      "description": "Uptime in seconds"
+                    },
+                    "environment": {
+                      "type": "string",
+                      "example": "development"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service is unhealthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/game/pressure-stream": {
+      "get": {
+        "tags": ["Real-time"],
+        "summary": "Live game pressure stream",
+        "description": "Server-Sent Events (SSE) endpoint providing real-time game pressure analytics and win probability data.",
+        "responses": {
+          "200": {
+            "description": "SSE stream of pressure data",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "t": {
+                      "type": "number",
+                      "description": "Timestamp"
+                    },
+                    "wp": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "description": "Win probability (0-1)"
+                    },
+                    "p": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "description": "Pressure index (0-1)"
+                    },
+                    "event": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": "PLAY"
+                        },
+                        "label": {
+                          "type": "string",
+                          "example": "High-leverage"
+                        },
+                        "team": {
+                          "type": "string",
+                          "enum": ["HOME", "AWAY"]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/balldontlie/live": {
+      "get": {
+        "tags": ["Sports Data"],
+        "summary": "Get live sports scores",
+        "description": "Retrieve real-time scores from multiple sports leagues.",
+        "responses": {
+          "200": {
+            "description": "Live scores data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiveScores"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to fetch live scores",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/balldontlie/nba/teams": {
+      "get": {
+        "tags": ["NBA"],
+        "summary": "Get NBA teams",
+        "description": "Retrieve list of all NBA teams with current season information.",
+        "responses": {
+          "200": {
+            "description": "NBA teams data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/NBATeam"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/balldontlie/nba/games": {
+      "get": {
+        "tags": ["NBA"],
+        "summary": "Get NBA games",
+        "description": "Retrieve NBA games for a specific date or current schedule.",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date in YYYY-MM-DD format",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "NBA games data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/NBAGame"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/digital-combine/upload": {
+      "post": {
+        "tags": ["Digital Combine"],
+        "summary": "Upload video for analysis",
+        "description": "Upload a video file for biomechanical analysis using the Digital Combine™ system.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "video": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Video file to analyze"
+                  },
+                  "analysisType": {
+                    "type": "string",
+                    "enum": ["swing", "pitch", "batting", "fielding"],
+                    "description": "Type of analysis to perform"
+                  },
+                  "playerInfo": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "string"
+                      },
+                      "team": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upload successful, analysis started",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sessionId": {
+                      "type": "string",
+                      "description": "Analysis session ID"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "processing"
+                    },
+                    "estimatedCompletion": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid file or parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/digital-combine/results/{sessionId}": {
+      "get": {
+        "tags": ["Digital Combine"],
+        "summary": "Get analysis results",
+        "description": "Retrieve the analysis results for a specific session.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "description": "Analysis session ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisResults"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Session not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Register new user",
+        "description": "Create a new user account with email and password.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password", "name"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 8
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "organization": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or user already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "User login",
+        "description": "Authenticate user and return access tokens.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "details": {
+            "type": "string",
+            "description": "Detailed error information"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "LiveScores": {
+        "type": "object",
+        "properties": {
+          "games": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "homeTeam": {
+                  "type": "string"
+                },
+                "awayTeam": {
+                  "type": "string"
+                },
+                "homeScore": {
+                  "type": "integer"
+                },
+                "awayScore": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": ["scheduled", "live", "completed"]
+                },
+                "league": {
+                  "type": "string",
+                  "enum": ["NBA", "NFL", "MLB"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "NBATeam": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "abbreviation": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "conference": {
+            "type": "string",
+            "enum": ["East", "West"]
+          },
+          "division": {
+            "type": "string"
+          }
+        }
+      },
+      "NBAGame": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "home_team": {
+            "$ref": "#/components/schemas/NBATeam"
+          },
+          "visitor_team": {
+            "$ref": "#/components/schemas/NBATeam"
+          },
+          "home_team_score": {
+            "type": "integer"
+          },
+          "visitor_team_score": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "period": {
+            "type": "integer"
+          },
+          "time": {
+            "type": "string"
+          }
+        }
+      },
+      "PaginationMeta": {
+        "type": "object",
+        "properties": {
+          "total_pages": {
+            "type": "integer"
+          },
+          "current_page": {
+            "type": "integer"
+          },
+          "next_page": {
+            "type": "integer",
+            "nullable": true
+          },
+          "per_page": {
+            "type": "integer"
+          },
+          "total_count": {
+            "type": "integer"
+          }
+        }
+      },
+      "AnalysisResults": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["completed", "processing", "failed"]
+          },
+          "metrics": {
+            "type": "object",
+            "properties": {
+              "exitVelocity": {
+                "type": "number",
+                "description": "Exit velocity in mph"
+              },
+              "launchAngle": {
+                "type": "number",
+                "description": "Launch angle in degrees"
+              },
+              "battingAverage": {
+                "type": "number",
+                "description": "Predicted batting average"
+              },
+              "powerRating": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100,
+                "description": "Power rating (0-100)"
+              }
+            }
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "videoAnalysis": {
+            "type": "object",
+            "properties": {
+              "keyFrames": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": "number"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "biomechanics": {
+                "type": "object",
+                "properties": {
+                  "hipShoulderSeparation": {
+                    "type": "number"
+                  },
+                  "batSpeed": {
+                    "type": "number"
+                  },
+                  "rotationalAcceleration": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "AuthResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "subscription": {
+                "type": "string",
+                "enum": ["Grassroots", "Competitive", "Elite"]
+              }
+            }
+          },
+          "expiresIn": {
+            "type": "integer",
+            "description": "Token expiration time in seconds"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "System",
+      "description": "System health and monitoring endpoints"
+    },
+    {
+      "name": "Real-time",
+      "description": "Real-time data streaming and live updates"
+    },
+    {
+      "name": "Sports Data",
+      "description": "Sports data retrieval and analytics"
+    },
+    {
+      "name": "NBA",
+      "description": "NBA-specific data and analytics"
+    },
+    {
+      "name": "NFL",
+      "description": "NFL-specific data and analytics"
+    },
+    {
+      "name": "MLB",
+      "description": "MLB-specific data and analytics"
+    },
+    {
+      "name": "Digital Combine",
+      "description": "Video analysis and biomechanical assessment"
+    },
+    {
+      "name": "Authentication",
+      "description": "User authentication and authorization"
+    }
+  ]
+}

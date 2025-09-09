@@ -1,0 +1,64 @@
+{
+  "sport": "nba",
+  "last_updated": "2025-08-28T07:50:58.557Z",
+  "apis": {
+    "primary": {
+      "name": "NBA Stats API",
+      "base_url": "https://stats.nba.com/stats",
+      "endpoints": {
+        "teams": "/leaguedashteamstats",
+        "player_stats": "/leaguedashplayerstats",
+        "games": "/scoreboardV2"
+      },
+      "rate_limit": "30 requests/minute",
+      "authentication": "headers",
+      "data_quality": "official"
+    },
+    "secondary": {
+      "name": "ESPN NBA API",
+      "base_url": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba",
+      "endpoints": {
+        "scoreboard": "/scoreboard",
+        "teams": "/teams",
+        "standings": "/standings"
+      },
+      "rate_limit": "100 requests/minute",
+      "authentication": "none",
+      "data_quality": "real_time"
+    }
+  },
+  "connection_settings": {
+    "timeout_ms": 10000,
+    "retry_attempts": 3,
+    "retry_delay_ms": 1000,
+    "connection_pool_size": 5
+  },
+  "data_mapping": {
+    "team_name": "team.displayName",
+    "readiness": {
+      "overall": "calculated_field",
+      "offense": "stats.offRtg",
+      "defense": "stats.defRtg"
+    },
+    "efficiency_metrics": {
+      "offensive_rating": "stats.offRtg",
+      "defensive_rating": "stats.defRtg"
+    }
+  },
+  "validation_rules": {
+    "readiness_range": [
+      0,
+      100
+    ],
+    "leverage_range": [
+      1.5,
+      4
+    ],
+    "required_fields": [
+      "team",
+      "readiness",
+      "efficiency_metrics"
+    ],
+    "data_freshness_hours": 12
+  }
+}

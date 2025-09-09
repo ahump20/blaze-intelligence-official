@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Blaze Intelligence</title>
+    <meta name="description" content="Get in touch with Blaze Intelligence for championship-level sports analytics">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .glass-nav { background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 255, 255, 0.2); }
+        .hero-3d-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .contact-form { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 2px solid rgba(0, 255, 255, 0.3); border-radius: 1rem; padding: 3rem; }
+        .input-field { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; width: 100%; transition: all 0.3s ease; }
+        .input-field:focus { outline: none; border-color: #00FFFF; box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.1); }
+        .submit-btn { background: linear-gradient(45deg, #BF5700, #FF8C00); color: white; font-weight: 600; padding: 1rem 2rem; border-radius: 0.5rem; width: 100%; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .contact-card { background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(255, 140, 0, 0.2); border-radius: 1rem; padding: 2rem; }
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; }
+        .checkbox-item { display: flex; align-items: center; gap: 0.5rem; }
+        .checkbox-item input[type="checkbox"] { 
+            width: 1rem; height: 1rem; 
+            accent-color: #00FFFF;
+            background: rgba(30, 41, 59, 0.5);
+        }
+        .success-message { 
+            background: linear-gradient(45deg, #10B981, #059669); 
+            color: white; 
+            padding: 1rem; 
+            border-radius: 0.5rem; 
+            text-align: center; 
+            margin-top: 1rem;
+            display: none;
+        }
+        .step-indicator { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 2rem; 
+            padding: 0 1rem;
+        }
+        .step { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            color: #64748b;
+            transition: all 0.3s ease;
+        }
+        .step.active { color: #00FFFF; }
+        .step.completed { color: #10B981; }
+        .step-number { 
+            width: 2rem; 
+            height: 2rem; 
+            border-radius: 50%; 
+            border: 2px solid currentColor; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: bold; 
+        }
+        .form-step { display: none; }
+        .form-step.active { display: block; }
+    </style>
+    
+    <!-- Analytics & Lead Qualification -->
+    <script src="js/analytics-config.js"></script>
+    <script src="js/lead-qualification-system.js"></script>
+    <script src="js/ab-testing.js" defer></script>
+    <script src="js/sentry-config.js"></script>
+</head>
+<body>
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+            <ul class="hidden lg:flex items-center space-x-8">
+                <li><a href="/index.html" class="text-slate-300 hover:text-white">Home</a></li>
+                <li><a href="/dashboard.html" class="text-slate-300 hover:text-white">Dashboard</a></li>
+                <li><a href="/demo.html" class="text-slate-300 hover:text-white">Demo</a></li>
+                <li><a href="/contact.html" class="text-white font-semibold">Contact</a></li>
+            </ul>
+            <button class="lg:hidden text-white">☰</button>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen pt-24">        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-6xl font-black mb-4">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-cyan-400">
+                        LET'S CONNECT
+                    </span>
+                </h1>
+                <p class="text-xl text-slate-400">Transform your team with championship-level analytics</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Enhanced Contact Form -->
+                <div class="contact-form">
+                    <div class="step-indicator">
+                        <div class="step active" id="step-1">
+                            <div class="step-number">1</div>
+                            <span class="hidden sm:block">Contact Info</span>
+                        </div>
+                        <div class="step" id="step-2">
+                            <div class="step-number">2</div>
+                            <span class="hidden sm:block">Organization</span>
+                        </div>
+                        <div class="step" id="step-3">
+                            <div class="step-number">3</div>
+                            <span class="hidden sm:block">Requirements</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-cyan-400 mb-6">Get Championship-Level Analytics</h2>
+                    
+                    <form id="contactForm" class="contact-form space-y-6">
+                        <!-- Step 1: Contact Information -->
+                        <div class="form-step active" id="form-step-1">
+                            <div class="space-y-6">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-300 mb-2">First Name *</label>
+                                        <input type="text" name="firstName" class="input-field" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-300 mb-2">Last Name *</label>
+                                        <input type="text" name="lastName" class="input-field" required>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-300 mb-2">Email Address *</label>
+                                    <input type="email" name="email" class="input-field" required>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-300 mb-2">Phone Number</label>
+                                    <input type="tel" name="phone" class="input-field" placeholder="+1 (555) 123-4567">
+                                </div>
+
+                                <div class="flex justify-end">
+                                    <button type="button" class="next-btn bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2 rounded-lg transition-all">
+                                        Next Step →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Organization Details -->
+                        <div class="form-step" id="form-step-2">
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-300 mb-2">Organization/Team Name *</label>
+                                    <input type="text" name="company" class="input-field" required placeholder="e.g., St. Louis Cardinals, University of Texas">
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-300 mb-2">Your Role/Title *</label>
+                                        <select name="jobTitle" class="input-field" required>
+                                            <option value="">Select your role</option>
+                                            <option value="General Manager">General Manager</option>
+                                            <option value="VP of Analytics">VP of Analytics</option>
+                                            <option value="Director of Analytics">Director of Analytics</option>
+                                            <option value="Head Coach">Head Coach</option>
+                                            <option value="Assistant Coach">Assistant Coach</option>
+                                            <option value="Sports Scientist">Sports Scientist</option>
+                                            <option value="Performance Director">Performance Director</option>
+                                            <option value="Technology Director">Technology Director</option>
+                                            <option value="Data Analyst">Data Analyst</option>
+                                            <option value="Athletic Director">Athletic Director</option>
+                                            <option value="Consultant">Consultant</option>
+                                            <option value="Student">Student/Researcher</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-300 mb-2">Organization Type *</label>
+                                        <select name="organizationType" class="input-field" required>
+                                            <option value="">Select organization type</option>
+                                            <option value="Professional Sports Team">Professional Sports Team</option>
+                                            <option value="NCAA Division I">NCAA Division I</option>
+                                            <option value="NCAA Division II/III">NCAA Division II/III</option>
+                                            <option value="High School">High School</option>
+                                            <option value="Youth Organization">Youth Organization</option>
+                                            <option value="Sports Technology Company">Sports Technology Company</option>
+                                            <option value="Sports Analytics Firm">Sports Analytics Firm</option>
+                                            <option value="Individual Coach">Individual Coach</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-300 mb-2">Primary Sport Focus</label>
+                                    <select name="sport" class="input-field">
+                                        <option value="">Select primary sport</option>
+                                        <option value="baseball">Baseball (MLB/NCAA/High School)</option>
+                                        <option value="football">Football (NFL/NCAA/High School)</option>
+                                        <option value="basketball">Basketball (NBA/NCAA/High School)</option>
+                                        <option value="multi-sport">Multi-Sport Organization</option>
+                                        <option value="other">Other Sport</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex justify-between">
+                                    <button type="button" class="prev-btn bg-slate-600 hover:bg-slate-700 text-white px-6 py-2 rounded-lg transition-all">
+                                        ← Previous
+                                    </button>
+                                    <button type="button" class="next-btn bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2 rounded-lg transition-all">
+                                        Next Step →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Requirements & Budget -->
+                        <div class="form-step" id="form-step-3">
+                            <div class="space-y-6">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-300 mb-2">Budget Range</label>
+                                        <select name="budgetRange" class="input-field">
+                                            <option value="">Select budget range</option>
+                                            <option value="$500K+">$500K+ annually</option>
+                                            <option value="$250K - $500K">$250K - $500K annually</option>
+                                            <option value="$100K - $250K">$100K - $250K annually</option>
+                                            <option value="$50K - $100K">$50K - $100K annually</option>
+                                            <option value="$25K - $50K">$25K - $50K annually</option>
+                                            <option value="$10K - $25K">$10K - $25K annually</option>
+                                            <option value="Under $10K">Under $10K annually</option>
+                                            <option value="Not specified">Prefer to discuss</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-300 mb-2">Implementation Timeline</label>
+                                        <select name="implementationTimeline" class="input-field">
+                                            <option value="">Select timeline</option>
+                                            <option value="Immediate (0-30 days)">Immediate (0-30 days)</option>
+                                            <option value="This Quarter (1-3 months)">This Quarter (1-3 months)</option>
+                                            <option value="Next Quarter (3-6 months)">Next Quarter (3-6 months)</option>
+                                            <option value="Next Year (6-12 months)">Next Year (6-12 months)</option>
+                                            <option value="Future Planning (12+ months)">Future Planning (12+ months)</option>
+                                            <option value="Not specified">Not specified</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-300 mb-4">Current Challenges (Check all that apply)</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="challenges" value="High injury rates">
+                                            <span>High injury rates</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="challenges" value="Poor draft performance">
+                                            <span>Poor draft/recruiting results</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="challenges" value="Outdated analytics">
+                                            <span>Outdated analytics tools</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="challenges" value="Lack of predictive insights">
+                                            <span>Lack of predictive insights</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="challenges" value="Budget constraints from injuries">
+                                            <span>Budget lost to injuries</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="challenges" value="Competitive disadvantage">
+                                            <span>Competitive disadvantage</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="challenges" value="Manual processes">
+                                            <span>Too many manual processes</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="challenges" value="Data integration issues">
+                                            <span>Data integration challenges</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-300 mb-2">Specific Needs/Requirements</label>
+                                    <textarea name="specificNeeds" class="input-field" rows="3" placeholder="What specific capabilities are you looking for? Any integration requirements?"></textarea>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-300 mb-2">Additional Message</label>
+                                    <textarea name="message" class="input-field" rows="4" placeholder="Tell us about your goals, current setup, or any questions you have..."></textarea>
+                                </div>
+
+                                <div class="flex justify-between">
+                                    <button type="button" class="prev-btn bg-slate-600 hover:bg-slate-700 text-white px-6 py-2 rounded-lg transition-all">
+                                        ← Previous
+                                    </button>
+                                    <button type="submit" class="submit-btn">
+                                        🚀 Submit & Schedule Demo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="successMessage" class="success-message">
+                            <div class="text-lg font-bold mb-2">🎉 Thank You!</div>
+                            <div>Your message has been received. We'll respond within <span id="responseTime">2 hours</span> with next steps.</div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Information & Quick Actions -->
+                <div class="space-y-8">
+                    <!-- Direct Contact Card -->
+                    <div class="contact-card">
+                        <h3 class="text-xl font-bold text-orange-400 mb-4">Direct Contact</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center">
+                                    📧
+                                </div>
+                                <div>
+                                    <div class="text-sm text-slate-400">Email</div>
+                                    <a href="mailto:ahump20@outlook.com" class="text-white hover:text-orange-400">
+                                        ahump20@outlook.com
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center">
+                                    📱
+                                </div>
+                                <div>
+                                    <div class="text-sm text-slate-400">Phone</div>
+                                    <a href="tel:+12102735538" class="text-white hover:text-orange-400">
+                                        (210) 273-5538
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center">
+                                    📍
+                                </div>
+                                <div>
+                                    <div class="text-sm text-slate-400">Based in</div>
+                                    <div class="text-white">Austin, Texas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Demo Access -->
+                    <div class="contact-card">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-4">Instant Access</h3>
+                        <div class="space-y-4">
+                            <a href="/demo.html" class="block w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-lg text-center transition-all">
+                                🚀 Try Live Demo
+                            </a>
+                            <a href="/dashboard.html" class="block w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-semibold py-3 px-4 rounded-lg text-center transition-all">
+                                📊 View Dashboard
+                            </a>
+                            <a href="/data.html" class="block w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-semibold py-3 px-4 rounded-lg text-center transition-all">
+                                📈 Explore Analytics
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Response Time Guarantee -->
+                    <div class="contact-card">
+                        <h3 class="text-xl font-bold text-green-400 mb-4">Response Guarantee</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">🔥</span>
+                                <div>
+                                    <div class="font-semibold">High-Priority Leads</div>
+                                    <div class="text-sm text-slate-400">15 minutes response time</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">⚡</span>
+                                <div>
+                                    <div class="font-semibold">Standard Inquiries</div>
+                                    <div class="text-sm text-slate-400">2 hours response time</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">📞</span>
+                                <div>
+                                    <div class="font-semibold">Demo Requests</div>
+                                    <div class="text-sm text-slate-400">Same-day scheduling</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Multi-step form handling
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentStep = 1;
+            const totalSteps = 3;
+            
+            // Step navigation
+            function updateStepIndicator() {
+                for (let i = 1; i <= totalSteps; i++) {
+                    const stepElement = document.getElementById(`step-${i}`);
+                    const formStep = document.getElementById(`form-step-${i}`);
+                    
+                    if (i < currentStep) {
+                        stepElement.classList.add('completed');
+                        stepElement.classList.remove('active');
+                    } else if (i === currentStep) {
+                        stepElement.classList.add('active');
+                        stepElement.classList.remove('completed');
+                        formStep.classList.add('active');
+                    } else {
+                        stepElement.classList.remove('active', 'completed');
+                        formStep.classList.remove('active');
+                    }
+                }
+            }
+            
+            // Next button handlers
+            document.querySelectorAll('.next-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (validateCurrentStep()) {
+                        if (currentStep < totalSteps) {
+                            currentStep++;
+                            updateStepIndicator();
+                        }
+                    }
+                });
+            });
+            
+            // Previous button handlers
+            document.querySelectorAll('.prev-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (currentStep > 1) {
+                        currentStep--;
+                        updateStepIndicator();
+                    }
+                });
+            });
+            
+            function validateCurrentStep() {
+                const currentFormStep = document.getElementById(`form-step-${currentStep}`);
+                const requiredFields = currentFormStep.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.style.borderColor = '#ef4444';
+                        isValid = false;
+                    } else {
+                        field.style.borderColor = '';
+                    }
+                });
+                
+                return isValid;
+            }
+            
+            // Form submission with lead qualification
+            document.getElementById('contactForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                if (!validateCurrentStep()) {
+                    return;
+                }
+                
+                const submitBtn = document.querySelector('.submit-btn');
+                const successMessage = document.getElementById('successMessage');
+                const responseTimeSpan = document.getElementById('responseTime');
+                
+                // Disable submit button
+                submitBtn.disabled = true;
+                submitBtn.textContent = '🔄 Processing...';
+                
+                // Collect form data
+                const formData = new FormData(this);
+                const leadData = {};
+                
+                // Convert FormData to object
+                for (let [key, value] of formData.entries()) {
+                    if (key === 'challenges') {
+                        leadData[key] = leadData[key] || [];
+                        leadData[key].push(value);
+                    } else {
+                        leadData[key] = value;
+                    }
+                }
+                
+                // Combine name fields
+                leadData.name = `${leadData.firstName || ''} ${leadData.lastName || ''}`.trim();
+                
+                try {
+                    // Process with lead qualification system
+                    if (window.BlazeLeadSystem) {
+                        // Create a synthetic form for the lead system
+                        const syntheticForm = document.createElement('form');
+                        syntheticForm.className = 'contact-form';
+                        
+                        Object.entries(leadData).forEach(([key, value]) => {
+                            const input = document.createElement('input');
+                            input.name = key;
+                            input.value = Array.isArray(value) ? value.join(', ') : value;
+                            syntheticForm.appendChild(input);
+                        });
+                        
+                        // Trigger lead processing
+                        window.BlazeLeadSystem.captureFormLead(syntheticForm, e);
+                        
+                        // Get lead category for response time
+                        const mockLeadData = { ...leadData, sessionData: window.BlazeLeadSystem.getSessionData() };
+                        const score = window.BlazeLeadSystem.scoreLead(mockLeadData);
+                        const category = window.BlazeLeadSystem.categorizeLead(score);
+                        
+                        // Update response time based on category
+                        const responseTimeMap = {
+                            'HOT': '15 minutes',
+                            'WARM': '2 hours',
+                            'COLD': '24 hours',
+                            'NURTURE': '72 hours'
+                        };
+                        responseTimeSpan.textContent = responseTimeMap[category] || '2 hours';
+                    }
+                    
+                    // Simulate API call (replace with actual endpoint)
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // Show success message
+                    this.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // Track conversion
+                    if (window.BlazeAnalytics) {
+                        window.BlazeAnalytics.track('contact_form_submit', {
+                            'form_type': 'enhanced_contact',
+                            'lead_data': leadData
+                        });
+                    }
+                    
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    alert('There was an error submitting your form. Please try again or contact us directly.');
+                    
+                    // Re-enable submit button
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '🚀 Submit & Schedule Demo';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

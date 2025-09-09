@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Blaze Intelligence">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0B0B0F">
+    
+    <title>Blaze Intelligence | Championship Mobile App</title>
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/icon-120.png">
+    
+    <!-- Splash Screens -->
+    <link rel="apple-touch-startup-image" href="/splash/splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash/splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash/splash-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Championship Brand System -->
+    <link rel="stylesheet" href="/public/brand.css">
+    <link rel="stylesheet" href="/public/brand-components.css">
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/@capacitor/core@latest/dist/capacitor.js"></script>
+    
+    <style>
+        /* iOS-Optimized Championship Styles */
+        :root {
+            --safe-area-inset-top: env(safe-area-inset-top);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+            --safe-area-inset-left: env(safe-area-inset-left);
+            --safe-area-inset-right: env(safe-area-inset-right);
+        }
+        
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #0B0B0F;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+        }
+        
+        /* iOS App Container */
+        .ios-app {
+            height: 100vh;
+            height: -webkit-fill-available;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        /* iOS Status Bar */
+        .ios-status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--safe-area-inset-top);
+            background: rgba(11, 11, 15, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 9999;
+        }
+        
+        /* iOS Navigation */
+        .ios-nav {
+            position: fixed;
+            top: var(--safe-area-inset-top);
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: rgba(11, 11, 15, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 9998;
+        }
+        
+        .ios-nav-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #fff;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .ios-nav-btn {
+            font-size: 17px;
+            color: #9BCBEB;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+        }
+        
+        /* iOS Tab Bar */
+        .ios-tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: calc(49px + var(--safe-area-inset-bottom));
+            background: rgba(11, 11, 15, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding-top: 6px;
+            padding-bottom: var(--safe-area-inset-bottom);
+            z-index: 9997;
+        }
+        
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tab-item.active {
+            color: #BF5700;
+        }
+        
+        .tab-item:not(.active) {
+            color: #9CA3AF;
+        }
+        
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tab-label {
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        /* Content Area */
+        .ios-content {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-top: calc(44px + var(--safe-area-inset-top));
+            padding-bottom: calc(49px + var(--safe-area-inset-bottom));
+        }
+        
+        .view {
+            display: none;
+            min-height: 100%;
+            padding: 16px;
+            padding-left: calc(16px + var(--safe-area-inset-left));
+            padding-right: calc(16px + var(--safe-area-inset-right));
+        }
+        
+        .view.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Championship Cards */
+        .championship-card {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(155, 203, 235, 0.1));
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .championship-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(191, 87, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        /* Live Metrics */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .metric-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #BF5700, #9BCBEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .metric-label {
+            font-size: 11px;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+        }
+        
+        /* Live Feed */
+        .live-feed {
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 12px;
+            padding: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .feed-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .feed-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Native iOS Buttons */
+        .ios-button {
+            background: linear-gradient(135deg, #BF5700, #9BCBEB);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 24px;
+            font-size: 17px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .ios-button:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        
+        /* Pull to Refresh */
+        .pull-to-refresh {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .pull-to-refresh.active {
+            opacity: 1;
+        }
+        
+        .spinner {
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(155, 203, 235, 0.2);
+            border-top-color: #9BCBEB;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Haptic Feedback Styles */
+        .haptic {
+            transition: all 0.1s;
+        }
+        
+        .haptic:active {
+            transform: scale(0.98);
+        }
+        
+        /* Iframe Container for Deployments */
+        .deployment-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            margin: 16px 0;
+        }
+        
+        .deployment-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="ios-app">
+        <!-- iOS Status Bar -->
+        <div class="ios-status-bar"></div>
+        
+        <!-- iOS Navigation Bar -->
+        <div class="ios-nav">
+            <button class="ios-nav-btn" onclick="handleBack()">←</button>
+            <div class="ios-nav-title">Blaze Intelligence</div>
+            <button class="ios-nav-btn" onclick="handleSettings()">⚙</button>
+        </div>
+        
+        <!-- Pull to Refresh -->
+        <div class="pull-to-refresh" id="pullRefresh">
+            <div class="spinner"></div>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="ios-content" id="content">
+            <!-- Dashboard View -->
+            <div class="view active" id="dashboard">
+                <div class="championship-card">
+                    <h2 style="color: #fff; margin: 0 0 8px;">Championship Dashboard</h2>
+                    <p style="color: #9CA3AF; margin: 0;">Real-time sports intelligence at your fingertips</p>
+                </div>
+                
+                <div class="metric-grid">
+                    <div class="metric-item haptic">
+                        <div class="metric-value" id="accuracy">94.6%</div>
+                        <div class="metric-label">Accuracy</div>
+                    </div>
+                    <div class="metric-item haptic">
+                        <div class="metric-value" id="latency"><100ms</div>
+                        <div class="metric-label">Latency</div>
+                    </div>
+                    <div class="metric-item haptic">
+                        <div class="metric-value" id="dataPoints">2.8M+</div>
+                        <div class="metric-label">Data Points</div>
+                    </div>
+                    <div class="metric-item haptic">
+                        <div class="metric-value" id="readiness">86.6%</div>
+                        <div class="metric-label">Readiness</div>
+                    </div>
+                </div>
+                
+                <h3 style="color: #fff; margin: 20px 0 12px;">Live Cardinals Feed</h3>
+                <div class="live-feed" id="liveFeed">
+                    <!-- Live feed items will be inserted here -->
+                </div>
+                
+                <div style="margin-top: 24px;">
+                    <button class="ios-button haptic" onclick="openChampionshipView()">
+                        View Championship Analytics
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Analytics View -->
+            <div class="view" id="analytics">
+                <h2 style="color: #fff; margin: 0 0 16px;">Live Analytics</h2>
+                
+                <div class="deployment-container">
+                    <iframe src="https://blaze-intelligence.pages.dev" title="Production Analytics"></iframe>
+                </div>
+                
+                <div style="margin-top: 16px;">
+                    <button class="ios-button haptic" onclick="refreshAnalytics()">
+                        Refresh Analytics
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Championship View -->
+            <div class="view" id="championship">
+                <h2 style="color: #fff; margin: 0 0 16px;">Championship Platform</h2>
+                
+                <div class="deployment-container">
+                    <iframe src="https://4ce1b7a1.blaze-intelligence.pages.dev/blaze-intelligence-championship.html" title="Championship Platform"></iframe>
+                </div>
+                
+                <div style="margin-top: 16px;">
+                    <button class="ios-button haptic" onclick="switchDeployment()">
+                        Switch Deployment
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Replit View -->
+            <div class="view" id="replit">
+                <h2 style="color: #fff; margin: 0 0 16px;">Development Environment</h2>
+                
+                <div class="deployment-container">
+                    <iframe src="https://35179f3c-00f3-409f-95da-bed1c6ba912c-00-3tftlc85yrdac.spock.replit.dev/" title="Replit Environment"></iframe>
+                </div>
+                
+                <div style="margin-top: 16px;">
+                    <button class="ios-button haptic" onclick="reloadReplit()">
+                        Reload Environment
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Profile View -->
+            <div class="view" id="profile">
+                <div class="championship-card">
+                    <h2 style="color: #fff; margin: 0 0 8px;">Austin Humphrey</h2>
+                    <p style="color: #9CA3AF; margin: 0;">Founder & CEO</p>
+                    <p style="color: #9CA3AF; margin: 8px 0 0;">Boerne, Texas</p>
+                </div>
+                
+                <div style="background: rgba(15, 23, 42, 0.4); border-radius: 12px; padding: 16px; margin: 16px 0;">
+                    <h3 style="color: #fff; margin: 0 0 12px;">Platform Status</h3>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <div class="feed-indicator"></div>
+                        <span style="color: #10b981;">All Systems Operational</span>
+                    </div>
+                    <p style="color: #9CA3AF; margin: 0; font-size: 14px;">
+                        Championship platform deployed across 3 environments with 99.9% uptime.
+                    </p>
+                </div>
+                
+                <div style="margin-top: 24px;">
+                    <button class="ios-button haptic" onclick="contactSupport()">
+                        Contact Support
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- iOS Tab Bar -->
+        <div class="ios-tab-bar">
+            <div class="tab-item active haptic" onclick="switchTab('dashboard', this)">
+                <div class="tab-icon">📊</div>
+                <div class="tab-label">Dashboard</div>
+            </div>
+            <div class="tab-item haptic" onclick="switchTab('analytics', this)">
+                <div class="tab-icon">📈</div>
+                <div class="tab-label">Analytics</div>
+            </div>
+            <div class="tab-item haptic" onclick="switchTab('championship', this)">
+                <div class="tab-icon">🏆</div>
+                <div class="tab-label">Championship</div>
+            </div>
+            <div class="tab-item haptic" onclick="switchTab('replit', this)">
+                <div class="tab-icon">🚀</div>
+                <div class="tab-label">Dev</div>
+            </div>
+            <div class="tab-item haptic" onclick="switchTab('profile', this)">
+                <div class="tab-icon">👤</div>
+                <div class="tab-label">Profile</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // iOS App State
+        let currentView = 'dashboard';
+        let deploymentIndex = 0;
+        const deployments = [
+            'http://localhost:8090/blaze-intelligence-championship.html',
+            'https://blaze-intelligence.pages.dev',
+            'https://4ce1b7a1.blaze-intelligence.pages.dev',
+            'https://35179f3c-00f3-409f-95da-bed1c6ba912c-00-3tftlc85yrdac.spock.replit.dev/'
+        ];
+        
+        // Tab Switching
+        function switchTab(viewId, tabElement) {
+            // Haptic feedback
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(10);
+            }
+            
+            // Update active tab
+            document.querySelectorAll('.tab-item').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            tabElement.classList.add('active');
+            
+            // Update active view
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(viewId).classList.add('active');
+            
+            currentView = viewId;
+            
+            // Update navigation title
+            const titles = {
+                dashboard: 'Dashboard',
+                analytics: 'Live Analytics',
+                championship: 'Championship',
+                replit: 'Development',
+                profile: 'Profile'
+            };
+            document.querySelector('.ios-nav-title').textContent = titles[viewId] || 'Blaze Intelligence';
+        }
+        
+        // Navigation
+        function handleBack() {
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(10);
+            }
+            
+            if (currentView !== 'dashboard') {
+                switchTab('dashboard', document.querySelector('.tab-item'));
+            } else {
+                // Go to home screen (PWA)
+                if (window.matchMedia('(display-mode: standalone)').matches) {
+                    window.close();
+                }
+            }
+        }
+        
+        function handleSettings() {
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(10);
+            }
+            alert('Settings coming soon!');
+        }
+        
+        // Live Feed Simulation
+        function updateLiveFeed() {
+            const feed = document.getElementById('liveFeed');
+            const events = [
+                'Cardinals scored 7 - MLB',
+                'Pressure index: 78%',
+                'Win probability: 65%',
+                'Titans field goal - NFL',
+                'Clutch performance detected',
+                'Championship moment triggered'
+            ];
+            
+            const event = events[Math.floor(Math.random() * events.length)];
+            const time = new Date().toLocaleTimeString();
+            
+            const item = document.createElement('div');
+            item.className = 'feed-item';
+            item.innerHTML = `
+                <div class="feed-indicator"></div>
+                <div style="flex: 1;">
+                    <div style="color: #fff; font-size: 14px;">${event}</div>
+                    <div style="color: #9CA3AF; font-size: 12px;">${time}</div>
+                </div>
+            `;
+            
+            feed.insertBefore(item, feed.firstChild);
+            
+            // Keep only last 10 items
+            while (feed.children.length > 10) {
+                feed.removeChild(feed.lastChild);
+            }
+        }
+        
+        // Update metrics
+        function updateMetrics() {
+            const readiness = (80 + Math.random() * 20).toFixed(1);
+            document.getElementById('readiness').textContent = readiness + '%';
+        }
+        
+        // Championship View
+        function openChampionshipView() {
+            switchTab('championship', document.querySelectorAll('.tab-item')[2]);
+        }
+        
+        // Refresh Analytics
+        function refreshAnalytics() {
+            const iframe = document.querySelector('#analytics iframe');
+            iframe.src = iframe.src;
+        }
+        
+        // Switch Deployment
+        function switchDeployment() {
+            deploymentIndex = (deploymentIndex + 1) % deployments.length;
+            const iframe = document.querySelector('#championship iframe');
+            iframe.src = deployments[deploymentIndex];
+        }
+        
+        // Reload Replit
+        function reloadReplit() {
+            const iframe = document.querySelector('#replit iframe');
+            iframe.src = iframe.src;
+        }
+        
+        // Contact Support
+        function contactSupport() {
+            window.location.href = 'mailto:ahump20@outlook.com?subject=Blaze Intelligence Support';
+        }
+        
+        // Pull to Refresh
+        let startY = 0;
+        let isPulling = false;
+        
+        const content = document.getElementById('content');
+        const pullRefresh = document.getElementById('pullRefresh');
+        
+        content.addEventListener('touchstart', (e) => {
+            if (content.scrollTop === 0) {
+                startY = e.touches[0].clientY;
+                isPulling = true;
+            }
+        });
+        
+        content.addEventListener('touchmove', (e) => {
+            if (!isPulling) return;
+            
+            const currentY = e.touches[0].clientY;
+            const diff = currentY - startY;
+            
+            if (diff > 0 && diff < 100) {
+                pullRefresh.style.transform = `translateX(-50%) translateY(${diff}px)`;
+                pullRefresh.classList.add('active');
+            }
+        });
+        
+        content.addEventListener('touchend', () => {
+            if (isPulling && pullRefresh.classList.contains('active')) {
+                // Trigger refresh
+                pullRefresh.style.transform = 'translateX(-50%) translateY(50px)';
+                
+                setTimeout(() => {
+                    updateMetrics();
+                    updateLiveFeed();
+                    
+                    pullRefresh.style.transform = 'translateX(-50%) translateY(-50px)';
+                    pullRefresh.classList.remove('active');
+                }, 1000);
+            }
+            
+            isPulling = false;
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start live feed updates
+            setInterval(updateLiveFeed, 5000);
+            setInterval(updateMetrics, 3000);
+            updateLiveFeed();
+            
+            // Check if running as PWA
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                console.log('Running as iOS PWA');
+            }
+            
+            // Register service worker for offline support
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed'));
+            }
+            
+            // Request notification permission
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+        });
+        
+        // Handle iOS safe areas
+        function updateSafeAreas() {
+            const root = document.documentElement;
+            const safeAreaInsets = {
+                top: parseInt(getComputedStyle(root).getPropertyValue('--safe-area-inset-top')) || 0,
+                bottom: parseInt(getComputedStyle(root).getPropertyValue('--safe-area-inset-bottom')) || 0,
+                left: parseInt(getComputedStyle(root).getPropertyValue('--safe-area-inset-left')) || 0,
+                right: parseInt(getComputedStyle(root).getPropertyValue('--safe-area-inset-right')) || 0
+            };
+            console.log('Safe area insets:', safeAreaInsets);
+        }
+        
+        window.addEventListener('resize', updateSafeAreas);
+        updateSafeAreas();
+    </script>
+</body>
+</html>

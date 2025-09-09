@@ -1,0 +1,26 @@
+{
+  "sport": "youth",
+  "last_updated": "2025-08-28T07:50:58.557Z",
+  "apis": {
+    "primary": {
+      "name": "Perfect Game API",
+      "base_url": "https://api.perfectgame.org/v1",
+      "endpoints": {
+        "tournaments": "/tournaments",
+        "players": "/players",
+        "rankings": "/rankings"
+      },
+      "rate_limit": "50 requests/minute",
+      "authentication": "api_key",
+      "data_quality": "specialized"
+    }
+  },
+  "connection_settings": {
+    "timeout_ms": 10000,
+    "retry_attempts": 3,
+    "retry_delay_ms": 1000,
+    "connection_pool_size": 5
+  },
+  "data_mapping": {},
+  "validation_rules": {}
+}

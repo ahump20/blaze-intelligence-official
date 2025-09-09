@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Deck | Blaze Intelligence</title>
+    <meta name="description" content="Investment opportunity in the rapidly growing sports analytics market">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/blaze-three-visuals.js" defer></script>
+    
+    <style>
+        body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .glass-nav { background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 255, 255, 0.2); }
+        .hero-3d-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .investor-card { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(15px); border: 2px solid rgba(0, 255, 255, 0.2); border-radius: 1rem; padding: 2rem; margin-bottom: 2rem; }
+        .metric-highlight { background: linear-gradient(135deg, rgba(255, 140, 0, 0.2), rgba(0, 255, 255, 0.1)); border: 2px solid rgba(255, 140, 0, 0.4); border-radius: 1rem; padding: 2rem; }
+        .growth-indicator { color: #00FF00; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+            <ul class="hidden lg:flex items-center space-x-8">
+                <li><a href="/index.html" class="text-slate-300 hover:text-white">Home</a></li>
+                <li><a href="/dashboard.html" class="text-slate-300 hover:text-white">Dashboard</a></li>
+                <li><a href="/methods-definitions.html" class="text-slate-300 hover:text-white">Methods</a></li>
+                <li><a href="/contact.html" class="text-slate-300 hover:text-white">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen pt-24">
+        <div id="investor-hero-3d" class="hero-3d-container"></div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto px-4 py-12">
+            <!-- Title Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-6xl font-black mb-4">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-cyan-400">
+                        INVESTMENT OPPORTUNITY
+                    </span>
+                </h1>
+                <p class="text-2xl text-slate-300">Capturing Value in the Explosive Sports Analytics Market</p>
+                <p class="text-lg text-slate-400 mt-2">Confidential Investor Materials | August 2025</p>
+            </div>
+
+            <!-- Market Opportunity -->
+            <div class="investor-card">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-6">📈 Market Opportunity</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="metric-highlight">
+                        <h3 class="text-xl font-bold text-orange-400 mb-3">Total Addressable Market</h3>
+                        <p class="text-4xl font-black text-white mb-2">$2.29B → $4.75B</p>
+                        <p class="text-slate-300">2025 to 2030 Projection</p>
+                        <p class="growth-indicator mt-2">+107% Growth</p>
+                    </div>
+                    
+                    <div class="metric-highlight">
+                        <h3 class="text-xl font-bold text-orange-400 mb-3">Compound Annual Growth Rate</h3>
+                        <p class="text-4xl font-black text-white mb-2">15.7% - 27.75%</p>
+                        <p class="text-slate-300">Industry CAGR (2025-2030)</p>
+                        <p class="text-sm text-slate-400 mt-2">Source: MarketsandMarkets, Mordor Intelligence</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-green-400 mb-4">Growth Drivers</h3>
+                <ul class="list-disc list-inside text-slate-300 space-y-2">
+                    <li><strong>Sports Betting Expansion:</strong> Legal sports betting expanding to 38+ states by 2026</li>
+                    <li><strong>AI/ML Adoption:</strong> Teams investing heavily in predictive analytics</li>
+                    <li><strong>Cloud Infrastructure:</strong> Elastic computing enabling real-time analysis</li>
+                    <li><strong>Sensor Technology:</strong> IoT devices generating exponential data growth</li>
+                    <li><strong>Fan Engagement:</strong> Data-driven content and fantasy sports expansion</li>
+                </ul>
+            </div>
+
+            <!-- Competitive Advantage -->
+            <div class="investor-card">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-6">🏆 Competitive Advantage</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="text-center p-4 border border-cyan-500/30 rounded-lg">
+                        <p class="text-5xl font-black text-orange-400 mb-2">Digital Combine algorithms</p>
+                        <p class="text-slate-300 font-semibold">Prediction Accuracy</p>
+                        <p class="text-sm text-green-400 mt-1">Top 10% of Industry</p>
+                    </div>
+                    
+                    <div class="text-center p-4 border border-cyan-500/30 rounded-lg">
+                        <p class="text-5xl font-black text-orange-400 mb-2">competitive advantages</p>
+                        <p class="text-slate-300 font-semibold">Cost Savings</p>
+                        <p class="text-sm text-green-400 mt-1">vs. Hudl, TeamBuildr</p>
+                    </div>
+                    
+                    <div class="text-center p-4 border border-cyan-500/30 rounded-lg">
+                        <p class="text-5xl font-black text-orange-400 mb-2">85ms</p>
+                        <p class="text-slate-300 font-semibold">API Latency</p>
+                        <p class="text-sm text-green-400 mt-1">CDN-Optimized</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-green-400 mb-4">Market Positioning</h3>
+                <table class="w-full text-slate-300">
+                    <thead>
+                        <tr class="border-b border-slate-600">
+                            <th class="text-left py-3">Competitor</th>
+                            <th class="text-right py-3">Annual Price</th>
+                            <th class="text-right py-3">Our Advantage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-slate-700">
+                            <td class="py-3">Hudl Platinum</td>
+                            <td class="text-right">$3,300</td>
+                            <td class="text-right text-green-400">64% cheaper</td>
+                        </tr>
+                        <tr class="border-b border-slate-700">
+                            <td class="py-3">Catapult Pro</td>
+                            <td class="text-right">~$6,300</td>
+                            <td class="text-right text-green-400">81% cheaper</td>
+                        </tr>
+                        <tr class="border-b border-slate-700">
+                            <td class="py-3">Second Spectrum</td>
+                            <td class="text-right">Enterprise</td>
+                            <td class="text-right text-green-400">Accessible pricing</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 font-bold">Blaze Intelligence</td>
+                            <td class="text-right font-bold">$1,188</td>
+                            <td class="text-right font-bold text-cyan-400">Market Leader</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Business Model -->
+            <div class="investor-card">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-6">💼 Business Model</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-orange-400 mb-4">Revenue Streams</h3>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li><strong>SaaS Subscriptions:</strong> $99/month or $1,188/year</li>
+                            <li><strong>Enterprise Contracts:</strong> Custom pricing for pro teams</li>
+                            <li><strong>API Access:</strong> Usage-based pricing for developers</li>
+                            <li><strong>Consulting Services:</strong> Strategic advisory for teams</li>
+                            <li><strong>Vision AI Platform:</strong> Premium biomechanical analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-orange-400 mb-4">Target Markets</h3>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li><strong>Professional Teams:</strong> MLB, NFL, NBA franchises</li>
+                            <li><strong>College Athletics:</strong> NCAA Division I-III programs</li>
+                            <li><strong>High Schools:</strong> 27,000+ athletic programs</li>
+                            <li><strong>Youth Sports:</strong> Travel teams and academies</li>
+                            <li><strong>Sports Betting:</strong> Data partnerships</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Traction & Validation -->
+            <div class="investor-card">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-6">✅ Traction & Validation</h2>
+                
+                <div class="grid md:grid-cols-4 gap-4 mb-6">
+                    <div class="text-center p-4 bg-slate-800/50 rounded-lg">
+                        <p class="text-3xl font-bold text-orange-400">Comprehensive datasets</p>
+                        <p class="text-sm text-slate-400">Data Points</p>
+                    </div>
+                    <div class="text-center p-4 bg-slate-800/50 rounded-lg">
+                        <p class="text-3xl font-bold text-orange-400">99.9%</p>
+                        <p class="text-sm text-slate-400">Uptime SLA</p>
+                    </div>
+                    <div class="text-center p-4 bg-slate-800/50 rounded-lg">
+                        <p class="text-3xl font-bold text-orange-400">15K</p>
+                        <p class="text-sm text-slate-400">Daily Data Intake</p>
+                    </div>
+                    <div class="text-center p-4 bg-slate-800/50 rounded-lg">
+                        <p class="text-3xl font-bold text-orange-400">92/100</p>
+                        <p class="text-sm text-slate-400">Truth Score</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-green-400 mb-4">Key Achievements</h3>
+                <ul class="list-disc list-inside text-slate-300 space-y-2">
+                    <li>Developed proprietary Vision AI for biomechanical analysis and micro-expression detection</li>
+                    <li>Achieved Top 10% prediction accuracy across MLB, NFL, NBA</li>
+                    <li>Built CDN-optimized infrastructure with sub-100ms response times</li>
+                    <li>Created comprehensive coverage of 30 MLB, 32 NFL, 30 NBA teams</li>
+                    <li>Validated competitive advantages</li>
+                </ul>
+            </div>
+
+            <!-- Financial Projections -->
+            <div class="investor-card">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-6">📊 Financial Projections</h2>
+                
+                <div class="bg-slate-800/50 p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-bold text-orange-400 mb-4">Conservative Growth Scenario</h3>
+                    <table class="w-full text-slate-300">
+                        <thead>
+                            <tr class="border-b border-slate-600">
+                                <th class="text-left py-2">Metric</th>
+                                <th class="text-right py-2">Year 1</th>
+                                <th class="text-right py-2">Year 2</th>
+                                <th class="text-right py-2">Year 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-700">
+                                <td class="py-2">Customers</td>
+                                <td class="text-right">100</td>
+                                <td class="text-right">500</td>
+                                <td class="text-right">2,000</td>
+                            </tr>
+                            <tr class="border-b border-slate-700">
+                                <td class="py-2">ARR</td>
+                                <td class="text-right">$118,800</td>
+                                <td class="text-right">$594,000</td>
+                                <td class="text-right">$2,376,000</td>
+                            </tr>
+                            <tr class="border-b border-slate-700">
+                                <td class="py-2">Gross Margin</td>
+                                <td class="text-right">75%</td>
+                                <td class="text-right">80%</td>
+                                <td class="text-right">85%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-sm text-slate-400">
+                    *Based on $1,188 annual pricing, conservative customer acquisition, and improving margins through scale
+                </p>
+            </div>
+
+            <!-- Investment Terms -->
+            <div class="investor-card">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-6">🎯 Investment Opportunity</h2>
+                
+                <div class="bg-gradient-to-r from-orange-500/20 to-cyan-500/20 p-6 rounded-lg mb-6">
+                    <h3 class="text-2xl font-bold text-white mb-4">Seeking: $2-5M Series A</h3>
+                    
+                    <h4 class="text-lg font-bold text-orange-400 mb-3">Use of Funds</h4>
+                    <ul class="list-disc list-inside text-slate-300 space-y-2 mb-4">
+                        <li><strong>40% - Engineering:</strong> Scale platform, enhance AI/ML capabilities</li>
+                        <li><strong>30% - Sales & Marketing:</strong> Enterprise sales team, digital marketing</li>
+                        <li><strong>20% - Data Partnerships:</strong> Secure premium data sources</li>
+                        <li><strong>10% - Operations:</strong> Infrastructure, compliance, admin</li>
+                    </ul>
+
+                    <h4 class="text-lg font-bold text-orange-400 mb-3">Investment Highlights</h4>
+                    <ul class="list-disc list-inside text-slate-300 space-y-2">
+                        <li>Entering market growing at 15.7-27.75% CAGR</li>
+                        <li>Proven technology with Top 10% accuracy</li>
+                        <li>Significant cost advantage vs. incumbents</li>
+                        <li>Founder with deep sports and analytics background</li>
+                        <li>Clear path to profitability with SaaS model</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Team -->
+            <div class="investor-card">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-6">👥 Leadership Team</h2>
+                
+                <div class="bg-slate-800/50 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold text-orange-400 mb-3">Austin Humphrey - Founder & CEO</h3>
+                    <ul class="list-disc list-inside text-slate-300 space-y-2">
+                        <li>B.A. International Relations, UT Austin | M.S. Sports Management, Full Sail (2025)</li>
+                        <li>Former Northwestern Mutual Top 10% Financial Representative</li>
+                        <li>Current Spectrum Reach Account Executive (Sports & Entertainment)</li>
+                        <li>Multi-sport athlete with deep understanding of performance analytics</li>
+                        <li>Built production-ready Cardinals Analytics MCP Server</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-12 p-8 bg-gradient-to-r from-orange-500/10 to-cyan-500/10 rounded-2xl border-2 border-cyan-500/30">
+                <h2 class="text-3xl font-bold text-white mb-4">Join Us in Revolutionizing Sports Analytics</h2>
+                <p class="text-xl text-slate-300 mb-6">
+                    Be part of the next generation of sports intelligence technology
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/contact.html" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-lg hover:scale-105 transition-transform">
+                        Schedule Meeting <i data-lucide="calendar" class="w-5 h-5"></i>
+                    </a>
+                    <a href="/methods-definitions.html" class="inline-flex items-center gap-3 px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600 transition-colors">
+                        View Validation <i data-lucide="check-circle" class="w-5 h-5"></i>
+                    </a>
+                </div>
+                
+                <div class="mt-8 text-sm text-slate-400">
+                    <p>Contact: Austin Humphrey | ahump20@outlook.com | (210) 273-5538</p>
+                    <p class="mt-2">All metrics validated August 31, 2025 | <a href="/CLAIMS_VALIDATION_REPORT_2025.md" class="text-cyan-400 underline">Full Validation Report</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            if (typeof blazeVisuals !== 'undefined') {
+                blazeVisuals.initHeroHeader('investor-hero-3d', { 
+                    particleCount: 2000, 
+                    interactive: true 
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,3077 @@
+[
+  {
+    "id": "player_1",
+    "name": "Jonathan Jackson",
+    "jerseyNumber": 32,
+    "position": "PG",
+    "age": 20,
+    "height": "6'4\"",
+    "weight": 230,
+    "experience": 7,
+    "stats": {
+      "pointsPerGame": "9.8",
+      "reboundsPerGame": "3.2",
+      "assistsPerGame": "7.4",
+      "stealsPerGame": "2.2",
+      "blocksPerGame": "1.3",
+      "fieldGoalPercentage": "0.573",
+      "threePointPercentage": "0.326",
+      "freeThrowPercentage": "0.927",
+      "minutesPerGame": "29.0"
+    },
+    "contract": {
+      "years": 6,
+      "totalValue": 84,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 2,
+      "noTradeClause": false,
+      "status": "rookie"
+    },
+    "bio": {
+      "college": "University of Texas",
+      "hometown": "Birmingham, AL",
+      "draftYear": 2015,
+      "draftRound": 5,
+      "draftPick": 4,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 53,
+      "heartRateMax": 204,
+      "bodyFatPercentage": 12.4,
+      "muscleMass": 47.4,
+      "vo2Max": 63.9,
+      "flexibility": 85,
+      "reactionTime": 0.215,
+      "balance": 82,
+      "coordination": 81,
+      "agility": 96
+    },
+    "performance": {
+      "currentForm": 94,
+      "peakPerformance": 91,
+      "consistency": 77,
+      "clutchFactor": 89,
+      "mentalToughness": 97,
+      "leadershipScore": 94,
+      "teamChemistry": 97,
+      "coachability": 89,
+      "workEthic": 95,
+      "adaptability": 84
+    },
+    "development": {
+      "primaryFocus": "Technique Refinement",
+      "secondaryFocus": "Flexibility Training",
+      "weeklyHours": 38,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Shoulder maintenance"
+      ],
+      "injuryHistory": 0,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.15,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 82,
+      "communication": 79,
+      "teamwork": 94,
+      "mentorship": 83,
+      "communityInvolvement": 95,
+      "mediaRelations": 89,
+      "socialMediaPresence": 59,
+      "fanEngagement": 65,
+      "professionalism": 91,
+      "characterScore": 96
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.881,
+      "optimalPerformanceZone": "74-85%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 73,
+      "marketValue": "$8.7M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_2",
+    "name": "Jeffrey Garcia",
+    "jerseyNumber": 41,
+    "position": "SG",
+    "age": 31,
+    "height": "6'5\"",
+    "weight": 175,
+    "experience": 3,
+    "stats": {
+      "pointsPerGame": "13.9",
+      "reboundsPerGame": "13.7",
+      "assistsPerGame": "7.1",
+      "stealsPerGame": "1.6",
+      "blocksPerGame": "1.0",
+      "fieldGoalPercentage": "0.595",
+      "threePointPercentage": "0.448",
+      "freeThrowPercentage": "0.777",
+      "minutesPerGame": "26.9"
+    },
+    "contract": {
+      "years": 6,
+      "totalValue": 92,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 7,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Georgia Institute of Technology",
+      "hometown": "New York, NY",
+      "draftYear": 2016,
+      "draftRound": 2,
+      "draftPick": 6,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 57,
+      "heartRateMax": 213,
+      "bodyFatPercentage": 19.8,
+      "muscleMass": 36.2,
+      "vo2Max": 57.9,
+      "flexibility": 94,
+      "reactionTime": 0.157,
+      "balance": 96,
+      "coordination": 95,
+      "agility": 89
+    },
+    "performance": {
+      "currentForm": 84,
+      "peakPerformance": 87,
+      "consistency": 83,
+      "clutchFactor": 95,
+      "mentalToughness": 76,
+      "leadershipScore": 79,
+      "teamChemistry": 99,
+      "coachability": 95,
+      "workEthic": 90,
+      "adaptability": 99
+    },
+    "development": {
+      "primaryFocus": "Film Study",
+      "secondaryFocus": "Mental Conditioning",
+      "weeklyHours": 42,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Muscle fatigue"
+      ],
+      "injuryHistory": 2,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.11,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 79,
+      "communication": 96,
+      "teamwork": 82,
+      "mentorship": 70,
+      "communityInvolvement": 89,
+      "mediaRelations": 98,
+      "socialMediaPresence": 98,
+      "fanEngagement": 79,
+      "professionalism": 99,
+      "characterScore": 86
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.811,
+      "optimalPerformanceZone": "78-80%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 75,
+      "marketValue": "$8.9M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_3",
+    "name": "Nicholas Hall",
+    "jerseyNumber": 43,
+    "position": "SF",
+    "age": 26,
+    "height": "7'1\"",
+    "weight": 249,
+    "experience": 4,
+    "stats": {
+      "pointsPerGame": "11.0",
+      "reboundsPerGame": "11.1",
+      "assistsPerGame": "2.5",
+      "stealsPerGame": "0.7",
+      "blocksPerGame": "2.0",
+      "fieldGoalPercentage": "0.378",
+      "threePointPercentage": "0.277",
+      "freeThrowPercentage": "0.903",
+      "minutesPerGame": "37.3"
+    },
+    "contract": {
+      "years": 4,
+      "totalValue": 58,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 9,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "University of California",
+      "hometown": "Houston, TX",
+      "draftYear": 2015,
+      "draftRound": 1,
+      "draftPick": 27,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 54,
+      "heartRateMax": 193,
+      "bodyFatPercentage": 8.4,
+      "muscleMass": 46,
+      "vo2Max": 56.7,
+      "flexibility": 71,
+      "reactionTime": 0.2,
+      "balance": 84,
+      "coordination": 96,
+      "agility": 95
+    },
+    "performance": {
+      "currentForm": 87,
+      "peakPerformance": 83,
+      "consistency": 87,
+      "clutchFactor": 85,
+      "mentalToughness": 98,
+      "leadershipScore": 60,
+      "teamChemistry": 92,
+      "coachability": 98,
+      "workEthic": 98,
+      "adaptability": 78
+    },
+    "development": {
+      "primaryFocus": "Speed Training",
+      "secondaryFocus": "Strength Building",
+      "weeklyHours": 38,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Shoulder maintenance"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.05,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 92,
+      "communication": 77,
+      "teamwork": 99,
+      "mentorship": 90,
+      "communityInvolvement": 75,
+      "mediaRelations": 72,
+      "socialMediaPresence": 63,
+      "fanEngagement": 71,
+      "professionalism": 97,
+      "characterScore": 96
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.92,
+      "optimalPerformanceZone": "72-81%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 80,
+      "marketValue": "$1.3M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_4",
+    "name": "Ryan Taylor",
+    "jerseyNumber": 27,
+    "position": "PF",
+    "age": 31,
+    "height": "6'1\"",
+    "weight": 246,
+    "experience": 10,
+    "stats": {
+      "pointsPerGame": "13.6",
+      "reboundsPerGame": "10.3",
+      "assistsPerGame": "8.4",
+      "stealsPerGame": "0.9",
+      "blocksPerGame": "0.3",
+      "fieldGoalPercentage": "0.383",
+      "threePointPercentage": "0.290",
+      "freeThrowPercentage": "0.723",
+      "minutesPerGame": "19.2"
+    },
+    "contract": {
+      "years": 6,
+      "totalValue": 92,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 1,
+      "noTradeClause": true,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Rice University",
+      "hometown": "New York, NY",
+      "draftYear": 2019,
+      "draftRound": 4,
+      "draftPick": 27,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 56,
+      "heartRateMax": 199,
+      "bodyFatPercentage": 12.7,
+      "muscleMass": 48.2,
+      "vo2Max": 58.9,
+      "flexibility": 81,
+      "reactionTime": 0.224,
+      "balance": 81,
+      "coordination": 93,
+      "agility": 81
+    },
+    "performance": {
+      "currentForm": 76,
+      "peakPerformance": 94,
+      "consistency": 91,
+      "clutchFactor": 86,
+      "mentalToughness": 76,
+      "leadershipScore": 68,
+      "teamChemistry": 91,
+      "coachability": 93,
+      "workEthic": 91,
+      "adaptability": 98
+    },
+    "development": {
+      "primaryFocus": "Mental Conditioning",
+      "secondaryFocus": "Mental Conditioning",
+      "weeklyHours": 44,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Shoulder maintenance"
+      ],
+      "injuryHistory": 2,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.23,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 75,
+      "communication": 98,
+      "teamwork": 82,
+      "mentorship": 65,
+      "communityInvolvement": 80,
+      "mediaRelations": 80,
+      "socialMediaPresence": 98,
+      "fanEngagement": 75,
+      "professionalism": 98,
+      "characterScore": 88
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.948,
+      "optimalPerformanceZone": "70-83%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 94,
+      "marketValue": "$8.5M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_5",
+    "name": "Edward Lewis",
+    "jerseyNumber": 78,
+    "position": "C",
+    "age": 23,
+    "height": "5'7\"",
+    "weight": 165,
+    "experience": 9,
+    "stats": {
+      "pointsPerGame": "27.8",
+      "reboundsPerGame": "11.5",
+      "assistsPerGame": "8.0",
+      "stealsPerGame": "2.0",
+      "blocksPerGame": "2.4",
+      "fieldGoalPercentage": "0.562",
+      "threePointPercentage": "0.448",
+      "freeThrowPercentage": "0.711",
+      "minutesPerGame": "22.6"
+    },
+    "contract": {
+      "years": 1,
+      "totalValue": 23,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 3,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Florida State University",
+      "hometown": "New York, NY",
+      "draftYear": 2022,
+      "draftRound": 3,
+      "draftPick": 20,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 54,
+      "heartRateMax": 203,
+      "bodyFatPercentage": 8.3,
+      "muscleMass": 37.7,
+      "vo2Max": 56.4,
+      "flexibility": 79,
+      "reactionTime": 0.165,
+      "balance": 84,
+      "coordination": 80,
+      "agility": 85
+    },
+    "performance": {
+      "currentForm": 78,
+      "peakPerformance": 98,
+      "consistency": 75,
+      "clutchFactor": 70,
+      "mentalToughness": 76,
+      "leadershipScore": 73,
+      "teamChemistry": 99,
+      "coachability": 85,
+      "workEthic": 93,
+      "adaptability": 95
+    },
+    "development": {
+      "primaryFocus": "Recovery Protocols",
+      "secondaryFocus": "Recovery Protocols",
+      "weeklyHours": 45,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Muscle fatigue"
+      ],
+      "injuryHistory": 2,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.01,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 96,
+      "communication": 84,
+      "teamwork": 91,
+      "mentorship": 79,
+      "communityInvolvement": 95,
+      "mediaRelations": 74,
+      "socialMediaPresence": 65,
+      "fanEngagement": 61,
+      "professionalism": 94,
+      "characterScore": 87
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.938,
+      "optimalPerformanceZone": "77-85%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 86,
+      "marketValue": "$3.7M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_6",
+    "name": "Gregory Smith",
+    "jerseyNumber": 9,
+    "position": "PG",
+    "age": 30,
+    "height": "7'1\"",
+    "weight": 229,
+    "experience": 10,
+    "stats": {
+      "pointsPerGame": "20.6",
+      "reboundsPerGame": "5.5",
+      "assistsPerGame": "5.7",
+      "stealsPerGame": "0.9",
+      "blocksPerGame": "1.6",
+      "fieldGoalPercentage": "0.428",
+      "threePointPercentage": "0.498",
+      "freeThrowPercentage": "0.898",
+      "minutesPerGame": "33.4"
+    },
+    "contract": {
+      "years": 1,
+      "totalValue": 93,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 7,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Georgia Institute of Technology",
+      "hometown": "Dallas, TX",
+      "draftYear": 2021,
+      "draftRound": 2,
+      "draftPick": 1,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 59,
+      "heartRateMax": 197,
+      "bodyFatPercentage": 12.2,
+      "muscleMass": 38,
+      "vo2Max": 55,
+      "flexibility": 86,
+      "reactionTime": 0.224,
+      "balance": 94,
+      "coordination": 93,
+      "agility": 81
+    },
+    "performance": {
+      "currentForm": 72,
+      "peakPerformance": 92,
+      "consistency": 77,
+      "clutchFactor": 92,
+      "mentalToughness": 78,
+      "leadershipScore": 95,
+      "teamChemistry": 83,
+      "coachability": 85,
+      "workEthic": 97,
+      "adaptability": 93
+    },
+    "development": {
+      "primaryFocus": "Flexibility Training",
+      "secondaryFocus": "Flexibility Training",
+      "weeklyHours": 35,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Previous ankle sprain"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.18,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 87,
+      "communication": 94,
+      "teamwork": 96,
+      "mentorship": 97,
+      "communityInvolvement": 71,
+      "mediaRelations": 79,
+      "socialMediaPresence": 86,
+      "fanEngagement": 83,
+      "professionalism": 94,
+      "characterScore": 99
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.804,
+      "optimalPerformanceZone": "71-82%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 96,
+      "marketValue": "$2.4M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_7",
+    "name": "Nicholas Baker",
+    "jerseyNumber": 18,
+    "position": "SG",
+    "age": 24,
+    "height": "6'9\"",
+    "weight": 276,
+    "experience": 7,
+    "stats": {
+      "pointsPerGame": "27.7",
+      "reboundsPerGame": "2.4",
+      "assistsPerGame": "9.0",
+      "stealsPerGame": "1.7",
+      "blocksPerGame": "0.5",
+      "fieldGoalPercentage": "0.359",
+      "threePointPercentage": "0.309",
+      "freeThrowPercentage": "0.801",
+      "minutesPerGame": "17.4"
+    },
+    "contract": {
+      "years": 2,
+      "totalValue": 51,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 2,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Georgia Institute of Technology",
+      "hometown": "Nashville, TN",
+      "draftYear": 2018,
+      "draftRound": 7,
+      "draftPick": 15,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 66,
+      "heartRateMax": 180,
+      "bodyFatPercentage": 17.8,
+      "muscleMass": 45.1,
+      "vo2Max": 51.2,
+      "flexibility": 95,
+      "reactionTime": 0.172,
+      "balance": 93,
+      "coordination": 93,
+      "agility": 90
+    },
+    "performance": {
+      "currentForm": 93,
+      "peakPerformance": 86,
+      "consistency": 96,
+      "clutchFactor": 80,
+      "mentalToughness": 94,
+      "leadershipScore": 94,
+      "teamChemistry": 95,
+      "coachability": 93,
+      "workEthic": 92,
+      "adaptability": 91
+    },
+    "development": {
+      "primaryFocus": "Strength Building",
+      "secondaryFocus": "Film Study",
+      "weeklyHours": 43,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Shoulder maintenance"
+      ],
+      "injuryHistory": 0,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.29,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 75,
+      "communication": 91,
+      "teamwork": 82,
+      "mentorship": 61,
+      "communityInvolvement": 80,
+      "mediaRelations": 99,
+      "socialMediaPresence": 78,
+      "fanEngagement": 67,
+      "professionalism": 97,
+      "characterScore": 98
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.829,
+      "optimalPerformanceZone": "72-85%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 98,
+      "marketValue": "$5.0M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_8",
+    "name": "Joshua Green",
+    "jerseyNumber": 51,
+    "position": "SF",
+    "age": 30,
+    "height": "6'5\"",
+    "weight": 276,
+    "experience": 9,
+    "stats": {
+      "pointsPerGame": "25.6",
+      "reboundsPerGame": "6.6",
+      "assistsPerGame": "5.4",
+      "stealsPerGame": "1.1",
+      "blocksPerGame": "2.5",
+      "fieldGoalPercentage": "0.569",
+      "threePointPercentage": "0.481",
+      "freeThrowPercentage": "0.901",
+      "minutesPerGame": "36.8"
+    },
+    "contract": {
+      "years": 1,
+      "totalValue": 44,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 7,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Stanford University",
+      "hometown": "Miami, FL",
+      "draftYear": 2022,
+      "draftRound": 4,
+      "draftPick": 29,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 56,
+      "heartRateMax": 218,
+      "bodyFatPercentage": 17,
+      "muscleMass": 48.9,
+      "vo2Max": 48.5,
+      "flexibility": 75,
+      "reactionTime": 0.2,
+      "balance": 91,
+      "coordination": 87,
+      "agility": 83
+    },
+    "performance": {
+      "currentForm": 73,
+      "peakPerformance": 90,
+      "consistency": 96,
+      "clutchFactor": 90,
+      "mentalToughness": 75,
+      "leadershipScore": 74,
+      "teamChemistry": 88,
+      "coachability": 91,
+      "workEthic": 99,
+      "adaptability": 93
+    },
+    "development": {
+      "primaryFocus": "Nutrition Optimization",
+      "secondaryFocus": "Flexibility Training",
+      "weeklyHours": 48,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Previous ankle sprain"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.22,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 73,
+      "communication": 84,
+      "teamwork": 87,
+      "mentorship": 86,
+      "communityInvolvement": 95,
+      "mediaRelations": 72,
+      "socialMediaPresence": 57,
+      "fanEngagement": 78,
+      "professionalism": 96,
+      "characterScore": 97
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.91,
+      "optimalPerformanceZone": "77-86%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 96,
+      "marketValue": "$9.8M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_9",
+    "name": "Alexander Allen",
+    "jerseyNumber": 97,
+    "position": "PF",
+    "age": 30,
+    "height": "5'7\"",
+    "weight": 237,
+    "experience": 6,
+    "stats": {
+      "pointsPerGame": "23.7",
+      "reboundsPerGame": "9.8",
+      "assistsPerGame": "1.9",
+      "stealsPerGame": "1.4",
+      "blocksPerGame": "1.3",
+      "fieldGoalPercentage": "0.427",
+      "threePointPercentage": "0.495",
+      "freeThrowPercentage": "0.794",
+      "minutesPerGame": "29.0"
+    },
+    "contract": {
+      "years": 7,
+      "totalValue": 42,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 7,
+      "noTradeClause": true,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "University of Alabama",
+      "hometown": "Atlanta, GA",
+      "draftYear": 2018,
+      "draftRound": 5,
+      "draftPick": 12,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 57,
+      "heartRateMax": 188,
+      "bodyFatPercentage": 13.3,
+      "muscleMass": 47.8,
+      "vo2Max": 48.4,
+      "flexibility": 94,
+      "reactionTime": 0.17,
+      "balance": 80,
+      "coordination": 89,
+      "agility": 82
+    },
+    "performance": {
+      "currentForm": 82,
+      "peakPerformance": 98,
+      "consistency": 79,
+      "clutchFactor": 87,
+      "mentalToughness": 80,
+      "leadershipScore": 81,
+      "teamChemistry": 82,
+      "coachability": 88,
+      "workEthic": 95,
+      "adaptability": 76
+    },
+    "development": {
+      "primaryFocus": "Recovery Protocols",
+      "secondaryFocus": "Nutrition Optimization",
+      "weeklyHours": 40,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Previous ankle sprain"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.11,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 76,
+      "communication": 83,
+      "teamwork": 86,
+      "mentorship": 67,
+      "communityInvolvement": 74,
+      "mediaRelations": 84,
+      "socialMediaPresence": 77,
+      "fanEngagement": 78,
+      "professionalism": 90,
+      "characterScore": 97
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.909,
+      "optimalPerformanceZone": "71-81%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 84,
+      "marketValue": "$5.1M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_10",
+    "name": "Michael Lee",
+    "jerseyNumber": 91,
+    "position": "C",
+    "age": 21,
+    "height": "6'6\"",
+    "weight": 168,
+    "experience": 8,
+    "stats": {
+      "pointsPerGame": "11.6",
+      "reboundsPerGame": "11.0",
+      "assistsPerGame": "9.8",
+      "stealsPerGame": "1.7",
+      "blocksPerGame": "1.1",
+      "fieldGoalPercentage": "0.575",
+      "threePointPercentage": "0.365",
+      "freeThrowPercentage": "0.814",
+      "minutesPerGame": "18.4"
+    },
+    "contract": {
+      "years": 4,
+      "totalValue": 48,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 0,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Duke University",
+      "hometown": "Miami, FL",
+      "draftYear": 2021,
+      "draftRound": 7,
+      "draftPick": 17,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 52,
+      "heartRateMax": 182,
+      "bodyFatPercentage": 16.4,
+      "muscleMass": 35.8,
+      "vo2Max": 49.2,
+      "flexibility": 96,
+      "reactionTime": 0.193,
+      "balance": 84,
+      "coordination": 87,
+      "agility": 92
+    },
+    "performance": {
+      "currentForm": 95,
+      "peakPerformance": 97,
+      "consistency": 81,
+      "clutchFactor": 84,
+      "mentalToughness": 86,
+      "leadershipScore": 95,
+      "teamChemistry": 97,
+      "coachability": 95,
+      "workEthic": 99,
+      "adaptability": 75
+    },
+    "development": {
+      "primaryFocus": "Leadership Development",
+      "secondaryFocus": "Recovery Protocols",
+      "weeklyHours": 43,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Previous ankle sprain"
+      ],
+      "injuryHistory": 0,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.2,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 78,
+      "communication": 76,
+      "teamwork": 96,
+      "mentorship": 68,
+      "communityInvolvement": 76,
+      "mediaRelations": 90,
+      "socialMediaPresence": 99,
+      "fanEngagement": 75,
+      "professionalism": 99,
+      "characterScore": 95
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.904,
+      "optimalPerformanceZone": "77-81%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 71,
+      "marketValue": "$3.7M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_11",
+    "name": "Donald Adams",
+    "jerseyNumber": 45,
+    "position": "PG",
+    "age": 25,
+    "height": "6'3\"",
+    "weight": 145,
+    "experience": 9,
+    "stats": {
+      "pointsPerGame": "16.8",
+      "reboundsPerGame": "4.8",
+      "assistsPerGame": "9.5",
+      "stealsPerGame": "1.3",
+      "blocksPerGame": "2.5",
+      "fieldGoalPercentage": "0.476",
+      "threePointPercentage": "0.371",
+      "freeThrowPercentage": "0.769",
+      "minutesPerGame": "34.0"
+    },
+    "contract": {
+      "years": 5,
+      "totalValue": 43,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 7,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "University of Michigan",
+      "hometown": "New York, NY",
+      "draftYear": 2015,
+      "draftRound": 6,
+      "draftPick": 12,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 69,
+      "heartRateMax": 188,
+      "bodyFatPercentage": 9.7,
+      "muscleMass": 40.9,
+      "vo2Max": 61.7,
+      "flexibility": 90,
+      "reactionTime": 0.153,
+      "balance": 83,
+      "coordination": 97,
+      "agility": 83
+    },
+    "performance": {
+      "currentForm": 99,
+      "peakPerformance": 89,
+      "consistency": 82,
+      "clutchFactor": 94,
+      "mentalToughness": 79,
+      "leadershipScore": 74,
+      "teamChemistry": 80,
+      "coachability": 92,
+      "workEthic": 90,
+      "adaptability": 76
+    },
+    "development": {
+      "primaryFocus": "Mental Conditioning",
+      "secondaryFocus": "Nutrition Optimization",
+      "weeklyHours": 31,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Minor strain"
+      ],
+      "injuryHistory": 2,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.26,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 79,
+      "communication": 94,
+      "teamwork": 84,
+      "mentorship": 99,
+      "communityInvolvement": 70,
+      "mediaRelations": 81,
+      "socialMediaPresence": 60,
+      "fanEngagement": 90,
+      "professionalism": 92,
+      "characterScore": 92
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.852,
+      "optimalPerformanceZone": "71-88%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 90,
+      "marketValue": "$2.3M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_12",
+    "name": "Justin Johnson",
+    "jerseyNumber": 25,
+    "position": "SG",
+    "age": 20,
+    "height": "6'5\"",
+    "weight": 235,
+    "experience": 4,
+    "stats": {
+      "pointsPerGame": "18.2",
+      "reboundsPerGame": "13.4",
+      "assistsPerGame": "1.5",
+      "stealsPerGame": "1.0",
+      "blocksPerGame": "2.0",
+      "fieldGoalPercentage": "0.548",
+      "threePointPercentage": "0.444",
+      "freeThrowPercentage": "0.896",
+      "minutesPerGame": "36.5"
+    },
+    "contract": {
+      "years": 1,
+      "totalValue": 93,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 7,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Georgia Institute of Technology",
+      "hometown": "Phoenix, AZ",
+      "draftYear": 2023,
+      "draftRound": 5,
+      "draftPick": 26,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 65,
+      "heartRateMax": 192,
+      "bodyFatPercentage": 16.7,
+      "muscleMass": 47.1,
+      "vo2Max": 47.9,
+      "flexibility": 72,
+      "reactionTime": 0.233,
+      "balance": 81,
+      "coordination": 90,
+      "agility": 81
+    },
+    "performance": {
+      "currentForm": 74,
+      "peakPerformance": 98,
+      "consistency": 89,
+      "clutchFactor": 93,
+      "mentalToughness": 98,
+      "leadershipScore": 85,
+      "teamChemistry": 80,
+      "coachability": 97,
+      "workEthic": 95,
+      "adaptability": 98
+    },
+    "development": {
+      "primaryFocus": "Strength Building",
+      "secondaryFocus": "Speed Training",
+      "weeklyHours": 49,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Previous ankle sprain"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.12,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 90,
+      "communication": 82,
+      "teamwork": 81,
+      "mentorship": 70,
+      "communityInvolvement": 68,
+      "mediaRelations": 84,
+      "socialMediaPresence": 56,
+      "fanEngagement": 65,
+      "professionalism": 98,
+      "characterScore": 90
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.824,
+      "optimalPerformanceZone": "75-80%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 99,
+      "marketValue": "$10.1M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_13",
+    "name": "Stephen Rivera",
+    "jerseyNumber": 48,
+    "position": "SF",
+    "age": 34,
+    "height": "7'2\"",
+    "weight": 215,
+    "experience": 5,
+    "stats": {
+      "pointsPerGame": "28.4",
+      "reboundsPerGame": "11.6",
+      "assistsPerGame": "6.4",
+      "stealsPerGame": "2.2",
+      "blocksPerGame": "1.8",
+      "fieldGoalPercentage": "0.535",
+      "threePointPercentage": "0.426",
+      "freeThrowPercentage": "0.718",
+      "minutesPerGame": "17.9"
+    },
+    "contract": {
+      "years": 7,
+      "totalValue": 99,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 5,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Vanderbilt University",
+      "hometown": "Birmingham, AL",
+      "draftYear": 2015,
+      "draftRound": 4,
+      "draftPick": 6,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 63,
+      "heartRateMax": 191,
+      "bodyFatPercentage": 17.8,
+      "muscleMass": 35.7,
+      "vo2Max": 54.8,
+      "flexibility": 86,
+      "reactionTime": 0.183,
+      "balance": 84,
+      "coordination": 86,
+      "agility": 87
+    },
+    "performance": {
+      "currentForm": 73,
+      "peakPerformance": 90,
+      "consistency": 81,
+      "clutchFactor": 93,
+      "mentalToughness": 99,
+      "leadershipScore": 90,
+      "teamChemistry": 84,
+      "coachability": 90,
+      "workEthic": 90,
+      "adaptability": 85
+    },
+    "development": {
+      "primaryFocus": "Strength Building",
+      "secondaryFocus": "Mental Conditioning",
+      "weeklyHours": 30,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Knee monitoring"
+      ],
+      "injuryHistory": 0,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.15,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 90,
+      "communication": 91,
+      "teamwork": 85,
+      "mentorship": 65,
+      "communityInvolvement": 90,
+      "mediaRelations": 99,
+      "socialMediaPresence": 85,
+      "fanEngagement": 74,
+      "professionalism": 94,
+      "characterScore": 99
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.901,
+      "optimalPerformanceZone": "71-83%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 81,
+      "marketValue": "$2.4M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_14",
+    "name": "Alexander Campbell",
+    "jerseyNumber": 1,
+    "position": "PF",
+    "age": 29,
+    "height": "6'8\"",
+    "weight": 179,
+    "experience": 10,
+    "stats": {
+      "pointsPerGame": "10.0",
+      "reboundsPerGame": "2.7",
+      "assistsPerGame": "2.8",
+      "stealsPerGame": "0.9",
+      "blocksPerGame": "2.3",
+      "fieldGoalPercentage": "0.415",
+      "threePointPercentage": "0.470",
+      "freeThrowPercentage": "0.672",
+      "minutesPerGame": "30.8"
+    },
+    "contract": {
+      "years": 6,
+      "totalValue": 24,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 2,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "University of Michigan",
+      "hometown": "Nashville, TN",
+      "draftYear": 2016,
+      "draftRound": 4,
+      "draftPick": 32,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 50,
+      "heartRateMax": 185,
+      "bodyFatPercentage": 9.2,
+      "muscleMass": 37.6,
+      "vo2Max": 58.2,
+      "flexibility": 81,
+      "reactionTime": 0.208,
+      "balance": 87,
+      "coordination": 88,
+      "agility": 80
+    },
+    "performance": {
+      "currentForm": 89,
+      "peakPerformance": 85,
+      "consistency": 83,
+      "clutchFactor": 75,
+      "mentalToughness": 99,
+      "leadershipScore": 90,
+      "teamChemistry": 98,
+      "coachability": 98,
+      "workEthic": 92,
+      "adaptability": 86
+    },
+    "development": {
+      "primaryFocus": "Recovery Protocols",
+      "secondaryFocus": "Mental Conditioning",
+      "weeklyHours": 48,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Muscle fatigue"
+      ],
+      "injuryHistory": 2,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.25,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 83,
+      "communication": 83,
+      "teamwork": 83,
+      "mentorship": 91,
+      "communityInvolvement": 92,
+      "mediaRelations": 77,
+      "socialMediaPresence": 69,
+      "fanEngagement": 93,
+      "professionalism": 91,
+      "characterScore": 85
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.855,
+      "optimalPerformanceZone": "73-81%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 75,
+      "marketValue": "$7.1M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_15",
+    "name": "Michael Miller",
+    "jerseyNumber": 88,
+    "position": "C",
+    "age": 28,
+    "height": "6'11\"",
+    "weight": 310,
+    "experience": 8,
+    "stats": {
+      "pointsPerGame": "27.3",
+      "reboundsPerGame": "6.7",
+      "assistsPerGame": "10.8",
+      "stealsPerGame": "2.2",
+      "blocksPerGame": "1.8",
+      "fieldGoalPercentage": "0.442",
+      "threePointPercentage": "0.302",
+      "freeThrowPercentage": "0.850",
+      "minutesPerGame": "33.9"
+    },
+    "contract": {
+      "years": 4,
+      "totalValue": 55,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 3,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "University of Michigan",
+      "hometown": "Chicago, IL",
+      "draftYear": 2019,
+      "draftRound": 3,
+      "draftPick": 12,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 69,
+      "heartRateMax": 186,
+      "bodyFatPercentage": 19.6,
+      "muscleMass": 46.1,
+      "vo2Max": 50.6,
+      "flexibility": 70,
+      "reactionTime": 0.24,
+      "balance": 87,
+      "coordination": 87,
+      "agility": 85
+    },
+    "performance": {
+      "currentForm": 77,
+      "peakPerformance": 85,
+      "consistency": 93,
+      "clutchFactor": 80,
+      "mentalToughness": 92,
+      "leadershipScore": 97,
+      "teamChemistry": 84,
+      "coachability": 91,
+      "workEthic": 93,
+      "adaptability": 83
+    },
+    "development": {
+      "primaryFocus": "Leadership Development",
+      "secondaryFocus": "Leadership Development",
+      "weeklyHours": 48,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Muscle fatigue"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.14,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 98,
+      "communication": 94,
+      "teamwork": 86,
+      "mentorship": 91,
+      "communityInvolvement": 79,
+      "mediaRelations": 76,
+      "socialMediaPresence": 81,
+      "fanEngagement": 86,
+      "professionalism": 99,
+      "characterScore": 93
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.93,
+      "optimalPerformanceZone": "75-83%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 73,
+      "marketValue": "$10.6M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_16",
+    "name": "Jonathan Ramirez",
+    "jerseyNumber": 72,
+    "position": "PG",
+    "age": 22,
+    "height": "6'3\"",
+    "weight": 304,
+    "experience": 5,
+    "stats": {
+      "pointsPerGame": "22.0",
+      "reboundsPerGame": "4.5",
+      "assistsPerGame": "10.5",
+      "stealsPerGame": "0.6",
+      "blocksPerGame": "1.6",
+      "fieldGoalPercentage": "0.498",
+      "threePointPercentage": "0.499",
+      "freeThrowPercentage": "0.944",
+      "minutesPerGame": "31.6"
+    },
+    "contract": {
+      "years": 4,
+      "totalValue": 42,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 4,
+      "noTradeClause": true,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Florida State University",
+      "hometown": "Phoenix, AZ",
+      "draftYear": 2021,
+      "draftRound": 5,
+      "draftPick": 31,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 52,
+      "heartRateMax": 208,
+      "bodyFatPercentage": 18.5,
+      "muscleMass": 44.2,
+      "vo2Max": 64.4,
+      "flexibility": 90,
+      "reactionTime": 0.212,
+      "balance": 93,
+      "coordination": 89,
+      "agility": 85
+    },
+    "performance": {
+      "currentForm": 90,
+      "peakPerformance": 91,
+      "consistency": 96,
+      "clutchFactor": 99,
+      "mentalToughness": 89,
+      "leadershipScore": 91,
+      "teamChemistry": 97,
+      "coachability": 87,
+      "workEthic": 91,
+      "adaptability": 85
+    },
+    "development": {
+      "primaryFocus": "Mental Conditioning",
+      "secondaryFocus": "Strength Building",
+      "weeklyHours": 30,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Minor strain"
+      ],
+      "injuryHistory": 2,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.29,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 87,
+      "communication": 88,
+      "teamwork": 83,
+      "mentorship": 71,
+      "communityInvolvement": 83,
+      "mediaRelations": 73,
+      "socialMediaPresence": 92,
+      "fanEngagement": 71,
+      "professionalism": 93,
+      "characterScore": 88
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.932,
+      "optimalPerformanceZone": "77-86%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 98,
+      "marketValue": "$5.4M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_17",
+    "name": "Samuel Green",
+    "jerseyNumber": 37,
+    "position": "SG",
+    "age": 31,
+    "height": "6'0\"",
+    "weight": 268,
+    "experience": 6,
+    "stats": {
+      "pointsPerGame": "14.1",
+      "reboundsPerGame": "8.7",
+      "assistsPerGame": "8.5",
+      "stealsPerGame": "1.7",
+      "blocksPerGame": "0.5",
+      "fieldGoalPercentage": "0.599",
+      "threePointPercentage": "0.424",
+      "freeThrowPercentage": "0.799",
+      "minutesPerGame": "21.2"
+    },
+    "contract": {
+      "years": 1,
+      "totalValue": 92,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 2,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Vanderbilt University",
+      "hometown": "Birmingham, AL",
+      "draftYear": 2017,
+      "draftRound": 4,
+      "draftPick": 31,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 69,
+      "heartRateMax": 204,
+      "bodyFatPercentage": 12.1,
+      "muscleMass": 46,
+      "vo2Max": 56.8,
+      "flexibility": 70,
+      "reactionTime": 0.174,
+      "balance": 95,
+      "coordination": 88,
+      "agility": 98
+    },
+    "performance": {
+      "currentForm": 76,
+      "peakPerformance": 94,
+      "consistency": 89,
+      "clutchFactor": 77,
+      "mentalToughness": 85,
+      "leadershipScore": 79,
+      "teamChemistry": 86,
+      "coachability": 95,
+      "workEthic": 93,
+      "adaptability": 79
+    },
+    "development": {
+      "primaryFocus": "Speed Training",
+      "secondaryFocus": "Speed Training",
+      "weeklyHours": 35,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Minor strain"
+      ],
+      "injuryHistory": 0,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.11,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 85,
+      "communication": 83,
+      "teamwork": 97,
+      "mentorship": 80,
+      "communityInvolvement": 72,
+      "mediaRelations": 80,
+      "socialMediaPresence": 84,
+      "fanEngagement": 95,
+      "professionalism": 97,
+      "characterScore": 91
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.817,
+      "optimalPerformanceZone": "72-88%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 71,
+      "marketValue": "$8.0M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_18",
+    "name": "Edward Allen",
+    "jerseyNumber": 14,
+    "position": "SF",
+    "age": 27,
+    "height": "7'0\"",
+    "weight": 229,
+    "experience": 4,
+    "stats": {
+      "pointsPerGame": "18.7",
+      "reboundsPerGame": "13.4",
+      "assistsPerGame": "10.3",
+      "stealsPerGame": "2.2",
+      "blocksPerGame": "0.8",
+      "fieldGoalPercentage": "0.493",
+      "threePointPercentage": "0.405",
+      "freeThrowPercentage": "0.842",
+      "minutesPerGame": "24.9"
+    },
+    "contract": {
+      "years": 5,
+      "totalValue": 76,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 9,
+      "noTradeClause": false,
+      "status": "rookie"
+    },
+    "bio": {
+      "college": "Georgia Institute of Technology",
+      "hometown": "Memphis, TN",
+      "draftYear": 2023,
+      "draftRound": 5,
+      "draftPick": 19,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 61,
+      "heartRateMax": 209,
+      "bodyFatPercentage": 17.6,
+      "muscleMass": 36.2,
+      "vo2Max": 56,
+      "flexibility": 91,
+      "reactionTime": 0.231,
+      "balance": 93,
+      "coordination": 86,
+      "agility": 88
+    },
+    "performance": {
+      "currentForm": 79,
+      "peakPerformance": 89,
+      "consistency": 89,
+      "clutchFactor": 84,
+      "mentalToughness": 94,
+      "leadershipScore": 83,
+      "teamChemistry": 94,
+      "coachability": 91,
+      "workEthic": 99,
+      "adaptability": 96
+    },
+    "development": {
+      "primaryFocus": "Nutrition Optimization",
+      "secondaryFocus": "Flexibility Training",
+      "weeklyHours": 32,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Muscle fatigue"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.08,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 87,
+      "communication": 88,
+      "teamwork": 91,
+      "mentorship": 70,
+      "communityInvolvement": 89,
+      "mediaRelations": 98,
+      "socialMediaPresence": 54,
+      "fanEngagement": 76,
+      "professionalism": 94,
+      "characterScore": 95
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.869,
+      "optimalPerformanceZone": "76-85%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 80,
+      "marketValue": "$10.6M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_19",
+    "name": "Benjamin Hall",
+    "jerseyNumber": 43,
+    "position": "PF",
+    "age": 34,
+    "height": "7'1\"",
+    "weight": 271,
+    "experience": 2,
+    "stats": {
+      "pointsPerGame": "13.7",
+      "reboundsPerGame": "3.5",
+      "assistsPerGame": "9.7",
+      "stealsPerGame": "0.6",
+      "blocksPerGame": "1.6",
+      "fieldGoalPercentage": "0.478",
+      "threePointPercentage": "0.390",
+      "freeThrowPercentage": "0.711",
+      "minutesPerGame": "30.2"
+    },
+    "contract": {
+      "years": 2,
+      "totalValue": 58,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 5,
+      "noTradeClause": false,
+      "status": "rookie"
+    },
+    "bio": {
+      "college": "Rice University",
+      "hometown": "Dallas, TX",
+      "draftYear": 2015,
+      "draftRound": 2,
+      "draftPick": 2,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 59,
+      "heartRateMax": 183,
+      "bodyFatPercentage": 11.4,
+      "muscleMass": 45.6,
+      "vo2Max": 55.9,
+      "flexibility": 71,
+      "reactionTime": 0.221,
+      "balance": 81,
+      "coordination": 80,
+      "agility": 87
+    },
+    "performance": {
+      "currentForm": 70,
+      "peakPerformance": 88,
+      "consistency": 80,
+      "clutchFactor": 81,
+      "mentalToughness": 96,
+      "leadershipScore": 85,
+      "teamChemistry": 89,
+      "coachability": 92,
+      "workEthic": 99,
+      "adaptability": 77
+    },
+    "development": {
+      "primaryFocus": "Film Study",
+      "secondaryFocus": "Technique Refinement",
+      "weeklyHours": 37,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Previous ankle sprain"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.12,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 90,
+      "communication": 84,
+      "teamwork": 96,
+      "mentorship": 94,
+      "communityInvolvement": 78,
+      "mediaRelations": 78,
+      "socialMediaPresence": 96,
+      "fanEngagement": 88,
+      "professionalism": 98,
+      "characterScore": 89
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.852,
+      "optimalPerformanceZone": "79-82%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 73,
+      "marketValue": "$1.1M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_20",
+    "name": "Kenneth Harris",
+    "jerseyNumber": 74,
+    "position": "C",
+    "age": 28,
+    "height": "7'0\"",
+    "weight": 240,
+    "experience": 7,
+    "stats": {
+      "pointsPerGame": "30.0",
+      "reboundsPerGame": "2.7",
+      "assistsPerGame": "2.7",
+      "stealsPerGame": "0.7",
+      "blocksPerGame": "0.5",
+      "fieldGoalPercentage": "0.409",
+      "threePointPercentage": "0.467",
+      "freeThrowPercentage": "0.668",
+      "minutesPerGame": "16.4"
+    },
+    "contract": {
+      "years": 5,
+      "totalValue": 52,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 5,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "University of California",
+      "hometown": "Atlanta, GA",
+      "draftYear": 2021,
+      "draftRound": 2,
+      "draftPick": 12,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 59,
+      "heartRateMax": 194,
+      "bodyFatPercentage": 17.7,
+      "muscleMass": 47.7,
+      "vo2Max": 56.3,
+      "flexibility": 71,
+      "reactionTime": 0.157,
+      "balance": 90,
+      "coordination": 85,
+      "agility": 84
+    },
+    "performance": {
+      "currentForm": 99,
+      "peakPerformance": 92,
+      "consistency": 98,
+      "clutchFactor": 88,
+      "mentalToughness": 80,
+      "leadershipScore": 62,
+      "teamChemistry": 95,
+      "coachability": 85,
+      "workEthic": 91,
+      "adaptability": 99
+    },
+    "development": {
+      "primaryFocus": "Flexibility Training",
+      "secondaryFocus": "Strength Building",
+      "weeklyHours": 33,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "None"
+      ],
+      "injuryHistory": 2,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.12,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 78,
+      "communication": 92,
+      "teamwork": 95,
+      "mentorship": 75,
+      "communityInvolvement": 89,
+      "mediaRelations": 70,
+      "socialMediaPresence": 90,
+      "fanEngagement": 83,
+      "professionalism": 90,
+      "characterScore": 86
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.888,
+      "optimalPerformanceZone": "73-87%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 96,
+      "marketValue": "$9.0M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_21",
+    "name": "Anthony Lopez",
+    "jerseyNumber": 67,
+    "position": "PG",
+    "age": 26,
+    "height": "7'0\"",
+    "weight": 229,
+    "experience": 0,
+    "stats": {
+      "pointsPerGame": "29.1",
+      "reboundsPerGame": "6.8",
+      "assistsPerGame": "8.6",
+      "stealsPerGame": "1.0",
+      "blocksPerGame": "1.3",
+      "fieldGoalPercentage": "0.453",
+      "threePointPercentage": "0.468",
+      "freeThrowPercentage": "0.785",
+      "minutesPerGame": "26.5"
+    },
+    "contract": {
+      "years": 3,
+      "totalValue": 59,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 8,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Duke University",
+      "hometown": "Dallas, TX",
+      "draftYear": 2022,
+      "draftRound": 3,
+      "draftPick": 26,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 57,
+      "heartRateMax": 194,
+      "bodyFatPercentage": 15.1,
+      "muscleMass": 49.7,
+      "vo2Max": 63.8,
+      "flexibility": 93,
+      "reactionTime": 0.229,
+      "balance": 94,
+      "coordination": 90,
+      "agility": 82
+    },
+    "performance": {
+      "currentForm": 76,
+      "peakPerformance": 96,
+      "consistency": 92,
+      "clutchFactor": 73,
+      "mentalToughness": 94,
+      "leadershipScore": 67,
+      "teamChemistry": 84,
+      "coachability": 93,
+      "workEthic": 93,
+      "adaptability": 99
+    },
+    "development": {
+      "primaryFocus": "Leadership Development",
+      "secondaryFocus": "Leadership Development",
+      "weeklyHours": 37,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Shoulder maintenance"
+      ],
+      "injuryHistory": 2,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.1,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 99,
+      "communication": 97,
+      "teamwork": 89,
+      "mentorship": 85,
+      "communityInvolvement": 65,
+      "mediaRelations": 99,
+      "socialMediaPresence": 63,
+      "fanEngagement": 65,
+      "professionalism": 93,
+      "characterScore": 90
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.845,
+      "optimalPerformanceZone": "78-89%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 98,
+      "marketValue": "$1.6M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_22",
+    "name": "Jeffrey Smith",
+    "jerseyNumber": 78,
+    "position": "SG",
+    "age": 32,
+    "height": "5'9\"",
+    "weight": 156,
+    "experience": 2,
+    "stats": {
+      "pointsPerGame": "21.0",
+      "reboundsPerGame": "4.5",
+      "assistsPerGame": "7.8",
+      "stealsPerGame": "0.8",
+      "blocksPerGame": "2.0",
+      "fieldGoalPercentage": "0.351",
+      "threePointPercentage": "0.325",
+      "freeThrowPercentage": "0.785",
+      "minutesPerGame": "22.7"
+    },
+    "contract": {
+      "years": 7,
+      "totalValue": 63,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 6,
+      "noTradeClause": true,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Georgia Institute of Technology",
+      "hometown": "Austin, TX",
+      "draftYear": 2017,
+      "draftRound": 3,
+      "draftPick": 3,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 65,
+      "heartRateMax": 207,
+      "bodyFatPercentage": 15.9,
+      "muscleMass": 38.5,
+      "vo2Max": 55.3,
+      "flexibility": 91,
+      "reactionTime": 0.221,
+      "balance": 91,
+      "coordination": 98,
+      "agility": 99
+    },
+    "performance": {
+      "currentForm": 78,
+      "peakPerformance": 97,
+      "consistency": 88,
+      "clutchFactor": 86,
+      "mentalToughness": 91,
+      "leadershipScore": 66,
+      "teamChemistry": 92,
+      "coachability": 94,
+      "workEthic": 98,
+      "adaptability": 94
+    },
+    "development": {
+      "primaryFocus": "Speed Training",
+      "secondaryFocus": "Mental Conditioning",
+      "weeklyHours": 42,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Shoulder maintenance"
+      ],
+      "injuryHistory": 0,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.24,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 87,
+      "communication": 75,
+      "teamwork": 93,
+      "mentorship": 61,
+      "communityInvolvement": 89,
+      "mediaRelations": 98,
+      "socialMediaPresence": 97,
+      "fanEngagement": 90,
+      "professionalism": 92,
+      "characterScore": 95
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.825,
+      "optimalPerformanceZone": "76-83%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 78,
+      "marketValue": "$5.6M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_23",
+    "name": "Andrew White",
+    "jerseyNumber": 66,
+    "position": "SF",
+    "age": 23,
+    "height": "6'5\"",
+    "weight": 162,
+    "experience": 11,
+    "stats": {
+      "pointsPerGame": "29.8",
+      "reboundsPerGame": "13.4",
+      "assistsPerGame": "2.1",
+      "stealsPerGame": "2.5",
+      "blocksPerGame": "2.7",
+      "fieldGoalPercentage": "0.460",
+      "threePointPercentage": "0.491",
+      "freeThrowPercentage": "0.707",
+      "minutesPerGame": "29.1"
+    },
+    "contract": {
+      "years": 6,
+      "totalValue": 19,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 6,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Rice University",
+      "hometown": "Birmingham, AL",
+      "draftYear": 2016,
+      "draftRound": 2,
+      "draftPick": 28,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 54,
+      "heartRateMax": 203,
+      "bodyFatPercentage": 9.5,
+      "muscleMass": 48.2,
+      "vo2Max": 59.2,
+      "flexibility": 88,
+      "reactionTime": 0.188,
+      "balance": 88,
+      "coordination": 83,
+      "agility": 96
+    },
+    "performance": {
+      "currentForm": 99,
+      "peakPerformance": 99,
+      "consistency": 80,
+      "clutchFactor": 97,
+      "mentalToughness": 86,
+      "leadershipScore": 99,
+      "teamChemistry": 86,
+      "coachability": 93,
+      "workEthic": 92,
+      "adaptability": 98
+    },
+    "development": {
+      "primaryFocus": "Leadership Development",
+      "secondaryFocus": "Mental Conditioning",
+      "weeklyHours": 47,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "None"
+      ],
+      "injuryHistory": 0,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.1,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 82,
+      "communication": 77,
+      "teamwork": 89,
+      "mentorship": 74,
+      "communityInvolvement": 96,
+      "mediaRelations": 82,
+      "socialMediaPresence": 70,
+      "fanEngagement": 80,
+      "professionalism": 91,
+      "characterScore": 98
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.908,
+      "optimalPerformanceZone": "73-83%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 94,
+      "marketValue": "$2.6M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_24",
+    "name": "Jacob Smith",
+    "jerseyNumber": 82,
+    "position": "PF",
+    "age": 34,
+    "height": "5'8\"",
+    "weight": 311,
+    "experience": 4,
+    "stats": {
+      "pointsPerGame": "9.4",
+      "reboundsPerGame": "2.4",
+      "assistsPerGame": "5.4",
+      "stealsPerGame": "1.0",
+      "blocksPerGame": "1.7",
+      "fieldGoalPercentage": "0.489",
+      "threePointPercentage": "0.458",
+      "freeThrowPercentage": "0.940",
+      "minutesPerGame": "26.1"
+    },
+    "contract": {
+      "years": 6,
+      "totalValue": 60,
+      "annualAverage": 0,
+      "guaranteed": false,
+      "incentives": 7,
+      "noTradeClause": false,
+      "status": "rookie"
+    },
+    "bio": {
+      "college": "Ohio State University",
+      "hometown": "New York, NY",
+      "draftYear": 2021,
+      "draftRound": 6,
+      "draftPick": 23,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 68,
+      "heartRateMax": 218,
+      "bodyFatPercentage": 19,
+      "muscleMass": 47.9,
+      "vo2Max": 47,
+      "flexibility": 78,
+      "reactionTime": 0.245,
+      "balance": 91,
+      "coordination": 89,
+      "agility": 84
+    },
+    "performance": {
+      "currentForm": 97,
+      "peakPerformance": 88,
+      "consistency": 75,
+      "clutchFactor": 72,
+      "mentalToughness": 78,
+      "leadershipScore": 69,
+      "teamChemistry": 81,
+      "coachability": 92,
+      "workEthic": 91,
+      "adaptability": 90
+    },
+    "development": {
+      "primaryFocus": "Leadership Development",
+      "secondaryFocus": "Speed Training",
+      "weeklyHours": 47,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Previous ankle sprain"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.08,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 97,
+      "communication": 95,
+      "teamwork": 94,
+      "mentorship": 92,
+      "communityInvolvement": 90,
+      "mediaRelations": 73,
+      "socialMediaPresence": 74,
+      "fanEngagement": 84,
+      "professionalism": 94,
+      "characterScore": 95
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.837,
+      "optimalPerformanceZone": "74-83%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 90,
+      "marketValue": "$10.3M",
+      "contractRecommendation": "Extension candidate"
+    }
+  },
+  {
+    "id": "player_25",
+    "name": "Gary Torres",
+    "jerseyNumber": 40,
+    "position": "C",
+    "age": 34,
+    "height": "5'8\"",
+    "weight": 204,
+    "experience": 6,
+    "stats": {
+      "pointsPerGame": "13.4",
+      "reboundsPerGame": "9.7",
+      "assistsPerGame": "2.0",
+      "stealsPerGame": "1.1",
+      "blocksPerGame": "2.4",
+      "fieldGoalPercentage": "0.453",
+      "threePointPercentage": "0.359",
+      "freeThrowPercentage": "0.809",
+      "minutesPerGame": "32.7"
+    },
+    "contract": {
+      "years": 3,
+      "totalValue": 84,
+      "annualAverage": 0,
+      "guaranteed": true,
+      "incentives": 4,
+      "noTradeClause": false,
+      "status": "veteran"
+    },
+    "bio": {
+      "college": "Stanford University",
+      "hometown": "Houston, TX",
+      "draftYear": 2020,
+      "draftRound": 5,
+      "draftPick": 28,
+      "biography": "Talented athlete with strong work ethic and championship potential."
+    },
+    "status": "active",
+    "biometrics": {
+      "heartRateResting": 53,
+      "heartRateMax": 202,
+      "bodyFatPercentage": 16.7,
+      "muscleMass": 39.4,
+      "vo2Max": 47,
+      "flexibility": 92,
+      "reactionTime": 0.156,
+      "balance": 98,
+      "coordination": 93,
+      "agility": 89
+    },
+    "performance": {
+      "currentForm": 96,
+      "peakPerformance": 84,
+      "consistency": 87,
+      "clutchFactor": 70,
+      "mentalToughness": 92,
+      "leadershipScore": 85,
+      "teamChemistry": 92,
+      "coachability": 94,
+      "workEthic": 90,
+      "adaptability": 95
+    },
+    "development": {
+      "primaryFocus": "Flexibility Training",
+      "secondaryFocus": "Speed Training",
+      "weeklyHours": 43,
+      "progressTracking": "Weekly assessments with biometric monitoring",
+      "goals": [
+        "Improve peak performance by 10%",
+        "Enhance consistency metrics",
+        "Develop leadership capabilities"
+      ],
+      "timeline": "6-month development cycle",
+      "resources": [
+        "Personal trainer",
+        "Sports psychologist",
+        "Nutritionist"
+      ]
+    },
+    "injury": {
+      "currentStatus": "Healthy",
+      "riskFactors": [
+        "Previous ankle sprain"
+      ],
+      "injuryHistory": 1,
+      "preventionPlan": "Daily mobility work and strength training",
+      "recoveryProtocol": "Standard team protocol with individualization",
+      "riskScore": 0.19,
+      "lastAssessment": "2025-09-02",
+      "nextCheckup": "2025-09-09"
+    },
+    "social": {
+      "leadership": 76,
+      "communication": 93,
+      "teamwork": 94,
+      "mentorship": 87,
+      "communityInvolvement": 91,
+      "mediaRelations": 72,
+      "socialMediaPresence": 74,
+      "fanEngagement": 86,
+      "professionalism": 99,
+      "characterScore": 87
+    },
+    "analytics": {
+      "performanceTrend": "Improving",
+      "predictionAccuracy": 0.863,
+      "optimalPerformanceZone": "76-87%",
+      "fatigueIndicators": "Within normal range",
+      "improvementAreas": [
+        "Consistency under pressure",
+        "Recovery optimization"
+      ],
+      "strengths": [
+        "Natural talent",
+        "Strong work ethic",
+        "Team leadership"
+      ],
+      "benchmarkComparison": "Above league average",
+      "potentialRating": 72,
+      "marketValue": "$7.2M",
+      "contractRecommendation": "Extension candidate"
+    }
+  }
+]

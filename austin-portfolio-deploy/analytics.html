@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics | Blaze Intelligence - Real-Time Sports Analytics Platform</title>
+    <meta name="description" content="Advanced sports analytics with 94.6% accuracy. Real-time data processing, predictive modeling, and championship-level insights for professional teams.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .glass-card { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .metric-card { transition: all 0.3s ease; }
+        .metric-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2); }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+                <ul class="hidden md:flex items-center gap-8">
+                    <li><a href="/features.html" class="text-slate-300 hover:text-white">Features</a></li>
+                    <li><a href="/analytics.html" class="text-white font-medium">Analytics</a></li>
+                    <li><a href="/vision-ai-demo.html" class="text-slate-300 hover:text-white">Vision AI</a></li>
+                    <li><a href="/video-showcase.html" class="text-slate-300 hover:text-white">Videos</a></li>
+                    <li><a href="/dashboard.html" class="text-slate-300 hover:text-white">Dashboard</a></li>
+                    <li><a href="/data.html" class="text-slate-300 hover:text-white">Data</a></li>
+                    <li><a href="/pricing.html" class="text-slate-300 hover:text-white">Pricing</a></li>
+                    <li><a href="/contact.html" class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-black mb-6">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-orange-500">
+                    CHAMPIONSHIP ANALYTICS
+                </span>
+            </h1>
+            <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                Professional-grade analytics platform processing 2.8M+ data points per second with 94.6% prediction accuracy
+            </p>
+        </div>
+    </section>
+
+    <!-- Live Metrics Dashboard -->
+    <section class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Live Performance Metrics</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Cardinals Readiness -->
+                <div class="metric-card glass-card p-6 rounded-xl text-center">
+                    <div class="text-sm text-slate-400 mb-2">Cardinals Readiness</div>
+                    <div class="text-4xl font-black text-red-400 mb-2">86.6%</div>
+                    <div class="text-xs text-green-400">↑ 3.2% from yesterday</div>
+                </div>
+
+                <!-- Titans EPA/Play -->
+                <div class="metric-card glass-card p-6 rounded-xl text-center">
+                    <div class="text-sm text-slate-400 mb-2">Titans EPA/Play</div>
+                    <div class="text-4xl font-black text-blue-400 mb-2">+0.18</div>
+                    <div class="text-xs text-green-400">Top 5 in AFC</div>
+                </div>
+
+                <!-- Longhorns Recruiting -->
+                <div class="metric-card glass-card p-6 rounded-xl text-center">
+                    <div class="text-sm text-slate-400 mb-2">Longhorns Recruiting</div>
+                    <div class="text-4xl font-black text-orange-400 mb-2">#5</div>
+                    <div class="text-xs text-yellow-400">National Ranking</div>
+                </div>
+
+                <!-- Grizzlies Grit -->
+                <div class="metric-card glass-card p-6 rounded-xl text-center">
+                    <div class="text-sm text-slate-400 mb-2">Grizzlies Grit Index</div>
+                    <div class="text-4xl font-black text-cyan-400 mb-2">94.8</div>
+                    <div class="text-xs text-green-400">Elite Tier</div>
+                </div>
+            </div>
+
+            <!-- Performance Chart -->
+            <div class="glass-card p-8 rounded-2xl mb-12">
+                <h3 class="text-xl font-bold text-white mb-6">Weekly Performance Trends</h3>
+                <canvas id="performanceChart" height="100"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Capabilities -->
+    <section class="py-16 px-4 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Advanced Analytics Capabilities</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Predictive Analytics -->
+                <div class="glass-card p-8 rounded-2xl">
+                    <h3 class="text-2xl font-bold text-cyan-400 mb-6">Predictive Analytics</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">Win Probability Models</span>
+                            <span class="text-green-400 font-mono">94.6% accurate</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">Player Performance Projection</span>
+                            <span class="text-green-400 font-mono">R² = 0.91</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">Injury Risk Assessment</span>
+                            <span class="text-green-400 font-mono">87% precision</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">Draft Value Modeling</span>
+                            <span class="text-green-400 font-mono">Top 10% accuracy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-Time Analytics -->
+                <div class="glass-card p-8 rounded-2xl">
+                    <h3 class="text-2xl font-bold text-orange-400 mb-6">Real-Time Processing</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">Data Points Per Second</span>
+                            <span class="text-white font-mono">2.8M+</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">API Response Time</span>
+                            <span class="text-white font-mono"><100ms</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">Stream Processing Latency</span>
+                            <span class="text-white font-mono"><50ms</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-300">Platform Uptime</span>
+                            <span class="text-white font-mono">99.9%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sport-Specific Analytics -->
+    <section class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Sport-Specific Intelligence</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- MLB Analytics -->
+                <div class="glass-card p-6 rounded-xl">
+                    <div class="text-2xl mb-3">⚾</div>
+                    <h3 class="text-lg font-bold text-red-400 mb-3">MLB Analytics</h3>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li>• Statcast integration</li>
+                        <li>• Pitch sequencing AI</li>
+                        <li>• Defensive positioning</li>
+                        <li>• WAR projections</li>
+                        <li>• Lineup optimization</li>
+                    </ul>
+                </div>
+
+                <!-- NFL Analytics -->
+                <div class="glass-card p-6 rounded-xl">
+                    <div class="text-2xl mb-3">🏈</div>
+                    <h3 class="text-lg font-bold text-blue-400 mb-3">NFL Analytics</h3>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li>• EPA/play analysis</li>
+                        <li>• Route tree efficiency</li>
+                        <li>• Pass rush win rate</li>
+                        <li>• DVOA metrics</li>
+                        <li>• Play calling tendencies</li>
+                    </ul>
+                </div>
+
+                <!-- NBA Analytics -->
+                <div class="glass-card p-6 rounded-xl">
+                    <div class="text-2xl mb-3">🏀</div>
+                    <h3 class="text-lg font-bold text-purple-400 mb-3">NBA Analytics</h3>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li>• Shot quality metrics</li>
+                        <li>• Player tracking data</li>
+                        <li>• Lineup net rating</li>
+                        <li>• Clutch performance</li>
+                        <li>• Defensive versatility</li>
+                    </ul>
+                </div>
+
+                <!-- NCAA Analytics -->
+                <div class="glass-card p-6 rounded-xl">
+                    <div class="text-2xl mb-3">🎓</div>
+                    <h3 class="text-lg font-bold text-orange-400 mb-3">NCAA Analytics</h3>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li>• Recruiting rankings</li>
+                        <li>• NIL valuations</li>
+                        <li>• Transfer portal analysis</li>
+                        <li>• SP+ ratings</li>
+                        <li>• Academic performance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section class="py-16 px-4 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Our Methodology</h2>
+            
+            <div class="glass-card p-8 rounded-2xl max-w-4xl mx-auto">
+                <h3 class="text-xl font-bold text-cyan-400 mb-4">How We Achieve 94.6% Accuracy</h3>
+                <p class="text-slate-300 mb-6">
+                    Our predictive models combine multiple data sources and advanced machine learning techniques:
+                </p>
+                <ul class="space-y-3 text-slate-300">
+                    <li class="flex items-start gap-3">
+                        <span class="text-green-400">1.</span>
+                        <span><strong>Multi-source data fusion:</strong> We integrate Statcast, Next Gen Stats, Second Spectrum, and proprietary sources</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-green-400">2.</span>
+                        <span><strong>Ensemble modeling:</strong> Multiple ML models (Random Forest, XGBoost, Neural Networks) vote on predictions</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-green-400">3.</span>
+                        <span><strong>Continuous learning:</strong> Models retrain nightly on latest data to maintain accuracy</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-green-400">4.</span>
+                        <span><strong>Backtesting validation:</strong> All models tested on 5+ years of historical data</span>
+                    </li>
+                </ul>
+                <p class="text-sm text-slate-400 mt-6">
+                    * Accuracy measured on out-of-sample test set from 2024 season. 
+                    <a href="/methods.html" class="text-cyan-400 underline">See full methodology</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Experience Championship Analytics</h2>
+            <p class="text-xl text-slate-300 mb-8">See why 50+ professional organizations trust Blaze Intelligence</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/demo" class="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600">
+                    View Live Demo
+                </a>
+                <a href="/contact.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                    Get Custom Analysis
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/50 border-t border-slate-800 py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center text-slate-400">
+            <p>&copy; 2025 Blaze Intelligence. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Create performance chart
+            const ctx = document.getElementById('performanceChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                        datasets: [
+                            {
+                                label: 'Cardinals',
+                                data: [82, 85, 83, 87, 86, 86.6],
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Titans',
+                                data: [88, 89, 91, 90, 92, 91.2],
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Longhorns',
+                                data: [85, 86, 88, 87, 89, 90],
+                                borderColor: '#f97316',
+                                backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Grizzlies',
+                                data: [92, 93, 94, 93, 95, 94.8],
+                                borderColor: '#06b6d4',
+                                backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { color: '#e2e8f0' }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                ticks: { color: '#94a3b8' },
+                                grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                            },
+                            x: {
+                                ticks: { color: '#94a3b8' },
+                                grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

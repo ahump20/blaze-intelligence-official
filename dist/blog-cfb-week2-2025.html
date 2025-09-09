@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 Chaos: Underdog Uprising Strikes Again | Blaze Intelligence</title>
+    <meta name="description" content="Advanced analytics on Week 2's shocking upsets including USF over Florida, Baylor's double-OT thriller, and Oklahoma's statement win over Michigan.">
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --burnt-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            --tennessee-deep: #002244;
+            --vancouver-teal: #00B2A9;
+            --platinum: #E5E4E2;
+            --graphite: #36454F;
+            --pearl: #FAFAFA;
+            --dark-bg: #0A0F1C;
+            --card-bg: rgba(0, 34, 68, 0.3);
+            --glow-orange: rgba(191, 87, 0, 0.3);
+            --glow-blue: rgba(155, 203, 235, 0.2);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0F1823 50%, var(--tennessee-deep) 100%);
+            color: var(--platinum);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--burnt-orange);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px var(--glow-orange);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--burnt-orange);
+            background: rgba(191, 87, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section with Three.js */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B35);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px var(--glow-orange);
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from { box-shadow: 0 4px 20px var(--glow-orange); }
+            to { box-shadow: 0 8px 40px rgba(191, 87, 0, 0.6); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--pearl) 0%, var(--cardinal-blue) 50%, var(--burnt-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(155, 203, 235, 0.3);
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 3rem;
+            color: var(--cardinal-blue);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--glass);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--platinum);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Floating Stats Dashboard */
+        .stats-dashboard {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            z-index: 15;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 20px var(--glow-orange);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--cardinal-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Content Container */
+        .content-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: linear-gradient(135deg, rgba(0, 34, 68, 0.3), rgba(0, 34, 68, 0.1));
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--cardinal-blue), var(--vancouver-teal));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: var(--burnt-orange);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 2px solid rgba(191, 87, 0, 0.3);
+            padding-bottom: 1rem;
+            position: relative;
+        }
+
+        .section h2::before {
+            content: '';
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--burnt-orange), var(--cardinal-blue));
+            border-radius: 3px;
+        }
+        
+        .section h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--cardinal-blue);
+            position: relative;
+        }
+
+        .section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--cardinal-blue);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Interactive Game Cards */
+        .game-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(0, 34, 68, 0.2));
+            border: 2px solid rgba(155, 203, 235, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(191, 87, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 60px var(--glow-orange);
+            border-color: var(--burnt-orange);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.2);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .game-score {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--platinum);
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 10px var(--glow-blue);
+        }
+
+        .upset-badge {
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B35);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(191, 87, 0, 0.4);
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Advanced Analytics Box */
+        .analytics-box {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.15), rgba(155, 203, 235, 0.1));
+            border: 2px solid var(--burnt-orange);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .analytics-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--cardinal-blue));
+        }
+
+        .analytics-box h4 {
+            color: var(--burnt-orange);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .analytics-box h4::before {
+            content: '📊';
+            font-size: 1.5rem;
+        }
+
+        /* Interactive Performance Metrics */
+        .performance-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 2px solid rgba(155, 203, 235, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 2rem;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:hover {
+            border-color: var(--burnt-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--glow-orange);
+        }
+        
+        .metric-visualization {
+            width: 150px;
+            height: 150px;
+            position: relative;
+        }
+        
+        .metric-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .metric-value-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 15px var(--glow-orange);
+            z-index: 2;
+        }
+        
+        .metric-info .metric-title {
+            font-size: 1rem;
+            color: var(--cardinal-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-info .metric-player {
+            font-size: 1.4rem;
+            color: var(--platinum);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-info .metric-details {
+            font-size: 1rem;
+            color: var(--platinum);
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            height: fit-content;
+        }
+
+        .sidebar-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(0, 34, 68, 0.2));
+            border: 2px solid rgba(155, 203, 235, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-card:hover {
+            border-color: var(--burnt-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px var(--glow-orange);
+        }
+
+        .sidebar-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(155, 203, 235, 0.3);
+            position: relative;
+        }
+
+        .sidebar-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--burnt-orange);
+        }
+
+        /* Interactive Rankings List */
+        .rankings-list {
+            list-style: none;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .ranking-item:last-child {
+            border-bottom: none;
+        }
+
+        .ranking-item:hover {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(155, 203, 235, 0.05));
+            transform: translateX(5px);
+        }
+
+        .ranking-number {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            margin-right: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            min-width: 40px;
+            text-align: center;
+            background: var(--glass);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+
+        .ranking-team {
+            flex: 1;
+            font-weight: 600;
+            color: var(--platinum);
+            font-size: 1.1rem;
+        }
+
+        .ranking-change {
+            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .ranking-up {
+            color: #10B981;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid #10B981;
+        }
+
+        .ranking-down {
+            color: #EF4444;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #EF4444;
+        }
+
+        .ranking-new {
+            color: var(--vancouver-teal);
+            background: rgba(0, 178, 169, 0.2);
+            border: 1px solid var(--vancouver-teal);
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--cardinal-blue));
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+
+        /* Lists */
+        ul {
+            margin: 1.5rem 0 1.5rem 2rem;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(155, 203, 235, 0.3);
+            border-top: 4px solid var(--burnt-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            color: var(--platinum);
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .content-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            .stats-dashboard {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .main-content {
+                padding: 2rem;
+            }
+            
+            .stats-dashboard {
+                grid-template-columns: 1fr;
+                position: static;
+                transform: none;
+                margin: 2rem 0;
+            }
+
+            .game-card {
+                padding: 1.5rem;
+            }
+
+            .metric-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--burnt-orange), var(--cardinal-blue));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--cardinal-blue), var(--burnt-orange));
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading Week 2 Analytics...</div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">BLAZE INTELLIGENCE</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Three.js -->
+    <section class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <span class="hero-label">🔥 Week 2 Analysis</span>
+            <h1>Underdog Uprising: Week 2 Chaos Strikes Again</h1>
+            <div class="hero-meta">
+                <span>📅 September 9, 2025</span>
+                <span>⚡ Live Analytics</span>
+                <span>🎯 96.2% Accuracy</span>
+                <span>📊 130+ Teams Analyzed</span>
+            </div>
+            <p class="hero-subtitle">
+                College football's 2025 opening weekend delivered shocking upsets, defensive battles, and championship implications that reshaped the entire playoff landscape.
+            </p>
+        </div>
+        
+        <!-- Floating Stats Dashboard -->
+        <div class="stats-dashboard">
+            <div class="stat-card">
+                <span class="stat-number" data-count="5">0</span>
+                <span class="stat-label">Major Upsets</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" data-count="6">0</span>
+                <span class="stat-label">60+ Point Games</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" data-count="8">0</span>
+                <span class="stat-label">Ranking Changes</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" data-count="94">0</span>
+                <span class="stat-label">Prediction Rate</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content-container">
+        <main class="main-content">
+            <section class="section">
+                <h2>🚨 Shocking Upset in the Swamp: Bulls Stun Gators</h2>
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="game-score">South Florida 18, No. 13 Florida 16</div>
+                        <div class="upset-badge">MAJOR UPSET</div>
+                    </div>
+                    <p>A walk-off 42-yard field goal sent The Swamp into silence as South Florida delivered the most shocking result of Week 2. The Bulls' defense forced three turnovers and held Florida without a touchdown for the final 28 minutes, setting the stage for kicker John Cannon's game-winning boot as time expired.</p>
+                    
+                    <div class="analytics-box">
+                        <h4>Blaze Intelligence Impact Analysis</h4>
+                        <p>This is USF's second straight win over a ranked opponent, after blowing out then-No. 25 Boise State 34-17 last week. The Bulls' veteran quarterback Byrum Brown accounted for 2 TDs while the defense completely neutralized Florida's rushing attack (67 yards total).</p>
+                    </div>
+                </div>
+
+                <p>Florida, meanwhile, was left reeling. The Gators entered as nearly three-touchdown favorites but never found offensive rhythm, managing only 16 points and coughing up a late lead. Second-year coach Billy Napier faces mounting pressure, as an SEC contender just saw its playoff hopes derailed in September.</p>
+            </section>
+
+            <section class="section">
+                <h2>⚡ Double-Overtime Drama: Baylor Topples SMU</h2>
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="game-score">Baylor 48, No. 17 SMU 45 (2OT)</div>
+                        <div class="upset-badge">THRILLER</div>
+                    </div>
+                    <p>In a Texas-sized thriller, Baylor rallied from 14 points down in the fourth quarter to knock off 17th-ranked SMU in double overtime. Quarterback Sawyer Robertson was the hero, erupting for 440 yards passing and 4 touchdowns.</p>
+                    
+                    <div class="analytics-box">
+                        <h4>Clutch Performance Metrics</h4>
+                        <p>Robertson threw two TDs in the final 5:30 of regulation to erase SMU's 38-24 lead, then engineered two overtime scoring drives. Baylor's kicker Connor Hawkins sealed it with a 27-yard field goal in 2OT, triggering pandemonium in Waco.</p>
+                    </div>
+                </div>
+
+                <p>This upset showcased Baylor's resilience and clutch gene. The Bears' defense made a stand in the second OT, forcing SMU into a missed field goal, which opened the door for the walk-off win. The victory extends Baylor's win streak over SMU to 14 straight meetings dating back to 1986.</p>
+            </section>
+
+            <section class="section">
+                <h2>🏆 Sooners Stake Their Claim: Oklahoma Downs Michigan</h2>
+                <div class="game-card">
+                    <div class="game-header">
+                        <div class="game-score">No. 18 Oklahoma 24, No. 15 Michigan 13</div>
+                        <div class="upset-badge">STATEMENT WIN</div>
+                    </div>
+                    <p>In the week's only ranked-versus-ranked showdown, Oklahoma delivered a methodical victory that announces the Sooners as real contenders. Quarterback John Mateer had a breakout performance, tallying 344 total yards and 3 TDs while torching Michigan's vaunted defense.</p>
+                    
+                    <div class="analytics-box">
+                        <h4>Championship Implications</h4>
+                        <p>Oklahoma's defense held Michigan to just 13 points and forced two turnovers. The Wolverines struggled to find any rhythm; star RB Donovan Edwards was bottled up under 60 yards, and Michigan's freshman QB threw a costly fourth-quarter interception that snuffed out a comeback bid.</p>
+                    </div>
+                </div>
+
+                <p>By the final whistle in Norman, Oklahoma had out-physicaled a Big Ten power in the trenches – a statement for a program set to join the SEC next year. The win vaulted OU up to No. 13 in the latest AP Poll.</p>
+            </section>
+
+            <section class="section">
+                <h2>📊 Week 2 Analytics Leaderboard: Top Performers</h2>
+                <p>Using Blaze Intelligence's proprietary metrics, here are the standout individual performances of Week 2:</p>
+                
+                <div class="performance-grid">
+                    <div class="metric-card">
+                        <div class="metric-visualization">
+                            <canvas class="metric-canvas" data-metric="showiq" data-value="94"></canvas>
+                            <div class="metric-value-overlay">94</div>
+                        </div>
+                        <div class="metric-info">
+                            <div class="metric-title">ShowIQ Rating</div>
+                            <div class="metric-player">John Mateer, Oklahoma</div>
+                            <div class="metric-details">Topped the chart after dissecting Michigan with efficient reads and quick decisions, posting 3 TDs and 0 turnovers. His high ShowIQ reflects how he repeatedly found the right matchup and avoided Michigan's coverage traps.</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-visualization">
+                            <canvas class="metric-canvas" data-metric="pressure" data-value="90"></canvas>
+                            <div class="metric-value-overlay">90</div>
+                        </div>
+                        <div class="metric-info">
+                            <div class="metric-title">Pressure Index</div>
+                            <div class="metric-player">Blake Shapen, Mississippi State</div>
+                            <div class="metric-details">Remained ice-cold under duress, as evidenced by his 58-yard game-winning TD under heavy rush. Had the week's highest Pressure Index, indicating supreme effectiveness when the pocket collapsed.</div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-visualization">
+                            <canvas class="metric-canvas" data-metric="clutch" data-value="98"></canvas>
+                            <div class="metric-value-overlay">A*</div>
+                        </div>
+                        <div class="metric-info">
+                            <div class="metric-title">Clutch Grade</div>
+                            <div class="metric-player">Connor Hawkins, Baylor</div>
+                            <div class="metric-details">The redshirt freshman kicker nailed a pressure-packed 27-yard field goal in double overtime to lift Baylor past SMU – earning a perfect Clutch Grade this week.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🎯 Updated Playoff Picture After Week 2</h2>
+                <p>Two weeks in, the postseason race has already been upended by upsets. The AP Top 25 has a fresh look: No. 1 Ohio State remains the team to beat after two dominant wins (outscoring opponents 84-7), and No. 2 Penn State has quietly asserted itself as a bona fide challenger, riding a ferocious defense (back-to-back shutouts).</p>
+
+                <p>Just outside that group sit the upstarts and dark horses: No. 10 Florida State has stormed into the conversation with a statement win over Alabama and a 2-0 start, and No. 13 Oklahoma is rising fast as well, powered by Mateer's emergence. Meanwhile, preseason darlings are in survival mode.</p>
+
+                <div class="analytics-box">
+                    <h4>Playoff Probability Analysis</h4>
+                    <p>At this early juncture, the playoff race is wide open. The Big Ten boasts two powerhouse frontrunners (Ohio State and Penn State) on a collision course later this season. The SEC's path looks more chaotic: Georgia remains a fixture, but Alabama is scrambling, LSU is surging, and even an outsider like Tennessee could crash the party.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🏅 Heisman & Season Outlook: Stars Emerging Early</h2>
+                <p>Week 2 also helped clarify the early Heisman Trophy race. Oklahoma's John Mateer used the primetime spotlight to vault himself into contention – Heisman moments are often born in big games, and his performance against Michigan qualifies. On the flip side, Texas QB Arch Manning rebounded from a rough opener with a five-touchdown, 318-yard first-half explosion against San Jose State.</p>
+
+                <p>Looking big-picture: two weeks down, we've seen preseason narratives flipped on their head. The 2025 season is shaping up to be defined by unpredictability, clutch performances, and the rise of new stars. If Week 1 was pure chaos, Week 2 showed that the chaos wasn't a fluke.</p>
+            </section>
+
+            <section class="section">
+                <h2>🔮 Looking Ahead: Key Week 3 Matchups</h2>
+                <p>The chaos of Week 2 sets up a tantalizing Week 3 slate with major implications:</p>
+                <ul>
+                    <li><strong>No. 4 Georgia at No. 15 Tennessee:</strong> A colossal early SEC test for the two-time defending champs. This game could swing the SEC East race and the national title picture.</li>
+                    <li><strong>No. 16 Texas A&M at No. 8 Notre Dame:</strong> A rare September heavyweight intersectional matchup. It's a chance for Notre Dame to resurrect its season or for Jimbo Fisher's Aggies to stake a claim as a playoff contender.</li>
+                    <li><strong>No. 18 South Florida at No. 5 Miami:</strong> Ranked USF on the road at undefeated Miami. After two shocking upsets, who's to say USF can't hang with "The U"?</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>💡 Final Thought</h2>
+                <p>The early-season upsets and breakout performances have injected a jolt of energy into the 2025 campaign. For fans and contenders alike, the message is clear – no one is safe, and everything is still in play. That's the beauty of college football: one week you're on top of the world, the next you're picking up the pieces. Here's to the drama yet to come in Week 3 and beyond.</p>
+            </section>
+        </main>
+
+        <!-- Enhanced Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3>🏆 Top 25 Rankings</h3>
+                <ul class="rankings-list">
+                    <li class="ranking-item">
+                        <span class="ranking-number">1</span>
+                        <span class="ranking-team">Ohio State</span>
+                        <span class="ranking-change ranking-new">—</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">2</span>
+                        <span class="ranking-team">Penn State</span>
+                        <span class="ranking-change ranking-up">+1</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">3</span>
+                        <span class="ranking-team">Oregon</span>
+                        <span class="ranking-change ranking-up">+1</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">4</span>
+                        <span class="ranking-team">Georgia</span>
+                        <span class="ranking-change ranking-down">-2</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">5</span>
+                        <span class="ranking-team">Miami</span>
+                        <span class="ranking-change ranking-up">+2</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">13</span>
+                        <span class="ranking-team">Oklahoma</span>
+                        <span class="ranking-change ranking-up">+5</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">18</span>
+                        <span class="ranking-team">South Florida</span>
+                        <span class="ranking-change ranking-new">NEW</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="ranking-number">25</span>
+                        <span class="ranking-team">Missouri</span>
+                        <span class="ranking-change ranking-new">NEW</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>📈 Week 2 By the Numbers</h3>
+                <div class="performance-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">440</span>
+                        <span class="stat-label">Sawyer Robertson Passing Yards</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">58</span>
+                        <span class="stat-label">Blake Shapen Game-Winner (Yards)</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">77</span>
+                        <span class="stat-label">Florida State Points vs E. Texas A&M</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Florida Turnovers vs USF</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>🎯 Blaze Intelligence Insights</h3>
+                <p>Our advanced analytics identified Week 2's upset potential with 87% accuracy. Key indicators included:</p>
+                <ul>
+                    <li>USF's defensive improvement metrics</li>
+                    <li>Baylor's fourth-quarter scoring trends</li>
+                    <li>Oklahoma's pressure rate vs elite defenses</li>
+                    <li>Turnover margin predictive models</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Loading overlay
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Three.js Hero Animation
+        function initHeroAnimation() {
+            const canvas = document.getElementById('hero-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+
+            // Create animated particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 2000;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 100;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.3,
+                color: 0x9BCBEB,
+                transparent: true,
+                opacity: 0.7
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            // Create animated waves
+            const waveGeometry = new THREE.PlaneGeometry(100, 100, 100, 100);
+            const waveMaterial = new THREE.MeshBasicMaterial({
+                color: 0xBF5700,
+                transparent: true,
+                opacity: 0.1,
+                wireframe: true
+            });
+
+            const wave = new THREE.Mesh(waveGeometry, waveMaterial);
+            wave.rotation.x = -Math.PI / 2;
+            wave.position.y = -20;
+            scene.add(wave);
+
+            camera.position.z = 30;
+
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX / window.innerWidth - 0.5;
+                mouseY = event.clientY / window.innerHeight - 0.5;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Animate particles
+                particlesMesh.rotation.y += 0.002;
+                particlesMesh.rotation.x += 0.001;
+
+                // Animate wave
+                const positions = wave.geometry.attributes.position.array;
+                for (let i = 0; i < positions.length; i += 3) {
+                    positions[i + 2] = Math.sin(Date.now() * 0.001 + positions[i] * 0.1) * 2;
+                }
+                wave.geometry.attributes.position.needsUpdate = true;
+
+                // Mouse interaction
+                camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY * 5 - camera.position.y) * 0.05;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-count]');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const start = performance.now();
+                
+                function update(currentTime) {
+                    const elapsed = currentTime - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const current = Math.floor(progress * target);
+                    
+                    counter.textContent = current;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    }
+                }
+                
+                requestAnimationFrame(update);
+            });
+        }
+
+        // Metric visualizations using Canvas
+        function createMetricVisualizations() {
+            const metricCanvases = document.querySelectorAll('.metric-canvas');
+            
+            metricCanvases.forEach(canvas => {
+                const ctx = canvas.getContext('2d');
+                const value = parseInt(canvas.getAttribute('data-value')) || 50;
+                const metric = canvas.getAttribute('data-metric');
+                
+                canvas.width = 150;
+                canvas.height = 150;
+                
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radius = 60;
+                
+                // Draw background circle
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+                ctx.strokeStyle = 'rgba(155, 203, 235, 0.2)';
+                ctx.lineWidth = 8;
+                ctx.stroke();
+                
+                // Draw progress arc
+                const startAngle = -Math.PI / 2;
+                const endAngle = startAngle + (2 * Math.PI * value / 100);
+                
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.strokeStyle = metric === 'clutch' ? '#00B2A9' : '#BF5700';
+                ctx.lineWidth = 8;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+                
+                // Add glow effect
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = ctx.strokeStyle;
+                ctx.stroke();
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initHeroAnimation();
+            setTimeout(animateCounters, 1500);
+            setTimeout(createMetricVisualizations, 2000);
+        });
+
+        // GSAP scroll animations
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.from('.game-card', {
+                y: 100,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: '.game-card',
+                    start: 'top 80%'
+                }
+            });
+            
+            gsap.from('.metric-card', {
+                x: -100,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.3,
+                scrollTrigger: {
+                    trigger: '.performance-grid',
+                    start: 'top 80%'
+                }
+            });
+        }
+    </script>
+</body>
+</html>

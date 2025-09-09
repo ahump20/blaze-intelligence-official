@@ -1,0 +1,139 @@
+<!-- Google Analytics & Privacy-Friendly Tracking -->
+<!-- Include this snippet in the <head> of every HTML page -->
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX'); // Replace with your GA4 measurement ID
+</script>
+
+<!-- Alternative: Privacy-friendly Plausible Analytics (no cookies) -->
+<!-- <script defer data-domain="blaze-intelligence.pages.dev" src="https://plausible.io/js/script.js"></script> -->
+
+<!-- Custom Event Tracking for Blaze Intelligence -->
+<script>
+// Track key user interactions
+document.addEventListener('DOMContentLoaded', function() {
+    // Track CTA button clicks
+    document.querySelectorAll('.enhanced-btn, .submit-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const buttonText = this.textContent.trim();
+            const buttonLocation = this.closest('section')?.id || 'unknown';
+            
+            // Google Analytics event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'cta_click', {
+                    'button_text': buttonText,
+                    'button_location': buttonLocation,
+                    'page_url': window.location.pathname
+                });
+            }
+            
+            // Console log for debugging
+            console.log('CTA Clicked:', buttonText, 'in', buttonLocation);
+        });
+    });
+    
+    // Track calculator usage
+    if (window.location.pathname.includes('calculator')) {
+        let calculatorStartTime = Date.now();
+        
+        // Track when calculation is performed
+        document.addEventListener('change', function(e) {
+            if (e.target.matches('input, select')) {
+                const timeSpent = Math.round((Date.now() - calculatorStartTime) / 1000);
+                
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'calculator_interaction', {
+                        'calculator_type': 'savings',
+                        'time_spent_seconds': timeSpent
+                    });
+                }
+            }
+        });
+    }
+    
+    // Track dashboard views
+    if (window.location.pathname.includes('dashboard')) {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'dashboard_view', {
+                'dashboard_type': 'live_performance',
+                'user_type': 'visitor'
+            });
+        }
+    }
+    
+    // Track scroll depth
+    let maxScroll = 0;
+    window.addEventListener('scroll', function() {
+        const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+        
+        if (scrollPercent > maxScroll) {
+            maxScroll = scrollPercent;
+            
+            // Track milestones
+            if ([25, 50, 75, 90, 100].includes(maxScroll)) {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'scroll_depth', {
+                        'percent_scrolled': maxScroll,
+                        'page_url': window.location.pathname
+                    });
+                }
+            }
+        }
+    });
+    
+    // Track time on page
+    let pageStartTime = Date.now();
+    window.addEventListener('beforeunload', function() {
+        const timeOnPage = Math.round((Date.now() - pageStartTime) / 1000);
+        
+        if (typeof gtag !== 'undefined' && timeOnPage > 3) {
+            gtag('event', 'time_on_page', {
+                'seconds': timeOnPage,
+                'page_url': window.location.pathname
+            });
+        }
+    });
+    
+    // Track external link clicks
+    document.querySelectorAll('a[href^="http"]:not([href*="blaze-intelligence"])').forEach(link => {
+        link.addEventListener('click', function() {
+            const destination = this.href;
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'external_link_click', {
+                    'link_url': destination,
+                    'link_text': this.textContent.trim()
+                });
+            }
+        });
+    });
+});
+
+// Custom function to track conversions
+function trackConversion(type, value) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'conversion', {
+            'conversion_type': type,
+            'conversion_value': value,
+            'currency': 'USD'
+        });
+    }
+    
+    console.log('Conversion tracked:', type, value);
+}
+
+// Track demo requests
+function trackDemoRequest(sport, organization) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'demo_request', {
+            'sport_type': sport,
+            'organization': organization
+        });
+    }
+}
+</script>

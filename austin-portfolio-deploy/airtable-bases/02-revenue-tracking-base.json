@@ -1,0 +1,539 @@
+{
+  "baseName": "Blaze Intelligence - Revenue Operations",
+  "description": "Financial pipeline management, forecasting, and revenue optimization",
+  "tables": {
+    "deals": {
+      "name": "Deals",
+      "description": "Sales pipeline and deal tracking",
+      "fields": [
+        {
+          "name": "Deal Name",
+          "type": "formula",
+          "formula": "CONCATENATE({Organization}, ' - ', {Product Package})",
+          "required": true
+        },
+        {
+          "name": "Organization",
+          "type": "linkedRecord",
+          "linkedTable": "organizations",
+          "required": true
+        },
+        {
+          "name": "Deal Stage",
+          "type": "singleSelect",
+          "options": [
+            "Qualification",
+            "Discovery",
+            "Technical Demo", 
+            "Proposal Sent",
+            "Negotiation",
+            "Legal Review",
+            "Closed Won",
+            "Closed Lost"
+          ],
+          "required": true
+        },
+        {
+          "name": "Product Package",
+          "type": "singleSelect",
+          "options": [
+            "Vision AI Starter ($12,000/year)",
+            "Vision AI Professional ($25,000/year)",
+            "Vision AI Enterprise ($50,000/year)",
+            "Multi-Sport Analytics ($75,000/year)",
+            "Championship Package ($250,000/year)",
+            "Custom Enterprise (Variable)"
+          ],
+          "required": true
+        },
+        {
+          "name": "Deal Value",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "name": "Probability (%)",
+          "type": "number",
+          "description": "Likelihood of closing"
+        },
+        {
+          "name": "Weighted Value",
+          "type": "formula",
+          "formula": "{Deal Value} * ({Probability (%)} / 100)"
+        },
+        {
+          "name": "Expected Close Date",
+          "type": "date"
+        },
+        {
+          "name": "Actual Close Date",
+          "type": "date"
+        },
+        {
+          "name": "Quarter",
+          "type": "formula",
+          "formula": "IF(MONTH({Expected Close Date}) <= 3, 'Q1', IF(MONTH({Expected Close Date}) <= 6, 'Q2', IF(MONTH({Expected Close Date}) <= 9, 'Q3', 'Q4'))) & ' ' & YEAR({Expected Close Date})"
+        },
+        {
+          "name": "Sales Rep",
+          "type": "singleSelect",
+          "options": ["Austin Humphrey", "Future Hire 1", "Future Hire 2"],
+          "default": "Austin Humphrey"
+        },
+        {
+          "name": "Competitor",
+          "type": "multipleSelect",
+          "options": ["Hudl", "Synergy", "Second Spectrum", "Stats Inc", "Custom Solution", "No Current Solution"]
+        },
+        {
+          "name": "Key Decision Factors",
+          "type": "multipleSelect",
+          "options": [
+            "Cost Savings",
+            "Technical Capabilities", 
+            "Implementation Speed",
+            "Support Quality",
+            "Integration Ease",
+            "User Experience",
+            "ROI Demonstration",
+            "Vision AI Features"
+          ]
+        },
+        {
+          "name": "Lost Reason",
+          "type": "singleSelect",
+          "options": [
+            "Budget Constraints",
+            "Timeline Mismatch",
+            "Feature Gap",
+            "Competitive Solution",
+            "Internal Solution",
+            "No Decision Made",
+            "Champion Left"
+          ]
+        },
+        {
+          "name": "Created Date",
+          "type": "createdTime"
+        },
+        {
+          "name": "Notes",
+          "type": "longText"
+        }
+      ],
+      "sampleData": [
+        {
+          "Organization": "St. Louis Cardinals",
+          "Deal Stage": "Negotiation",
+          "Product Package": "Championship Package ($250,000/year)",
+          "Deal Value": 250000,
+          "Probability (%)": 75,
+          "Expected Close Date": "2024-10-15",
+          "Quarter": "Q4 2024",
+          "Sales Rep": "Austin Humphrey",
+          "Competitor": ["Hudl", "Stats Inc"],
+          "Key Decision Factors": ["Cost Savings", "Vision AI Features", "ROI Demonstration"],
+          "Notes": "Strong interest in biomechanical + micro-expression analysis. 67% savings vs current Hudl Pro + Stats Inc stack. GM Girsch very engaged."
+        },
+        {
+          "Organization": "Tennessee Titans",
+          "Deal Stage": "Discovery",
+          "Product Package": "Vision AI Professional ($25,000/year)",
+          "Deal Value": 50000,
+          "Probability (%)": 40,
+          "Expected Close Date": "2024-12-01",
+          "Quarter": "Q4 2024",
+          "Sales Rep": "Austin Humphrey",
+          "Competitor": ["Hudl"],
+          "Key Decision Factors": ["User Experience", "Technical Capabilities"],
+          "Notes": "Two-year contract potential. Focus on character assessment capabilities for draft evaluation."
+        },
+        {
+          "Organization": "University of Texas Longhorns",
+          "Deal Stage": "Qualification",
+          "Product Package": "Multi-Sport Analytics ($75,000/year)",
+          "Deal Value": 50000,
+          "Probability (%)": 25,
+          "Expected Close Date": "2025-03-01",
+          "Quarter": "Q1 2025",
+          "Sales Rep": "Austin Humphrey",
+          "Competitor": ["Synergy", "Custom Solution"],
+          "Key Decision Factors": ["Integration Ease", "Cost Savings"],
+          "Notes": "Budget approval process starts in January. Need to demonstrate NIL valuation integration."
+        },
+        {
+          "Organization": "Memphis Grizzlies", 
+          "Deal Stage": "Legal Review",
+          "Product Package": "Championship Package ($250,000/year)",
+          "Deal Value": 250000,
+          "Probability (%)": 90,
+          "Expected Close Date": "2024-09-15",
+          "Quarter": "Q3 2024",
+          "Sales Rep": "Austin Humphrey",
+          "Competitor": ["Second Spectrum"],
+          "Key Decision Factors": ["Technical Capabilities", "Support Quality", "Vision AI Features"],
+          "Notes": "Partnership framework instead of traditional client relationship. Revenue sharing model."
+        }
+      ]
+    },
+    "subscriptions": {
+      "name": "Subscriptions",
+      "description": "Active recurring revenue tracking",
+      "fields": [
+        {
+          "name": "Subscription Name",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Client Organization",
+          "type": "linkedRecord",
+          "linkedTable": "organizations"
+        },
+        {
+          "name": "Product Package",
+          "type": "singleSelect",
+          "options": [
+            "Vision AI Starter",
+            "Vision AI Professional", 
+            "Vision AI Enterprise",
+            "Multi-Sport Analytics",
+            "Championship Package",
+            "Custom Enterprise"
+          ]
+        },
+        {
+          "name": "Monthly Recurring Revenue",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "name": "Annual Contract Value",
+          "type": "formula",
+          "formula": "{Monthly Recurring Revenue} * 12"
+        },
+        {
+          "name": "Contract Start Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "Contract End Date", 
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "Renewal Probability (%)",
+          "type": "number",
+          "description": "Likelihood of renewal"
+        },
+        {
+          "name": "Expansion Opportunity",
+          "type": "currency",
+          "description": "Potential additional ARR"
+        },
+        {
+          "name": "Health Score",
+          "type": "singleSelect",
+          "options": ["Excellent", "Good", "At Risk", "Critical"],
+          "default": "Good"
+        },
+        {
+          "name": "Payment Method",
+          "type": "singleSelect",
+          "options": ["Stripe", "Square", "Wire Transfer", "Check", "ACH"]
+        },
+        {
+          "name": "Last Payment Date",
+          "type": "date"
+        },
+        {
+          "name": "Next Payment Date",
+          "type": "date"
+        },
+        {
+          "name": "Usage Metrics",
+          "type": "longText",
+          "description": "Platform usage and engagement data"
+        }
+      ]
+    },
+    "revenue_forecast": {
+      "name": "Revenue Forecast",
+      "description": "Financial forecasting and target tracking",
+      "fields": [
+        {
+          "name": "Period",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Period Type",
+          "type": "singleSelect",
+          "options": ["Month", "Quarter", "Year"]
+        },
+        {
+          "name": "New Business Target",
+          "type": "currency"
+        },
+        {
+          "name": "New Business Actual",
+          "type": "currency"
+        },
+        {
+          "name": "Recurring Revenue Target",
+          "type": "currency"
+        },
+        {
+          "name": "Recurring Revenue Actual",
+          "type": "currency"
+        },
+        {
+          "name": "Total Revenue Target",
+          "type": "formula",
+          "formula": "{New Business Target} + {Recurring Revenue Target}"
+        },
+        {
+          "name": "Total Revenue Actual",
+          "type": "formula", 
+          "formula": "{New Business Actual} + {Recurring Revenue Actual}"
+        },
+        {
+          "name": "Attainment %",
+          "type": "formula",
+          "formula": "IF({Total Revenue Target} > 0, ({Total Revenue Actual} / {Total Revenue Target}) * 100, 0)"
+        },
+        {
+          "name": "Variance",
+          "type": "formula",
+          "formula": "{Total Revenue Actual} - {Total Revenue Target}"
+        }
+      ],
+      "sampleData": [
+        {
+          "Period": "Q4 2024",
+          "Period Type": "Quarter",
+          "New Business Target": 325000,
+          "New Business Actual": 0,
+          "Recurring Revenue Target": 0,
+          "Recurring Revenue Actual": 0
+        },
+        {
+          "Period": "Q1 2025",
+          "Period Type": "Quarter", 
+          "New Business Target": 150000,
+          "New Business Actual": 0,
+          "Recurring Revenue Target": 50000,
+          "Recurring Revenue Actual": 0
+        },
+        {
+          "Period": "2025",
+          "Period Type": "Year",
+          "New Business Target": 1200000,
+          "New Business Actual": 0,
+          "Recurring Revenue Target": 675000,
+          "Recurring Revenue Actual": 0
+        },
+        {
+          "Period": "2026",
+          "Period Type": "Year",
+          "New Business Target": 1000000,
+          "New Business Actual": 0,
+          "Recurring Revenue Target": 875000,
+          "Recurring Revenue Actual": 0
+        }
+      ]
+    },
+    "competitive_intel": {
+      "name": "Competitive Intelligence",
+      "description": "Market positioning and competitor analysis",
+      "fields": [
+        {
+          "name": "Competitor",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Product/Service",
+          "type": "singleLineText"
+        },
+        {
+          "name": "Pricing Tier",
+          "type": "singleLineText"
+        },
+        {
+          "name": "Annual Price",
+          "type": "currency"
+        },
+        {
+          "name": "Blaze Intelligence Equivalent",
+          "type": "singleSelect",
+          "options": [
+            "Vision AI Starter ($12,000/year)",
+            "Vision AI Professional ($25,000/year)", 
+            "Vision AI Enterprise ($50,000/year)",
+            "Multi-Sport Analytics ($75,000/year)",
+            "Championship Package ($250,000/year)"
+          ]
+        },
+        {
+          "name": "Cost Savings %",
+          "type": "formula",
+          "formula": "IF({Annual Price} > 0, (({Annual Price} - {Blaze Price}) / {Annual Price}) * 100, 0)"
+        },
+        {
+          "name": "Blaze Price",
+          "type": "number",
+          "description": "Hidden field for calculation"
+        },
+        {
+          "name": "Key Differentiators",
+          "type": "multipleSelect",
+          "options": [
+            "Vision AI Technology",
+            "Micro-Expression Analysis", 
+            "Character Assessment",
+            "Real-time Processing",
+            "Multi-Sport Coverage",
+            "Cost Efficiency",
+            "User Experience",
+            "Implementation Speed",
+            "Custom Analytics"
+          ]
+        },
+        {
+          "name": "Market Share %",
+          "type": "number"
+        },
+        {
+          "name": "Strengths",
+          "type": "longText"
+        },
+        {
+          "name": "Weaknesses",
+          "type": "longText"
+        },
+        {
+          "name": "Competitive Strategy",
+          "type": "longText"
+        }
+      ],
+      "sampleData": [
+        {
+          "Competitor": "Hudl",
+          "Product/Service": "Hudl Assist",
+          "Pricing Tier": "Team Plan",
+          "Annual Price": 40000,
+          "Blaze Intelligence Equivalent": "Vision AI Professional ($25,000/year)",
+          "Blaze Price": 25000,
+          "Key Differentiators": ["Vision AI Technology", "Cost Efficiency", "Real-time Processing"],
+          "Market Share %": 45,
+          "Strengths": "Market leader, extensive video library, strong brand recognition",
+          "Weaknesses": "High cost, limited AI capabilities, slow analysis speed",
+          "Competitive Strategy": "Position on 67% cost savings + advanced Vision AI capabilities unavailable in Hudl"
+        },
+        {
+          "Competitor": "Second Spectrum",
+          "Product/Service": "NBA Tracking", 
+          "Pricing Tier": "Professional",
+          "Annual Price": 300000,
+          "Blaze Intelligence Equivalent": "Championship Package ($250,000/year)",
+          "Blaze Price": 250000,
+          "Key Differentiators": ["Character Assessment", "Multi-Sport Coverage", "Cost Efficiency"],
+          "Market Share %": 20,
+          "Strengths": "Advanced tracking, NBA partnership, sophisticated analytics",
+          "Weaknesses": "Basketball-only focus, extremely high cost, complex implementation",
+          "Competitive Strategy": "Multi-sport capability + character/grit analysis + 17% cost savings"
+        }
+      ]
+    }
+  },
+  "views": {
+    "deals": [
+      {
+        "name": "Active Pipeline",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Deal Stage",
+            "condition": "is not",
+            "value": "Closed Lost"
+          },
+          {
+            "field": "Deal Stage", 
+            "condition": "is not",
+            "value": "Closed Won"
+          }
+        ],
+        "sorts": [
+          {
+            "field": "Weighted Value",
+            "direction": "desc"
+          }
+        ]
+      },
+      {
+        "name": "This Quarter",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Quarter",
+            "condition": "contains",
+            "value": "Q4 2024"
+          }
+        ]
+      },
+      {
+        "name": "High Value Deals",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Deal Value",
+            "condition": "is greater than",
+            "value": 100000
+          }
+        ]
+      }
+    ]
+  },
+  "automations": [
+    {
+      "name": "Deal Stage Progression Alert",
+      "trigger": "Field updated in Deals",
+      "conditions": [
+        {
+          "field": "Deal Stage",
+          "condition": "is one of",
+          "values": ["Proposal Sent", "Negotiation", "Legal Review"]
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com",
+          "subject": "Deal Progress: {Deal Name} → {Deal Stage}",
+          "body": "Deal: {Deal Name}\\nValue: {Deal Value}\\nProbability: {Probability (%)}%\\nExpected Close: {Expected Close Date}\\n\\nNext steps required for {Deal Stage} stage."
+        }
+      ]
+    },
+    {
+      "name": "Revenue Target Tracking",
+      "trigger": "Field updated in Revenue Forecast",
+      "conditions": [
+        {
+          "field": "Attainment %",
+          "condition": "is less than",
+          "value": 80
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail", 
+          "to": "ahump20@outlook.com",
+          "subject": "Revenue Alert: {Period} Under Target",
+          "body": "Period: {Period}\\nTarget: {Total Revenue Target}\\nActual: {Total Revenue Actual}\\nAttainment: {Attainment %}%\\n\\nAction required to hit revenue targets."
+        }
+      ]
+    }
+  ]
+}

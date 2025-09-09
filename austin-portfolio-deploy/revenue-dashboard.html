@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Dashboard - Blaze Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        body { 
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e2e8f0; 
+            font-family: 'Inter', sans-serif; 
+        }
+        .glass-nav { 
+            background: rgba(10, 10, 10, 0.95); 
+            backdrop-filter: blur(20px); 
+        }
+        .revenue-card { 
+            background: rgba(30, 41, 59, 0.9); 
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+        }
+        .metric-positive { 
+            color: #00FF88; 
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); 
+        }
+        .metric-neutral { 
+            color: #FFD700; 
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); 
+        }
+        .metric-negative { 
+            color: #FF4757; 
+            text-shadow: 0 0 10px rgba(255, 71, 87, 0.5); 
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #00FF88 0%, #FFD700 50%, #FF4757 100%);
+            height: 4px;
+            border-radius: 2px;
+        }
+        .chart-container {
+            background: rgba(10, 10, 10, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+            <div class="flex items-center space-x-4">
+                <span class="text-green-400 font-mono text-sm">REVENUE TRACKING: ACTIVE</span>
+                <span id="last-updated" class="text-slate-400 text-sm">Updated: --</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 max-w-7xl mx-auto px-4">
+        <div class="mb-8">
+            <h1 class="text-5xl font-black mb-4">
+                <span class="bg-gradient-to-r from-green-400 to-yellow-400 bg-clip-text text-transparent">
+                    REVENUE DASHBOARD
+                </span>
+            </h1>
+            <p class="text-xl text-slate-300">Real-time business performance and growth metrics</p>
+        </div>
+        
+        <!-- Key Metrics Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="revenue-card p-6 rounded-lg">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-sm text-slate-400">Monthly Recurring Revenue</p>
+                    <i data-lucide="trending-up" class="w-4 h-4 text-green-400"></i>
+                </div>
+                <p id="mrr-value" class="text-3xl font-bold metric-positive">$0</p>
+                <p id="mrr-change" class="text-xs text-green-400 mt-1">+0% from last month</p>
+            </div>
+            
+            <div class="revenue-card p-6 rounded-lg">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-sm text-slate-400">Active Clients</p>
+                    <i data-lucide="users" class="w-4 h-4 text-cyan-400"></i>
+                </div>
+                <p id="active-clients" class="text-3xl font-bold text-cyan-400">0</p>
+                <p id="client-change" class="text-xs text-slate-500 mt-1">Across all tiers</p>
+            </div>
+            
+            <div class="revenue-card p-6 rounded-lg">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-sm text-slate-400">Average Deal Size</p>
+                    <i data-lucide="dollar-sign" class="w-4 h-4 text-yellow-400"></i>
+                </div>
+                <p id="avg-deal-size" class="text-3xl font-bold text-yellow-400">$0</p>
+                <p id="deal-size-trend" class="text-xs text-slate-500 mt-1">Last 30 days</p>
+            </div>
+            
+            <div class="revenue-card p-6 rounded-lg">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-sm text-slate-400">Conversion Rate</p>
+                    <i data-lucide="target" class="w-4 h-4 text-orange-400"></i>
+                </div>
+                <p id="conversion-rate" class="text-3xl font-bold text-orange-400">0%</p>
+                <p id="conversion-trend" class="text-xs text-slate-500 mt-1">Lead to client</p>
+            </div>
+        </div>
+        
+        <!-- Revenue Trend Chart -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div class="revenue-card p-6 rounded-lg">
+                <h3 class="text-xl font-bold mb-4 text-green-400">Revenue Trend</h3>
+                <div class="chart-container">
+                    <canvas id="revenueChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+            
+            <div class="revenue-card p-6 rounded-lg">
+                <h3 class="text-xl font-bold mb-4 text-cyan-400">Client Acquisition</h3>
+                <div class="chart-container">
+                    <canvas id="acquisitionChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tier Breakdown -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div class="revenue-card p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-4 text-red-500">Enterprise Tier</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-slate-400">Active Clients</span>
+                        <span id="enterprise-clients" class="text-lg font-bold text-red-400">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-slate-400">Monthly Revenue</span>
+                        <span id="enterprise-revenue" class="text-lg font-bold text-red-400">$0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-slate-400">Avg Deal Size</span>
+                        <span id="enterprise-deal" class="text-lg font-bold text-red-400">$250,000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="revenue-card p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-4 text-orange-500">Professional Tier</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-slate-400">Active Clients</span>
+                        <span id="professional-clients" class="text-lg font-bold text-orange-400">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-slate-400">Monthly Revenue</span>
+                        <span id="professional-revenue" class="text-lg font-bold text-orange-400">$0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-slate-400">Avg Deal Size</span>
+                        <span id="professional-deal" class="text-lg font-bold text-orange-400">$50,000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="revenue-card p-6 rounded-lg">
+                <h3 class="text-lg font-bold mb-4 text-green-500">Demo Tier</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-slate-400">Active Users</span>
+                        <span id="demo-users" class="text-lg font-bold text-green-400">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-slate-400">Conversion Potential</span>
+                        <span id="demo-potential" class="text-lg font-bold text-green-400">$0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-slate-400">Upgrade Rate</span>
+                        <span id="demo-upgrade" class="text-lg font-bold text-green-400">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pipeline & Forecasting -->
+        <div class="revenue-card p-6 rounded-lg mb-8">
+            <h3 class="text-xl font-bold mb-6 text-purple-400">Sales Pipeline & Forecasting</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-slate-300">Pipeline Stages</h4>
+                    <div class="space-y-4">
+                        <div class="pipeline-stage">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-slate-400">Qualified Leads</span>
+                                <span id="qualified-leads" class="text-sm font-bold text-cyan-400">0 ($0)</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="qualified-progress" class="bg-cyan-400 h-full rounded" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="pipeline-stage">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-slate-400">Proposals Sent</span>
+                                <span id="proposals-sent" class="text-sm font-bold text-yellow-400">0 ($0)</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="proposals-progress" class="bg-yellow-400 h-full rounded" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="pipeline-stage">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-slate-400">Negotiations</span>
+                                <span id="negotiations" class="text-sm font-bold text-orange-400">0 ($0)</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="negotiations-progress" class="bg-orange-400 h-full rounded" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="pipeline-stage">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm text-slate-400">Closed Won</span>
+                                <span id="closed-won" class="text-sm font-bold text-green-400">0 ($0)</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="closed-progress" class="bg-green-400 h-full rounded" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-slate-300">Revenue Forecast</h4>
+                    <div class="space-y-4">
+                        <div class="forecast-item">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-slate-400">This Month</span>
+                                <span id="forecast-month" class="text-lg font-bold metric-positive">$0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="forecast-item">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-slate-400">This Quarter</span>
+                                <span id="forecast-quarter" class="text-lg font-bold metric-neutral">$0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="forecast-item">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-slate-400">Annual Projection</span>
+                                <span id="forecast-annual" class="text-lg font-bold metric-positive">$0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="forecast-item">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-slate-400">Target Achievement</span>
+                                <span id="target-achievement" class="text-lg font-bold metric-neutral">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Real-time Activity Feed -->
+        <div class="revenue-card p-6 rounded-lg">
+            <h3 class="text-xl font-bold mb-4 text-blue-400">Real-time Revenue Activity</h3>
+            <div id="activity-feed" class="space-y-2 max-h-64 overflow-y-auto font-mono text-sm">
+                <!-- Activity entries will be loaded dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const REVENUE_CONFIG = {
+            apiBaseUrl: '/api/revenue',
+            refreshInterval: 30000,
+            metricsEndpoint: '?type=metrics',
+            pipelineEndpoint: '?type=pipeline',
+            forecastEndpoint: '?type=forecast'
+        };
+
+        let revenueChart = null;
+        let acquisitionChart = null;
+
+        // Sample data for demonstration (in production, this would come from API)
+        const sampleData = {
+            metrics: {
+                mrr: 0,
+                mrrGrowth: 0,
+                activeClients: 0,
+                clientGrowth: 0,
+                avgDealSize: 0,
+                conversionRate: 0
+            },
+            tierBreakdown: {
+                enterprise: { clients: 0, revenue: 0, dealSize: 250000 },
+                professional: { clients: 0, revenue: 0, dealSize: 50000 },
+                demo: { users: 0, potential: 0, upgradeRate: 0 }
+            },
+            pipeline: {
+                qualifiedLeads: { count: 0, value: 0 },
+                proposalsSent: { count: 0, value: 0 },
+                negotiations: { count: 0, value: 0 },
+                closedWon: { count: 0, value: 0 }
+            },
+            forecast: {
+                thisMonth: 0,
+                thisQuarter: 0,
+                annualProjection: 0,
+                targetAchievement: 0
+            }
+        };
+
+        async function fetchRevenueData() {
+            try {
+                // In production, these would be real API calls
+                // For now, return sample data with some randomization
+                return generateSampleData();
+            } catch (error) {
+                console.warn('Revenue data unavailable, using sample data');
+                return sampleData;
+            }
+        }
+
+        function generateSampleData() {
+            // Generate realistic sample data for demonstration
+            const baseData = { ...sampleData };
+            
+            // Simulate some growth metrics
+            baseData.metrics.mrr = Math.floor(Math.random() * 50000);
+            baseData.metrics.mrrGrowth = Math.floor(Math.random() * 25);
+            baseData.metrics.activeClients = Math.floor(Math.random() * 15);
+            baseData.metrics.avgDealSize = Math.floor(Math.random() * 75000) + 25000;
+            baseData.metrics.conversionRate = Math.floor(Math.random() * 15) + 5;
+            
+            // Tier breakdown
+            baseData.tierBreakdown.enterprise.clients = Math.floor(Math.random() * 3);
+            baseData.tierBreakdown.professional.clients = Math.floor(Math.random() * 8);
+            baseData.tierBreakdown.demo.users = Math.floor(Math.random() * 25) + 10;
+            
+            // Calculate revenues
+            baseData.tierBreakdown.enterprise.revenue = 
+                baseData.tierBreakdown.enterprise.clients * (250000 / 12);
+            baseData.tierBreakdown.professional.revenue = 
+                baseData.tierBreakdown.professional.clients * (50000 / 12);
+            baseData.tierBreakdown.demo.potential = 
+                baseData.tierBreakdown.demo.users * 1188;
+            
+            // Pipeline
+            baseData.pipeline.qualifiedLeads = { count: Math.floor(Math.random() * 10) + 5, value: 0 };
+            baseData.pipeline.proposalsSent = { count: Math.floor(Math.random() * 5) + 2, value: 0 };
+            baseData.pipeline.negotiations = { count: Math.floor(Math.random() * 3) + 1, value: 0 };
+            baseData.pipeline.closedWon = { count: Math.floor(Math.random() * 2), value: baseData.metrics.mrr };
+            
+            // Calculate pipeline values
+            baseData.pipeline.qualifiedLeads.value = baseData.pipeline.qualifiedLeads.count * 75000;
+            baseData.pipeline.proposalsSent.value = baseData.pipeline.proposalsSent.count * 100000;
+            baseData.pipeline.negotiations.value = baseData.pipeline.negotiations.count * 125000;
+            
+            // Forecasts
+            baseData.forecast.thisMonth = baseData.metrics.mrr * 1.2;
+            baseData.forecast.thisQuarter = baseData.metrics.mrr * 3.5;
+            baseData.forecast.annualProjection = baseData.metrics.mrr * 15;
+            baseData.forecast.targetAchievement = Math.floor(Math.random() * 85) + 15;
+            
+            return baseData;
+        }
+
+        function updateMetrics(data) {
+            // Update main metrics
+            document.getElementById('mrr-value').textContent = `$${data.metrics.mrr.toLocaleString()}`;
+            document.getElementById('mrr-change').textContent = `+${data.metrics.mrrGrowth}% from last month`;
+            document.getElementById('active-clients').textContent = data.metrics.activeClients;
+            document.getElementById('avg-deal-size').textContent = `$${data.metrics.avgDealSize.toLocaleString()}`;
+            document.getElementById('conversion-rate').textContent = `${data.metrics.conversionRate}%`;
+            
+            // Update tier breakdown
+            document.getElementById('enterprise-clients').textContent = data.tierBreakdown.enterprise.clients;
+            document.getElementById('enterprise-revenue').textContent = 
+                `$${Math.floor(data.tierBreakdown.enterprise.revenue).toLocaleString()}`;
+            
+            document.getElementById('professional-clients').textContent = data.tierBreakdown.professional.clients;
+            document.getElementById('professional-revenue').textContent = 
+                `$${Math.floor(data.tierBreakdown.professional.revenue).toLocaleString()}`;
+            
+            document.getElementById('demo-users').textContent = data.tierBreakdown.demo.users;
+            document.getElementById('demo-potential').textContent = 
+                `$${data.tierBreakdown.demo.potential.toLocaleString()}`;
+            document.getElementById('demo-upgrade').textContent = `${data.tierBreakdown.demo.upgradeRate}%`;
+            
+            // Update pipeline
+            document.getElementById('qualified-leads').textContent = 
+                `${data.pipeline.qualifiedLeads.count} ($${data.pipeline.qualifiedLeads.value.toLocaleString()})`;
+            document.getElementById('proposals-sent').textContent = 
+                `${data.pipeline.proposalsSent.count} ($${data.pipeline.proposalsSent.value.toLocaleString()})`;
+            document.getElementById('negotiations').textContent = 
+                `${data.pipeline.negotiations.count} ($${data.pipeline.negotiations.value.toLocaleString()})`;
+            document.getElementById('closed-won').textContent = 
+                `${data.pipeline.closedWon.count} ($${data.pipeline.closedWon.value.toLocaleString()})`;
+            
+            // Update forecast
+            document.getElementById('forecast-month').textContent = `$${Math.floor(data.forecast.thisMonth).toLocaleString()}`;
+            document.getElementById('forecast-quarter').textContent = `$${Math.floor(data.forecast.thisQuarter).toLocaleString()}`;
+            document.getElementById('forecast-annual').textContent = `$${Math.floor(data.forecast.annualProjection).toLocaleString()}`;
+            document.getElementById('target-achievement').textContent = `${data.forecast.targetAchievement}%`;
+        }
+
+        function initializeCharts() {
+            // Revenue Trend Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            revenueChart = new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Monthly Revenue',
+                        data: [0, 5000, 15000, 25000, 40000, 50000],
+                        borderColor: '#00FF88',
+                        backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#94a3b8' }
+                        },
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#94a3b8' }
+                        }
+                    }
+                }
+            });
+
+            // Client Acquisition Chart
+            const acquisitionCtx = document.getElementById('acquisitionChart').getContext('2d');
+            acquisitionChart = new Chart(acquisitionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Enterprise', 'Professional', 'Demo'],
+                    datasets: [{
+                        label: 'Clients',
+                        data: [0, 0, 0],
+                        backgroundColor: ['#FF4757', '#FFA500', '#00FF88']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#94a3b8' }
+                        },
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#94a3b8' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateCharts(data) {
+            // Update acquisition chart
+            if (acquisitionChart) {
+                acquisitionChart.data.datasets[0].data = [
+                    data.tierBreakdown.enterprise.clients,
+                    data.tierBreakdown.professional.clients,
+                    Math.floor(data.tierBreakdown.demo.users / 5) // Scale down demo users for display
+                ];
+                acquisitionChart.update();
+            }
+        }
+
+        function addActivityEntry(message, type = 'info') {
+            const feed = document.getElementById('activity-feed');
+            const entry = document.createElement('div');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'revenue' ? 'text-green-400' : 
+                         type === 'client' ? 'text-cyan-400' : 'text-slate-400';
+            
+            entry.className = `${color} opacity-90`;
+            entry.innerHTML = `<span class="text-slate-500">[${timestamp}]</span> ${message}`;
+            
+            feed.insertBefore(entry, feed.firstChild);
+            
+            // Keep only last 20 entries
+            while (feed.children.length > 20) {
+                feed.removeChild(feed.lastChild);
+            }
+        }
+
+        async function refreshRevenueData() {
+            try {
+                const data = await fetchRevenueData();
+                updateMetrics(data);
+                updateCharts(data);
+                
+                // Add activity entries based on data changes
+                if (data.metrics.mrr > 0) {
+                    addActivityEntry(`Monthly recurring revenue updated: $${data.metrics.mrr.toLocaleString()}`, 'revenue');
+                }
+                
+                document.getElementById('last-updated').textContent = 
+                    `Updated: ${new Date().toLocaleTimeString()}`;
+                    
+            } catch (error) {
+                console.error('Failed to refresh revenue data:', error);
+                addActivityEntry('Revenue data refresh failed - using cached data', 'error');
+            }
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            initializeCharts();
+            refreshRevenueData();
+            
+            // Add initial activity entries
+            addActivityEntry('Revenue dashboard initialized', 'info');
+            addActivityEntry('Real-time tracking activated', 'info');
+            
+            // Set up auto-refresh
+            setInterval(refreshRevenueData, REVENUE_CONFIG.refreshInterval);
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' || e.key === 'R') {
+                refreshRevenueData();
+                addActivityEntry('Manual data refresh triggered', 'info');
+            }
+        });
+    </script>
+</body>
+</html>

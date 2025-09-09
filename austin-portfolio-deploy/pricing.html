@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Blaze Intelligence | Transparent Sports Analytics Pricing</title>
+    <meta name="description" content="Simple, transparent pricing for Blaze Intelligence sports analytics platform. Save 67-80% compared to competitors.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Canonical Metrics Configuration -->
+    <script type="application/json" id="metrics">
+    {
+        "prediction_accuracy": "94.6%",
+        "response_latency": "<100ms",
+        "data_points": "2.8M+",
+        "events_per_second": "100K+",
+        "cost_savings": "67-80%",
+        "value_identified": "$42.3M",
+        "annual_subscription": "$1,188"
+    }
+    </script>
+    <script src="/js/canonical-metrics.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .pricing-card {
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(191, 87, 0, 0.3);
+        }
+        .recommended {
+            position: relative;
+            border: 2px solid #BF5700;
+        }
+        .recommended::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-black/50 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="text-2xl font-bold gradient-text">
+                    Blaze Intelligence
+                </a>
+                <div class="flex items-center space-x-6">
+                    <a href="/" class="text-gray-300 hover:text-white">Home</a>
+                    <a href="/live-demo.html" class="text-gray-300 hover:text-white">Live Demo</a>
+                    <a href="/pricing.html" class="text-white font-semibold">Pricing</a>
+                    <a href="/contact.html" class="text-gray-300 hover:text-white">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl font-bold mb-6">
+                <span class="gradient-text">Simple, Transparent Pricing</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-4 max-w-3xl mx-auto">
+                Professional sports analytics that saves you <span class="font-bold text-orange-500" data-metric="cost_savings">67-80%</span> 
+                compared to traditional solutions. No hidden fees, no surprises.
+            </p>
+            <div class="inline-flex items-center space-x-2 bg-green-900/30 border border-green-600 rounded-lg px-4 py-2">
+                <span class="text-green-400">✓</span>
+                <span class="text-green-300">14-day free trial • No credit card required • Cancel anytime</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Comparison Bar -->
+    <section class="py-8 border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-2xl font-bold text-orange-500">$99/mo</div>
+                    <div class="text-gray-400 text-sm">vs Hudl Assist at $800/mo</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-orange-500">$299/mo</div>
+                    <div class="text-gray-400 text-sm">vs Hudl Elite at $1,500/mo</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-orange-500" data-metric="annual_subscription">$1,188</div>
+                    <div class="text-gray-400 text-sm">Annual (save 2 months)</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-orange-500" data-metric="cost_savings">67-80%</div>
+                    <div class="text-gray-400 text-sm">Average Savings</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Pricing Cards -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Starter Plan -->
+                <div class="glass-card rounded-lg p-8 pricing-card">
+                    <h3 class="text-2xl font-bold mb-2">Starter</h3>
+                    <p class="text-gray-400 mb-6">Perfect for high school teams</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">$99</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Up to 50 players</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Basic analytics dashboard</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Game performance tracking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Player stats & trends</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Mobile app access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Email support</span>
+                        </li>
+                        <li class="flex items-start text-gray-500">
+                            <span class="mr-2">✗</span>
+                            <span>AI predictions</span>
+                        </li>
+                        <li class="flex items-start text-gray-500">
+                            <span class="mr-2">✗</span>
+                            <span>Advanced scouting</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition">
+                        Start Free Trial
+                    </button>
+                </div>
+
+                <!-- Professional Plan (Recommended) -->
+                <div class="glass-card rounded-lg p-8 pricing-card recommended">
+                    <h3 class="text-2xl font-bold mb-2">Professional</h3>
+                    <p class="text-gray-400 mb-6">For serious programs</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-orange-500">$299</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Unlimited players</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Advanced analytics suite</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>AI-powered predictions (<span data-metric="prediction_accuracy">94.6%</span> accuracy)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Multi-AI analysis (ChatGPT 5, Claude 4.1, Gemini 2.5)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Opponent scouting reports</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Recruiting analytics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>API access (1,000 req/hr)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold rounded-lg transition">
+                        Start Free Trial
+                    </button>
+                    
+                    <p class="text-center text-sm text-gray-400 mt-4">
+                        Save $598 with annual billing
+                    </p>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass-card rounded-lg p-8 pricing-card">
+                    <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+                    <p class="text-gray-400 mb-6">For professional organizations</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">Custom</span>
+                    </div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Everything in Professional</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Unlimited API requests</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Custom integrations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>White-label options</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Dedicated account manager</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>On-site training</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>SLA guarantee</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>24/7 phone support</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Comparison Table -->
+    <section class="py-20 bg-black/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <span class="gradient-text">Detailed Feature Comparison</span>
+            </h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full glass-card rounded-lg overflow-hidden">
+                    <thead class="bg-gray-800/50">
+                        <tr>
+                            <th class="text-left p-4">Features</th>
+                            <th class="text-center p-4">Starter</th>
+                            <th class="text-center p-4 text-orange-500">Professional</th>
+                            <th class="text-center p-4">Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-4">Player Limit</td>
+                            <td class="text-center p-4">50</td>
+                            <td class="text-center p-4 text-orange-500">Unlimited</td>
+                            <td class="text-center p-4">Unlimited</td>
+                        </tr>
+                        <tr class="border-t border-gray-700 bg-gray-800/20">
+                            <td class="p-4">AI Models</td>
+                            <td class="text-center p-4">-</td>
+                            <td class="text-center p-4 text-orange-500">3 Models</td>
+                            <td class="text-center p-4">3+ Models</td>
+                        </tr>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-4">Prediction Accuracy</td>
+                            <td class="text-center p-4">-</td>
+                            <td class="text-center p-4 text-orange-500">94.6%</td>
+                            <td class="text-center p-4">94.6%+</td>
+                        </tr>
+                        <tr class="border-t border-gray-700 bg-gray-800/20">
+                            <td class="p-4">API Requests</td>
+                            <td class="text-center p-4">100/hr</td>
+                            <td class="text-center p-4 text-orange-500">1,000/hr</td>
+                            <td class="text-center p-4">Unlimited</td>
+                        </tr>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-4">Data Export</td>
+                            <td class="text-center p-4">CSV</td>
+                            <td class="text-center p-4 text-orange-500">CSV, JSON, API</td>
+                            <td class="text-center p-4">All Formats</td>
+                        </tr>
+                        <tr class="border-t border-gray-700 bg-gray-800/20">
+                            <td class="p-4">Support</td>
+                            <td class="text-center p-4">Email</td>
+                            <td class="text-center p-4 text-orange-500">Priority Email + Chat</td>
+                            <td class="text-center p-4">24/7 Phone + Dedicated</td>
+                        </tr>
+                        <tr class="border-t border-gray-700">
+                            <td class="p-4">Training</td>
+                            <td class="text-center p-4">Self-serve</td>
+                            <td class="text-center p-4 text-orange-500">Virtual Sessions</td>
+                            <td class="text-center p-4">On-site Available</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <span class="gradient-text">Frequently Asked Questions</span>
+            </h2>
+            
+            <div class="space-y-6">
+                <div class="glass-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-orange-500">How does the free trial work?</h3>
+                    <p class="text-gray-300">
+                        You get 14 days of full Professional plan access with no credit card required. 
+                        Simply sign up, explore all features, and decide if Blaze Intelligence is right for your team.
+                    </p>
+                </div>
+                
+                <div class="glass-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-orange-500">Can I change plans anytime?</h3>
+                    <p class="text-gray-300">
+                        Yes! You can upgrade, downgrade, or cancel your subscription at any time. 
+                        Changes take effect at the next billing cycle, and we'll prorate any differences.
+                    </p>
+                </div>
+                
+                <div class="glass-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-orange-500">What sports do you support?</h3>
+                    <p class="text-gray-300">
+                        We currently support MLB, NFL, NBA, NCAA football and basketball, and high school sports. 
+                        We also integrate with Perfect Game for youth baseball analytics.
+                    </p>
+                </div>
+                
+                <div class="glass-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-orange-500">How accurate are your predictions?</h3>
+                    <p class="text-gray-300">
+                        Our multi-AI system achieves 94.6% accuracy on historical data validation. 
+                        We use ChatGPT 5, Claude Opus 4.1, and Gemini 2.5 Pro in ensemble for maximum reliability.
+                    </p>
+                </div>
+                
+                <div class="glass-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-orange-500">Do you offer discounts for multiple teams?</h3>
+                    <p class="text-gray-300">
+                        Yes! Contact our sales team for custom pricing on multi-team or league-wide deployments. 
+                        We offer significant discounts for organizations with 5+ teams.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-b from-transparent to-black/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">
+                Ready to Transform Your Analytics?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Join teams saving thousands while getting better insights
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/live-demo.html" class="px-8 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-amber-600 transition">
+                    Start Free Trial
+                </a>
+                <a href="/contact.html" class="px-8 py-3 border border-orange-500 text-orange-500 font-semibold rounded-lg hover:bg-orange-500/10 transition">
+                    Talk to Sales
+                </a>
+            </div>
+            <p class="mt-6 text-sm text-gray-400">
+                No credit card required • 14-day free trial • Cancel anytime
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/50 backdrop-blur-md border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 text-sm">
+                    © 2025 Blaze Intelligence. All rights reserved.
+                </div>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="/privacy.html" class="text-gray-400 hover:text-white text-sm">Privacy</a>
+                    <a href="/terms.html" class="text-gray-400 hover:text-white text-sm">Terms</a>
+                    <a href="/status.html" class="text-gray-400 hover:text-white text-sm">Status</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Load canonical metrics
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof loadCanonicalMetrics === 'function') {
+                loadCanonicalMetrics();
+            }
+        });
+
+        // Handle CTA buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('Trial')) {
+                    window.location.href = '/live-demo.html#request-access';
+                } else if (this.textContent.includes('Sales')) {
+                    window.location.href = '/contact.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

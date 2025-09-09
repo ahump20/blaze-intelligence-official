@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Combine Autopilot | Blaze Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at center, rgba(0,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #00ffff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b8b8b8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 6rem 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-align: center;
+            background: linear-gradient(135deg, #00ffff, #0099ff, #0066cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #b8b8b8;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .control-dashboard {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .control-panel {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0,255,255,0.2);
+        }
+
+        .control-title {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00ffff;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        select, input, button {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(0,255,255,0.3);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            color: #ffffff;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 0 2px rgba(0,255,255,0.2);
+        }
+
+        .start-autopilot-btn {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            color: #0a0a0f;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 50px;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .start-autopilot-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,255,255,0.3);
+        }
+
+        .status-panel {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0,255,255,0.2);
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff00;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,255,255,0.1);
+        }
+
+        .metric-title {
+            font-size: 0.9rem;
+            color: #b8b8b8;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #00ffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-unit {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .processing-section {
+            margin-top: 3rem;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0,255,255,0.2);
+        }
+
+        .processing-title {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .queue-item {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid #00ffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .athlete-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .athlete-id {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .athlete-details {
+            font-size: 0.9rem;
+            color: #b8b8b8;
+        }
+
+        .priority-badge {
+            background: linear-gradient(135deg, #ff4757, #ff6b35);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .priority-badge.medium {
+            background: linear-gradient(135deg, #ffa500, #ff8c00);
+        }
+
+        .priority-badge.standard {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            color: #0a0a0f;
+        }
+
+        .insights-panel {
+            margin-top: 3rem;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0,255,255,0.2);
+        }
+
+        .insight-item {
+            background: rgba(0,255,255,0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid #00ffff;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0,255,255,0.3);
+            border-top: 3px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .neural-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .control-dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .main-content {
+                padding: 5rem 1rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="nav-content">
+            <a href="/" class="logo">BLAZE INTELLIGENCE</a>
+            <ul class="nav-links">
+                <li><a href="/sports">🏆 Sports Hub</a></li>
+                <li><a href="/champion-enigma-demo.html">🧠 Enigma AI</a></li>
+                <li><a href="#autopilot">🤖 Autopilot</a></li>
+                <li><a href="/contact.html">📞 Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="neural-bg" id="neuralBg"></div>
+        
+        <div class="main-content">
+            <h1 class="hero-title">Digital Combine Autopilot</h1>
+            <p class="hero-subtitle">Automated Athlete Evaluation • Real-time Biomechanics • Perfect Game Integration</p>
+
+            <div class="control-dashboard">
+                <div class="control-panel">
+                    <h2 class="control-title">🎛️ System Configuration</h2>
+                    
+                    <div class="control-group">
+                        <label for="mode">Evaluation Mode</label>
+                        <select id="mode">
+                            <option value="evaluation">Comprehensive Evaluation</option>
+                            <option value="assessment">Quick Assessment</option>
+                            <option value="development">Development Analysis</option>
+                            <option value="scouting">Scouting Report</option>
+                            <option value="recruiting">Recruiting Profile</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="sport">Primary Sport</label>
+                        <select id="sport">
+                            <option value="baseball">Baseball</option>
+                            <option value="football">Football</option>
+                            <option value="basketball">Basketball</option>
+                            <option value="hockey">Hockey</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="intensity">Processing Intensity</label>
+                        <select id="intensity">
+                            <option value="standard">Standard Processing</option>
+                            <option value="basic">Basic Analysis</option>
+                            <option value="advanced">Advanced Analysis</option>
+                            <option value="maximum">Maximum Depth</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="deployment">Deployment Scale</label>
+                        <select id="deployment">
+                            <option value="single">Single Athlete</option>
+                            <option value="team">Team Assessment</option>
+                            <option value="organization">Organization-wide</option>
+                            <option value="enterprise">Enterprise Scale</option>
+                        </select>
+                    </div>
+                    
+                    <button class="start-autopilot-btn" onclick="startAutopilot()">
+                        🚀 Launch Autopilot System
+                    </button>
+                </div>
+
+                <div class="status-panel">
+                    <div class="status-header">
+                        <h2 class="control-title">📊 System Status</h2>
+                        <div class="status-indicator">
+                            <div class="status-dot"></div>
+                            <span id="systemStatus">Standby</span>
+                        </div>
+                    </div>
+                    
+                    <div id="statusContent">
+                        <div class="loading">
+                            <p style="color: #b8b8b8;">Configure system parameters and launch autopilot to begin real-time evaluation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="metricsSection" style="display: none;">
+                <div class="metrics-grid" id="metricsGrid">
+                    <!-- Metrics will be populated here -->
+                </div>
+            </div>
+
+            <div id="processingSection" style="display: none;" class="processing-section">
+                <h2 class="processing-title">⚡ Live Processing Queue</h2>
+                <div id="processingQueue">
+                    <!-- Queue items will be populated here -->
+                </div>
+            </div>
+
+            <div id="insightsSection" style="display: none;" class="insights-panel">
+                <h2 class="control-title">🎯 Autopilot Insights</h2>
+                <div id="insightsList">
+                    <!-- Insights will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let autopilotRunning = false;
+        let updateInterval;
+
+        async function startAutopilot() {
+            const mode = document.getElementById('mode').value;
+            const sport = document.getElementById('sport').value;
+            const intensity = document.getElementById('intensity').value;
+            const deployment = document.getElementById('deployment').value;
+
+            // Update system status
+            document.getElementById('systemStatus').textContent = 'Initializing...';
+            
+            // Show loading in status panel
+            document.getElementById('statusContent').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Launching Digital Combine Autopilot System...</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch(`/api/digital-combine/autopilot?mode=${mode}&sport=${sport}&intensity=${intensity}&deployment=${deployment}`);
+                const data = await response.json();
+
+                autopilotRunning = true;
+                document.getElementById('systemStatus').textContent = 'Active';
+                
+                displayAutopilotData(data);
+                
+                // Start real-time updates
+                updateInterval = setInterval(updateAutopilotData, 5000);
+
+            } catch (error) {
+                console.error('Autopilot launch failed:', error);
+                document.getElementById('statusContent').innerHTML = `
+                    <div style="text-align: center; color: #ff6b35; padding: 2rem;">
+                        <h3>System Launch Failed</h3>
+                        <p>Please check configuration and try again.</p>
+                    </div>
+                `;
+                document.getElementById('systemStatus').textContent = 'Error';
+            }
+        }
+
+        function displayAutopilotData(data) {
+            const autopilot = data.autopilotStatus;
+            const metrics = data.digitalCombineMetrics;
+            const deployment = data.deploymentAnalytics;
+            const processing = data.athleteProcessing;
+
+            // Update status panel
+            document.getElementById('statusContent').innerHTML = `
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-title">System Efficiency</div>
+                        <div class="metric-value">${metrics.overallAutopilotScore}</div>
+                        <div class="metric-unit">Autopilot Score</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Evaluation Accuracy</div>
+                        <div class="metric-value">${(metrics.evaluationAccuracy * 100).toFixed(1)}%</div>
+                        <div class="metric-unit">Assessment Precision</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">System Uptime</div>
+                        <div class="metric-value">${(autopilot.uptime.current * 100).toFixed(1)}%</div>
+                        <div class="metric-unit">Operational Status</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Processing Rate</div>
+                        <div class="metric-value">${autopilot.throughput.evaluationsPerHour}</div>
+                        <div class="metric-unit">Evaluations/Hour</div>
+                    </div>
+                </div>
+            `;
+
+            // Show and populate metrics section
+            document.getElementById('metricsSection').style.display = 'block';
+            document.getElementById('metricsGrid').innerHTML = `
+                <div class="metric-card">
+                    <div class="metric-title">Biomechanical Accuracy</div>
+                    <div class="metric-value">${(metrics.biomechanicalAnalysis.motionCapture.accuracy * 100).toFixed(1)}%</div>
+                    <div class="metric-unit">${metrics.biomechanicalAnalysis.motionCapture.frameRate} FPS Capture</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Perfect Game Integration</div>
+                    <div class="metric-value">${(metrics.perfectGameAutomation.scoutingEfficiency * 100).toFixed(1)}%</div>
+                    <div class="metric-unit">Scouting Efficiency</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Prediction Accuracy</div>
+                    <div class="metric-value">${(metrics.predictiveEngine.modelAccuracy * 100).toFixed(1)}%</div>
+                    <div class="metric-unit">ML Model Performance</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">System Load</div>
+                    <div class="metric-value">${deployment.scalingMetrics.currentLoad}%</div>
+                    <div class="metric-unit">CPU/Memory Usage</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Queue Depth</div>
+                    <div class="metric-value">${deployment.scalingMetrics.queueDepth}</div>
+                    <div class="metric-unit">Athletes Waiting</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Processing Time</div>
+                    <div class="metric-value">${deployment.scalingMetrics.averageProcessingTime}</div>
+                    <div class="metric-unit">Average Duration</div>
+                </div>
+            `;
+
+            // Show and populate processing section
+            document.getElementById('processingSection').style.display = 'block';
+            let queueHtml = '';
+            processing.processingQueue.preview.forEach(item => {
+                queueHtml += `
+                    <div class="queue-item">
+                        <div class="athlete-info">
+                            <div class="athlete-id">${item.athleteId}</div>
+                            <div class="athlete-details">Position ${item.position} • ETA: ${item.estimatedStart}</div>
+                        </div>
+                        <div class="priority-badge ${item.priority}">${item.priority.toUpperCase()}</div>
+                    </div>
+                `;
+            });
+            document.getElementById('processingQueue').innerHTML = queueHtml;
+
+            // Show and populate insights section
+            document.getElementById('insightsSection').style.display = 'block';
+            let insightsHtml = '';
+            data.coachingAutopilot.coachingInsights.forEach(insight => {
+                insightsHtml += `<div class="insight-item">${insight}</div>`;
+            });
+            document.getElementById('insightsList').innerHTML = insightsHtml;
+        }
+
+        async function updateAutopilotData() {
+            if (!autopilotRunning) return;
+
+            try {
+                const mode = document.getElementById('mode').value;
+                const sport = document.getElementById('sport').value;
+                const intensity = document.getElementById('intensity').value;
+                const deployment = document.getElementById('deployment').value;
+
+                const response = await fetch(`/api/digital-combine/autopilot?mode=${mode}&sport=${sport}&intensity=${intensity}&deployment=${deployment}`);
+                const data = await response.json();
+
+                displayAutopilotData(data);
+
+            } catch (error) {
+                console.error('Update failed:', error);
+            }
+        }
+
+        // Stop autopilot on page unload
+        window.addEventListener('beforeunload', () => {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+        });
+
+        // Initialize neural network background animation
+        function initNeuralBackground() {
+            const neuralBg = document.getElementById('neuralBg');
+            
+            for (let i = 0; i < 50; i++) {
+                const node = document.createElement('div');
+                node.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: #00ffff;
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: float ${Math.random() * 20 + 10}s infinite linear;
+                `;
+                neuralBg.appendChild(node);
+            }
+        }
+
+        // Add floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% { transform: translateY(0px) translateX(0px); opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            initNeuralBackground();
+        });
+    </script>
+</body>
+</html>

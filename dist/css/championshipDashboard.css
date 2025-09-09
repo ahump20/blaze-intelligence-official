@@ -1,0 +1,373 @@
+/* Championship Analytics Dashboard Styles */
+.championship-analytics-section {
+    padding: 80px 50px;
+    background: var(--black);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.analytics-summary {
+    margin: 60px 0;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.summary-card {
+    background: var(--dark-gray);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(191, 87, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--burnt-orange);
+}
+
+.summary-value {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--burnt-orange);
+    margin-bottom: 10px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.summary-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.league-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 50px 0;
+}
+
+.filter-btn {
+    background: var(--dark-gray);
+    color: var(--white);
+    border: 1px solid rgba(191, 87, 0, 0.3);
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.filter-btn:hover {
+    background: rgba(191, 87, 0, 0.1);
+    border-color: var(--burnt-orange);
+}
+
+.filter-btn.active {
+    background: var(--burnt-orange);
+    border-color: var(--burnt-orange);
+    color: var(--black);
+}
+
+.analytics-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 0;
+    padding: 20px;
+    background: var(--dark-gray);
+    border-radius: 10px;
+    border: 1px solid rgba(191, 87, 0, 0.2);
+}
+
+.sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sort-controls label {
+    color: var(--white);
+    font-weight: 500;
+}
+
+.sort-controls select {
+    background: var(--black);
+    color: var(--white);
+    border: 1px solid rgba(191, 87, 0, 0.3);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.view-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.view-btn {
+    background: var(--black);
+    color: var(--white);
+    border: 1px solid rgba(191, 87, 0, 0.3);
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-btn:hover,
+.view-btn.active {
+    background: var(--burnt-orange);
+    border-color: var(--burnt-orange);
+    color: var(--black);
+}
+
+.teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.teams-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 40px 0;
+}
+
+.teams-list .team-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.teams-list .team-header {
+    flex: 0 0 200px;
+}
+
+.teams-list .team-info {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.teams-list .team-scores {
+    flex: 0 0 150px;
+}
+
+.team-card {
+    background: var(--dark-gray);
+    border-radius: 15px;
+    border: 1px solid rgba(191, 87, 0, 0.2);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--burnt-orange);
+    box-shadow: 0 10px 30px rgba(191, 87, 0, 0.2);
+}
+
+.team-header {
+    padding: 20px 20px 0 20px;
+    position: relative;
+}
+
+.team-colors {
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 15px;
+}
+
+.team-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 0 15px 0;
+}
+
+.team-info {
+    padding: 0 20px;
+}
+
+.team-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.league-badge {
+    background: var(--burnt-orange);
+    color: var(--black);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.founded-year {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.division-info,
+.titles-info {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 5px;
+}
+
+.team-scores {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    margin: 15px 0;
+}
+
+.score-item {
+    text-align: center;
+}
+
+.score-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--burnt-orange);
+    margin-bottom: 5px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.score-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+}
+
+.external-links {
+    padding: 0 20px 20px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.external-link {
+    font-size: 11px;
+    color: var(--burnt-orange);
+    text-decoration: none;
+    padding: 4px 8px;
+    border: 1px solid rgba(191, 87, 0, 0.3);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.external-link:hover {
+    background: var(--burnt-orange);
+    color: var(--black);
+}
+
+.performance-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+    margin: 60px 0;
+}
+
+.chart-container {
+    background: var(--dark-gray);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(191, 87, 0, 0.2);
+}
+
+.chart-container h3 {
+    color: var(--burnt-orange);
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.chart-container canvas {
+    max-height: 300px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .championship-analytics-section {
+        padding: 60px 30px;
+    }
+    
+    .teams-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .championship-analytics-section {
+        padding: 40px 20px;
+    }
+    
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .summary-value {
+        font-size: 36px;
+    }
+    
+    .league-filters {
+        gap: 10px;
+    }
+    
+    .filter-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+    
+    .analytics-controls {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .teams-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .performance-charts {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .chart-container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .league-filters {
+        justify-content: center;
+    }
+    
+    .filter-btn {
+        flex: 1;
+        min-width: 80px;
+    }
+}

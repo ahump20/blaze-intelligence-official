@@ -1,0 +1,15 @@
+{
+  "retry_with_backoff": {
+    "max_attempts": 3,
+    "base_delay": 1000,
+    "multiplier": 2
+  },
+  "fallback_to_cache": {
+    "max_age_hours": 24,
+    "fallback_enabled": true
+  },
+  "graceful_degradation": {
+    "show_cache_warning": true,
+    "simplified_data": true
+  }
+}

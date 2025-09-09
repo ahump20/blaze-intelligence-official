@@ -1,0 +1,180 @@
+#flow-evidence {
+position: fixed;
+top: 20px;
+left: 20px;
+background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(40, 167, 69, 0.9));
+color: white;
+padding: 1rem 1.5rem;
+border-radius: 12px;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+backdrop-filter: blur(10px);
+z-index: 1000;
+font-family: 'Arial', sans-serif;
+min-width: 280px;
+animation: flowPulse 3s ease-in-out infinite;
+}
+@keyframes flowPulse {
+0%, 100% { transform: scale(1); opacity: 0.9; }
+50% { transform: scale(1.02); opacity: 1; }
+}
+.flow-header {
+display: flex;
+align-items: center;
+margin-bottom: 0.8rem;
+border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+padding-bottom: 0.5rem;
+}
+.flow-icon {
+font-size: 1.5rem;
+margin-right: 0.5rem;
+animation: rotate 4s linear infinite;
+}
+@keyframes rotate {
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
+}
+.flow-title {
+font-weight: bold;
+font-size: 0.9rem;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.flow-metrics {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 0.5rem;
+margin-bottom: 0.8rem;
+}
+.flow-metric {
+text-align: center;
+padding: 0.3rem;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 6px;
+transition: all 0.3s ease;
+}
+.flow-metric:hover {
+background: rgba(255, 255, 255, 0.2);
+transform: translateY(-1px);
+}
+.metric-label {
+font-size: 0.7rem;
+opacity: 0.8;
+margin-bottom: 0.2rem;
+text-transform: uppercase;
+}
+.metric-value {
+font-size: 1.1rem;
+font-weight: bold;
+color: #00ff88;
+}
+.tile-fss, .tile-eeg, .tile-hrv {
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 8px;
+padding: 1rem;
+margin: 0.5rem 0;
+transition: all 0.3s ease;
+}
+.tile-fss:hover, .tile-eeg:hover, .tile-hrv:hover {
+background: rgba(255, 255, 255, 0.1);
+border-color: #00ff88;
+box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+.tile-title {
+font-size: 0.8rem;
+font-weight: bold;
+margin-bottom: 0.5rem;
+text-transform: uppercase;
+color: #00ff88;
+}
+.tile-value {
+font-size: 1.5rem;
+font-weight: bold;
+margin-bottom: 0.3rem;
+}
+.tile-description {
+font-size: 0.7rem;
+opacity: 0.8;
+line-height: 1.2;
+}
+.flow-controls {
+display: flex;
+justify-content: space-between;
+gap: 0.5rem;
+margin-top: 0.8rem;
+}
+.flow-btn {
+background: rgba(255, 255, 255, 0.2);
+border: none;
+color: white;
+padding: 0.4rem 0.8rem;
+border-radius: 6px;
+font-size: 0.7rem;
+cursor: pointer;
+transition: all 0.3s ease;
+text-transform: uppercase;
+font-weight: bold;
+}
+.flow-btn:hover {
+background: rgba(255, 255, 255, 0.3);
+transform: translateY(-1px);
+}
+.flow-btn.active {
+background: #00ff88;
+color: #000;
+}
+.difficulty-slider {
+width: 100%;
+margin: 0.5rem 0;
+-webkit-appearance: none;
+appearance: none;
+height: 4px;
+border-radius: 2px;
+background: rgba(255, 255, 255, 0.3);
+outline: none;
+}
+.difficulty-slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 16px;
+height: 16px;
+border-radius: 50%;
+background: #00ff88;
+cursor: pointer;
+border: 2px solid white;
+}
+.difficulty-slider::-moz-range-thumb {
+width: 16px;
+height: 16px;
+border-radius: 50%;
+background: #00ff88;
+cursor: pointer;
+border: 2px solid white;
+}
+@media (max-width: 768px) {
+#flow-evidence {
+position: relative;
+top: 0;
+left: 0;
+margin: 1rem;
+min-width: auto;
+}
+.flow-metrics {
+grid-template-columns: 1fr;
+}
+}
+.championship-with-flow {
+border-left: 4px solid #00ff88;
+background: linear-gradient(90deg, rgba(0, 255, 136, 0.1), transparent);
+}
+.flow-enhanced-metric {
+position: relative;
+}
+.flow-enhanced-metric::after {
+content: "🧠";
+position: absolute;
+top: -5px;
+right: -5px;
+font-size: 0.8rem;
+opacity: 0.7;
+}

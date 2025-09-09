@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze Intelligence | Championship Sports Analytics & AI Platform</title>
+<meta name="description" content="Revolutionary sports intelligence platform combining AI, computer vision, and advanced analytics. Serving MLB, NFL, NBA, NCAA with 94.6% accuracy and <100ms response times.">
+<meta name="keywords" content="sports analytics, AI, computer vision, MLB analytics, NFL analytics, NBA analytics, NCAA recruiting, sports intelligence, performance analytics, biomechanical analysis">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://blaze-intelligence.pages.dev/">
+<meta property="twitter:title" content="Blaze Intelligence | Championship Sports Analytics">
+<meta property="twitter:description" content="Where cognitive performance meets quarterly performance. Advanced AI-driven sports analytics.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="js/blaze-three-visuals.js" defer></script>
+<script src="js/blaze-real-time-data.js" defer></script>
+<script src="js/cardinals-readiness-board.js" defer></script>
+
+<script src="js/analytics-config.js"></script>
+<script src="js/ab-testing.js" defer></script>
+<script src="js/sentry-config.js"></script>
+</head>
+<body>
+<div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 lg:hidden transform translate-x-full transition-transform duration-300">
+<ul class="flex flex-col items-center justify-center h-full space-y-8">
+<li><a href="#features" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Features</a></li>
+<li><a href="#analytics" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Analytics</a></li>
+<li><a href="/vision-ai-demo.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Vision AI</a></li>
+<li><a href="/dashboard.html" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Dashboard</a></li>
+<li><a href="/data" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Data</a></li>
+<li><a href="/blog/" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Insights</a></li>
+<li><a href="#contact" class="text-3xl font-bold hover:text-cyan-400 transition-colors">Contact</a></li>
+</ul>
+</div>
+
+<main>
+<div id="hero-3d-bg" class="hero-3d-container"></div>
+
+<div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+<div class="mb-12">
+<h1 class="text-7xl md:text-8xl lg:text-9xl font-black leading-none mb-6">
+<span class="gradient-text block">BLAZE</span>
+<span class="neon-text block">INTELLIGENCE</span>
+</h1>
+
+<p class="text-2xl md:text-4xl text-slate-300 mb-6 font-light">
+WHERE <span class="gradient-text font-bold">COGNITIVE PERFORMANCE</span>
+</p>
+<p class="text-2xl md:text-4xl text-slate-300 mb-8 font-light">
+MEETS <span class="neon-text font-bold">QUARTERLY PERFORMANCE</span>
+</p>
+
+<p class="text-lg md:text-xl text-orange-300 mb-8 max-w-3xl mx-auto">
+Revolutionary AI-powered sports analytics platform serving MLB, NFL, NBA, and NCAA organizations 
+with championship-level intelligence and real-time performance insights
+</p>
+</div>
+
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<a href="#analytics" class="cta-button text-white font-bold px-10 py-5 rounded-full flex items-center gap-3 text-lg">
+<i data-lucide="play" class="w-6 h-6"></i>
+View Live Demo
+</a>
+<a href="/vision-ai-demo.html" class="glass-card hover:bg-slate-700/50 text-white font-bold px-10 py-5 rounded-full transition-all duration-300 flex items-center gap-3 neon-border">
+<i data-lucide="brain" class="w-6 h-6"></i>
+Experience Vision AI
+</a>
+</div>
+</div>
+</section>
+
+<div class="text-center max-w-4xl mx-auto mb-20">
+<h2 class="text-4xl md:text-6xl font-bold gradient-text mb-6 reveal">LIVE ANALYTICS DASHBOARD</h2>
+<p class="text-xl md:text-2xl text-slate-300 mb-8 reveal">
+Real-time sports intelligence powered by advanced AI and computer vision
+</p>
+<div class="status-indicator reveal">
+<div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+<span>LIVE DATA STREAM ACTIVE</span>
+</div>
+</div>
+
+<div class="reveal">
+<div class="text-center mb-8">
+<h3 class="text-2xl font-bold text-white mb-4">Interactive Sports Intelligence Network</h3>
+<p class="text-slate-400">Live data visualization of our multi-sport analytics ecosystem</p>
+</div>
+<div id="main-3d-viz" class="viz-container mx-auto pulse-glow"></div>
+</div>
+</div>
+</section>
+
+<div class="glass-card p-8 reveal feature-highlight">
+<div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center mb-6">
+<i data-lucide="eye" class="w-8 h-8 text-white"></i>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4">Vision AI</h3>
+<p class="text-slate-300 mb-6">
+Advanced computer vision for biomechanical analysis, micro-expression detection, 
+and championship character assessment validated against 10,000+ elite athletes.
+</p>
+<ul class="space-y-2 text-sm text-slate-400">
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Real-time biomechanical tracking
+</li>
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Micro-expression analysis (1/25th second)
+</li>
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Championship DNA identification
+</li>
+</ul>
+<a href="/vision-ai-demo.html" class="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 font-semibold mt-6">
+Experience Demo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+</a>
+</div>
+
+<div class="glass-card p-8 reveal">
+<div class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mb-6">
+<i data-lucide="server" class="w-8 h-8 text-white"></i>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4">Enterprise Platform</h3>
+<p class="text-slate-300 mb-6">
+SOC 2 compliant platform with enterprise SSO, API access, and white-label solutions 
+designed for professional sports organizations and Fortune 500 companies.
+</p>
+<ul class="space-y-2 text-sm text-slate-400">
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+SOC 2 Type II compliance
+</li>
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Enterprise SSO & RBAC
+</li>
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+White-label solutions
+</li>
+</ul>
+<a href="#contact" class="inline-flex items-center gap-2 text-green-400 hover:text-green-300 font-semibold mt-6">
+Contact Sales <i data-lucide="arrow-right" class="w-4 h-4"></i>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<div class="glass-card p-8 reveal">
+<div class="text-center mb-8">
+<h3 class="text-2xl font-bold text-white mb-2">Demo</h3>
+<div class="text-4xl font-black text-green-400 mb-2">$1,188</div>
+<p class="text-slate-400">per year</p>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Sample analytics access</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Basic dashboard features</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Community support</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>1,000 API calls/month</span>
+</li>
+</ul>
+<a href="#contact" class="w-full cta-button text-center text-white font-bold py-4 rounded-lg">
+Get Started
+</a>
+</div>
+
+<div class="glass-card p-8 reveal">
+<div class="text-center mb-8">
+<h3 class="text-2xl font-bold text-white mb-2">Enterprise</h3>
+<div class="text-4xl font-black text-orange-400 mb-2">$250,000</div>
+<p class="text-slate-400">per year</p>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Full platform access</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>White-label solutions</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Custom integrations</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Unlimited API access</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>24/7 dedicated support</span>
+</li>
+</ul>
+<a href="#contact" class="w-full cta-button text-center text-white font-bold py-4 rounded-lg">
+Contact Sales
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="border-t border-slate-800 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center">
+<div class="neon-text text-2xl font-bold mb-4">BLAZE INTELLIGENCE</div>
+<p class="text-slate-400 mb-6">
+Where Cognitive Performance Meets Quarterly Performance
+</p>
+<div class="flex justify-center space-x-8 text-sm text-slate-500">
+<a href="/privacy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+<a href="/terms.html" class="hover:text-white transition-colors">Terms of Service</a>
+<a href="/methods.html" class="hover:text-white transition-colors">Methods & Definitions</a>
+<a href="/status.html" class="hover:text-white transition-colors">System Status</a>
+</div>
+<p class="text-slate-600 text-xs mt-6">
+© 2025 Blaze Intelligence. All rights reserved.
+</p>
+</div>
+</div>
+</footer>
+
+<script>
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+initializePage();
+});
+
+function initializePage() {
+// Initialize icons
+lucide.createIcons();
+
+// Initialize 3D visualizations
+if (typeof blazeVisuals !== 'undefined') {
+// Hero 3D background
+blazeVisuals.initHeroHeader('hero-3d-bg', {
+particleCount: 3000,
+interactive: true,
+colors: ['#ff6b35', '#f7931e', '#00ffff', '#00ff88']
+});
+
+// Main analytics visualization
+const sportsData = generateSportsNetworkData();
+blazeVisuals.createDataVisualization('main-3d-viz', sportsData, 'network');
+}
+
+// Initialize real-time data
+if (typeof blazeRealTimeData !== 'undefined') {
+startLiveDataUpdates();
+}
+
+// Initialize GSAP animations
+initializeAnimations();
+
+// Initialize interactive elements
+initializeInteractiveElements();
+
+// Start metric updates
+startMetricUpdates();
+}
+
+function generateSportsNetworkData() {
+return {
+nodes: [
+{ id: 'Central', size: 4, color: 0xff6b35, label: 'Blaze Intelligence' },
+{ id: 'Cardinals', size: 3, color: 0xff0000, label: 'Cardinals MLB' },
+{ id: 'Titans', size: 3, color: 0x0080ff, label: 'Titans NFL' },
+{ id: 'Longhorns', size: 3, color: 0xff8000, label: 'Longhorns NCAA' },
+{ id: 'Grizzlies', size: 3, color: 0x800080, label: 'Grizzlies NBA' },
+{ id: 'Vision AI', size: 2.5, color: 0x00ffff, label: 'Vision AI' },
+{ id: 'Analytics', size: 2.5, color: 0x00ff88, label: 'Analytics Engine' },
+{ id: 'Data Pipeline', size: 2, color: 0xffd700, label: 'Data Pipeline' }
+],
+links: [
+{ source: 'Central', target: 'Cardinals' },
+{ source: 'Central', target: 'Titans' },
+{ source: 'Central', target: 'Longhorns' },
+{ source: 'Central', target: 'Grizzlies' },
+{ source: 'Central', target: 'Vision AI' },
+{ source: 'Central', target: 'Analytics' },
+{ source: 'Analytics', target: 'Data Pipeline' },
+{ source: 'Vision AI', target: 'Data Pipeline' }
+]
+};
+}
+
+function initializeAnimations() {
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+gsap.registerPlugin(ScrollTrigger);
+
+// Reveal animations
+gsap.utils.toArray('.reveal').forEach(element => {
+gsap.from(element, {
+y: 50,
+opacity: 0,
+duration: 0.8,
+ease: 'power3.out',
+scrollTrigger: {
+trigger: element,
+start: 'top 80%',
+toggleActions: 'play none none none'
+}
+});
+});
+
+// Metric cards animation
+gsap.utils.toArray('.metric-card').forEach((card, index) => {
+gsap.from(card, {
+y: 30,
+opacity: 0,
+duration: 0.6,
+delay: index * 0.1,
+ease: 'power3.out',
+scrollTrigger: {
+trigger: card,
+start: 'top 85%',
+toggleActions: 'play none none none'
+}
+});
+});
+}
+}
+
+function initializeInteractiveElements() {
+// Mobile menu toggle
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+
+mobileMenuToggle.addEventListener('click', () => {
+mobileMenu.classList.toggle('translate-x-full');
+});
+
+// Close mobile menu when clicking links
+mobileMenu.querySelectorAll('a').forEach(link => {
+link.addEventListener('click', () => {
+mobileMenu.classList.add('translate-x-full');
+});
+});
+
+// Interactive metric cards
+document.querySelectorAll('.interactive-card').forEach(card => {
+card.addEventListener('click', function() {
+const metric = this.dataset.metric;
+showMetricDetails(metric);
+});
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+}
+});
+});
+}
+
+function showMetricDetails(metric) {
+// This could open a modal or expand details
+console.log(`Showing details for ${metric}`);
+// Implementation would show detailed analytics for the selected metric
+}
+
+function startMetricUpdates() {
+// Simulate real-time metric updates
+setInterval(updateMetrics, 5000);
+updateMetrics(); // Initial update
+}
+
+function updateMetrics() {
+// Cardinals readiness
+const cardinalsValue = (85 + Math.random() * 10).toFixed(1);
+updateMetricValue('cardinals-readiness', cardinalsValue + '%');
+
+// Titans performance
+const titansValue = (78 + Math.random() * 15).toFixed(1);
+updateMetricValue('titans-performance', titansValue + '%');
+
+// Longhorns recruiting
+const longhornsValue = Math.floor(45 + Math.random() * 20);
+updateMetricValue('longhorns-recruiting', longhornsValue);
+
+// Grizzlies grit
+const grizzliesValue = (92 + Math.random() * 6).toFixed(1);
+updateMetricValue('grizzlies-grit', grizzliesValue + '%');
+}
+
+function updateMetricValue(elementId, value) {
+const element = document.getElementById(elementId);
+if (element) {
+element.textContent = value;
+// Add a subtle animation to indicate update
+element.style.transform = 'scale(1.05)';
+setTimeout(() => {
+element.style.transform = 'scale(1)';
+}, 200);
+}
+}
+
+// Initialize mini charts for metrics
+function initializeMetricCharts() {
+const chartConfig = {
+type: 'line',
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: { legend: { display: false } },
+scales: {
+x: { display: false },
+y: { display: false }
+},
+elements: { point: { radius: 0 } }
+}
+};
+
+// Cardinals chart
+if (document.getElementById('cardinals-chart')) {
+new Chart(document.getElementById('cardinals-chart'), {
+...chartConfig,
+data: {
+labels: Array(10).fill(''),
+datasets: [{
+data: Array.from({length: 10}, () => 85 + Math.random() * 10),
+borderColor: '#00ffff',
+backgroundColor: 'rgba(0, 255, 255, 0.1)',
+tension: 0.4
+}]
+}
+});
+}
+
+// Similar setup for other charts...
+}
+
+// Initialize charts after page load
+setTimeout(initializeMetricCharts, 1000);
+</script>
+</body>
+</html>

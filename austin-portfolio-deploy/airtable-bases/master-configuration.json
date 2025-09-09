@@ -1,0 +1,326 @@
+{
+  "blazeIntelligence": {
+    "company": {
+      "name": "Blaze Intelligence",
+      "tagline": "Where cognitive performance meets quarterly performance",
+      "website": "https://blaze-intelligence.pages.dev",
+      "contact": {
+        "name": "Austin Humphrey",
+        "email": "ahump20@outlook.com",
+        "phone": "(210) 273-5538",
+        "address": "8319 Monument Oak, Boerne, TX 78015"
+      }
+    },
+    "systemMetrics": {
+      "accuracy": {
+        "current": 94.6,
+        "target": 94.6,
+        "unit": "%",
+        "description": "Vision AI system accuracy rate"
+      },
+      "latency": {
+        "current": 87,
+        "target": 100,
+        "unit": "ms",
+        "description": "Average system response time"
+      },
+      "dataPoints": {
+        "current": 2850000,
+        "target": 2800000,
+        "unit": "records",
+        "description": "Total data points processed"
+      }
+    },
+    "revenueTargets": {
+      "q4_2024": {
+        "target": 325000,
+        "current": 0,
+        "deals": [
+          {"organization": "St. Louis Cardinals", "value": 250000, "probability": 75},
+          {"organization": "Tennessee Titans", "value": 50000, "probability": 40},
+          {"organization": "Memphis Grizzlies", "value": 25000, "probability": 90}
+        ]
+      },
+      "2025": {
+        "target": 1875000,
+        "current": 0,
+        "breakdown": {
+          "new_business": 1200000,
+          "recurring_revenue": 675000
+        }
+      },
+      "2026": {
+        "target": 1875000,
+        "current": 0,
+        "breakdown": {
+          "new_business": 1000000,
+          "recurring_revenue": 875000
+        }
+      }
+    },
+    "competitorSavings": {
+      "range": {
+        "min": 67,
+        "max": 80,
+        "unit": "%"
+      },
+      "comparisons": [
+        {
+          "competitor": "Hudl Assist",
+          "their_price": 40000,
+          "blaze_price": 25000,
+          "savings_percent": 67.5
+        },
+        {
+          "competitor": "Second Spectrum",
+          "their_price": 300000,
+          "blaze_price": 250000,
+          "savings_percent": 16.7
+        }
+      ]
+    },
+    "keyClients": {
+      "prospects": [
+        {
+          "name": "St. Louis Cardinals",
+          "type": "MLB Team",
+          "deal_value": 250000,
+          "stage": "Negotiation",
+          "probability": 75,
+          "decision_timeline": "Q4 2024"
+        },
+        {
+          "name": "Tennessee Titans", 
+          "type": "NFL Team",
+          "deal_value": 50000,
+          "stage": "Discovery",
+          "probability": 40,
+          "decision_timeline": "Q4 2024"
+        },
+        {
+          "name": "University of Texas Longhorns",
+          "type": "NCAA Division I",
+          "deal_value": 50000,
+          "stage": "Qualification",
+          "probability": 25,
+          "decision_timeline": "Q1 2025"
+        },
+        {
+          "name": "Memphis Grizzlies",
+          "type": "NBA Team",
+          "deal_value": 250000,
+          "stage": "Legal Review",
+          "probability": 90,
+          "decision_timeline": "Q3 2024"
+        }
+      ]
+    },
+    "productOffering": {
+      "packages": [
+        {
+          "name": "Vision AI Starter",
+          "price": 12000,
+          "billing": "annual",
+          "features": [
+            "Basic biomechanical analysis",
+            "Standard reporting",
+            "Email support"
+          ]
+        },
+        {
+          "name": "Vision AI Professional",
+          "price": 25000,
+          "billing": "annual", 
+          "features": [
+            "Advanced biomechanical analysis",
+            "Micro-expression detection",
+            "Real-time processing",
+            "Custom reporting",
+            "Phone support"
+          ]
+        },
+        {
+          "name": "Vision AI Enterprise",
+          "price": 50000,
+          "billing": "annual",
+          "features": [
+            "Full Vision AI suite",
+            "Character assessment",
+            "Multi-sport coverage",
+            "API access",
+            "Dedicated support"
+          ]
+        },
+        {
+          "name": "Multi-Sport Analytics",
+          "price": 75000,
+          "billing": "annual",
+          "features": [
+            "Cross-sport analytics",
+            "Recruiting intelligence", 
+            "NIL valuation",
+            "Advanced integrations"
+          ]
+        },
+        {
+          "name": "Championship Package",
+          "price": 250000,
+          "billing": "annual",
+          "features": [
+            "Complete platform access",
+            "Custom development",
+            "White-label options",
+            "24/7 support",
+            "Strategic consulting"
+          ]
+        }
+      ]
+    }
+  },
+  "integrationConfiguration": {
+    "hubspot": {
+      "enabled": true,
+      "purpose": "Lead management and CRM",
+      "sync_frequency": "real-time",
+      "critical": true
+    },
+    "notion": {
+      "enabled": true,
+      "purpose": "Content management system",
+      "sync_frequency": "hourly",
+      "critical": false
+    },
+    "asana": {
+      "enabled": true,
+      "purpose": "Project and task management", 
+      "sync_frequency": "real-time",
+      "critical": false
+    },
+    "stripe": {
+      "enabled": true,
+      "purpose": "Payment processing",
+      "sync_frequency": "real-time",
+      "critical": true
+    },
+    "square": {
+      "enabled": true,
+      "purpose": "Point-of-sale and payments",
+      "sync_frequency": "real-time",
+      "critical": true
+    },
+    "vercel": {
+      "enabled": true,
+      "purpose": "Web hosting and deployment",
+      "sync_frequency": "event-driven",
+      "critical": true
+    },
+    "sentry": {
+      "enabled": true,
+      "purpose": "Error monitoring and alerting",
+      "sync_frequency": "real-time",
+      "critical": true
+    },
+    "linear": {
+      "enabled": true,
+      "purpose": "Development task tracking",
+      "sync_frequency": "real-time", 
+      "critical": false
+    },
+    "canva": {
+      "enabled": true,
+      "purpose": "Design and marketing assets",
+      "sync_frequency": "manual",
+      "critical": false
+    }
+  },
+  "automationRules": {
+    "lead_processing": {
+      "enabled": true,
+      "trigger": "new_contact_form_submission",
+      "actions": [
+        "validate_data",
+        "enrich_contact_info",
+        "score_lead",
+        "create_hubspot_contact",
+        "send_welcome_email",
+        "notify_austin"
+      ],
+      "sla": "5 minutes"
+    },
+    "deal_progression": {
+      "enabled": true,
+      "trigger": "deal_stage_update",
+      "actions": [
+        "update_probability",
+        "schedule_follow_up",
+        "generate_progress_report",
+        "alert_if_stuck"
+      ]
+    },
+    "payment_processing": {
+      "enabled": true,
+      "trigger": "successful_payment",
+      "actions": [
+        "update_subscription_status",
+        "send_receipt",
+        "update_client_health_score",
+        "log_revenue_event"
+      ]
+    },
+    "system_monitoring": {
+      "enabled": true,
+      "trigger": "performance_threshold_breach",
+      "actions": [
+        "send_alert",
+        "attempt_auto_recovery",
+        "log_incident",
+        "escalate_if_critical"
+      ]
+    }
+  },
+  "reportingDashboard": {
+    "kpis": [
+      {
+        "name": "Revenue Pipeline",
+        "current_value": 575000,
+        "target_value": 325000,
+        "status": "exceeding"
+      },
+      {
+        "name": "System Performance",
+        "current_value": 94.6,
+        "target_value": 94.6,
+        "status": "on_target"
+      },
+      {
+        "name": "Client Satisfaction",
+        "current_value": 4.8,
+        "target_value": 4.5,
+        "status": "exceeding"
+      },
+      {
+        "name": "Lead Conversion Rate",
+        "current_value": 23,
+        "target_value": 25,
+        "status": "approaching"
+      }
+    ],
+    "alerts": {
+      "critical_system_failure": {
+        "enabled": true,
+        "recipients": ["ahump20@outlook.com"],
+        "channels": ["email", "sms"]
+      },
+      "deal_at_risk": {
+        "enabled": true,
+        "recipients": ["ahump20@outlook.com"],
+        "channels": ["email"]
+      },
+      "revenue_target_miss": {
+        "enabled": true,
+        "recipients": ["ahump20@outlook.com"],
+        "channels": ["email", "slack"]
+      }
+    }
+  }
+}
