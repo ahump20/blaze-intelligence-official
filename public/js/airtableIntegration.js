@@ -435,6 +435,114 @@ class AirtableIntegration {
                 }
             }
             
+            /* In Development Section Styles */
+            .in-development-section {
+                padding: 120px 50px;
+                background: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%);
+            }
+            
+            .development-content {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .development-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 30px;
+                margin-bottom: 60px;
+            }
+            
+            .development-card {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 30px;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+            
+            .development-card:hover {
+                transform: translateY(-5px);
+                border-color: rgba(191, 87, 0, 0.3);
+                background: rgba(191, 87, 0, 0.05);
+            }
+            
+            .development-icon {
+                font-size: 48px;
+                margin-bottom: 20px;
+            }
+            
+            .development-card h3 {
+                color: #BF5700;
+                font-size: 22px;
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+            
+            .development-card p {
+                color: rgba(255, 255, 255, 0.7);
+                line-height: 1.6;
+                margin: 0;
+            }
+            
+            .transparency-section {
+                background: rgba(191, 87, 0, 0.03);
+                border: 2px solid rgba(191, 87, 0, 0.2);
+                border-radius: 25px;
+                padding: 40px;
+                text-align: center;
+            }
+            
+            .transparency-section h3 {
+                color: #BF5700;
+                font-size: 28px;
+                font-weight: 800;
+                margin-bottom: 20px;
+            }
+            
+            .transparency-badge {
+                display: inline-block;
+                background: #BF5700;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-weight: 700;
+                font-size: 14px;
+                margin-bottom: 30px;
+                letter-spacing: 1px;
+            }
+            
+            .transparency-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 20px;
+                text-align: left;
+            }
+            
+            .transparency-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 15px 0;
+            }
+            
+            .checkmark {
+                color: #00ff00;
+                font-size: 18px;
+                font-weight: 900;
+                margin-top: 2px;
+            }
+            
+            .transparency-item strong {
+                color: #BF5700;
+            }
+            
+            .transparency-item {
+                color: rgba(255, 255, 255, 0.8);
+                line-height: 1.5;
+            }
+            
             .insights-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
