@@ -1888,20 +1888,117 @@
             </div>
             <div class="stats-container">
                 <div class="stat-item">
-                    <div class="stat-value" data-count="2847">2,847</div>
-                    <div class="stat-label">Players Analyzed</div>
+                    <div class="stat-value" data-count="227">227</div>
+                    <div class="stat-label">Teams Analyzed</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value" data-count="94.6">94.6%</div>
                     <div class="stat-label">Prediction Accuracy</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" data-count="156">156</div>
-                    <div class="stat-label">Live Games Tracked</div>
+                    <div class="stat-value" data-count="16">16</div>
+                    <div class="stat-label">Leagues Covered</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" data-count="1.2">1.2M</div>
-                    <div class="stat-label">Data Points/Day</div>
+                    <div class="stat-value" data-count="100">&lt;100ms</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Intelligence Showcase Section -->
+    <section class="intelligence-showcase" id="intelligence-showcase" data-aos="fade-up">
+        <div class="section-header">
+            <span class="section-badge">Intelligence in Action</span>
+            <h2 class="section-title">AI-Powered Sports Analytics</h2>
+            <p class="section-subtitle">
+                Real-time pattern recognition and championship insights powered by advanced machine learning
+            </p>
+        </div>
+        
+        <div class="intelligence-grid">
+            <div class="intelligence-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="intelligence-header">
+                    <div class="intelligence-icon">🧠</div>
+                    <h3 class="intelligence-title">Pattern Recognition Engine</h3>
+                </div>
+                <div class="intelligence-content">
+                    <p>Advanced AI analyzing millions of data points across professional sports leagues, identifying winning patterns and strategic advantages.</p>
+                    <div class="intelligence-metrics">
+                        <div class="metric">
+                            <div class="metric-value">2.8M+</div>
+                            <div class="metric-label">Data Points</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">94.6%</div>
+                            <div class="metric-label">Accuracy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="intelligence-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="intelligence-header">
+                    <div class="intelligence-icon">⚡</div>
+                    <h3 class="intelligence-title">Real-Time Decision Velocity</h3>
+                </div>
+                <div class="intelligence-content">
+                    <p>Sub-100ms response times for competitive intelligence and strategic insights that keep you ahead of the competition.</p>
+                    <div class="intelligence-metrics">
+                        <div class="metric">
+                            <div class="metric-value">&lt;100ms</div>
+                            <div class="metric-label">Response Time</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">24/7</div>
+                            <div class="metric-label">Monitoring</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="intelligence-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="intelligence-header">
+                    <div class="intelligence-icon">🏆</div>
+                    <h3 class="intelligence-title">Championship Prediction</h3>
+                </div>
+                <div class="intelligence-content">
+                    <p>AI models trained on historical championship data across 227 teams and 16 leagues to predict winning outcomes.</p>
+                    <div class="intelligence-metrics">
+                        <div class="metric">
+                            <div class="metric-value">227</div>
+                            <div class="metric-label">Teams</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">16</div>
+                            <div class="metric-label">Leagues</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="intelligence-demo">
+            <div class="demo-header">
+                <h3>Live Intelligence Dashboard</h3>
+                <p>Real-time analytics processing across all major sports leagues</p>
+            </div>
+            <div class="demo-visualization">
+                <canvas id="intelligence-canvas" width="800" height="400"></canvas>
+                <div class="demo-stats">
+                    <div class="demo-stat">
+                        <div class="demo-stat-value" id="processed-teams">0</div>
+                        <div class="demo-stat-label">Teams Processed</div>
+                    </div>
+                    <div class="demo-stat">
+                        <div class="demo-stat-value" id="accuracy-rate">0%</div>
+                        <div class="demo-stat-label">Accuracy Rate</div>
+                    </div>
+                    <div class="demo-stat">
+                        <div class="demo-stat-value" id="response-time">0ms</div>
+                        <div class="demo-stat-label">Response Time</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3300,6 +3397,11 @@
     <script src="/public/js/three-dashboard-viz.js"></script>
     <script src="/public/js/enhanced-charts.js"></script>
     <script src="/public/js/loading-animations.js"></script>
+    
+    <!-- Enhanced Sports Intelligence -->
+    <script src="/public/js/enhanced-sports-data.js"></script>
+    <script src="/public/js/enhanced-three-hero.js"></script>
+    <script src="/public/js/intelligence-demo.js"></script>
     <!-- Smooth Scroll Animations -->
     <script>
         // Reveal animations on scroll
