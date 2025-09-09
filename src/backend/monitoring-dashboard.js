@@ -36,7 +36,7 @@ class MonitoringDashboard {
   startMetricsCollection() {
     // Collect system metrics every 30 seconds
     setInterval(async () => {
-      await this.collectSystemMetrics();
+      await this.getSystemMetrics();
       await this.checkThresholds();
     }, 30000);
 
