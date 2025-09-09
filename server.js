@@ -2,7 +2,18 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+import helmet from 'helmet';
+import compression from 'compression';
+import rateLimit from 'express-rate-limit';
 import SportsDataService from './src/services/sportsDataService.js';
+import mlbAdapter from './src/data/mlb/adapter.js';
+import nflAdapter from './src/data/nfl/adapter.js';
+import cfbAdapter from './src/data/cfb/adapter.js';
+import cache from './src/data/cache.js';
+
+// Load environment variables
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,12 +21,59 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust proxy for rate limiting to work correctly
+app.set('trust proxy', true);
+
 // Initialize sports data service
 const sportsData = new SportsDataService();
 
-// Enable CORS for all origins (required for Replit)
-app.use(cors());
+// Security middleware
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://cdn.jsdelivr.net", "https://unpkg.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https://statsapi.mlb.com"]
+    }
+  }
+}));
+app.use(compression());
+
+// CORS configuration
+const allowedOrigins = process.env.ALLOWED_ORIGINS ? 
+  process.env.ALLOWED_ORIGINS.split(',') : 
+  ['http://localhost:5000', 'http://localhost:3000'];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
+
+// Rate limiting
+const apiLimiter = rateLimit({
+  windowMs: parseInt(process.env.API_RATE_WINDOW) || 60000, // 1 minute
+  max: parseInt(process.env.API_RATE_LIMIT) || 100,
+  message: 'Too many requests from this IP, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Apply rate limiting to API routes
+app.use('/api/', apiLimiter);
 
 // Serve static files from both root and public directories
 app.use(express.static(__dirname));
@@ -79,7 +137,152 @@ app.get('/lone-star-legends', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'lone-star-legends.html'));
 });
 
-// API Routes for Sports Data - College Football, MLB, NFL
+// Health check endpoint
+app.get('/healthz', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Metrics endpoint
+app.get('/metrics', (req, res) => {
+  const cacheStats = cache.getStats();
+  res.json({
+    cache: cacheStats,
+    memory: process.memoryUsage(),
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
+});
+
+// MLB API Routes (Real Data)
+app.get('/api/mlb/teams/:id', async (req, res) => {
+  try {
+    const data = await mlbAdapter.getTeamSummary(req.params.id);
+    res.json(data);
+  } catch (error) {
+    console.error('MLB team error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB team data', source: 'MLB Stats API' });
+  }
+});
+
+app.get('/api/mlb/players/:id', async (req, res) => {
+  try {
+    const data = await mlbAdapter.getPlayerSummary(req.params.id);
+    res.json(data);
+  } catch (error) {
+    console.error('MLB player error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB player data', source: 'MLB Stats API' });
+  }
+});
+
+app.get('/api/mlb/games/live', async (req, res) => {
+  try {
+    const data = await mlbAdapter.getLiveGames();
+    res.json(data);
+  } catch (error) {
+    console.error('MLB live games error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB live games', source: 'MLB Stats API' });
+  }
+});
+
+app.get('/api/mlb/standings/:league', async (req, res) => {
+  try {
+    const data = await mlbAdapter.getStandings(req.params.league);
+    res.json(data);
+  } catch (error) {
+    console.error('MLB standings error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB standings', source: 'MLB Stats API' });
+  }
+});
+
+// NFL API Routes
+app.get('/api/nfl/teams/:abbr', async (req, res) => {
+  try {
+    const data = await nflAdapter.getTeamSummary(req.params.abbr);
+    res.json(data);
+  } catch (error) {
+    console.error('NFL team error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL team data', source: 'NFL Data Provider' });
+  }
+});
+
+app.get('/api/nfl/players/:name', async (req, res) => {
+  try {
+    const data = await nflAdapter.getPlayerSummary(req.params.name);
+    res.json(data);
+  } catch (error) {
+    console.error('NFL player error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL player data', source: 'NFL Data Provider' });
+  }
+});
+
+app.get('/api/nfl/games/live', async (req, res) => {
+  try {
+    const data = await nflAdapter.getLiveGames();
+    res.json(data);
+  } catch (error) {
+    console.error('NFL live games error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL live games', source: 'NFL Data Provider' });
+  }
+});
+
+app.get('/api/nfl/standings/:conference', async (req, res) => {
+  try {
+    const data = await nflAdapter.getStandings(req.params.conference);
+    res.json(data);
+  } catch (error) {
+    console.error('NFL standings error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL standings', source: 'NFL Data Provider' });
+  }
+});
+
+// College Football API Routes
+app.get('/api/cfb/teams/:team', async (req, res) => {
+  try {
+    const data = await cfbAdapter.getTeamSummary(req.params.team);
+    res.json(data);
+  } catch (error) {
+    console.error('CFB team error:', error);
+    res.status(500).json({ error: 'Failed to fetch CFB team data', source: 'CollegeFootballData API' });
+  }
+});
+
+app.get('/api/cfb/players/:name', async (req, res) => {
+  try {
+    const data = await cfbAdapter.getPlayerSummary(req.params.name);
+    res.json(data);
+  } catch (error) {
+    console.error('CFB player error:', error);
+    res.status(500).json({ error: 'Failed to fetch CFB player data', source: 'CollegeFootballData API' });
+  }
+});
+
+app.get('/api/cfb/games/live', async (req, res) => {
+  try {
+    const data = await cfbAdapter.getLiveGames();
+    res.json(data);
+  } catch (error) {
+    console.error('CFB live games error:', error);
+    res.status(500).json({ error: 'Failed to fetch CFB live games', source: 'CollegeFootballData API' });
+  }
+});
+
+app.get('/api/cfb/rankings', async (req, res) => {
+  try {
+    const limit = req.query.limit || 25;
+    const data = await cfbAdapter.getRankings(limit);
+    res.json(data);
+  } catch (error) {
+    console.error('CFB rankings error:', error);
+    res.status(500).json({ error: 'Failed to fetch CFB rankings', source: 'CollegeFootballData API' });
+  }
+});
+
+// Legacy API Routes for Sports Data (for backward compatibility)
 app.get('/api/sports/:sport/teams', (req, res) => {
   const teams = sportsData.getTeams(req.params.sport);
   res.json(teams);
