@@ -89,16 +89,22 @@ Elite sports analytics platform website for championship teams. This is a static
 
 ## AI Integrations
 ### OpenAI Integration
-- **Team Analysis**: GPT-4 powered comprehensive team performance analysis
+- **Team Analysis**: ChatGPT 5 powered comprehensive team performance analysis
 - **Endpoint**: `POST /api/ai/openai/analyze-team`
 - **Features**: Strengths/weaknesses analysis, championship outlook, player evaluations
-- **Model**: GPT-4-mini for cost-effective high-quality analysis
+- **Model**: ChatGPT 5 for advanced high-quality analysis
 
 ### Anthropic Claude Integration  
 - **Championship Predictions**: Advanced probability analysis for championship outcomes
 - **Endpoint**: `POST /api/ai/anthropic/predict-championship`
 - **Features**: Top contender rankings, dark horse identification, confidence analysis
-- **Model**: Claude-3-haiku for detailed sports predictions
+- **Model**: Claude Opus 4.1 for detailed sports predictions
+
+### Google Gemini Integration
+- **Game Highlights Analysis**: Deep game analysis and performance insights
+- **Endpoint**: `POST /api/ai/gemini/analyze-highlights`
+- **Features**: Key moment detection, performance breakdown, tactical analysis
+- **Model**: Gemini 2.5 Pro for comprehensive game analysis
 
 ### Stripe Integration
 - **Premium Subscriptions**: Two-tier subscription system (Pro $99/month, Enterprise $299/month)

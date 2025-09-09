@@ -1980,7 +1980,7 @@
             <span class="section-badge">AI Intelligence</span>
             <h2 class="section-title">Powered by Leading AI Services</h2>
             <p class="section-subtitle">
-                Experience real AI-powered sports analysis using OpenAI, Anthropic Claude, and premium features via Stripe integration.
+                Experience real AI-powered sports analysis using ChatGPT 5, Claude Opus 4.1, and Gemini 2.5 Pro for championship insights.
             </p>
         </div>
         
@@ -1990,7 +1990,7 @@
                 <div class="ai-feature-header">
                     <div class="ai-service-logo">🤖</div>
                     <h3 class="ai-feature-title">OpenAI Team Analysis</h3>
-                    <span class="ai-service-badge">OpenAI GPT-4</span>
+                    <span class="ai-service-badge">ChatGPT 5</span>
                 </div>
                 <div class="ai-feature-content">
                     <p class="ai-feature-description">
@@ -2039,11 +2039,11 @@
                 <div class="ai-feature-header">
                     <div class="ai-service-logo">🧠</div>
                     <h3 class="ai-feature-title">Championship Predictions</h3>
-                    <span class="ai-service-badge">Anthropic Claude</span>
+                    <span class="ai-service-badge">Claude Opus 4.1</span>
                 </div>
                 <div class="ai-feature-content">
                     <p class="ai-feature-description">
-                        Advanced championship probability analysis using Anthropic's Claude AI for detailed predictions and insights.
+                        Advanced championship probability analysis using Claude Opus 4.1 for detailed predictions and insights.
                     </p>
                     <div class="league-selector">
                         <select id="leagueSelector" class="ai-input">
@@ -2057,9 +2057,33 @@
                     <div id="championshipResult" class="ai-result-container"></div>
                 </div>
             </div>
+            
+            <!-- Gemini Game Highlights Analysis -->
+            <div class="ai-feature-card" data-aos="fade-up" data-aos-delay="250">
+                <div class="ai-feature-header">
+                    <div class="ai-service-logo">⚡</div>
+                    <h3 class="ai-feature-title">Game Highlights Analysis</h3>
+                    <span class="ai-service-badge">Gemini 2.5 Pro</span>
+                </div>
+                <div class="ai-feature-content">
+                    <p class="ai-feature-description">
+                        Deep game analysis and highlight detection using Gemini 2.5 Pro for comprehensive performance insights.
+                    </p>
+                    <div class="league-selector">
+                        <select id="geminiLeagueSelector" class="ai-input">
+                            <option value="mlb">MLB</option>
+                            <option value="nfl">NFL</option>
+                            <option value="nba">NBA</option>
+                            <option value="cfb">College Football</option>
+                        </select>
+                        <button class="ai-action-btn" id="analyzeHighlightsBtn">Analyze Highlights</button>
+                    </div>
+                    <div id="highlightsResult" class="ai-result-container"></div>
+                </div>
+            </div>
 
             <!-- Premium Features with Stripe -->
-            <div class="ai-feature-card premium-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="ai-feature-card premium-card" data-aos="fade-up" data-aos-delay="400">
                 <div class="ai-feature-header">
                     <div class="ai-service-logo">💎</div>
                     <h3 class="ai-feature-title">Premium AI Features</h3>
@@ -2175,7 +2199,7 @@
             </div>
             <div class="method-item">
                 <h4>Technical Architecture</h4>
-                <p>Built on Node.js with Express, featuring real AI integrations (OpenAI GPT-4, Anthropic Claude) for team analysis, Stripe for payments, and comprehensive sports data processing capabilities.</p>
+                <p>Built on Node.js with Express, featuring real AI integrations (ChatGPT 5, Claude Opus 4.1, Gemini 2.5 Pro) for team analysis, Stripe for payments, and comprehensive sports data processing capabilities.</p>
                 <a href="/proof" class="method-link">View Technical Details →</a>
             </div>
         </div>
@@ -2280,13 +2304,13 @@
                         <div class="integration-icon">🤖</div>
                         <div class="integration-info">
                             <h4>OpenAI API</h4>
-                            <p>GPT-4 integration for team analysis and insights</p>
+                            <p>ChatGPT 5 integration for team analysis and insights</p>
                         </div>
                     </div>
                     <div class="integration-item">
                         <div class="integration-icon">🧠</div>
                         <div class="integration-info">
-                            <h4>Anthropic Claude API</h4>
+                            <h4>Claude Opus 4.1 API</h4>
                             <p>Advanced championship probability calculations</p>
                         </div>
                     </div>

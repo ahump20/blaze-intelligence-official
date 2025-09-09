@@ -600,7 +600,7 @@ app.post('/api/ai/openai/analyze-team', authenticateToken, requireSubscription('
       return res.status(503).json({ error: 'OpenAI API not configured' });
     }
 
-    const { prompt, model = 'gpt-4', max_tokens = 800, temperature = 0.3 } = req.body;
+    const { prompt, model = 'gpt-5', max_tokens = 800, temperature = 0.3 } = req.body;
     
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -645,7 +645,7 @@ app.post('/api/ai/anthropic/predict-championship', async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'claude-3-sonnet-20240229',
+        model: 'claude-opus-4.1',
         max_tokens,
         temperature,
         messages: [{ role: 'user', content: prompt }]
@@ -671,7 +671,7 @@ app.post('/api/ai/gemini/analyze-highlights', async (req, res) => {
       return res.status(503).json({ error: 'Gemini API not configured' });
     }
 
-    const { prompt, game_data, model = 'gemini-pro' } = req.body;
+    const { prompt, game_data, model = 'gemini-2.5-pro' } = req.body;
     
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
       method: 'POST',
