@@ -30,6 +30,7 @@ import ProductionLogger from './src/backend/production-logger.js';
 import MonitoringDashboard from './src/backend/monitoring-dashboard.js';
 import BackupSystem from './src/backend/backup-system.js';
 import ballDontLieService from './src/services/ballDontLieService.js';
+import aiAnalyticsService from './src/services/aiAnalyticsService.js';
 
 // Load environment variables
 dotenv.config();
@@ -653,6 +654,65 @@ app.get('/api/balldontlie/mlb/teams', async (req, res) => {
   } catch (error) {
     console.error('MLB teams error:', error);
     res.status(500).json({ error: 'Failed to fetch MLB teams' });
+  }
+});
+
+// AI Analytics API endpoints
+app.get('/api/ai/status', (req, res) => {
+  const status = aiAnalyticsService.getStatus();
+  res.json(status);
+});
+
+app.post('/api/ai/analyze-team', async (req, res) => {
+  try {
+    const analysis = await aiAnalyticsService.analyzeTeamWithOpenAI(req.body);
+    res.json(analysis);
+  } catch (error) {
+    console.error('Team analysis error:', error);
+    res.status(500).json({ error: 'Analysis failed' });
+  }
+});
+
+app.post('/api/ai/predict-championship', async (req, res) => {
+  try {
+    const prediction = await aiAnalyticsService.predictChampionshipWithClaude(req.body);
+    res.json(prediction);
+  } catch (error) {
+    console.error('Championship prediction error:', error);
+    res.status(500).json({ error: 'Prediction failed' });
+  }
+});
+
+app.post('/api/ai/analyze-highlights', async (req, res) => {
+  try {
+    const analysis = await aiAnalyticsService.analyzeGameHighlights(
+      req.body,
+      req.query.provider || 'openai'
+    );
+    res.json(analysis);
+  } catch (error) {
+    console.error('Highlights analysis error:', error);
+    res.status(500).json({ error: 'Analysis failed' });
+  }
+});
+
+app.post('/api/ai/predict-player', async (req, res) => {
+  try {
+    const prediction = await aiAnalyticsService.predictPlayerPerformance(req.body);
+    res.json(prediction);
+  } catch (error) {
+    console.error('Player prediction error:', error);
+    res.status(500).json({ error: 'Prediction failed' });
+  }
+});
+
+app.post('/api/ai/assess-injury', async (req, res) => {
+  try {
+    const assessment = await aiAnalyticsService.assessInjuryRisk(req.body);
+    res.json(assessment);
+  } catch (error) {
+    console.error('Injury assessment error:', error);
+    res.status(500).json({ error: 'Assessment failed' });
   }
 });
 
