@@ -25,6 +25,10 @@ import { authenticateToken, trackApiUsage, requireSubscription } from './server/
 import CardinalsDataIntegration from './src/integrations/cardinals-real-data-integration.js';
 import DigitalCombineBackend from './src/backend/digital-combine-backend.js';
 import InstrumentationManager from './src/backend/instrumentation-setup.js';
+import RedisCacheLayer from './src/backend/redis-cache-layer.js';
+import ProductionLogger from './src/backend/production-logger.js';
+import MonitoringDashboard from './src/backend/monitoring-dashboard.js';
+import BackupSystem from './src/backend/backup-system.js';
 
 // Load environment variables
 dotenv.config();
@@ -46,6 +50,10 @@ const aiAnalytics = new AIAnalyticsService();
 const cardinalsAPI = new CardinalsDataIntegration();
 const digitalCombineBackend = new DigitalCombineBackend(pool);
 const instrumentation = new InstrumentationManager(process.env.NODE_ENV || 'development');
+const cacheLayer = new RedisCacheLayer();
+const logger = new ProductionLogger();
+const monitoring = new MonitoringDashboard(cacheLayer, logger);
+const backupSystem = new BackupSystem(logger);
 
 // Initialize AI services with API keys
 const openai = process.env.OPENAI_API_KEY ? new OpenAI({
@@ -1309,6 +1317,132 @@ app.get('/api/sports/:sport/players/:id/advanced', (req, res) => {
   }
 });
 
+// Production Cache Endpoints
+app.get('/api/cache/stats', async (req, res) => {
+  try {
+    const stats = cacheLayer.getStats();
+    res.json(stats);
+  } catch (error) {
+    res.status(500).json({ error: 'Cache stats unavailable' });
+  }
+});
+
+app.delete('/api/cache/clear/:namespace', async (req, res) => {
+  try {
+    await cacheLayer.clearNamespace(req.params.namespace);
+    res.json({ success: true, message: `Cleared cache namespace: ${req.params.namespace}` });
+  } catch (error) {
+    res.status(500).json({ error: 'Cache clear failed' });
+  }
+});
+
+// Production Monitoring Endpoints
+app.get('/api/monitoring/health', async (req, res) => {
+  try {
+    const health = await monitoring.getSystemHealth();
+    res.json(health);
+  } catch (error) {
+    res.status(500).json({ error: 'Health check failed' });
+  }
+});
+
+app.get('/api/monitoring/dashboard', async (req, res) => {
+  try {
+    const dashboard = await monitoring.getDashboardData();
+    res.json(dashboard);
+  } catch (error) {
+    res.status(500).json({ error: 'Dashboard data unavailable' });
+  }
+});
+
+app.get('/api/monitoring/metrics/:category', async (req, res) => {
+  try {
+    const timeframe = parseInt(req.query.timeframe) || 60;
+    const metrics = monitoring.getMetrics(req.params.category, timeframe);
+    res.json(metrics);
+  } catch (error) {
+    res.status(500).json({ error: 'Metrics unavailable' });
+  }
+});
+
+// Production Backup Endpoints
+app.post('/api/backup/database', async (req, res) => {
+  try {
+    const backup = await backupSystem.createDatabaseBackup('manual');
+    res.json({ success: true, backup });
+  } catch (error) {
+    logger.logError(error, { endpoint: '/api/backup/database' });
+    res.status(500).json({ error: 'Database backup failed' });
+  }
+});
+
+app.post('/api/backup/files', async (req, res) => {
+  try {
+    const backups = await backupSystem.createFileBackup('manual');
+    res.json({ success: true, backups });
+  } catch (error) {
+    logger.logError(error, { endpoint: '/api/backup/files' });
+    res.status(500).json({ error: 'File backup failed' });
+  }
+});
+
+app.get('/api/backup/status', async (req, res) => {
+  try {
+    const status = await backupSystem.getBackupStatus();
+    res.json(status);
+  } catch (error) {
+    res.status(500).json({ error: 'Backup status unavailable' });
+  }
+});
+
+// Enhanced Health Check with Production Details
+app.get('/healthz/production', async (req, res) => {
+  try {
+    const health = await monitoring.getSystemHealth();
+    const backupStatus = await backupSystem.getBackupStatus();
+    const cacheStats = cacheLayer.getStats();
+    
+    const productionHealth = {
+      ...health,
+      production: {
+        environment: process.env.NODE_ENV,
+        version: process.env.npm_package_version || '1.0.0',
+        cache: cacheStats,
+        backups: backupStatus,
+        ssl: process.env.NODE_ENV === 'production' ? 'enabled' : 'development'
+      }
+    };
+    
+    res.json(productionHealth);
+  } catch (error) {
+    res.status(500).json({ 
+      status: 'unhealthy', 
+      error: 'Production health check failed',
+      timestamp: new Date().toISOString() 
+    });
+  }
+});
+
+// Initialize production services
+async function initializeProduction() {
+  try {
+    console.log('🚀 Initializing production services...');
+    
+    // Initialize cache layer
+    await cacheLayer.initialize();
+    
+    // Initialize production systems
+    if (process.env.NODE_ENV === 'production') {
+      await backupSystem.initialize();
+      console.log('✅ Production systems initialized');
+    }
+    
+  } catch (error) {
+    console.error('❌ Production initialization failed:', error);
+    if (logger) logger.logError(error, { component: 'production-init' });
+  }
+}
+
 // Simulate data updates
 setInterval(() => {
   sportsData.simulateDataUpdate();
@@ -1319,7 +1453,14 @@ app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+// Start server with production initialization
+app.listen(PORT, '0.0.0.0', async () => {
   console.log(`🔥 Blaze Intelligence server running on port ${PORT}`);
   console.log(`🚀 Access your app at: http://localhost:${PORT}`);
+  
+  // Log startup details
+  logger.logStartup({ port: PORT, environment: process.env.NODE_ENV });
+  
+  // Initialize production services
+  await initializeProduction();
 });
