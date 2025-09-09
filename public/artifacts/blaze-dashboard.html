@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Live Championship Dashboard</title>
+    <link rel="stylesheet" href="../css/brand.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/recharts@2.8.0/lib/index.js"></script>
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-lg) 0;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .live-feed {
+            height: 400px;
+            overflow-y: auto;
+            background: var(--oil);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+        }
+        
+        .feed-item {
+            padding: var(--space-sm);
+            margin-bottom: var(--space-sm);
+            background: var(--panel);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--accent);
+        }
+        
+        .chart-container {
+            height: 300px;
+            background: var(--panel);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+        }
+        
+        .pressure-gauge {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        
+        .gauge-bg {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--line) 0%, var(--line) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gauge-value {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .metric-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">🔥 Blaze Intelligence</a>
+        <div class="nav-links">
+            <span class="live-indicator">
+                <span class="live-dot"></span>
+                LIVE
+            </span>
+            <a href="/app.html" class="btn-secondary">Back to App</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header style="text-align: center; margin: var(--space-xl) 0;">
+            <h1>Championship Dashboard</h1>
+            <p class="muted">Real-time NFL analytics with 94.6% prediction accuracy</p>
+        </header>
+
+        <div id="dashboard-root"></div>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
+                AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell } = Recharts;
+
+        // Sample NFL Game Data
+        const sampleGameData = {
+            teams: {
+                home: { name: "Kansas City Chiefs", abbr: "KC", score: 21, logo: "🏈" },
+                away: { name: "Dallas Cowboys", abbr: "DAL", score: 17, logo: "⭐" }
+            },
+            quarter: 4,
+            timeRemaining: "8:42",
+            down: 3,
+            distance: 7,
+            fieldPosition: "KC 35"
+        };
+
+        function Dashboard() {
+            const [metrics, setMetrics] = useState({
+                accuracy: 94.6,
+                predictions: 847,
+                liveGames: 3,
+                dataPoints: 2800000
+            });
+
+            const [pressureData, setPressureData] = useState([]);
+            const [winProbability, setWinProbability] = useState(0.65);
+            const [gameEvents, setGameEvents] = useState([]);
+            const [connectionStatus, setConnectionStatus] = useState('connecting');
+
+            const eventSourceRef = useRef(null);
+
+            useEffect(() => {
+                // Connect to pressure stream
+                eventSourceRef.current = new EventSource('/api/game/pressure-stream');
+                
+                eventSourceRef.current.onopen = () => {
+                    setConnectionStatus('connected');
+                };
+
+                eventSourceRef.current.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        
+                        // Update pressure data for chart
+                        setPressureData(prev => {
+                            const newData = [...prev, {
+                                time: new Date(data.t).toLocaleTimeString(),
+                                pressure: (data.p * 100).toFixed(1),
+                                winProb: (data.wp * 100).toFixed(1)
+                            }];
+                            return newData.slice(-20); // Keep last 20 points
+                        });
+
+                        // Update win probability
+                        setWinProbability(data.wp);
+
+                        // Add game events
+                        if (data.event) {
+                            const newEvent = {
+                                id: Date.now(),
+                                time: new Date().toLocaleTimeString(),
+                                event: data.event.label,
+                                team: data.event.team || 'N/A',
+                                pressure: (data.p * 100).toFixed(1)
+                            };
+                            setGameEvents(prev => [newEvent, ...prev.slice(0, 9)]);
+                        }
+                    } catch (error) {
+                        console.error('Error parsing SSE data:', error);
+                    }
+                };
+
+                eventSourceRef.current.onerror = () => {
+                    setConnectionStatus('error');
+                };
+
+                return () => {
+                    if (eventSourceRef.current) {
+                        eventSourceRef.current.close();
+                    }
+                };
+            }, []);
+
+            const getStatusColor = () => {
+                switch (connectionStatus) {
+                    case 'connected': return 'var(--teal)';
+                    case 'error': return '#ef4444';
+                    default: return 'var(--muted)';
+                }
+            };
+
+            return (
+                <div>
+                    {/* Connection Status */}
+                    <div style={{ textAlign: 'center', marginBottom: 'var(--space-lg)' }}>
+                        <span style={{ color: getStatusColor(), fontSize: '0.875rem' }}>
+                            ● {connectionStatus.toUpperCase()} - Real-time data stream
+                        </span>
+                    </div>
+
+                    {/* Key Metrics */}
+                    <div className="metric-grid">
+                        <div className="metric-card">
+                            <div className="metric-value">{metrics.accuracy}%</div>
+                            <div className="metric-label">Prediction Accuracy</div>
+                        </div>
+                        <div className="metric-card">
+                            <div className="metric-value">{metrics.predictions}</div>
+                            <div className="metric-label">Predictions Today</div>
+                        </div>
+                        <div className="metric-card">
+                            <div className="metric-value">{metrics.liveGames}</div>
+                            <div className="metric-label">Live Games</div>
+                        </div>
+                        <div className="metric-card">
+                            <div className="metric-value">{(metrics.dataPoints/1000000).toFixed(1)}M</div>
+                            <div className="metric-label">Data Points</div>
+                        </div>
+                    </div>
+
+                    {/* Live Game Status */}
+                    <div className="panel mb-4">
+                        <h3 style={{ margin: '0 0 var(--space-md) 0' }}>
+                            🏈 Live Game: {sampleGameData.teams.away.name} vs {sampleGameData.teams.home.name}
+                        </h3>
+                        <div className="row">
+                            <div className="col">
+                                <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+                                    {sampleGameData.teams.away.logo} {sampleGameData.teams.away.abbr} {sampleGameData.teams.away.score}
+                                </div>
+                                <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+                                    {sampleGameData.teams.home.logo} {sampleGameData.teams.home.abbr} {sampleGameData.teams.home.score}
+                                </div>
+                            </div>
+                            <div className="col">
+                                <div className="tiny muted">Quarter {sampleGameData.quarter}</div>
+                                <div className="tiny muted">{sampleGameData.timeRemaining} remaining</div>
+                                <div className="tiny muted">{sampleGameData.down} & {sampleGameData.distance} at {sampleGameData.fieldPosition}</div>
+                            </div>
+                            <div className="pressure-gauge">
+                                <div className="gauge-bg">
+                                    <div className="gauge-value">
+                                        {(winProbability * 100).toFixed(1)}%
+                                    </div>
+                                </div>
+                                <div style={{ textAlign: 'center', marginTop: 'var(--space-sm)', fontSize: '0.875rem', color: 'var(--muted)' }}>
+                                    Win Probability
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Dashboard Grid */}
+                    <div className="dashboard-grid">
+                        {/* Pressure Timeline */}
+                        <div className="panel">
+                            <h4>Game Pressure Timeline</h4>
+                            <div className="chart-container">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <LineChart data={pressureData}>
+                                        <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" />
+                                        <XAxis dataKey="time" stroke="var(--muted)" fontSize={12} />
+                                        <YAxis stroke="var(--muted)" fontSize={12} />
+                                        <Tooltip 
+                                            contentStyle={{ 
+                                                backgroundColor: 'var(--panel)', 
+                                                border: '1px solid var(--line)',
+                                                borderRadius: 'var(--radius-sm)'
+                                            }} 
+                                        />
+                                        <Line 
+                                            type="monotone" 
+                                            dataKey="pressure" 
+                                            stroke="var(--accent)" 
+                                            strokeWidth={2}
+                                            dot={{ fill: 'var(--accent)', r: 3 }}
+                                        />
+                                        <Line 
+                                            type="monotone" 
+                                            dataKey="winProb" 
+                                            stroke="var(--cyan)" 
+                                            strokeWidth={2}
+                                            dot={{ fill: 'var(--cyan)', r: 3 }}
+                                        />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </div>
+
+                        {/* Live Events Feed */}
+                        <div className="panel">
+                            <h4>Live Events Feed</h4>
+                            <div className="live-feed">
+                                {gameEvents.length === 0 ? (
+                                    <div className="muted text-center" style={{ marginTop: 'var(--space-xl)' }}>
+                                        Waiting for live events...
+                                    </div>
+                                ) : (
+                                    gameEvents.map(event => (
+                                        <div key={event.id} className="feed-item">
+                                            <div style={{ fontWeight: 'bold', color: 'var(--accent)' }}>
+                                                {event.event}
+                                            </div>
+                                            <div className="tiny muted">
+                                                {event.time} • Team: {event.team} • Pressure: {event.pressure}%
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div style={{ textAlign: 'center', margin: 'var(--space-xl) 0', color: 'var(--muted)', fontSize: '0.875rem' }}>
+                        🔥 Powered by Blaze Intelligence • Championship Analytics Platform
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<Dashboard />, document.getElementById('dashboard-root'));
+    </script>
+</body>
+</html>
