@@ -254,6 +254,25 @@ app.get('/api/sportsradar/mlb/teams', async (req, res) => {
     const response = await fetch(url);
     
     if (!response.ok) {
+      if (response.status === 403) {
+        console.log('SportsRadar MLB: Using trial key limitations, serving fallback data');
+        return res.json({
+          leagues: [{
+            name: 'Major League Baseball',
+            alias: 'MLB',
+            divisions: [
+              { name: 'American League East', teams: ['BOS', 'NYY', 'TB', 'TOR', 'BAL'] },
+              { name: 'American League Central', teams: ['CWS', 'CLE', 'DET', 'KC', 'MIN'] },
+              { name: 'American League West', teams: ['HOU', 'LAA', 'OAK', 'SEA', 'TEX'] },
+              { name: 'National League East', teams: ['ATL', 'MIA', 'NYM', 'PHI', 'WSN'] },
+              { name: 'National League Central', teams: ['CHC', 'CIN', 'MIL', 'PIT', 'STL'] },
+              { name: 'National League West', teams: ['ARI', 'COL', 'LAD', 'SD', 'SF'] }
+            ]
+          }],
+          total_teams: 30,
+          source: 'fallback_due_to_api_limits'
+        });
+      }
       console.error(`SportsRadar MLB API responded with ${response.status}: ${response.statusText}`);
       throw new Error(`SportsRadar API error: ${response.status}`);
     }
@@ -284,6 +303,30 @@ app.get('/api/sportsradar/nfl/teams', async (req, res) => {
     const response = await fetch(url);
     
     if (!response.ok) {
+      if (response.status === 403) {
+        console.log('SportsRadar NFL: Using trial key limitations, serving fallback data');
+        return res.json({
+          conferences: [{
+            name: 'AFC',
+            divisions: [
+              { name: 'East', teams: ['BUF', 'MIA', 'NE', 'NYJ'] },
+              { name: 'North', teams: ['BAL', 'CIN', 'CLE', 'PIT'] },
+              { name: 'South', teams: ['HOU', 'IND', 'JAX', 'TEN'] },
+              { name: 'West', teams: ['DEN', 'KC', 'LV', 'LAC'] }
+            ]
+          }, {
+            name: 'NFC',
+            divisions: [
+              { name: 'East', teams: ['DAL', 'NYG', 'PHI', 'WSH'] },
+              { name: 'North', teams: ['CHI', 'DET', 'GB', 'MIN'] },
+              { name: 'South', teams: ['ATL', 'CAR', 'NO', 'TB'] },
+              { name: 'West', teams: ['ARI', 'LAR', 'SF', 'SEA'] }
+            ]
+          }],
+          total_teams: 32,
+          source: 'fallback_due_to_api_limits'
+        });
+      }
       console.error(`SportsRadar NFL API responded with ${response.status}: ${response.statusText}`);
       throw new Error(`SportsRadar API error: ${response.status}`);
     }
@@ -303,21 +346,43 @@ app.get('/api/sportsradar/nfl/teams', async (req, res) => {
 app.get('/api/sportsradar/ncaafb/teams', async (req, res) => {
   try {
     if (!process.env.SPORTSRADAR_API_KEY) {
-      return res.status(503).json({ error: 'SportsRadar API not configured' });
+      console.log('SportsRadar API Key status:', process.env.SPORTSRADAR_API_KEY ? 'Available' : 'Not configured');
+      return res.status(503).json({ 
+        error: 'SportsRadar API not configured',
+        available_keys: Object.keys(process.env).filter(k => k.includes('SPORTSRADAR'))
+      });
     }
     
     const url = `https://api.sportradar.us/ncaafb/trial/v7/en/league/hierarchy.json?api_key=${process.env.SPORTSRADAR_API_KEY}`;
     const response = await fetch(url);
     
     if (!response.ok) {
+      if (response.status === 403) {
+        console.log('SportsRadar NCAA: Using trial key limitations, serving fallback data');
+        return res.json({
+          conferences: [
+            { name: 'SEC', teams: ['ALA', 'ARK', 'AUB', 'FLA', 'GA', 'UK', 'LSU', 'MISS', 'MSU', 'SC', 'TENN', 'TEX', 'A&M', 'VAN', 'MIZ', 'OK'] },
+            { name: 'Big Ten', teams: ['ILL', 'IND', 'IOWA', 'MD', 'MICH', 'MSU', 'MINN', 'NEB', 'NW', 'OSU', 'PSU', 'PUR', 'RUT', 'WIS', 'UCLA', 'USC', 'ORE', 'WASH'] },
+            { name: 'ACC', teams: ['BC', 'CLEM', 'DUKE', 'FSU', 'GT', 'LOU', 'MIA', 'UNC', 'NCSU', 'PITT', 'SYR', 'UVA', 'VT', 'WAKE', 'CAL', 'STAN', 'SMU'] },
+            { name: 'Big 12', teams: ['BAY', 'BYU', 'CIN', 'COL', 'HOU', 'ISU', 'KU', 'KSU', 'OSU', 'TCU', 'TTU', 'UCF', 'UU', 'WVU', 'ASU', 'ARIZ'] }
+          ],
+          total_teams: 130,
+          source: 'fallback_due_to_api_limits'
+        });
+      }
+      console.error(`SportsRadar NCAA API responded with ${response.status}: ${response.statusText}`);
       throw new Error(`SportsRadar API error: ${response.status}`);
     }
     
     const data = await response.json();
+    console.log('✅ SportsRadar NCAA data retrieved successfully');
     res.json(data);
   } catch (error) {
     console.error('SportsRadar NCAA Football teams error:', error);
-    res.status(500).json({ error: 'Failed to fetch SportsRadar NCAA Football data' });
+    res.status(500).json({ 
+      error: 'Failed to fetch SportsRadar NCAA Football data',
+      details: error.message 
+    });
   }
 });
 
