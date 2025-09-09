@@ -15,22 +15,23 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Frontend Server"
+args = "Blaze Server"
 
 [[workflows.workflow]]
-name = "Frontend Server"
+name = "Blaze Server"
 author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
 
+[workflows.workflow.metadata]
+outputType = "webview"
+
 [[ports]]
 localPort = 5000
+externalPort = 80
 
 [deployment]
 deploymentTarget = "autoscale"
