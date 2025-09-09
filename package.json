@@ -73,6 +73,7 @@
   "homepage": "https://github.com/austinhumphrey/blaze-intelligence-website#readme",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.61.0",
+    "@balldontlie/sdk": "^1.2.2",
     "@notionhq/client": "^4.0.2",
     "@sendgrid/mail": "^8.1.5",
     "aos": "^2.3.4",
@@ -102,6 +103,8 @@
     "pg": "^8.16.3",
     "pm2": "^6.0.10",
     "redis": "^5.8.2",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "stripe": "^18.5.0",
     "three": "^0.180.0",
     "uuid": "^13.0.0",
