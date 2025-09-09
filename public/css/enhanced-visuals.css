@@ -394,6 +394,76 @@
     min-height: 300px;
 }
 
+/* Enhanced Logo Design */
+.logo-enhanced {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-enhanced .logo-icon {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-enhanced .flame-icon {
+    font-size: 2.2rem;
+    animation: flameFlicker 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(255, 107, 53, 0.8));
+}
+
+@keyframes flameFlicker {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg); 
+        filter: drop-shadow(0 0 15px rgba(255, 107, 53, 0.8));
+    }
+    25% { 
+        transform: scale(1.1) rotate(-5deg);
+        filter: drop-shadow(0 0 20px rgba(255, 142, 83, 0.9));
+    }
+    50% { 
+        transform: scale(0.95) rotate(5deg);
+        filter: drop-shadow(0 0 12px rgba(255, 107, 53, 0.7));
+    }
+    75% { 
+        transform: scale(1.05) rotate(-3deg);
+        filter: drop-shadow(0 0 18px rgba(255, 209, 63, 0.8));
+    }
+}
+
+.logo-enhanced .logo-text {
+    font-family: 'Bebas Neue', 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8E53 25%, #FFD23F 50%, #FF6B35 75%, #FF8E53 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: blazeGradient 3s ease infinite;
+}
+
+@keyframes blazeGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.logo-enhanced:hover .flame-icon {
+    animation-duration: 0.5s;
+    transform: scale(1.2);
+}
+
+.logo-enhanced:hover .logo-text {
+    animation-duration: 1s;
+}
+
 /* Mobile Optimizations */
 @media (max-width: 768px) {
     .hero {
