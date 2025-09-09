@@ -29,6 +29,9 @@ Elite sports analytics platform website for championship teams. This is a static
 ✅ **Digital Combine Upgrade**: Uses actual gateway endpoints for biomechanical analysis
 ✅ **Proof Page**: Transparent documentation of methods, claims verification, and live metrics
 ✅ **Security Hardening**: CORS configuration, CSP headers, and error handling
+✅ **AI Integrations**: OpenAI, Anthropic Claude, and Stripe services fully integrated
+✅ **AI Intelligence Section**: Interactive AI-powered features with real API connections
+✅ **Premium Subscriptions**: Stripe-powered subscription management for advanced features
 
 ## Key Features
 - **Live Sports Dashboard**: Real-time MLB/NFL/CFB data with team and player analytics
@@ -41,6 +44,32 @@ Elite sports analytics platform website for championship teams. This is a static
 - **NFL and CFB data adapters**: Demo data ready for real API integration
 - **Caching layer**: Stale-while-revalidate pattern for optimal performance
 - **API proxy routes**: Rate limiting, security headers, and CORS protection
+- **AI Intelligence Section**: Interactive AI-powered team analysis and championship predictions
+- **Premium Subscription Management**: Stripe-powered billing and subscription tiers
+
+## AI Integrations
+### OpenAI Integration
+- **Team Analysis**: GPT-4 powered comprehensive team performance analysis
+- **Endpoint**: `POST /api/ai/openai/analyze-team`
+- **Features**: Strengths/weaknesses analysis, championship outlook, player evaluations
+- **Model**: GPT-4-mini for cost-effective high-quality analysis
+
+### Anthropic Claude Integration  
+- **Championship Predictions**: Advanced probability analysis for championship outcomes
+- **Endpoint**: `POST /api/ai/anthropic/predict-championship`
+- **Features**: Top contender rankings, dark horse identification, confidence analysis
+- **Model**: Claude-3-haiku for detailed sports predictions
+
+### Stripe Integration
+- **Premium Subscriptions**: Two-tier subscription system (Pro $99/month, Enterprise $299/month)
+- **Endpoints**: `POST /api/stripe/create-subscription`, `GET /api/stripe/prices`
+- **Features**: Customer management, subscription billing, payment processing
+- **Security**: PCI-compliant payment handling with Stripe SDK
+
+### AI Status Monitoring
+- **Health Checks**: Real-time status monitoring for all AI services
+- **Endpoints**: `/api/ai/openai/health`, `/api/ai/anthropic/health`
+- **Visual Indicators**: Live status indicators on website with health/error states
 
 ## Development
 - Server runs on port 5000 (required for Replit)
