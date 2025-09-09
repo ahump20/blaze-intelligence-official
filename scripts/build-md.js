@@ -25,7 +25,12 @@ const pages = [
     title: 'Investor Narrative — The $50B Conviction Economy',
     description: 'The $50B conviction economy and Blaze\'s path to category creation.'
   },
-];
+  { 
+    src: 'METHODS.md', 
+    out: 'methods.html', 
+    title: 'Methods & Transparency — Blaze Intelligence',
+    description: 'Complete transparency on data sources, algorithms, and platform methodology.'
+  }\n];
 
 const layout = (title, description, body, canonicalPath) => `<!DOCTYPE html>
 <html lang="en">

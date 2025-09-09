@@ -34,7 +34,7 @@ class DigitalCombineBackend {
             `CREATE TABLE IF NOT EXISTS dc_analysis_sessions (
                 id SERIAL PRIMARY KEY,
                 session_id VARCHAR(50) UNIQUE NOT NULL,
-                user_id INTEGER REFERENCES users(id),
+                user_id UUID REFERENCES users(id),
                 player_name VARCHAR(255),
                 sport VARCHAR(50) NOT NULL,
                 video_file_path VARCHAR(500),

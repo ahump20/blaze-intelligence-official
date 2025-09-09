@@ -24,6 +24,7 @@ import subscriptionRoutes from './server/stripe/subscriptionRoutes.js';
 import { authenticateToken, trackApiUsage, requireSubscription } from './server/auth/authMiddleware.js';
 import CardinalsDataIntegration from './cardinals-real-data-integration.js';
 import DigitalCombineBackend from './digital-combine-backend.js';
+import InstrumentationManager from './instrumentation-setup.js';
 
 // Load environment variables
 dotenv.config();
@@ -44,6 +45,7 @@ const liveSportsAdapter = new LiveSportsAdapter();
 const aiAnalytics = new AIAnalyticsService();
 const cardinalsAPI = new CardinalsDataIntegration();
 const digitalCombineBackend = new DigitalCombineBackend(pool);
+const instrumentation = new InstrumentationManager(process.env.NODE_ENV || 'development');
 
 // Initialize AI services with API keys
 const openai = process.env.OPENAI_API_KEY ? new OpenAI({
@@ -174,6 +176,10 @@ app.get('/lone-star-legends', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'lone-star-legends.html'));
 });
 
+app.get('/methods', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'methods.html'));
+});
+
 // Health check endpoint
 app.get('/healthz', (req, res) => {
   res.json({
@@ -184,8 +190,46 @@ app.get('/healthz', (req, res) => {
   });
 });
 
-// Metrics endpoint
-app.get('/metrics', (req, res) => {
+// Comprehensive health check endpoint
+app.get('/healthz', async (req, res) => {
+  try {
+    const healthCheck = await instrumentation.performFullHealthCheck();
+    const statusCode = healthCheck.status === 'healthy' ? 200 : healthCheck.status === 'degraded' ? 206 : 503;
+    res.status(statusCode).json(healthCheck);
+  } catch (error) {
+    res.status(503).json({
+      status: 'unhealthy',
+      error: error.message,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
+// Enhanced metrics endpoint
+app.get('/metrics', async (req, res) => {
+  try {
+    const metrics = await instrumentation.getMetrics();
+    res.json(metrics);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to collect metrics' });
+  }
+});
+
+// Legacy health endpoint
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// CSP report endpoint
+app.post('/api/csp-report', express.json({ type: 'application/csp-report' }), instrumentation.handleCSPReport());
+
+// Original metrics endpoint (for backward compatibility)
+app.get('/api/metrics', (req, res) => {
   const cacheStats = cache.getStats();
   res.json({
     cache: cacheStats,
