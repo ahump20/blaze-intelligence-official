@@ -1,0 +1,245 @@
+Here’s exactly how to update that Replit URL and start feeding real-time data into the current build.
+
+## 1) Point the page at your live gateway
+
+Edit your client `app.js` (or equivalent) and set:
+
+```js
+const BASE = "https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev";
+```
+
+If you have multiple envs, read from `window.__ENV.BASE` and inject it at build.
+
+## 2) Drop in a Status Bar (health + live KPIs)
+
+Add a strip near the top:
+
+```html
+<section id="status" class="strip">
+  <span id="sb-health">—</span>
+  <span id="sb-p95">p95: —</span>
+  <span id="sb-sessions">sessions: —</span>
+  <span id="sb-qps">ingest qps: —</span>
+</section>
+```
+
+```js
+async function j(url){const r=await fetch(url);return r.ok?r.text():null;}
+async function jx(url){const r=await fetch(url);return r.ok? r.json():null;}
+
+async function loadStatus(){
+  const health = await j(`${BASE}/healthz`);
+  document.getElementById('sb-health').textContent = health || 'unknown';
+
+  const s = await jx(`${BASE}/vision/analytics/system/stats`);
+  if (s){
+    document.getElementById('sb-p95').textContent = `p95: ${(s.telemetry_p95_ms??0).toFixed(0)}ms`;
+    document.getElementById('sb-sessions').textContent = `sessions: ${s.active_sessions??0}`;
+    document.getElementById('sb-qps').textContent = `ingest qps: ${(s.ingest_qps??0).toFixed(1)}`;
+  }
+}
+setInterval(loadStatus, 5000);
+loadStatus();
+```
+
+## 3) Live player/team dashboard (safe, no secrets)
+
+### MLB (public StatsAPI)
+
+```js
+async function mlbTeams(){return (await jx('https://statsapi.mlb.com/api/v1/teams?sportId=1'))?.teams||[];}
+async function mlbRoster(teamId){return (await jx(`https://statsapi.mlb.com/api/v1/teams/${teamId}/roster`))?.roster||[];}
+async function mlbTeamSchedule(teamId){
+  const y=new Date().getFullYear();
+  const d=await jx(`https://statsapi.mlb.com/api/v1/schedule?teamId=${teamId}&sportId=1&season=${y}&gameType=R&hydrate=linescore,team`);
+  return d?.dates?.flatMap(x=>x.games)||[];
+}
+function ewma(arr,a=0.35){let m=null;for(const v of arr){if(v==null)continue;m=m==null?v:a*v+(1-a)*m;}return m;}
+```
+
+If CORS blocks in Replit, create a tiny Worker router on your gateway that fetches these same URLs server-side and expose them as `/proxy/mlb/*`. Then call your gateway, not the 3rd-party API from the browser.
+
+### NBA/NFL (optional)
+
+* NBA: BallDon’tLie `/teams`, `/games`.
+* NFL: ESPN scoreboard JSON.
+  Use the **same gateway proxy** pattern to avoid browser CORS and to keep keys off the client if you add any paid data later.
+
+## 4) Real-time Blaze stream (Grit Index)
+
+Create a session, then open the WebSocket:
+
+```js
+async function startSession(player="test_player", sport="baseball"){
+  const sessionId = "demo-" + Math.random().toString(36).slice(2,8);
+  await fetch(`${BASE}/vision/sessions`,{
+    method:"POST",
+    headers:{'Content-Type':'application/json','X-Dev-Mode':'true'},
+    body: JSON.stringify({session_id:sessionId, player_id:player, sport})
+  });
+  const ws = new WebSocket(`${BASE.replace('https://','wss://')}/vision/session/${sessionId}/stream`);
+  ws.onmessage = (ev)=>{
+    try{
+      const msg = JSON.parse(ev.data);
+      if (msg?.scores?.grit_index) {
+        document.getElementById('live-grit').textContent = msg.scores.grit_index.toFixed(2);
+      }
+    }catch{ /* show raw string */ }
+  };
+  return sessionId;
+}
+```
+
+## 5) Start **feeding** real-time data into the latest version
+
+Two options—pick one:
+
+### A) Simulated telemetry (good for demo)
+
+```js
+function sendTelemetry(sessionId){
+  const payload = [{
+    session_id: sessionId,
+    t: Date.now(),
+    device: { fps: 60, resolution:[1920,1080], has_webgpu:true, has_webgl:true, camera_count:1 },
+    // add small randomized motion/pose fields if your Worker maps them
+  }];
+  return fetch(`${BASE}/vision/telemetry`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','X-Dev-Mode':'true'},
+    body: JSON.stringify(payload)
+  });
+}
+async function beginDemoFeed(){
+  const id = await startSession("test_player","baseball");
+  setInterval(()=>sendTelemetry(id), 1000);
+}
+```
+
+### B) Real device/browser feed (production)
+
+* Capture frames/pose locally (WebRTC + WebGL/WebGPU).
+* Transform to your Worker’s expected schema.
+* POST batches to `/vision/telemetry` at 10–30 Hz (or your allowed rate).
+* Never send private keys from the browser. All vendor calls go via the Worker.
+
+## 6) Digital Combine™ demo on the page
+
+* Provide an **Upload** and a **Sample clip** button.
+* Run a light client-side pipeline (or send frame hashes/pose vectors to your Worker) and render:
+
+  * Mechanics score, Load balance, Timing delta, “Next drill” cue.
+* Add a **“Reproduce”** tab with copy-paste `curl` pointing to your gateway (no third-party endpoints).
+
+## 7) Make the Replit app reliable
+
+* **Single port**: bind to `process.env.PORT || 8000`.
+* `package.json`:
+
+  ```json
+  {
+    "scripts": {
+      "dev": "vite",
+      "build": "vite build",
+      "start": "node server.js"  // or python http.server $PORT
+    }
+  }
+  ```
+* **CORS** on the Worker:
+
+  ```js
+  new Response(body, { headers:{
+    "Access-Control-Allow-Origin": "*",               // or your Replit origin
+    "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS",
+    "Access-Control-Allow-Headers": "content-type, x-dev-mode"
+  }});
+  ```
+* Serve static assets with cache headers; avoid bundling any secrets.
+
+## 8) Verify every claim on the page
+
+* Keep “sub-100 ms responses” only if your Worker + RUM show it today.
+* If you list an “accuracy” number, link to a short **Methods** page describing dataset, metric, window, and error bars.
+* Remove “trusted by” unless publicly verifiable.
+
+## 9) Quick stress & quality checks (you can run in Replit shell)
+
+```bash
+# Performance snapshot
+npx @lhci/cli autorun --collect.url="https://<your-replit-url>/"
+
+# Accessibility
+npx pa11y-ci --sitemap https://<your-replit-url>/sitemap.xml || true
+
+# Secrets scan (repo)
+npx trufflehog filesystem --only-verified=false .
+
+# Basic load (k6 smoke; add /healthz, main page, and stats JSON)
+# (if k6 available)
+```
+
+## 10) Claude Code / Replit Agent worklist from your GitHub repos
+
+Create issues and PRs in the web repo (e.g., `ahump20/blaze-intelligence-official`):
+
+1. **Status Bar** pulling `/healthz` + `/vision/analytics/system/stats`
+2. **Dashboard (MLB first)**: teams, schedule, record, last-5, EWMA projection; roster + player season line
+3. **Digital Combine demo** with upload + sample asset + cues
+4. **Proof page** documenting metrics and projections + live stats widgets
+5. **Gateway proxy** endpoints for MLB/NBA/NFL to solve CORS and centralize keys
+6. **CI gates**: Lighthouse CI, Pa11y, TruffleHog, `npm audit` (fail PR on critical)
+7. **CSP & headers**: basic CSP, `X-Content-Type-Options`, `Referrer-Policy`
+8. **Content audit**: remove or qualify any unverifiable claims; add dates/sources
+
+---
+
+If you want, I can produce a drop-in `index.html`, `app.js`, and `styles.css` that match the above, plus a Worker router snippet (`/proxy/mlb/*`) and a minimal `server.js` for Replit.
+
+
+The “latest” Replit URL is simply a static mockup.  Nothing is actually connected: the headline promises real‑time sports analytics, yet all the metric cards show zeros for players analysed, prediction accuracy, live games and data points.  Even worse, the page makes hard claims like “machine learning models … predict outcomes with 94.7 % accuracy” without any published methodology, and the Digital Combine example shows a `curl` call to an external endpoint with a placeholder API key, which would expose secrets if naïvely copied into client code.
+
+Here’s how to properly upgrade the site and wire it to real data:
+
+### 1. Audit and refactor content
+
+* **Verify claims**: remove or footnote any numerical claim unless you have reproducible evidence.  For example, the “94.7 % accuracy” line should be replaced with a link to a “Methods” or “Proof” page explaining the dataset, evaluation metric and confidence interval or removed entirely.
+* **Replace placeholders**: the four KPI cards should be driven by the actual analytics backend rather than showing zeros.  If the platform hasn’t processed any sessions yet, display a loading state or hide the cards until data is available.
+* **Clarify features**: ensure that the Digital Combine™, NIL valuation, and live dashboards are labelled as demos or prototypes until they are fully functional, to avoid misleading users.
+
+### 2. Connect to the Blaze gateway for real‑time data
+
+1. **Expose a configurable base URL**: in your client JS (e.g. `app.js`), define `const BASE = "https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev";`.  Read it from an environment variable in production.
+2. **Health and metrics bar**: add a status bar that periodically fetches `/healthz` and `/vision/analytics/system/stats` to display gateway status (healthy/error), p95 telemetry latency, active sessions and ingest QPS.  Use `fetch(BASE + "/healthz")` and parse the text; call `fetch(BASE + "/vision/analytics/system/stats").json()` for stats.  Refresh every 5–10 s.
+3. **Live session stream**: when a visitor opens the dashboard, create a session via `POST /vision/sessions` with a generated ID and sport.  Connect a WebSocket to `wss://blaze-vision-ai-gateway.humphrey-austin20.workers.dev/vision/session/{session_id}/stream` and update the UI with the incoming `grit_index` scores.
+4. **Telemetry feed**: for demos, simulate telemetry by sending synthetic pose/biomechanics data to `POST /vision/telemetry` every second.  In production, instrument the client (WebGL/WebGPU capture) and send batches at 10–30 Hz, always via the gateway (never directly to third‑party APIs).
+5. **Analytics endpoints**: fetch summary and trend data with `/vision/analytics/player/{id}/summary` and `/vision/analytics/player/{id}/trends` to populate player performance panels.  Use `/vision/analytics/system/stats` for system‑wide metrics.
+
+### 3. Real sports data for MLB/NBA/NFL dashboards
+
+* Use publicly available sports APIs on the backend (e.g. MLB StatsAPI, BallDon’tLie for NBA, ESPN’s JSON API for NFL).  Because browsers enforce CORS, proxy these calls through your Cloudflare Worker: e.g. `/proxy/mlb/schedule` fetches `https://statsapi.mlb.com/api/v1/schedule?teamId=…`.
+* Implement a basic Exponential Weighted Moving Average (EWMA) to project next‑game scoring, as described in your “Enhanced Multi‑Sport Analytics” doc.  Present the projection with the window size and alpha value so users know how it’s calculated.
+* For MLB players, retrieve season hitting stats (`/people/{id}` with `stats=season`) and display AVG/OBP/SLG/HR/RBI plus a last‑10‑games sparkline.  For NBA and NFL, display recent game stats and team records.
+
+### 4. Secure the integration
+
+* **Secrets management**: never embed API keys in the client.  The sample `curl` in the Digital Combine™ demo is fine for documentation but should not be hard‑coded in your front end.  Store keys in Cloudflare Worker secrets via `wrangler secret put` and fetch third‑party APIs server‑side.
+* **CORS and headers**: ensure the Worker adds `Access-Control-Allow-Origin` (restrict to your production domains), `Access-Control-Allow-Methods`, and `Access-Control-Allow-Headers` to responses.  Implement a preflight `OPTIONS` handler.
+
+### 5. Stress‑test and improve reliability
+
+* **Performance audits**: run Lighthouse and WebPageTest against the Replit deployment to measure LCP, CLS and INP.  Optimise by preloading fonts, deferring non‑critical JS, and compressing assets.
+* **Load testing**: use k6 or JMeter to simulate concurrent dashboard usage and telemetry streams.  Verify that `/vision/telemetry` and WebSocket streams remain stable under load.
+* **Security scanning**: add TruffleHog or GitLeaks as a pre‑commit hook to catch secret leaks.  Run `npm audit` regularly on your dependencies.
+
+### 6. Repository tasks for Claude Code/Replit Agent
+
+Create GitHub issues or Linear tickets for each unit of work:
+
+* **Integrate status bar** – front‑end fetch of `/healthz` and `/vision/analytics/system/stats`.
+* **Team/player dashboard** – implement sport/team/player selectors, data fetching via Worker proxies, and EWMA projection.
+* **Digital Combine demo** – build a safe upload/analysis demo that uses your gateway.
+* **NIL calculator** – implement valuation logic (e.g. weighting performance, social reach, engagement and trajectory) and hide it behind the gateway.
+* **Proof/Methods page** – write up methodology and data sources to substantiate any claims.
+* **CI/QA** – add GitHub Actions for Lighthouse CI, Pa11y accessibility tests, `npm audit`, and secret scanning; block merges on failures.
+
+By following these steps, you transform the mockup into a genuine, data‑driven application.  You remove unverified marketing claims, safeguard your keys, and leverage your existing Blaze Vision AI gateway and sports APIs to provide meaningful, real‑time insights.
