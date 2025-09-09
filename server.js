@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
 import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
@@ -16,6 +17,9 @@ import cfbAdapter from './src/data/cfb/adapter.js';
 import cache from './src/data/cache.js';
 import LiveSportsAdapter from './lib/liveSportsAdapter.js';
 import AIAnalyticsService from './lib/aiAnalyticsService.js';
+import pool from './server/db.js';
+import authRoutes from './server/auth/authRoutes.js';
+import { authenticateToken, trackApiUsage, requireSubscription } from './server/auth/authMiddleware.js';
 
 // Load environment variables
 dotenv.config();
@@ -72,6 +76,14 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(cookieParser());
+
+// Initialize database connection
+pool.query('SELECT NOW()', (err, res) => {
+  if (!err) {
+    console.log('✅ Database connected');
+  }
+});
 
 // Rate limiting
 const apiLimiter = rateLimit({
@@ -84,6 +96,12 @@ const apiLimiter = rateLimit({
 
 // Apply rate limiting to API routes
 app.use('/api/', apiLimiter);
+
+// Authentication routes (no auth required)
+app.use('/api/auth', authRoutes);
+
+// Add tracking middleware for authenticated requests
+app.use('/api/protected', authenticateToken, trackApiUsage);
 
 // Serve static files from both root and public directories
 app.use(express.static(__dirname));
