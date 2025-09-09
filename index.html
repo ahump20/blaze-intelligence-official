@@ -1798,55 +1798,46 @@
     </div>
     
     <!-- Navigation -->
-    <nav id="navbar">
+    <nav id="navbar" class="nav-professional">
         <div class="nav-container">
-            <a href="/" class="logo-wrapper logo-enhanced">
-                <div class="logo-icon">
-                    <span class="flame-icon">🔥</span>
-                </div>
-                <span class="logo-text">BLAZE INTELLIGENCE</span>
+            <a href="/" class="logo">
+                <div class="logo-icon">B</div>
+                <span>Blaze Intelligence</span>
             </a>
-            <ul class="nav-links">
-                <li><a href="#analytics">Analytics</a></li>
-                <li><a href="/blog" style="color: #BF5700; font-weight: 600;">CFB Blog ↗</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#ai-intelligence">AI Intelligence</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="/live-demo" style="color: #00ff00; font-weight: 600;">Live Demo ↗</a></li>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="/manifesto">Manifesto</a></li>
-                <li><a href="/pilot-playbook">Pilot</a></li>
-                <li><a href="#" class="nav-cta">Get Started</a></li>
-            </ul>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                <span>☰</span>
-            </button>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#features" class="nav-link">Platform</a>
+                <a href="#championship" class="nav-link">Analytics</a>
+                <a href="#neural-coach" class="nav-link">Neural Coach™</a>
+                <a href="#digital-combine" class="nav-link">Digital Combine™</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="/live-demo" class="nav-link" style="color: var(--success);">Live Demo ↗</a>
+                <button class="btn btn-primary" onclick="window.location.href='#contact'">
+                    Get Started →
+                </button>
+            </div>
         </div>
     </nav>
     
     <!-- Hero Section with Three.js -->
-    <section id="hero">
+    <section id="hero" class="hero-section">
         <canvas id="three-canvas"></canvas>
-        <div class="hero-content">
-            <div class="hero-badge">🔥 ELITE SPORTS INTELLIGENCE</div>
-            <h1 class="hero-title">Transform Data Into Championships</h1>
-            <p class="hero-tagline">Where Texas Grit Meets Silicon Valley Innovation</p>
-            <p class="hero-subtitle">
-                Pioneer sports analytics through cutting-edge AI, real-time performance tracking, and predictive modeling. Transform raw data into championship decisions.
-            </p>
-            <div class="hero-buttons">
-                <a href="/live-demo" class="btn-primary">
-                    Try Live Demo
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-5 3a9 9 0 110-18 9 9 0 010 18z"/>
-                    </svg>
-                </a>
-                <a href="#pricing" class="btn-secondary">
-                    View Pricing
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-                    </svg>
-                </a>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="tagline">🔥 ELITE SPORTS INTELLIGENCE</div>
+                <h1>Transform Data Into <span class="highlight">Championships</span></h1>
+                <p class="hero-tagline">Where Texas Grit Meets Silicon Valley Innovation</p>
+                <p class="hero-description">
+                    Pioneer sports analytics through cutting-edge AI, real-time performance tracking, and predictive modeling. Transform raw data into championship decisions.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="/live-demo" class="btn btn-primary">
+                        <i class="fas fa-play"></i> Try Live Demo
+                    </a>
+                    <a href="#pricing" class="btn btn-secondary">
+                        <i class="fas fa-dollar-sign"></i> View Pricing
+                    </a>
+                </div>
             </div>
             
             <!-- User Journey Flow -->
