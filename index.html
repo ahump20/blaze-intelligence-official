@@ -128,6 +128,23 @@
             align-items: center;
         }
         
+        .mobile-menu-toggle {
+            display: none;
+            background: transparent;
+            border: 2px solid var(--burnt-orange);
+            color: var(--burnt-orange);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .mobile-menu-toggle:hover {
+            background: var(--burnt-orange);
+            color: var(--white);
+        }
+        
         .logo-wrapper {
             display: flex;
             align-items: center;
@@ -1706,8 +1723,37 @@
                 padding: 15px 20px;
             }
             
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 25, 47, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+                border-bottom: 2px solid var(--burnt-orange);
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
+            }
+            
+            .nav-links.mobile-active {
+                transform: translateX(0);
+            }
+            
+            .nav-links .nav-link,
+            .nav-links .btn {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
             }
             
             .hero-title {
@@ -1809,7 +1855,10 @@
                 <div class="logo-icon">B</div>
                 <span>Blaze Intelligence</span>
             </a>
-            <div class="nav-links">
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
                 <a href="#hero" class="nav-link active">Home</a>
                 <a href="#features" class="nav-link">Platform</a>
                 <a href="#championship" class="nav-link">Analytics</a>
@@ -1817,7 +1866,7 @@
                 <a href="#digital-combine" class="nav-link">Digital Combine™</a>
                 <a href="#pricing" class="nav-link">Pricing</a>
                 <a href="/live-demo" class="nav-link" style="color: var(--success);">Live Demo ↗</a>
-                <button class="btn btn-primary" onclick="window.location.href='/public/login.html'">
+                <button class="btn btn-primary" onclick="navigateToLogin()">
                     Get Started →
                 </button>
             </div>
@@ -3695,6 +3744,36 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(initHubSpotForm, 1000);
+        });
+    </script>
+    
+    <!-- Navigation Functions -->
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            if (navLinks) {
+                navLinks.classList.toggle('mobile-active');
+            }
+        }
+        
+        // Navigate to login page
+        function navigateToLogin() {
+            window.location.href = '/public/login.html';
+        }
+        
+        // Close mobile menu when clicking a link
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenu = document.getElementById('navLinks');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenu && mobileMenu.classList.contains('mobile-active')) {
+                        mobileMenu.classList.remove('mobile-active');
+                    }
+                });
+            });
         });
     </script>
     
