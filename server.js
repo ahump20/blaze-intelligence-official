@@ -43,23 +43,12 @@ app.use(helmet({
 }));
 app.use(compression());
 
-// CORS configuration
-const allowedOrigins = process.env.ALLOWED_ORIGINS ? 
-  process.env.ALLOWED_ORIGINS.split(',') : 
-  ['http://localhost:5000', 'http://localhost:3000', 'https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev'];
-
+// CORS configuration - allow all origins for development
 app.use(cors({
-  origin: function(origin, callback) {
-    // Allow requests with no origin (mobile apps, Postman, etc)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Dev-Mode', 'X-Client-Version', 'X-Batch-Size']
 }));
 
 app.use(express.json());
@@ -171,6 +160,13 @@ app.post('/analytics/metrics', (req, res) => {
 app.post('/analytics/errors', (req, res) => {
   // Log errors (in production, send to error tracking service)
   console.error('Client error:', req.body);
+  res.status(200).json({ status: 'recorded' });
+});
+
+// Security events endpoint
+app.post('/security/events', (req, res) => {
+  // Log security events (in production, send to security monitoring service)
+  console.warn('🚨 Security event:', req.body);
   res.status(200).json({ status: 'recorded' });
 });
 
