@@ -19,6 +19,7 @@ import LiveSportsAdapter from './lib/liveSportsAdapter.js';
 import AIAnalyticsService from './lib/aiAnalyticsService.js';
 import pool from './server/db.js';
 import authRoutes from './server/auth/authRoutes.js';
+import subscriptionRoutes from './server/stripe/subscriptionRoutes.js';
 import { authenticateToken, trackApiUsage, requireSubscription } from './server/auth/authMiddleware.js';
 
 // Load environment variables
@@ -99,6 +100,9 @@ app.use('/api/', apiLimiter);
 
 // Authentication routes (no auth required)
 app.use('/api/auth', authRoutes);
+
+// Subscription routes (auth required for most)
+app.use('/api/stripe', subscriptionRoutes);
 
 // Add tracking middleware for authenticated requests
 app.use('/api/protected', authenticateToken, trackApiUsage);
