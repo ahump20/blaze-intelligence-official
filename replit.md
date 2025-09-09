@@ -20,6 +20,8 @@ Elite sports analytics platform website for championship teams. This is a static
 ✅ **Digital Combine™**: Demo with upload and biomechanical analysis
 ✅ **NIL Valuation Engine™**: Calculator with confidence intervals and value drivers
 ✅ **Enhanced Pricing**: 3-tier pricing with comparison matrix
+✅ **Social Media Integration**: Twitter and Instagram links embedded in footer
+✅ **Founder Section**: Fixed image visibility issue for professional headshot
 
 ## Key Features
 - **Live Sports Dashboard**: Real-time MLB/NFL/CFB data with team and player analytics
