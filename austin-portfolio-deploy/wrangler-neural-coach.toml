@@ -1,0 +1,58 @@
+name = "blaze-neural-coach"
+main = "worker-neural-coach.js"
+compatibility_date = "2024-01-01"
+
+[env.production]
+name = "blaze-neural-coach-production"
+vars = { ENVIRONMENT = "production" }
+
+[site]
+bucket = "./austin-portfolio-deploy"
+include = [
+  "neural-coach-enhanced.html",
+  "js/blaze-vision-ai.js", 
+  "js/cursor-ide-integration.js",
+  "api/websocket-server.js",
+  "server-config.js",
+  "css/**/*",
+  "assets/**/*"
+]
+exclude = ["*.map", "*.test.js", "tests/**/*"]
+
+[[kv_namespaces]]
+binding = "VISION_CACHE"
+id = "vision_cache_production"
+preview_id = "vision_cache_preview"
+
+[[r2_buckets]]
+binding = "VIDEO_STORAGE"
+bucket_name = "blaze-video-analysis"
+
+[[d1_databases]]
+binding = "ANALYTICS_DB"
+database_name = "blaze-analytics"
+database_id = "analytics_production"
+
+[[durable_objects.bindings]]
+name = "WEBSOCKET_HANDLER"
+class_name = "WebSocketHandler"
+script_name = "worker-neural-coach"
+
+[[analytics_engine_datasets]]
+binding = "PERFORMANCE_METRICS"
+
+[build]
+command = "npm run build"
+watch_paths = ["js/**/*.js", "*.html"]
+
+[dev]
+port = 8787
+local_protocol = "https"
+
+[[routes]]
+pattern = "neural-coach.blaze-intelligence.com/*"
+zone_name = "blaze-intelligence.com"
+
+[[routes]]
+pattern = "api.blaze-intelligence.com/vision/*"
+zone_name = "blaze-intelligence.com"
