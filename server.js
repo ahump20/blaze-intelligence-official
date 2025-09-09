@@ -11,6 +11,8 @@ import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
 import Stripe from 'stripe';
 import multer from 'multer';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 import SportsDataService from './src/services/sportsDataService.js';
 import mlbAdapter from './src/data/mlb/adapter.js';
 import nflAdapter from './src/data/nfl/adapter.js';
@@ -114,6 +116,47 @@ const apiLimiter = rateLimit({
 
 // Apply rate limiting to API routes
 app.use('/api/', apiLimiter);
+
+// Swagger API Documentation
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Blaze Intelligence API',
+      version: '2.0.0',
+      description: 'Professional-grade sports analytics platform API with real-time performance tracking, predictive modeling, and AI-powered insights.',
+      contact: {
+        name: 'Blaze Intelligence',
+        url: 'https://blazeintelligence.com'
+      }
+    },
+    servers: [
+      {
+        url: process.env.NODE_ENV === 'production' ? 'https://api.blazeintelligence.com' : 'http://localhost:5000',
+        description: process.env.NODE_ENV === 'production' ? 'Production server' : 'Development server'
+      }
+    ],
+  },
+  apis: ['./server.js', './server/**/*.js'], // Path to the API docs
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+
+// Serve API documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customCss: `
+    .swagger-ui .topbar { display: none; }
+    .swagger-ui { font-family: 'Inter', sans-serif; }
+    .swagger-ui .info .title { color: #BF5700; }
+  `,
+  customSiteTitle: 'Blaze Intelligence API Documentation'
+}));
+
+// Serve static OpenAPI spec
+app.get('/api-docs.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
 
 // Authentication routes (no auth required)
 app.use('/api/auth', authRoutes);

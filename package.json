@@ -35,7 +35,9 @@
     "uuid": "^11.0.2",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0",
-    "ws": "^8.18.0"
+    "ws": "^8.18.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
