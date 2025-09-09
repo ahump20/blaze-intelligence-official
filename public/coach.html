@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="/public/css/blaze-styles.css">
     <link rel="stylesheet" href="/public/css/dashboard.css">
     <link rel="stylesheet" href="/public/css/neural-coach.css">
+    <link rel="stylesheet" href="/public/css/neural-coach-enhanced.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/public/manifest.json">
+    <meta name="theme-color" content="#BF5700">
     
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -394,7 +399,9 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="/public/js/neural-coach.js"></script>
+    <script src="/public/js/neural-coach-enhanced.js"></script>
     <script src="/public/js/neural-network-bg.js"></script>
+    <script src="/public/js/performance-monitor.js"></script>
     <script>
         AOS.init({
             duration: 1000,
@@ -406,6 +413,53 @@
         document.getElementById('navToggle').addEventListener('click', function() {
             document.getElementById('mobileMenu').classList.toggle('active');
             this.classList.toggle('active');
+        });
+        
+        // Register PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/public/service-worker.js')
+                .then(registration => {
+                    console.log('✅ Service Worker registered:', registration);
+                    
+                    // Check for updates
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // New version available
+                                console.log('🔄 New version available');
+                                if (confirm('New version available! Reload to update?')) {
+                                    newWorker.postMessage({ type: 'SKIP_WAITING' });
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
+        
+        // Add PWA install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button
+            const installBtn = document.createElement('button');
+            installBtn.className = 'pwa-install-btn';
+            installBtn.innerHTML = '📱 Install App';
+            installBtn.onclick = async () => {
+                deferredPrompt.prompt();
+                const result = await deferredPrompt.userChoice;
+                console.log('Install prompt result:', result);
+                deferredPrompt = null;
+                installBtn.remove();
+            };
+            
+            document.body.appendChild(installBtn);
         });
     </script>
 </body>

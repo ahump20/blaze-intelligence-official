@@ -1,0 +1,71 @@
+{
+  "name": "Blaze Intelligence - Championship Analytics Platform",
+  "short_name": "Blaze Intelligence",
+  "description": "AI-powered sports analytics platform with Neural Coach, Digital Combine, and real-time performance tracking",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#BF5700",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/public/assets/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/public/assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/public/assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["sports", "analytics", "productivity"],
+  "screenshots": [
+    {
+      "src": "/public/assets/screenshot-dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Dashboard Analytics"
+    },
+    {
+      "src": "/public/assets/screenshot-coach.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Neural Coach Analysis"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Neural Coach",
+      "short_name": "Coach",
+      "description": "Launch Neural Coach Analysis",
+      "url": "/coach?utm_source=pwa",
+      "icons": [{ "src": "/public/assets/coach-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View Analytics Dashboard",
+      "url": "/dashboard?utm_source=pwa",
+      "icons": [{ "src": "/public/assets/dashboard-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Digital Combine",
+      "short_name": "Combine",
+      "description": "Launch Digital Combine",
+      "url": "/digital-combine?utm_source=pwa",
+      "icons": [{ "src": "/public/assets/combine-icon.png", "sizes": "96x96" }]
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr"
+}
