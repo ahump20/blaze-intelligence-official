@@ -9,7 +9,7 @@ Elite sports analytics platform website for championship teams. This is a static
 - **Deployment**: Configured for Replit autoscale deployment
 - **Content**: Markdown-based content system for manifesto, playbooks, and documentation
 
-## Current Setup (Last updated: 2025-09-09)
+## Current Setup (Last updated: 2025-01-09)
 ✅ **Dependencies Installed**: All npm packages installed successfully
 ✅ **Development Server**: Express.js server running on port 5000 with proper Replit configuration
 ✅ **Build Process**: Working markdown processing and static file generation
@@ -23,6 +23,10 @@ Elite sports analytics platform website for championship teams. This is a static
 - Mobile command center and global recruiting leaderboard
 - Contact forms and athlete dashboard
 - Integration hub for sports data connections
+- Live data from MLB Stats API (real data)
+- NFL and CFB data adapters (demo data ready for real APIs)
+- Caching layer with stale-while-revalidate pattern
+- API proxy routes with rate limiting and security
 
 ## Development
 - Server runs on port 5000 (required for Replit)
@@ -46,3 +50,8 @@ The site uses a markdown-based content system:
 - Static assets served from both root and `/public` directories
 - Routing handles both static pages and generated markdown content
 - All hosts allowed for Replit proxy compatibility
+- Security: Helmet, CORS, rate limiting, dotenv for secrets
+- Performance: Compression, caching, lazy loading
+- Data Sources: MLB Stats API (live), NFL/CFB adapters (demo)
+- Monitoring: Health check endpoint, metrics endpoint
+- SEO: Meta tags, structured data, canonical URLs
