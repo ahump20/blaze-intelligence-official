@@ -1,4 +1,5 @@
 // Cardinals Real Data Integration - Server-side MLB data fetching
+// Located: src/integrations/cardinals-real-data-integration.js
 // Implements GET /api/mlb/cardinals/summary with 300s caching
 
 class CardinalsDataIntegration {

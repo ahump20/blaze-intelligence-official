@@ -22,9 +22,9 @@ import pool from './server/db.js';
 import authRoutes from './server/auth/authRoutes.js';
 import subscriptionRoutes from './server/stripe/subscriptionRoutes.js';
 import { authenticateToken, trackApiUsage, requireSubscription } from './server/auth/authMiddleware.js';
-import CardinalsDataIntegration from './cardinals-real-data-integration.js';
-import DigitalCombineBackend from './digital-combine-backend.js';
-import InstrumentationManager from './instrumentation-setup.js';
+import CardinalsDataIntegration from './src/integrations/cardinals-real-data-integration.js';
+import DigitalCombineBackend from './src/backend/digital-combine-backend.js';
+import InstrumentationManager from './src/backend/instrumentation-setup.js';
 
 // Load environment variables
 dotenv.config();

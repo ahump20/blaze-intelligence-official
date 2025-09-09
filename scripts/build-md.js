@@ -30,7 +30,8 @@ const pages = [
     out: 'methods.html', 
     title: 'Methods & Transparency — Blaze Intelligence',
     description: 'Complete transparency on data sources, algorithms, and platform methodology.'
-  }\n];
+  }
+];
 
 const layout = (title, description, body, canonicalPath) => `<!DOCTYPE html>
 <html lang="en">
