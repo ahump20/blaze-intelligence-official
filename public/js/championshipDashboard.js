@@ -290,11 +290,11 @@ class ChampionshipDashboard {
                 <div class="performance-charts" data-aos="fade-up" data-aos-delay="500">
                     <div class="chart-container">
                         <h3>League Distribution Analysis</h3>
-                        <canvas id="leagueChart"></canvas>
+                        <canvas id="championshipLeagueChart"></canvas>
                     </div>
                     <div class="chart-container">
                         <h3>Competitive Performance Matrix</h3>
-                        <canvas id="performanceChart"></canvas>
+                        <canvas id="championshipPerformanceChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -479,8 +479,11 @@ class ChampionshipDashboard {
     }
 
     createLeagueDistributionChart() {
-        const canvas = document.getElementById('leagueChart');
-        if (!canvas || typeof Chart === 'undefined') return;
+        const canvas = document.getElementById('championshipLeagueChart');
+        if (!canvas || typeof Chart === 'undefined') {
+            console.warn('League Distribution Chart: Canvas not found or Chart.js not loaded');
+            return;
+        }
 
         const ctx = canvas.getContext('2d');
         
@@ -547,8 +550,11 @@ class ChampionshipDashboard {
     }
 
     createPerformanceMatrixChart() {
-        const canvas = document.getElementById('performanceChart');
-        if (!canvas || typeof Chart === 'undefined') return;
+        const canvas = document.getElementById('championshipPerformanceChart');
+        if (!canvas || typeof Chart === 'undefined') {
+            console.warn('Performance Matrix Chart: Canvas not found or Chart.js not loaded');
+            return;
+        }
 
         const ctx = canvas.getContext('2d');
         
@@ -662,8 +668,8 @@ class ChampionshipDashboard {
     // Update charts when filters change
     updateCharts() {
         // Clear existing charts
-        const leagueChart = Chart.getChart('leagueChart');
-        const performanceChart = Chart.getChart('performanceChart');
+        const leagueChart = Chart.getChart('championshipLeagueChart');
+        const performanceChart = Chart.getChart('championshipPerformanceChart');
         
         if (leagueChart) leagueChart.destroy();
         if (performanceChart) performanceChart.destroy();
