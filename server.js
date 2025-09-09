@@ -22,7 +22,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Trust proxy for rate limiting to work correctly
-app.set('trust proxy', true);
+// Use specific trust proxy setting for Replit environment
+app.set('trust proxy', 1);
 
 // Initialize sports data service
 const sportsData = new SportsDataService();
