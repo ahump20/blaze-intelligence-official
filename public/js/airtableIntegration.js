@@ -179,9 +179,70 @@ class AirtableIntegration {
         const css = document.createElement('style');
         css.id = 'airtable-insights-css';
         css.textContent = `
-            .airtable-insights-section {
+            .airtable-insights-section,
+            .methods-verification-section,
+            .tech-integration-section {
                 padding: 120px 50px;
                 background: #0A0A0A;
+            }
+            
+            /* Integration Section Styles */
+            .integration-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 40px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .integration-category h3 {
+                color: #BF5700;
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: 20px;
+                border-bottom: 2px solid rgba(191, 87, 0, 0.3);
+                padding-bottom: 10px;
+            }
+            
+            .integration-items {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .integration-item {
+                display: flex;
+                align-items: center;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 15px;
+                padding: 20px;
+                transition: all 0.3s ease;
+            }
+            
+            .integration-item:hover {
+                background: rgba(191, 87, 0, 0.05);
+                border-color: rgba(191, 87, 0, 0.3);
+                transform: translateY(-2px);
+            }
+            
+            .integration-icon {
+                font-size: 32px;
+                margin-right: 15px;
+                min-width: 50px;
+            }
+            
+            .integration-info h4 {
+                color: #ffffff;
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+            
+            .integration-info p {
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 14px;
+                margin: 0;
             }
             
             .insights-grid {
