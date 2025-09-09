@@ -1809,6 +1809,9 @@
                 <li><a href="/pilot-playbook">Pilot</a></li>
                 <li><a href="#" class="nav-cta">Get Started</a></li>
             </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span>☰</span>
+            </button>
         </div>
     </nav>
     
@@ -2800,6 +2803,42 @@
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuToggle && navLinks) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    
+                    // Change hamburger icon to X when active
+                    const toggleIcon = mobileMenuToggle.querySelector('span');
+                    if (navLinks.classList.contains('active')) {
+                        toggleIcon.textContent = '✕';
+                    } else {
+                        toggleIcon.textContent = '☰';
+                    }
+                });
+                
+                // Close mobile menu when clicking on a link
+                navLinks.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'A') {
+                        navLinks.classList.remove('active');
+                        mobileMenuToggle.querySelector('span').textContent = '☰';
+                    }
+                });
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!navLinks.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                        navLinks.classList.remove('active');
+                        mobileMenuToggle.querySelector('span').textContent = '☰';
+                    }
+                });
             }
         });
         
