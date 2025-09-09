@@ -495,8 +495,8 @@ app.get('/api/live-sports/nfl/live-score/:id', async (req, res) => {
   }
 });
 
-// AI Analytics API Endpoints
-app.post('/api/ai/openai/analyze-team', async (req, res) => {
+// AI Analytics API Endpoints (Protected with authentication)
+app.post('/api/ai/openai/analyze-team', authenticateToken, requireSubscription('pro'), async (req, res) => {
   try {
     if (!process.env.OPENAI_API_KEY) {
       return res.status(503).json({ error: 'OpenAI API not configured' });
@@ -783,41 +783,10 @@ app.get('/api/ai/gemini/health', async (req, res) => {
   }
 });
 
-// OpenAI Team Analysis Endpoint
-app.post('/api/ai/openai/analyze-team', async (req, res) => {
-  try {
-    if (!openai) {
-      return res.status(503).json({ error: 'OpenAI not configured' });
-    }
+// Duplicate endpoint removed - using the protected version above
 
-    const { prompt, model = 'gpt-4o-mini', max_tokens = 800, temperature = 0.3 } = req.body;
-
-    const completion = await openai.chat.completions.create({
-      model,
-      messages: [
-        {
-          role: 'system',
-          content: 'You are an expert sports analyst with deep knowledge of team performance, player statistics, and championship dynamics. Provide detailed, data-driven analysis.'
-        },
-        {
-          role: 'user',
-          content: prompt
-        }
-      ],
-      max_tokens,
-      temperature
-    });
-
-    res.json(completion);
-
-  } catch (error) {
-    console.error('OpenAI team analysis error:', error);
-    res.status(500).json({ error: 'Failed to analyze team', details: error.message });
-  }
-});
-
-// Anthropic Championship Prediction Endpoint
-app.post('/api/ai/anthropic/predict-championship', async (req, res) => {
+// Anthropic Championship Prediction Endpoint (Protected with authentication)
+app.post('/api/ai/anthropic/predict-championship', authenticateToken, requireSubscription('pro'), async (req, res) => {
   try {
     if (!anthropic) {
       return res.status(503).json({ error: 'Anthropic not configured' });
