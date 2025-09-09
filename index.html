@@ -616,16 +616,43 @@
             align-items: center;
         }
         
-        .founder-image-wrapper {
+        .blaze-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+        
+        .gallery-item {
             position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
         }
         
         .founder-image {
             width: 100%;
-            max-width: 400px;
+            height: 180px;
+            object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
             border: 3px solid rgba(191, 87, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .blaze-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .founder-image {
+                height: 140px;
+            }
         }
         
         .founder-info h3 {
@@ -1067,12 +1094,23 @@
     <!-- Founder Section -->
     <section class="founder-section">
         <div class="founder-content" data-aos="fade-up">
-            <div class="founder-image-wrapper">
-                <img src="/public/assets/images/founder-headshot.jpg" alt="Austin Humphrey, Founder" class="founder-image">
+            <div class="blaze-gallery">
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="0">
+                    <img src="/public/assets/images/blaze-logo-train-smarter.png" alt="Blaze Intelligence - Train Smarter" class="founder-image">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="/public/assets/images/blaze-image-1.jpg" alt="Blaze Intelligence Brand" class="founder-image">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="/public/assets/images/blaze-image-2.jpg" alt="Blaze Intelligence Technology" class="founder-image">
+                </div>
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="/public/assets/images/blaze-wolf-flames.png" alt="Blaze Intelligence Wolf" class="founder-image">
+                </div>
             </div>
             <div class="founder-info">
                 <h3>Built for Winners</h3>
-                <p class="founder-title">Founded by Austin Humphrey</p>
+                <p class="founder-title">Train Smarter. Win More.</p>
                 <p class="founder-bio">
                     Blaze Intelligence was born from a simple observation: the best coaches and scouts 
                     have an intuitive sense for talent that goes beyond traditional statistics. 
@@ -1170,6 +1208,7 @@
     <script src="/js/stressTest.js" defer></script>
     <script src="/js/enhancedGateway.js" defer></script>
     <script src="/js/securityEnhancements.js" defer></script>
+    <script src="/js/errorHandler.js"></script>
     
     <script>
         // Initialize AOS
