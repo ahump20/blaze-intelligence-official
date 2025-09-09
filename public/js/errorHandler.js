@@ -1,10 +1,21 @@
-// Error Handler to prevent unhandled promise rejection console spam
+// Comprehensive Error Handler for Blaze Intelligence
 (function() {
     'use strict';
     
+    // Global promise rejection counter for debugging
+    let rejectionCount = 0;
+    const maxRejections = 50; // Prevent infinite logging
+    
     // Handle unhandled promise rejections gracefully
     window.addEventListener('unhandledrejection', function(event) {
+        rejectionCount++;
         const reason = event.reason;
+        
+        // Stop processing if too many rejections (prevent spam)
+        if (rejectionCount > maxRejections) {
+            event.preventDefault();
+            return;
+        }
         
         // Suppress common development errors to prevent console spam
         if (!reason || 
@@ -33,8 +44,12 @@
             return;
         }
         
-        // Log other promise rejections for debugging
-        console.warn('Unhandled promise rejection:', reason);
+        // Log other promise rejections for debugging (limited)
+        if (rejectionCount <= 3) {
+            console.warn('Unhandled promise rejection:', reason);
+        } else if (rejectionCount === 4) {
+            console.warn('Multiple promise rejections detected, suppressing further logs...');
+        }
     });
     
     // Handle other JavaScript errors
