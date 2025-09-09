@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Where Heritage Meets Algorithmic Excellence</title>
+    <meta name="description" content="Pioneering sports intelligence through Texas-inspired innovation. Professional-grade analytics for teams, betting syndicates, and media outlets.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Primary Colors */
+            --burnt-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            
+            /* Secondary Colors */
+            --tennessee-deep: #002244;
+            --vancouver-teal: #00B2A9;
+            
+            /* Supporting Colors */
+            --platinum: #E5E4E2;
+            --graphite: #36454F;
+            --pearl: #FAFAFA;
+            
+            /* Functional */
+            --bg-dark: #0A0A0A;
+            --bg-card: rgba(15, 15, 15, 0.95);
+            --border: rgba(155, 203, 235, 0.1);
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            background: var(--bg-dark);
+            color: var(--platinum);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--cardinal-blue);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--burnt-orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: var(--burnt-orange);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--burnt-orange);
+        }
+        
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--burnt-orange);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 2rem;
+            overflow: hidden;
+        }
+        
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid var(--burnt-orange);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            color: var(--burnt-orange);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--burnt-orange);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--platinum) 0%, var(--cardinal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-title .accent {
+            color: var(--burnt-orange);
+            -webkit-text-fill-color: var(--burnt-orange);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--cardinal-blue);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--burnt-orange);
+            color: white;
+            border: 2px solid var(--burnt-orange);
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--burnt-orange);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--cardinal-blue);
+            border: 2px solid var(--cardinal-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--cardinal-blue);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Live Ticker */
+        .live-ticker {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        
+        .ticker-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--burnt-orange);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .ticker-content {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 30s linear infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            white-space: nowrap;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        
+        .ticker-team {
+            color: var(--platinum);
+        }
+        
+        .ticker-score {
+            color: var(--cardinal-blue);
+            font-weight: 700;
+        }
+        
+        .ticker-metric {
+            color: var(--vancouver-teal);
+            font-size: 0.8rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(0, 34, 68, 0.1) 100%);
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+        
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(155, 203, 235, 0.1);
+            border: 1px solid var(--cardinal-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            color: var(--cardinal-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--platinum) 0%, var(--cardinal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--platinum);
+            opacity: 0.8;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--cardinal-blue));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--burnt-orange);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--platinum);
+        }
+        
+        .feature-description {
+            color: var(--platinum);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .feature-metrics {
+            display: flex;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .metric {
+            flex: 1;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cardinal-blue);
+            font-family: var(--font-mono);
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--platinum);
+            opacity: 0.6;
+        }
+        
+        /* Analytics Dashboard Preview */
+        .dashboard-preview {
+            padding: 6rem 2rem;
+            background: var(--bg-dark);
+        }
+        
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .dashboard-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .dashboard-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .dashboard-card-title {
+            font-weight: 600;
+            color: var(--platinum);
+        }
+        
+        .dashboard-card-badge {
+            background: rgba(0, 178, 169, 0.1);
+            color: var(--vancouver-teal);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .chart-placeholder {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(155, 203, 235, 0.1));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(155, 203, 235, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        /* Footer */
+        footer {
+            padding: 4rem 2rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--cardinal-blue);
+            opacity: 1;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--platinum);
+            opacity: 0.6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🔥</div>
+                <span>Blaze Intelligence</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#analytics">Analytics</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#about">About</a>
+                <a href="#" class="nav-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="canvas-container"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <div class="pulse"></div>
+                <span>LIVE ANALYTICS ACTIVE</span>
+            </div>
+            
+            <h1 class="hero-title">
+                Where <span class="accent">Heritage</span> Meets<br>
+                Algorithmic Excellence
+            </h1>
+            
+            <p class="hero-subtitle">
+                Pioneering sports intelligence through Texas-inspired innovation, 
+                frontier daring, and uncompromising integrity
+            </p>
+            
+            <div class="hero-cta-group">
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Start Free Trial
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-play-circle"></i>
+                    Watch Demo
+                </a>
+            </div>
+            
+            <!-- Live Ticker -->
+            <div class="live-ticker">
+                <div class="ticker-header">
+                    <div class="pulse"></div>
+                    <span>REAL-TIME INTELLIGENCE FEED</span>
+                </div>
+                <div class="ticker-content">
+                    <div class="ticker-item">
+                        <span class="ticker-team">LAD @ HOU</span>
+                        <span class="ticker-score">3-2</span>
+                        <span class="ticker-metric">| Win Prob: 67%</span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-team">NYY @ BOS</span>
+                        <span class="ticker-score">5-4</span>
+                        <span class="ticker-metric">| xBA: .287</span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-team">SF @ SD</span>
+                        <span class="ticker-score">1-1</span>
+                        <span class="ticker-metric">| Leverage: 2.4</span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-team">CHC @ STL</span>
+                        <span class="ticker-score">7-6</span>
+                        <span class="ticker-metric">| QPEF: 92.3</span>
+                    </div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="ticker-item">
+                        <span class="ticker-team">LAD @ HOU</span>
+                        <span class="ticker-score">3-2</span>
+                        <span class="ticker-metric">| Win Prob: 67%</span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-team">NYY @ BOS</span>
+                        <span class="ticker-score">5-4</span>
+                        <span class="ticker-metric">| xBA: .287</span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-team">SF @ SD</span>
+                        <span class="ticker-score">1-1</span>
+                        <span class="ticker-metric">| Leverage: 2.4</span>
+                    </div>
+                    <div class="ticker-item">
+                        <span class="ticker-team">CHC @ STL</span>
+                        <span class="ticker-score">7-6</span>
+                        <span class="ticker-metric">| QPEF: 92.3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header">
+            <div class="section-badge">
+                <i class="fas fa-chart-line"></i>
+                CORE OFFERINGS
+            </div>
+            <h2 class="section-title">Professional Intelligence Suite</h2>
+            <p class="section-description">
+                Institutional-grade analytics with explainable AI transparency
+            </p>
+        </div>
+        
+        <div class="features-grid">
+            <!-- Pro Analytics -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3 class="feature-title">Pro Analytics</h3>
+                <p class="feature-description">
+                    Real-time performance intelligence for professional teams. 
+                    Advanced metrics, predictive modeling, and strategic insights.
+                </p>
+                <div class="feature-metrics">
+                    <div class="metric">
+                        <div class="metric-value">95%</div>
+                        <div class="metric-label">Accuracy</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value"><100ms</div>
+                        <div class="metric-label">Latency</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Betting Edge -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3 class="feature-title">Betting Edge</h3>
+                <p class="feature-description">
+                    Institutional-grade analytics for serious sports investors. 
+                    Market inefficiencies, value identification, and risk modeling.
+                </p>
+                <div class="feature-metrics">
+                    <div class="metric">
+                        <div class="metric-value">73%</div>
+                        <div class="metric-label">Win Rate</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">2.4x</div>
+                        <div class="metric-label">ROI</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Talent Scout -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3 class="feature-title">Talent Scout</h3>
+                <p class="feature-description">
+                    AI-powered player evaluation and recruitment intelligence. 
+                    Pattern recognition, projection models, and comparative analysis.
+                </p>
+                <div class="feature-metrics">
+                    <div class="metric">
+                        <div class="metric-value">10M+</div>
+                        <div class="metric-label">Players</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">500+</div>
+                        <div class="metric-label">Metrics</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard Preview -->
+    <section id="analytics" class="dashboard-preview">
+        <div class="dashboard-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-desktop"></i>
+                    LIVE PREVIEW
+                </div>
+                <h2 class="section-title">Real-Time Intelligence Dashboard</h2>
+                <p class="section-description">
+                    Professional-grade visualization with institutional depth
+                </p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <span class="dashboard-card-title">Performance Metrics</span>
+                        <span class="dashboard-card-badge">LIVE</span>
+                    </div>
+                    <div class="chart-placeholder"></div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <span class="dashboard-card-title">Win Probability</span>
+                        <span class="dashboard-card-badge">UPDATING</span>
+                    </div>
+                    <div class="chart-placeholder"></div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <span class="dashboard-card-title">Player Efficiency</span>
+                        <span class="dashboard-card-badge">REAL-TIME</span>
+                    </div>
+                    <div class="chart-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Product</h3>
+                <div class="footer-links">
+                    <a href="#">Pro Analytics</a>
+                    <a href="#">Betting Edge</a>
+                    <a href="#">Talent Scout</a>
+                    <a href="#">API Access</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Company</h3>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">Mission</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <div class="footer-links">
+                    <a href="#">Documentation</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Research</a>
+                    <a href="#">Case Studies</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="footer-links">
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">Newsletter</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Blaze Intelligence. Intelligence. Integrity. Innovation.</p>
+        </div>
+    </footer>
+
+    <!-- Three.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Three.js Particle System
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('canvas-container'),
+            alpha: true,
+            antialias: true
+        });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        // Create particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 5000;
+        const posArray = new Float32Array(particlesCount * 3);
+        const colors = new Float32Array(particlesCount * 3);
+        
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+            
+            // Alternate between burnt orange and cardinal blue
+            if(i % 2 === 0) {
+                colors[i] = 0.75; // R
+                colors[i + 1] = 0.34; // G
+                colors[i + 2] = 0; // B
+            } else {
+                colors[i] = 0.61; // R
+                colors[i + 1] = 0.8; // G
+                colors[i + 2] = 0.92; // B
+            }
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        
+        camera.position.z = 3;
+        
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particlesMesh.rotation.x += 0.0005;
+            particlesMesh.rotation.y += 0.0005;
+            
+            // Mouse interaction
+            particlesMesh.rotation.x += mouseY * 0.00008;
+            particlesMesh.rotation.y += mouseX * 0.00008;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Scroll effects
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const nav = document.querySelector('nav');
+            
+            if(scrolled > 50) {
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+                nav.style.backdropFilter = 'blur(30px)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+                nav.style.backdropFilter = 'blur(20px)';
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

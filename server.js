@@ -29,6 +29,7 @@ import RedisCacheLayer from './src/backend/redis-cache-layer.js';
 import ProductionLogger from './src/backend/production-logger.js';
 import MonitoringDashboard from './src/backend/monitoring-dashboard.js';
 import BackupSystem from './src/backend/backup-system.js';
+import ballDontLieService from './src/services/ballDontLieService.js';
 
 // Load environment variables
 dotenv.config();
@@ -581,6 +582,77 @@ app.get('/api/digital-combine/health', async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ status: 'error', error: error.message });
+  }
+});
+
+// BallDontLie Real Sports Data API endpoints
+app.get('/api/balldontlie/live', async (req, res) => {
+  try {
+    const liveScores = await ballDontLieService.getAllLiveScores();
+    res.json(liveScores);
+  } catch (error) {
+    console.error('BallDontLie live scores error:', error);
+    res.status(500).json({ error: 'Failed to fetch live scores' });
+  }
+});
+
+app.get('/api/balldontlie/nba/games', async (req, res) => {
+  try {
+    const games = await ballDontLieService.getNBAGames(req.query.date);
+    res.json(games);
+  } catch (error) {
+    console.error('NBA games error:', error);
+    res.status(500).json({ error: 'Failed to fetch NBA games' });
+  }
+});
+
+app.get('/api/balldontlie/nba/teams', async (req, res) => {
+  try {
+    const teams = await ballDontLieService.getNBATeams();
+    res.json(teams);
+  } catch (error) {
+    console.error('NBA teams error:', error);
+    res.status(500).json({ error: 'Failed to fetch NBA teams' });
+  }
+});
+
+app.get('/api/balldontlie/nfl/games', async (req, res) => {
+  try {
+    const games = await ballDontLieService.getNFLGames(req.query.week, req.query.season);
+    res.json(games);
+  } catch (error) {
+    console.error('NFL games error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL games' });
+  }
+});
+
+app.get('/api/balldontlie/nfl/teams', async (req, res) => {
+  try {
+    const teams = await ballDontLieService.getNFLTeams();
+    res.json(teams);
+  } catch (error) {
+    console.error('NFL teams error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL teams' });
+  }
+});
+
+app.get('/api/balldontlie/mlb/games', async (req, res) => {
+  try {
+    const games = await ballDontLieService.getMLBGames(req.query.date);
+    res.json(games);
+  } catch (error) {
+    console.error('MLB games error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB games' });
+  }
+});
+
+app.get('/api/balldontlie/mlb/teams', async (req, res) => {
+  try {
+    const teams = await ballDontLieService.getMLBTeams();
+    res.json(teams);
+  } catch (error) {
+    console.error('MLB teams error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB teams' });
   }
 });
 

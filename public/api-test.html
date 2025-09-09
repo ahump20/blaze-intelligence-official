@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Dashboard | Blaze Intelligence</title>
+    <link rel="stylesheet" href="/brand.css">
+    <link rel="stylesheet" href="/brand-components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font);
+            padding: 2rem;
+        }
+        
+        .test-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .test-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .test-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .test-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .status-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        
+        .status-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .status-loading {
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+        }
+        
+        .test-endpoint {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--cyan);
+            margin-bottom: 0.5rem;
+        }
+        
+        .test-result {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(155, 203, 235, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .test-button {
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            color: #0B0B0F;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .test-button:hover {
+            opacity: 0.9;
+        }
+        
+        .test-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--ink) 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: var(--muted);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>API Integration Test Dashboard</h1>
+        <p class="subtitle">Test all API endpoints and verify data connections</p>
+        
+        <div class="test-grid">
+            <!-- BallDontLie Live Scores -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">BallDontLie Live Scores</div>
+                    <div class="test-status status-loading" id="status-balldontlie-live">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/balldontlie/live</div>
+                <div class="test-result" id="result-balldontlie-live">Testing endpoint...</div>
+                <button class="test-button" onclick="testEndpoint('balldontlie-live', '/api/balldontlie/live')">
+                    <i class="fas fa-sync"></i> Retest
+                </button>
+            </div>
+            
+            <!-- NBA Teams -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">NBA Teams</div>
+                    <div class="test-status status-loading" id="status-nba-teams">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/balldontlie/nba/teams</div>
+                <div class="test-result" id="result-nba-teams">Testing endpoint...</div>
+                <button class="test-button" onclick="testEndpoint('nba-teams', '/api/balldontlie/nba/teams')">
+                    <i class="fas fa-sync"></i> Retest
+                </button>
+            </div>
+            
+            <!-- NFL Teams -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">NFL Teams</div>
+                    <div class="test-status status-loading" id="status-nfl-teams">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/balldontlie/nfl/teams</div>
+                <div class="test-result" id="result-nfl-teams">Testing endpoint...</div>
+                <button class="test-button" onclick="testEndpoint('nfl-teams', '/api/balldontlie/nfl/teams')">
+                    <i class="fas fa-sync"></i> Retest
+                </button>
+            </div>
+            
+            <!-- MLB Teams -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">MLB Teams</div>
+                    <div class="test-status status-loading" id="status-mlb-teams">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/balldontlie/mlb/teams</div>
+                <div class="test-result" id="result-mlb-teams">Testing endpoint...</div>
+                <button class="test-button" onclick="testEndpoint('mlb-teams', '/api/balldontlie/mlb/teams')">
+                    <i class="fas fa-sync"></i> Retest
+                </button>
+            </div>
+            
+            <!-- Pressure Stream SSE -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">Pressure Stream (SSE)</div>
+                    <div class="test-status status-loading" id="status-pressure-stream">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/game/pressure-stream</div>
+                <div class="test-result" id="result-pressure-stream">Connecting to SSE...</div>
+                <button class="test-button" onclick="testSSE()">
+                    <i class="fas fa-sync"></i> Retest SSE
+                </button>
+            </div>
+            
+            <!-- Cardinals MLB Data -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">Cardinals Real Data</div>
+                    <div class="test-status status-loading" id="status-cardinals">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/mlb/cardinals/summary</div>
+                <div class="test-result" id="result-cardinals">Testing endpoint...</div>
+                <button class="test-button" onclick="testEndpoint('cardinals', '/api/mlb/cardinals/summary')">
+                    <i class="fas fa-sync"></i> Retest
+                </button>
+            </div>
+            
+            <!-- Digital Combine Health -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">Digital Combine</div>
+                    <div class="test-status status-loading" id="status-digital-combine">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/digital-combine/health</div>
+                <div class="test-result" id="result-digital-combine">Testing endpoint...</div>
+                <button class="test-button" onclick="testEndpoint('digital-combine', '/api/digital-combine/health')">
+                    <i class="fas fa-sync"></i> Retest
+                </button>
+            </div>
+            
+            <!-- Live Sports All -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">Live Sports (ESPN)</div>
+                    <div class="test-status status-loading" id="status-live-sports">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/live-sports/all</div>
+                <div class="test-result" id="result-live-sports">Testing endpoint...</div>
+                <button class="test-button" onclick="testEndpoint('live-sports', '/api/live-sports/all')">
+                    <i class="fas fa-sync"></i> Retest
+                </button>
+            </div>
+            
+            <!-- Cache Stats -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">Cache Statistics</div>
+                    <div class="test-status status-loading" id="status-cache">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/cache/stats</div>
+                <div class="test-result" id="result-cache">Testing endpoint...</div>
+                <button class="test-button" onclick="testEndpoint('cache', '/api/cache/stats')">
+                    <i class="fas fa-sync"></i> Retest
+                </button>
+            </div>
+            
+            <!-- Monitoring Health -->
+            <div class="test-card">
+                <div class="test-header">
+                    <div class="test-title">System Health</div>
+                    <div class="test-status status-loading" id="status-health">Loading</div>
+                </div>
+                <div class="test-endpoint">/api/monitoring/health</div>
+                <div class="test-result" id="result-health">Testing endpoint...</div>
+                <button class="test-button" onclick="testEndpoint('health', '/api/monitoring/health')">
+                    <i class="fas fa-sync"></i> Retest
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        async function testEndpoint(id, endpoint) {
+            const statusEl = document.getElementById(`status-${id}`);
+            const resultEl = document.getElementById(`result-${id}`);
+            
+            statusEl.className = 'test-status status-loading';
+            statusEl.textContent = 'Testing...';
+            resultEl.textContent = 'Fetching data...';
+            
+            try {
+                const startTime = performance.now();
+                const response = await fetch(endpoint);
+                const endTime = performance.now();
+                const responseTime = Math.round(endTime - startTime);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                statusEl.className = 'test-status status-success';
+                statusEl.textContent = `Success (${responseTime}ms)`;
+                
+                // Format and display result
+                const formatted = JSON.stringify(data, null, 2);
+                const preview = formatted.length > 1000 
+                    ? formatted.substring(0, 1000) + '\n...\n[Truncated - Response too large]'
+                    : formatted;
+                
+                resultEl.textContent = `Response Time: ${responseTime}ms\n\n${preview}`;
+                
+            } catch (error) {
+                statusEl.className = 'test-status status-error';
+                statusEl.textContent = 'Error';
+                resultEl.textContent = `Error: ${error.message}\n\nThis could mean:\n- The API is not configured\n- The service is rate limited\n- Network connection issue`;
+            }
+        }
+        
+        let sseConnection = null;
+        
+        function testSSE() {
+            const statusEl = document.getElementById('status-pressure-stream');
+            const resultEl = document.getElementById('result-pressure-stream');
+            
+            // Close existing connection if any
+            if (sseConnection) {
+                sseConnection.close();
+            }
+            
+            statusEl.className = 'test-status status-loading';
+            statusEl.textContent = 'Connecting...';
+            resultEl.textContent = 'Establishing SSE connection...';
+            
+            try {
+                sseConnection = new EventSource('/api/game/pressure-stream');
+                let messageCount = 0;
+                let messages = [];
+                
+                sseConnection.onopen = () => {
+                    statusEl.className = 'test-status status-success';
+                    statusEl.textContent = 'Connected';
+                    resultEl.textContent = 'SSE connection established. Waiting for data...';
+                };
+                
+                sseConnection.onmessage = (event) => {
+                    messageCount++;
+                    const data = JSON.parse(event.data);
+                    messages.push(data);
+                    
+                    // Keep only last 5 messages
+                    if (messages.length > 5) {
+                        messages.shift();
+                    }
+                    
+                    statusEl.textContent = `Connected (${messageCount} msgs)`;
+                    resultEl.textContent = `Received ${messageCount} messages\n\nLatest data:\n${JSON.stringify(messages, null, 2)}`;
+                };
+                
+                sseConnection.onerror = (error) => {
+                    statusEl.className = 'test-status status-error';
+                    statusEl.textContent = 'Connection Error';
+                    resultEl.textContent = 'SSE connection failed. Check if the endpoint is working.';
+                    sseConnection.close();
+                };
+                
+            } catch (error) {
+                statusEl.className = 'test-status status-error';
+                statusEl.textContent = 'Error';
+                resultEl.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        // Test all endpoints on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            testEndpoint('balldontlie-live', '/api/balldontlie/live');
+            testEndpoint('nba-teams', '/api/balldontlie/nba/teams');
+            testEndpoint('nfl-teams', '/api/balldontlie/nfl/teams');
+            testEndpoint('mlb-teams', '/api/balldontlie/mlb/teams');
+            testEndpoint('cardinals', '/api/mlb/cardinals/summary');
+            testEndpoint('digital-combine', '/api/digital-combine/health');
+            testEndpoint('live-sports', '/api/live-sports/all');
+            testEndpoint('cache', '/api/cache/stats');
+            testEndpoint('health', '/api/monitoring/health');
+            testSSE();
+        });
+    </script>
+</body>
+</html>
