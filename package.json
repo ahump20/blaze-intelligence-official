@@ -86,6 +86,7 @@
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "marked": "^16.2.0",
+    "multer": "^2.0.2",
     "node-cache": "^5.1.2",
     "node-fetch": "^3.3.2",
     "nodemailer": "^7.0.6",

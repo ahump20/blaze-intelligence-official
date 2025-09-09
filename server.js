@@ -10,6 +10,7 @@ import rateLimit from 'express-rate-limit';
 import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
 import Stripe from 'stripe';
+import multer from 'multer';
 import SportsDataService from './src/services/sportsDataService.js';
 import mlbAdapter from './src/data/mlb/adapter.js';
 import nflAdapter from './src/data/nfl/adapter.js';
@@ -22,6 +23,7 @@ import authRoutes from './server/auth/authRoutes.js';
 import subscriptionRoutes from './server/stripe/subscriptionRoutes.js';
 import { authenticateToken, trackApiUsage, requireSubscription } from './server/auth/authMiddleware.js';
 import CardinalsDataIntegration from './cardinals-real-data-integration.js';
+import DigitalCombineBackend from './digital-combine-backend.js';
 
 // Load environment variables
 dotenv.config();
@@ -41,6 +43,7 @@ const sportsData = new SportsDataService();
 const liveSportsAdapter = new LiveSportsAdapter();
 const aiAnalytics = new AIAnalyticsService();
 const cardinalsAPI = new CardinalsDataIntegration();
+const digitalCombineBackend = new DigitalCombineBackend(pool);
 
 // Initialize AI services with API keys
 const openai = process.env.OPENAI_API_KEY ? new OpenAI({
@@ -434,6 +437,34 @@ app.get('/api/mlb/cardinals/health', async (req, res) => {
   try {
     const health = await cardinalsAPI.healthCheck();
     res.json(health);
+  } catch (error) {
+    res.status(500).json({ status: 'error', error: error.message });
+  }
+});
+
+// Digital Combine API endpoints
+const dcRoutes = digitalCombineBackend.createExpressRoutes();
+
+// Video upload and analysis endpoints
+app.post('/api/digital-combine/upload', dcRoutes.upload, dcRoutes.processUpload);
+app.get('/api/digital-combine/results/:sessionId', dcRoutes.getResults);
+app.get('/api/digital-combine/status/:sessionId', dcRoutes.getStatus);
+
+// Digital Combine health endpoint
+app.get('/api/digital-combine/health', async (req, res) => {
+  try {
+    const queueStatus = await pool.query(
+      'SELECT COUNT(*) as total, COUNT(CASE WHEN status = \'pending\' THEN 1 END) as pending FROM dc_processing_queue WHERE created_at > NOW() - INTERVAL \'24 hours\''
+    );
+    
+    res.json({
+      status: 'healthy',
+      queueStatus: {
+        totalJobs24h: parseInt(queueStatus.rows[0].total),
+        pendingJobs: parseInt(queueStatus.rows[0].pending)
+      },
+      timestamp: new Date().toISOString()
+    });
   } catch (error) {
     res.status(500).json({ status: 'error', error: error.message });
   }
