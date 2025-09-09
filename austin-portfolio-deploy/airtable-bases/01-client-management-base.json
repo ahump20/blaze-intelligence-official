@@ -1,0 +1,397 @@
+{
+  "baseName": "Blaze Intelligence - Client Management",
+  "description": "Complete client lifecycle management from prospect to expansion",
+  "tables": {
+    "organizations": {
+      "name": "Organizations",
+      "description": "Master database of all organizations (prospects, clients, partners)",
+      "fields": [
+        {
+          "name": "Organization Name",
+          "type": "singleLineText",
+          "description": "Official organization name",
+          "required": true
+        },
+        {
+          "name": "Organization Type",
+          "type": "singleSelect",
+          "options": [
+            "MLB Team",
+            "NFL Team", 
+            "NBA Team",
+            "NCAA Division I",
+            "High School",
+            "Youth Organization",
+            "Perfect Game Affiliate",
+            "Media Company",
+            "Technology Partner",
+            "Service Provider"
+          ],
+          "required": true
+        },
+        {
+          "name": "League/Conference",
+          "type": "singleLineText",
+          "description": "MLB, NFL, SEC, Big 12, etc."
+        },
+        {
+          "name": "Market Size",
+          "type": "singleSelect",
+          "options": ["Large Market", "Mid Market", "Small Market", "Emerging"]
+        },
+        {
+          "name": "Primary Contact",
+          "type": "linkedRecord",
+          "linkedTable": "contacts"
+        },
+        {
+          "name": "Relationship Status",
+          "type": "singleSelect",
+          "options": [
+            "Cold Prospect",
+            "Warm Lead",
+            "Active Negotiations",
+            "Active Client",
+            "Expansion Opportunity",
+            "Former Client",
+            "Strategic Partner"
+          ],
+          "required": true
+        },
+        {
+          "name": "Revenue Potential",
+          "type": "currency",
+          "description": "Annual contract value potential"
+        },
+        {
+          "name": "Decision Timeline",
+          "type": "singleSelect",
+          "options": ["Immediate", "1-3 Months", "3-6 Months", "6-12 Months", "Long Term"]
+        },
+        {
+          "name": "Technology Stack",
+          "type": "multipleSelect",
+          "options": ["Hudl", "Synergy", "Second Spectrum", "Stats Inc", "Custom Build", "Legacy Systems", "None"]
+        },
+        {
+          "name": "Pain Points",
+          "type": "multipleSelect",
+          "options": [
+            "High Costs",
+            "Slow Analysis",
+            "Poor Integration",
+            "Limited Customization",
+            "Lack of Real-time Data",
+            "Poor User Experience",
+            "Insufficient ROI Tracking"
+          ]
+        },
+        {
+          "name": "Competitive Positioning",
+          "type": "longText",
+          "description": "How we differentiate vs their current solution"
+        },
+        {
+          "name": "Next Action",
+          "type": "singleLineText"
+        },
+        {
+          "name": "Last Contact Date",
+          "type": "date"
+        },
+        {
+          "name": "Created Date",
+          "type": "createdTime"
+        },
+        {
+          "name": "Notes",
+          "type": "longText"
+        }
+      ],
+      "sampleData": [
+        {
+          "Organization Name": "St. Louis Cardinals",
+          "Organization Type": "MLB Team",
+          "League/Conference": "MLB - National League Central",
+          "Market Size": "Mid Market",
+          "Relationship Status": "Active Negotiations",
+          "Revenue Potential": 250000,
+          "Decision Timeline": "1-3 Months",
+          "Technology Stack": ["Hudl", "Stats Inc"],
+          "Pain Points": ["High Costs", "Slow Analysis", "Poor Integration"],
+          "Competitive Positioning": "67% cost savings vs Hudl Pro. Real-time Vision AI coaching platform provides biomechanical + micro-expression analysis unavailable in current stack.",
+          "Next Action": "Schedule technical demo with analytics team",
+          "Last Contact Date": "2024-08-28"
+        },
+        {
+          "Organization Name": "Tennessee Titans",
+          "Organization Type": "NFL Team", 
+          "League/Conference": "NFL - AFC South",
+          "Market Size": "Mid Market",
+          "Relationship Status": "Warm Lead",
+          "Revenue Potential": 50000,
+          "Decision Timeline": "3-6 Months",
+          "Technology Stack": ["Hudl"],
+          "Pain Points": ["Limited Customization", "Poor User Experience"],
+          "Competitive Positioning": "Enhanced video analysis with character/grit assessment capabilities. 80% savings vs current Hudl Assist subscription.",
+          "Next Action": "Connect with Director of Player Personnel",
+          "Last Contact Date": "2024-08-15"
+        },
+        {
+          "Organization Name": "University of Texas Longhorns",
+          "Organization Type": "NCAA Division I",
+          "League/Conference": "Big 12 Conference",
+          "Market Size": "Large Market",
+          "Relationship Status": "Cold Prospect",
+          "Revenue Potential": 50000,
+          "Decision Timeline": "6-12 Months",
+          "Technology Stack": ["Synergy", "Custom Build"],
+          "Pain Points": ["Lack of Real-time Data", "Insufficient ROI Tracking"],
+          "Competitive Positioning": "Multi-sport platform covering football and baseball. NIL valuation integration for recruiting intelligence.",
+          "Next Action": "Research key decision makers",
+          "Last Contact Date": null
+        },
+        {
+          "Organization Name": "Memphis Grizzlies",
+          "Organization Type": "NBA Team",
+          "League/Conference": "NBA - Western Conference",
+          "Market Size": "Small Market",
+          "Relationship Status": "Strategic Partner",
+          "Revenue Potential": 250000,
+          "Decision Timeline": "Immediate",
+          "Technology Stack": ["Second Spectrum", "Stats Inc"],
+          "Pain Points": ["High Costs", "Poor Integration"],
+          "Competitive Positioning": "Advanced player development platform with biomechanical analysis and character assessment. Proven ROI in player development.",
+          "Next Action": "Finalize partnership agreement",
+          "Last Contact Date": "2024-08-30"
+        }
+      ]
+    },
+    "contacts": {
+      "name": "Contacts",
+      "description": "Individual contact records linked to organizations",
+      "fields": [
+        {
+          "name": "Full Name",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Organization",
+          "type": "linkedRecord",
+          "linkedTable": "organizations"
+        },
+        {
+          "name": "Title/Role",
+          "type": "singleLineText"
+        },
+        {
+          "name": "Email",
+          "type": "email"
+        },
+        {
+          "name": "Phone",
+          "type": "phoneNumber"
+        },
+        {
+          "name": "LinkedIn",
+          "type": "url"
+        },
+        {
+          "name": "Decision Maker Level",
+          "type": "singleSelect",
+          "options": ["Ultimate Decision Maker", "Key Influencer", "Technical Evaluator", "End User", "Gatekeeper"]
+        },
+        {
+          "name": "Communication Preference",
+          "type": "singleSelect",
+          "options": ["Email", "Phone", "Text", "LinkedIn", "In-Person"]
+        },
+        {
+          "name": "Interaction History",
+          "type": "linkedRecord",
+          "linkedTable": "interactions"
+        },
+        {
+          "name": "Notes",
+          "type": "longText"
+        },
+        {
+          "name": "Created Date",
+          "type": "createdTime"
+        }
+      ],
+      "sampleData": [
+        {
+          "Full Name": "Michael Girsch",
+          "Title/Role": "General Manager",
+          "Email": "mgirsch@cardinals.com",
+          "Decision Maker Level": "Ultimate Decision Maker",
+          "Communication Preference": "Email",
+          "Notes": "Analytics-focused GM. Previously with Rays. Strong interest in advanced metrics and player development."
+        },
+        {
+          "Full Name": "Jon Robinson",
+          "Title/Role": "General Manager", 
+          "Email": "jrobinson@titans.com",
+          "Decision Maker Level": "Ultimate Decision Maker",
+          "Communication Preference": "Phone",
+          "Notes": "Values practical applications over theoretical metrics. Focus on team chemistry and character evaluation."
+        }
+      ]
+    },
+    "interactions": {
+      "name": "Interactions",
+      "description": "Record of all client/prospect touchpoints",
+      "fields": [
+        {
+          "name": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "Contact",
+          "type": "linkedRecord",
+          "linkedTable": "contacts"
+        },
+        {
+          "name": "Organization",
+          "type": "linkedRecord", 
+          "linkedTable": "organizations"
+        },
+        {
+          "name": "Interaction Type",
+          "type": "singleSelect",
+          "options": [
+            "Initial Outreach",
+            "Discovery Call",
+            "Technical Demo",
+            "Proposal Presentation",
+            "Contract Negotiation",
+            "Implementation Planning",
+            "Training Session",
+            "Check-in Call",
+            "Support Request",
+            "Expansion Discussion"
+          ]
+        },
+        {
+          "name": "Outcome",
+          "type": "singleSelect",
+          "options": [
+            "Positive - Next Steps Defined",
+            "Neutral - Information Gathering",
+            "Negative - Objections Raised",
+            "Closed - Won",
+            "Closed - Lost",
+            "Follow-up Required"
+          ]
+        },
+        {
+          "name": "Summary",
+          "type": "longText",
+          "required": true
+        },
+        {
+          "name": "Next Action",
+          "type": "singleLineText"
+        },
+        {
+          "name": "Next Action Date",
+          "type": "date"
+        },
+        {
+          "name": "Austin Notes",
+          "type": "longText",
+          "description": "Austin's personal insights and strategic thinking"
+        }
+      ]
+    }
+  },
+  "views": {
+    "organizations": [
+      {
+        "name": "Active Pipeline",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Relationship Status",
+            "condition": "is one of",
+            "values": ["Warm Lead", "Active Negotiations", "Active Client"]
+          }
+        ],
+        "sorts": [
+          {
+            "field": "Revenue Potential",
+            "direction": "desc"
+          }
+        ]
+      },
+      {
+        "name": "Championship Targets",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Revenue Potential",
+            "condition": "is greater than",
+            "value": 100000
+          }
+        ]
+      },
+      {
+        "name": "Immediate Opportunities",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Decision Timeline", 
+            "condition": "is one of",
+            "values": ["Immediate", "1-3 Months"]
+          }
+        ]
+      }
+    ]
+  },
+  "automations": [
+    {
+      "name": "New Prospect Welcome Sequence",
+      "trigger": "Record created in Organizations",
+      "conditions": [
+        {
+          "field": "Relationship Status",
+          "value": "Cold Prospect"
+        }
+      ],
+      "actions": [
+        {
+          "type": "createRecord",
+          "table": "interactions",
+          "fields": {
+            "Date": "today",
+            "Interaction Type": "Initial Outreach",
+            "Summary": "Added to Blaze Intelligence pipeline - research phase",
+            "Next Action": "Complete organization research and identify key contacts",
+            "Next Action Date": "+3 days"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Follow-up Reminder",
+      "trigger": "Field updated in Interactions",
+      "conditions": [
+        {
+          "field": "Next Action Date",
+          "condition": "is today"
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com",
+          "subject": "Follow-up Required: {Organization Name}",
+          "body": "Action needed: {Next Action}\nOrganization: {Organization Name}\nContact: {Contact Name}\nLast interaction: {Summary}"
+        }
+      ]
+    }
+  ]
+}

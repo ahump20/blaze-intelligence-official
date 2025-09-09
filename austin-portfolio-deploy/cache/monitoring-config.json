@@ -1,0 +1,61 @@
+{
+  "metrics": {
+    "response_times": {
+      "enabled": true,
+      "percentiles": [
+        50,
+        90,
+        95,
+        99
+      ],
+      "alert_threshold_ms": 1000
+    },
+    "throughput": {
+      "enabled": true,
+      "measurement_window": 60,
+      "alert_threshold_rps": 10
+    },
+    "error_rates": {
+      "enabled": true,
+      "measurement_window": 300,
+      "alert_threshold_percent": 5
+    },
+    "resource_usage": {
+      "enabled": true,
+      "metrics": [
+        "memory",
+        "cpu",
+        "disk_io"
+      ],
+      "alert_thresholds": {
+        "memory_mb": 1000,
+        "cpu_percent": 80,
+        "disk_io_mbps": 100
+      }
+    }
+  },
+  "alerting": {
+    "channels": [
+      "console",
+      "log_file"
+    ],
+    "severity_levels": [
+      "info",
+      "warning",
+      "critical"
+    ],
+    "rate_limiting": {
+      "max_alerts_per_minute": 5,
+      "duplicate_suppression": 300
+    }
+  },
+  "reporting": {
+    "interval_minutes": 15,
+    "retention_days": 7,
+    "aggregation_levels": [
+      "minute",
+      "hour",
+      "day"
+    ]
+  }
+}
