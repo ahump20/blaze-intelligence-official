@@ -22,6 +22,7 @@ class ChampionshipDashboard {
         this.bindEvents();
         this.renderTeams();
         this.updateAnalytics();
+        this.createCharts();
     }
 
     async loadTeamsData() {
@@ -366,6 +367,7 @@ class ChampionshipDashboard {
         
         this.updateAnalytics();
         this.sortAndRenderTeams();
+        this.updateCharts();
     }
 
     sortAndRenderTeams() {
@@ -484,12 +486,241 @@ class ChampionshipDashboard {
     }
 
     // Additional static data methods for NBA, NHL, MLS would go here...
-    getNBATeams() { return []; }
-    getNHLTeams() { return []; }
-    getMLSTeams() { return []; }
+    getNBATeams() { 
+        return [
+            { name: 'Lakers', market: 'Los Angeles', league: 'NBA', division: 'Pacific', founded: '1947', titles: 17 },
+            { name: 'Celtics', market: 'Boston', league: 'NBA', division: 'Atlantic', founded: '1946', titles: 18 },
+            { name: 'Warriors', market: 'Golden State', league: 'NBA', division: 'Pacific', founded: '1946', titles: 7 },
+            { name: 'Bulls', market: 'Chicago', league: 'NBA', division: 'Central', founded: '1966', titles: 6 },
+            { name: 'Spurs', market: 'San Antonio', league: 'NBA', division: 'Southwest', founded: '1967', titles: 5 }
+        ].map(team => this.formatTeam(team, 'NBA', team.division));
+    }
+    
+    getNHLTeams() { 
+        return [
+            { name: 'Canadiens', market: 'Montreal', league: 'NHL', division: 'Atlantic', founded: '1909', titles: 24 },
+            { name: 'Maple Leafs', market: 'Toronto', league: 'NHL', division: 'Atlantic', founded: '1917', titles: 13 },
+            { name: 'Red Wings', market: 'Detroit', league: 'NHL', division: 'Atlantic', founded: '1926', titles: 11 },
+            { name: 'Bruins', market: 'Boston', league: 'NHL', division: 'Atlantic', founded: '1924', titles: 6 },
+            { name: 'Rangers', market: 'New York', league: 'NHL', division: 'Metropolitan', founded: '1926', titles: 4 }
+        ].map(team => this.formatTeam(team, 'NHL', team.division));
+    }
+    
+    getMLSTeams() { 
+        return [
+            { name: 'Galaxy', market: 'LA', league: 'MLS', division: 'Western', founded: '1995', titles: 5 },
+            { name: 'Sounders FC', market: 'Seattle', league: 'MLS', division: 'Western', founded: '2007', titles: 2 },
+            { name: 'Atlanta United', market: 'Atlanta', league: 'MLS', division: 'Eastern', founded: '2014', titles: 1 },
+            { name: 'LAFC', market: 'Los Angeles', league: 'MLS', division: 'Western', founded: '2014', titles: 1 },
+            { name: 'Sporting KC', market: 'Kansas City', league: 'MLS', division: 'Western', founded: '1995', titles: 2 }
+        ].map(team => this.formatTeam(team, 'MLS', team.division));
+    }
     
     generateTeamId(name, market) {
         return (market + name).toLowerCase().replace(/[^a-z0-9]/g, '').substring(0, 10);
+    }
+
+    // Chart creation and visualization
+    createCharts() {
+        this.createLeagueDistributionChart();
+        this.createPerformanceMatrixChart();
+    }
+
+    createLeagueDistributionChart() {
+        const canvas = document.getElementById('leagueChart');
+        if (!canvas || typeof Chart === 'undefined') return;
+
+        const ctx = canvas.getContext('2d');
+        
+        // Calculate league distribution
+        const leagueCounts = this.filteredTeams.reduce((acc, team) => {
+            acc[team.league] = (acc[team.league] || 0) + 1;
+            return acc;
+        }, {});
+
+        const leagues = Object.keys(leagueCounts);
+        const counts = Object.values(leagueCounts);
+        
+        // Generate colors for each league
+        const colors = leagues.map((_, index) => {
+            const hue = (index * 60) % 360;
+            return `hsl(${hue}, 70%, 60%)`;
+        });
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: leagues,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: colors,
+                    borderColor: '#1a1a1a',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#ffffff',
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#2a2a2a',
+                        titleColor: '#bf5700',
+                        bodyColor: '#ffffff',
+                        borderColor: '#bf5700',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                return `${context.label}: ${context.parsed} teams (${percentage}%)`;
+                            }
+                        }
+                    }
+                },
+                elements: {
+                    arc: {
+                        borderRadius: 5
+                    }
+                }
+            }
+        });
+    }
+
+    createPerformanceMatrixChart() {
+        const canvas = document.getElementById('performanceChart');
+        if (!canvas || typeof Chart === 'undefined') return;
+
+        const ctx = canvas.getContext('2d');
+        
+        // Create scatter plot data showing competitive vs legacy scores
+        const datasets = {};
+        
+        this.filteredTeams.forEach(team => {
+            if (!datasets[team.league]) {
+                datasets[team.league] = {
+                    label: team.league,
+                    data: [],
+                    backgroundColor: this.getLeagueColor(team.league),
+                    borderColor: this.getLeagueColor(team.league),
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                };
+            }
+            
+            datasets[team.league].data.push({
+                x: team.competitive,
+                y: team.legacy,
+                team: `${team.market} ${team.name}`,
+                titles: team.titles
+            });
+        });
+
+        new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: Object.values(datasets)
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Competitive Score',
+                            color: '#ffffff',
+                            font: { size: 14 }
+                        },
+                        ticks: {
+                            color: '#cccccc'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Legacy Score',
+                            color: '#ffffff',
+                            font: { size: 14 }
+                        },
+                        ticks: {
+                            color: '#cccccc'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: '#ffffff',
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#2a2a2a',
+                        titleColor: '#bf5700',
+                        bodyColor: '#ffffff',
+                        borderColor: '#bf5700',
+                        borderWidth: 1,
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].raw.team;
+                            },
+                            label: function(context) {
+                                return [
+                                    `Competitive: ${context.raw.x}`,
+                                    `Legacy: ${context.raw.y}`,
+                                    `Championships: ${context.raw.titles}`
+                                ];
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'point'
+                }
+            }
+        });
+    }
+
+    getLeagueColor(league) {
+        const colors = {
+            'MLB': '#bf5700',
+            'NFL': '#013369',
+            'NBA': '#c9082a',
+            'NHL': '#000000',
+            'MLS': '#00b04f',
+            'NCAA Football': '#cc5500'
+        };
+        return colors[league] || '#666666';
+    }
+
+    // Update charts when filters change
+    updateCharts() {
+        // Clear existing charts
+        const leagueChart = Chart.getChart('leagueChart');
+        const performanceChart = Chart.getChart('performanceChart');
+        
+        if (leagueChart) leagueChart.destroy();
+        if (performanceChart) performanceChart.destroy();
+        
+        // Recreate charts with new data
+        this.createCharts();
     }
 }
 
