@@ -947,6 +947,45 @@ app.get('/api/command-center/status', async (req, res) => {
     }
 });
 
+// Blog Routes
+app.get('/blog', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'blog-index.html'));
+});
+
+app.get('/blog-cfb-week1-2025', (req, res) => {
+    res.redirect('https://blaze-intelligence-lsl.pages.dev/blog-cfb-week1-2025');
+});
+
+app.get('/blog-cfb-week2-2025', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'blog-cfb-week2-2025.html'));
+});
+
+// Week 2 Blog API Route
+app.get('/api/blog/week2-analytics', async (req, res) => {
+    try {
+        const analyticsData = {
+            majorUpsets: 5,
+            highScoringGames: 6,
+            rankingChanges: 8,
+            predictionAccuracy: 94.2,
+            topPerformers: [
+                { name: 'John Mateer', team: 'Oklahoma', metric: 'ShowIQ', value: 94 },
+                { name: 'Blake Shapen', team: 'Mississippi State', metric: 'Pressure Index', value: 90 },
+                { name: 'Connor Hawkins', team: 'Baylor', metric: 'Clutch Grade', value: 98 }
+            ],
+            gameHighlights: [
+                { teams: 'South Florida vs Florida', score: '18-16', upset: true },
+                { teams: 'Baylor vs SMU', score: '48-45 (2OT)', upset: true },
+                { teams: 'Oklahoma vs Michigan', score: '24-13', upset: false }
+            ]
+        };
+        res.json(analyticsData);
+    } catch (error) {
+        console.error('Week 2 analytics error:', error);
+        res.status(500).json({ error: 'Failed to fetch analytics data' });
+    }
+});
+
 // College Football API Routes
 app.get('/api/cfb/teams/:team', async (req, res) => {
   try {
