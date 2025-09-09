@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Coach - Blaze Intelligence</title>
+    <link rel="icon" type="image/png" href="/public/assets/favicon.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/public/css/blaze-styles.css">
+    <link rel="stylesheet" href="/public/css/dashboard.css">
+    <link rel="stylesheet" href="/public/css/neural-coach.css">
+    
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="/public/assets/logo.png" alt="Blaze Intelligence" class="logo-img">
+                <span class="logo-text">BLAZE</span>
+            </a>
+            <div class="nav-menu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+                <a href="/coach" class="nav-link active">Neural Coach</a>
+                <a href="/digital-combine" class="nav-link">Digital Combine</a>
+                <a href="/pricing" class="nav-link">Pricing</a>
+                <button class="nav-cta" onclick="window.location.href='/dashboard'">Launch Platform</button>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/" class="mobile-link">Home</a>
+        <a href="/dashboard" class="mobile-link">Dashboard</a>
+        <a href="/coach" class="mobile-link active">Neural Coach</a>
+        <a href="/digital-combine" class="mobile-link">Digital Combine</a>
+        <a href="/pricing" class="mobile-link">Pricing</a>
+        <button class="mobile-cta" onclick="window.location.href='/dashboard'">Launch Platform</button>
+    </div>
+
+    <!-- Neural Coach Hero -->
+    <section class="neural-hero">
+        <div class="neural-bg-animation">
+            <canvas id="neural-network-canvas"></canvas>
+        </div>
+        <div class="container">
+            <div class="neural-hero-content">
+                <h1 class="neural-title" data-aos="fade-up">
+                    <span class="gradient-text">Neural Coach™</span>
+                    <span class="subtitle">AI-Powered Performance Analysis</span>
+                </h1>
+                <p class="neural-description" data-aos="fade-up" data-aos-delay="100">
+                    Real-time biometric monitoring and coaching powered by ChatGPT 5, Claude Opus 4.1, and Gemini 2.5 Pro
+                </p>
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+                    <div class="hero-stat">
+                        <span class="stat-value">94.6%</span>
+                        <span class="stat-label">Analysis Accuracy</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-value"><100ms</span>
+                        <span class="stat-label">Response Time</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-value">227+</span>
+                        <span class="stat-label">Teams Analyzed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Neural Analysis Interface -->
+    <section class="neural-analysis">
+        <div class="container">
+            <div class="analysis-grid">
+                <!-- Video Analysis Panel -->
+                <div class="analysis-panel video-panel" data-aos="fade-right">
+                    <div class="panel-header">
+                        <h3>🎥 Live Analysis Feed</h3>
+                        <span class="status-indicator" id="analysis-status">Ready</span>
+                    </div>
+                    <div class="video-container">
+                        <div class="video-placeholder" id="video-feed">
+                            <canvas id="analysis-canvas"></canvas>
+                            <div class="video-overlay">
+                                <div class="analysis-overlay" id="analysis-overlay"></div>
+                            </div>
+                        </div>
+                        <div class="video-controls">
+                            <button class="control-btn primary" id="start-analysis">
+                                <span class="btn-icon">▶️</span> Start Analysis
+                            </button>
+                            <button class="control-btn" id="stop-analysis" disabled>
+                                <span class="btn-icon">⏹️</span> Stop
+                            </button>
+                            <button class="control-btn" id="generate-report">
+                                <span class="btn-icon">📊</span> Generate Report
+                            </button>
+                            <button class="control-btn accent" id="live-coaching">
+                                <span class="btn-icon">🧠</span> Live Coaching
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biometric Metrics Panel -->
+                <div class="analysis-panel metrics-panel" data-aos="fade-left">
+                    <div class="panel-header">
+                        <h3>📊 Biometric Metrics</h3>
+                    </div>
+                    <div class="metrics-grid">
+                        <!-- Confidence Score -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Confidence Score</span>
+                                <span class="metric-trend" id="confidence-trend">→ Baseline</span>
+                            </div>
+                            <div class="metric-display">
+                                <div class="metric-value" id="confidence-value">0</div>
+                                <div class="metric-unit">%</div>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill confidence-fill" id="confidence-bar"></div>
+                            </div>
+                        </div>
+
+                        <!-- Engagement Level -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Engagement Level</span>
+                                <span class="metric-trend" id="engagement-trend">→ Baseline</span>
+                            </div>
+                            <div class="metric-display">
+                                <div class="metric-value" id="engagement-value">0</div>
+                                <div class="metric-unit">%</div>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill engagement-fill" id="engagement-bar"></div>
+                            </div>
+                        </div>
+
+                        <!-- Stress Indicators -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Stress Indicators</span>
+                                <span class="metric-trend" id="stress-trend">↗ Increasing</span>
+                            </div>
+                            <div class="metric-display">
+                                <div class="metric-value" id="stress-value">Low</div>
+                            </div>
+                            <div class="stress-indicator-dots">
+                                <span class="indicator-dot" data-level="1"></span>
+                                <span class="indicator-dot" data-level="2"></span>
+                                <span class="indicator-dot" data-level="3"></span>
+                                <span class="indicator-dot" data-level="4"></span>
+                                <span class="indicator-dot" data-level="5"></span>
+                            </div>
+                        </div>
+
+                        <!-- Posture Quality -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Posture Quality</span>
+                                <span class="metric-trend" id="posture-trend">↗ Improving</span>
+                            </div>
+                            <div class="metric-display">
+                                <div class="metric-value" id="posture-value">Good</div>
+                            </div>
+                            <div class="posture-visualization">
+                                <canvas id="posture-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Micro-Expressions Analysis -->
+            <div class="expression-panel" data-aos="fade-up">
+                <div class="panel-header">
+                    <h3>😊 Micro-Expressions Analysis</h3>
+                </div>
+                <div class="expressions-grid">
+                    <div class="expression-item">
+                        <span class="expression-emoji">😊</span>
+                        <span class="expression-label">Joy</span>
+                        <div class="expression-bar">
+                            <div class="expression-fill" id="joy-bar"></div>
+                        </div>
+                        <span class="expression-value" id="joy-value">0%</span>
+                    </div>
+                    <div class="expression-item">
+                        <span class="expression-emoji">😲</span>
+                        <span class="expression-label">Surprise</span>
+                        <div class="expression-bar">
+                            <div class="expression-fill" id="surprise-bar"></div>
+                        </div>
+                        <span class="expression-value" id="surprise-value">0%</span>
+                    </div>
+                    <div class="expression-item">
+                        <span class="expression-emoji">😠</span>
+                        <span class="expression-label">Anger</span>
+                        <div class="expression-bar">
+                            <div class="expression-fill" id="anger-bar"></div>
+                        </div>
+                        <span class="expression-value" id="anger-value">0%</span>
+                    </div>
+                    <div class="expression-item">
+                        <span class="expression-emoji">😢</span>
+                        <span class="expression-label">Sadness</span>
+                        <div class="expression-bar">
+                            <div class="expression-fill" id="sadness-bar"></div>
+                        </div>
+                        <span class="expression-value" id="sadness-value">0%</span>
+                    </div>
+                    <div class="expression-item">
+                        <span class="expression-emoji">😨</span>
+                        <span class="expression-label">Fear</span>
+                        <div class="expression-bar">
+                            <div class="expression-fill" id="fear-bar"></div>
+                        </div>
+                        <span class="expression-value" id="fear-value">0%</span>
+                    </div>
+                    <div class="expression-item">
+                        <span class="expression-emoji">🤢</span>
+                        <span class="expression-label">Disgust</span>
+                        <div class="expression-bar">
+                            <div class="expression-fill" id="disgust-bar"></div>
+                        </div>
+                        <span class="expression-value" id="disgust-value">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice & Body Language Analysis -->
+            <div class="advanced-analysis-grid">
+                <!-- Voice Analysis -->
+                <div class="analysis-panel voice-panel" data-aos="fade-right">
+                    <div class="panel-header">
+                        <h3>🎤 Voice Analysis</h3>
+                    </div>
+                    <div class="voice-metrics">
+                        <div class="voice-metric">
+                            <span class="voice-label">Pitch</span>
+                            <div class="voice-display">
+                                <span class="voice-value" id="pitch-value">0</span>
+                                <span class="voice-unit">Hz</span>
+                            </div>
+                            <canvas id="pitch-waveform"></canvas>
+                        </div>
+                        <div class="voice-metric">
+                            <span class="voice-label">Tone</span>
+                            <div class="voice-display">
+                                <span class="voice-value" id="tone-value">Neutral</span>
+                            </div>
+                            <div class="tone-indicators">
+                                <span class="tone-dot" data-tone="confident"></span>
+                                <span class="tone-dot" data-tone="uncertain"></span>
+                                <span class="tone-dot" data-tone="enthusiastic"></span>
+                                <span class="tone-dot" data-tone="calm"></span>
+                            </div>
+                        </div>
+                        <div class="voice-metric">
+                            <span class="voice-label">Clarity</span>
+                            <div class="voice-display">
+                                <span class="voice-value" id="clarity-value">0</span>
+                                <span class="voice-unit">%</span>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill clarity-fill" id="clarity-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body Language -->
+                <div class="analysis-panel body-panel" data-aos="fade-left">
+                    <div class="panel-header">
+                        <h3>🚶 Body Language</h3>
+                    </div>
+                    <div class="body-metrics">
+                        <div class="posture-score">
+                            <div class="score-circle">
+                                <svg viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" class="score-bg"></circle>
+                                    <circle cx="50" cy="50" r="45" class="score-progress" id="posture-score-circle"></circle>
+                                </svg>
+                                <div class="score-text">
+                                    <span class="score-value" id="posture-score-value">85</span>
+                                    <span class="score-label">Posture Score</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body-insights">
+                            <div class="insight-item">
+                                <span class="insight-icon">✓</span>
+                                <span class="insight-text" id="body-insight-1">Maintain straight shoulders</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-icon">↑</span>
+                                <span class="insight-text" id="body-insight-2">Good eye contact detected</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-icon">→</span>
+                                <span class="insight-text" id="body-insight-3">Open gestures observed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Insights Panel -->
+            <div class="insights-panel" data-aos="fade-up">
+                <div class="panel-header">
+                    <h3>💡 Live Coaching Insights</h3>
+                    <div class="ai-models">
+                        <span class="ai-badge active" data-model="gpt5">ChatGPT 5</span>
+                        <span class="ai-badge" data-model="claude">Claude Opus 4.1</span>
+                        <span class="ai-badge" data-model="gemini">Gemini 2.5 Pro</span>
+                    </div>
+                </div>
+                <div class="insights-feed" id="insights-feed">
+                    <div class="insight-message welcome">
+                        <span class="insight-time">Welcome</span>
+                        <span class="insight-content">Click "Start Analysis" to begin real-time biometric monitoring with AI-powered coaching insights.</span>
+                    </div>
+                </div>
+                <div class="insights-actions">
+                    <button class="action-btn" id="export-report">
+                        <span class="btn-icon">📄</span> Export PDF Report
+                    </button>
+                    <button class="action-btn" id="share-session">
+                        <span class="btn-icon">🔗</span> Share Session
+                    </button>
+                    <button class="action-btn primary" id="save-analysis">
+                        <span class="btn-icon">💾</span> Save Analysis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="/public/assets/logo.png" alt="Blaze Intelligence" class="footer-logo">
+                    <p class="footer-description">Championship Analytics Platform</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                        <a href="#" class="social-link">GitHub</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/coach">Neural Coach</a></li>
+                        <li><a href="/digital-combine">Digital Combine</a></li>
+                        <li><a href="/pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="/terms">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Blaze Intelligence. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="/public/js/neural-coach.js"></script>
+    <script src="/public/js/neural-network-bg.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Mobile menu toggle
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -172,6 +172,10 @@ app.get('/recruiting', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'recruiting.html'));
 });
 
+app.get('/coach', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'coach.html'));
+});
+
 app.get('/rankings', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'rankings.html'));
 });
