@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import SportsDataService from './src/services/sportsDataService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,8 +10,12 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Initialize sports data service
+const sportsData = new SportsDataService();
+
 // Enable CORS for all origins (required for Replit)
 app.use(cors());
+app.use(express.json());
 
 // Serve static files from both root and public directories
 app.use(express.static(__dirname));
@@ -73,6 +78,73 @@ app.get('/integration-hub', (req, res) => {
 app.get('/lone-star-legends', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'lone-star-legends.html'));
 });
+
+// API Routes for Sports Data
+app.get('/api/sports/nba/players', (req, res) => {
+  res.json(sportsData.getNBAPlayers());
+});
+
+app.get('/api/sports/nba/players/:id', (req, res) => {
+  const player = sportsData.getNBAPlayer(parseInt(req.params.id));
+  if (player) {
+    res.json(player);
+  } else {
+    res.status(404).json({ error: 'Player not found' });
+  }
+});
+
+app.get('/api/sports/nba/teams', (req, res) => {
+  res.json(sportsData.getNBATeams());
+});
+
+app.get('/api/sports/nba/teams/:abbr', (req, res) => {
+  const team = sportsData.getNBATeam(req.params.abbr);
+  if (team) {
+    res.json(team);
+  } else {
+    res.status(404).json({ error: 'Team not found' });
+  }
+});
+
+app.get('/api/sports/nba/teams/:abbr/analytics', (req, res) => {
+  const analytics = sportsData.getTeamAnalytics(req.params.abbr);
+  if (analytics) {
+    res.json(analytics);
+  } else {
+    res.status(404).json({ error: 'Team analytics not found' });
+  }
+});
+
+app.get('/api/sports/nba/standings', (req, res) => {
+  res.json(sportsData.getLeagueStandings('NBA'));
+});
+
+app.get('/api/sports/live', (req, res) => {
+  res.json(sportsData.getLiveGames());
+});
+
+app.get('/api/sports/nba/players/:id/projections', (req, res) => {
+  const projections = sportsData.getPlayerProjections(parseInt(req.params.id));
+  if (projections) {
+    res.json(projections);
+  } else {
+    res.status(404).json({ error: 'Player projections not found' });
+  }
+});
+
+app.get('/api/sports/nba/players/:id/advanced', (req, res) => {
+  const metrics = sportsData.getAdvancedMetrics(parseInt(req.params.id));
+  if (metrics) {
+    res.json(metrics);
+  } else {
+    res.status(404).json({ error: 'Advanced metrics not found' });
+  }
+});
+
+// Simulate data updates
+setInterval(() => {
+  sportsData.simulateDataUpdate();
+}, 5000);
 
 // Handle 404s by serving index.html
 app.use((req, res) => {
