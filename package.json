@@ -13,11 +13,16 @@
     "security:scan": "echo 'Security scan placeholder'",
     "security:protect": "echo 'Security protect placeholder'",
     "build:md": "node scripts/build-md.js",
-    "build": "npm run build:md && npm run validate:stats && npm run security:scan && cp -r public/* dist/ 2>/dev/null || true",
+    "build": "npm run build:md && npm run build:prod",
+    "build:prod": "node scripts/build-production.js",
     "deploy": "npm run build && npx wrangler pages deploy ./dist",
     "deploy:pages": "echo 'Deploy to Cloudflare Pages'",
-    "start": "node server.js",
-    "dev": "node server.js",
+    "start": "NODE_ENV=production node server.js",
+    "start:prod": "NODE_ENV=production PM2_HOME=.pm2 npx pm2 start ecosystem.config.js",
+    "dev": "NODE_ENV=development node server.js",
+    "logs": "npx pm2 logs",
+    "monitor": "npx pm2 monit",
+    "stop": "npx pm2 stop all",
     "preview": "npx wrangler pages dev ./dist"
   },
   "repository": {
@@ -84,6 +89,7 @@
     "express-validator": "^7.2.1",
     "gsap": "^3.13.0",
     "helmet": "^8.1.0",
+    "ioredis": "^5.7.0",
     "jsonwebtoken": "^9.0.2",
     "marked": "^16.2.0",
     "multer": "^2.0.2",
@@ -94,8 +100,12 @@
     "openai": "^5.20.0",
     "particles.js": "^2.0.0",
     "pg": "^8.16.3",
+    "pm2": "^6.0.10",
+    "redis": "^5.8.2",
     "stripe": "^18.5.0",
     "three": "^0.180.0",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
   }
 }
