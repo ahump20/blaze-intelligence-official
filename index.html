@@ -1113,6 +1113,148 @@
             font-size: 16px;
         }
         
+        /* Demo Mode Styling */
+        .demo-mode-badge {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid rgba(255, 165, 0, 0.3);
+            border-radius: 25px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        
+        .demo-indicator {
+            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+        
+        .demo-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+        
+        .demo-mode-banner {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid rgba(255, 165, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .demo-mode-label {
+            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .demo-mode-content p {
+            color: rgba(255, 255, 255, 0.9);
+            margin: 10px 0 0 0;
+        }
+        
+        /* User Journey Flow */
+        .user-journey-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 60px;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .journey-step {
+            text-align: center;
+            min-width: 180px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .journey-step:hover {
+            background: rgba(191, 87, 0, 0.05);
+            transform: translateY(-3px);
+        }
+        
+        .journey-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #BF5700 0%, #FF6B35 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 15px;
+            font-size: 18px;
+        }
+        
+        .journey-content h4 {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .journey-content p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .journey-link {
+            color: var(--burnt-orange);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .journey-link:hover {
+            color: var(--white);
+        }
+        
+        .journey-arrow {
+            color: var(--burnt-orange);
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .user-journey-flow {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .journey-arrow {
+                transform: rotate(90deg);
+            }
+            
+            .journey-step {
+                min-width: auto;
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+        
         /* Enhanced Mobile Optimizations */
         @media (max-width: 768px) {
             .comparison-header,
@@ -1617,23 +1759,66 @@
                 Quantify the intangibles. Predict performance. Win more games.
             </p>
             <div class="hero-buttons">
-                <a href="#dashboard" class="btn-primary">
-                    View Live Dashboard
+                <a href="/live-demo" class="btn-primary">
+                    Try Live Demo
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                        <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-5 3a9 9 0 110-18 9 9 0 010 18z"/>
                     </svg>
                 </a>
-                <a href="/manifesto" class="btn-secondary">
-                    Read Our Manifesto
+                <a href="#pricing" class="btn-secondary">
+                    View Pricing
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 11H3m6 0l-3 3m3-3l-3-3m12 0h6m-6 0l3 3m-3-3l3-3"/>
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
                     </svg>
                 </a>
+            </div>
+            
+            <!-- User Journey Flow -->
+            <div class="user-journey-flow">
+                <div class="journey-step">
+                    <div class="journey-number">1</div>
+                    <div class="journey-content">
+                        <h4>Learn</h4>
+                        <p>Explore our analytics platform</p>
+                        <a href="#analytics" class="journey-link">View Features →</a>
+                    </div>
+                </div>
+                <div class="journey-arrow">→</div>
+                <div class="journey-step">
+                    <div class="journey-number">2</div>
+                    <div class="journey-content">
+                        <h4>Demo</h4>
+                        <p>Try our live analytics dashboard</p>
+                        <a href="/live-demo" class="journey-link">Live Demo →</a>
+                    </div>
+                </div>
+                <div class="journey-arrow">→</div>
+                <div class="journey-step">
+                    <div class="journey-number">3</div>
+                    <div class="journey-content">
+                        <h4>Pricing</h4>
+                        <p>Choose your analytics plan</p>
+                        <a href="#pricing" class="journey-link">See Plans →</a>
+                    </div>
+                </div>
+                <div class="journey-arrow">→</div>
+                <div class="journey-step">
+                    <div class="journey-number">4</div>
+                    <div class="journey-content">
+                        <h4>Contact</h4>
+                        <p>Start your championship journey</p>
+                        <a href="mailto:austin@blaze-intelligence.com" class="journey-link">Get Started →</a>
+                    </div>
+                </div>
             </div>
         </div>
         
         <!-- Live Stats Bar -->
         <div class="live-stats-bar">
+            <div class="demo-mode-badge">
+                <span class="demo-indicator">DEMO MODE</span>
+                <span class="demo-text">Live production metrics available with subscription</span>
+            </div>
             <div class="stats-container">
                 <div class="stat-item">
                     <div class="stat-value" data-count="2847">2,847</div>
@@ -1800,10 +1985,36 @@
                     </p>
                     <div class="team-selector">
                         <select id="teamSelector" class="ai-input">
-                            <option value="dallas-cowboys">Dallas Cowboys</option>
-                            <option value="houston-astros">Houston Astros</option>
-                            <option value="texas-longhorns">Texas Longhorns</option>
-                            <option value="spurs">San Antonio Spurs</option>
+                            <option value="">Select a Team...</option>
+                            <optgroup label="College Football">
+                                <option value="texas-longhorns">Texas Longhorns</option>
+                                <option value="louisville-cardinals">Louisville Cardinals</option>
+                                <option value="tennessee-volunteers">Tennessee Volunteers</option>
+                                <option value="alabama-crimson-tide">Alabama Crimson Tide</option>
+                                <option value="georgia-bulldogs">Georgia Bulldogs</option>
+                                <option value="michigan-wolverines">Michigan Wolverines</option>
+                            </optgroup>
+                            <optgroup label="NFL">
+                                <option value="dallas-cowboys">Dallas Cowboys</option>
+                                <option value="kansas-city-chiefs">Kansas City Chiefs</option>
+                                <option value="buffalo-bills">Buffalo Bills</option>
+                                <option value="miami-dolphins">Miami Dolphins</option>
+                                <option value="tennessee-titans">Tennessee Titans</option>
+                                <option value="houston-texans">Houston Texans</option>
+                            </optgroup>
+                            <optgroup label="MLB">
+                                <option value="houston-astros">Houston Astros</option>
+                                <option value="texas-rangers">Texas Rangers</option>
+                                <option value="atlanta-braves">Atlanta Braves</option>
+                                <option value="los-angeles-dodgers">Los Angeles Dodgers</option>
+                                <option value="new-york-yankees">New York Yankees</option>
+                            </optgroup>
+                            <optgroup label="NBA">
+                                <option value="san-antonio-spurs">San Antonio Spurs</option>
+                                <option value="dallas-mavericks">Dallas Mavericks</option>
+                                <option value="houston-rockets">Houston Rockets</option>
+                                <option value="golden-state-warriors">Golden State Warriors</option>
+                            </optgroup>
                         </select>
                         <button class="ai-action-btn" id="analyzeTeamBtn">Analyze Team</button>
                     </div>
@@ -2173,6 +2384,12 @@
         <div class="section-header" data-aos="fade-up">
             <span class="section-badge">Live Dashboard</span>
             <h2 class="section-title">Player Performance Metrics</h2>
+            <div class="demo-mode-banner">
+                <div class="demo-mode-content">
+                    <span class="demo-mode-label">🎯 INTERACTIVE DEMO</span>
+                    <p>Sample data from Cardinals, Titans, and Longhorns programs. <a href="/live-demo" style="color: #BF5700;">Try Full Live Demo →</a></p>
+                </div>
+            </div>
             <p class="section-subtitle">
                 Real-time player tracking with comprehensive performance analytics.
             </p>
@@ -2314,6 +2531,7 @@
     <script src="/js/apiTester.js" defer></script>
     <script src="/js/sportsRadarService.js" defer></script>
     <script src="/js/championshipDashboard.js" defer></script>
+    <script src="/js/airtableIntegration.js" defer></script>
     <link rel="stylesheet" href="/css/championshipDashboard.css">
     
     <script>
