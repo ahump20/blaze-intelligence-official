@@ -70,6 +70,22 @@ const backupSystem = new BackupSystem(logger);
 const videoAnalysisEngine = new VideoAnalysisEngine();
 let sportsWebSocket;
 
+// Configure multer for video uploads
+const upload = multer({
+  dest: './uploads/video-analysis/',
+  limits: {
+    fileSize: 500 * 1024 * 1024 // 500MB
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['video/mp4', 'video/avi', 'video/mov', 'video/quicktime'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only video files are allowed.'));
+    }
+  }
+});
+
 // Initialize AI services with API keys
 const openai = process.env.OPENAI_API_KEY ? new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
