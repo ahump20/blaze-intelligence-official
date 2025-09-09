@@ -6,6 +6,9 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+import Stripe from 'stripe';
 import SportsDataService from './src/services/sportsDataService.js';
 import mlbAdapter from './src/data/mlb/adapter.js';
 import nflAdapter from './src/data/nfl/adapter.js';
@@ -31,6 +34,19 @@ app.set('trust proxy', 1);
 const sportsData = new SportsDataService();
 const liveSportsAdapter = new LiveSportsAdapter();
 const aiAnalytics = new AIAnalyticsService();
+
+// Initialize AI services with API keys
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+}) : null;
+
+const anthropic = process.env.ANTHROPIC_API_KEY ? new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
+}) : null;
+
+const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2024-12-18.acacia',
+}) : null;
 
 // Security middleware
 app.use(helmet({
@@ -742,6 +758,125 @@ app.get('/api/ai/gemini/health', async (req, res) => {
 
   } catch (error) {
     res.status(500).json({ status: 'error', error: error.message });
+  }
+});
+
+// OpenAI Team Analysis Endpoint
+app.post('/api/ai/openai/analyze-team', async (req, res) => {
+  try {
+    if (!openai) {
+      return res.status(503).json({ error: 'OpenAI not configured' });
+    }
+
+    const { prompt, model = 'gpt-4o-mini', max_tokens = 800, temperature = 0.3 } = req.body;
+
+    const completion = await openai.chat.completions.create({
+      model,
+      messages: [
+        {
+          role: 'system',
+          content: 'You are an expert sports analyst with deep knowledge of team performance, player statistics, and championship dynamics. Provide detailed, data-driven analysis.'
+        },
+        {
+          role: 'user',
+          content: prompt
+        }
+      ],
+      max_tokens,
+      temperature
+    });
+
+    res.json(completion);
+
+  } catch (error) {
+    console.error('OpenAI team analysis error:', error);
+    res.status(500).json({ error: 'Failed to analyze team', details: error.message });
+  }
+});
+
+// Anthropic Championship Prediction Endpoint
+app.post('/api/ai/anthropic/predict-championship', async (req, res) => {
+  try {
+    if (!anthropic) {
+      return res.status(503).json({ error: 'Anthropic not configured' });
+    }
+
+    const { prompt, max_tokens = 1000, temperature = 0.2 } = req.body;
+
+    const message = await anthropic.messages.create({
+      model: 'claude-3-haiku-20240307',
+      max_tokens,
+      temperature,
+      messages: [
+        {
+          role: 'user',
+          content: prompt
+        }
+      ]
+    });
+
+    res.json({ content: message.content[0].text });
+
+  } catch (error) {
+    console.error('Anthropic championship prediction error:', error);
+    res.status(500).json({ error: 'Failed to predict championship', details: error.message });
+  }
+});
+
+// Stripe Premium Subscription Endpoint
+app.post('/api/stripe/create-subscription', async (req, res) => {
+  try {
+    if (!stripe) {
+      return res.status(503).json({ error: 'Stripe not configured' });
+    }
+
+    const { email, priceId } = req.body;
+
+    // Create customer
+    const customer = await stripe.customers.create({
+      email,
+      metadata: {
+        product: 'blaze-intelligence-premium'
+      }
+    });
+
+    // Create subscription
+    const subscription = await stripe.subscriptions.create({
+      customer: customer.id,
+      items: [{ price: priceId }],
+      payment_behavior: 'default_incomplete',
+      expand: ['latest_invoice.payment_intent'],
+    });
+
+    res.json({
+      subscriptionId: subscription.id,
+      clientSecret: subscription.latest_invoice.payment_intent.client_secret,
+      customerId: customer.id
+    });
+
+  } catch (error) {
+    console.error('Stripe subscription error:', error);
+    res.status(500).json({ error: 'Failed to create subscription', details: error.message });
+  }
+});
+
+// Stripe Price Check Endpoint
+app.get('/api/stripe/prices', async (req, res) => {
+  try {
+    if (!stripe) {
+      return res.status(503).json({ error: 'Stripe not configured' });
+    }
+
+    const prices = await stripe.prices.list({
+      product: req.query.product,
+      active: true,
+    });
+
+    res.json(prices);
+
+  } catch (error) {
+    console.error('Stripe prices error:', error);
+    res.status(500).json({ error: 'Failed to fetch prices', details: error.message });
   }
 });
 

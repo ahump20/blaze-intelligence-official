@@ -67,6 +67,7 @@
   },
   "homepage": "https://github.com/austinhumphrey/blaze-intelligence-website#readme",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.61.0",
     "@notionhq/client": "^4.0.2",
     "aos": "^2.3.4",
     "axios": "^1.11.0",
@@ -83,7 +84,9 @@
     "node-cache": "^5.1.2",
     "node-fetch": "^3.3.2",
     "octokit": "^3.1.2",
+    "openai": "^5.20.0",
     "particles.js": "^2.0.0",
+    "stripe": "^18.5.0",
     "three": "^0.180.0"
   }
 }
