@@ -16,8 +16,8 @@
     "build": "npm run build:md && npm run validate:stats && npm run security:scan && cp -r public/* dist/ 2>/dev/null || true",
     "deploy": "npm run build && npx wrangler pages deploy ./dist",
     "deploy:pages": "echo 'Deploy to Cloudflare Pages'",
-    "start": "python3 -m http.server 8000",
-    "dev": "python3 -m http.server 8000",
+    "start": "node server.js",
+    "dev": "node server.js",
     "preview": "npx wrangler pages dev ./dist"
   },
   "repository": {
@@ -68,6 +68,8 @@
   "homepage": "https://github.com/austinhumphrey/blaze-intelligence-website#readme",
   "dependencies": {
     "@notionhq/client": "^4.0.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "marked": "^16.2.0",
     "octokit": "^3.1.2"
   }
