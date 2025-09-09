@@ -145,6 +145,10 @@ app.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'contact.html'));
 });
 
+app.get('/executive', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'executive-intelligence.html'));
+});
+
 app.get('/pricing', (req, res) => {
   res.sendFile(path.join(__dirname, 'pricing.html'));
 });
