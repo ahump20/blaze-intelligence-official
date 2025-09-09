@@ -565,17 +565,25 @@ class BlazeDataIntegration {
     }
 
     setupRealtimeUpdates() {
-        // Update data every 5 seconds
+        // Update data every 5 seconds with error handling
         setInterval(() => {
-            this.simulateDataUpdate();
-            this.updateCharts();
-            this.updateLiveStats();
+            try {
+                this.simulateDataUpdate();
+                this.updateCharts();
+                this.updateLiveStats();
+            } catch (error) {
+                console.warn('Data update failed:', error.message);
+            }
         }, this.dataUpdateInterval);
 
-        // Faster updates for live games (every 2 seconds)
+        // Faster updates for live games (every 10 seconds to reduce load)
         setInterval(() => {
-            this.updateLiveGames();
-        }, 2000);
+            try {
+                this.updateLiveGames();
+            } catch (error) {
+                console.warn('Live games update failed:', error.message);
+            }
+        }, 10000); // Reduced frequency
     }
 
     simulateDataUpdate() {
