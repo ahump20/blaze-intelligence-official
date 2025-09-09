@@ -57,9 +57,10 @@ The platform uses a **modern web application** architecture built with:
 
 ### Third-Party APIs and Data Sources
 - **MLB Stats API**: Official MLB statistics and game data (public API)
-- **OpenAI API**: AI-powered analytics and natural language processing
-- **Anthropic Claude**: Advanced AI analysis and content generation
-- **Stripe**: Payment processing and subscription management
+- **OpenAI API**: AI-powered analytics and natural language processing (CONFIGURED)
+- **Anthropic Claude**: Advanced AI analysis and content generation (CONFIGURED)
+- **Stripe**: Payment processing and subscription management (CONFIGURED)
+- **BallDontLie API**: Real-time NBA, NFL, and MLB data with free tier (INTEGRATED)
 - **Perfect Game**: Youth baseball scouting and tournament data
 - **College Football Data API**: College sports statistics and analytics
 
