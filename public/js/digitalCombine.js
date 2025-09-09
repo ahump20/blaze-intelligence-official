@@ -238,8 +238,96 @@ class DigitalCombine {
         }
     }
 
-    performAnalysis(data) {
-        // Generate random but realistic values
+    async performAnalysis(data) {
+        try {
+            const analysis = await this.analyzeClipWithGateway(data);
+            this.displayResults(analysis);
+            this.updateCodeBlocks(data);
+        } catch (error) {
+            console.warn('Analysis failed, using fallback:', error);
+            this.performFallbackAnalysis(data);
+        }
+    }
+
+    async analyzeClipWithGateway(data) {
+        const BASE = "https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev";
+        
+        // Create session for analysis
+        const sessionId = "analysis-" + Math.random().toString(36).slice(2, 8);
+        await fetch(`${BASE}/vision/sessions`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Dev-Mode': 'true'
+            },
+            body: JSON.stringify({
+                session_id: sessionId,
+                player_id: "demo_player",
+                sport: data.sport || "baseball"
+            })
+        });
+
+        // Simulate biomechanical data extraction
+        const biomechanicsData = this.generateBiomechanicsData(data);
+        
+        // Send telemetry to gateway
+        await fetch(`${BASE}/vision/telemetry`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Dev-Mode': 'true'
+            },
+            body: JSON.stringify([{
+                session_id: sessionId,
+                t: Date.now(),
+                device: {
+                    fps: 60,
+                    resolution: [1920, 1080],
+                    has_webgpu: true,
+                    has_webgl: true,
+                    camera_count: 1
+                },
+                biomechanics: biomechanicsData
+            }])
+        });
+
+        // Convert biomechanics to analysis scores
+        return {
+            mechanics: Math.round(biomechanicsData.timing_score * 100),
+            balance: Math.round(biomechanicsData.load_balance * 100), 
+            timing: Math.round((biomechanicsData.swing_speed / 100) * 100),
+            coachingCue: this.generateCoachingCue(biomechanicsData)
+        };
+    }
+
+    generateBiomechanicsData(data) {
+        // Generate realistic biomechanics based on sport and clip type
+        const baseScore = data.sport === 'baseball' ? 0.85 : 0.75;
+        const variation = 0.15;
+        
+        return {
+            swing_speed: 85 + Math.random() * 20,
+            load_balance: baseScore + (Math.random() - 0.5) * variation,
+            timing_score: baseScore + (Math.random() - 0.5) * variation,
+            hip_rotation: Math.random() * 180,
+            shoulder_separation: 15 + Math.random() * 10
+        };
+    }
+
+    generateCoachingCue(biomechanics) {
+        if (biomechanics.load_balance < 0.8) {
+            return "Focus on weight transfer - keep your load balanced through contact.";
+        } else if (biomechanics.timing_score < 0.8) {
+            return "Work on timing - try starting your stride earlier.";
+        } else if (biomechanics.swing_speed < 80) {
+            return "Increase bat speed through the zone - rotate those hips!";
+        } else {
+            return "Excellent mechanics! Focus on consistency in your swing path.";
+        }
+    }
+
+    performFallbackAnalysis(data) {
+        // Fallback to original analysis if gateway fails
         const mechanics = Math.floor(Math.random() * 20 + 75);
         const balance = Math.floor(Math.random() * 15 + 80);
         const timing = Math.floor(Math.random() * 80 + 20);

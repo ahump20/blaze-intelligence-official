@@ -37,7 +37,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://statsapi.mlb.com"]
+      connectSrc: ["'self'", "https://statsapi.mlb.com", "https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev", "wss://blaze-vision-ai-gateway.humphrey-austin20.workers.dev"]
     }
   }
 }));
@@ -46,7 +46,7 @@ app.use(compression());
 // CORS configuration
 const allowedOrigins = process.env.ALLOWED_ORIGINS ? 
   process.env.ALLOWED_ORIGINS.split(',') : 
-  ['http://localhost:5000', 'http://localhost:3000'];
+  ['http://localhost:5000', 'http://localhost:3000', 'https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev'];
 
 app.use(cors({
   origin: function(origin, callback) {
