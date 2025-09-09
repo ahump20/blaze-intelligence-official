@@ -41,7 +41,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://statsapi.mlb.com", "https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev", "wss://blaze-vision-ai-gateway.humphrey-austin20.workers.dev"]
+      connectSrc: ["'self'", "https://statsapi.mlb.com", "https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev", "wss://blaze-vision-ai-gateway.humphrey-austin20.workers.dev", "https://api.sportradar.us", "https://site.api.espn.com", "https://api.openai.com", "https://api.anthropic.com", "https://generativelanguage.googleapis.com"]
     }
   }
 }));
@@ -243,42 +243,60 @@ app.get('/proxy/nfl/scores', async (req, res) => {
 app.get('/api/sportsradar/mlb/teams', async (req, res) => {
   try {
     if (!process.env.SPORTSRADAR_API_KEY) {
-      return res.status(503).json({ error: 'SportsRadar API not configured' });
+      console.log('SportsRadar API Key status:', process.env.SPORTSRADAR_API_KEY ? 'Available' : 'Not configured');
+      return res.status(503).json({ 
+        error: 'SportsRadar API not configured',
+        available_keys: Object.keys(process.env).filter(k => k.includes('SPORTSRADAR'))
+      });
     }
     
     const url = `https://api.sportradar.us/mlb/trial/v7/en/league/hierarchy.json?api_key=${process.env.SPORTSRADAR_API_KEY}`;
     const response = await fetch(url);
     
     if (!response.ok) {
+      console.error(`SportsRadar MLB API responded with ${response.status}: ${response.statusText}`);
       throw new Error(`SportsRadar API error: ${response.status}`);
     }
     
     const data = await response.json();
+    console.log('✅ SportsRadar MLB data retrieved successfully');
     res.json(data);
   } catch (error) {
     console.error('SportsRadar MLB teams error:', error);
-    res.status(500).json({ error: 'Failed to fetch SportsRadar MLB data' });
+    res.status(500).json({ 
+      error: 'Failed to fetch SportsRadar MLB data',
+      details: error.message 
+    });
   }
 });
 
 app.get('/api/sportsradar/nfl/teams', async (req, res) => {
   try {
     if (!process.env.SPORTSRADAR_API_KEY) {
-      return res.status(503).json({ error: 'SportsRadar API not configured' });
+      console.log('SportsRadar API Key status:', process.env.SPORTSRADAR_API_KEY ? 'Available' : 'Not configured');
+      return res.status(503).json({ 
+        error: 'SportsRadar API not configured',
+        available_keys: Object.keys(process.env).filter(k => k.includes('SPORTSRADAR'))
+      });
     }
     
     const url = `https://api.sportradar.us/nfl/official/trial/v7/en/league/hierarchy.json?api_key=${process.env.SPORTSRADAR_API_KEY}`;
     const response = await fetch(url);
     
     if (!response.ok) {
+      console.error(`SportsRadar NFL API responded with ${response.status}: ${response.statusText}`);
       throw new Error(`SportsRadar API error: ${response.status}`);
     }
     
     const data = await response.json();
+    console.log('✅ SportsRadar NFL data retrieved successfully');
     res.json(data);
   } catch (error) {
     console.error('SportsRadar NFL teams error:', error);
-    res.status(500).json({ error: 'Failed to fetch SportsRadar NFL data' });
+    res.status(500).json({ 
+      error: 'Failed to fetch SportsRadar NFL data',
+      details: error.message 
+    });
   }
 });
 

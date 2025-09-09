@@ -6,14 +6,17 @@
     window.addEventListener('unhandledrejection', function(event) {
         const reason = event.reason;
         
-        // Suppress gateway connection errors to prevent console spam
+        // Suppress common development errors to prevent console spam
         if (reason && (
             reason.toString().includes('gateway') ||
             reason.toString().includes('Failed to fetch') ||
-            reason.toString().includes('NetworkError')
+            reason.toString().includes('NetworkError') ||
+            reason.toString().includes('API key') ||
+            reason.toString().includes('not configured') ||
+            reason.message === '' ||
+            !reason.toString()
         )) {
             event.preventDefault();
-            console.log('🔌 Gateway connection attempt (expected in development)');
             return;
         }
         
