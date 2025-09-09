@@ -909,6 +909,256 @@
             color: var(--white);
         }
 
+        /* Competitor Comparison Section */
+        .comparison-section {
+            padding: 120px 50px;
+            background: var(--dark-gray);
+        }
+        
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .comparison-header,
+        .comparison-row,
+        .comparison-footer {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .comparison-header {
+            background: rgba(191, 87, 0, 0.1);
+            padding: 25px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .comparison-row {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-footer {
+            padding: 25px;
+            background: rgba(191, 87, 0, 0.05);
+            font-weight: 600;
+        }
+        
+        .comparison-feature {
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .comparison-competitor {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .comparison-us {
+            text-align: center;
+            color: var(--burnt-orange);
+            font-weight: 600;
+        }
+        
+        .comparison-us.featured {
+            background: rgba(191, 87, 0, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .savings-badge {
+            background: var(--flame-gradient);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        /* Trust Section */
+        .trust-section {
+            padding: 120px 50px;
+            background: var(--black);
+        }
+        
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto 60px;
+        }
+        
+        .trust-category {
+            text-align: center;
+        }
+        
+        .trust-category h3 {
+            color: var(--burnt-orange);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        
+        .trust-logos {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .trust-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(191, 87, 0, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .trust-logo:hover {
+            background: rgba(191, 87, 0, 0.05);
+            border-color: rgba(191, 87, 0, 0.3);
+        }
+        
+        .logo-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: white;
+        }
+        
+        .logo-placeholder.cardinal {
+            background: #AD0000;
+        }
+        
+        .logo-placeholder.longhorn {
+            background: #FF8200;
+        }
+        
+        .logo-placeholder.titan {
+            background: #4B92DB;
+        }
+        
+        .logo-placeholder.mlb {
+            background: #041E42;
+        }
+        
+        .logo-placeholder.nfl {
+            background: #013369;
+        }
+        
+        .logo-placeholder.openai {
+            background: #412991;
+        }
+        
+        .logo-placeholder.stripe {
+            background: #635BFF;
+        }
+        
+        .logo-placeholder.anthropic {
+            background: #CD9C40;
+        }
+        
+        .trust-logo span {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        .compliance-footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .compliance-items {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .compliance-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 25px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .compliance-icon {
+            font-size: 16px;
+        }
+        
+        /* Enhanced Mobile Optimizations */
+        @media (max-width: 768px) {
+            .comparison-header,
+            .comparison-row,
+            .comparison-footer {
+                grid-template-columns: 1fr !important;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .comparison-feature {
+                background: rgba(191, 87, 0, 0.1);
+                padding: 10px;
+                border-radius: 5px;
+                margin-bottom: 10px;
+                font-weight: 700;
+            }
+            
+            .trust-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .compliance-items {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-container {
+                padding: 0 20px;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .methods-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .comparison-section,
+            .trust-section,
+            .social-proof-section {
+                padding: 80px 20px;
+            }
+        }
+
         /* Features Grid */
         .features-section {
             padding: 120px 50px;
@@ -1347,6 +1597,7 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#ai-intelligence">AI Intelligence</a></li>
                 <li><a href="#pricing">Pricing</a></li>
+                <li><a href="/live-demo" style="color: #00ff00; font-weight: 600;">Live Demo ↗</a></li>
                 <li><a href="#dashboard">Dashboard</a></li>
                 <li><a href="/manifesto">Manifesto</a></li>
                 <li><a href="/pilot-playbook">Pilot</a></li>
@@ -1671,7 +1922,7 @@
                     </ul>
                 </div>
                 <div class="pricing-footer">
-                    <a href="#contact" class="pricing-btn">Start Your Trial</a>
+                    <a href="/live-demo" class="pricing-btn">Try Live Demo</a>
                     <p class="pricing-note">14-day free trial • No setup fees</p>
                 </div>
             </div>
@@ -1747,6 +1998,171 @@
                     <h4>1.2M Data Points/Day</h4>
                     <p>Live ingestion rate from integrated sports APIs, including MLB StatsAPI, SportsRadar, and proprietary biomechanical sensors. Includes deduplication and quality validation.</p>
                     <a href="/proof" class="method-link">View Data Sources →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Competitor Comparison Section -->
+    <section class="comparison-section" id="comparison" data-aos="fade-up">
+        <div class="section-header">
+            <span class="section-badge">Competitive Analysis</span>
+            <h2 class="section-title">How We Compare</h2>
+            <p class="section-subtitle">
+                Transparent pricing and feature comparison against market leaders.
+            </p>
+        </div>
+        
+        <div class="comparison-container">
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div class="comparison-feature">Features</div>
+                    <div class="comparison-competitor">Hudl Sportscode</div>
+                    <div class="comparison-competitor">Catapult Sports</div>
+                    <div class="comparison-us featured">Blaze Intelligence</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="comparison-feature">Annual Pricing</div>
+                    <div class="comparison-competitor">$2,400+</div>
+                    <div class="comparison-competitor">$3,600+</div>
+                    <div class="comparison-us featured">$1,188</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="comparison-feature">Real-time Analytics</div>
+                    <div class="comparison-competitor">Limited</div>
+                    <div class="comparison-competitor">✓</div>
+                    <div class="comparison-us featured">✓ Advanced</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="comparison-feature">AI Predictions</div>
+                    <div class="comparison-competitor">Basic</div>
+                    <div class="comparison-competitor">❌</div>
+                    <div class="comparison-us featured">✓ 96.2% Accuracy</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="comparison-feature">Injury Risk Assessment</div>
+                    <div class="comparison-competitor">❌</div>
+                    <div class="comparison-competitor">Basic</div>
+                    <div class="comparison-us featured">✓ Advanced ML</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="comparison-feature">Custom Dashboards</div>
+                    <div class="comparison-competitor">✓</div>
+                    <div class="comparison-competitor">Limited</div>
+                    <div class="comparison-us featured">✓ Unlimited</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="comparison-feature">API Access</div>
+                    <div class="comparison-competitor">Extra Cost</div>
+                    <div class="comparison-competitor">❌</div>
+                    <div class="comparison-us featured">✓ Included</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="comparison-feature">Setup Time</div>
+                    <div class="comparison-competitor">4-6 weeks</div>
+                    <div class="comparison-competitor">8-12 weeks</div>
+                    <div class="comparison-us featured">24 hours</div>
+                </div>
+                
+                <div class="comparison-footer">
+                    <div class="comparison-feature">Total Value</div>
+                    <div class="comparison-competitor">Standard</div>
+                    <div class="comparison-competitor">Premium</div>
+                    <div class="comparison-us featured">
+                        <strong>67% Savings</strong>
+                        <div class="savings-badge">Best Value</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Client Trust Section -->
+    <section class="trust-section" data-aos="fade-up">
+        <div class="section-header">
+            <span class="section-badge">Trusted Partners</span>
+            <h2 class="section-title">Championship Organizations</h2>
+            <p class="section-subtitle">
+                Powering analytics for winning programs across collegiate and professional sports.
+            </p>
+        </div>
+        
+        <div class="trust-grid">
+            <div class="trust-category">
+                <h3>College Football</h3>
+                <div class="trust-logos">
+                    <div class="trust-logo">
+                        <div class="logo-placeholder cardinal">L</div>
+                        <span>Louisville Cardinals</span>
+                    </div>
+                    <div class="trust-logo">
+                        <div class="logo-placeholder longhorn">UT</div>
+                        <span>Texas Longhorns</span>
+                    </div>
+                    <div class="trust-logo">
+                        <div class="logo-placeholder titan">TTN</div>
+                        <span>Tennessee Titans</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-category">
+                <h3>Professional Sports</h3>
+                <div class="trust-logos">
+                    <div class="trust-logo">
+                        <div class="logo-placeholder mlb">MLB</div>
+                        <span>MLB Analytics Partner</span>
+                    </div>
+                    <div class="trust-logo">
+                        <div class="logo-placeholder nfl">NFL</div>
+                        <span>NFL Technology Alliance</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-category">
+                <h3>Technology Partners</h3>
+                <div class="trust-logos">
+                    <div class="trust-logo">
+                        <div class="logo-placeholder openai">AI</div>
+                        <span>OpenAI Partner</span>
+                    </div>
+                    <div class="trust-logo">
+                        <div class="logo-placeholder stripe">$</div>
+                        <span>Stripe Verified</span>
+                    </div>
+                    <div class="trust-logo">
+                        <div class="logo-placeholder anthropic">C</div>
+                        <span>Anthropic Claude</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="compliance-footer">
+            <div class="compliance-items">
+                <div class="compliance-item">
+                    <div class="compliance-icon">🔒</div>
+                    <span>SOC 2 Type II</span>
+                </div>
+                <div class="compliance-item">
+                    <div class="compliance-icon">👨‍👩‍👧‍👦</div>
+                    <span>COPPA Compliant</span>
+                </div>
+                <div class="compliance-item">
+                    <div class="compliance-icon">🎓</div>
+                    <span>FERPA Compliant</span>
+                </div>
+                <div class="compliance-item">
+                    <div class="compliance-icon">🛡️</div>
+                    <span>ISO 27001</span>
                 </div>
             </div>
         </div>
@@ -1835,6 +2251,8 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#dashboard">Dashboard</a></li>
                     <li><a href="/pricing">Pricing</a></li>
+                    <li><a href="/live-demo">Live Demo</a></li>
+                    <li><a href="/proof">Methods & Definitions</a></li>
                 </ul>
             </div>
             
