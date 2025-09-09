@@ -1,0 +1,176 @@
+{
+  "name": "blaze-intelligence",
+  "version": "1.0.0",
+  "description": "Institutional-grade sports intelligence platform - The Bloomberg Terminal of sports",
+  "author": "John Austin Humphrey <ahump20@outlook.com>",
+  "license": "PROPRIETARY",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "test": "jest --watch",
+    "test:ci": "jest --ci",
+    "analyze": "ANALYZE=true next build",
+    "ws:dev": "nodemon blaze-websocket/server.js",
+    "ws:prod": "node blaze-websocket/server.js",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "postinstall": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "next": "14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    
+    "// WebSocket & Real-time": "",
+    "socket.io": "^4.6.0",
+    "socket.io-client": "^4.6.0",
+    "ioredis": "^5.3.2",
+    "ws": "^8.16.0",
+    
+    "// UI & Styling": "",
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "framer-motion": "^11.0.0",
+    "clsx": "^2.1.0",
+    
+    "// Data Visualization": "",
+    "chart.js": "^4.4.1",
+    "react-chartjs-2": "^5.2.0",
+    "d3": "^7.8.5",
+    "recharts": "^2.10.0",
+    "three": "^0.160.0",
+    "@react-three/fiber": "^8.15.0",
+    "@react-three/drei": "^9.96.0",
+    
+    "// Analytics & Monitoring": "",
+    "mixpanel-browser": "^2.48.0",
+    "@sentry/nextjs": "^7.99.0",
+    "@vercel/analytics": "^1.1.2",
+    "@vercel/speed-insights": "^1.0.0",
+    "web-vitals": "^3.5.1",
+    
+    "// API Documentation": "",
+    "swagger-ui-react": "^5.11.0",
+    "swagger-jsdoc": "^6.2.8",
+    
+    "// Authentication & Security": "",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "next-auth": "^4.24.5",
+    "@auth/prisma-adapter": "^1.0.0",
+    
+    "// Database & ORM": "",
+    "@prisma/client": "^5.8.0",
+    "prisma": "^5.8.0",
+    "mongodb": "^6.3.0",
+    "pg": "^8.11.3",
+    
+    "// HTTP & API": "",
+    "axios": "^1.6.5",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "compression": "^1.7.4",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    
+    "// Utilities": "",
+    "uuid": "^9.0.1",
+    "date-fns": "^3.3.0",
+    "lodash": "^4.17.21",
+    "zod": "^3.22.4",
+    "@tanstack/react-query": "^5.17.0",
+    "react-hook-form": "^7.49.0",
+    "@hookform/resolvers": "^3.3.4",
+    
+    "// Machine Learning": "",
+    "@tensorflow/tfjs": "^4.16.0",
+    "brain.js": "^2.0.0-beta.23",
+    
+    "// Testing": "",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/jest-dom": "^6.2.0",
+    "@testing-library/user-event": "^14.5.2",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    
+    "// Dev Tools": "",
+    "@storybook/react": "^7.6.0",
+    "@storybook/nextjs": "^7.6.0",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
+    "prettier": "^3.2.4",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "nodemon": "^3.0.2",
+    "@next/bundle-analyzer": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/mixpanel-browser": "^2.47.5",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/compression": "^1.7.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/lodash": "^4.14.202",
+    "@types/uuid": "^9.0.7",
+    "@types/ws": "^8.5.10",
+    "@types/swagger-ui-react": "^4.18.3"
+  },
+  "engines": {
+    "node": ">=18.17.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.1%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml}": [
+      "prettier --write"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blaze-intelligence/platform.git"
+  },
+  "keywords": [
+    "sports",
+    "analytics",
+    "ai",
+    "betting",
+    "intelligence",
+    "real-time",
+    "websocket",
+    "predictions",
+    "mlb",
+    "nfl",
+    "nba",
+    "ncaa"
+  ]
+}
