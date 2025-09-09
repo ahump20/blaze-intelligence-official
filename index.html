@@ -1721,6 +1721,46 @@
             }
         }
     </style>
+    
+    <!-- Centralized Metrics Configuration -->
+    <script type="module">
+        import { BLAZE_METRICS } from '/metrics-config.js';
+        
+        // Update all metrics on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update accuracy metrics
+            const accuracyElements = document.querySelectorAll('[data-metric="accuracy"]');
+            accuracyElements.forEach(el => {
+                el.textContent = BLAZE_METRICS.accuracy.value;
+            });
+            
+            // Update data points
+            const dataPointElements = document.querySelectorAll('[data-metric="data-points"]');
+            dataPointElements.forEach(el => {
+                el.textContent = BLAZE_METRICS.data_points.value;
+            });
+            
+            // Update cost savings
+            const savingsElements = document.querySelectorAll('[data-metric="savings-range"]');
+            savingsElements.forEach(el => {
+                el.textContent = `${BLAZE_METRICS.cost_savings.minimum_percentage}-${BLAZE_METRICS.cost_savings.maximum_percentage}%`;
+            });
+            
+            // Update pricing
+            const pricingElements = document.querySelectorAll('[data-metric="annual-price"]');
+            pricingElements.forEach(el => {
+                el.textContent = `$${BLAZE_METRICS.pricing.annual_fee}`;
+            });
+            
+            // Update any remaining 96.2% to 94.6%
+            const accuracyText = document.querySelectorAll('*');
+            accuracyText.forEach(el => {
+                if (el.children.length === 0 && el.textContent) {
+                    el.textContent = el.textContent.replace(/96\.2%/g, BLAZE_METRICS.accuracy.value);
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Preloader -->
@@ -1838,7 +1878,7 @@
                     <div class="stat-label">Players Analyzed</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value" data-count="96.2">96.2%</div>
+                    <div class="stat-value" data-count="94.6">94.6%</div>
                     <div class="stat-label">Prediction Accuracy</div>
                 </div>
                 <div class="stat-item">
@@ -1932,7 +1972,7 @@
                 <h3 class="feature-title">AI-Powered Predictions</h3>
                 <p class="feature-description">
                     Machine learning models trained on millions of games predict outcomes 
-                    with 96.2% accuracy.
+                    with 94.6% accuracy.
                 </p>
             </div>
             
@@ -2242,7 +2282,7 @@
                     <div class="comparison-feature">AI Predictions</div>
                     <div class="comparison-competitor">Basic</div>
                     <div class="comparison-competitor">❌</div>
-                    <div class="comparison-us featured">✓ 96.2% Accuracy</div>
+                    <div class="comparison-us featured">✓ 94.6% Accuracy</div>
                 </div>
                 
                 <div class="comparison-row">
@@ -2643,7 +2683,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#dashboard">Dashboard</a></li>
                     <li><a href="/pricing">Pricing</a></li>
-                    <li><a href="/live-demo">Live Demo</a></li>
+                    <li><a href="/live-demo.html">Live Demo</a></li>
                     <li><a href="/proof">Methods & Definitions</a></li>
                 </ul>
             </div>
@@ -2680,6 +2720,10 @@
         
         <div class="footer-bottom">
             <p>© 2025 Blaze Intelligence. Courage • Grit • Leadership</p>
+            <p style="margin-top: 10px;">
+                <a href="/privacy.html" style="color: rgba(255, 255, 255, 0.6); margin: 0 10px;">Privacy Policy</a> •
+                <a href="/terms.html" style="color: rgba(255, 255, 255, 0.6); margin: 0 10px;">Terms of Service</a>
+            </p>
         </div>
     </footer>
     
