@@ -680,6 +680,86 @@ app.get('/api/ai/gemini/health', async (req, res) => {
   }
 });
 
+// Comprehensive API Status endpoint
+app.get('/api/status', async (req, res) => {
+  try {
+    const apiStatus = {
+      timestamp: new Date().toISOString(),
+      server: 'healthy',
+      apis: {
+        sportsradar: {
+          configured: !!process.env.SPORTSRADAR_API_KEY,
+          vault_configured: !!process.env.SPORTSRADAR_VAULT_API_KEY
+        },
+        openai: {
+          configured: !!process.env.OPENAI_API_KEY
+        },
+        anthropic: {
+          configured: !!process.env.ANTHROPIC_API_KEY
+        },
+        gemini: {
+          configured: !!process.env.GEMINI_API_KEY
+        },
+        postman: {
+          configured: !!process.env.POSTMAN_API_KEY
+        }
+      },
+      endpoints: {
+        mlb_stats: '/api/mlb/teams',
+        nfl_proxy: '/proxy/nfl/teams',
+        sportsradar_mlb: '/api/sportsradar/mlb/teams',
+        sportsradar_nfl: '/api/sportsradar/nfl/teams',
+        live_sports: '/api/live-sports/all',
+        ai_analytics: '/api/ai/openai/analyze-team'
+      },
+      features: {
+        championship_dashboard: true,
+        ai_analytics: true,
+        live_data: true,
+        historical_vault: true
+      }
+    };
+
+    res.json(apiStatus);
+  } catch (error) {
+    res.status(500).json({ 
+      error: 'Status check failed',
+      details: error.message,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
+// Gateway health check endpoint
+app.get('/api/gateway/health', async (req, res) => {
+  try {
+    // Test gateway connection
+    const gatewayUrl = 'https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev/health';
+    const response = await fetch(gatewayUrl);
+    
+    if (response.ok) {
+      const data = await response.json();
+      res.json({
+        status: 'healthy',
+        gateway: data,
+        timestamp: new Date().toISOString()
+      });
+    } else {
+      res.json({
+        status: 'degraded',
+        gateway_status: response.status,
+        timestamp: new Date().toISOString()
+      });
+    }
+  } catch (error) {
+    res.json({
+      status: 'offline',
+      error: error.message,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
 // MLB API Routes (Real Data)
 app.get('/api/mlb/teams/:id', async (req, res) => {
   try {
