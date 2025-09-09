@@ -393,24 +393,38 @@ class DashboardVisualization {
 
 // Initialize dashboard visualizations when ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Create visualization containers if they don't exist
-    const dashboardSections = document.querySelectorAll('.dashboard-section');
-    
-    dashboardSections.forEach((section, index) => {
-        const vizContainer = document.createElement('div');
-        vizContainer.id = `viz-container-${index}`;
-        vizContainer.style.width = '100%';
-        vizContainer.style.height = '400px';
-        vizContainer.style.position = 'relative';
-        vizContainer.style.marginTop = '2rem';
-        vizContainer.style.borderRadius = '20px';
-        vizContainer.style.overflow = 'hidden';
-        vizContainer.classList.add('glass-card');
-        
-        // Only add to specific sections
-        if (section.querySelector('.live-stats-card') && index === 0) {
-            section.appendChild(vizContainer);
-            new DashboardVisualization(`viz-container-${index}`);
+    try {
+        // Check if Three.js is loaded
+        if (typeof THREE === 'undefined') {
+            console.warn('Three.js not loaded, skipping dashboard visualizations');
+            return;
         }
-    });
+        
+        // Create visualization containers if they don't exist
+        const dashboardSections = document.querySelectorAll('.dashboard-section');
+        
+        dashboardSections.forEach((section, index) => {
+            try {
+                const vizContainer = document.createElement('div');
+                vizContainer.id = `viz-container-${index}`;
+                vizContainer.style.width = '100%';
+                vizContainer.style.height = '400px';
+                vizContainer.style.position = 'relative';
+                vizContainer.style.marginTop = '2rem';
+                vizContainer.style.borderRadius = '20px';
+                vizContainer.style.overflow = 'hidden';
+                vizContainer.classList.add('glass-card');
+                
+                // Only add to specific sections
+                if (section.querySelector('.live-stats-card') && index === 0) {
+                    section.appendChild(vizContainer);
+                    new DashboardVisualization(`viz-container-${index}`);
+                }
+            } catch (error) {
+                console.warn(`Dashboard visualization ${index} failed:`, error);
+            }
+        });
+    } catch (error) {
+        console.warn('Dashboard visualizations failed to initialize:', error);
+    }
 });

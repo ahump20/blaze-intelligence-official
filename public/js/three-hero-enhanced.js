@@ -378,16 +378,14 @@ class BlazeHeroVisualization {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if Three.js is loaded
-    if (typeof THREE !== 'undefined') {
-        window.blazeHeroViz = new BlazeHeroVisualization();
-    } else {
-        // Load Three.js if not already loaded
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-        script.onload = () => {
+    try {
+        // Check if Three.js is loaded
+        if (typeof THREE !== 'undefined') {
             window.blazeHeroViz = new BlazeHeroVisualization();
-        };
-        document.head.appendChild(script);
+        } else {
+            console.warn('Three.js not loaded, skipping hero visualization');
+        }
+    } catch (error) {
+        console.warn('Hero visualization failed to initialize:', error);
     }
 });
