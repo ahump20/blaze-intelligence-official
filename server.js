@@ -196,6 +196,10 @@ app.get('/pressure-dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'pressure-dashboard.html'));
 });
 
+app.get('/neural-coach', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'neural-coach.html'));
+});
+
 // Health check endpoint
 app.get('/healthz', (req, res) => {
   res.json({
