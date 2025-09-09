@@ -192,6 +192,10 @@ app.get('/methods', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'methods.html'));
 });
 
+app.get('/pressure-dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'pressure-dashboard.html'));
+});
+
 // Health check endpoint
 app.get('/healthz', (req, res) => {
   res.json({
@@ -1052,6 +1056,12 @@ app.get('/api/gateway/health', async (req, res) => {
     });
   }
 });
+
+// Import Pressure Analytics Routes
+import pressureAnalyticsRoutes from './src/api/pressure-analytics.js';
+
+// Mount Pressure Analytics API
+app.use('/api', pressureAnalyticsRoutes);
 
 // MLB API Routes (Real Data)
 app.get('/api/mlb/teams/:id', async (req, res) => {
