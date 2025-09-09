@@ -11,6 +11,7 @@ import mlbAdapter from './src/data/mlb/adapter.js';
 import nflAdapter from './src/data/nfl/adapter.js';
 import cfbAdapter from './src/data/cfb/adapter.js';
 import cache from './src/data/cache.js';
+import fetch from 'node-fetch';
 
 // Load environment variables
 dotenv.config();
