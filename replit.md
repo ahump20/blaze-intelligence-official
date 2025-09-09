@@ -24,7 +24,11 @@ The platform uses a **modern web application** architecture built with:
 - **Chart.js** for data visualization and dashboard components
 - **GSAP** for animations and scroll-triggered effects
 - **Progressive Web App (PWA)** capabilities with service worker implementation
-- **Glassmorphism UI design** with dark theme and burnt orange (#BF5700) brand colors
+- **Navy & Burnt Orange Theme** with glassmorphism UI design
+  - Primary: Dark Navy (#0A192F) background with Light Navy (#112240) accents
+  - Accent: Burnt Orange (#BF5700) for CTAs and highlights
+  - Typography: Inter for sans-serif, Roboto Mono for monospace
+  - Clean glass panel effects with backdrop filters
 
 ### Backend Architecture
 **Node.js/Express server** with the following design patterns:
