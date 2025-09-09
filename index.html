@@ -18,7 +18,7 @@
     <!-- Font Preloads -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -40,16 +40,16 @@
     <style>
         :root {
             --burnt-orange: #BF5700;
-            --dark-burnt-orange: #8B3A00;
-            --flame-gradient: linear-gradient(135deg, #FF6B35 0%, #BF5700 50%, #8B3A00 100%);
-            --black: #0A0A0A;
-            --dark-gray: #1A1A1A;
-            --medium-gray: #2D2D2D;
-            --light-gray: #F5F5F7;
-            --white: #FFFFFF;
-            --success: #00DC82;
-            --warning: #FFB800;
-            --danger: #FF3838;
+            --light-orange: #FFD7B8;
+            --dark-navy: #0A192F;
+            --light-navy: #112240;
+            --slate: #8892B0;
+            --light-slate: #CCD6F6;
+            --white: #E6F1FF;
+            --success: #64FFDA;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
         
         * {
@@ -59,9 +59,9 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--black);
-            color: var(--white);
+            font-family: var(--font-sans);
+            background: var(--dark-navy);
+            color: var(--slate);
             overflow-x: hidden;
             line-height: 1.6;
         }
