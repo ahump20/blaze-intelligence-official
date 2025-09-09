@@ -1,0 +1,170 @@
+P0 — Ship now
+
+Hero + Above-the-Fold
+
+Add crisp value prop + proof bar under CTA: “Sub-100ms responses · 94.6% accuracy · 2.3M athlete profiles”.
+
+Replace secondary CTA with “Launch Live Dashboard” that jumps to a real-time section.
+
+Live Sports Dashboard (MLB/NBA/NFL)
+
+Team selector → recent results, next game, simple EWMA projection card.
+
+Player panel (MLB first): season line (AVG/OBP/SLG/HR/RBI), last-10 sparkline, “Pressure Response Index” pill.
+
+System status strip (health, p95, sessions, ingest QPS) pinned.
+
+Digital Combine™ Demo
+
+Drop-zone for clip (or sample assets) → run pose overlay → output: Mechanics score, Load balance, Timing delta, Coaching cue.
+
+“Reproduce analysis” code tab (copyable curl/JS).
+
+Pricing page clarity
+
+Three tiles with explicit deliverables:
+
+Grassroots: 1 athlete, weekly scorecards, NIL estimate.
+
+Competitive: 30 athletes, roster board, scouting reports, CSV export.
+
+Elite: SSO, on-prem gateway, API quota, custom models.
+
+Add “What’s included” matrix and a 14-day trial CTA.
+
+Founder card
+
+Tight bio (2 lines) + single headshot + “Book 15-min call” link.
+
+Trust & Compliance band
+
+“SOC 2 Type II · COPPA/FERPA compliant · 99.95% uptime · Zero false claims.”
+
+Content safety
+
+Scrub all hard-coded secrets; move to env vars; blocklist via .gitignore.
+(Do not print keys in logs, HTML, or client JS.)
+
+P1 — 1–2 sprints
+
+NIL Valuation Engine™ mini-app
+
+Inputs: sport, level, social reach, recent performance.
+
+Output card: valuation range, confidence, drivers (Performance 40% / Reach 30% / Engagement 20% / Trajectory 10%).
+
+“Export PDF” and “Share link”.
+
+Cardinals Readiness Board v2
+
+Four pillar tiles with deltas: Champion Readiness, Cognitive Leverage, Prescriptive Score, Enigma Factor.
+
+Timeline slider to see changes week-over-week.
+
+Case Studies (no hype)
+
+“What we did / Result / How to validate” format (3 tiles).
+
+Add a “Proof policy” page stating verification methods and sample datasets.
+
+SEO & CWV
+
+Preload hero font; lazy-load non-critical images; compress JSON responses; serve images in AVIF; ensure LCP < 2.0s, INP < 200ms.
+
+Accessibility
+
+Color-contrast ≥ 4.5:1, keyboard nav, focus rings, aria-labels on controls, alt text for charts.
+
+Analytics
+
+GA4 + Mixpanel events: view_dashboard, select_team, player_loaded, projection_viewed, lead_submitted.
+
+Funnel: Hero → Live Dashboard → Pricing → Contact.
+
+P2 — Differentiators
+
+Prescriptive Scouting™ playbooks
+
+Role fit tile (“67% closer, 23% setup”) with training blocks and injury-risk note.
+
+One-click “Email to athlete” with PDF report.
+
+Championship Dynamics™ microsite
+
+Pressure Response, Momentum Creation, Adversity Recovery, Leadership Influence—each with definition + example clip + metric ranges.
+
+Resource Hub
+
+Coach one-pagers, API quickstart, model cards, privacy/terms, status page, blog.
+
+Internationalization
+
+Minimal i18n (en/es) for hero, pricing, contact.
+
+Concrete page map
+
+/ Hero · Proof bar · Live Dashboard strip · 4 Pillars · Logos/Trust · CTA
+
+/live Full real-time dashboard (team/player panels + system status)
+
+/digital-combine Upload demo + cues + “reproduce analysis”
+
+/pricing Tiers, comparison matrix, FAQs
+
+/nil Valuation mini-app
+
+/case-studies Three validated studies
+
+/resources Docs, SDK, model cards
+
+/contact Lead form with required fields
+
+Component checklist (drop-in)
+
+<SystemStatusBar /> (health, p95, sessions, QPS)
+
+<TeamSelector sport="mlb" /> → sets teamId
+
+<TeamSnapshot /> (record, last 5, next game, proj)
+
+<PlayerSummary /> (MLB: season + last-10 sparkline)
+
+<ProjectionCard method="EWMA" />
+
+<NILCalculator /> (range + drivers + confidence)
+
+<ComplianceStrip />
+
+<LeadForm /> (server-side submit + thank-you)
+
+Content to add (ready-to-paste)
+
+Hero h1:
+“Real-time sports intelligence for decisions that win.”
+
+Subcopy:
+“Under 100ms response. Predictive scouting, Digital Combine™, and NIL valuation in one platform. No hype. Just measurable outcomes.”
+
+Proof policy excerpt:
+“We publish methods, sample datasets, and error bounds. No unnamed clients. All metrics are reproducible.”
+
+Lead form required fields:
+Name, Org, Email, Sport, Level, Use-case, Consent.
+
+Guardrails
+
+No unverifiable claims. Gate any “trusted by” copy behind explicit, linkable evidence.
+
+Keep secrets in server env only. Never in client bundles.
+
+Return JSON from demo endpoints capped and cached; implement rate limiting.
+
+If you want, I can supply the exact React/vanilla components for:
+
+Team/Player dashboard (selectors, KPIs, sparkline)
+
+NIL calculator
+
+Digital Combine upload panel
+
+Say the word and I’ll drop in production-ready components and minimal CSS.
