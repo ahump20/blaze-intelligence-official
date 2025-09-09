@@ -11,7 +11,7 @@ import mlbAdapter from './src/data/mlb/adapter.js';
 import nflAdapter from './src/data/nfl/adapter.js';
 import cfbAdapter from './src/data/cfb/adapter.js';
 import cache from './src/data/cache.js';
-import fetch from 'node-fetch';
+import LiveSportsAdapter from './lib/liveSportsAdapter.js';
 
 // Load environment variables
 dotenv.config();
@@ -26,8 +26,9 @@ const PORT = process.env.PORT || 5000;
 // Use specific trust proxy setting for Replit environment
 app.set('trust proxy', 1);
 
-// Initialize sports data service
+// Initialize sports data services
 const sportsData = new SportsDataService();
+const liveSportsAdapter = new LiveSportsAdapter();
 
 // Security middleware
 app.use(helmet({
@@ -233,6 +234,141 @@ app.get('/proxy/nfl/scores', async (req, res) => {
   } catch (error) {
     console.error('NFL scores proxy error:', error);
     res.status(500).json({ error: 'Failed to fetch NFL scores' });
+  }
+});
+
+// SportsRadar API proxy endpoints (requires API key)
+app.get('/api/sportsradar/mlb/teams', async (req, res) => {
+  try {
+    if (!process.env.SPORTSRADAR_API_KEY) {
+      return res.status(503).json({ error: 'SportsRadar API not configured' });
+    }
+    
+    const url = `https://api.sportradar.us/mlb/trial/v7/en/league/hierarchy.json?api_key=${process.env.SPORTSRADAR_API_KEY}`;
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`SportsRadar API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('SportsRadar MLB teams error:', error);
+    res.status(500).json({ error: 'Failed to fetch SportsRadar MLB data' });
+  }
+});
+
+app.get('/api/sportsradar/nfl/teams', async (req, res) => {
+  try {
+    if (!process.env.SPORTSRADAR_API_KEY) {
+      return res.status(503).json({ error: 'SportsRadar API not configured' });
+    }
+    
+    const url = `https://api.sportradar.us/nfl/official/trial/v7/en/league/hierarchy.json?api_key=${process.env.SPORTSRADAR_API_KEY}`;
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`SportsRadar API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('SportsRadar NFL teams error:', error);
+    res.status(500).json({ error: 'Failed to fetch SportsRadar NFL data' });
+  }
+});
+
+app.get('/api/sportsradar/ncaafb/teams', async (req, res) => {
+  try {
+    if (!process.env.SPORTSRADAR_API_KEY) {
+      return res.status(503).json({ error: 'SportsRadar API not configured' });
+    }
+    
+    const url = `https://api.sportradar.us/ncaafb/trial/v7/en/league/hierarchy.json?api_key=${process.env.SPORTSRADAR_API_KEY}`;
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`SportsRadar API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('SportsRadar NCAA Football teams error:', error);
+    res.status(500).json({ error: 'Failed to fetch SportsRadar NCAA Football data' });
+  }
+});
+
+// Live Sports API endpoints (ESPN-based like nishs9/live-sports-scoreboard-api)
+app.get('/api/live-sports/all', async (req, res) => {
+  try {
+    const liveData = await liveSportsAdapter.getAllLiveScores();
+    res.json(liveData);
+  } catch (error) {
+    console.error('Live sports all data error:', error);
+    res.status(500).json({ error: 'Failed to fetch live sports data' });
+  }
+});
+
+app.get('/api/live-sports/mlb/scoreboard', async (req, res) => {
+  try {
+    const data = await liveSportsAdapter.getMLBScoreboard(req.query.date);
+    res.json(data);
+  } catch (error) {
+    console.error('MLB scoreboard error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB scoreboard' });
+  }
+});
+
+app.get('/api/live-sports/nfl/scoreboard', async (req, res) => {
+  try {
+    const data = await liveSportsAdapter.getNFLScoreboard(req.query.week);
+    res.json(data);
+  } catch (error) {
+    console.error('NFL scoreboard error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL scoreboard' });
+  }
+});
+
+app.get('/api/live-sports/mlb/game-count', async (req, res) => {
+  try {
+    const count = await liveSportsAdapter.getMLBGameCount();
+    res.json({ count });
+  } catch (error) {
+    console.error('MLB game count error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB game count' });
+  }
+});
+
+app.get('/api/live-sports/nfl/game-count', async (req, res) => {
+  try {
+    const count = await liveSportsAdapter.getNFLGameCount();
+    res.json({ count });
+  } catch (error) {
+    console.error('NFL game count error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL game count' });
+  }
+});
+
+app.get('/api/live-sports/mlb/live-score/:id', async (req, res) => {
+  try {
+    const data = await liveSportsAdapter.getMLBLiveScore(req.params.id);
+    res.json(data);
+  } catch (error) {
+    console.error('MLB live score error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB live score' });
+  }
+});
+
+app.get('/api/live-sports/nfl/live-score/:id', async (req, res) => {
+  try {
+    const data = await liveSportsAdapter.getNFLLiveScore(req.params.id);
+    res.json(data);
+  } catch (error) {
+    console.error('NFL live score error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL live score' });
   }
 });
 
