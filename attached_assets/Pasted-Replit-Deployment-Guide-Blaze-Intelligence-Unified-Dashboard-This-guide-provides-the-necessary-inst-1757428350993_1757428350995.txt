@@ -1,0 +1,56 @@
+Replit Deployment Guide: Blaze Intelligence Unified Dashboard
+This guide provides the necessary instructions and code for the Replit Agent to deploy the enhanced and unified Blaze Intelligence dashboard.
+
+1. Objective
+Enhance Storytelling & Factuality: Integrate more compelling narratives and verifiable data points throughout the site to increase credibility.
+
+Implement Unique Data Visualizations: Replace generic charts with custom, eye-popping visuals that provide unique insights.
+
+Unify All Features: Ensure all modules (Neural Coach, Digital Combine, etc.) are seamlessly integrated into a single, cohesive SPA.
+
+Live Deployment: Provide a single, injectable HTML file for immediate implementation in the Replit environment.
+
+2. Implementation Steps for Replit Agent
+Backup Existing Files: Before injection, create a backup of the current index.html, style.css, and any relevant JavaScript files in the Replit environment.
+
+Inject blaze-intelligence-revamped.html:
+
+Delete the entire contents of the existing main HTML file (likely index.html).
+
+Copy and paste the full contents of the provided blaze-intelligence-revamped.html file into the now-empty main HTML file.
+
+Remove Obsolete Files: Delete any old, separate .css or .js files that have been consolidated into the new unified HTML file. This prevents conflicts.
+
+Restart the Repl: Perform a full restart of the Replit environment to ensure all changes are loaded correctly.
+
+Verify Deployment:
+
+Open the live URL.
+
+Confirm that the new dark-themed aesthetic is active.
+
+Test all navigation links (Home, Neural Coach™, Digital Combine™, Pricing, About, Login) to ensure the SPA routing works without page reloads.
+
+Check that the homepage "Cardinals Live Snapshot" is populating with data from the MLB API.
+
+Verify that the three.js animations are running on the Home and Neural Coach pages.
+
+3. Summary of Key Enhancements Deployed
+Storytelling & Factuality:
+"From the Diamond to Data Science" Narrative: The new "About" page provides a strong, authentic founder story that connects your athletic background directly to the company's mission.
+
+Data-Backed Claims: The "Methods" link on the hero dashboard now provides a clear, concise explanation for the platform's accuracy claims, building immediate trust.
+
+Real-Time Momentum: The "Team Momentum" metric is now a dynamic, factual representation of the Cardinals' current streak based on the last 10 days of game data, replacing a generic number with a real, insightful story.
+
+Unique Data Visualizations:
+Live Team Momentum: Instead of a simple number, the "W/L" streak format is a more intuitive and visually engaging way to represent a team's current performance trend. -   Dynamic Gauges: The Digital Combine™ now uses custom-coded, animated SVG gauges that are more visually appealing and unique than standard chart libraries.
+
+Interactive 3D Backgrounds: The use of three.js provides a cutting-edge, interactive backdrop that subtly communicates the platform's technological sophistication.
+
+Functional Enhancements:
+Live Login & Pricing Pages: The "Login" button and "Get Started" CTAs now lead to functional, styled pages, creating complete and logical user journeys.
+
+Unified Codebase: All HTML, CSS, and JavaScript are contained within a single file, simplifying deployment and ensuring consistency across the platform.
+
+This deployment will successfully transform the Blaze Intelligence site into a premium, factual, and highly engaging platform that accurately reflects your brand vision.

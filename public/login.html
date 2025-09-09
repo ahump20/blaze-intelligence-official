@@ -32,6 +32,22 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/attached_assets/generated_images/Security_authentication_interface_c7209d4f.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: 0;
         }
 
         .auth-container {
@@ -42,6 +58,8 @@
             width: 100%;
             max-width: 450px;
             backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
         }
 
         .logo-section {
