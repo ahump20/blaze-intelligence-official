@@ -12,6 +12,7 @@ import nflAdapter from './src/data/nfl/adapter.js';
 import cfbAdapter from './src/data/cfb/adapter.js';
 import cache from './src/data/cache.js';
 import LiveSportsAdapter from './lib/liveSportsAdapter.js';
+import AIAnalyticsService from './lib/aiAnalyticsService.js';
 
 // Load environment variables
 dotenv.config();
@@ -29,6 +30,7 @@ app.set('trust proxy', 1);
 // Initialize sports data services
 const sportsData = new SportsDataService();
 const liveSportsAdapter = new LiveSportsAdapter();
+const aiAnalytics = new AIAnalyticsService();
 
 // Security middleware
 app.use(helmet({
@@ -369,6 +371,294 @@ app.get('/api/live-sports/nfl/live-score/:id', async (req, res) => {
   } catch (error) {
     console.error('NFL live score error:', error);
     res.status(500).json({ error: 'Failed to fetch NFL live score' });
+  }
+});
+
+// AI Analytics API Endpoints
+app.post('/api/ai/openai/analyze-team', async (req, res) => {
+  try {
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(503).json({ error: 'OpenAI API not configured' });
+    }
+
+    const { prompt, model = 'gpt-4', max_tokens = 800, temperature = 0.3 } = req.body;
+    
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model,
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens,
+        temperature
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenAI API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+
+  } catch (error) {
+    console.error('OpenAI API error:', error);
+    res.status(500).json({ error: 'Failed to analyze team with OpenAI' });
+  }
+});
+
+app.post('/api/ai/anthropic/predict-championship', async (req, res) => {
+  try {
+    if (!process.env.ANTHROPIC_API_KEY) {
+      return res.status(503).json({ error: 'Anthropic API not configured' });
+    }
+
+    const { prompt, max_tokens = 1000, temperature = 0.2 } = req.body;
+    
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'claude-3-sonnet-20240229',
+        max_tokens,
+        temperature,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Anthropic API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json({ content: data.content[0]?.text || 'No response generated' });
+
+  } catch (error) {
+    console.error('Anthropic API error:', error);
+    res.status(500).json({ error: 'Failed to predict championships with Anthropic' });
+  }
+});
+
+app.post('/api/ai/gemini/analyze-highlights', async (req, res) => {
+  try {
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(503).json({ error: 'Gemini API not configured' });
+    }
+
+    const { prompt, game_data, model = 'gemini-pro' } = req.body;
+    
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.4,
+          topK: 32,
+          topP: 1,
+          maxOutputTokens: 1000
+        }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Gemini API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json({ content: data.candidates[0]?.content?.parts[0]?.text || 'No response generated' });
+
+  } catch (error) {
+    console.error('Gemini API error:', error);
+    res.status(500).json({ error: 'Failed to analyze highlights with Gemini' });
+  }
+});
+
+// SportsRadar Vault API endpoints (historical data)
+app.get('/api/sportsradar/vault/mlb/seasons/:year', async (req, res) => {
+  try {
+    if (!process.env.SPORTSRADAR_VAULT_API_KEY) {
+      return res.status(503).json({ error: 'SportsRadar Vault API not configured' });
+    }
+
+    const { year } = req.params;
+    const url = `https://api.sportradar.us/mlb/trial/v7/en/seasons/${year}/REG/standings.json?api_key=${process.env.SPORTSRADAR_VAULT_API_KEY}`;
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`SportsRadar Vault API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+
+  } catch (error) {
+    console.error('SportsRadar Vault MLB error:', error);
+    res.status(500).json({ error: 'Failed to fetch historical MLB data' });
+  }
+});
+
+app.get('/api/sportsradar/vault/nfl/seasons/:year', async (req, res) => {
+  try {
+    if (!process.env.SPORTSRADAR_VAULT_API_KEY) {
+      return res.status(503).json({ error: 'SportsRadar Vault API not configured' });
+    }
+
+    const { year } = req.params;
+    const url = `https://api.sportradar.us/nfl/official/trial/v7/en/seasons/${year}/REG/standings.json?api_key=${process.env.SPORTSRADAR_VAULT_API_KEY}`;
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`SportsRadar Vault API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+
+  } catch (error) {
+    console.error('SportsRadar Vault NFL error:', error);
+    res.status(500).json({ error: 'Failed to fetch historical NFL data' });
+  }
+});
+
+app.get('/api/sportsradar/vault/ncaafb/seasons/:year', async (req, res) => {
+  try {
+    if (!process.env.SPORTSRADAR_VAULT_API_KEY) {
+      return res.status(503).json({ error: 'SportsRadar Vault API not configured' });
+    }
+
+    const { year } = req.params;
+    const url = `https://api.sportradar.us/ncaafb/trial/v7/en/seasons/${year}/REG/standings.json?api_key=${process.env.SPORTSRADAR_VAULT_API_KEY}`;
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`SportsRadar Vault API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+
+  } catch (error) {
+    console.error('SportsRadar Vault NCAA Football error:', error);
+    res.status(500).json({ error: 'Failed to fetch historical NCAA Football data' });
+  }
+});
+
+// Postman API Integration for monitoring
+app.get('/api/monitoring/postman/collections', async (req, res) => {
+  try {
+    if (!process.env.POSTMAN_API_KEY) {
+      return res.status(503).json({ error: 'Postman API not configured' });
+    }
+
+    const response = await fetch('https://api.getpostman.com/collections', {
+      headers: {
+        'X-API-Key': process.env.POSTMAN_API_KEY
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Postman API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+
+  } catch (error) {
+    console.error('Postman API error:', error);
+    res.status(500).json({ error: 'Failed to fetch Postman collections' });
+  }
+});
+
+app.get('/api/monitoring/postman/environments', async (req, res) => {
+  try {
+    if (!process.env.POSTMAN_API_KEY) {
+      return res.status(503).json({ error: 'Postman API not configured' });
+    }
+
+    const response = await fetch('https://api.getpostman.com/environments', {
+      headers: {
+        'X-API-Key': process.env.POSTMAN_API_KEY
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Postman API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+
+  } catch (error) {
+    console.error('Postman API error:', error);
+    res.status(500).json({ error: 'Failed to fetch Postman environments' });
+  }
+});
+
+// AI Health Check Endpoints
+app.get('/api/ai/openai/health', async (req, res) => {
+  try {
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(503).json({ status: 'unavailable', error: 'API key not configured' });
+    }
+
+    const response = await fetch('https://api.openai.com/v1/models', {
+      headers: { 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}` }
+    });
+
+    res.json({
+      status: response.ok ? 'healthy' : 'error',
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    res.status(500).json({ status: 'error', error: error.message });
+  }
+});
+
+app.get('/api/ai/anthropic/health', async (req, res) => {
+  try {
+    if (!process.env.ANTHROPIC_API_KEY) {
+      return res.status(503).json({ status: 'unavailable', error: 'API key not configured' });
+    }
+
+    // Simple health check - just verify the API key format
+    const apiKeyValid = process.env.ANTHROPIC_API_KEY.startsWith('sk-ant-');
+    
+    res.json({
+      status: apiKeyValid ? 'healthy' : 'error',
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    res.status(500).json({ status: 'error', error: error.message });
+  }
+});
+
+app.get('/api/ai/gemini/health', async (req, res) => {
+  try {
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(503).json({ status: 'unavailable', error: 'API key not configured' });
+    }
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${process.env.GEMINI_API_KEY}`);
+    
+    res.json({
+      status: response.ok ? 'healthy' : 'error',
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    res.status(500).json({ status: 'error', error: error.message });
   }
 });
 
