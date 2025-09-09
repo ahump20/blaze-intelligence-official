@@ -204,6 +204,10 @@ app.get('/neural-coach', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'neural-coach.html'));
 });
 
+app.get('/digital-combine', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'digital-combine.html'));
+});
+
 // Health check endpoint
 app.get('/healthz', (req, res) => {
   res.json({
