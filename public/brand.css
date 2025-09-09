@@ -1,0 +1,21 @@
+:root{
+  /* Colors */
+  --bg:#0B0B0F; --panel:#0f172a; --ink:#E5E7EB;
+  --muted:#9CA3AF; --line:#1F2937;
+  --accent:#BF5700;        /* burnt orange */
+  --accent-2:#9BCBEB;      /* cardinal blue/turquoise */
+
+  /* Typography */
+  --font: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial;
+
+  /* Metrics (canonical copy only) */
+  --accuracy: "94.6%";
+  --latency: "< 100 ms";
+  --uptime: "99.9%";
+  --datapoints: "2.8M+";
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font)}
+a{color:var(--accent-2);text-decoration:none}
+hr{border:none;border-top:1px solid var(--line);opacity:.6}
