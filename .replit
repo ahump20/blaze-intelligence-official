@@ -1,0 +1,6 @@
+modules = ["web", "nodejs-18", "bash"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"

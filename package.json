@@ -2,6 +2,7 @@
   "name": "blaze-intelligence-website",
   "version": "1.0.0",
   "description": "Elite sports analytics platform for championship teams",
+  "type": "module",
   "main": "index.html",
   "scripts": {
     "test": "jest",
