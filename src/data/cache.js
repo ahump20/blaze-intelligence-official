@@ -16,11 +16,17 @@ class DataCache {
         const value = this.cache.get(key);
         if (value) {
             this.hits++;
-            console.log(`Cache hit for ${key} (hit rate: ${this.getHitRate()}%)`);
+            // Reduced logging for production - only log occasionally
+            if (Math.random() < 0.05) {
+                console.log(`Cache hit for ${key} (hit rate: ${this.getHitRate()}%)`);
+            }
             return value;
         }
         this.misses++;
-        console.log(`Cache miss for ${key} (hit rate: ${this.getHitRate()}%)`);
+        // Reduced logging for production - only log occasionally
+        if (Math.random() < 0.1) {
+            console.log(`Cache miss for ${key} (hit rate: ${this.getHitRate()}%)`);
+        }
         return undefined;
     }
 
