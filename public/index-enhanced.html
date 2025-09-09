@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Elite Sports Analytics Platform</title>
+    <meta name="description" content="Transform data into championships with AI-powered sports analytics. Real-time insights for MLB, NFL, NBA teams.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="/brand.css">
+    <link rel="stylesheet" href="/brand-components.css">
+    
+    <style>
+        :root {
+            --bg: #0B0B0F;
+            --panel: #0f172a;
+            --ink: #E5E7EB;
+            --muted: #9CA3AF;
+            --line: #1F2937;
+            --accent: #BF5700;
+            --cyan: #9BCBEB;
+            --font: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--ink);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Navigation with new logo */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(11, 11, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--line);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(191, 87, 0, 0.5));
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+        }
+        
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--ink);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent), var(--cyan));
+            color: var(--bg);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .nav-cta:hover {
+            background: transparent;
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section with Three.js */
+        #hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--ink) 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+        
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #FF6B00);
+            color: white;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(191, 87, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--cyan);
+            border: 2px solid var(--cyan);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--cyan);
+            color: var(--bg);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(155, 203, 235, 0.3);
+        }
+        
+        /* Live Metrics */
+        .live-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+        
+        .metric-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(191, 87, 0, 0.2);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--cyan);
+            font-family: var(--font-mono);
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+        
+        /* Pressure Stream Section */
+        .pressure-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(191, 87, 0, 0.05) 100%);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--ink) 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--muted);
+        }
+        
+        .pressure-container {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #pressureCanvas {
+            width: 100%;
+            height: 400px;
+            border-radius: 16px;
+        }
+        
+        /* Features Grid */
+        .features-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, rgba(191, 87, 0, 0.05) 0%, transparent 100%);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .feature-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(191, 87, 0, 0.2);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--cyan));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+        
+        .feature-description {
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-stats {
+            display: flex;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--line);
+        }
+        
+        .stat {
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--cyan);
+            font-family: var(--font-mono);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 4rem 2rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.3) 100%);
+            border-top: 1px solid var(--line);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-brand {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 30px rgba(191, 87, 0, 0.5));
+        }
+        
+        .footer-brand-text {
+            flex: 1;
+        }
+        
+        .footer-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-tagline {
+            color: var(--muted);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .footer-section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--cyan);
+        }
+        
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .live-metrics {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="/assets/blaze-logo.svg" alt="Blaze Intelligence" class="logo-img">
+                <div class="logo-text">
+                    <div class="logo-title">BLAZE</div>
+                    <div class="logo-tagline">Intelligence</div>
+                </div>
+            </a>
+            
+            <div class="nav-links">
+                <a href="/live-analytics">Live Analytics</a>
+                <a href="/nil">NIL Engine</a>
+                <a href="/analytics">Dashboard</a>
+                <a href="/about">About</a>
+                <a href="/api-test">API Status</a>
+            </div>
+            
+            <a href="/get-started" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section with Three.js Background -->
+    <section id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="pulse"></span>
+                <span>ELITE SPORTS INTELLIGENCE</span>
+            </div>
+            
+            <h1 class="hero-title">Transform Data Into<br>Championships</h1>
+            
+            <p class="hero-subtitle">
+                AI-powered analytics platform delivering real-time insights for MLB, NFL, and NBA teams
+            </p>
+            
+            <div class="hero-cta-group">
+                <a href="/live-analytics" class="btn btn-primary">
+                    <i class="fas fa-chart-line"></i>
+                    Launch Platform
+                </a>
+                <a href="/api-test" class="btn btn-secondary">
+                    <i class="fas fa-play"></i>
+                    Live Demo
+                </a>
+            </div>
+            
+            <div class="live-metrics">
+                <div class="metric-card">
+                    <div class="metric-value">94.6%</div>
+                    <div class="metric-label">Prediction Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2.8M+</div>
+                    <div class="metric-label">Data Points</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value"><100ms</div>
+                    <div class="metric-label">Response Time</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99.9%</div>
+                    <div class="metric-label">Uptime</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pressure Stream Section -->
+    <section class="pressure-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Live Pressure Stream</h2>
+                <p class="section-subtitle">Real-time win probability and pressure analytics</p>
+            </div>
+            
+            <div class="pressure-container">
+                <canvas id="pressureCanvas"></canvas>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Grid -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Championship-Level Tools</h2>
+                <p class="section-subtitle">Everything you need to dominate the competition</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">AI-Powered Predictions</h3>
+                    <p class="feature-description">
+                        Advanced machine learning models trained on millions of games predict outcomes with 94.6% accuracy
+                    </p>
+                    <div class="feature-stats">
+                        <div class="stat">
+                            <div class="stat-value">GPT-4</div>
+                            <div class="stat-label">OpenAI</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Claude</div>
+                            <div class="stat-label">Anthropic</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Real-Time Processing</h3>
+                    <p class="feature-description">
+                        Process millions of data points per second with sub-millisecond latency for instant insights
+                    </p>
+                    <div class="feature-stats">
+                        <div class="stat">
+                            <div class="stat-value"><100ms</div>
+                            <div class="stat-label">Latency</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">10K/s</div>
+                            <div class="stat-label">Throughput</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Custom Dashboards</h3>
+                    <p class="feature-description">
+                        Build personalized analytics dashboards tailored to your team's specific metrics and KPIs
+                    </p>
+                    <div class="feature-stats">
+                        <div class="stat">
+                            <div class="stat-value">50+</div>
+                            <div class="stat-label">Widgets</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">∞</div>
+                            <div class="stat-label">Customization</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Player Development</h3>
+                    <p class="feature-description">
+                        Track individual player progress with detailed skill progression analytics and recommendations
+                    </p>
+                    <div class="feature-stats">
+                        <div class="stat">
+                            <div class="stat-value">227</div>
+                            <div class="stat-label">Teams</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">16</div>
+                            <div class="stat-label">Leagues</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔬</div>
+                    <h3 class="feature-title">Biomechanical Analysis</h3>
+                    <p class="feature-description">
+                        Advanced motion capture and biomechanical modeling to optimize technique and prevent injuries
+                    </p>
+                    <div class="feature-stats">
+                        <div class="stat">
+                            <div class="stat-value">360°</div>
+                            <div class="stat-label">Coverage</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">120fps</div>
+                            <div class="stat-label">Capture</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">Global Scouting</h3>
+                    <p class="feature-description">
+                        Access comprehensive player data from leagues worldwide with our integrated scouting database
+                    </p>
+                    <div class="feature-stats">
+                        <div class="stat">
+                            <div class="stat-value">50K+</div>
+                            <div class="stat-label">Players</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Global</div>
+                            <div class="stat-label">Coverage</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/assets/blaze-logo.svg" alt="Blaze Intelligence" class="footer-logo">
+                <div class="footer-brand-text">
+                    <div class="footer-title">BLAZE INTELLIGENCE</div>
+                    <div class="footer-tagline">
+                        Courage • Grit • Leadership<br>
+                        Transform data into championships with elite sports analytics
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="/live-analytics">Live Analytics</a></li>
+                    <li><a href="/nil">NIL Engine</a></li>
+                    <li><a href="/analytics">Dashboard</a></li>
+                    <li><a href="/api-test">API Status</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/pricing">Pricing</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/compliance">Compliance</a></li>
+                    <li><a href="/security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Blaze Intelligence. All rights reserved. Built with Texas Grit 🔥</p>
+        </div>
+    </footer>
+    
+    <!-- Three.js Hero Background -->
+    <script type="module">
+        import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+        
+        const hero = document.querySelector('#hero');
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        if (!reduce) {
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(hero.clientWidth, hero.clientHeight);
+            renderer.domElement.style.position = 'absolute';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            renderer.domElement.style.zIndex = '1';
+            hero.appendChild(renderer.domElement);
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(55, hero.clientWidth / hero.clientHeight, 0.1, 100);
+            camera.position.z = 5;
+            
+            const geometry = new THREE.PlaneGeometry(10, 6, 1, 1);
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    time: { value: 0 },
+                    colorA: { value: new THREE.Color(0xBF5700) },
+                    colorB: { value: new THREE.Color(0x9BCBEB) }
+                },
+                transparent: true,
+                vertexShader: `
+                    varying vec2 vUv;
+                    void main() {
+                        vUv = uv;
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    precision highp float;
+                    varying vec2 vUv;
+                    uniform float time;
+                    uniform vec3 colorA;
+                    uniform vec3 colorB;
+                    
+                    float noise(vec2 p) {
+                        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+                    }
+                    
+                    void main() {
+                        vec2 uv = vUv * vec2(1.8, 1.0);
+                        float n = noise(uv + time * 0.1);
+                        float swirl = abs(sin(uv.x * 6.283 + time * 0.4)) * 0.35 + n * 0.25;
+                        vec3 color = mix(colorA, colorB, uv.x + 0.15 * sin(time * 0.2));
+                        color *= 0.25 + 0.75 * swirl;
+                        gl_FragColor = vec4(color, 0.9);
+                    }
+                `
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+            
+            const clock = new THREE.Clock();
+            function animate() {
+                material.uniforms.time.value = clock.getElapsedTime();
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            }
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = hero.clientWidth / hero.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(hero.clientWidth, hero.clientHeight);
+            });
+        }
+    </script>
+    
+    <!-- Pressure Stream Visualization -->
+    <script>
+        const canvas = document.getElementById('pressureCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size
+        canvas.width = canvas.offsetWidth;
+        canvas.height = 400;
+        
+        let pressureData = [];
+        const maxDataPoints = 100;
+        
+        // Connect to SSE
+        const eventSource = new EventSource('/api/game/pressure-stream');
+        
+        eventSource.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            pressureData.push(data);
+            
+            if (pressureData.length > maxDataPoints) {
+                pressureData.shift();
+            }
+            
+            drawPressureStream();
+        };
+        
+        function drawPressureStream() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (pressureData.length < 2) return;
+            
+            const padding = 60;
+            const graphWidth = canvas.width - padding * 2;
+            const graphHeight = canvas.height - padding * 2;
+            
+            // Draw grid
+            ctx.strokeStyle = 'rgba(155, 203, 235, 0.1)';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i <= 10; i++) {
+                const y = padding + (graphHeight / 10) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(canvas.width - padding, y);
+                ctx.stroke();
+            }
+            
+            // Draw pressure area
+            const gradient = ctx.createLinearGradient(0, padding, 0, canvas.height - padding);
+            gradient.addColorStop(0, 'rgba(191, 87, 0, 0.4)');
+            gradient.addColorStop(1, 'rgba(155, 203, 235, 0.1)');
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(padding, canvas.height - padding);
+            
+            pressureData.forEach((data, index) => {
+                const x = padding + (index / (maxDataPoints - 1)) * graphWidth;
+                const y = canvas.height - padding - (data.p * graphHeight);
+                ctx.lineTo(x, y);
+            });
+            
+            ctx.lineTo(canvas.width - padding, canvas.height - padding);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Draw win probability line
+            ctx.strokeStyle = '#9BCBEB';
+            ctx.lineWidth = 3;
+            ctx.shadowColor = '#9BCBEB';
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            
+            pressureData.forEach((data, index) => {
+                const x = padding + (index / (maxDataPoints - 1)) * graphWidth;
+                const y = canvas.height - padding - (data.wp * graphHeight);
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+            
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+            
+            // Draw event markers
+            ctx.fillStyle = '#BF5700';
+            pressureData.forEach((data, index) => {
+                if (data.event) {
+                    const x = padding + (index / (maxDataPoints - 1)) * graphWidth;
+                    const y = canvas.height - padding - (data.wp * graphHeight);
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, 5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+            
+            // Draw axes labels
+            ctx.fillStyle = '#9CA3AF';
+            ctx.font = '12px JetBrains Mono';
+            ctx.textAlign = 'right';
+            
+            for (let i = 0; i <= 10; i++) {
+                const value = (i * 10) + '%';
+                const y = canvas.height - padding - (i / 10) * graphHeight;
+                ctx.fillText(value, padding - 10, y + 4);
+            }
+            
+            // Draw current value
+            if (pressureData.length > 0) {
+                const latest = pressureData[pressureData.length - 1];
+                ctx.fillStyle = '#9BCBEB';
+                ctx.font = 'bold 24px JetBrains Mono';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${(latest.wp * 100).toFixed(1)}% WIN`, padding, padding - 20);
+                
+                ctx.fillStyle = '#BF5700';
+                ctx.font = 'bold 18px JetBrains Mono';
+                ctx.fillText(`${(latest.p * 100).toFixed(0)}% PRESSURE`, padding + 200, padding - 20);
+            }
+        }
+        
+        // Handle canvas resize
+        window.addEventListener('resize', () => {
+            canvas.width = canvas.offsetWidth;
+            drawPressureStream();
+        });
+    </script>
+</body>
+</html>

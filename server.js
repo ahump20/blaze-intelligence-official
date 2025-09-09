@@ -138,7 +138,7 @@ app.use((req, res, next) => {
 
 // Route handlers for main pages
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index-enhanced.html'));
 });
 
 app.get('/contact', (req, res) => {
