@@ -1722,6 +1722,9 @@
         }
     </style>
     
+    <!-- HubSpot Forms Embed Code -->
+    <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+    
     <!-- Centralized Metrics Configuration -->
     <script type="module">
         import { BLAZE_METRICS } from '/metrics-config.js';
@@ -2604,7 +2607,13 @@
                 </div>
                 
                 <div class="contact-form-right">
-                    <form class="demo-request-form" id="demoRequestForm">
+                    <!-- HubSpot Form Container -->
+                    <div id="hubspot-form-container">
+                        <!-- HubSpot form will be injected here -->
+                    </div>
+                    
+                    <!-- Fallback Form (hidden by default) -->
+                    <form class="demo-request-form" id="demoRequestForm" style="display: none;">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fullName">Name *</label>
@@ -3286,6 +3295,115 @@
                     card.classList.add('float');
                 }, index * 100);
             });
+        });
+    </script>
+    
+    <!-- HubSpot Form Integration with Worker Fallback -->
+    <script type="module">
+        import { API_CONFIG } from '/config/api-endpoints.js';
+        
+        // Initialize HubSpot form
+        function initHubSpotForm() {
+            if (window.hbspt) {
+                try {
+                    hbspt.forms.create({
+                        portalId: API_CONFIG.HUBSPOT_PORTAL_ID,
+                        formId: API_CONFIG.HUBSPOT_FORM_ID,
+                        target: '#hubspot-form-container',
+                        onFormSubmit: function() {
+                            console.log('HubSpot form submitted successfully');
+                        },
+                        onFormSubmitError: function() {
+                            console.error('HubSpot form submission failed, showing fallback');
+                            showFallbackForm();
+                        }
+                    });
+                } catch (error) {
+                    console.error('HubSpot initialization failed:', error);
+                    showFallbackForm();
+                }
+            } else {
+                // HubSpot script not loaded, show fallback
+                setTimeout(() => {
+                    if (!window.hbspt) {
+                        showFallbackForm();
+                    }
+                }, 3000);
+            }
+        }
+        
+        // Show fallback form
+        function showFallbackForm() {
+            const hubspotContainer = document.getElementById('hubspot-form-container');
+            const fallbackForm = document.getElementById('demoRequestForm');
+            
+            if (hubspotContainer) hubspotContainer.style.display = 'none';
+            if (fallbackForm) fallbackForm.style.display = 'block';
+        }
+        
+        // Handle fallback form submission
+        document.getElementById('demoRequestForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const loadingText = submitBtn.querySelector('.loading-text');
+            const normalText = submitBtn.textContent.replace('Sending...', '').trim();
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            if (loadingText) {
+                loadingText.style.display = 'inline';
+                submitBtn.innerHTML = submitBtn.innerHTML.replace(normalText, '');
+            }
+            
+            try {
+                // Send to worker endpoint
+                const response = await fetch(API_CONFIG.LEAD_CAPTURE_WORKER, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ...data,
+                        source: 'blaze-intelligence-website',
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                
+                if (response.ok) {
+                    // Show success message
+                    const successDiv = document.getElementById('formSuccess');
+                    if (successDiv) {
+                        successDiv.style.display = 'block';
+                        e.target.reset();
+                    }
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                const errorDiv = document.getElementById('formError');
+                if (errorDiv) {
+                    errorDiv.style.display = 'block';
+                } else {
+                    alert('There was an error submitting your request. Please email ahump20@outlook.com directly.');
+                }
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                if (loadingText) {
+                    loadingText.style.display = 'none';
+                    submitBtn.innerHTML = normalText + submitBtn.innerHTML.substring(submitBtn.innerHTML.indexOf('<span'));
+                }
+            }
+        });
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(initHubSpotForm, 1000);
         });
     </script>
 </body>
