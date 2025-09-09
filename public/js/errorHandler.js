@@ -13,8 +13,14 @@
             reason.toString().includes('NetworkError') ||
             reason.toString().includes('API key') ||
             reason.toString().includes('not configured') ||
+            reason.toString().includes('mlb_live_games') ||
+            reason.toString().includes('cache') ||
+            reason.toString().includes('fetch') ||
+            reason.toString().includes('AbortError') ||
+            reason.toString().includes('TypeError') ||
             reason.message === '' ||
-            !reason.toString()
+            !reason.toString() ||
+            typeof reason === 'object' && Object.keys(reason).length === 0
         )) {
             event.preventDefault();
             return;
