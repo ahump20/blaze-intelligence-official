@@ -3456,6 +3456,143 @@
         });
     </script>
     
+    <!-- Blaze Intelligence Professional Scripts -->
+    <script src="/public/js/blaze-3d-background.js"></script>
+    <script src="/public/js/blaze-live-scoreboard.js"></script>
+    <script src="/public/js/blaze-data-integration.js"></script>
+    
+    <!-- Initialize Professional Components -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize live scoreboards
+            if (window.blazeScoreboard) {
+                // Create Cardinals widget
+                const cardinalsWidget = document.getElementById('cardinals-widget');
+                if (cardinalsWidget) {
+                    blazeScoreboard.createWidget('cardinals-widget', {
+                        type: 'cardinals',
+                        showLive: true,
+                        showDetails: true
+                    });
+                }
+                
+                // Create MLB scores widget
+                const mlbWidget = document.getElementById('mlb-scores-widget');
+                if (mlbWidget) {
+                    blazeScoreboard.createWidget('mlb-scores-widget', {
+                        type: 'mlb',
+                        maxGames: 5
+                    });
+                }
+                
+                // Create multi-league widget
+                const multiWidget = document.getElementById('multi-league-widget');
+                if (multiWidget) {
+                    blazeScoreboard.createWidget('multi-league-widget', {
+                        type: 'multi-league'
+                    });
+                }
+            }
+            
+            // Initialize data integration
+            if (window.blazeDataIntegration) {
+                // Subscribe to data updates
+                blazeDataIntegration.onDataUpdate((update) => {
+                    console.log('📊 Data updated:', update.type);
+                    
+                    // Update UI based on data type
+                    if (update.type === 'cardinals') {
+                        updateCardinalsUI(update.data);
+                    } else if (update.type === 'predictions') {
+                        updatePredictionsUI(update.data);
+                    }
+                });
+                
+                // Initial data fetch
+                blazeDataIntegration.refreshAll();
+            }
+            
+            // GSAP animations
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                
+                // Animate hero elements
+                gsap.from('.hero-badge', {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    delay: 0.2
+                });
+                
+                gsap.from('.hero-title', {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    delay: 0.4
+                });
+                
+                gsap.from('.hero-subtitle', {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    delay: 0.6
+                });
+                
+                // Animate feature cards on scroll
+                gsap.utils.toArray('.feature-card').forEach((card, i) => {
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 80%',
+                            end: 'bottom 20%',
+                            toggleActions: 'play none none reverse'
+                        },
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.8,
+                        delay: i * 0.1
+                    });
+                });
+                
+                // Animate stats
+                gsap.utils.toArray('.stat-value').forEach((stat) => {
+                    const value = stat.textContent;
+                    stat.textContent = '0';
+                    
+                    ScrollTrigger.create({
+                        trigger: stat,
+                        start: 'top 80%',
+                        onEnter: () => {
+                            gsap.to(stat, {
+                                textContent: value,
+                                duration: 2,
+                                ease: 'power2.out',
+                                snap: { textContent: 1 }
+                            });
+                        }
+                    });
+                });
+            }
+            
+            // Update UI functions
+            function updateCardinalsUI(data) {
+                // Update readiness score
+                const readinessElement = document.querySelector('.cardinals-readiness');
+                if (readinessElement && data.cardinals) {
+                    readinessElement.textContent = data.cardinals.overall_readiness + '%';
+                }
+            }
+            
+            function updatePredictionsUI(data) {
+                // Update accuracy
+                const accuracyElement = document.querySelector('.model-accuracy');
+                if (accuracyElement && data.model_accuracy) {
+                    accuracyElement.textContent = data.model_accuracy + '%';
+                }
+            }
+        });
+    </script>
+    
     <!-- HubSpot Form Integration with Worker Fallback -->
     <script type="module">
         import { API_CONFIG } from '/config/api-endpoints.js';
@@ -3562,6 +3699,48 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(initHubSpotForm, 1000);
+        });
+    </script>
+    
+    <!-- Enhanced Professional Features -->
+    <script>
+        // Add professional scroll effects
+        let lastScrollTop = 0;
+        const nav = document.querySelector('.nav');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Add scrolled class to nav
+            if (nav) {
+                if (scrollTop > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                
+                // Hide/show nav on scroll
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    nav.style.transform = 'translateY(-100%)';
+                } else {
+                    nav.style.transform = 'translateY(0)';
+                }
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Professional loader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 1000);
+            }
         });
     </script>
 </body>
