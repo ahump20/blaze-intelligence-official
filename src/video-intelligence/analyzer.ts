@@ -222,8 +222,8 @@ export class VideoAnalysisEngine {
     };
   }
 
-  private generateFieldLandmarks(sport: string): any[] {
-    const landmarks = [];
+  private generateFieldLandmarks(sport: string): FieldLandmark[] {
+    const landmarks: FieldLandmark[] = [];
     
     if (sport === 'baseball') {
       landmarks.push(
@@ -247,8 +247,8 @@ export class VideoAnalysisEngine {
     return landmarks;
   }
 
-  private generateTrajectory(frameIndex: number): any[] {
-    const trajectory = [];
+  private generateTrajectory(frameIndex: number): TrajectoryPoint[] {
+    const trajectory: TrajectoryPoint[] = [];
     const baseTime = frameIndex / 30;
     
     for (let i = 0; i < 10; i++) {
@@ -265,7 +265,7 @@ export class VideoAnalysisEngine {
     return trajectory;
   }
 
-  private generateSummary(frames: VideoFrame[], config: AnalysisConfig): any {
+  private generateSummary(frames: VideoFrame[], config: AnalysisConfig): AnalysisSummary {
     const playerCounts = frames.map(f => f.players.length);
     const avgPlayerCount = playerCounts.reduce((a, b) => a + b, 0) / playerCounts.length;
     
