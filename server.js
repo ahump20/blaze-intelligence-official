@@ -21,6 +21,7 @@ import pool from './server/db.js';
 import authRoutes from './server/auth/authRoutes.js';
 import subscriptionRoutes from './server/stripe/subscriptionRoutes.js';
 import { authenticateToken, trackApiUsage, requireSubscription } from './server/auth/authMiddleware.js';
+import CardinalsDataIntegration from './cardinals-real-data-integration.js';
 
 // Load environment variables
 dotenv.config();
@@ -39,6 +40,7 @@ app.set('trust proxy', 1);
 const sportsData = new SportsDataService();
 const liveSportsAdapter = new LiveSportsAdapter();
 const aiAnalytics = new AIAnalyticsService();
+const cardinalsAPI = new CardinalsDataIntegration();
 
 // Initialize AI services with API keys
 const openai = process.env.OPENAI_API_KEY ? new OpenAI({
@@ -421,6 +423,19 @@ app.get('/api/sportsradar/ncaafb/teams', async (req, res) => {
       error: 'Failed to fetch SportsRadar NCAA Football data',
       details: error.message 
     });
+  }
+});
+
+// Cardinals Real Data API endpoint with 300s cache
+app.get('/api/mlb/cardinals/summary', cardinalsAPI.createExpressRoute());
+
+// Health check endpoint for Cardinals API
+app.get('/api/mlb/cardinals/health', async (req, res) => {
+  try {
+    const health = await cardinalsAPI.healthCheck();
+    res.json(health);
+  } catch (error) {
+    res.status(500).json({ status: 'error', error: error.message });
   }
 });
 

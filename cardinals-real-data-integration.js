@@ -335,10 +335,10 @@ class CardinalsDataIntegration {
     }
 }
 
-// Export for Node.js
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = CardinalsDataIntegration;
-} else {
-    // Browser environment
+// Export for ES6 modules
+export default CardinalsDataIntegration;
+
+// Browser environment
+if (typeof window !== 'undefined') {
     window.CardinalsDataIntegration = CardinalsDataIntegration;
 }
