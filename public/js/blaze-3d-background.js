@@ -22,7 +22,7 @@ class Blaze3DBackground {
     init() {
         // Create scene
         this.scene = new THREE.Scene();
-        this.scene.fog = new THREE.FogExp2(0x0a0a0a, 0.001);
+        this.scene.fog = new THREE.FogExp2(0x0A192F, 0.001);
         
         // Setup camera
         this.camera = new THREE.PerspectiveCamera(
@@ -41,7 +41,7 @@ class Blaze3DBackground {
         });
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setClearColor(0x0a0a0a, 0);
+        this.renderer.setClearColor(0x0A192F, 0);
         
         // Add canvas to page
         const container = document.getElementById('three-canvas');
@@ -72,7 +72,7 @@ class Blaze3DBackground {
         this.scene.add(ambientLight);
         
         // Add point light
-        const pointLight = new THREE.PointLight(0xBF5700, 1, 100);
+        const pointLight = new THREE.PointLight(0xBF5700, 0.8, 100);
         pointLight.position.set(20, 20, 20);
         this.scene.add(pointLight);
         

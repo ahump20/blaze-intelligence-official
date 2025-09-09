@@ -20,6 +20,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
@@ -73,7 +76,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--black);
+            background: var(--dark-navy);
             z-index: 10000;
             display: flex;
             align-items: center;
@@ -438,18 +441,20 @@
         }
         
         .analytics-card {
-            background: rgba(45, 45, 45, 0.5);
-            border: 1px solid rgba(191, 87, 0, 0.2);
-            border-radius: 20px;
+            background: rgba(17, 34, 64, 0.75);
+            border: 1px solid var(--light-navy);
+            border-radius: 16px;
             padding: 30px;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            transition: var(--transition);
         }
         
         .analytics-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(191, 87, 0, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(-8px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
         }
         
         .analytics-card-header {
@@ -818,7 +823,7 @@
         /* Social Proof Section */
         .social-proof-section {
             padding: 120px 50px;
-            background: var(--black);
+            background: var(--dark-navy);
         }
         
         .testimonials-grid {
@@ -1012,7 +1017,7 @@
         /* Trust Section */
         .trust-section {
             padding: 120px 50px;
-            background: var(--black);
+            background: var(--dark-navy);
         }
         
         .trust-grid {
@@ -1326,7 +1331,7 @@
         /* Features Grid */
         .features-section {
             padding: 120px 50px;
-            background: var(--black);
+            background: var(--dark-navy);
         }
         
         .features-grid {
@@ -1470,7 +1475,7 @@
         /* About/Founder Section */
         .founder-section {
             padding: 120px 50px;
-            background: var(--black);
+            background: var(--dark-navy);
         }
         
         .founder-content {
@@ -1619,7 +1624,7 @@
         /* Footer */
         footer {
             padding: 60px 50px 30px;
-            background: var(--black);
+            background: var(--dark-navy);
             border-top: 1px solid rgba(191, 87, 0, 0.2);
         }
         
