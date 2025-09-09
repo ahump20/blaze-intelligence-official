@@ -245,6 +245,196 @@ class AirtableIntegration {
                 margin: 0;
             }
             
+            /* Austin Founder Section Styles */
+            .austin-founder-section {
+                padding: 120px 50px;
+                background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            }
+            
+            .austin-content {
+                max-width: 1000px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            
+            .austin-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                margin-bottom: 40px;
+                flex-wrap: wrap;
+            }
+            
+            .austin-image-container {
+                position: relative;
+            }
+            
+            .austin-placeholder {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #BF5700 0%, #FF6B35 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                box-shadow: 0 20px 40px rgba(191, 87, 0, 0.4);
+            }
+            
+            .austin-initials {
+                font-size: 48px;
+                font-weight: 900;
+                color: white;
+            }
+            
+            .jersey-number {
+                position: absolute;
+                bottom: -10px;
+                right: -10px;
+                background: #FFFFFF;
+                color: #BF5700;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 900;
+                font-size: 18px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+            
+            .austin-info {
+                text-align: left;
+            }
+            
+            .austin-badge {
+                background: rgba(191, 87, 0, 0.1);
+                border: 1px solid rgba(191, 87, 0, 0.3);
+                border-radius: 25px;
+                padding: 8px 16px;
+                font-size: 14px;
+                font-weight: 600;
+                color: #BF5700;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+            
+            .austin-name {
+                font-size: 42px;
+                font-weight: 900;
+                color: #FFFFFF;
+                margin-bottom: 10px;
+                background: linear-gradient(135deg, #FFFFFF 0%, #BF5700 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            
+            .austin-tagline {
+                font-size: 20px;
+                color: rgba(255, 255, 255, 0.7);
+                font-weight: 500;
+                margin: 0;
+            }
+            
+            .austin-bio {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 30px;
+                margin-bottom: 40px;
+                text-align: left;
+            }
+            
+            .austin-bio p {
+                font-size: 18px;
+                line-height: 1.7;
+                color: rgba(255, 255, 255, 0.8);
+                margin: 0;
+            }
+            
+            .austin-stats {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 30px;
+                margin-bottom: 50px;
+            }
+            
+            .austin-stat {
+                text-align: center;
+            }
+            
+            .austin-stat .stat-value {
+                font-size: 36px;
+                font-weight: 900;
+                color: #BF5700;
+                margin-bottom: 8px;
+            }
+            
+            .austin-stat .stat-label {
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.6);
+                font-weight: 500;
+            }
+            
+            .austin-contact {
+                background: rgba(191, 87, 0, 0.05);
+                border: 1px solid rgba(191, 87, 0, 0.2);
+                border-radius: 20px;
+                padding: 30px;
+            }
+            
+            .austin-contact h3 {
+                color: #BF5700;
+                font-size: 24px;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+            
+            .contact-info {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .contact-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 16px;
+            }
+            
+            .contact-icon {
+                font-size: 20px;
+            }
+            
+            .contact-item a {
+                color: #FFFFFF;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            
+            .contact-item a:hover {
+                color: #BF5700;
+            }
+            
+            @media (max-width: 768px) {
+                .austin-header {
+                    flex-direction: column;
+                    text-align: center;
+                }
+                
+                .austin-info {
+                    text-align: center;
+                }
+                
+                .austin-bio {
+                    text-align: center;
+                }
+            }
+            
             .insights-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
