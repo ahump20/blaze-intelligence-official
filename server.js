@@ -155,8 +155,88 @@ app.get('/metrics', (req, res) => {
     cache: cacheStats,
     memory: process.memoryUsage(),
     uptime: process.uptime(),
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    version: '2.0.0',
+    environment: process.env.NODE_ENV || 'development'
   });
+});
+
+// Analytics endpoints
+app.post('/analytics/metrics', (req, res) => {
+  // Log performance metrics (in production, send to analytics service)
+  console.log('Performance metric:', req.body);
+  res.status(200).json({ status: 'recorded' });
+});
+
+app.post('/analytics/errors', (req, res) => {
+  // Log errors (in production, send to error tracking service)
+  console.error('Client error:', req.body);
+  res.status(200).json({ status: 'recorded' });
+});
+
+// Sports data proxy endpoints (CORS-safe)
+app.get('/proxy/mlb/teams', async (req, res) => {
+  try {
+    const response = await fetch('https://statsapi.mlb.com/api/v1/teams?sportId=1');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('MLB teams proxy error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB teams' });
+  }
+});
+
+app.get('/proxy/mlb/roster/:teamId', async (req, res) => {
+  try {
+    const { teamId } = req.params;
+    const response = await fetch(`https://statsapi.mlb.com/api/v1/teams/${teamId}/roster`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('MLB roster proxy error:', error);
+    res.status(500).json({ error: 'Failed to fetch team roster' });
+  }
+});
+
+app.get('/proxy/mlb/schedule/:teamId', async (req, res) => {
+  try {
+    const { teamId } = req.params;
+    const year = new Date().getFullYear();
+    const response = await fetch(`https://statsapi.mlb.com/api/v1/schedule?teamId=${teamId}&sportId=1&season=${year}&gameType=R&hydrate=linescore,team`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('MLB schedule proxy error:', error);
+    res.status(500).json({ error: 'Failed to fetch team schedule' });
+  }
+});
+
+app.get('/proxy/nba/teams', async (req, res) => {
+  try {
+    const response = await fetch('https://www.balldontlie.io/api/v1/teams');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('NBA teams proxy error:', error);
+    res.status(500).json({ error: 'Failed to fetch NBA teams' });
+  }
+});
+
+app.get('/proxy/nfl/scores', async (req, res) => {
+  try {
+    const year = new Date().getFullYear();
+    const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=${year}`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('NFL scores proxy error:', error);
+    res.status(500).json({ error: 'Failed to fetch NFL scores' });
+  }
 });
 
 // MLB API Routes (Real Data)
