@@ -20,7 +20,6 @@ class BlazeDataIntegration {
     }
     
     init() {
-        console.log('🔥 Blaze Data Integration initialized');
         this.setupAutoRefresh();
         this.setupEventHandlers();
     }
@@ -52,7 +51,7 @@ class BlazeDataIntegration {
             
             return data;
         } catch (error) {
-            console.warn('Cardinals data fetch failed, using fallback', error);
+            // Cardinals data fetch failed, using fallback
             return this.getCardinalsData();
         }
     }
@@ -167,7 +166,7 @@ class BlazeDataIntegration {
             
             return data;
         } catch (error) {
-            console.warn('MLB scores fetch failed, using fallback', error);
+            // MLB scores fetch failed, using fallback
             return this.getMLBScoresData();
         }
     }
@@ -234,7 +233,7 @@ class BlazeDataIntegration {
             
             return data;
         } catch (error) {
-            console.warn('Predictions fetch failed, using fallback', error);
+            // Predictions fetch failed, using fallback
             return this.getPredictionsData();
         }
     }
@@ -311,7 +310,7 @@ class BlazeDataIntegration {
             try {
                 callback({ type, data, timestamp: new Date().toISOString() });
             } catch (error) {
-                console.error('Update callback error:', error);
+                // Update callback error
             }
         });
     }
@@ -351,8 +350,6 @@ class BlazeDataIntegration {
     
     // Refresh all data sources
     async refreshAll() {
-        console.log('🔄 Refreshing all data sources...');
-        
         const promises = [
             this.fetchCardinalsData(),
             this.fetchMLBScores(),
@@ -361,9 +358,8 @@ class BlazeDataIntegration {
         
         try {
             await Promise.all(promises);
-            console.log('✅ All data refreshed successfully');
         } catch (error) {
-            console.error('❌ Some data sources failed to refresh:', error);
+            // Some data sources failed to refresh
         }
     }
     
@@ -391,7 +387,6 @@ class BlazeDataIntegration {
     // Clear cache
     clearCache() {
         this.cache.clear();
-        console.log('🗑️ Cache cleared');
     }
 }
 

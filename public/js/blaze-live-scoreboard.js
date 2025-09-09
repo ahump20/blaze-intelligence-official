@@ -18,7 +18,6 @@ class BlazeScoreboard {
     }
     
     init() {
-        console.log('🏆 Blaze Intelligence Live Scoreboard initialized');
         this.setupEventListeners();
         this.startGlobalUpdates();
     }
@@ -27,7 +26,6 @@ class BlazeScoreboard {
     createWidget(containerId, options = {}) {
         const container = document.getElementById(containerId);
         if (!container) {
-            console.error(`Container ${containerId} not found`);
             return null;
         }
         
@@ -141,7 +139,7 @@ class BlazeScoreboard {
             }
             return await response.json();
         } catch (error) {
-            console.warn('Cardinals data fetch failed, using demo data');
+            // Cardinals data fetch failed, using demo data
             return this.getDemoCardinalsData();
         }
     }
@@ -155,7 +153,7 @@ class BlazeScoreboard {
             }
             return await response.json();
         } catch (error) {
-            console.warn(`${league} scores fetch failed, using demo data`);
+            // Scores fetch failed, using demo data
             return this.getDemoLeagueData(league);
         }
     }
@@ -169,7 +167,7 @@ class BlazeScoreboard {
             }
             return await response.json();
         } catch (error) {
-            console.warn('Live scores fetch failed, using demo data');
+            // Live scores fetch failed, using demo data
             return this.getDemoAllScores();
         }
     }

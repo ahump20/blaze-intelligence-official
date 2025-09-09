@@ -41,7 +41,7 @@ class ChampionshipDashboard {
             ];
 
             this.filteredTeams = [...this.teams];
-            console.log(`✅ Loaded ${this.teams.length} teams across all leagues`);
+            // Successfully loaded teams
         } catch (error) {
             console.error('Failed to load teams data:', error);
             // Load fallback static data
@@ -55,7 +55,7 @@ class ChampionshipDashboard {
             const response = await fetch(`/api/sportsradar/${sport}/teams`);
             return response.ok ? await response.json() : null;
         } catch (error) {
-            console.warn(`SportsRadar ${sport} data unavailable:`, error.message);
+            // SportsRadar data unavailable, using fallback
             return null;
         }
     }
@@ -481,7 +481,7 @@ class ChampionshipDashboard {
     createLeagueDistributionChart() {
         const canvas = document.getElementById('championshipLeagueChart');
         if (!canvas || typeof Chart === 'undefined') {
-            console.warn('League Distribution Chart: Canvas not found or Chart.js not loaded');
+            // Chart.js not available or canvas missing
             return;
         }
 
@@ -552,7 +552,7 @@ class ChampionshipDashboard {
     createPerformanceMatrixChart() {
         const canvas = document.getElementById('championshipPerformanceChart');
         if (!canvas || typeof Chart === 'undefined') {
-            console.warn('Performance Matrix Chart: Canvas not found or Chart.js not loaded');
+            // Chart.js not available or canvas missing
             return;
         }
 
