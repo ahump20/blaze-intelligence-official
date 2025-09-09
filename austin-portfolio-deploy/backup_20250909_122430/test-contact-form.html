@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Test Suite | Blaze Intelligence</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/lead-capture.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e2e8f0;
+        }
+        .test-pass { color: #00ff88; }
+        .test-fail { color: #ff4444; }
+        .test-pending { color: #ffd700; }
+    </style>
+</head>
+<body class="p-8">
+    <h1 class="text-3xl font-bold mb-8">🔥 Contact Form Test Suite</h1>
+    
+    <div class="max-w-4xl">
+        <!-- Test Form -->
+        <div class="bg-slate-900 p-6 rounded-lg mb-8">
+            <h2 class="text-xl font-bold mb-4">Test Contact Form</h2>
+            <form data-lead-form="test" id="test-form" class="space-y-4">
+                <input type="text" name="name" placeholder="Name" required class="w-full p-2 bg-slate-800 rounded">
+                <input type="email" name="email" placeholder="Email" required class="w-full p-2 bg-slate-800 rounded">
+                <input type="tel" name="phone" placeholder="Phone" class="w-full p-2 bg-slate-800 rounded">
+                <input type="text" name="organization" placeholder="Organization" required class="w-full p-2 bg-slate-800 rounded">
+                <select name="role" required class="w-full p-2 bg-slate-800 rounded">
+                    <option value="">Select Role</option>
+                    <option value="decision-maker">C-Suite / VP</option>
+                    <option value="influencer">Director / Manager</option>
+                    <option value="evaluator">Analyst</option>
+                </select>
+                <select name="sport" required class="w-full p-2 bg-slate-800 rounded">
+                    <option value="">Select Sport</option>
+                    <option value="mlb">MLB</option>
+                    <option value="nfl">NFL</option>
+                    <option value="nba">NBA</option>
+                    <option value="ncaa">NCAA</option>
+                </select>
+                <select name="budget" class="w-full p-2 bg-slate-800 rounded">
+                    <option value="">Budget Range</option>
+                    <option value="<25k">Under $25k</option>
+                    <option value="25k-50k">$25k-50k</option>
+                    <option value="50k-100k">$50k-100k</option>
+                    <option value="100k-250k">$100k-250k</option>
+                    <option value="250k+">$250k+</option>
+                </select>
+                <select name="timeline" class="w-full p-2 bg-slate-800 rounded">
+                    <option value="">Timeline</option>
+                    <option value="immediate">Immediate</option>
+                    <option value="1-3months">1-3 Months</option>
+                    <option value="3-6months">3-6 Months</option>
+                    <option value="6months+">6+ Months</option>
+                </select>
+                <button type="submit" class="w-full p-3 bg-orange-500 text-white rounded font-bold">Submit Test</button>
+            </form>
+        </div>
+
+        <!-- Test Results -->
+        <div class="bg-slate-900 p-6 rounded-lg">
+            <h2 class="text-xl font-bold mb-4">Test Results</h2>
+            <div id="test-results" class="space-y-2 font-mono text-sm"></div>
+        </div>
+
+        <!-- Automated Tests -->
+        <div class="bg-slate-900 p-6 rounded-lg mt-8">
+            <h2 class="text-xl font-bold mb-4">Automated Test Suite</h2>
+            <button onclick="runAutomatedTests()" class="px-6 py-2 bg-cyan-500 text-white rounded font-bold mb-4">
+                Run All Tests
+            </button>
+            <div id="automated-results" class="space-y-2 font-mono text-sm"></div>
+        </div>
+    </div>
+
+    <script>
+        const log = (message, type = 'info') => {
+            const resultsDiv = document.getElementById('test-results');
+            const entry = document.createElement('div');
+            const timestamp = new Date().toISOString().substring(11, 19);
+            
+            let className = '';
+            let icon = '';
+            switch(type) {
+                case 'pass': className = 'test-pass'; icon = '✅'; break;
+                case 'fail': className = 'test-fail'; icon = '❌'; break;
+                case 'pending': className = 'test-pending'; icon = '⏳'; break;
+                default: icon = 'ℹ️';
+            }
+            
+            entry.className = className;
+            entry.textContent = `[${timestamp}] ${icon} ${message}`;
+            resultsDiv.appendChild(entry);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        };
+
+        // Listen for lead capture events
+        document.addEventListener('blazeLeadCaptured', (event) => {
+            log('Lead captured successfully', 'pass');
+            log(`Lead Score: ${event.detail.leadScore}`, 'info');
+            log(`Qualification: ${event.detail.qualification}`, 'info');
+            log(`Data: ${JSON.stringify(event.detail)}`, 'info');
+        });
+
+        document.addEventListener('blazeAnalytics', (event) => {
+            log(`Analytics Event: ${event.detail.event}`, 'info');
+        });
+
+        // Test form submission
+        document.getElementById('test-form').addEventListener('submit', (e) => {
+            log('Form submission initiated', 'pending');
+        });
+
+        // Automated test suite
+        async function runAutomatedTests() {
+            const results = document.getElementById('automated-results');
+            results.innerHTML = '';
+            
+            const tests = [
+                testFieldValidation,
+                testLeadScoring,
+                testQualification,
+                testDataPersistence,
+                testErrorHandling,
+                testAnalyticsTracking
+            ];
+
+            for (const test of tests) {
+                await test();
+                await sleep(500);
+            }
+        }
+
+        async function testFieldValidation() {
+            logTest('Field Validation', 'pending');
+            
+            const form = document.getElementById('test-form');
+            const emailField = form.querySelector('[name="email"]');
+            
+            // Test invalid email
+            emailField.value = 'invalid-email';
+            const isValid = blazeLeadCapture.validateField(emailField);
+            
+            if (!isValid) {
+                logTest('Email validation working', 'pass');
+            } else {
+                logTest('Email validation failed', 'fail');
+            }
+            
+            // Test valid email
+            emailField.value = 'test@example.com';
+            const isValid2 = blazeLeadCapture.validateField(emailField);
+            
+            if (isValid2) {
+                logTest('Valid email accepted', 'pass');
+            } else {
+                logTest('Valid email rejected', 'fail');
+            }
+        }
+
+        async function testLeadScoring() {
+            logTest('Lead Scoring', 'pending');
+            
+            const testData = {
+                companySize: 'enterprise',
+                budget: '250k+',
+                timeline: 'immediate',
+                role: 'decision-maker',
+                sport: 'mlb'
+            };
+            
+            const score = blazeLeadCapture.calculateLeadScore(testData);
+            logTest(`Lead Score Calculated: ${score}`, score > 0 ? 'pass' : 'fail');
+            
+            // Test different scenarios
+            const scenarios = [
+                { data: { budget: '<25k', role: 'researcher' }, expected: 'low' },
+                { data: { budget: '100k-250k', role: 'influencer', sport: 'nfl' }, expected: 'medium' },
+                { data: { budget: '250k+', role: 'decision-maker', timeline: 'immediate' }, expected: 'high' }
+            ];
+            
+            scenarios.forEach(scenario => {
+                const testScore = blazeLeadCapture.calculateLeadScore(scenario.data);
+                logTest(`Scenario (${scenario.expected}): Score = ${testScore}`, 'info');
+            });
+        }
+
+        async function testQualification() {
+            logTest('Lead Qualification', 'pending');
+            
+            const qualifications = [
+                { score: 85, expected: 'hot' },
+                { score: 65, expected: 'warm' },
+                { score: 45, expected: 'cool' },
+                { score: 30, expected: 'cold' }
+            ];
+            
+            qualifications.forEach(test => {
+                const result = blazeLeadCapture.qualifyLead({ leadScore: test.score });
+                const passed = result === test.expected;
+                logTest(`Score ${test.score} = ${result} (expected: ${test.expected})`, passed ? 'pass' : 'fail');
+            });
+        }
+
+        async function testDataPersistence() {
+            logTest('Data Persistence', 'pending');
+            
+            const testLead = {
+                name: 'Test User',
+                email: 'test@blazeintelligence.com',
+                timestamp: new Date().toISOString()
+            };
+            
+            blazeLeadCapture.storeLead(testLead);
+            const stored = localStorage.getItem('blazeLeads');
+            
+            if (stored) {
+                const leads = JSON.parse(stored);
+                const found = leads.find(l => l.email === testLead.email);
+                logTest('Lead stored in localStorage', found ? 'pass' : 'fail');
+            } else {
+                logTest('localStorage storage failed', 'fail');
+            }
+        }
+
+        async function testErrorHandling() {
+            logTest('Error Handling', 'pending');
+            
+            // Test queue system
+            const testLead = { 
+                name: 'Queue Test',
+                email: 'queue@test.com',
+                leadScore: 50
+            };
+            
+            blazeLeadCapture.queueLead(testLead);
+            const hasQueue = blazeLeadCapture.leadQueue.length > 0;
+            logTest('Lead queuing system', hasQueue ? 'pass' : 'fail');
+        }
+
+        async function testAnalyticsTracking() {
+            logTest('Analytics Tracking', 'pending');
+            
+            // Test event tracking
+            let eventFired = false;
+            const listener = () => { eventFired = true; };
+            document.addEventListener('blazeAnalytics', listener, { once: true });
+            
+            blazeLeadCapture.trackEvent('test_event', 'test_type', 100);
+            
+            setTimeout(() => {
+                logTest('Analytics event firing', eventFired ? 'pass' : 'fail');
+            }, 100);
+        }
+
+        function logTest(message, status) {
+            const results = document.getElementById('automated-results');
+            const entry = document.createElement('div');
+            
+            let className = '';
+            let icon = '';
+            switch(status) {
+                case 'pass': className = 'test-pass'; icon = '✅'; break;
+                case 'fail': className = 'test-fail'; icon = '❌'; break;
+                case 'pending': className = 'test-pending'; icon = '⏳'; break;
+                default: icon = 'ℹ️';
+            }
+            
+            entry.className = className;
+            entry.textContent = `${icon} ${message}`;
+            results.appendChild(entry);
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            log('Test suite initialized', 'pass');
+            log('Lead capture system ready', 'pass');
+        });
+    </script>
+</body>
+</html>

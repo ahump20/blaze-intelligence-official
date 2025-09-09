@@ -1,0 +1,522 @@
+{
+  "workspace": {
+    "name": "Blaze Intelligence Command Center",
+    "description": "Central knowledge hub for sports intelligence operations",
+    "owner": "Austin Humphrey (ahump20@outlook.com)",
+    "phone": "(210) 273-5538",
+    "created": "2025-09-02",
+    "structure": {
+      "home": {
+        "title": "🔥 Blaze Intelligence HQ",
+        "sections": [
+          {
+            "name": "Quick Actions",
+            "items": [
+              "📊 View Live Dashboard",
+              "🎯 Client Pipeline",
+              "📈 Revenue Tracking",
+              "🔬 Research Hub",
+              "⚙️ System Status"
+            ]
+          },
+          {
+            "name": "Key Metrics (Live)",
+            "widgets": [
+              "Cardinals Readiness: 90.0%",
+              "System Accuracy: 94.6%",
+              "Q4 2025 Target: $325K",
+              "2026 Target: $1.875M",
+              "Active Prospects: [Dynamic]"
+            ]
+          }
+        ]
+      },
+      "databases": {
+        "clients": {
+          "name": "🏆 Client Database",
+          "description": "Complete profiles for all target and current clients",
+          "properties": {
+            "Organization": {
+              "type": "title",
+              "required": true
+            },
+            "League": {
+              "type": "select",
+              "options": ["MLB", "NFL", "NBA", "NCAA", "High School", "Youth/Perfect Game", "International"]
+            },
+            "Status": {
+              "type": "select",
+              "options": ["Target", "Contacted", "Demo Scheduled", "Proposal Sent", "Negotiating", "Client", "Lost", "On Hold"]
+            },
+            "Tier": {
+              "type": "select",
+              "options": ["Demo ($1,188)", "Professional ($50K)", "Enterprise ($250K)", "Custom"]
+            },
+            "Priority": {
+              "type": "select",
+              "options": ["🔴 High", "🟡 Medium", "🟢 Low"]
+            },
+            "Revenue Potential": {
+              "type": "number",
+              "format": "dollar"
+            },
+            "Decision Maker": {
+              "type": "rich_text"
+            },
+            "Contact Info": {
+              "type": "rich_text"
+            },
+            "Last Contact": {
+              "type": "date"
+            },
+            "Next Action": {
+              "type": "rich_text"
+            },
+            "Notes": {
+              "type": "rich_text"
+            },
+            "Readiness Score": {
+              "type": "number",
+              "format": "percent"
+            },
+            "Pain Points": {
+              "type": "multi_select",
+              "options": ["Analytics Gap", "Cost Reduction", "Performance Optimization", "Scouting Enhancement", "Injury Prevention"]
+            },
+            "Competition": {
+              "type": "multi_select",
+              "options": ["Hudl", "Stats Inc", "Second Spectrum", "Catapult", "In-house Solution", "None"]
+            }
+          },
+          "views": [
+            {
+              "name": "🎯 Active Pipeline",
+              "filter": "Status != Lost AND Status != Client",
+              "sort": "Priority DESC, Revenue Potential DESC"
+            },
+            {
+              "name": "💰 Revenue Forecast",
+              "group_by": "Status",
+              "aggregate": "Revenue Potential"
+            },
+            {
+              "name": "⚾ MLB Targets",
+              "filter": "League = MLB",
+              "sort": "Priority DESC"
+            },
+            {
+              "name": "🏈 NFL Targets",
+              "filter": "League = NFL",
+              "sort": "Priority DESC"
+            },
+            {
+              "name": "🏀 NBA Targets",
+              "filter": "League = NBA",
+              "sort": "Priority DESC"
+            },
+            {
+              "name": "🎓 NCAA Targets",
+              "filter": "League = NCAA",
+              "sort": "Priority DESC"
+            }
+          ],
+          "sample_data": [
+            {
+              "Organization": "St. Louis Cardinals",
+              "League": "MLB",
+              "Status": "Target",
+              "Tier": "Enterprise ($250K)",
+              "Priority": "🔴 High",
+              "Revenue Potential": 250000,
+              "Decision Maker": "John Mozeliak (President of Baseball Operations)",
+              "Contact Info": "TBD - Research needed",
+              "Pain Points": ["Analytics Gap", "Performance Optimization"],
+              "Readiness Score": 90.0,
+              "Notes": "Currently tracking 90.0% readiness. Strong analytical culture. Opportunity for real-time optimization."
+            },
+            {
+              "Organization": "Tennessee Titans",
+              "League": "NFL",
+              "Status": "Target",
+              "Tier": "Professional ($50K)",
+              "Priority": "🔴 High",
+              "Revenue Potential": 50000,
+              "Decision Maker": "TBD",
+              "Pain Points": ["Cost Reduction", "Performance Optimization"],
+              "Notes": "Performance tracking at 81.2%. Opportunity for defensive improvement analytics."
+            },
+            {
+              "Organization": "University of Texas Longhorns",
+              "League": "NCAA",
+              "Status": "Target",
+              "Tier": "Professional ($50K)",
+              "Priority": "🟡 Medium",
+              "Revenue Potential": 50000,
+              "Decision Maker": "Steve Sarkisian (Football), David Pierce (Baseball)",
+              "Pain Points": ["Scouting Enhancement", "Analytics Gap"],
+              "Notes": "Strong recruiting class (Rank #2 nationally). Opportunity for recruiting optimization."
+            },
+            {
+              "Organization": "Memphis Grizzlies",
+              "League": "NBA",
+              "Status": "Target",
+              "Tier": "Enterprise ($250K)",
+              "Priority": "🟡 Medium",
+              "Revenue Potential": 250000,
+              "Decision Maker": "Zach Kleiman (Executive VP of Basketball Operations)",
+              "Pain Points": ["Character Assessment", "Performance Optimization"],
+              "Notes": "Grit Index tracking at 95.1%. Perfect fit for character/grit analysis platform."
+            }
+          ]
+        },
+        "research": {
+          "name": "🔬 Research Library",
+          "description": "Market intelligence and competitive analysis",
+          "properties": {
+            "Title": {"type": "title"},
+            "Category": {
+              "type": "select", 
+              "options": ["Market Analysis", "Competitor Research", "Technology Trends", "Pricing Intelligence", "Industry Reports"]
+            },
+            "Priority": {
+              "type": "select",
+              "options": ["Critical", "High", "Medium", "Low"]
+            },
+            "Status": {
+              "type": "select",
+              "options": ["Research Needed", "In Progress", "Complete", "Outdated"]
+            },
+            "Source": {"type": "rich_text"},
+            "Key Insights": {"type": "rich_text"},
+            "Action Items": {"type": "rich_text"},
+            "Date Created": {"type": "created_time"},
+            "Last Updated": {"type": "last_edited_time"},
+            "Tags": {
+              "type": "multi_select",
+              "options": ["MLB", "NFL", "NBA", "NCAA", "Pricing", "Technology", "Competition"]
+            }
+          },
+          "sample_data": [
+            {
+              "Title": "Hudl Pricing Analysis 2025",
+              "Category": "Pricing Intelligence",
+              "Priority": "Critical",
+              "Status": "Complete",
+              "Key Insights": "Hudl Assist: $3,600/year, Hudl Pro: $7,200/year. Our savings range: 67-80% validated",
+              "Tags": ["Pricing", "Competition"]
+            },
+            {
+              "Title": "Computer Vision in Sports Analytics",
+              "Category": "Technology Trends", 
+              "Priority": "High",
+              "Status": "In Progress",
+              "Key Insights": "Micro-expression analysis emerging as differentiator. Character assessment through body language gaining traction",
+              "Tags": ["Technology", "MLB", "NFL", "NBA"]
+            }
+          ]
+        },
+        "content": {
+          "name": "📝 Content Management System",
+          "description": "All marketing materials, case studies, and sales content",
+          "properties": {
+            "Title": {"type": "title"},
+            "Type": {
+              "type": "select",
+              "options": ["Blog Post", "Case Study", "White Paper", "Sales Deck", "Demo Script", "Email Template", "Social Media", "Website Copy"]
+            },
+            "Status": {
+              "type": "select",
+              "options": ["Draft", "Review", "Approved", "Published", "Archived"]
+            },
+            "Target Audience": {
+              "type": "multi_select",
+              "options": ["MLB", "NFL", "NBA", "NCAA", "High School", "General", "Technical", "Executive"]
+            },
+            "Priority": {
+              "type": "select",
+              "options": ["Urgent", "High", "Medium", "Low"]
+            },
+            "Author": {"type": "person"},
+            "Reviewer": {"type": "person"},
+            "Publish Date": {"type": "date"},
+            "URL": {"type": "url"},
+            "Performance Metrics": {"type": "rich_text"},
+            "Keywords": {"type": "multi_select"},
+            "Call to Action": {"type": "rich_text"}
+          },
+          "sample_data": [
+            {
+              "Title": "Why 94.6% Accuracy Matters in Sports Analytics",
+              "Type": "Blog Post",
+              "Status": "Draft",
+              "Target Audience": ["MLB", "NFL", "NBA", "Technical"],
+              "Priority": "High",
+              "Keywords": ["accuracy", "sports analytics", "machine learning"]
+            }
+          ]
+        },
+        "product": {
+          "name": "⚙️ Product Documentation",
+          "description": "Technical specifications and product roadmap",
+          "properties": {
+            "Feature": {"type": "title"},
+            "Category": {
+              "type": "select",
+              "options": ["Vision AI", "Analytics Engine", "Data Pipeline", "API", "Dashboard", "Integration", "Security"]
+            },
+            "Status": {
+              "type": "select", 
+              "options": ["Concept", "Planned", "In Development", "Testing", "Live", "Deprecated"]
+            },
+            "Priority": {
+              "type": "select",
+              "options": ["P0 - Critical", "P1 - High", "P2 - Medium", "P3 - Low"]
+            },
+            "Technical Specs": {"type": "rich_text"},
+            "Business Value": {"type": "rich_text"},
+            "Target Release": {"type": "date"},
+            "Dependencies": {"type": "relation"},
+            "Testing Notes": {"type": "rich_text"},
+            "Performance Metrics": {"type": "rich_text"}
+          },
+          "sample_data": [
+            {
+              "Feature": "Vision AI - Micro-Expression Detection",
+              "Category": "Vision AI",
+              "Status": "In Development",
+              "Priority": "P0 - Critical",
+              "Technical Specs": "Real-time facial analysis at 1/25th second intervals. Character traits: grit, determination, focus, composure",
+              "Business Value": "Differentiates from all competitors. Enables character-based scouting and performance prediction",
+              "Target Release": "Q1 2025"
+            },
+            {
+              "Feature": "Cardinals Real-Time Readiness Board",
+              "Category": "Analytics Engine",
+              "Status": "Live",
+              "Priority": "P0 - Critical",
+              "Technical Specs": "Live MLB data integration, 10-minute refresh cycle, 90%+ accuracy",
+              "Business Value": "Proof of concept for real-time sports intelligence",
+              "Performance Metrics": "Currently tracking 90.0% readiness"
+            }
+          ]
+        },
+        "business_intelligence": {
+          "name": "📈 Business Intelligence",
+          "description": "Revenue tracking, pipeline management, success metrics",
+          "properties": {
+            "Metric": {"type": "title"},
+            "Category": {
+              "type": "select",
+              "options": ["Revenue", "Pipeline", "Performance", "System", "Growth"]
+            },
+            "Current Value": {"type": "number"},
+            "Target Value": {"type": "number"},
+            "Period": {
+              "type": "select",
+              "options": ["Daily", "Weekly", "Monthly", "Quarterly", "Annual"]
+            },
+            "Trend": {
+              "type": "select", 
+              "options": ["↗️ Up", "↘️ Down", "→ Flat"]
+            },
+            "Last Updated": {"type": "last_edited_time"},
+            "Notes": {"type": "rich_text"}
+          },
+          "sample_data": [
+            {
+              "Metric": "Q4 2025 Revenue Target",
+              "Category": "Revenue",
+              "Target Value": 325000,
+              "Current Value": 0,
+              "Period": "Quarterly",
+              "Notes": "Target includes 5 Professional tier clients + 1 Enterprise client"
+            },
+            {
+              "Metric": "2026 Annual Revenue Target", 
+              "Category": "Revenue",
+              "Target Value": 1875000,
+              "Current Value": 0,
+              "Period": "Annual",
+              "Notes": "Aggressive growth target requiring 15+ Enterprise clients"
+            },
+            {
+              "Metric": "System Accuracy",
+              "Category": "Performance",
+              "Current Value": 94.6,
+              "Target Value": 95.0,
+              "Period": "Daily",
+              "Trend": "↗️ Up"
+            }
+          ]
+        },
+        "integrations": {
+          "name": "🔗 Integration Hub",
+          "description": "External platform connections and automations",
+          "properties": {
+            "Platform": {"type": "title"},
+            "Type": {
+              "type": "select",
+              "options": ["CRM", "Analytics", "Communication", "Development", "Finance", "Marketing"]
+            },
+            "Status": {
+              "type": "select",
+              "options": ["Connected", "Setup Needed", "Testing", "Failed", "Deprecated"]
+            },
+            "Purpose": {"type": "rich_text"},
+            "Last Sync": {"type": "date"},
+            "Health Check": {
+              "type": "select",
+              "options": ["🟢 Healthy", "🟡 Warning", "🔴 Error"]
+            },
+            "API Details": {"type": "rich_text"},
+            "Automation Rules": {"type": "rich_text"}
+          },
+          "sample_data": [
+            {
+              "Platform": "Asana",
+              "Type": "Development", 
+              "Status": "Setup Needed",
+              "Purpose": "Task management and project tracking",
+              "Health Check": "🟡 Warning"
+            },
+            {
+              "Platform": "HubSpot",
+              "Type": "CRM",
+              "Status": "Setup Needed", 
+              "Purpose": "Contact management and sales pipeline",
+              "Health Check": "🟡 Warning"
+            },
+            {
+              "Platform": "Stripe",
+              "Type": "Finance",
+              "Status": "Setup Needed",
+              "Purpose": "Payment processing for subscriptions",
+              "Health Check": "🟡 Warning"
+            }
+          ]
+        }
+      },
+      "pages": {
+        "competitive_analysis": {
+          "title": "🎯 Competitive Landscape",
+          "content": [
+            {
+              "section": "Primary Competitors",
+              "items": [
+                "Hudl - Video analysis platform",
+                "Stats Inc - Statistical analysis", 
+                "Second Spectrum - NBA tracking",
+                "Catapult - Wearable tech",
+                "Synergy Sports - Video scouting"
+              ]
+            },
+            {
+              "section": "Our Differentiators", 
+              "items": [
+                "Vision AI with micro-expression analysis",
+                "Character/grit assessment algorithms",
+                "Multi-sport unified platform",
+                "Real-time readiness tracking",
+                "67-80% cost savings validated"
+              ]
+            }
+          ]
+        },
+        "sales_playbook": {
+          "title": "📋 Sales Playbook",
+          "sections": [
+            {
+              "name": "Discovery Questions",
+              "content": [
+                "What analytics tools are you currently using?",
+                "What's your biggest challenge in player evaluation?", 
+                "How important is character assessment in your process?",
+                "What's your annual budget for analytics tools?"
+              ]
+            },
+            {
+              "name": "Demo Flow",
+              "content": [
+                "1. Show live Cardinals readiness (90.0%)",
+                "2. Demonstrate Vision AI character analysis",
+                "3. Present cost savings calculator",
+                "4. Review success metrics (94.6% accuracy)"
+              ]
+            }
+          ]
+        },
+        "methods_definitions": {
+          "title": "📊 Methods & Definitions",
+          "content": [
+            {
+              "section": "Accuracy Metrics",
+              "definition": "94.6% accuracy measured against verified game outcomes over 10,000+ predictions"
+            },
+            {
+              "section": "Latency Benchmarks", 
+              "definition": "<100ms response time measured from API request to data delivery"
+            },
+            {
+              "section": "Data Points",
+              "definition": "2.8M+ verified data points from official league sources and validated third-party providers"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "client_proposal": {
+          "title": "Client Proposal Template",
+          "sections": ["Executive Summary", "Problem Statement", "Solution Overview", "Implementation Plan", "Pricing", "ROI Analysis", "Next Steps"]
+        },
+        "demo_script": {
+          "title": "Demo Script Template", 
+          "flow": ["Introduction", "Problem Discovery", "Live Demo", "Competitive Comparison", "Pricing Discussion", "Close"]
+        },
+        "case_study": {
+          "title": "Case Study Template",
+          "structure": ["Client Background", "Challenge", "Solution", "Implementation", "Results", "Testimonial"]
+        }
+      }
+    }
+  },
+  "implementation_guide": {
+    "step1": {
+      "action": "Create Notion workspace",
+      "details": "Set up new workspace named 'Blaze Intelligence Command Center'"
+    },
+    "step2": {
+      "action": "Create databases", 
+      "details": "Build all 6 core databases with properties and sample data as specified"
+    },
+    "step3": {
+      "action": "Set up views and filters",
+      "details": "Create filtered views for each database to support different workflows"
+    },
+    "step4": {
+      "action": "Build templates",
+      "details": "Create reusable templates for common documents and processes"
+    },
+    "step5": {
+      "action": "Configure automations",
+      "details": "Set up Notion automations to sync with external tools"
+    },
+    "step6": {
+      "action": "Import existing data",
+      "details": "Migrate current data from various sources into structured format"
+    }
+  },
+  "automation_suggestions": {
+    "zapier_integrations": [
+      "Asana → Notion (sync tasks)",
+      "HubSpot → Notion (sync contacts)", 
+      "Stripe → Notion (revenue tracking)",
+      "Email → Notion (lead capture)"
+    ],
+    "notion_automations": [
+      "Auto-assign client status based on last contact date",
+      "Generate weekly pipeline reports",
+      "Send follow-up reminders for pending actions",
+      "Update revenue forecasts automatically"
+    ]
+  }
+}

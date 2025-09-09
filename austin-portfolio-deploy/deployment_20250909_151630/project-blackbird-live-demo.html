@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Blackbird: Baltimore Orioles 2025-2027 Competitive Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+background: #000000;
+color: #ffffff;
+overflow-x: hidden;
+}
+
+/* Navigation */
+.nav-bar {
+position: fixed;
+top: 0;
+width: 100%;
+background: rgba(0, 0, 0, 0.95);
+backdrop-filter: blur(20px);
+z-index: 1000;
+padding: 1rem 2rem;
+border-bottom: 1px solid rgba(223, 70, 1, 0.2);
+}
+
+.nav-content {
+max-width: 1400px;
+margin: 0 auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.nav-logo {
+font-size: 1.2rem;
+font-weight: 700;
+color: #DF4601;
+}
+
+.nav-links {
+display: flex;
+gap: 2rem;
+}
+
+.nav-link {
+color: #999;
+text-decoration: none;
+transition: color 0.3s;
+}
+
+.nav-link:hover {
+color: #DF4601;
+}
+
+/* Hero Section */
+.hero-section {
+margin-top: 60px;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+background: linear-gradient(180deg, #000000, #0a0a0a);
+}
+
+.hero-bg {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+opacity: 0.1;
+background: radial-gradient(circle at 50% 50%, #DF4601 0%, transparent 70%);
+}
+
+.hero-content {
+position: relative;
+z-index: 2;
+max-width: 1200px;
+padding: 4rem 2rem;
+text-align: center;
+}
+
+.hero-badge {
+display: inline-block;
+background: rgba(223, 70, 1, 0.1);
+border: 1px solid rgba(223, 70, 1, 0.3);
+padding: 0.5rem 1rem;
+border-radius: 20px;
+margin-bottom: 2rem;
+font-size: 0.85rem;
+color: #DF4601;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+}
+
+.hero-title {
+font-size: 4rem;
+font-weight: 900;
+margin-bottom: 1.5rem;
+letter-spacing: -0.03em;
+background: linear-gradient(135deg, #ffffff, #DF4601);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+font-size: 1.3rem;
+color: #999;
+margin-bottom: 3rem;
+max-width: 800px;
+margin-left: auto;
+margin-right: auto;
+line-height: 1.6;
+}
+
+/* Value Cards */
+.value-grid {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+gap: 1rem;
+margin-bottom: 3rem;
+}
+
+.value-card {
+background: rgba(255, 255, 255, 0.02);
+border: 1px solid rgba(255, 255, 255, 0.1);
+border-radius: 12px;
+padding: 1.5rem;
+transition: all 0.3s;
+position: relative;
+overflow: hidden;
+}
+
+.value-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 2px;
+background: linear-gradient(90deg, #DF4601, #FF8C00);
+transform: scaleX(0);
+transition: transform 0.3s;
+}
+
+.value-card:hover::before {
+transform: scaleX(1);
+}
+
+.value-card:hover {
+background: rgba(223, 70, 1, 0.05);
+transform: translateY(-5px);
+}
+
+.value-metric {
+font-size: 2rem;
+font-weight: 700;
+color: #DF4601;
+margin-bottom: 0.5rem;
+}
+
+.value-label {
+font-size: 0.8rem;
+color: #999;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+
+/* Section Styles */
+.section {
+padding: 5rem 2rem;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.section-header {
+text-align: center;
+margin-bottom: 4rem;
+}
+
+.section-label {
+color: #DF4601;
+font-size: 0.9rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+margin-bottom: 1rem;
+}
+
+.section-title {
+font-size: 3rem;
+font-weight: 900;
+margin-bottom: 1rem;
+letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+font-size: 1.2rem;
+color: #999;
+max-width: 700px;
+margin: 0 auto;
+}
+
+/* Prospect Cards */
+.prospect-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 1.5rem;
+margin: 2rem 0;
+}
+
+.prospect-card {
+background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(223,70,1,0.02));
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 12px;
+padding: 1.5rem;
+transition: all 0.3s;
+position: relative;
+}
+
+.prospect-card:hover {
+border-color: #DF4601;
+transform: scale(1.02);
+box-shadow: 0 10px 30px rgba(223,70,1,0.2);
+}
+
+.prospect-header {
+display: flex;
+justify-content: space-between;
+align-items: start;
+margin-bottom: 1rem;
+}
+
+.prospect-name {
+font-size: 1.3rem;
+font-weight: 700;
+color: #DF4601;
+}
+
+.prospect-position {
+color: #999;
+font-size: 0.9rem;
+margin-top: 0.25rem;
+}
+
+.prospect-rank {
+background: rgba(223,70,1,0.2);
+color: #DF4601;
+padding: 0.25rem 0.75rem;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: 600;
+}
+
+.metric-row {
+display: flex;
+justify-content: space-between;
+padding: 0.5rem 0;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.metric-label {
+color: #999;
+font-size: 0.9rem;
+}
+
+.metric-value {
+font-weight: 600;
+color: #ffffff;
+}
+
+.metric-bar {
+height: 4px;
+background: rgba(255,255,255,0.1);
+border-radius: 2px;
+margin-top: 0.25rem;
+overflow: hidden;
+}
+
+.metric-fill {
+height: 100%;
+background: linear-gradient(90deg, #DF4601, #FF8C00);
+border-radius: 2px;
+transition: width 0.5s ease;
+}
+
+/* Chart Container */
+.chart-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 2rem;
+margin: 3rem 0;
+}
+
+.chart-container {
+background: rgba(255,255,255,0.02);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 12px;
+padding: 2rem;
+height: 400px;
+position: relative;
+}
+
+.chart-title {
+font-size: 1.2rem;
+font-weight: 600;
+margin-bottom: 1.5rem;
+color: #ffffff;
+}
+
+/* Technology Cards */
+.tech-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 2rem;
+margin: 3rem 0;
+}
+
+.tech-card {
+background: rgba(255,255,255,0.02);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 12px;
+padding: 2rem;
+text-align: center;
+transition: all 0.3s;
+}
+
+.tech-card:hover {
+border-color: #DF4601;
+background: rgba(223,70,1,0.05);
+}
+
+.tech-icon {
+width: 60px;
+height: 60px;
+margin: 0 auto 1.5rem;
+background: linear-gradient(135deg, #DF4601, #FF8C00);
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.5rem;
+}
+
+.tech-title {
+font-size: 1.2rem;
+font-weight: 600;
+margin-bottom: 1rem;
+}
+
+.tech-description {
+color: #999;
+line-height: 1.6;
+}
+
+/* CTA Section */
+.cta-section {
+text-align: center;
+padding: 6rem 2rem;
+background: linear-gradient(180deg, transparent, rgba(223,70,1,0.05));
+}
+
+.btn-primary {
+background: linear-gradient(135deg, #DF4601, #FF8C00);
+color: white;
+padding: 1rem 2.5rem;
+border-radius: 8px;
+font-weight: 600;
+text-decoration: none;
+display: inline-block;
+transition: all 0.3s;
+margin: 0.5rem;
+}
+
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 10px 30px rgba(223,70,1,0.3);
+}
+
+.btn-secondary {
+background: transparent;
+color: #DF4601;
+padding: 1rem 2.5rem;
+border: 2px solid #DF4601;
+border-radius: 8px;
+font-weight: 600;
+text-decoration: none;
+display: inline-block;
+transition: all 0.3s;
+margin: 0.5rem;
+}
+
+.btn-secondary:hover {
+background: rgba(223,70,1,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+.hero-title {
+font-size: 2.5rem;
+}
+.value-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+.prospect-grid {
+grid-template-columns: 1fr;
+}
+.chart-grid {
+grid-template-columns: 1fr;
+}
+.tech-grid {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+<section class="hero-section">
+<div class="hero-bg"></div>
+<div class="hero-content">
+<div class="hero-badge">Yale-Houston Philosophy • NASA Clarity • Championship Results</div>
+
+<h1 class="hero-title">
+Project Blackbird:<br>
+Information Asymmetry Exploitation
+</h1>
+
+<p class="hero-subtitle">
+Exploiting market inefficiencies in domestic amateur scouting through proprietary evaluation models,
+Camden-specific optimization, and AL East counter-intelligence for the 2025-2027 competitive window
+</p>
+
+<section id="inefficiencies" class="section">
+<div class="section-header">
+<div class="section-label">Unexploited Opportunities</div>
+<h2 class="section-title">Three Categories of Systematic Undervaluation</h2>
+<p class="section-subtitle">
+Information asymmetries persist in transfer portal dynamics, medical recovery trajectories,
+and late-bloomer development patterns
+</p>
+</div>
+
+<div class="tech-grid">
+<div class="tech-card">
+<div class="tech-icon">🔄</div>
+<h3 class="tech-title">Transfer Portal Arbitrage</h3>
+<p class="tech-description">
+D2/D3/NAIA players with MLB-caliber peripherals masked by competition level.
+20-40% signability discount with 2.0+ WAR delta potential.
+</p>
+</div>
+<div class="tech-card">
+<div class="tech-icon">⚕️</div>
+<h3 class="tech-title">Medical Red Herrings</h3>
+<p class="tech-description">
+TJ-recovered pitchers with velocity restoration and improved mechanics.
+35-45% draft discount with 85% performance probability.
+</p>
+</div>
+<div class="tech-card">
+<div class="tech-icon">📈</div>
+<h3 class="tech-title">Late Bloomer Modeling</h3>
+<p class="tech-description">
+Multi-sport athletes and YoY improvers with uncommitted runway.
+High cognitive leverage from transferable kinetic chains.
+</p>
+</div>
+</div>
+</section>
+
+<section id="prospects" class="section">
+<div class="section-header">
+<div class="section-label">2026 Draft Intelligence</div>
+<h2 class="section-title">Undervalued Targets with Proprietary Scoring</h2>
+<p class="section-subtitle">
+40 prospects identified through Camden Fit Index, Division Readiness Score,
+and NIL Signability modeling
+</p>
+</div>
+
+<div class="prospect-grid">
+<div class="prospect-card">
+<div class="prospect-header">
+<div>
+<div class="prospect-name">Matt Barr</div>
+<div class="prospect-position">RHP • Tennessee • 98mph Post-TJ</div>
+</div>
+<div class="prospect-rank">Value Play</div>
+</div>
+<div class="metric-row">
+<span class="metric-label">Medical Recovery</span>
+<span class="metric-value">85%</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 85%"></div></div>
+<div class="metric-row">
+<span class="metric-label">Velocity Restoration</span>
+<span class="metric-value">+7mph</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 100%"></div></div>
+<div class="metric-row">
+<span class="metric-label">Draft Discount</span>
+<span class="metric-value">40-50%</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 45%"></div></div>
+</div>
+
+<div class="prospect-card">
+<div class="prospect-header">
+<div>
+<div class="prospect-name">Ryan Wideman</div>
+<div class="prospect-position">OF • W. Kentucky • 45 SB Transfer</div>
+</div>
+<div class="prospect-rank">Arbitrage</div>
+</div>
+<div class="metric-row">
+<span class="metric-label">Speed Utilization</span>
+<span class="metric-value">94</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 94%"></div></div>
+<div class="metric-row">
+<span class="metric-label">Transfer WAR Delta</span>
+<span class="metric-value">+2.0</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 80%"></div></div>
+<div class="metric-row">
+<span class="metric-label">Cognitive Leverage</span>
+<span class="metric-value">87</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 87%"></div></div>
+</div>
+
+<div class="prospect-card">
+<div class="prospect-header">
+<div>
+<div class="prospect-name">Isaac Milburn</div>
+<div class="prospect-position">LHP • Wisconsin • Northwoods Dom</div>
+</div>
+<div class="prospect-rank">LHP Need</div>
+</div>
+<div class="metric-row">
+<span class="metric-label">Anti-Yankees Profile</span>
+<span class="metric-value">93</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 93%"></div></div>
+<div class="metric-row">
+<span class="metric-label">Command Grade</span>
+<span class="metric-value">60</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 60%"></div></div>
+<div class="metric-row">
+<span class="metric-label">Development Timeline</span>
+<span class="metric-value">18-24mo</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 70%"></div></div>
+</div>
+
+<div class="prospect-card">
+<div class="prospect-header">
+<div>
+<div class="prospect-name">Jack Wheeler</div>
+<div class="prospect-position">INF • Multi-Sport • 3-Star FB</div>
+</div>
+<div class="prospect-rank">Late Bloomer</div>
+</div>
+<div class="metric-row">
+<span class="metric-label">Athletic Score</span>
+<span class="metric-value">96</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 96%"></div></div>
+<div class="metric-row">
+<span class="metric-label">Baseball Experience</span>
+<span class="metric-value">Limited</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 30%"></div></div>
+<div class="metric-row">
+<span class="metric-label">Upside Projection</span>
+<span class="metric-value">Elite</span>
+</div>
+<div class="metric-bar"><div class="metric-fill" style="width: 90%"></div></div>
+</div>
+</div>
+</section>
+
+<section id="portfolio" class="section">
+<div class="section-header">
+<div class="section-label">Risk-Optimized Draft Strategy</div>
+<h2 class="section-title">Portfolio Construction & Timeline Alignment</h2>
+<p class="section-subtitle">
+Balancing immediate needs with sustained excellence through
+diversified player acquisition and service time optimization
+</p>
+</div>
+
+<div class="chart-grid">
+<div class="chart-container">
+<h3 class="chart-title">Risk Portfolio Distribution</h3>
+<canvas id="portfolioChart"></canvas>
+</div>
+<div class="chart-container">
+<h3 class="chart-title">ETA Timeline Optimization</h3>
+<canvas id="timelineChart"></canvas>
+</div>
+</div>
+</section>
+

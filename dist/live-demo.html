@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Demo - Blaze Intelligence</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+    <style>
+        body {
+            background: #0A0A0A;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .demo-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .demo-title {
+            font-size: 48px;
+            font-weight: 800;
+            color: #BF5700;
+            margin-bottom: 20px;
+        }
+        
+        .demo-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .demo-badge {
+            background: linear-gradient(135deg, #BF5700 0%, #FF6B35 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .demo-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #BF5700 0%, #FF6B35 100%);
+        }
+        
+        .demo-card h3 {
+            color: #BF5700;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse-live 2s infinite;
+        }
+        
+        @keyframes pulse-live {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        
+        .team-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .team-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .team-btn:hover,
+        .team-btn.active {
+            background: rgba(191, 87, 0, 0.2);
+            border-color: #BF5700;
+            color: #BF5700;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .metric-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #BF5700;
+            display: block;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 5px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #BF5700 0%, #FF6B35 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <div class="demo-badge">🔴 LIVE DEMO</div>
+            <h1 class="demo-title">Cardinals Analytics Dashboard</h1>
+            <p class="demo-subtitle">
+                Real-time performance analytics for the Louisville Cardinals. Live data updates every 30 seconds.
+                <br><strong>Demo Mode:</strong> Using representative data for demonstration purposes.
+            </p>
+        </div>
+        
+        <div class="demo-grid">
+            <div class="demo-card">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    <span style="color: #00ff00; font-weight: 600;">LIVE</span>
+                </div>
+                <h3>Team Performance Trends</h3>
+                <div class="chart-container">
+                    <canvas id="performanceTrendChart"></canvas>
+                </div>
+                <div class="team-selector">
+                    <button class="team-btn active" onclick="switchTeam('cardinals')">Cardinals</button>
+                    <button class="team-btn" onclick="switchTeam('titans')">Titans</button>
+                    <button class="team-btn" onclick="switchTeam('longhorns')">Longhorns</button>
+                </div>
+            </div>
+            
+            <div class="demo-card">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    <span style="color: #00ff00; font-weight: 600;">LIVE</span>
+                </div>
+                <h3>Player Efficiency Ratings</h3>
+                <div class="chart-container">
+                    <canvas id="playerEfficiencyChart"></canvas>
+                </div>
+                <div class="metric-grid">
+                    <div class="metric-item">
+                        <span class="metric-value" id="avgEfficiency">87.3</span>
+                        <div class="metric-label">Avg Efficiency</div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-value" id="topPerformer">94.2</span>
+                        <div class="metric-label">Top Performer</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-card">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    <span style="color: #00ff00; font-weight: 600;">LIVE</span>
+                </div>
+                <h3>Injury Risk Assessment</h3>
+                <div class="chart-container">
+                    <canvas id="injuryRiskChart"></canvas>
+                </div>
+                <div class="metric-grid">
+                    <div class="metric-item">
+                        <span class="metric-value" id="lowRisk">23</span>
+                        <div class="metric-label">Low Risk</div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-value" id="mediumRisk">8</span>
+                        <div class="metric-label">Medium Risk</div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-value" id="highRisk">2</span>
+                        <div class="metric-label">High Risk</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-card">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    <span style="color: #00ff00; font-weight: 600;">LIVE</span>
+                </div>
+                <h3>Championship Probability</h3>
+                <div class="chart-container">
+                    <canvas id="championshipChart"></canvas>
+                </div>
+                <div class="metric-grid">
+                    <div class="metric-item">
+                        <span class="metric-value" id="champProb">73.2%</span>
+                        <div class="metric-label">Win Probability</div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-value" id="confRank">#2</span>
+                        <div class="metric-label">Conference Rank</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="/" class="back-link">← Back to Main Site</a>
+        </div>
+    </div>
+    
+    <script>
+        // Chart configuration
+        const chartColors = {
+            primary: '#BF5700',
+            secondary: '#FF6B35',
+            success: '#28a745',
+            warning: '#ffc107',
+            danger: '#dc3545',
+            gray: 'rgba(255, 255, 255, 0.5)',
+            white: '#ffffff'
+        };
+        
+        // Performance Trend Chart
+        const performanceTrendCtx = document.getElementById('performanceTrendChart');
+        if (performanceTrendCtx) {
+            new Chart(performanceTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                    datasets: [{
+                        label: 'Team Performance',
+                        data: [85, 88, 92, 87, 94, 89, 96, 93],
+                        borderColor: chartColors.primary,
+                        backgroundColor: 'rgba(191, 87, 0, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 75,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: chartColors.gray
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: chartColors.gray
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Player Efficiency Chart
+        const playerEfficiencyCtx = document.getElementById('playerEfficiencyChart');
+        if (playerEfficiencyCtx) {
+            new Chart(playerEfficiencyCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Johnson', 'Williams', 'Davis', 'Miller', 'Wilson'],
+                    datasets: [{
+                        label: 'Efficiency Rating',
+                        data: [94.2, 89.7, 87.3, 85.1, 82.4],
+                        backgroundColor: [
+                            chartColors.primary,
+                            chartColors.secondary,
+                            'rgba(191, 87, 0, 0.7)',
+                            'rgba(191, 87, 0, 0.5)',
+                            'rgba(191, 87, 0, 0.3)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 75,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: chartColors.gray
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: chartColors.gray
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Injury Risk Chart
+        const injuryRiskCtx = document.getElementById('injuryRiskChart');
+        if (injuryRiskCtx) {
+            new Chart(injuryRiskCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Low Risk', 'Medium Risk', 'High Risk'],
+                    datasets: [{
+                        data: [23, 8, 2],
+                        backgroundColor: [
+                            chartColors.success,
+                            chartColors.warning,
+                            chartColors.danger
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: chartColors.white,
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Championship Chart
+        const championshipCtx = document.getElementById('championshipChart');
+        if (championshipCtx) {
+            new Chart(championshipCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Offense', 'Defense', 'Special Teams', 'Coaching', 'Depth', 'Experience'],
+                    datasets: [{
+                        label: 'Championship Factors',
+                        data: [92, 88, 75, 90, 82, 85],
+                        borderColor: chartColors.primary,
+                        backgroundColor: 'rgba(191, 87, 0, 0.2)',
+                        pointBackgroundColor: chartColors.primary
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: chartColors.gray
+                            },
+                            ticks: {
+                                color: chartColors.gray,
+                                backdropColor: 'transparent'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Live data updates
+        setInterval(() => {
+            // Simulate live data updates
+            const avgEfficiency = document.getElementById('avgEfficiency');
+            const topPerformer = document.getElementById('topPerformer');
+            const champProb = document.getElementById('champProb');
+            
+            if (avgEfficiency) {
+                const current = parseFloat(avgEfficiency.textContent);
+                const variance = current * 0.02;
+                const newValue = current + (Math.random() - 0.5) * variance;
+                avgEfficiency.textContent = newValue.toFixed(1);
+            }
+            
+            if (topPerformer) {
+                const current = parseFloat(topPerformer.textContent);
+                const variance = current * 0.015;
+                const newValue = current + (Math.random() - 0.5) * variance;
+                topPerformer.textContent = newValue.toFixed(1);
+            }
+            
+            if (champProb) {
+                const current = parseFloat(champProb.textContent.replace('%', ''));
+                const variance = current * 0.01;
+                const newValue = current + (Math.random() - 0.5) * variance;
+                champProb.textContent = newValue.toFixed(1) + '%';
+            }
+        }, 30000);
+        
+        function switchTeam(team) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.team-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Update demo data based on team selection
+            // This would connect to real team data in production
+            console.log('Switched to team:', team);
+        }
+    </script>
+</body>
+</html>

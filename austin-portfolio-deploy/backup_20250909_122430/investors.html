@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investors | Blaze Intelligence - Democratizing Sports Analytics Nationwide</title>
+    <meta name="description" content="Join Blaze Intelligence in democratizing sports intelligence from youth leagues to professional sports. Equal analytics for every market, every athlete.">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Three.js Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 184, 28, 0.2);
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 15px 0;
+            background: rgba(10, 10, 10, 0.98);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #BF5700 0%, #FFB81C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FFB81C;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            background: linear-gradient(180deg, 
+                rgba(191, 87, 0, 0.05) 0%, 
+                rgba(10, 10, 10, 0.9) 100%);
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 184, 28, 0.1);
+            border: 1px solid #FFB81C;
+            color: #FFB81C;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-title {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #BF5700 50%, #FFB81C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite, fadeInUp 0.8s ease-out;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero-subtitle {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease-out;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Stats Section */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 184, 28, 0.05) 0%, rgba(191, 87, 0, 0.1) 100%);
+            border: 1px solid rgba(255, 184, 28, 0.2);
+            padding: 40px;
+            text-align: center;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: #BF5700;
+            box-shadow: 0 20px 40px rgba(191, 87, 0, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #BF5700 0%, #FFB81C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Mission Section */
+        .mission-section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #BF5700 0%, #FFB81C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 60px;
+        }
+        
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .mission-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 184, 28, 0.2);
+            border-radius: 15px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .mission-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+        
+        .mission-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .mission-title {
+            font-size: 24px;
+            color: #FFB81C;
+            margin-bottom: 15px;
+        }
+        
+        .mission-text {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        /* Video Section */
+        .video-section {
+            padding: 100px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 184, 28, 0.1);
+            border-bottom: 1px solid rgba(255, 184, 28, 0.1);
+        }
+        
+        .video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.2) 0%, rgba(255, 184, 28, 0.1) 100%);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .video-placeholder:hover {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.3) 0%, rgba(255, 184, 28, 0.2) 100%);
+        }
+        
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 184, 28, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            background: #FFB81C;
+        }
+        
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-left: 25px solid #0a0a0a;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 5px;
+        }
+        
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+        
+        /* Coverage Section */
+        .coverage-section {
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .coverage-card {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.05) 0%, rgba(255, 184, 28, 0.02) 100%);
+            border: 1px solid rgba(255, 184, 28, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .coverage-card:hover {
+            transform: translateY(-5px);
+            border-color: #BF5700;
+        }
+        
+        .coverage-title {
+            font-size: 28px;
+            color: #FFB81C;
+            margin-bottom: 20px;
+        }
+        
+        .coverage-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .coverage-list li {
+            padding: 10px 0;
+            color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .coverage-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Investment Tiers */
+        .tiers-section {
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .tier-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 184, 28, 0.2);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tier-card:hover {
+            transform: translateY(-10px);
+            border-color: #BF5700;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .tier-card.featured {
+            border-color: #FFB81C;
+            background: linear-gradient(135deg, rgba(255, 184, 28, 0.1) 0%, rgba(191, 87, 0, 0.05) 100%);
+        }
+        
+        .tier-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #FFB81C;
+            color: #0a0a0a;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .tier-name {
+            font-size: 24px;
+            color: #FFB81C;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .tier-amount {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #BF5700 0%, #FFB81C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+        }
+        
+        .tier-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+        
+        .tier-features li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .tier-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #BF5700 0%, #FFB81C 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: 48px;
+            color: #0a0a0a;
+            margin-bottom: 20px;
+        }
+        
+        .cta-text {
+            font-size: 20px;
+            color: rgba(10, 10, 10, 0.8);
+            margin-bottom: 40px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #0a0a0a;
+            color: #FFB81C;
+            padding: 18px 50px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #0a0a0a;
+            color: #0a0a0a;
+        }
+        
+        /* Footer */
+        footer {
+            background: #000000;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 184, 28, 0.2);
+        }
+        
+        footer a {
+            color: #FFB81C;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: #BF5700;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .tiers-grid, .coverage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Three.js Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">BLAZE INTELLIGENCE</a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="demo.html" class="nav-link">Demo</a>
+                <a href="investors.html" class="nav-link active">Investors</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-badge">Democratizing Sports Intelligence</div>
+            <h1 class="hero-title">Equal Analytics for Every Market, Every Athlete</h1>
+            <p class="hero-subtitle">From Perfect Game showcases to the World Series, from Friday Night Lights to Monday Night Football, from AAU courts to NBA Finals — transforming competitive intuition into computational intelligence across all 50 states</p>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">5M+</div>
+                    <div class="stat-label">Athlete Records Nationwide</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50</div>
+                    <div class="stat-label">States Covered Equally</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number"><100ms</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">94.6%</div>
+                    <div class="stat-label">Prediction Accuracy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <h2 class="section-title">Our Mission: True Market Equity</h2>
+        <p class="section-subtitle">No more coastal bias. No more overlooked markets. Every zip code gets professional-grade analytics.</p>
+        
+        <div class="mission-grid">
+            <div class="mission-card">
+                <div class="mission-icon">⚖️</div>
+                <h3 class="mission-title">Regional Balance</h3>
+                <p class="mission-text">Automated bias detection ensures no market exceeds 15% coverage. Small markets amplified. Hidden gems discovered monthly from unexpected places.</p>
+            </div>
+            <div class="mission-card">
+                <div class="mission-icon">🎯</div>
+                <h3 class="mission-title">Complete Pipeline</h3>
+                <p class="mission-text">Youth leagues to professional sports. Perfect Game circuits to MLB. Texas HS football to NFL. AAU nationals to NBA. Every athlete's journey mapped.</p>
+            </div>
+            <div class="mission-card">
+                <div class="mission-icon">💰</div>
+                <h3 class="mission-title">NIL Democratization</h3>
+                <p class="mission-text">40% of NIL deals outside Power 5. Regional sponsorship matching. Small school amplification. Women's athletics optimization. Equal opportunity intelligence.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="video-container">
+            <h2 class="section-title">Executive Presentation</h2>
+            <p class="section-subtitle">How we're democratizing sports intelligence across every market</p>
+            
+            <div class="video-wrapper">
+                <div class="video-placeholder" id="videoPlaceholder">
+                    <div class="play-button">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <!-- Video element (hidden initially) -->
+                <video id="presentationVideo" controls style="display: none;">
+                    <!-- Reference to the .mov file location -->
+                    <source src="/Users/AustinHumphrey/Library/Mobile Documents/com~apple~CloudDocs/HumphreyA_DMKFinalPresentation.mov" type="video/quicktime">
+                    <source src="presentation.mp4" type="video/mp4">
+                    <source src="presentation.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 20px;">
+                    Full presentation deck available. See how we're building intelligence that discovers talent from Amarillo to Atlanta, Spokane to Syracuse.
+                </p>
+                <a href="contact.html" class="cta-button" style="display: inline-block;">Request Full Analysis</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Coverage Section -->
+    <section class="coverage-section">
+        <h2 class="section-title">Comprehensive Coverage Across All Levels</h2>
+        <p class="section-subtitle">Professional-grade analytics from youth leagues to the pros</p>
+        
+        <div class="coverage-grid">
+            <div class="coverage-card">
+                <h3 class="coverage-title">⚾ Baseball Pipeline</h3>
+                <ul class="coverage-list">
+                    <li>Perfect Game circuits (all regions)</li>
+                    <li>USSSA Elite events nationwide</li>
+                    <li>High school coverage (all 50 states)</li>
+                    <li>JUCO pathway intelligence</li>
+                    <li>D1/D2/D3/NAIA opportunities</li>
+                    <li>MiLB development (all affiliates)</li>
+                    <li>MLB performance (30 teams equal depth)</li>
+                    <li>International pipeline tracking</li>
+                </ul>
+            </div>
+            
+            <div class="coverage-card">
+                <h3 class="coverage-title">🏈 Football Journey</h3>
+                <ul class="coverage-list">
+                    <li>7v7 circuits nationwide</li>
+                    <li>High school (all classifications)</li>
+                    <li>Texas/Florida/Georgia/Ohio equal weight</li>
+                    <li>FBS Group of 5 = Power 5 coverage</li>
+                    <li>FCS/D2/D3 pathway tracking</li>
+                    <li>NIL valuations by position</li>
+                    <li>NFL coverage (32 teams balanced)</li>
+                    <li>Alternative leagues (USFL/XFL/CFL)</li>
+                </ul>
+            </div>
+            
+            <div class="coverage-card">
+                <h3 class="coverage-title">🏀 Basketball Development</h3>
+                <ul class="coverage-list">
+                    <li>Nike EYBL/Adidas Gauntlet circuits</li>
+                    <li>Regional AAU tournaments</li>
+                    <li>High school (Montana to Maine)</li>
+                    <li>JUCO hidden gems discovery</li>
+                    <li>Mid-major opportunity matching</li>
+                    <li>Women's basketball NIL optimization</li>
+                    <li>G-League development tracking</li>
+                    <li>NBA coverage (30 teams equal)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Investment Tiers -->
+    <section class="tiers-section">
+        <h2 class="section-title">Investment Opportunities</h2>
+        <p class="section-subtitle">Join us in revolutionizing sports intelligence nationwide</p>
+        
+        <div class="tiers-grid">
+            <div class="tier-card">
+                <h3 class="tier-name">Regional Partner</h3>
+                <div class="tier-amount">$50K - $250K</div>
+                <ul class="tier-features">
+                    <li>Territory exclusivity rights</li>
+                    <li>Regional market insights</li>
+                    <li>Youth program partnerships</li>
+                    <li>High school analytics access</li>
+                    <li>Quarterly market reports</li>
+                </ul>
+            </div>
+            
+            <div class="tier-card featured">
+                <div class="tier-badge">Strategic Value</div>
+                <h3 class="tier-name">National Partner</h3>
+                <div class="tier-amount">$250K - $1M</div>
+                <ul class="tier-features">
+                    <li>Multi-state coverage rights</li>
+                    <li>NIL platform integration</li>
+                    <li>Portal intelligence access</li>
+                    <li>Board observer status</li>
+                    <li>Custom market models</li>
+                    <li>Revenue share opportunities</li>
+                </ul>
+            </div>
+            
+            <div class="tier-card">
+                <h3 class="tier-name">Lead Investor</h3>
+                <div class="tier-amount">$1M+</div>
+                <ul class="tier-features">
+                    <li>Board seat opportunity</li>
+                    <li>National expansion input</li>
+                    <li>Professional league access</li>
+                    <li>Media partnership rights</li>
+                    <li>Technology co-development</li>
+                    <li>First refusal on Series B</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Democratize Sports Intelligence?</h2>
+            <p class="cta-text">
+                Join us in building analytics that serve Wichita State as deeply as UCLA, that value G-League grinders as much as lottery picks, that discover the next superstar from unexpected places.
+            </p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="cta-button">Schedule Meeting</a>
+                <a href="demo.html" class="cta-button secondary">View Demo</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Blaze Intelligence. Democratizing Sports Intelligence Nationwide.</p>
+        <p style="margin-top: 10px; color: rgba(255, 255, 255, 0.6);">Founded in Boerne, TX | Serving All 50 States Equally</p>
+        <p style="margin-top: 15px;">
+            <a href="index.html">Home</a>
+            <a href="demo.html">Demo</a>
+            <a href="contact.html">Contact</a>
+            <a href="sitemap.xml">Sitemap</a>
+        </p>
+    </footer>
+    
+    <!-- Three.js Background Animation -->
+    <script>
+        // Three.js Scene - Map visualization
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('bg-canvas'),
+            antialias: true,
+            alpha: true 
+        });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        // Create nationwide grid representing equal coverage
+        const gridSize = 50;
+        const gridDivisions = 25;
+        
+        for(let x = -gridSize; x <= gridSize; x += gridSize/5) {
+            for(let z = -gridSize; z <= gridSize; z += gridSize/5) {
+                const dotGeometry = new THREE.SphereGeometry(0.5, 8, 8);
+                const dotMaterial = new THREE.MeshBasicMaterial({ 
+                    color: Math.random() > 0.5 ? 0xBF5700 : 0xFFB81C,
+                    transparent: true,
+                    opacity: 0.6
+                });
+                const dot = new THREE.Mesh(dotGeometry, dotMaterial);
+                dot.position.set(x, Math.random() * 10 - 5, z);
+                scene.add(dot);
+            }
+        }
+        
+        // Create connecting lines between regions
+        const linesMaterial = new THREE.LineBasicMaterial({ 
+            color: 0xFFB81C,
+            transparent: true,
+            opacity: 0.2
+        });
+        
+        for(let i = 0; i < 50; i++) {
+            const points = [];
+            points.push(new THREE.Vector3(
+                (Math.random() - 0.5) * 100,
+                (Math.random() - 0.5) * 20,
+                (Math.random() - 0.5) * 100
+            ));
+            points.push(new THREE.Vector3(
+                (Math.random() - 0.5) * 100,
+                (Math.random() - 0.5) * 20,
+                (Math.random() - 0.5) * 100
+            ));
+            
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const line = new THREE.Line(geometry, linesMaterial);
+            scene.add(line);
+        }
+        
+        // Camera Position
+        camera.position.set(0, 30, 60);
+        camera.lookAt(0, 0, 0);
+        
+        // Animation
+        const dots = scene.children.filter(child => child.type === 'Mesh');
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Animate dots with wave effect
+            dots.forEach((dot, index) => {
+                if(dot.type === 'Mesh') {
+                    dot.position.y += Math.sin(Date.now() * 0.001 + index * 0.1) * 0.01;
+                    dot.rotation.y += 0.01;
+                }
+            });
+            
+            // Slowly rotate entire scene
+            scene.rotation.y += 0.0005;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Video Player
+        document.getElementById('videoPlaceholder').addEventListener('click', function() {
+            const video = document.getElementById('presentationVideo');
+            const placeholder = document.getElementById('videoPlaceholder');
+            
+            // Note: Local file paths won't work in production
+            // This is set up for when you upload the video to a server
+            placeholder.style.display = 'none';
+            video.style.display = 'block';
+            video.play();
+        });
+    </script>
+    
+    <!-- Analytics -->
+    <script src="js/analytics-config.js"></script>
+</body>
+</html>

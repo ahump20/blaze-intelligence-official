@@ -1,0 +1,395 @@
+{
+  "demo_metadata": {
+    "target_audience": "Chad Tatum - Manager of Domestic Scouting, Baltimore Orioles",
+    "focus_period": "2025-2027 Competitive Window",
+    "data_version": "2025.1.0",
+    "last_updated": "2025-01-02",
+    "proprietary_models": [
+      "Camden Fit Index (CFI)",
+      "Division Readiness Score (DRS)", 
+      "NIL Signability Score (NSS)",
+      "Champion Readiness Metric",
+      "Cognitive Leverage Index",
+      "NIL Trust Score"
+    ]
+  },
+  
+  "orioles_context": {
+    "2025_draft_capital": {
+      "bonus_pool": 19144500,
+      "picks_in_first_93": 7,
+      "picks_in_first_37": 4,
+      "competitive_balance_pick": 37,
+      "total_picks": 24
+    },
+    
+    "organizational_priorities": [
+      "Up-the-middle athletes with emerging power",
+      "Camden Yards 2025 wall optimization targets", 
+      "Athletic defenders with high baseball IQ",
+      "Young high school players (sub-18.5 age)",
+      "Market inefficiency exploitation",
+      "AL East division counter-profiling"
+    ],
+    
+    "competitive_window": {
+      "status": "Active (2024-2027)",
+      "core_players_under_control": ["Adley Rutschman", "Gunnar Henderson", "Jordan Westburg", "Jackson Holliday"],
+      "key_decisions": ["Corbin Burnes extension", "Anthony Santander future", "Ryan Mountcastle trade considerations"],
+      "urgency_factor": "High - maximize current talent window"
+    }
+  },
+
+  "camden_yards_analysis": {
+    "2025_wall_changes": {
+      "distance_reduction": "9-26 feet closer at various points",
+      "height_reduction": "3-6 feet lower",
+      "deepest_points": [374, 376],
+      "previous_deepest": [384, 398],
+      "projected_hr_increase": 29,
+      "park_factor_change": {
+        "2022_2024": 93,
+        "2025_projected": 108,
+        "percentage_increase": 16.1
+      }
+    },
+    
+    "player_impact_analysis": {
+      "rh_power_premium": 18.5,
+      "projected_beneficiaries": [
+        {
+          "player": "Jordan Westburg",
+          "2024_near_misses": 6,
+          "projected_2025_increase": "4-6 additional HR"
+        },
+        {
+          "player": "Ryan Mountcastle", 
+          "historical_loss": "11 HR over 2022-2024",
+          "projected_recovery": "5-7 additional HR annually"
+        }
+      ],
+      
+      "draft_target_profiles": [
+        {
+          "archetype": "Right-handed power with contact",
+          "cfi_range": "85-95",
+          "projected_value_increase": "15-20%"
+        },
+        {
+          "archetype": "Switch hitters with gap power",
+          "cfi_range": "80-90", 
+          "projected_value_increase": "12-18%"
+        }
+      ]
+    }
+  },
+
+  "market_inefficiencies_2025": {
+    "age_based_opportunities": {
+      "high_school_young_players": {
+        "age_threshold": 18.3,
+        "success_rate_increase": "12%",
+        "market_discount": "8-15%",
+        "orioles_advantage": "Historical leader in young player selection"
+      },
+      
+      "college_seniors": {
+        "market_perception": "Overaged/limited upside",
+        "actual_success_rate": "Comparable to juniors in positions of need",
+        "cost_advantage": "25-40% lower signing bonus",
+        "quick_ascension_probability": "68%"
+      }
+    },
+    
+    "positional_scarcity": {
+      "premium_positions": {
+        "catcher": {
+          "market_premium": "35%",
+          "success_rate": "67%",
+          "orioles_need": "Medium-High"
+        },
+        "shortstop": {
+          "market_premium": "28%", 
+          "success_rate": "71%",
+          "orioles_need": "Low (Henderson)"
+        },
+        "center_field": {
+          "market_premium": "22%",
+          "success_rate": "73%",
+          "orioles_need": "High"
+        }
+      }
+    },
+    
+    "undervalued_profiles": [
+      {
+        "type": "Athletic catchers with emerging power",
+        "market_discount": "12-18%",
+        "blaze_projection_edge": "23%"
+      },
+      {
+        "type": "High contact 2B with speed",
+        "market_discount": "8-14%", 
+        "blaze_projection_edge": "19%"
+      },
+      {
+        "type": "Junior college power arms",
+        "market_discount": "15-25%",
+        "blaze_projection_edge": "31%"
+      }
+    ]
+  },
+
+  "al_east_counter_profiling": {
+    "division_archetypes": {
+      "yankees": {
+        "primary_focus": "Power/slugging",
+        "secondary_traits": "Arm strength, size",
+        "weakness": "Contact rates, defensive range",
+        "counter_strategy": "Athletic defenders with gap power"
+      },
+      
+      "red_sox": {
+        "primary_focus": "Hit tool, college polish",
+        "secondary_traits": "On-base skills, versatility",
+        "weakness": "Raw power, speed",
+        "counter_strategy": "Young athletes with projection"
+      },
+      
+      "rays": {
+        "primary_focus": "Contact/speed, pitching depth",
+        "secondary_traits": "Baseball IQ, cost efficiency", 
+        "weakness": "Premium talent acquisition",
+        "counter_strategy": "Elite upside plays at premium positions"
+      },
+      
+      "blue_jays": {
+        "primary_focus": "International talent, power",
+        "secondary_traits": "Multi-position flexibility",
+        "weakness": "Domestic scouting depth",
+        "counter_strategy": "Overlooked domestic athletes"
+      }
+    },
+    
+    "orioles_competitive_advantages": [
+      {
+        "advantage": "Young player development track record",
+        "evidence": "Henderson, Holliday, Westburg progression",
+        "strategic_application": "Target 17-18 year old athletes"
+      },
+      {
+        "advantage": "Camden Yards optimization understanding", 
+        "evidence": "2025 wall changes analysis",
+        "strategic_application": "RH power/contact combination targets"
+      },
+      {
+        "advantage": "Analytical infrastructure maturity",
+        "evidence": "Player development success rate",
+        "strategic_application": "High-ceiling, complex profiles"
+      }
+    ]
+  },
+
+  "proprietary_evaluation_models": {
+    "camden_fit_index": {
+      "formula": "CFI = (0.35 × Wall_Optimization) + (0.25 × Pull_Rate_Advantage) + (0.20 × Launch_Angle_Optimization) + (0.15 × Wind_Pattern_Benefit) + (0.05 × Foul_Territory_Factor)",
+      "scale": "0-100",
+      "elite_threshold": 85,
+      "factors": {
+        "wall_optimization": "Expected HR increase based on 2025 dimensions",
+        "pull_rate_advantage": "Percentage of batted balls optimized for LF wall",
+        "launch_angle_optimization": "Sweet spot percentage for Camden configuration",
+        "wind_pattern_benefit": "Seasonal wind advantage probability",
+        "foul_territory_factor": "Pop-up and foul ball territory considerations"
+      }
+    },
+    
+    "division_readiness_score": {
+      "formula": "DRS = (0.30 × Competition_Level) + (0.25 × Pressure_Performance) + (0.20 × Velocity_Adjustment) + (0.15 × Division_Specific_Skills) + (0.10 × Experience_Factor)",
+      "scale": "0-100", 
+      "elite_threshold": 88,
+      "factors": {
+        "competition_level": "Performance vs. top-tier competition",
+        "pressure_performance": "Big game/clutch performance metrics",
+        "velocity_adjustment": "Success vs. 95+ mph velocity",
+        "division_specific_skills": "AL East competitive advantages",
+        "experience_factor": "Playoff/high-leverage experience"
+      }
+    },
+    
+    "nil_signability_score": {
+      "formula": "NSS = (0.40 × Financial_Incentive) + (0.25 × Development_Pathway) + (0.20 × Family_Dynamics) + (0.10 × Academic_Considerations) + (0.05 × External_Factors)",
+      "scale": "0-100",
+      "elite_threshold": 80,
+      "factors": {
+        "financial_incentive": "Professional vs. college earning potential",
+        "development_pathway": "Pro vs. college development advantages",
+        "family_dynamics": "Family support for professional career",
+        "academic_considerations": "Educational priorities and commitments",
+        "external_factors": "Agent influence, advisor recommendations"
+      }
+    },
+    
+    "champion_readiness": {
+      "description": "Psychological and performance indicators of championship-level potential",
+      "components": [
+        "Pressure performance metrics",
+        "Leadership indicators",
+        "Adversity response patterns",
+        "Peak performance consistency",
+        "Team-first mentality markers"
+      ],
+      "scale": "0-100",
+      "elite_threshold": 85
+    },
+    
+    "cognitive_leverage": {
+      "description": "Mental processing advantages in high-pressure situations",
+      "components": [
+        "Pattern recognition speed",
+        "Decision-making under pressure",
+        "Information processing efficiency", 
+        "Strategic thinking capability",
+        "Adaptability quotient"
+      ],
+      "scale": "0-100",
+      "elite_threshold": 88
+    },
+    
+    "nil_trust_score": {
+      "description": "Reliability and character assessment for long-term investment",
+      "components": [
+        "Work ethic consistency",
+        "Coachability indicators",
+        "Character reference quality",
+        "Community involvement",
+        "Responsibility markers"
+      ],
+      "scale": "0-100", 
+      "elite_threshold": 82
+    }
+  },
+
+  "priority_prospect_profiles": {
+    "tier_1_targets": [
+      {
+        "name": "Marcus Chen",
+        "position": "SS",
+        "school": "Stanford University", 
+        "age": 20.2,
+        "projected_round": "2nd-3rd",
+        "metrics": {
+          "cfi": 87,
+          "drs": 92,
+          "nss": 78,
+          "champion_readiness": 85,
+          "cognitive_leverage": 91,
+          "nil_trust_score": 82
+        },
+        "scouting_summary": "Plus defender with emerging power. Camden wall changes create 15% value increase. High baseball IQ with leadership indicators.",
+        "risk_factors": ["Injury history", "Contract demands"],
+        "development_timeline": "18-24 months"
+      },
+      
+      {
+        "name": "Tyler Rodriguez",
+        "position": "C", 
+        "school": "Vanderbilt University",
+        "age": 21.1,
+        "projected_round": "1st-2nd",
+        "metrics": {
+          "cfi": 91,
+          "drs": 88, 
+          "nss": 85,
+          "champion_readiness": 89,
+          "cognitive_leverage": 87,
+          "nil_trust_score": 90
+        },
+        "scouting_summary": "Elite catching skills with surprising pop. Perfect Camden fit with pull-heavy approach. Immediate organizational impact.",
+        "risk_factors": ["Position durability", "College leverage"],
+        "development_timeline": "12-18 months"
+      }
+    ],
+    
+    "tier_2_targets": [
+      {
+        "name": "Jordan Williams",
+        "position": "CF",
+        "school": "High School - Texas",
+        "age": 18.0,
+        "projected_round": "3rd-4th",
+        "metrics": {
+          "cfi": 79,
+          "drs": 94,
+          "nss": 72,
+          "champion_readiness": 82,
+          "cognitive_leverage": 88, 
+          "nil_trust_score": 75
+        },
+        "scouting_summary": "Premium athlete with 70+ speed and arm. High development upside with Camden Yards speed advantages.",
+        "risk_factors": ["Hit tool development", "Signability concerns"],
+        "development_timeline": "30-36 months"
+      }
+    ]
+  },
+
+  "competitive_intelligence": {
+    "market_timing": {
+      "optimal_selection_windows": [
+        {
+          "picks": "32-45",
+          "strategy": "Undervalued college performers with Camden fit",
+          "expected_value": "15-25% above market"
+        },
+        {
+          "picks": "65-85", 
+          "strategy": "High upside high school athletes",
+          "expected_value": "20-35% above market"
+        }
+      ]
+    },
+    
+    "risk_mitigation": {
+      "portfolio_construction": {
+        "safe_picks": "40% - College polished performers",
+        "moderate_risk": "35% - High school athletes with track record",
+        "high_upside": "25% - Premium talent with signability questions"
+      },
+      
+      "diversification_strategy": [
+        "Geographic spread to avoid regional scouting biases",
+        "Position balance with emphasis on premium spots",
+        "Age distribution targeting 18-21 range",
+        "Performance track record vs. projection balance"
+      ]
+    }
+  },
+
+  "success_metrics": {
+    "immediate_indicators": [
+      "Signing percentage above 95%",
+      "Average pick value 15% above market",
+      "Zero missed opportunities on priority targets"
+    ],
+    
+    "intermediate_goals": [
+      "50% of picks advance beyond A+ within 24 months",
+      "Top 3 organizational prospect list representation",
+      "Positive WAR contribution from 30% of class within 4 years"
+    ],
+    
+    "long_term_objectives": [
+      "Championship-level contributor identification",
+      "System ranking improvement to top-8", 
+      "Sustained competitive advantage in AL East"
+    ]
+  },
+  
+  "presentation_flow": {
+    "opener": "Camden Yards optimization creates immediate value opportunity",
+    "problem_statement": "AL East arms race requires maximum draft efficiency",
+    "solution_demonstration": "Blaze Intelligence models identify market inefficiencies",
+    "proof_points": "Proprietary metrics show 20-30% value edge",
+    "call_to_action": "Partnership for 2025 draft cycle optimization"
+  }
+}

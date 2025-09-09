@@ -1,0 +1,110 @@
+# Blaze Intelligence Cloudflare Gateway Configuration
+
+name = "blaze-intelligence-gateway"
+main = "api/cloudflare-gateway.js"
+compatibility_date = "2024-05-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Account and deployment settings
+account_id = "a12cb329d84130460eed99b816e4d0d3"
+workers_dev = true
+route = { pattern = "blaze-intelligence.pages.dev/api/*", zone_name = "blaze-intelligence.pages.dev" }
+
+# KV namespace bindings for caching
+[[kv_namespaces]]
+binding = "BLAZE_CACHE"
+id = "blaze_cache_production"
+preview_id = "blaze_cache_preview"
+
+# R2 bucket bindings for file storage
+[[r2_buckets]]
+binding = "BLAZE_STORAGE"
+bucket_name = "blaze-intelligence-storage"
+
+# Durable Object bindings for real-time features
+[[durable_objects.bindings]]
+name = "RATE_LIMITER"
+class_name = "RateLimiter"
+script_name = "blaze-intelligence-gateway"
+
+[[durable_objects.bindings]]
+name = "ANALYTICS_AGGREGATOR"
+class_name = "AnalyticsAggregator"
+script_name = "blaze-intelligence-gateway"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+API_VERSION = "v1"
+CACHE_TTL = "300"
+RATE_LIMIT_REQUESTS = "100"
+RATE_LIMIT_WINDOW = "60"
+
+# Secrets (set via `wrangler secret put`)
+# STRIPE_SECRET_KEY
+# HUBSPOT_ACCESS_TOKEN
+# NOTION_TOKEN
+# NOTION_BLOG_DATABASE_ID
+# NOTION_INSIGHTS_DATABASE_ID
+
+# Triggers
+[[triggers]]
+crons = ["0 */10 * * * *"]  # Every 10 minutes for data sync
+
+# Analytics and monitoring
+[analytics_engine_datasets]
+analytics = []
+
+# Placement settings for performance
+[placement]
+mode = "smart"
+
+# Build configuration
+[build]
+command = ""
+cwd = ""
+watch_dir = "api/"
+
+# Development settings
+[env.development]
+name = "blaze-intelligence-gateway-dev"
+vars = { ENVIRONMENT = "development", CACHE_TTL = "60" }
+
+[env.development.kv_namespaces]
+BLAZE_CACHE = { id = "blaze_cache_development", preview_id = "blaze_cache_preview" }
+
+# Staging settings
+[env.staging]
+name = "blaze-intelligence-gateway-staging"
+vars = { ENVIRONMENT = "staging", CACHE_TTL = "180" }
+
+[env.staging.kv_namespaces]
+BLAZE_CACHE = { id = "blaze_cache_staging", preview_id = "blaze_cache_preview" }
+
+# Observability
+[observability]
+enabled = true
+
+# Limits and performance
+limits = { cpu_ms = 10000, memory_mb = 128 }
+
+# Routing rules for different API endpoints
+[[routes]]
+pattern = "blaze-intelligence.pages.dev/api/stripe/*"
+custom_domain = true
+
+[[routes]]
+pattern = "blaze-intelligence.pages.dev/api/hubspot/*"
+custom_domain = true
+
+[[routes]]
+pattern = "blaze-intelligence.pages.dev/api/notion/*"
+custom_domain = true
+
+[[routes]]
+pattern = "blaze-intelligence.pages.dev/api/analytics/*"
+custom_domain = true
+
+[[routes]]
+pattern = "blaze-intelligence.pages.dev/api/health"
+custom_domain = true

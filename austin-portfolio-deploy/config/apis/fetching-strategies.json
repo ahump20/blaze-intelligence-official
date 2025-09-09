@@ -1,0 +1,46 @@
+{
+  "real_time": {
+    "description": "Live data for games in progress",
+    "frequency": "every_30_seconds",
+    "priority": "high",
+    "fallback": "cached_data",
+    "applicable_to": [
+      "live_games",
+      "active_trades",
+      "injury_updates"
+    ]
+  },
+  "scheduled": {
+    "description": "Regular updates for team stats and standings",
+    "frequency": "every_10_minutes",
+    "priority": "medium",
+    "fallback": "previous_scheduled_data",
+    "applicable_to": [
+      "team_stats",
+      "standings",
+      "player_stats"
+    ]
+  },
+  "batch": {
+    "description": "Bulk updates for historical and reference data",
+    "frequency": "hourly",
+    "priority": "low",
+    "fallback": "local_cache",
+    "applicable_to": [
+      "historical_stats",
+      "roster_data",
+      "schedule_info"
+    ]
+  },
+  "on_demand": {
+    "description": "User-triggered data requests",
+    "frequency": "as_requested",
+    "priority": "variable",
+    "fallback": "best_available_cache",
+    "applicable_to": [
+      "detailed_player_info",
+      "advanced_analytics",
+      "custom_queries"
+    ]
+  }
+}

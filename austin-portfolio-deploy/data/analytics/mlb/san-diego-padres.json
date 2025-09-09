@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-28T07:48:54.479Z",
+  "team": "San Diego Padres",
+  "league": "MLB",
+  "division": "NL West",
+  "season": "2025",
+  "market_size": "large",
+  "readiness": {
+    "overall": 83,
+    "offense": 81.9,
+    "defense": 82.5,
+    "pitching": 79.6,
+    "baserunning": 84.6
+  },
+  "leverage": {
+    "current": 3.19,
+    "trend": "decreasing",
+    "market_factors": [
+      {
+        "type": "regional_following",
+        "impact": 0.6
+      },
+      {
+        "type": "local_partnerships",
+        "impact": 0.5
+      },
+      {
+        "type": "media_coverage",
+        "impact": 0.4
+      }
+    ]
+  },
+  "performance_indicators": {
+    "wins_above_replacement": 18.6,
+    "run_differential": 64,
+    "pythagorean_wins": 78,
+    "strength_of_schedule": 0.549
+  },
+  "advanced_metrics": {
+    "offensive_war": 21.4,
+    "defensive_war": 15.1,
+    "pitching_war": 18.8,
+    "team_chemistry": 81
+  },
+  "metrics_count": 25,
+  "data_quality": {
+    "completeness": 97.43016264771724,
+    "accuracy": 94.17538105035649,
+    "freshness": 97.46560641591236
+  }
+}

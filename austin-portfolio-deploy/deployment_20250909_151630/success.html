@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Blaze Intelligence! | Championship Analytics Platform</title>
+<meta name="description" content="Welcome to the championship-level sports analytics platform. Your subscription is active and your journey to competitive intelligence begins now.">
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/tokens.css">
+
+<style>
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+background: var(--blaze-dark);
+color: #e2e8f0;
+}
+
+h1, h2, h3 {
+font-family: 'Space Grotesk', sans-serif;
+}
+
+.glass {
+background: var(--glass-bg);
+backdrop-filter: blur(16px);
+border: 1px solid rgba(255, 255, 255, 0.12);
+border-radius: 16px;
+}
+
+.success-gradient {
+background: linear-gradient(135deg, #10B981 0%, #059669 50%, #047857 100%);
+}
+
+.checkmark {
+width: 80px;
+height: 80px;
+border-radius: 50%;
+display: block;
+stroke-width: 3;
+stroke: #10B981;
+stroke-miterlimit: 10;
+margin: 0 auto;
+box-shadow: inset 0 0 0 var(--blaze-orange);
+animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+}
+
+.checkmark-circle {
+stroke-dasharray: 166;
+stroke-dashoffset: 166;
+stroke-width: 3;
+stroke-miterlimit: 10;
+stroke: var(--blaze-orange);
+fill: none;
+animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+transform-origin: 50% 50%;
+stroke-dasharray: 48;
+stroke-dashoffset: 48;
+animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+100% { stroke-dashoffset: 0; }
+}
+
+@keyframes scale {
+0%, 100% { transform: none; }
+50% { transform: scale3d(1.1, 1.1, 1); }
+}
+
+@keyframes fill {
+100% { box-shadow: inset 0 0 0 30px var(--blaze-orange); }
+}
+</style>
+</head>
+<body>
+<main class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+<div class="max-w-4xl mx-auto px-6 py-16">
+<div class="glass p-8 mb-8">
+<h2 class="text-3xl font-bold mb-6 text-center" style="color: var(--blaze-accent);">Get Started in 3 Simple Steps</h2>
+
+<div class="grid md:grid-cols-3 gap-8">
+<div class="text-center">
+<div class="w-16 h-16 mx-auto mb-4 bg-blue-500/20 rounded-full flex items-center justify-center">
+<i data-lucide="user-plus" class="w-8 h-8 text-blue-400"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3 text-blue-400">1. Setup Your Profile</h3>
+<p class="text-slate-400">Complete your organization profile and team preferences to personalize your analytics dashboard.</p>
+<a href="/profile" class="inline-block mt-4 px-6 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-400 hover:bg-blue-500/30 transition-colors">
+Setup Profile
+</a>
+</div>
+
+<div class="text-center">
+<div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: rgba(255, 107, 53, 0.2);">
+<i data-lucide="bar-chart-3" class="w-8 h-8" style="color: var(--blaze-orange);"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3" style="color: var(--blaze-orange);">2. Explore Your Dashboard</h3>
+<p class="text-slate-400">Access live analytics for Cardinals, Titans, Longhorns, Grizzlies, and league-wide coverage.</p>
+<a href="/dashboard" class="inline-block mt-4 px-6 py-2 rounded-full text-white hover:opacity-90 transition-opacity" style="background: var(--blaze-orange);">
+Open Dashboard
+</a>
+</div>
+
+<div class="text-center">
+<div class="w-16 h-16 mx-auto mb-4 bg-green-500/20 rounded-full flex items-center justify-center">
+<i data-lucide="zap" class="w-8 h-8 text-green-400"></i>
+</div>
+<h3 class="text-xl font-semibold mb-3 text-green-400">3. Start Winning</h3>
+<p class="text-slate-400">Begin leveraging AI-powered insights to gain your competitive advantage immediately.</p>
+<a href="/platform" class="inline-block mt-4 px-6 py-2 bg-green-500/20 border border-green-500/30 rounded-full text-green-400 hover:bg-green-500/30 transition-colors">
+View Platform
+</a>
+</div>
+</div>
+</div>
+
+<div class="glass p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+<i data-lucide="headphones" class="w-6 h-6" style="color: var(--blaze-accent);"></i>
+Need Help Getting Started?
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+<div class="text-center">
+<i data-lucide="mail" class="w-8 h-8 mx-auto mb-3" style="color: var(--blaze-orange);"></i>
+<h3 class="font-semibold mb-2">Email Support</h3>
+<p class="text-slate-400 text-sm mb-3">Get help from our team</p>
+<a href="mailto:ahump20@outlook.com?subject=New Subscriber - Need Help" class="text-blue-400 hover:text-blue-300">ahump20@outlook.com</a>
+</div>
+
+<div class="text-center">
+<i data-lucide="book-open" class="w-8 h-8 mx-auto mb-3" style="color: var(--blaze-orange);"></i>
+<h3 class="font-semibold mb-2">Documentation</h3>
+<p class="text-slate-400 text-sm mb-3">Learn how to use the platform</p>
+<a href="/api-docs" class="text-blue-400 hover:text-blue-300">View API Docs</a>
+</div>
+
+<div class="text-center">
+<i data-lucide="phone" class="w-8 h-8 mx-auto mb-3" style="color: var(--blaze-orange);"></i>
+<h3 class="font-semibold mb-2">Phone Support</h3>
+<p class="text-slate-400 text-sm mb-3">Direct line for urgent issues</p>
+<a href="tel:(210) 273-5538" class="text-blue-400 hover:text-blue-300">(210) 273-5538</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+// Get session ID from URL
+const urlParams = new URLSearchParams(window.location.search);
+const sessionId = urlParams.get('session_id');
+
+// Initialize icons
+document.addEventListener('DOMContentLoaded', function() {
+lucide.createIcons();
+
+// If we have a session ID, fetch subscription details
+if (sessionId) {
+fetchSubscriptionDetails(sessionId);
+}
+
+// Set next billing date to one year from now
+const nextYear = new Date();
+nextYear.setFullYear(nextYear.getFullYear() + 1);
+document.getElementById('next-billing').textContent = nextYear.toLocaleDateString('en-US', {
+year: 'numeric',
+month: 'long', 
+day: 'numeric'
+});
+});
+
+async function fetchSubscriptionDetails(sessionId) {
+try {
+// In a real implementation, you would fetch the session details from Stripe
+// For now, we'll use the session ID to determine the plan
+console.log('Subscription session:', sessionId);
+
+// Update plan details based on what was purchased
+// This could be enhanced to call your backend API
+} catch (error) {
+console.warn('Could not fetch subscription details:', error);
+}
+}
+</script>
+</body>
+</html>

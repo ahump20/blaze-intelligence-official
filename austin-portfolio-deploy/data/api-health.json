@@ -1,0 +1,20 @@
+{
+  "status": "healthy",
+  "timestamp": 1757443623834,
+  "cache_size": 7,
+  "models": [
+    {
+      "name": "ChatGPT 5",
+      "status": "active"
+    },
+    {
+      "name": "Claude Opus 4.1",
+      "status": "active"
+    },
+    {
+      "name": "Gemini 2.5 Pro",
+      "status": "active"
+    }
+  ],
+  "last_updates": []
+}

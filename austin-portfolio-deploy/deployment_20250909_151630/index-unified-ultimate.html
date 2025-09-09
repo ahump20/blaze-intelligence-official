@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze Intelligence | Elite Sports Analytics Platform</title>
+<meta name="description" content="Where Texas heritage meets algorithmic excellence. Professional sports analytics platform in development for MLB, NFL, NBA, and NCAA organizations.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://blaze-intelligence.pages.dev/">
+<meta property="og:title" content="Blaze Intelligence | Elite Sports Analytics Platform">
+<meta property="og:description" content="Professional sports analytics platform in development. Texas heritage meets modern technology for championship-level sports intelligence.">
+<meta property="og:site_name" content="Blaze Intelligence">
+
+<header class="header">
+<nav class="nav-container">
+<a href="#" class="logo">Blaze Intelligence</a>
+<ul class="nav-menu">
+<li><a href="#home">Home</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#analytics">Analytics</a></li>
+<li><a href="#pricing">Pricing</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+<section class="stats-section">
+<div class="container">
+<div class="stats-grid">
+<div class="stat-card fade-in">
+<div class="stat-value">Demo</div>
+<div class="stat-label">Development Mode</div>
+<div class="stat-status">In Progress</div>
+</div>
+<div class="stat-card fade-in">
+<div class="stat-value">Beta</div>
+<div class="stat-label">Testing Phase</div>
+<div class="stat-status">Coming Soon</div>
+</div>
+<div class="stat-card fade-in">
+<div class="stat-value">TBD</div>
+<div class="stat-label">Accuracy Target</div>
+<div class="stat-status">To Be Determined</div>
+</div>
+<div class="stat-card fade-in">
+<div class="stat-value">Q2 2025</div>
+<div class="stat-label">Launch Timeline</div>
+<div class="stat-status">Target Date</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="analytics" class="dashboard-section">
+<div class="container">
+<h2 class="section-title">Analytics Dashboard</h2>
+<p class="section-subtitle">Interactive data visualization and performance analysis tools</p>
+
+<div class="dashboard-container fade-in">
+<h3 style="color: var(--primary-color); margin-bottom: 1rem;">Development Preview</h3>
+<p style="color: var(--text-light); margin-bottom: 2rem;">
+This dashboard demonstrates planned analytics capabilities using prototype data and mockup interfaces.
+</p>
+<div class="chart-container">
+<canvas id="analyticsChart"></canvas>
+</div>
+</div>
+
+<div class="features-grid">
+<div class="feature-card fade-in">
+<h4 style="color: var(--primary-color); margin-bottom: 1rem;">Team Performance</h4>
+<p style="color: var(--text-light);">Comprehensive team analysis including offensive efficiency, defensive ratings, and clutch performance metrics.</p>
+</div>
+<div class="feature-card fade-in">
+<h4 style="color: var(--primary-color); margin-bottom: 1rem;">Player Analytics</h4>
+<p style="color: var(--text-light);">Individual player tracking with advanced statistics, biomechanical analysis, and injury prevention insights.</p>
+</div>
+<div class="feature-card fade-in">
+<h4 style="color: var(--primary-color); margin-bottom: 1rem;">Predictive Models</h4>
+<p style="color: var(--text-light);">AI-powered prediction algorithms for game outcomes, draft prospects, and strategic decision-making.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about" class="about-section">
+<div class="container">
+<div class="about-content fade-in">
+<div class="founder-image">🤠</div>
+<h2 class="section-title">Austin Humphrey</h2>
+<p class="section-subtitle">Founder & Developer</p>
+<p style="color: var(--text-light); font-size: 1.1rem; margin-bottom: 2rem;">
+Texas-based entrepreneur combining international relations background with sports analytics passion. 
+Building Blaze Intelligence to bring championship-level intelligence to organizations across all levels of sports.
+</p>
+<div style="background: var(--card-bg); border: 1px solid rgba(191, 87, 0, 0.3); border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
+<h3 style="color: var(--primary-color); margin-bottom: 1rem;">Platform Vision</h3>
+<p style="color: var(--text-light);">
+"Combining Texas heritage with modern technology to create competitive advantages in sports analytics. 
+We're building a platform that quantifies the intangibles and transforms data into championship decisions."
+</p>
+</div>
+<div style="display: flex; justify-content: center; gap: 1rem;">
+<p style="color: var(--text-dark); font-size: 0.9rem;">📍 Boerne, Texas</p>
+<p style="color: var(--text-dark); font-size: 0.9rem;">🎓 UT Austin • Full Sail University</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<script>
+// Three.js Background Animation
+function initThreeJS() {
+const canvas = document.querySelector('.hero-canvas');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+// Create particles
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 1000;
+const posArray = new Float32Array(particlesCount * 3);
+
+for (let i = 0; i < particlesCount * 3; i++) {
+posArray[i] = (Math.random() - 0.5) * 10;
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+const particlesMaterial = new THREE.PointsMaterial({
+size: 0.005,
+color: '#BF5700',
+transparent: true,
+opacity: 0.8
+});
+
+const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particlesMesh);
+
+camera.position.z = 3;
+
+// Animation
+function animate() {
+requestAnimationFrame(animate);
+particlesMesh.rotation.x += 0.0005;
+particlesMesh.rotation.y += 0.001;
+renderer.render(scene, camera);
+}
+
+animate();
+
+// Resize handler
+window.addEventListener('resize', () => {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+});
+}
+
+// Initialize Chart
+function initChart() {
+const ctx = document.getElementById('analyticsChart');
+if (ctx) {
+new Chart(ctx, {
+type: 'line',
+data: {
+labels: ['Q1 Dev', 'Q2 Beta', 'Q3 Launch', 'Q4 Scale'],
+datasets: [{
+label: 'Development Progress',
+data: [25, 60, 85, 100],
+borderColor: '#BF5700',
+backgroundColor: 'rgba(191, 87, 0, 0.1)',
+tension: 0.4,
+fill: true
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: {
+labels: { color: '#ffffff' }
+}
+},
+scales: {
+x: {
+ticks: { color: '#999999' },
+grid: { color: 'rgba(255, 255, 255, 0.1)' }
+},
+y: {
+ticks: { color: '#999999' },
+grid: { color: 'rgba(255, 255, 255, 0.1)' }
+}
+}
+}
+});
+}
+}
+
+// Scroll Animations
+function initScrollAnimations() {
+const fadeElements = document.querySelectorAll('.fade-in');
+
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('visible');
+}
+});
+}, { threshold: 0.1 });
+
+fadeElements.forEach(element => {
+observer.observe(element);
+});
+}
+
+// Smooth Scrolling
+function initSmoothScrolling() {
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+}
+});
+});
+}
+
+// Header Scroll Effect
+function initHeaderScroll() {
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+if (window.scrollY > 100) {
+header.style.background = 'rgba(13, 13, 13, 0.98)';
+} else {
+header.style.background = 'rgba(13, 13, 13, 0.95)';
+}
+});
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+initThreeJS();
+initChart();
+initScrollAnimations();
+initSmoothScrolling();
+initHeaderScroll();
+
+// GSAP ScrollTrigger animations
+if (typeof gsap !== 'undefined' && gsap.registerPlugin) {
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.timeline({
+scrollTrigger: {
+trigger: '.stats-section',
+start: 'top 80%'
+}
+})
+.from('.stat-card', {
+y: 50,
+opacity: 0,
+duration: 0.8,
+stagger: 0.2
+});
+}
+});
+
+// Development status logger
+console.log('🔥 Blaze Intelligence Platform - Development Mode');
+console.log('📊 Status: Early development with professional design foundation');
+console.log('🎯 Vision: Championship-level sports analytics platform');
+console.log('📧 Contact: ahump20@outlook.com');
+</script>
+</body>
+</html>

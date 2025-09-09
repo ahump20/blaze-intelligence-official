@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence Platform - Complete Championship Intelligence System</title>
+    <meta name="description" content="The unified Blaze Intelligence Platform integrating all championship-level sports analytics, vision AI, and cognitive performance tools.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Shared Tokens -->
+    <link rel="stylesheet" href="/assets/tokens.css">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--blaze-dark);
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 16px;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0A0E27 0%, #1A659E 100%);
+        }
+        
+        #canvas-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #FF6B35 0%, #FFD700 50%, #00FFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 3rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,107,53,0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #FF6B35, #1A659E, #FF6B35);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255,107,53,0.3);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .feature-card p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge-live {
+            background: rgba(0,255,0,0.2);
+            color: #00FF00;
+            border: 1px solid #00FF00;
+        }
+        
+        .badge-beta {
+            background: rgba(255,165,0,0.2);
+            color: #FFA500;
+            border: 1px solid #FFA500;
+        }
+        
+        .badge-enterprise {
+            background: rgba(147,51,234,0.2);
+            color: #9333EA;
+            border: 1px solid #9333EA;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF6B35, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10,14,39,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,107,53,0.2);
+            padding: 1rem 2rem;
+        }
+        
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FF6B35;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #FF6B35;
+        }
+        
+        .section {
+            padding: 5rem 2rem;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #FF6B35, #1A659E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .video-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1A659E, #0A0E27);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,107,53,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .video-info {
+            padding: 1.5rem;
+        }
+        
+        .video-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .video-duration {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.875rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #FF6B35, #1A659E);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-radius: 30px;
+            margin: 5rem 2rem;
+        }
+        
+        .cta-title {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: #fff;
+            color: #FF6B35;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">BLAZE INTELLIGENCE</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/demo">Demo</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="canvas-bg"></canvas>
+        <div class="hero-content">
+            <h1>Complete Championship Intelligence Platform</h1>
+            <p>Every tool. Every feature. Every advantage. Unified.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">94.6%</div>
+                    <div class="stat-label">ACCURACY</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">&lt;100ms</div>
+                    <div class="stat-label">LATENCY</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2.8M+</div>
+                    <div class="stat-label">DATA POINTS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">67-80%</div>
+                    <div class="stat-label">COST SAVINGS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Analytics Features -->
+    <section class="section">
+        <h2 class="section-title">Core Analytics Systems</h2>
+        <div class="feature-grid">
+            <!-- Cardinals Readiness Board -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #C41E3A, #FF6B35);">
+                    ⚾
+                </div>
+                <h3>Cardinals Readiness Board</h3>
+                <p>Real-time MLB readiness tracking with leverage calculations and performance metrics updated every 10 minutes.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">MLB</span>
+                <div style="margin-top: 1rem;">
+                    <div style="color: #00FF00;">Current Readiness: <span id="cardinals-readiness">87.2%</span></div>
+                    <div style="color: #FFD700;">Leverage Index: 2.35</div>
+                </div>
+            </div>
+
+            <!-- Digital Combine Autopilot -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #1A659E, #00FFFF);">
+                    🤖
+                </div>
+                <h3>Digital Combine Autopilot</h3>
+                <p>Automated 30-minute research and publishing system that continuously updates team analytics and insights.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">AUTO</span>
+                <div style="margin-top: 1rem; font-size: 0.875rem; color: rgba(255,255,255,0.6);">
+                    Next update: 2 minutes
+                </div>
+            </div>
+
+            <!-- HAVF Framework -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+                    💎
+                </div>
+                <h3>HAVF Framework</h3>
+                <p>Hidden Advantage Valuation Framework for identifying undervalued players and strategic opportunities.</p>
+                <span class="badge">PROPRIETARY</span>
+                <span class="badge">MLB/NFL</span>
+            </div>
+
+            <!-- Pattern Recognition Engine -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #9333EA, #EC4899);">
+                    🧠
+                </div>
+                <h3>Pattern Recognition Engine</h3>
+                <p>Advanced ML algorithms that identify winning patterns across 2.8M+ data points from professional sports.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">AI/ML</span>
+            </div>
+
+            <!-- Decision Velocity Model -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #10B981, #3B82F6);">
+                    ⚡
+                </div>
+                <h3>Decision Velocity Model™</h3>
+                <p>Quantifies cognitive processing speed from stimulus to response for elite performance optimization.</p>
+                <span class="badge">FRAMEWORK</span>
+                <span class="badge">COGNITIVE</span>
+            </div>
+
+            <!-- Cognitive Load Distribution -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">
+                    🎯
+                </div>
+                <h3>Cognitive Load Distribution™</h3>
+                <p>Mental resource allocation system for championship performance under pressure.</p>
+                <span class="badge">FRAMEWORK</span>
+                <span class="badge">PERFORMANCE</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision AI Features -->
+    <section class="section" style="background: rgba(255,107,53,0.05);">
+        <h2 class="section-title">Vision AI & Video Intelligence</h2>
+        <div class="feature-grid">
+            <!-- Vision AI Tell Detector -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #FF6B35, #C41E3A);">
+                    👁️
+                </div>
+                <h3>Vision AI Tell Detector</h3>
+                <p>Biomechanical analysis combined with micro-expression detection for character, grit, and determination assessment.</p>
+                <span class="badge badge-beta">BETA</span>
+                <span class="badge">VISION AI</span>
+                <div style="margin-top: 1rem;">
+                    <small style="color: rgba(255,255,255,0.6);">
+                        • Biomechanical indicators<br>
+                        • Micro-expression analysis<br>
+                        • Character assessment<br>
+                        • Grit index calculation
+                    </small>
+                </div>
+            </div>
+
+            <!-- Video Intelligence Library -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #1A659E, #9333EA);">
+                    📹
+                </div>
+                <h3>Video Intelligence Library</h3>
+                <p>44-minute AI training lectures and comprehensive video analysis tools for coaches and players.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">EDUCATION</span>
+                <a href="/videos" style="display: block; margin-top: 1rem; color: #FF6B35;">Watch Library →</a>
+            </div>
+
+            <!-- HLS Streaming Pipeline -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #00FFFF, #1A659E);">
+                    📡
+                </div>
+                <h3>HLS Streaming Pipeline</h3>
+                <p>Professional-grade video streaming infrastructure for live game analysis and training content.</p>
+                <span class="badge badge-enterprise">ENTERPRISE</span>
+                <span class="badge">INFRASTRUCTURE</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Coverage -->
+    <section class="section">
+        <h2 class="section-title">Comprehensive Data Coverage</h2>
+        <div class="feature-grid">
+            <!-- MLB Coverage -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #C41E3A, #0A0E27);">
+                    ⚾
+                </div>
+                <h3>MLB Complete Coverage</h3>
+                <p>All 30 teams with Statcast integration, international prospects from Latin America, Japan, and KBO.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">30 TEAMS</span>
+                <div style="margin-top: 1rem;">
+                    <small style="color: #FFD700;">Featured: Cardinals, Orioles</small>
+                </div>
+            </div>
+
+            <!-- NFL Coverage -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #002244, #FF6B35);">
+                    🏈
+                </div>
+                <h3>NFL Analytics Suite</h3>
+                <p>Complete NFL coverage with focus on Titans analytics, decision velocity, and pressure metrics.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">32 TEAMS</span>
+                <div style="margin-top: 1rem;">
+                    <small style="color: #4B9BFF;">Featured: Titans</small>
+                </div>
+            </div>
+
+            <!-- NCAA Coverage -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #BF5700, #FFD700);">
+                    🎓
+                </div>
+                <h3>NCAA Football & Baseball</h3>
+                <p>College sports analytics with recruiting intelligence, NIL valuations, and Longhorns focus.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">RECRUITING</span>
+                <div style="margin-top: 1rem;">
+                    <small style="color: #BF5700;">Featured: Texas Longhorns</small>
+                </div>
+            </div>
+
+            <!-- Youth/Perfect Game -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #10B981, #3B82F6);">
+                    ⭐
+                </div>
+                <h3>Perfect Game Integration</h3>
+                <p>Youth baseball analytics from 13U-18U with comprehensive recruiting insights and development tracking.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">YOUTH</span>
+                <div style="margin-top: 1rem;">
+                    <small style="color: rgba(255,255,255,0.6);">
+                        13U • 14U • 15U • 16U • 17U • 18U
+                    </small>
+                </div>
+            </div>
+
+            <!-- NBA Coverage -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #5D76A9, #12173D);">
+                    🏀
+                </div>
+                <h3>NBA Grit Analytics</h3>
+                <p>Character assessment and team chemistry analysis with focus on Grizzlies' championship culture.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">30 TEAMS</span>
+                <div style="margin-top: 1rem;">
+                    <small style="color: #5D76A9;">Featured: Grizzlies (94.6% Grit Index)</small>
+                </div>
+            </div>
+
+            <!-- International Prospects -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #FF0000, #FFD700);">
+                    🌍
+                </div>
+                <h3>International Pipeline</h3>
+                <p>Latin America, Japan, South Korea, and KBO prospect tracking with development projections.</p>
+                <span class="badge badge-beta">BETA</span>
+                <span class="badge">GLOBAL</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enterprise Features -->
+    <section class="section" style="background: rgba(26,101,158,0.05);">
+        <h2 class="section-title">Enterprise & Business Tools</h2>
+        <div class="feature-grid">
+            <!-- ROI Calculator -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #10B981, #059669);">
+                    💰
+                </div>
+                <h3>ROI Calculator</h3>
+                <p>Interactive cost comparison showing 67-80% savings versus competitors with transparent methodology.</p>
+                <span class="badge badge-live">LIVE</span>
+                <a href="/roi-calculator" style="display: block; margin-top: 1rem; color: #10B981;">Calculate Savings →</a>
+            </div>
+
+            <!-- NIL Valuation Engine -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+                    🏆
+                </div>
+                <h3>NIL Valuation Engine</h3>
+                <p>Advanced algorithm for Name, Image, Likeness valuations in college athletics.</p>
+                <span class="badge badge-beta">BETA</span>
+                <span class="badge">NCAA</span>
+            </div>
+
+            <!-- API Gateway -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #9333EA, #7C3AED);">
+                    🔌
+                </div>
+                <h3>Enterprise API</h3>
+                <p>RESTful API with <100ms response time for real-time integration into existing systems.</p>
+                <span class="badge badge-enterprise">ENTERPRISE</span>
+                <span class="badge">API</span>
+                <div style="margin-top: 1rem;">
+                    <small style="color: rgba(255,255,255,0.6);">
+                        • REST & GraphQL<br>
+                        • Webhook support<br>
+                        • Rate limiting<br>
+                        • SOC 2 compliant
+                    </small>
+                </div>
+            </div>
+
+            <!-- White Label Platform -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #1F2937, #111827);">
+                    🏢
+                </div>
+                <h3>White Label Solution</h3>
+                <p>Fully customizable platform for teams and organizations with branded experiences.</p>
+                <span class="badge badge-enterprise">ENTERPRISE</span>
+                <span class="badge">CUSTOM</span>
+            </div>
+
+            <!-- SSO Integration -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #3B82F6, #2563EB);">
+                    🔐
+                </div>
+                <h3>SSO & Security</h3>
+                <p>Enterprise-grade security with SAML, OAuth, and multi-factor authentication support.</p>
+                <span class="badge badge-enterprise">ENTERPRISE</span>
+                <span class="badge">SECURITY</span>
+            </div>
+
+            <!-- Data Export Suite -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #10B981, #059669);">
+                    📊
+                </div>
+                <h3>Data Export Suite</h3>
+                <p>Export analytics to CSV, JSON, or direct integration with Tableau, PowerBI, and Looker.</p>
+                <span class="badge badge-live">LIVE</span>
+                <span class="badge">EXPORT</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Intelligence Section -->
+    <section class="section">
+        <h2 class="section-title">Video Intelligence Library</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="video-info">
+                    <div class="video-title">Building Championship AI Systems</div>
+                    <div class="video-duration">44m 16s • Graduate Lecture</div>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="video-info">
+                    <div class="video-title">Pattern Recognition in Baseball</div>
+                    <div class="video-duration">28m 42s • Technical Deep Dive</div>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="video-info">
+                    <div class="video-title">Vision AI Tell Detection Demo</div>
+                    <div class="video-duration">15m 33s • Product Demo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="cta-title">Ready for Championship Intelligence?</h2>
+        <p class="cta-subtitle">Join teams using Blaze Intelligence to gain competitive advantages</p>
+        <div class="cta-buttons">
+            <a href="/demo" class="btn btn-primary">
+                Schedule Demo
+                <span>→</span>
+            </a>
+            <a href="/contact" class="btn btn-secondary">
+                Contact Sales
+                <span>💬</span>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Three.js Background Animation
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('canvas-bg'),
+            alpha: true,
+            antialias: true 
+        });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        // Create particle system
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const colors = [];
+        
+        for (let i = 0; i < 2000; i++) {
+            vertices.push(
+                Math.random() * 2000 - 1000,
+                Math.random() * 2000 - 1000,
+                Math.random() * 2000 - 1000
+            );
+            
+            const color = new THREE.Color();
+            color.setHSL(Math.random() * 0.1 + 0.05, 0.8, 0.5);
+            colors.push(color.r, color.g, color.b);
+        }
+        
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+        
+        const material = new THREE.PointsMaterial({
+            size: 2,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+        
+        camera.position.z = 500;
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particles.rotation.x += 0.0005;
+            particles.rotation.y += 0.001;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Live data updates
+        async function updateLiveData() {
+            try {
+                const response = await fetch('/data/blaze-metrics.json');
+                const data = await response.json();
+                
+                // Update Cardinals readiness
+                const readinessEl = document.getElementById('cardinals-readiness');
+                if (readinessEl && data.cardinals) {
+                    readinessEl.textContent = data.cardinals.readiness + '%';
+                }
+            } catch (error) {
+                console.log('Live data update in progress...');
+            }
+        }
+        
+        // Update every 30 seconds
+        updateLiveData();
+        setInterval(updateLiveData, 30000);
+        
+        // Smooth scroll reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

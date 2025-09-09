@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-28T07:48:54.480Z",
+  "team": "San Francisco 49ers",
+  "league": "NFL",
+  "division": "NFC West",
+  "conference": "NFC",
+  "season": "2025",
+  "readiness": {
+    "overall": 89.6,
+    "offense": 90.8,
+    "defense": 91.7,
+    "special_teams": 93.7,
+    "coaching": 89.5
+  },
+  "leverage": {
+    "current": 2.48,
+    "trend": "increasing",
+    "playoff_implications": "moderate"
+  },
+  "performance_metrics": {
+    "point_differential": -35,
+    "third_down_conversion": 37.7,
+    "red_zone_efficiency": 54.2,
+    "turnover_differential": 5
+  },
+  "advanced_analytics": {
+    "epa_per_play": -0.176,
+    "dvoa_ranking": 3,
+    "win_probability_added": -0.97,
+    "clutch_performance": 82
+  },
+  "metrics_count": 30
+}

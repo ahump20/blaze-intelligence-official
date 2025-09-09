@@ -1,0 +1,158 @@
+{
+  "name": "Content Catalog Agent",
+  "version": "1.0.0",
+  "description": "Daily content cataloging agent that sweeps Notion, Drive, and Notes to maintain unified content index",
+  "schedule": "0 6 * * *",
+  "type": "content_cataloging",
+  "priority": "medium",
+  "timeout_minutes": 15,
+  "retry_attempts": 3,
+  "environment": {
+    "required": [
+      "NOTION_TOKEN",
+      "GOOGLE_DRIVE_API_KEY", 
+      "APPLE_NOTES_ACCESS",
+      "BLAZE_STORAGE"
+    ]
+  },
+  "inputs": {
+    "sources": [
+      {
+        "name": "notion",
+        "type": "notion_database",
+        "database_id": "blaze-insights",
+        "filters": {
+          "status": "published",
+          "updated_since": "24h"
+        }
+      },
+      {
+        "name": "drive", 
+        "type": "google_drive",
+        "folders": [
+          "/Blaze Intelligence/Data",
+          "/Blaze Intelligence/Research",
+          "/Blaze Intelligence/Blog Content"
+        ],
+        "file_types": ["json", "csv", "pdf", "docx"],
+        "updated_since": "24h"
+      },
+      {
+        "name": "notes",
+        "type": "apple_notes", 
+        "tags": ["[Blog]", "[Framework]", "[Data]", "[Research]"],
+        "updated_since": "24h"
+      }
+    ]
+  },
+  "processing": {
+    "steps": [
+      {
+        "name": "extract_metadata",
+        "description": "Extract metadata from each content source",
+        "fields": [
+          "title",
+          "content_type", 
+          "sport",
+          "league",
+          "teams",
+          "tags",
+          "source_url",
+          "updated_date",
+          "summary"
+        ]
+      },
+      {
+        "name": "normalize_data",
+        "description": "Apply unified content model schema",
+        "schema": {
+          "id": "string (slug)",
+          "title": "string",
+          "sport": "string",
+          "league": "string", 
+          "teams": "array[string]",
+          "labs": "array[string]",
+          "content_type": "enum[article,dataset,dashboard,framework,video,playbook]",
+          "source": "enum[site,notion,drive,notes]",
+          "source_url": "string",
+          "slug": "string",
+          "tags": "array[string]",
+          "updated": "ISO date string",
+          "summary": "string"
+        }
+      },
+      {
+        "name": "deduplicate",
+        "description": "Remove duplicate content based on title similarity and source URLs",
+        "threshold": 0.85
+      },
+      {
+        "name": "categorize_labs", 
+        "description": "Assign priority lab categorization",
+        "lab_mappings": {
+          "Cardinals": ["St. Louis Cardinals", "STL", "Cardinals"],
+          "Titans": ["Tennessee Titans", "TEN", "Titans"],
+          "Longhorns": ["Texas Longhorns", "TEX", "Longhorns", "University of Texas"],
+          "Grizzlies": ["Memphis Grizzlies", "MEM", "Grizzlies"]
+        }
+      }
+    ]
+  },
+  "outputs": {
+    "primary": {
+      "path": "data/catalog/index.json",
+      "format": "json",
+      "schema": {
+        "generated_at": "ISO timestamp",
+        "version": "string",
+        "items": "array[normalized_content_item]",
+        "facets": {
+          "sports": "array[string]",
+          "leagues": "array[string]",
+          "labs": "array[string]",
+          "content_types": "array[string]",
+          "sources": "array[string]"
+        }
+      }
+    },
+    "backup": {
+      "path": "data/catalog/backups/catalog-{timestamp}.json",
+      "retention_days": 30
+    }
+  },
+  "health_checks": [
+    {
+      "name": "catalog_size",
+      "description": "Ensure catalog contains minimum expected items",
+      "min_items": 5,
+      "max_items": 1000
+    },
+    {
+      "name": "facet_completeness",
+      "description": "Verify all required facets are populated",
+      "required_facets": ["sports", "leagues", "labs", "content_types"]
+    },
+    {
+      "name": "lab_coverage",
+      "description": "Ensure priority labs are represented",
+      "required_labs": ["Cardinals", "Titans", "Longhorns", "Grizzlies"]
+    }
+  ],
+  "notifications": {
+    "success": {
+      "channel": "notion",
+      "template": "Content catalog updated: {items_count} items indexed, {new_items} new, {updated_items} updated"
+    },
+    "failure": {
+      "channel": "notion",
+      "template": "Content catalog failed: {error_message}. Last successful run: {last_success}"
+    }
+  },
+  "deployment": {
+    "trigger": "cloudflare_cron",
+    "worker": "blaze-intelligence-catalog",
+    "environment": "production",
+    "deploy_preview": true,
+    "post_to_notion": true
+  }
+}

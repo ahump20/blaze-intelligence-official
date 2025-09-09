@@ -1,0 +1,19 @@
+{
+  "topic": "NBA advanced statistics",
+  "timestamp": "2025-08-28T07:40:42.524Z",
+  "findings": [
+    "Shot quality metrics becoming primary evaluation tool",
+    "Real-time fatigue monitoring changing rotation strategies",
+    "Defensive impact measurements beyond traditional stats"
+  ],
+  "sources": [
+    "ESPN Analytics Team",
+    "Sports Info Solutions",
+    "The Athletic Research"
+  ],
+  "confidence": 85,
+  "actionable_items": [
+    "Update data collection methodology",
+    "Enhance client reporting dashboard"
+  ]
+}

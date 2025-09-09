@@ -1,0 +1,96 @@
+{
+  "videos": [
+    {
+      "slug": "sports-conversation",
+      "videoId": "138facaf760c65e9b4efab3715ae6f50",
+      "hlsUrl": "https://customer-mpdvoybjqct2pzls.cloudflarestream.com/138facaf760c65e9b4efab3715ae6f50/manifest/video.m3u8",
+      "title": "AI in Sports - Revolutionary Analytics & Performance Intelligence",
+      "shortTitle": "AI in Sports",
+      "description": "Deep dive into how artificial intelligence is transforming sports analytics, from player performance prediction to real-time strategic decision-making. Explores machine learning applications in MLB, NFL, and NCAA sports.",
+      "thumbnail": "https://videodelivery.net/138facaf760c65e9b4efab3715ae6f50/thumbnails/thumbnail.jpg",
+      "duration": "PT44M16S",
+      "register": "Technical/Strategic",
+      "category": "ai-sports",
+      "chapters": [
+        { "time": 0, "seconds": 0, "label": "00:00", "title": "Introduction: AI Revolution in Sports" },
+        { "time": 300, "seconds": 300, "label": "05:00", "title": "Machine Learning in Player Analytics" },
+        { "time": 720, "seconds": 720, "label": "12:00", "title": "Computer Vision & Performance Tracking" },
+        { "time": 1200, "seconds": 1200, "label": "20:00", "title": "Predictive Modeling for Game Strategy" },
+        { "time": 1800, "seconds": 1800, "label": "30:00", "title": "Real-World Implementation Cases" },
+        { "time": 2400, "seconds": 2400, "label": "40:00", "title": "Future of AI in Sports Analytics" }
+      ],
+      "keyTakeaways": [
+        "AI transforms sports analytics from reactive to predictive intelligence",
+        "Machine learning models can predict player performance with 94.6% accuracy",
+        "Computer vision enables real-time biomechanical analysis at scale",
+        "Integration of AI reduces analysis time by 67-80% vs traditional methods"
+      ],
+      "tags": ["ai", "machine-learning", "sports-analytics", "performance", "technology"],
+      "uploadDate": "2025-09-01"
+    },
+    {
+      "slug": "dmk-final-presentation",
+      "videoId": "eec1d7b09566f8acbcbadab3a0df5924",
+      "hlsUrl": "https://customer-mpdvoybjqct2pzls.cloudflarestream.com/eec1d7b09566f8acbcbadab3a0df5924/manifest/video.m3u8",
+      "title": "Blaze Intelligence Digital Marketing Strategy - AI-Powered Marketing Insights Inspired by Sports Strategy",
+      "shortTitle": "Digital Marketing Strategy",
+      "description": "Comprehensive presentation on Blaze Intelligence's digital marketing approach, leveraging sports strategy principles and AI-powered insights to drive data-driven marketing decisions. Covers funnel optimization, conversion metrics, and ROI measurement frameworks.",
+      "thumbnail": "https://videodelivery.net/eec1d7b09566f8acbcbadab3a0df5924/thumbnails/thumbnail.jpg",
+      "duration": "PT12M",
+      "register": "Marketing/Strategy",
+      "category": "marketing",
+      "chapters": [
+        { "time": 0, "seconds": 0, "label": "00:00", "title": "Sports Strategy Applied to Marketing" },
+        { "time": 134, "seconds": 134, "label": "02:14", "title": "Funnel Optimization Mathematics" },
+        { "time": 340, "seconds": 340, "label": "05:40", "title": "AI-Powered Decision Frameworks" },
+        { "time": 475, "seconds": 475, "label": "07:55", "title": "Data-Driven ROI Measurement" },
+        { "time": 550, "seconds": 550, "label": "09:10", "title": "Implementation Roadmap" },
+        { "time": 690, "seconds": 690, "label": "11:30", "title": "Success Metrics & KPIs" }
+      ],
+      "keyTakeaways": [
+        "Sports strategy principles translate directly to digital marketing success",
+        "AI-powered insights reduce marketing analysis time by 67-80%",
+        "Data-driven decision frameworks improve conversion rates by 23.5%",
+        "Championship mindset: Focus on plays that drive measurable outcomes"
+      ],
+      "tags": ["marketing", "ai", "strategy", "roi", "sports-analytics"],
+      "uploadDate": "2025-09-01"
+    },
+    {
+      "slug": "ut-dctf-nil-sponsorship-proposal",
+      "videoId": "acb0f50e86caf8f840f3b36a0c463229",
+      "hlsUrl": "https://customer-mpdvoybjqct2pzls.cloudflarestream.com/acb0f50e86caf8f840f3b36a0c463229/manifest/video.m3u8",
+      "title": "NIL Partnership Strategy - Data-Driven Athlete Sponsorships",
+      "shortTitle": "NIL Partnership Strategy",
+      "description": "Strategic framework for NIL (Name, Image, Likeness) partnerships in college athletics. Demonstrates how to leverage data analytics for athlete valuation, ROI measurement, and compliance tracking in the modern sponsorship landscape.",
+      "thumbnail": "https://videodelivery.net/acb0f50e86caf8f840f3b36a0c463229/thumbnails/thumbnail.jpg",
+      "duration": "PT15M",
+      "register": "Brand/Partnership",
+      "category": "partnership",
+      "chapters": [
+        { "time": 0, "seconds": 0, "label": "00:00", "title": "Context & Stakeholders" },
+        { "time": 150, "seconds": 150, "label": "02:30", "title": "Asset Mix & Deliverables" },
+        { "time": 310, "seconds": 310, "label": "05:10", "title": "Measurement Plan" },
+        { "time": 480, "seconds": 480, "label": "08:00", "title": "Risk Controls & Compliance" },
+        { "time": 645, "seconds": 645, "label": "10:45", "title": "Investment & Timeline" },
+        { "time": 780, "seconds": 780, "label": "13:00", "title": "Success Criteria" }
+      ],
+      "keyTakeaways": [
+        "Value alignment: Connect brand objectives with athlete development goals",
+        "Risk mitigation: Pre-defined compliance checkpoints and approval workflows",
+        "Performance tracking: Real-time dashboards for engagement and impact metrics",
+        "Scalable framework: Template approach for multi-athlete partnerships",
+        "Authentic storytelling: Focus on genuine athlete narratives over manufactured content"
+      ],
+      "tags": ["nil", "sponsorship", "partnerships", "compliance", "brand"],
+      "uploadDate": "2025-09-01"
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2025-09-01T20:00:00Z",
+    "version": "1.0.0",
+    "totalVideos": 3,
+    "totalDuration": "PT36M",
+    "categories": ["coaching", "executive", "partnership"]
+  }
+}

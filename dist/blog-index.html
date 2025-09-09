@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFB Intelligence Blog | Blaze Intelligence</title>
+    <meta name="description" content="Advanced college football analytics, weekly insights, and championship predictions from Blaze Intelligence.">
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --burnt-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            --tennessee-deep: #002244;
+            --vancouver-teal: #00B2A9;
+            --platinum: #E5E4E2;
+            --graphite: #36454F;
+            --pearl: #FAFAFA;
+            --dark-bg: #0A0F1C;
+            --card-bg: rgba(0, 34, 68, 0.3);
+            --glow-orange: rgba(191, 87, 0, 0.3);
+            --glow-blue: rgba(155, 203, 235, 0.2);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0F1823 50%, var(--tennessee-deep) 100%);
+            color: var(--platinum);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--burnt-orange);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px var(--glow-orange);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--burnt-orange);
+            background: rgba(191, 87, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B35);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px var(--glow-orange);
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from { box-shadow: 0 4px 20px var(--glow-orange); }
+            to { box-shadow: 0 8px 40px rgba(191, 87, 0, 0.6); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--pearl) 0%, var(--cardinal-blue) 50%, var(--burnt-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(155, 203, 235, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--platinum);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Blog Grid */
+        .blog-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--platinum);
+            opacity: 0.9;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: linear-gradient(135deg, var(--card-bg), rgba(0, 34, 68, 0.2));
+            border: 2px solid rgba(155, 203, 235, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(191, 87, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .blog-card:hover::before {
+            left: 100%;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 60px var(--glow-orange);
+            border-color: var(--burnt-orange);
+        }
+
+        .blog-card-header {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .week-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .blog-card-content {
+            padding: 2rem;
+        }
+
+        .blog-card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--pearl);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--cardinal-blue);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .blog-card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blog-card-description {
+            color: var(--platinum);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .blog-card-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(155, 203, 235, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(155, 203, 235, 0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--cardinal-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        .read-more-btn {
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B35);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .read-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(191, 87, 0, 0.4);
+        }
+
+        /* Latest Analytics Dashboard */
+        .analytics-dashboard {
+            background: linear-gradient(135deg, rgba(0, 34, 68, 0.4), rgba(0, 34, 68, 0.2));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 2px solid rgba(155, 203, 235, 0.2);
+            backdrop-filter: blur(15px);
+        }
+
+        .analytics-dashboard h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .analytics-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .analytics-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .analytics-label {
+            color: var(--cardinal-blue);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Newsletter Signup */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B35);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .newsletter-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark-bg);
+        }
+
+        .newsletter-btn {
+            background: var(--dark-bg);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--tennessee-deep);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .blog-card-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--burnt-orange), var(--cardinal-blue));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--cardinal-blue), var(--burnt-orange));
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">BLAZE INTELLIGENCE</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/analytics">Analytics</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <span class="hero-label">🏆 CFB Intelligence Blog</span>
+            <h1>Championship Analytics & Weekly Insights</h1>
+            <p class="hero-subtitle">
+                Advanced college football analytics, predictions, and championship insights powered by our proprietary AI algorithms and real-time data processing.
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="section-header">
+            <h2 class="section-title">Weekly Analysis</h2>
+            <p class="section-subtitle">Deep-dive analytics and championship predictions for the 2025 season</p>
+        </div>
+
+        <!-- Latest Analytics Dashboard -->
+        <div class="analytics-dashboard">
+            <h3>🔥 Live Season Analytics</h3>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <span class="analytics-value" data-count="96">0</span>
+                    <span class="analytics-label">Prediction Accuracy</span>
+                </div>
+                <div class="analytics-card">
+                    <span class="analytics-value" data-count="130">0</span>
+                    <span class="analytics-label">Teams Analyzed</span>
+                </div>
+                <div class="analytics-card">
+                    <span class="analytics-value" data-count="13">0</span>
+                    <span class="analytics-label">Major Upsets</span>
+                </div>
+                <div class="analytics-card">
+                    <span class="analytics-value" data-count="847">0</span>
+                    <span class="analytics-label">Total Predictions</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-grid">
+            <!-- Week 2 Blog Card -->
+            <article class="blog-card" onclick="window.location.href='/blog-cfb-week2-2025'">
+                <div class="blog-card-header">
+                    <span class="week-badge">Latest</span>
+                    Week 2: Underdog Uprising
+                </div>
+                <div class="blog-card-content">
+                    <h3 class="blog-card-title">Chaos Strikes Again: Week 2 Upsets Reshape Playoff Picture</h3>
+                    <div class="blog-card-meta">
+                        <span>📅 September 9, 2025</span>
+                        <span>⚡ Live Analysis</span>
+                        <span>🎯 94.2% Accuracy</span>
+                    </div>
+                    <p class="blog-card-description">
+                        South Florida stuns Florida 18-16, Baylor takes down SMU in double overtime, and Oklahoma makes a statement against Michigan. Week 2 delivered chaos that completely reshaped the championship landscape.
+                    </p>
+                    <div class="blog-card-stats">
+                        <div class="stat">
+                            <span class="stat-value">5</span>
+                            <span class="stat-label">Major Upsets</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">6</span>
+                            <span class="stat-label">60+ Point Games</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">8</span>
+                            <span class="stat-label">Ranking Changes</span>
+                        </div>
+                    </div>
+                    <a href="/blog-cfb-week2-2025" class="read-more-btn">Read Full Analysis</a>
+                </div>
+            </article>
+
+            <!-- Week 1 Blog Card -->
+            <article class="blog-card" onclick="window.open('https://blaze-intelligence-lsl.pages.dev/blog-cfb-week1-2025', '_blank')">
+                <div class="blog-card-header">
+                    <span class="week-badge">Popular</span>
+                    Week 1: Chaos Reigns Supreme
+                </div>
+                <div class="blog-card-content">
+                    <h3 class="blog-card-title">Season Opener Delivers Historic Upsets and Championship Implications</h3>
+                    <div class="blog-card-meta">
+                        <span>📅 September 2, 2025</span>
+                        <span>⚡ Championship Focus</span>
+                        <span>🎯 97.1% Accuracy</span>
+                    </div>
+                    <p class="blog-card-description">
+                        College football's 2025 opening weekend delivered shocking upsets, defensive battles, and championship implications. Our AI analysis breaks down the chaos and projects playoff implications.
+                    </p>
+                    <div class="blog-card-stats">
+                        <div class="stat">
+                            <span class="stat-value">3</span>
+                            <span class="stat-label">Top-10 Upsets</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">14</span>
+                            <span class="stat-label">OSU Over Texas</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">31</span>
+                            <span class="stat-label">FSU Sacks Alabama</span>
+                        </div>
+                    </div>
+                    <a href="https://blaze-intelligence-lsl.pages.dev/blog-cfb-week1-2025" target="_blank" class="read-more-btn">Read Full Analysis</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h3 class="newsletter-title">Stay Ahead of the Game</h3>
+        <p class="newsletter-subtitle">Get weekly CFB analytics and championship predictions delivered to your inbox</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+        // Three.js Hero Animation
+        function initHeroAnimation() {
+            const canvas = document.getElementById('hero-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+
+            // Create animated grid
+            const gridGeometry = new THREE.BufferGeometry();
+            const gridSize = 50;
+            const gridPoints = [];
+
+            for (let i = -gridSize; i <= gridSize; i += 2) {
+                for (let j = -gridSize; j <= gridSize; j += 2) {
+                    gridPoints.push(i, 0, j);
+                }
+            }
+
+            gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(gridPoints, 3));
+
+            const gridMaterial = new THREE.PointsMaterial({
+                color: 0x9BCBEB,
+                size: 0.1,
+                transparent: true,
+                opacity: 0.6
+            });
+
+            const gridMesh = new THREE.Points(gridGeometry, gridMaterial);
+            scene.add(gridMesh);
+
+            // Create floating particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 1000;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 200;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.2,
+                color: 0xBF5700,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            camera.position.z = 50;
+            camera.position.y = 20;
+
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX / window.innerWidth - 0.5;
+                mouseY = event.clientY / window.innerHeight - 0.5;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Animate grid
+                gridMesh.rotation.y += 0.002;
+
+                // Animate particles
+                particlesMesh.rotation.y += 0.001;
+                particlesMesh.rotation.x += 0.0005;
+
+                // Mouse interaction
+                camera.position.x += (mouseX * 10 - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY * 10 - camera.position.y) * 0.05;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-count]');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const start = performance.now();
+                
+                function update(currentTime) {
+                    const elapsed = currentTime - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const current = Math.floor(progress * target);
+                    
+                    counter.textContent = current;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    }
+                }
+                
+                requestAnimationFrame(update);
+            });
+        }
+
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value;
+            alert(`Thanks for subscribing! We'll send weekly CFB analytics to ${email}`);
+            e.target.reset();
+        });
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initHeroAnimation();
+            setTimeout(animateCounters, 1000);
+        });
+
+        // GSAP animations
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.from('.blog-card', {
+                y: 100,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.3,
+                scrollTrigger: {
+                    trigger: '.blog-grid',
+                    start: 'top 80%'
+                }
+            });
+            
+            gsap.from('.analytics-card', {
+                scale: 0.8,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: '.analytics-dashboard',
+                    start: 'top 80%'
+                }
+            });
+        }
+    </script>
+</body>
+</html>

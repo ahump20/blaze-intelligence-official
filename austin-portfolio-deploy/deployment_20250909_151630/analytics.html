@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics | Blaze Intelligence - Real-Time Sports Analytics Platform</title>
+<meta name="description" content="Advanced sports analytics with 94.6% accuracy. Real-time data processing, predictive modeling, and championship-level insights for professional teams.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+.glass-card { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+.metric-card { transition: all 0.3s ease; }
+.metric-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0, 255, 255, 0.2); }
+</style>
+</head>
+<body>
+<section class="pt-24 pb-16 px-4">
+<div class="max-w-7xl mx-auto text-center">
+<h1 class="text-5xl md:text-7xl font-black mb-6">
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-orange-500">
+CHAMPIONSHIP ANALYTICS
+</span>
+</h1>
+<p class="text-xl text-slate-300 max-w-3xl mx-auto">
+Professional-grade analytics platform processing 2.8M+ data points per second with 94.6% prediction accuracy
+</p>
+</div>
+</section>
+
+<div class="metric-card glass-card p-6 rounded-xl text-center">
+<div class="text-sm text-slate-400 mb-2">Cardinals Readiness</div>
+<div class="text-4xl font-black text-red-400 mb-2">86.6%</div>
+<div class="text-xs text-green-400">↑ 3.2% from yesterday</div>
+</div>
+
+<div class="metric-card glass-card p-6 rounded-xl text-center">
+<div class="text-sm text-slate-400 mb-2">Longhorns Recruiting</div>
+<div class="text-4xl font-black text-orange-400 mb-2">#5</div>
+<div class="text-xs text-yellow-400">National Ranking</div>
+</div>
+
+<div class="glass-card p-8 rounded-2xl mb-12">
+<h3 class="text-xl font-bold text-white mb-6">Weekly Performance Trends</h3>
+<canvas id="performanceChart" height="100"></canvas>
+</div>
+</div>
+</section>
+
+<div class="glass-card p-8 rounded-2xl">
+<h3 class="text-2xl font-bold text-cyan-400 mb-6">Predictive Analytics</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-slate-300">Win Probability Models</span>
+<span class="text-green-400 font-mono">94.6% accurate</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-300">Player Performance Projection</span>
+<span class="text-green-400 font-mono">R² = 0.91</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-300">Injury Risk Assessment</span>
+<span class="text-green-400 font-mono">87% precision</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-300">Draft Value Modeling</span>
+<span class="text-green-400 font-mono">Top 10% accuracy</span>
+</div>
+</div>
+</div>
+
+<section class="py-16 px-4">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold text-center mb-12 text-white">Sport-Specific Intelligence</h2>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-card p-6 rounded-xl">
+<div class="text-2xl mb-3">🏈</div>
+<h3 class="text-lg font-bold text-blue-400 mb-3">NFL Analytics</h3>
+<ul class="text-sm text-slate-300 space-y-2">
+<li>• EPA/play analysis</li>
+<li>• Route tree efficiency</li>
+<li>• Pass rush win rate</li>
+<li>• DVOA metrics</li>
+<li>• Play calling tendencies</li>
+</ul>
+</div>
+
+<div class="glass-card p-6 rounded-xl">
+<div class="text-2xl mb-3">🎓</div>
+<h3 class="text-lg font-bold text-orange-400 mb-3">NCAA Analytics</h3>
+<ul class="text-sm text-slate-300 space-y-2">
+<li>• Recruiting rankings</li>
+<li>• NIL valuations</li>
+<li>• Transfer portal analysis</li>
+<li>• SP+ ratings</li>
+<li>• Academic performance</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-20 px-4">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="text-4xl font-bold text-white mb-6">Experience Championship Analytics</h2>
+<p class="text-xl text-slate-300 mb-8">See why 50+ professional organizations trust Blaze Intelligence</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a href="/demo" class="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600">
+View Live Demo
+</a>
+<a href="/contact.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+Get Custom Analysis
+</a>
+</div>
+</div>
+</section>
+

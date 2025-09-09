@@ -1,0 +1,46 @@
+[env.production]
+name = "blaze-contact-api"
+main = "api/contact-form.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 Database binding
+[[env.production.d1_databases]]
+binding = "BLAZE_DB"
+database_name = "blaze-intelligence-prod"
+database_id = "b9df2f50-6287-40ed-9ec3-ad8d11092c7c"
+
+# KV Storage for rate limiting and caching
+[[env.production.kv_namespaces]]
+binding = "BLAZE_KV"
+id = "1b4e56b25c1442029c5eb3215f9ff636"
+preview_id = "314e25f60fbd436e8ba3af4d34b8351c"
+
+# Environment variables
+[env.production.vars]
+ENVIRONMENT = "production"
+ALLOWED_ORIGINS = "*"
+
+# Secret environment variables (set via CLI)
+# wrangler secret put SENDGRID_API_KEY
+# wrangler secret put JWT_SECRET
+# wrangler secret put DATABASE_ENCRYPTION_KEY
+
+[env.development]
+name = "blaze-contact-api-dev"
+main = "api/contact-form.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[env.development.d1_databases]]
+binding = "BLAZE_DB"
+database_name = "blaze-intelligence-dev"
+database_id = "your-dev-database-id-here"
+
+[[env.development.kv_namespaces]]
+binding = "BLAZE_KV"
+id = "your-dev-kv-namespace-id-here"
+
+[env.development.vars]
+ENVIRONMENT = "development"
+ALLOWED_ORIGINS = "*"

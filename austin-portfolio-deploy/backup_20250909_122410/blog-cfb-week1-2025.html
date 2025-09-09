@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 Chaos: Texas Falls, Florida State Stuns Alabama | Blaze Intelligence</title>
+    <meta name="description" content="Breaking down college football's opening weekend: Ohio State tops Texas 14-7, FSU shocks Alabama 31-17, plus all Week 1 upsets and playoff implications.">
+    <meta name="keywords" content="college football 2025, Texas Longhorns, Ohio State Buckeyes, Arch Manning, Alabama upset, FSU Seminoles, Week 1 results">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="College Football Week 1 2025: Major Upsets Rock the Rankings">
+    <meta property="og:description" content="Ohio State defeats #1 Texas, Florida State stuns Alabama, and more Week 1 chaos analyzed by Blaze Intelligence">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blaze-intelligence.pages.dev/blog-cfb-week1-2025.html">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Three.js Hero Container */
+        #hero-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+        }
+        
+        /* Hero Overlay */
+        .hero-overlay {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(180deg, 
+                rgba(191, 87, 0, 0.1) 0%, 
+                rgba(10, 10, 10, 0.8) 50%,
+                rgba(10, 10, 10, 1) 100%);
+            backdrop-filter: blur(2px);
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 184, 28, 0.2);
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 15px 0;
+            background: rgba(10, 10, 10, 0.98);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #BF5700 0%, #FFB81C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FFB81C;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        /* Hero Content */
+        .hero-content {
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 184, 28, 0.1);
+            border: 1px solid #FFB81C;
+            color: #FFB81C;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-title {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #BF5700 50%, #FFB81C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #BF5700;
+            display: block;
+        }
+        
+        .hero-stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            fill: #FFB81C;
+        }
+        
+        /* Article Content */
+        .article-wrapper {
+            position: relative;
+            z-index: 20;
+            background: #0a0a0a;
+            min-height: 100vh;
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        
+        .article-content h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 60px 0 30px;
+            background: linear-gradient(135deg, #BF5700 0%, #FFB81C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .article-content h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #FFB81C 0%, transparent 100%);
+        }
+        
+        .article-content h3 {
+            font-size: 24px;
+            color: #ffffff;
+            margin: 40px 0 20px;
+            font-weight: 700;
+        }
+        
+        .article-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .article-content li {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+        }
+        
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, rgba(255, 184, 28, 0.05) 100%);
+            border-left: 4px solid #BF5700;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .highlight-box strong {
+            color: #FFB81C;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 184, 28, 0.05) 0%, rgba(191, 87, 0, 0.1) 100%);
+            border: 1px solid rgba(255, 184, 28, 0.2);
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #BF5700;
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #BF5700 0%, #FFB81C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Key Takeaway */
+        .key-takeaway {
+            background: linear-gradient(135deg, #FFB81C 0%, #BF5700 100%);
+            color: #0a0a0a;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-weight: 500;
+            font-size: 16px;
+            box-shadow: 0 10px 30px rgba(255, 184, 28, 0.2);
+        }
+        
+        .key-takeaway strong {
+            color: #0a0a0a;
+            font-weight: 700;
+        }
+        
+        /* Team Analysis */
+        .team-analysis {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 184, 28, 0.2);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .team-analysis h4 {
+            color: #FFB81C;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        /* Game Result */
+        .game-result {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.2) 0%, rgba(191, 87, 0, 0.05) 100%);
+            border-left: 5px solid #BF5700;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+        
+        /* Upset Alert */
+        .upset-alert {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid #FF4444;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 10px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #BF5700 0%, #FFB81C 100%);
+            color: #0a0a0a;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 80px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .cta-section h2 {
+            color: #0a0a0a !important;
+            -webkit-text-fill-color: #0a0a0a !important;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .cta-section h2:after {
+            display: none;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #0a0a0a;
+            color: #FFB81C;
+            padding: 18px 50px;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: #000000;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 184, 28, 0.2);
+        }
+        
+        footer a {
+            color: #FFB81C;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: #BF5700;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 40px;
+            }
+            
+            .article-content {
+                padding: 40px 20px;
+            }
+            
+            .article-content h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Three.js Canvas -->
+    <canvas id="hero-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">BLAZE INTELLIGENCE</a>
+            <div class="nav-menu">
+                <a href="demo.html" class="nav-link">Demo</a>
+                <a href="blog-cardinals-analytics-2025.html" class="nav-link">MLB</a>
+                <a href="blog-titans-analytics-2025.html" class="nav-link">NFL</a>
+                <a href="blog-cfb-week1-2025.html" class="nav-link active">NCAA</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Overlay -->
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <div class="hero-badge">Week 1 Analysis</div>
+            <h1 class="hero-title">Chaos Reigns Supreme</h1>
+            <p class="hero-subtitle">College football's 2025 opening weekend delivered shocking upsets, defensive battles, and championship implications</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">3</span>
+                    <span class="hero-stat-label">Top-10 Upsets</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">14-7</span>
+                    <span class="hero-stat-label">OSU Over Texas</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">31-17</span>
+                    <span class="hero-stat-label">FSU Stuns Bama</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="article-wrapper">
+        <article class="article-content">
+            <div class="highlight-box">
+                <strong>Major Headlines:</strong> #3 Ohio State defeats #1 Texas 14-7 • Florida State stuns #8 Alabama 31-17 • #9 LSU upsets #4 Clemson 17-10 • Miami edges Notre Dame 27-24 • Arch Manning struggles in debut
+            </div>
+
+            <h2>The Heavyweight Showdown: Ohio State Stifles Texas</h2>
+            
+            <p>The most anticipated matchup of Week 1 lived up to its billing as a defensive masterclass, with #3 Ohio State defeating #1 Texas 14-7 in Columbus. This wasn't the offensive showcase many expected—it was a brutal, physical chess match that reminded everyone why defense still wins championships.</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">14-7</div>
+                    <div class="stat-label">Final Score (OSU wins)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">17/30</div>
+                    <div class="stat-label">Arch Manning Completions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">38</div>
+                    <div class="stat-label">Manning Yards (First 3 Quarters)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Texas 4th Down Stops</div>
+                </div>
+            </div>
+
+            <h3>Arch Manning's Reality Check</h3>
+            
+            <p>The preseason Heisman favorite's first road start turned into a nightmare against Ohio State's suffocating defense. Manning completed just 17 of 30 passes for 170 yards with one critical interception that set up Ohio State's go-ahead score. Perhaps most telling: through three quarters, Manning had accumulated just 38 passing yards.</p>
+
+            <div class="key-takeaway">
+                <strong>Blaze Intelligence Pattern Recognition:</strong> Manning's struggles weren't just about nerves. Ohio State defensive coordinator Matt Patricia deployed eight new starters who flew around the field with precision, proving that scheme can overcome inexperience when executed properly.
+            </div>
+
+            <p>Texas couldn't score for the first 56 minutes of the game. The Longhorns were stopped on fourth down four times, including twice inside the 10-yard line—a fourth-and-goal QB sneak stuff at the 1-yard line and a crucial pass breakup that denied Texas again in the red zone.</p>
+
+            <h3>Julian Sayin: The Calm in Columbus</h3>
+            
+            <p>While Manning struggled, Ohio State's true freshman quarterback Julian Sayin delivered exactly what the Buckeyes needed. His stat line (13/20, 126 yards, 1 TD) won't win any style points, but his poise and decision-making proved the difference. The defining moment: a perfectly placed 40-yard touchdown strike to Carnell Tate with 13:08 remaining that effectively sealed the game.</p>
+
+            <div class="team-analysis">
+                <h4>Key Defensive Statistics</h4>
+                <ul>
+                    <li><strong>Ohio State:</strong> Held Texas to 203 total yards</li>
+                    <li><strong>Red Zone Defense:</strong> 0-for-2 on fourth-down conversions inside the 10</li>
+                    <li><strong>Pressure Rate:</strong> Manning pressured on 42% of dropbacks</li>
+                    <li><strong>Explosive Plays Allowed:</strong> Zero plays over 15 yards until final minutes</li>
+                </ul>
+            </div>
+
+            <h2>The Stunner in Tallahassee: FSU Demolishes Alabama</h2>
+
+            <div class="upset-alert">
+                <strong>⚠️ MAJOR UPSET:</strong> Unranked Florida State 31, #8 Alabama 17
+            </div>
+
+            <p>In perhaps the most shocking result of the weekend, Florida State—coming off a dismal 2-10 season in 2024—absolutely dismantled Alabama 31-17. This wasn't a fluky win; it was a comprehensive beatdown that exposed serious questions about the post-Saban era in Tuscaloosa.</p>
+
+            <h3>Tommy Castellanos: The Giant Killer</h3>
+            
+            <p>Boston College transfer Tommy Castellanos backed up his offseason trash talk with a brilliant performance: 9/14 passing for 152 yards and 16 carries for 78 yards with a rushing touchdown. He had Alabama's defense looking lost, consistently finding gaps and making the Tide defense look "like it was running in mud."</p>
+
+            <div class="game-result">
+                <strong>Historical Context:</strong> This marked Alabama's first season-opening loss since 2001 and their first two-touchdown opening defeat since 1970. The Doak Campbell Stadium crowd stormed the field after the final whistle—a scene unimaginable just a year ago when FSU was winless in conference play.
+            </div>
+
+            <p>For Alabama, Ty Simpson's debut (23/43, 254 yards, 2 TDs) provided empty calories in a lifeless performance. New coach Kalen DeBoer is already feeling the heat after consecutive season-opening disappointments.</p>
+
+            <h2>LSU's Defensive Masterpiece Against Clemson</h2>
+
+            <div class="game-result">
+                <strong>Death Valley Showdown:</strong> #9 LSU 17, #4 Clemson 10
+            </div>
+
+            <p>In a defensive slugfest between two Tigers teams, LSU went into Clemson's house and emerged victorious through sheer defensive dominance. Brian Kelly finally secured his signature marquee win, and he did it with defense—not exactly what LSU fans are accustomed to seeing.</p>
+
+            <h3>Defensive Domination by the Numbers</h3>
+
+            <ul>
+                <li>Clemson held to just <strong>31 rushing yards</strong> on 23 attempts</li>
+                <li>Cade Klubnik pressured on nearly every dropback</li>
+                <li>Clemson's final 19 plays: all passes out of desperation</li>
+                <li>Zero passing touchdowns allowed by LSU</li>
+            </ul>
+
+            <p>LSU quarterback Garrett Nussmeier was steady (230 yards, 1 TD) and is now entering early NFL draft conversation as a potential first-round pick. The Tigers' defense showed championship-caliber potential, while Clemson's offensive woes—despite portal additions—persist against elite competition.</p>
+
+            <h2>Miami Edges Notre Dame in Sunday Night Thriller</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">27-24</div>
+                    <div class="stat-label">Miami Wins</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">47</div>
+                    <div class="stat-label">Game-Winning FG (yards)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1:04</div>
+                    <div class="stat-label">Time Remaining</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">NFL GMs in Attendance</div>
+                </div>
+            </div>
+
+            <p>Miami announced its return to relevance with a gutsy 27-24 victory over #6 Notre Dame. The Hurricanes led 21-7 in the third quarter before Notre Dame mounted a furious comeback to tie it at 24-24. But Miami kicker Carter Davis delivered the decisive blow with a clutch 47-yard field goal with just 1:04 remaining.</p>
+
+            <h3>Carson Beck's Miami Debut</h3>
+            
+            <p>The Georgia transfer showed poise in his first game for the Hurricanes, throwing for 205 yards and 2 touchdowns. Beck, who tore his UCL in last season's SEC Championship Game, looked fully recovered and in command of Mario Cristobal's offense. His 28-yard touchdown pass to freshman Malachi Toney opened the scoring and set the tone.</p>
+
+            <h3>CJ Carr Shows Promise in Defeat</h3>
+            
+            <p>Notre Dame's redshirt freshman quarterback CJ Carr, making his first significant appearance, showed resilience in rallying the Irish from a 14-point deficit. His highlight: evading pressure and finding Micah Gilbert for a game-tying touchdown that brought Notre Dame back from the brink.</p>
+
+            <div class="key-takeaway">
+                <strong>Scout's Note:</strong> Four NFL GMs were in attendance: Ryan Poles (Bears), Brian Gutekunst (Packers), Brandon Beane (Bills), and Joe Schoen (Giants)—all there to evaluate Beck and the wealth of NFL talent on display.
+            </div>
+
+            <h2>Other Power 5 Performances</h2>
+
+            <h3>Winners Rolling</h3>
+
+            <div class="team-analysis">
+                <ul>
+                    <li><strong>#2 Penn State 46, Nevada 11:</strong> Drew Allar efficient (22/26, 217 yards), four rushing TDs. Business as usual in Happy Valley.</li>
+                    
+                    <li><strong>#5 Georgia 45, Marshall 7:</strong> New QB Gunner Stockton flashed dual-threat ability (73 rushing yards, 2 rushing TDs, 2 passing TDs). The two-time SEC champs haven't missed a beat.</li>
+                    
+                    <li><strong>#7 Oregon 59, Montana State 13:</strong> Dante Moore's debut sparkled (18/23, 213 yards, 3 TDs). The Ducks racked up 253 rushing yards and look primed for a playoff run.</li>
+                    
+                    <li><strong>#14 Michigan 34, New Mexico 17:</strong> Freshman phenom Bryce Underwood's first start was solid if unspectacular. The Wolverines have work to do before Big Ten play.</li>
+                    
+                    <li><strong>USC 73, Missouri State 13:</strong> The unranked Trojans hung 600+ yards of offense, led 49-7 at halftime. If they can play any defense, they'll be back in the Top 25 soon.</li>
+                </ul>
+            </div>
+
+            <h3>Close Calls and Concerns</h3>
+
+            <ul>
+                <li><strong>#17 Kansas State 38, North Dakota 35:</strong> The Wildcats barely survived an FCS scare at home. Major red flags on defense.</li>
+                
+                <li><strong>#20 Indiana 27, Old Dominion 14:</strong> Uncomfortably close into the second half for the Hoosiers.</li>
+                
+                <li><strong>South Florida 34, #25 Boise State 7:</strong> Thursday night shocker eliminated the Broncos' New Year's Six hopes before they began.</li>
+            </ul>
+
+            <h2>Updated Playoff Picture After Week 1</h2>
+
+            <div class="highlight-box">
+                <h3>Early CFP Contenders (Post-Week 1)</h3>
+                <ol>
+                    <li><strong>Ohio State:</strong> Statement win over #1, elite defense with eight new starters clicking</li>
+                    <li><strong>Penn State:</strong> Dominant as expected, awaits real tests</li>
+                    <li><strong>Georgia:</strong> New QB looks ready, two-time champs reload</li>
+                    <li><strong>LSU:</strong> Marquee road win, championship-caliber defense emerges</li>
+                    <li><strong>Oregon:</strong> Explosive offense, Dante Moore could be the x-factor</li>
+                </ol>
+            </div>
+
+            <h3>On the Ropes</h3>
+
+            <div class="team-analysis">
+                <p><strong>Texas (0-1):</strong> Still controls SEC destiny but zero margin for error. Arch Manning must grow up fast. The good news: their defense held the defending champs to 14 points.</p>
+                
+                <p><strong>Alabama (0-1):</strong> Projected to tumble to #18-20 range. Must run the table in the SEC and get help. The post-Saban reality has arrived harshly.</p>
+                
+                <p><strong>Clemson (0-1):</strong> Offensive issues persist. ACC schedule gives them a lifeline, but they can't afford another loss.</p>
+                
+                <p><strong>Notre Dame (0-1):</strong> As an independent, must win out and hope for chaos. CJ Carr showed promise but the margin is gone.</p>
+            </div>
+
+            <h3>Dark Horse Rising</h3>
+
+            <p><strong>Florida State:</strong> From unranked to relevant overnight. The Alabama win could springboard them to an ACC title run if it wasn't a fluke. Projected to enter rankings around #24.</p>
+
+            <p><strong>Miami:</strong> The signature win over Notre Dame plus Carson Beck's presence makes them the ACC favorite. Could jump into the top 10 next week.</p>
+
+            <h2>Pattern Recognition: What Week 1 Taught Us</h2>
+
+            <div class="key-takeaway">
+                <strong>Blaze Intelligence Analysis:</strong> Three critical patterns emerged from Week 1 that will shape the 2025 season:
+            </div>
+
+            <ol>
+                <li><strong>Defense Still Wins Championships:</strong> Ohio State and LSU proved that elite defenses can neutralize Heisman hopefuls and offensive schemes. The days of simply outscoring opponents are over.</li>
+                
+                <li><strong>Transfer Portal Impact:</strong> Carson Beck (Miami), Tommy Castellanos (FSU), and others proved that the right transfer can transform a program overnight. The portal is now as important as recruiting.</li>
+                
+                <li><strong>Pressure Creates Diamonds—or Dust:</strong> Arch Manning crumbled under pressure while Julian Sayin thrived. The mental aspect of quarterback play has never been more crucial in the playoff era.</li>
+            </ol>
+
+            <h2>Looking Ahead: Key Week 2 Matchups</h2>
+
+            <p>The chaos of Week 1 sets up several must-watch games in Week 2:</p>
+
+            <ul>
+                <li><strong>Texas at Michigan (Sept 7):</strong> Can Arch Manning bounce back in Ann Arbor?</li>
+                <li><strong>Alabama vs. USF (Sept 7):</strong> The Tide must avoid a catastrophic 0-2 start</li>
+                <li><strong>Florida State at Boston College (Sept 7):</strong> Can FSU prove the Alabama win was legitimate?</li>
+                <li><strong>LSU vs. Nicholls (Sept 7):</strong> Tune-up game before SEC play begins</li>
+            </ul>
+
+            <h2>The Verdict: Chaos Reigns Supreme</h2>
+
+            <p>Week 1 of the 2025 college football season delivered everything fans craved: shocking upsets, defensive battles, and the complete reshuffling of the playoff picture. The preseason #1 fell, two other top-10 teams went down, and programs like Florida State and Miami announced their arrivals as serious contenders.</p>
+
+            <p>Ohio State emerges as the early favorite after their suffocating defensive performance, while Texas faces immediate adversity that will test Steve Sarkisian's culture. Alabama's loss raises serious questions about life after Saban, and Clemson's offensive struggles continue to plague Dabo Swinney.</p>
+
+            <div class="highlight-box">
+                <strong>Final Thought:</strong> If Week 1 taught us anything, it's that the 2025 season will be defined by defense, quarterback development, and the transfer portal's immediate impact. The playoff race is wide open, and we're just getting started.
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2>Want Deeper College Football Analytics?</h2>
+                <p>Get access to our proprietary performance metrics, predictive models, and real-time insights that give you the edge in understanding college football.</p>
+                <a href="demo.html" class="cta-button">Request Demo</a>
+            </div>
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Blaze Intelligence. Turning Data Into Dominance.</p>
+        <p style="margin-top: 15px;">
+            <a href="index.html">Home</a>
+            <a href="contact.html">Contact</a>
+            <a href="sitemap.xml">Sitemap</a>
+        </p>
+    </footer>
+
+    <!-- Three.js Animation Script -->
+    <script>
+        // Three.js Scene Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('hero-canvas'),
+            antialias: true,
+            alpha: true 
+        });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        
+        // Create Football Field
+        const fieldGeometry = new THREE.PlaneGeometry(100, 50);
+        const fieldMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x00AA00,
+            wireframe: true,
+            opacity: 0.3,
+            transparent: true
+        });
+        const field = new THREE.Mesh(fieldGeometry, fieldMaterial);
+        field.rotation.x = -Math.PI / 2;
+        scene.add(field);
+        
+        // Create Floating Particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2000;
+        const posArray = new Float32Array(particlesCount * 3);
+        
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 100;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.3,
+            color: 0xFFB81C,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        
+        // Create Goal Posts
+        function createGoalPost(x) {
+            const group = new THREE.Group();
+            
+            // Uprights
+            const postGeometry = new THREE.CylinderGeometry(0.2, 0.2, 10);
+            const postMaterial = new THREE.MeshBasicMaterial({ color: 0xFFB81C });
+            
+            const leftPost = new THREE.Mesh(postGeometry, postMaterial);
+            leftPost.position.set(-5, 5, 0);
+            group.add(leftPost);
+            
+            const rightPost = new THREE.Mesh(postGeometry, postMaterial);
+            rightPost.position.set(5, 5, 0);
+            group.add(rightPost);
+            
+            // Crossbar
+            const crossbarGeometry = new THREE.CylinderGeometry(0.2, 0.2, 10);
+            const crossbar = new THREE.Mesh(crossbarGeometry, postMaterial);
+            crossbar.rotation.z = Math.PI / 2;
+            crossbar.position.y = 10;
+            group.add(crossbar);
+            
+            group.position.x = x;
+            return group;
+        }
+        
+        const goalPost1 = createGoalPost(-40);
+        const goalPost2 = createGoalPost(40);
+        scene.add(goalPost1);
+        scene.add(goalPost2);
+        
+        // Create Dynamic Lines
+        const lineGeometry = new THREE.BufferGeometry();
+        const linePositions = [];
+        const lineCount = 20;
+        
+        for(let i = 0; i < lineCount; i++) {
+            const x = (Math.random() - 0.5) * 80;
+            const y = Math.random() * 20;
+            const z = (Math.random() - 0.5) * 40;
+            
+            linePositions.push(x, y, z);
+            linePositions.push(x + (Math.random() - 0.5) * 10, y + Math.random() * 5, z + (Math.random() - 0.5) * 10);
+        }
+        
+        lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+        const lineMaterial = new THREE.LineBasicMaterial({ 
+            color: 0xBF5700,
+            opacity: 0.5,
+            transparent: true
+        });
+        const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+        scene.add(lines);
+        
+        // Camera Position
+        camera.position.set(0, 20, 40);
+        camera.lookAt(0, 0, 0);
+        
+        // Mouse Movement
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+        
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotate particles
+            particlesMesh.rotation.y += 0.001;
+            particlesMesh.rotation.x += 0.0005;
+            
+            // Animate goal posts
+            goalPost1.rotation.y = Math.sin(Date.now() * 0.001) * 0.1;
+            goalPost2.rotation.y = -Math.sin(Date.now() * 0.001) * 0.1;
+            
+            // Animate lines
+            lines.rotation.y += 0.002;
+            
+            // Camera movement based on mouse
+            camera.position.x += (mouseX * 10 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 10 + 20 - camera.position.y) * 0.05;
+            camera.lookAt(0, 0, 0);
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+    <!-- Analytics -->
+    <script src="js/analytics-config.js"></script>
+    <script>
+        // Track article engagement
+        if (typeof gtag !== 'undefined') {
+            // Track scroll depth
+            let scrollPoints = [25, 50, 75, 100];
+            let scrolled = [];
+            
+            window.addEventListener('scroll', function() {
+                let scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                
+                scrollPoints.forEach(point => {
+                    if (scrollPercent >= point && !scrolled.includes(point)) {
+                        scrolled.push(point);
+                        gtag('event', 'scroll_depth', {
+                            'percent_scrolled': point,
+                            'page_title': 'CFB Week 1 2025 Analysis'
+                        });
+                    }
+                });
+            });
+            
+            // Track time on page
+            let startTime = Date.now();
+            window.addEventListener('beforeunload', function() {
+                let timeOnPage = Math.round((Date.now() - startTime) / 1000);
+                gtag('event', 'time_on_page', {
+                    'time_seconds': timeOnPage,
+                    'page_title': 'CFB Week 1 2025 Analysis'
+                });
+            });
+        }
+    </script>
+</body>
+</html>

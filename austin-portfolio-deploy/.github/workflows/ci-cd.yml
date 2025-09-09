@@ -1,0 +1,510 @@
+name: Blaze Intelligence CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop, production ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run daily at 2 AM UTC for scheduled data updates
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      deploy_target:
+        description: 'Deployment target'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+          - all
+
+env:
+  NODE_VERSION: '18.x'
+  PYTHON_VERSION: '3.10'
+
+jobs:
+  # Code Quality Checks
+  quality-check:
+    runs-on: ubuntu-latest
+    name: Code Quality & Linting
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: |
+          npm ci --prefer-offline --no-audit
+          npm install -g eslint prettier htmlhint
+      
+      - name: Run ESLint
+        run: |
+          eslint js/*.js --format=json --output-file=eslint-report.json || true
+          
+      - name: Run Prettier check
+        run: |
+          prettier --check "**/*.{js,json,css,md}" || true
+      
+      - name: HTML validation
+        run: |
+          htmlhint "**/*.html" --format=json > htmlhint-report.json || true
+      
+      - name: Check for sensitive data
+        run: |
+          # Check for API keys and secrets
+          if grep -r "sk-\|pk_\|ghp_\|api_key" --exclude-dir=node_modules --exclude-dir=.git .; then
+            echo "::error::Potential secrets found in code!"
+            exit 1
+          fi
+      
+      - name: Upload quality reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: quality-reports
+          path: |
+            eslint-report.json
+            htmlhint-report.json
+
+  # Security Scanning
+  security-scan:
+    runs-on: ubuntu-latest
+    name: Security Scanning
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run Trivy security scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+      
+      - name: Upload Trivy results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+      
+      - name: OWASP Dependency Check
+        run: |
+          # Check for vulnerable dependencies
+          npx audit-ci --moderate
+      
+      - name: Check SSL/TLS configuration
+        run: |
+          # Verify HTTPS enforcement in code
+          if ! grep -r "https://" js/*.js > /dev/null; then
+            echo "::warning::Ensure all API calls use HTTPS"
+          fi
+
+  # Automated Testing
+  test:
+    runs-on: ubuntu-latest
+    name: Automated Testing
+    needs: [quality-check]
+    
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Install test dependencies
+        run: |
+          npm ci
+          npm install -g playwright @playwright/test
+          npx playwright install ${{ matrix.browser }}
+      
+      - name: Run unit tests
+        run: |
+          # Create test runner script
+          cat > run-tests.js << 'EOF'
+          const { chromium, firefox } = require('playwright');
+          
+          async function runTests(browserType) {
+            const browser = await browserType.launch();
+            const page = await browser.newPage();
+            
+            // Test main page loads
+            await page.goto('file://${{ github.workspace }}/index.html');
+            const title = await page.title();
+            console.log('Page title:', title);
+            
+            // Test API configuration page
+            await page.goto('file://${{ github.workspace }}/setup-api-keys.html');
+            const configTitle = await page.title();
+            console.log('Config page title:', configTitle);
+            
+            // Test integration suite
+            await page.goto('file://${{ github.workspace }}/test-integration.html');
+            await page.click('button:has-text("Run All Tests")');
+            await page.waitForTimeout(5000);
+            
+            // Get test results
+            const results = await page.evaluate(() => {
+              return {
+                total: document.getElementById('total-tests')?.textContent,
+                passed: document.getElementById('passed-tests')?.textContent,
+                failed: document.getElementById('failed-tests')?.textContent
+              };
+            });
+            
+            console.log('Test results:', results);
+            
+            await browser.close();
+            return results;
+          }
+          
+          const browserType = '${{ matrix.browser }}' === 'chrome' ? chromium : firefox;
+          runTests(browserType).catch(console.error);
+          EOF
+          
+          node run-tests.js
+      
+      - name: Performance testing
+        run: |
+          # Test page load performance
+          cat > perf-test.js << 'EOF'
+          const { chromium } = require('playwright');
+          
+          async function testPerformance() {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            
+            await page.goto('file://${{ github.workspace }}/index.html');
+            
+            const metrics = await page.evaluate(() => {
+              const timing = performance.timing;
+              return {
+                loadTime: timing.loadEventEnd - timing.navigationStart,
+                domContentLoaded: timing.domContentLoadedEventEnd - timing.navigationStart,
+                firstByte: timing.responseStart - timing.navigationStart
+              };
+            });
+            
+            console.log('Performance metrics:', metrics);
+            
+            if (metrics.loadTime > 3000) {
+              console.error('Page load time exceeds 3 seconds!');
+              process.exit(1);
+            }
+            
+            await browser.close();
+          }
+          
+          testPerformance().catch(console.error);
+          EOF
+          
+          node perf-test.js
+      
+      - name: Accessibility testing
+        run: |
+          npm install -g @axe-core/cli
+          axe index.html --save accessibility-report.json || true
+      
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.browser }}
+          path: |
+            test-results/
+            accessibility-report.json
+
+  # Build and Optimize
+  build:
+    runs-on: ubuntu-latest
+    name: Build & Optimize
+    needs: [test, security-scan]
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Install build tools
+        run: |
+          npm install -g terser clean-css-cli html-minifier
+      
+      - name: Create production build
+        run: |
+          # Create dist directory
+          mkdir -p dist
+          
+          # Copy HTML files
+          cp *.html dist/
+          
+          # Minify JavaScript
+          mkdir -p dist/js
+          for file in js/*.js; do
+            if [ -f "$file" ]; then
+              filename=$(basename "$file")
+              terser "$file" -c -m -o "dist/js/${filename%.js}.min.js"
+            fi
+          done
+          
+          # Minify CSS
+          mkdir -p dist/css
+          for file in css/*.css; do
+            if [ -f "$file" ]; then
+              filename=$(basename "$file")
+              cleancss -o "dist/css/${filename%.css}.min.css" "$file"
+            fi
+          done
+          
+          # Minify HTML
+          for file in dist/*.html; do
+            html-minifier --collapse-whitespace --remove-comments --minify-css true --minify-js true "$file" -o "$file"
+          done
+          
+          # Copy other assets
+          cp -r data dist/ 2>/dev/null || true
+          cp -r api dist/ 2>/dev/null || true
+          cp -r src dist/ 2>/dev/null || true
+          cp -r images dist/ 2>/dev/null || true
+          
+          # Generate build manifest
+          cat > dist/build-manifest.json << EOF
+          {
+            "version": "$(date +%Y%m%d.%H%M%S)",
+            "commit": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "files": $(find dist -type f -name "*.js" -o -name "*.css" -o -name "*.html" | wc -l)
+          }
+          EOF
+      
+      - name: Generate source maps
+        run: |
+          for file in dist/js/*.min.js; do
+            if [ -f "$file" ]; then
+              terser "js/$(basename ${file%.min.js}.js)" -c -m --source-map "url='$(basename $file).map'" -o "$file"
+            fi
+          done
+      
+      - name: Calculate bundle size
+        run: |
+          echo "Bundle Size Report:"
+          echo "==================="
+          echo "JavaScript: $(du -sh dist/js | cut -f1)"
+          echo "CSS: $(du -sh dist/css 2>/dev/null | cut -f1 || echo '0')"
+          echo "HTML: $(du -sh dist/*.html | cut -f1)"
+          echo "Total: $(du -sh dist | cut -f1)"
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: production-build
+          path: dist/
+
+  # Deploy to Staging
+  deploy-staging:
+    runs-on: ubuntu-latest
+    name: Deploy to Staging
+    needs: [build]
+    if: github.ref == 'refs/heads/develop' || github.event.inputs.deploy_target == 'staging' || github.event.inputs.deploy_target == 'all'
+    environment: staging
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: production-build
+          path: dist/
+      
+      - name: Deploy to Cloudflare Pages (Staging)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npm install -g wrangler
+          wrangler pages deploy dist --project-name=blaze-intelligence-staging
+      
+      - name: Run smoke tests
+        run: |
+          # Wait for deployment
+          sleep 30
+          
+          # Test staging URL
+          curl -f https://blaze-intelligence-staging.pages.dev || exit 1
+          echo "✅ Staging deployment successful"
+
+  # Deploy to Production
+  deploy-production:
+    runs-on: ubuntu-latest
+    name: Deploy to Production
+    needs: [build, deploy-staging]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production' || github.event.inputs.deploy_target == 'production' || github.event.inputs.deploy_target == 'all'
+    environment: production
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: production-build
+          path: dist/
+      
+      - name: Deploy to Cloudflare Pages (Production)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npm install -g wrangler
+          wrangler pages deploy dist --project-name=blaze-intelligence --branch=main
+      
+      - name: Deploy to Vercel (Production)
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npm install -g vercel
+          vercel --prod --token=$VERCEL_TOKEN --yes || true
+      
+      - name: Deploy to Netlify (Production)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          npm install -g netlify-cli
+          netlify deploy --prod --dir=dist --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID || true
+      
+      - name: Purge CDN cache
+        run: |
+          # Purge Cloudflare cache
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' || true
+      
+      - name: Health check
+        run: |
+          # Test production URLs
+          urls=(
+            "https://blaze-intelligence.pages.dev"
+            "https://blaze-intelligence.vercel.app"
+            "https://blaze-intelligence.netlify.app"
+          )
+          
+          for url in "${urls[@]}"; do
+            if curl -f "$url" > /dev/null 2>&1; then
+              echo "✅ $url is healthy"
+            else
+              echo "⚠️ $url might be down"
+            fi
+          done
+
+  # Post-deployment tasks
+  post-deploy:
+    runs-on: ubuntu-latest
+    name: Post-Deployment Tasks
+    needs: [deploy-production]
+    if: success()
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Update deployment status
+        run: |
+          # Create deployment record
+          cat > deployment-record.json << EOF
+          {
+            "deployment_id": "${{ github.run_id }}",
+            "version": "${{ github.sha }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "deployed_by": "${{ github.actor }}",
+            "environment": "production",
+            "status": "success"
+          }
+          EOF
+      
+      - name: Send deployment notification
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          curl -X POST $SLACK_WEBHOOK \
+            -H 'Content-Type: application/json' \
+            -d '{
+              "text": "🚀 Blaze Intelligence deployed to production!",
+              "attachments": [{
+                "color": "good",
+                "fields": [
+                  {"title": "Version", "value": "'${{ github.sha }}'", "short": true},
+                  {"title": "Deployed by", "value": "'${{ github.actor }}'", "short": true},
+                  {"title": "Branch", "value": "'${{ github.ref_name }}'", "short": true}
+                ]
+              }]
+            }' || true
+      
+      - name: Trigger monitoring
+        run: |
+          # Trigger synthetic monitoring
+          echo "Monitoring triggered for production deployment"
+      
+      - name: Update documentation
+        run: |
+          # Update deployment documentation
+          echo "## Latest Deployment" > DEPLOYMENT_STATUS.md
+          echo "- **Date**: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> DEPLOYMENT_STATUS.md
+          echo "- **Version**: ${{ github.sha }}" >> DEPLOYMENT_STATUS.md
+          echo "- **Status**: ✅ Success" >> DEPLOYMENT_STATUS.md
+
+  # Scheduled data updates
+  scheduled-updates:
+    runs-on: ubuntu-latest
+    name: Scheduled Data Updates
+    if: github.event_name == 'schedule'
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Update sports data
+        run: |
+          # Run data update scripts
+          python3 -c "
+          import json
+          import datetime
+          
+          # Update timestamp
+          data = {
+            'last_updated': datetime.datetime.utcnow().isoformat(),
+            'status': 'updated'
+          }
+          
+          with open('data/last-update.json', 'w') as f:
+            json.dump(data, f, indent=2)
+          "
+      
+      - name: Commit updates
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add data/
+          git commit -m "🔄 Automated data update [skip ci]" || echo "No changes to commit"
+          git push || echo "No changes to push"

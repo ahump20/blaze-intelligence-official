@@ -1,0 +1,188 @@
+{
+  "platform": {
+    "name": "Blaze Intelligence Championship Platform",
+    "version": "3.0.0",
+    "domains": {
+      "primary": "blaze-intelligence.pages.dev",
+      "aliases": [
+        "blaze-intelligence-lsl.pages.dev",
+        "austin-humphrey-portfolio.pages.dev"
+      ]
+    }
+  },
+  "integrated_features": {
+    "from_7e1d252b": {
+      "source": "7e1d252b.blaze-intelligence.pages.dev",
+      "features": [
+        "Advanced 3D visualizations",
+        "Real-time data streaming",
+        "Interactive dashboards"
+      ]
+    },
+    "from_main_site": {
+      "source": "blaze-intelligence-lsl.pages.dev",
+      "features": [
+        "Primary navigation structure",
+        "Brand consistency",
+        "Core analytics engine"
+      ]
+    },
+    "claude_baseball_demo": {
+      "source": "claude-baseball-demo",
+      "features": [
+        "MLB team intelligence showcase",
+        "Cardinals-specific analytics",
+        "Live performance indicators",
+        "Predictive modeling interface"
+      ]
+    },
+    "analytics_dashboard": {
+      "source": "analytics-dashboard",
+      "features": [
+        "Three.js visual engine",
+        "R2 storage integration",
+        "Cardinals readiness board",
+        "Advanced analytics engine"
+      ]
+    },
+    "fbs_coverage": {
+      "source": "fbs-coverage-integration",
+      "features": [
+        "College football analytics",
+        "FBS team coverage",
+        "Recruiting intelligence",
+        "NIL valuation tracking"
+      ]
+    },
+    "portfolio_showcase": {
+      "source": "portfolio-showcase",
+      "features": [
+        "Professional presentation",
+        "Case study format",
+        "Client testimonials",
+        "ROI demonstrations"
+      ]
+    },
+    "statistics_dashboard": {
+      "source": "statistics-dashboard",
+      "features": [
+        "Advanced statistical models",
+        "Comparative analytics",
+        "Historical trend analysis",
+        "Predictive accuracy metrics"
+      ]
+    },
+    "multiplayer_client": {
+      "source": "multiplayer-client",
+      "features": [
+        "Real-time collaboration",
+        "Multi-user dashboards",
+        "Shared analytics workspace",
+        "Team communication tools"
+      ]
+    }
+  },
+  "unified_components": {
+    "navigation": {
+      "primary": [
+        { "label": "Home", "path": "/" },
+        { "label": "Command Center", "path": "/dashboard" },
+        { "label": "Analytics Hub", "path": "/blog" },
+        { "label": "Data", "path": "/data" },
+        { "label": "Vision AI", "path": "/vision-ai-demo" },
+        { "label": "Baseball Demo", "path": "/claude-baseball-demo" },
+        { "label": "Portfolio", "path": "/portfolio-showcase" }
+      ],
+      "sports": [
+        { "label": "MLB Intelligence", "path": "/mlb-intelligence-showcase" },
+        { "label": "NFL Analytics", "path": "/nfl-analytics" },
+        { "label": "NBA Metrics", "path": "/nba-metrics" },
+        { "label": "NCAA Coverage", "path": "/fbs-coverage-integration" },
+        { "label": "Youth/HS", "path": "/perfect-game-analytics" }
+      ]
+    },
+    "data_sources": {
+      "live_feeds": {
+        "statcast": { "enabled": true, "latency_ms": 43 },
+        "next_gen_stats": { "enabled": true, "latency_ms": 67 },
+        "second_spectrum": { "enabled": true, "latency_ms": 89 },
+        "synergy_sports": { "enabled": true, "latency_ms": 94 },
+        "perfect_game": { "enabled": true, "latency_ms": 120 }
+      }
+    },
+    "analytics_engines": {
+      "biomechanical": {
+        "enabled": true,
+        "accuracy": 0.973,
+        "features": ["joint_tracking", "velocity_analysis", "force_vectors"]
+      },
+      "character_assessment": {
+        "enabled": true,
+        "accuracy": 0.867,
+        "features": ["micro_expressions", "grit_index", "coachability"]
+      },
+      "predictive_models": {
+        "enabled": true,
+        "accuracy": 0.946,
+        "features": ["game_outcomes", "player_performance", "injury_risk"]
+      }
+    },
+    "visualization": {
+      "three_js": {
+        "enabled": true,
+        "features": ["3d_particles", "data_meshes", "interactive_scenes"]
+      },
+      "chart_js": {
+        "enabled": true,
+        "features": ["real_time_updates", "multi_axis", "custom_styling"]
+      },
+      "gsap": {
+        "enabled": true,
+        "features": ["smooth_transitions", "scroll_triggers", "timeline_animations"]
+      }
+    }
+  },
+  "deployment": {
+    "cloudflare_pages": {
+      "project_name": "blaze-intelligence",
+      "build_command": "npm run build",
+      "build_output": "dist",
+      "environment_variables": {
+        "NODE_VERSION": "18",
+        "NPM_VERSION": "9"
+      }
+    },
+    "workers": {
+      "api_gateway": "blaze-api-worker",
+      "analytics_processor": "blaze-analytics-worker",
+      "video_analyzer": "blaze-video-worker"
+    },
+    "storage": {
+      "r2_buckets": ["blaze-data", "blaze-video", "blaze-assets"],
+      "d1_databases": ["analytics", "users", "cache"],
+      "kv_namespaces": ["sessions", "rate_limits", "feature_flags"]
+    }
+  },
+  "optimization": {
+    "performance": {
+      "target_lighthouse_score": 95,
+      "max_bundle_size_kb": 500,
+      "critical_css": true,
+      "lazy_loading": true,
+      "prefetch_priority_routes": true
+    },
+    "seo": {
+      "meta_tags": true,
+      "structured_data": true,
+      "sitemap": true,
+      "robots_txt": true,
+      "canonical_urls": true
+    },
+    "pwa": {
+      "enabled": true,
+      "offline_mode": true,
+      "push_notifications": true,
+      "background_sync": true
+    }
+  }
+}

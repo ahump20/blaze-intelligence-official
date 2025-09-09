@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Blaze Intelligence</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#BF5700">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+background: #0B0B0F;
+color: #E5E5E5;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+position: relative;
+}
+
+/* Animated background */
+.bg-gradient {
+position: fixed;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: radial-gradient(circle at 20% 50%, rgba(191, 87, 0, 0.15) 0%, transparent 50%),
+radial-gradient(circle at 80% 50%, rgba(155, 203, 235, 0.15) 0%, transparent 50%),
+radial-gradient(circle at 50% 80%, rgba(191, 87, 0, 0.1) 0%, transparent 50%);
+animation: rotate 30s linear infinite;
+pointer-events: none;
+}
+
+@keyframes rotate {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.container {
+text-align: center;
+padding: 2rem;
+max-width: 700px;
+z-index: 10;
+position: relative;
+}
+
+.error-code {
+font-size: clamp(6rem, 15vw, 10rem);
+margin: 0;
+background: linear-gradient(135deg, #BF5700, #9BCBEB);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+font-weight: 900;
+letter-spacing: -0.05em;
+animation: glow 3s ease-in-out infinite;
+text-shadow: 0 0 80px rgba(191, 87, 0, 0.5);
+}
+
+@keyframes glow {
+0%, 100% { 
+filter: brightness(1);
+transform: scale(1);
+}
+50% { 
+filter: brightness(1.2);
+transform: scale(1.02);
+}
+}
+
+.error-title {
+font-size: 1.8rem;
+margin: 1rem 0;
+color: #9BCBEB;
+font-weight: 600;
+letter-spacing: -0.02em;
+}
+
+.error-message {
+color: rgba(229, 229, 229, 0.7);
+margin: 1.5rem auto 2.5rem;
+line-height: 1.6;
+font-size: 1.1rem;
+max-width: 500px;
+}
+
+.button-group {
+display: flex;
+gap: 1rem;
+justify-content: center;
+flex-wrap: wrap;
+margin-top: 2rem;
+}
+
+.btn {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.875rem 2rem;
+background: linear-gradient(135deg, #BF5700, #D96B00);
+color: white;
+text-decoration: none;
+border-radius: 8px;
+font-weight: 600;
+font-size: 1rem;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+overflow: hidden;
+border: none;
+cursor: pointer;
+}
+
+.btn::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:hover::before {
+left: 100%;
+}
+
+.btn:hover {
+transform: translateY(-3px);
+box-shadow: 0 15px 35px rgba(191, 87, 0, 0.4);
+}
+
+.btn-secondary {
+background: transparent;
+border: 2px solid #9BCBEB;
+color: #9BCBEB;
+}
+
+.btn-secondary:hover {
+background: linear-gradient(135deg, #9BCBEB, #7AB8D8);
+color: #0B0B0F;
+border-color: transparent;
+}
+
+.quick-access {
+margin-top: 4rem;
+padding-top: 2.5rem;
+border-top: 1px solid rgba(155, 203, 235, 0.15);
+}
+
+.quick-access-title {
+color: #9BCBEB;
+margin-bottom: 1.5rem;
+font-size: 1.2rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+opacity: 0.9;
+}
+
+.quick-links {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+gap: 0.75rem;
+max-width: 600px;
+margin: 0 auto;
+}
+
+.quick-link {
+padding: 0.75rem 1rem;
+background: rgba(191, 87, 0, 0.08);
+border: 1px solid rgba(191, 87, 0, 0.2);
+color: #BF5700;
+text-decoration: none;
+border-radius: 6px;
+font-size: 0.95rem;
+font-weight: 500;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+overflow: hidden;
+}
+
+.quick-link::after {
+content: '→';
+position: absolute;
+right: 1rem;
+opacity: 0;
+transform: translateX(-10px);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quick-link:hover {
+background: rgba(191, 87, 0, 0.15);
+border-color: #BF5700;
+transform: translateY(-2px);
+padding-right: 2.5rem;
+}
+
+.quick-link:hover::after {
+opacity: 1;
+transform: translateX(0);
+}
+
+.icon {
+width: 20px;
+height: 20px;
+fill: currentColor;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+.container {
+padding: 1.5rem;
+}
+
+.error-title {
+font-size: 1.5rem;
+}
+
+.error-message {
+font-size: 1rem;
+}
+
+.button-group {
+flex-direction: column;
+width: 100%;
+}
+
+.btn {
+width: 100%;
+justify-content: center;
+}
+
+.quick-links {
+grid-template-columns: 1fr 1fr;
+}
+}
+
+/* Particle effect */
+.particles {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 1;
+}
+
+.particle {
+position: absolute;
+width: 4px;
+height: 4px;
+background: #BF5700;
+border-radius: 50%;
+opacity: 0;
+animation: float-up 8s infinite;
+}
+
+.particle:nth-child(odd) {
+background: #9BCBEB;
+animation-duration: 10s;
+}
+
+@keyframes float-up {
+0% {
+opacity: 0;
+transform: translateY(100vh) scale(0);
+}
+10% {
+opacity: 1;
+transform: translateY(90vh) scale(1);
+}
+90% {
+opacity: 1;
+transform: translateY(10vh) scale(1);
+}
+100% {
+opacity: 0;
+transform: translateY(0) scale(0);
+}
+}
+</style>
+</head>
+<body>
+<div class="bg-gradient"></div>
+

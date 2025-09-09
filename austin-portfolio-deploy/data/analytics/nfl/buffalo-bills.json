@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-28T07:48:54.480Z",
+  "team": "Buffalo Bills",
+  "league": "NFL",
+  "division": "AFC East",
+  "conference": "AFC",
+  "season": "2025",
+  "readiness": {
+    "overall": 90.3,
+    "offense": 92.9,
+    "defense": 93.6,
+    "special_teams": 89.1,
+    "coaching": 90.8
+  },
+  "leverage": {
+    "current": 2.43,
+    "trend": "increasing",
+    "playoff_implications": "moderate"
+  },
+  "performance_metrics": {
+    "point_differential": 84,
+    "third_down_conversion": 35.5,
+    "red_zone_efficiency": 52.4,
+    "turnover_differential": 9
+  },
+  "advanced_analytics": {
+    "epa_per_play": -0.102,
+    "dvoa_ranking": 11,
+    "win_probability_added": 0.33,
+    "clutch_performance": 72
+  },
+  "metrics_count": 30
+}

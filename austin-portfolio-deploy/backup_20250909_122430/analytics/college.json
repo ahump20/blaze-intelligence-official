@@ -1,0 +1,130 @@
+{
+  "timestamp": "2025-08-28T14:00:00Z",
+  "league": "NCAA",
+  "season": "2025 Fall",
+  "week": "Week 1",
+  "sports": {
+    "football": {
+      "university_of_texas": {
+        "team_name": "Texas Longhorns",
+        "city": "Austin",
+        "state": "Texas",
+        "conference": "SEC",
+        "division": null,
+        "metrics": {
+          "readiness": 91.8,
+          "offensive_efficiency": 89.7,
+          "defensive_efficiency": 93.2,
+          "special_teams": 87.4,
+          "recruiting_class_rank": 3
+        },
+        "key_stats": {
+          "passing_yards_per_game": 298.4,
+          "rushing_yards_per_game": 178.9,
+          "points_per_game": 35.2,
+          "points_allowed_per_game": 16.8,
+          "turnover_margin": "+1.8"
+        },
+        "roster_metrics": {
+          "scholarship_players": 85,
+          "academic_progress_rate": 987,
+          "graduation_success_rate": 89,
+          "nil_valuation_total": 8.7
+        },
+        "cognitive_performance": {
+          "game_management": 94.1,
+          "pressure_situations": 91.6,
+          "fourth_quarter_performance": 96.3
+        },
+        "next_game": {
+          "opponent": "Colorado State",
+          "date": "2025-08-31",
+          "location": "home",
+          "tv_network": "ESPN",
+          "win_probability": 0.847
+        }
+      }
+    },
+    "basketball": {
+      "university_of_texas": {
+        "team_name": "Texas Longhorns",
+        "city": "Austin", 
+        "state": "Texas",
+        "conference": "SEC",
+        "metrics": {
+          "readiness": 86.3,
+          "offensive_efficiency": 118.7,
+          "defensive_efficiency": 94.2,
+          "tempo": 71.8,
+          "net_efficiency": 24.5
+        },
+        "key_stats": {
+          "points_per_game": 82.6,
+          "rebounds_per_game": 38.7,
+          "assists_per_game": 16.9,
+          "field_goal_percentage": 0.487,
+          "three_point_percentage": 0.374
+        },
+        "roster_metrics": {
+          "scholarship_players": 13,
+          "academic_progress_rate": 972,
+          "nil_valuation_total": 4.2
+        },
+        "season_outlook": {
+          "conference_championship_odds": 0.186,
+          "march_madness_projection": "2_seed",
+          "final_four_probability": 0.237
+        }
+      }
+    }
+  },
+  "nil_market_data": {
+    "total_market_size": "1.2B",
+    "average_deal_value": 12500,
+    "top_sports": [
+      {
+        "sport": "football",
+        "market_share": 68.4
+      },
+      {
+        "sport": "basketball",
+        "market_share": 22.7
+      },
+      {
+        "sport": "baseball",
+        "market_share": 4.3
+      },
+      {
+        "sport": "other",
+        "market_share": 4.6
+      }
+    ]
+  },
+  "conference_power_rankings": {
+    "SEC": {
+      "rank": 1,
+      "average_rating": 87.9,
+      "top_teams": ["Georgia", "Texas", "Alabama"]
+    },
+    "Big_Ten": {
+      "rank": 2, 
+      "average_rating": 85.1,
+      "top_teams": ["Ohio State", "Michigan", "Penn State"]
+    },
+    "Big_12": {
+      "rank": 3,
+      "average_rating": 82.4,
+      "top_teams": ["Oklahoma State", "Kansas State", "TCU"]
+    }
+  },
+  "data_sources": [
+    "CollegeFootballData.com",
+    "ESPN College Sports",
+    "NCAA Official Statistics",
+    "Sports Reference College",
+    "NIL Database Partners"
+  ],
+  "methodology_note": "College analytics incorporating academic metrics, NIL valuations, and traditional performance data using Blaze Intelligence frameworks.",
+  "update_frequency": "daily_during_season",
+  "coverage": "power_5_conferences_plus_select_g5"
+}

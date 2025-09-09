@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | Blaze Intelligence</title>
+<meta name="description" content="Real-time sports analytics dashboard with live performance metrics and 3D visualizations">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'burnt-orange': {
+'500': '#BF5700',
+'600': '#A0522D',
+'700': '#8B4513'
+},
+'neon': {
+'blue': '#00FFFF',
+'green': '#00FF00',
+'orange': '#FF8C00'
+}
+}
+}
+}
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="js/blaze-three-visuals.js" defer></script>
+
+<script src="js/r2-integration.js" defer></script>
+
+<script src="js/blaze-advanced-analytics.js" defer></script>
+
+<style>
+:root {
+--primary-orange: #BF5700;
+--accent-orange: #D2691E;
+--neon-blue: #00FFFF;
+--neon-green: #00FF00;
+--neon-orange: #FF8C00;
+--dark-bg: #0a0a0a;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+background: var(--dark-bg);
+color: #e2e8f0;
+}
+
+.glass-nav {
+background: rgba(10, 10, 10, 0.95);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.glass-card {
+background: rgba(30, 41, 59, 0.9);
+backdrop-filter: blur(15px);
+-webkit-backdrop-filter: blur(15px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-3d-container {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 0;
+}
+
+.dashboard-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 2rem;
+}
+
+.viz-card {
+background: rgba(15, 23, 42, 0.9);
+border: 1px solid rgba(0, 255, 255, 0.2);
+border-radius: 1rem;
+padding: 1.5rem;
+position: relative;
+overflow: hidden;
+}
+
+.viz-container {
+position: relative;
+width: 100%;
+height: 400px;
+border-radius: 0.5rem;
+overflow: hidden;
+background: rgba(10, 10, 10, 0.5);
+}
+
+.metric-badge {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.5rem 1rem;
+background: rgba(0, 255, 255, 0.1);
+border: 1px solid var(--neon-blue);
+border-radius: 9999px;
+font-size: 0.875rem;
+font-weight: 600;
+color: var(--neon-blue);
+}
+
+.live-indicator {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.live-dot {
+width: 0.5rem;
+height: 0.5rem;
+background: var(--neon-green);
+border-radius: 50%;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.stat-value {
+font-size: 3rem;
+font-weight: 900;
+background: linear-gradient(135deg, var(--neon-orange), var(--accent-orange));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.chart-container {
+position: relative;
+height: 350px;
+width: 100%;
+}
+</style>
+
+<script type="application/json" id="metrics">
+{
+"prediction_accuracy": "94.6%",
+"response_latency": "<100ms",
+"data_points": "2.8M+",
+"events_per_second": "100K+",
+"cost_savings": "67-80%",
+"value_identified": "$42.3M",
+"annual_subscription": "$1,188"
+}
+</script>
+<script src="/js/canonical-metrics.js"></script>
+</head>
+<body>
+<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-24">
+<div id="dashboard-hero-3d" class="hero-3d-container"></div>
+
+<div class="relative z-10 max-w-6xl mx-auto px-4 text-center">
+<h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4">
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-cyan-400">
+COMMAND CENTER
+</span>
+</h1>
+<p class="text-xl text-slate-400 mb-8">Real-Time Analytics & Performance Intelligence</p>
+
+<main class="max-w-7xl mx-auto px-4 py-12">
+<div class="viz-card">
+<h3 class="text-xl font-semibold mb-4 text-white">League-Wide Performance Index</h3>
+<div id="team-comparison-3d" class="viz-container"></div>
+<div class="mt-4 grid grid-cols-2 gap-4">
+<div class="text-center">
+<p class="text-sm text-slate-400">MLB Leaders</p>
+<p class="text-2xl font-bold text-orange-500">94.8%</p>
+</div>
+<div class="text-center">
+<p class="text-sm text-slate-400">NFL Leaders</p>
+<p class="text-2xl font-bold text-cyan-400">91.2%</p>
+</div>
+<div class="text-center">
+<p class="text-sm text-slate-400">NBA Leaders</p>
+<p class="text-2xl font-bold text-purple-400">93.7%</p>
+</div>
+<div class="text-center">
+<p class="text-sm text-slate-400">NCAA Leaders</p>
+<p class="text-2xl font-bold text-green-400">89.3%</p>
+</div>
+</div>
+</div>
+
+<div class="viz-card">
+<h3 class="text-xl font-semibold mb-4 text-white">Multi-Dimensional Analysis</h3>
+<div id="performance-sphere-3d" class="viz-container"></div>
+<div class="mt-4">
+<p class="text-sm text-slate-400">Analyzing 15 performance dimensions across all teams</p>
+</div>
+</div>
+</div>
+</section>
+
+<div class="glass-card p-6 text-center">
+<i data-lucide="trending-up" class="w-8 h-8 mx-auto mb-4 text-green-400"></i>
+<p class="text-sm text-slate-400 mb-2">Win Probability</p>
+<p class="stat-value">87.3%</p>
+<p class="text-xs text-green-400 mt-2">↑ 3.2% from last week</p>
+</div>
+
+<div class="glass-card p-6 text-center">
+<i data-lucide="zap" class="w-8 h-8 mx-auto mb-4 text-orange-400"></i>
+<p class="text-sm text-slate-400 mb-2">Decision Velocity</p>
+<p class="stat-value">0.47s</p>
+<p class="text-xs text-orange-400 mt-2">Elite Tier</p>
+</div>
+
+<section class="mb-12">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-400">
+Proprietary Sports Intelligence™
+</h2>
+<div class="bg-gradient-to-r from-orange-500 to-amber-400 text-black px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide">
+Blaze Exclusive
+</div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+</div>
+<div class="text-sm text-slate-400 mb-3">Character traits that predict championship performance</div>
+<div class="grid grid-cols-2 gap-4 text-xs">
+<div class="text-center">
+<div class="text-orange-400 font-bold text-lg" id="grit-score">87%</div>
+<div class="text-slate-500">Grit Index</div>
+</div>
+<div class="text-center">
+<div class="text-cyan-400 font-bold text-lg" id="clutch-dna">92%</div>
+<div class="text-slate-500">Clutch DNA</div>
+</div>
+</div>
+<a href="/unique-insights-showcase.html" class="mt-4 text-xs text-orange-400 hover:text-orange-300 transition-colors">
+View Full Analysis →
+</a>
+</div>
+
+</div>
+<div class="text-sm text-slate-400 mb-3">Cognitive processing speed analysis</div>
+<div class="grid grid-cols-2 gap-4 text-xs">
+<div class="text-center">
+<div class="text-teal-400 font-bold text-lg" id="neural-speed">183ms</div>
+<div class="text-slate-500">Processing Time</div>
+</div>
+<div class="text-center">
+<div class="text-blue-400 font-bold text-lg" id="decision-accuracy">94%</div>
+<div class="text-slate-500">Accuracy</div>
+</div>
+</div>
+<a href="/unique-insights-showcase.html" class="mt-4 text-xs text-teal-400 hover:text-teal-300 transition-colors">
+View Neural Map →
+</a>
+</div>
+
+</div>
+<div class="text-sm text-slate-400 mb-3">Dynasty trajectory prediction</div>
+<div class="grid grid-cols-2 gap-4 text-xs">
+<div class="text-center">
+<div class="text-blue-400 font-bold text-lg" id="momentum-score">78%</div>
+<div class="text-slate-500">Current Momentum</div>
+</div>
+<div class="text-center">
+<div class="text-purple-400 font-bold text-lg" id="championship-prob">67%</div>
+<div class="text-slate-500">Title Probability</div>
+</div>
+</div>
+<a href="/unique-insights-showcase.html" class="mt-4 text-xs text-blue-400 hover:text-blue-300 transition-colors">
+View Wave Analysis →
+</a>
+</div>
+</div>
+
+<section class="mb-12">
+<h2 class="text-3xl font-bold mb-8 text-cyan-400">Performance Trends</h2>
+
+<div class="dashboard-grid">
+<div class="viz-card">
+<h3 class="text-xl font-semibold mb-4 text-white">Team Capabilities</h3>
+<div class="chart-container">
+<canvas id="radarChart"></canvas>
+</div>
+</div>
+</div>
+</section>
+

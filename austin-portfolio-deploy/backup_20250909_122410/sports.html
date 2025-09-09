@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Intelligence Hub • Blaze Intelligence</title>
+    <meta name="description" content="Comprehensive sports analytics and intelligence across MLB, NFL, NBA, and College Sports - powered by advanced data science and performance optimization.">
+    <link rel="canonical" href="https://blaze-intelligence.pages.dev/sports">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Sports Intelligence Hub • Blaze Intelligence">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Comprehensive sports analytics and intelligence across MLB, NFL, NBA, and College Sports">
+    <meta property="og:image" content="https://blaze-intelligence.pages.dev/assets/og-sports-hub.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'burnt-orange': {
+                            '500': '#BF5700',
+                            '600': '#A0522D',
+                        },
+                        'neon': {
+                            'blue': '#00FFFF',
+                            'green': '#00FF00',
+                            'orange': '#FF8C00',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e2e8f0;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .neon-text {
+            background: linear-gradient(135deg, #FF8C00 0%, #BF5700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .lab-card {
+            transition: all 0.3s ease;
+        }
+        .lab-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 140, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(255, 140, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="text-2xl font-bold neon-text">BLAZE INTELLIGENCE</a>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="/solutions" class="text-slate-300 hover:text-white transition-colors">Solutions</a>
+                    <a href="/sports" class="text-white font-medium">Sports</a>
+                    <a href="/analytics-dashboard" class="text-slate-300 hover:text-white transition-colors">Analytics</a>
+                    <a href="/blog" class="text-slate-300 hover:text-white transition-colors">Insights</a>
+                    <a href="/pricing" class="text-slate-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="/contact" class="text-slate-300 hover:text-white transition-colors">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-orange-600/10 via-slate-900 to-blue-900/10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                    Sports Intelligence
+                    <span class="neon-text">Hub</span>
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Comprehensive analytics and performance optimization across professional and collegiate sports. 
+                    Where cognitive performance meets quarterly performance.
+                </p>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row gap-4 items-center">
+                        <div class="flex-1">
+                            <input type="text" id="searchInput" 
+                                placeholder="Search teams, players, insights..." 
+                                class="w-full bg-slate-800/50 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:border-orange-500 focus:outline-none">
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="labs">Priority Labs</button>
+                            <button class="filter-btn" data-filter="mlb">MLB</button>
+                            <button class="filter-btn" data-filter="nfl">NFL</button>
+                            <button class="filter-btn" data-filter="nba">NBA</button>
+                            <button class="filter-btn" data-filter="ncaa">NCAA</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Priority Labs Section -->
+    <section class="py-16" id="priority-labs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">Priority Analytics Labs</h2>
+                <p class="text-lg text-slate-300">Our flagship team intelligence platforms with real-time analytics and comprehensive insights</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Cardinals Lab -->
+                <div class="lab-card glass-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-red-500/10 rounded-full -mr-10 -mt-10"></div>
+                    <div class="relative">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-red-400 font-bold text-lg">STL</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Cardinals</h3>
+                                <p class="text-sm text-slate-400">MLB Analytics Lab</p>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-slate-400">Readiness Score</span>
+                                <span class="text-sm font-bold text-green-400">86.6</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-green-400 h-2 rounded-full" style="width: 86.6%"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs mb-4">
+                            <div class="text-center">
+                                <div class="text-slate-400">Offense</div>
+                                <div class="text-white font-bold">87.1</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-slate-400">Defense</div>
+                                <div class="text-white font-bold">88.5</div>
+                            </div>
+                        </div>
+                        <a href="/sports/baseball/mlb/cardinals" class="block w-full bg-red-500/20 hover:bg-red-500/30 text-red-400 font-medium py-2 px-4 rounded-lg text-center transition-colors">
+                            View Cardinals Lab →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Titans Lab -->
+                <div class="lab-card glass-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-blue-500/10 rounded-full -mr-10 -mt-10"></div>
+                    <div class="relative">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-blue-400 font-bold text-lg">TEN</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Titans</h3>
+                                <p class="text-sm text-slate-400">NFL Analytics Lab</p>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-slate-400">EPA/Play</span>
+                                <span class="text-sm font-bold text-blue-400">+0.12</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-blue-400 h-2 rounded-full" style="width: 67%"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs mb-4">
+                            <div class="text-center">
+                                <div class="text-slate-400">DVOA</div>
+                                <div class="text-white font-bold">8.2%</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-slate-400">Win Prob</div>
+                                <div class="text-white font-bold">73%</div>
+                            </div>
+                        </div>
+                        <a href="/sports/football/nfl/titans" class="block w-full bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 font-medium py-2 px-4 rounded-lg text-center transition-colors">
+                            View Titans Lab →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Longhorns Lab -->
+                <div class="lab-card glass-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-orange-500/10 rounded-full -mr-10 -mt-10"></div>
+                    <div class="relative">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-orange-400 font-bold text-lg">TEX</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Longhorns</h3>
+                                <p class="text-sm text-slate-400">NCAA Analytics Lab</p>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-slate-400">SP+ Rating</span>
+                                <span class="text-sm font-bold text-orange-400">18.4</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-orange-400 h-2 rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs mb-4">
+                            <div class="text-center">
+                                <div class="text-slate-400">Recruiting</div>
+                                <div class="text-white font-bold">#3</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-slate-400">NIL Value</div>
+                                <div class="text-white font-bold">$2.3M</div>
+                            </div>
+                        </div>
+                        <a href="/sports/football/ncaa/longhorns" class="block w-full bg-orange-500/20 hover:bg-orange-500/30 text-orange-400 font-medium py-2 px-4 rounded-lg text-center transition-colors">
+                            View Longhorns Lab →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Grizzlies Lab -->
+                <div class="lab-card glass-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-cyan-500/10 rounded-full -mr-10 -mt-10"></div>
+                    <div class="relative">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-cyan-400 font-bold text-lg">MEM</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white">Grizzlies</h3>
+                                <p class="text-sm text-slate-400">NBA Analytics Lab</p>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-slate-400">Grit Index</span>
+                                <span class="text-sm font-bold text-cyan-400">94.2</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-cyan-400 h-2 rounded-full" style="width: 94%"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs mb-4">
+                            <div class="text-center">
+                                <div class="text-slate-400">Net Rating</div>
+                                <div class="text-white font-bold">+8.4</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-slate-400">Pace</div>
+                                <div class="text-white font-bold">102.1</div>
+                            </div>
+                        </div>
+                        <a href="/sports/basketball/nba/grizzlies" class="block w-full bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 font-medium py-2 px-4 rounded-lg text-center transition-colors">
+                            View Grizzlies Lab →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- League Directories -->
+    <section class="py-16 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">League Directories</h2>
+                <p class="text-lg text-slate-300">Comprehensive analytics across all major sports leagues</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- MLB -->
+                <a href="/sports/baseball/mlb" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-all duration-300 group">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-red-500/30 transition-colors">
+                            <svg class="w-8 h-8 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 7c-1.5 0-3 .5-4 1.5L6.5 7c1.5-1.5 3.5-2 5.5-2s4 .5 5.5 2L16 8.5c-1-1-2.5-1.5-4-1.5z" fill="#0a0a0a"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Major League Baseball</h3>
+                        <p class="text-slate-400 text-sm mb-4">30 teams • Advanced metrics • Sabermetrics</p>
+                        <div class="flex justify-center space-x-4 text-xs">
+                            <div><span class="text-slate-500">WAR</span> <span class="text-white">8.4</span></div>
+                            <div><span class="text-slate-500">OPS+</span> <span class="text-white">128</span></div>
+                            <div><span class="text-slate-500">FIP</span> <span class="text-white">3.21</span></div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- NFL -->
+                <a href="/sports/football/nfl" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-all duration-300 group">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500/30 transition-colors">
+                            <svg class="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                                <ellipse cx="12" cy="12" rx="10" ry="6"/>
+                                <path d="M12 6c-4 0-8 2-8 6s4 6 8 6 8-2 8-6-4-6-8-6zm0 10c-2 0-4-1-4-4s2-4 4-4 4 1 4 4-2 4-4 4z" fill="#0a0a0a"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">National Football League</h3>
+                        <p class="text-slate-400 text-sm mb-4">32 teams • EPA/Play • Advanced analytics</p>
+                        <div class="flex justify-center space-x-4 text-xs">
+                            <div><span class="text-slate-500">EPA</span> <span class="text-white">+0.08</span></div>
+                            <div><span class="text-slate-500">DVOA</span> <span class="text-white">12.4%</span></div>
+                            <div><span class="text-slate-500">PFF</span> <span class="text-white">78.2</span></div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- NBA -->
+                <a href="/sports/basketball/nba" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-all duration-300 group">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-500/30 transition-colors">
+                            <svg class="w-8 h-8 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 2c1.5 0 3 .5 4 1.5v17c-1 1-2.5 1.5-4 1.5s-3-.5-4-1.5V3.5c1-1 2.5-1.5 4-1.5z" fill="#0a0a0a"/>
+                                <path d="M2 12c0-1.5.5-3 1.5-4h17c1 1 1.5 2.5 1.5 4s-.5 3-1.5 4h-17c-1-1-1.5-2.5-1.5-4z" fill="#0a0a0a"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">National Basketball Association</h3>
+                        <p class="text-slate-400 text-sm mb-4">30 teams • Advanced stats • Player tracking</p>
+                        <div class="flex justify-center space-x-4 text-xs">
+                            <div><span class="text-slate-500">PER</span> <span class="text-white">18.4</span></div>
+                            <div><span class="text-slate-500">BPM</span> <span class="text-white">+4.2</span></div>
+                            <div><span class="text-slate-500">TS%</span> <span class="text-white">58.7</span></div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- NCAA -->
+                <a href="/sports/college" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-all duration-300 group">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500/30 transition-colors">
+                            <svg class="w-8 h-8 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l10 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V6l10-4z"/>
+                                <text x="12" y="16" text-anchor="middle" class="text-xs font-bold" fill="#0a0a0a">NCAA</text>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">College Sports</h3>
+                        <p class="text-slate-400 text-sm mb-4">350+ teams • NIL analytics • Recruiting intel</p>
+                        <div class="flex justify-center space-x-4 text-xs">
+                            <div><span class="text-slate-500">SP+</span> <span class="text-white">14.2</span></div>
+                            <div><span class="text-slate-500">NIL</span> <span class="text-white">$1.8M</span></div>
+                            <div><span class="text-slate-500">Rank</span> <span class="text-white">#12</span></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Hub Preview -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">Intelligence Resources</h2>
+                <p class="text-lg text-slate-300">Datasets, frameworks, and analytical tools for competitive advantage</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <a href="/data" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-colors">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.58 4 8 4s8-1.79 8-4M4 7c0-2.21 3.58-4 8-4s8 1.79 8 4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Live Datasets</h3>
+                        <p class="text-slate-400 text-sm">Real-time sports data, performance metrics, and analytical datasets</p>
+                    </div>
+                </a>
+
+                <a href="/frameworks" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-colors">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Intelligence Frameworks</h3>
+                        <p class="text-slate-400 text-sm">Proprietary models and analytical frameworks for competitive intelligence</p>
+                    </div>
+                </a>
+
+                <a href="/blog" class="glass-card p-6 rounded-2xl hover:border-orange-500/50 transition-colors">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Strategic Insights</h3>
+                        <p class="text-slate-400 text-sm">In-depth analysis, case studies, and performance intelligence reports</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black/50 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <div class="text-2xl font-bold neon-text mb-2">BLAZE INTELLIGENCE</div>
+                    <div class="text-slate-400">Where cognitive performance meets quarterly performance.</div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://x.com/BISportsIntel" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-orange-400 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <div class="text-slate-500 text-sm">© 2025 Blaze Intelligence</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .filter-btn {
+            @apply px-4 py-2 bg-slate-800/50 text-slate-400 rounded-lg text-sm font-medium transition-colors border border-slate-600;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            @apply bg-orange-500/20 text-orange-400 border-orange-500/50;
+        }
+    </style>
+
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const sections = document.querySelectorAll('section[id]');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    
+                    if (filter === 'all') {
+                        sections.forEach(s => s.style.display = 'block');
+                    } else if (filter === 'labs') {
+                        sections.forEach(s => {
+                            s.style.display = s.id === 'priority-labs' ? 'block' : 'none';
+                        });
+                    }
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                // Implement search logic here
+                console.log('Searching for:', query);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-28T07:48:54.478Z",
+  "team": "Los Angeles Dodgers",
+  "league": "MLB",
+  "division": "NL West",
+  "season": "2025",
+  "market_size": "major",
+  "readiness": {
+    "overall": 90.7,
+    "offense": 90.9,
+    "defense": 89.9,
+    "pitching": 88,
+    "baserunning": 90.2
+  },
+  "leverage": {
+    "current": 1.81,
+    "trend": "stable",
+    "market_factors": [
+      {
+        "type": "media_attention",
+        "impact": 0.8
+      },
+      {
+        "type": "sponsorship_opportunities",
+        "impact": 0.9
+      },
+      {
+        "type": "fan_base_size",
+        "impact": 0.7
+      }
+    ]
+  },
+  "performance_indicators": {
+    "wins_above_replacement": 17.3,
+    "run_differential": 64,
+    "pythagorean_wins": 87,
+    "strength_of_schedule": 0.558
+  },
+  "advanced_metrics": {
+    "offensive_war": 20.1,
+    "defensive_war": 18.9,
+    "pitching_war": 20.6,
+    "team_chemistry": 78
+  },
+  "metrics_count": 25,
+  "data_quality": {
+    "completeness": 95.56006352735591,
+    "accuracy": 94.86137750907707,
+    "freshness": 97.18867341475769
+  }
+}

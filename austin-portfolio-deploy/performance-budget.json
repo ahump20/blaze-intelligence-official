@@ -1,0 +1,90 @@
+{
+  "name": "Blaze Intelligence Performance Budget",
+  "version": "1.0.0",
+  "budgets": [
+    {
+      "path": "/*",
+      "name": "Global Budget",
+      "timings": {
+        "firstContentfulPaint": 1800,
+        "largestContentfulPaint": 2500,
+        "firstInputDelay": 100,
+        "timeToInteractive": 3800,
+        "totalBlockingTime": 200,
+        "cumulativeLayoutShift": 0.1,
+        "speedIndex": 3400
+      },
+      "resourceSizes": {
+        "script": 350,
+        "style": 150,
+        "image": 1000,
+        "font": 100,
+        "document": 25,
+        "other": 100,
+        "total": 1725
+      },
+      "resourceCounts": {
+        "script": 10,
+        "style": 5,
+        "image": 20,
+        "font": 5,
+        "document": 1,
+        "other": 10,
+        "total": 51
+      }
+    },
+    {
+      "path": "/",
+      "name": "Homepage",
+      "timings": {
+        "firstContentfulPaint": 1500,
+        "largestContentfulPaint": 2000,
+        "timeToInteractive": 3000
+      },
+      "resourceSizes": {
+        "total": 1500
+      }
+    },
+    {
+      "path": "/demo.html",
+      "name": "Demo Page",
+      "timings": {
+        "firstContentfulPaint": 2000,
+        "largestContentfulPaint": 3000,
+        "timeToInteractive": 4000
+      },
+      "resourceSizes": {
+        "script": 500,
+        "total": 2000
+      }
+    },
+    {
+      "path": "/api/*",
+      "name": "API Endpoints",
+      "timings": {
+        "serverResponseTime": 100,
+        "totalTime": 500
+      },
+      "resourceSizes": {
+        "total": 50
+      }
+    }
+  ],
+  "lighthouse": {
+    "performance": 90,
+    "accessibility": 95,
+    "bestPractices": 95,
+    "seo": 100,
+    "pwa": 80
+  },
+  "assertions": {
+    "console": {
+      "error": 0,
+      "warning": 5
+    },
+    "network": {
+      "failedRequests": 0,
+      "slowRequests": 5
+    }
+  }
+}

@@ -1,0 +1,306 @@
+{
+  "workflows": [
+    {
+      "workflowName": "New Lead Welcome & Qualification",
+      "workflowId": "new_lead_qualification",
+      "description": "Automated welcome sequence and initial qualification for new leads",
+      "trigger": {
+        "type": "form_submission",
+        "criteria": "Any form submission on blaze-intelligence.com"
+      },
+      "enrollment": {
+        "triggers": ["form_submission", "list_addition", "manual_enrollment"],
+        "reenrollment": false
+      },
+      "actions": [
+        {
+          "delay": "immediate",
+          "type": "send_email",
+          "template": "welcome_new_lead",
+          "subject": "Welcome to Blaze Intelligence - Your Analytics Game Changer",
+          "personalization": {
+            "sender_name": "Austin Humphrey",
+            "sender_email": "ahump20@outlook.com",
+            "sender_signature": "Austin Humphrey\\nFounder, Blaze Intelligence\\n(210) 273-5538"
+          }
+        },
+        {
+          "delay": "2 hours",
+          "type": "internal_notification",
+          "action": "create_task",
+          "assignee": "Austin Humphrey",
+          "task_title": "New Lead: Follow up within 24 hours",
+          "priority": "high"
+        },
+        {
+          "delay": "1 day",
+          "type": "conditional_branch",
+          "condition": "has_not_been_contacted",
+          "true_action": {
+            "type": "send_email",
+            "template": "follow_up_day_1",
+            "subject": "Quick question about your analytics needs"
+          }
+        },
+        {
+          "delay": "3 days",
+          "type": "update_property",
+          "property": "qualification_status",
+          "value": "needs_follow_up"
+        }
+      ]
+    },
+    {
+      "workflowName": "Hot Lead Fast Track",
+      "workflowId": "hot_lead_fasttrack",
+      "description": "Expedited workflow for high-scoring leads",
+      "trigger": {
+        "type": "property_change",
+        "property": "blaze_lead_score",
+        "operator": "greater_than_or_equal",
+        "value": 75
+      },
+      "actions": [
+        {
+          "delay": "immediate",
+          "type": "internal_notification",
+          "action": "slack_notification",
+          "message": "🔥 HOT LEAD ALERT: {{contact.firstname}} {{contact.lastname}} from {{company.name}} scored {{contact.blaze_lead_score}} points!"
+        },
+        {
+          "delay": "30 minutes",
+          "type": "send_email",
+          "template": "hot_lead_priority_outreach",
+          "subject": "{{contact.firstname}} - Priority Analytics Consultation Available"
+        },
+        {
+          "delay": "2 hours",
+          "type": "create_task",
+          "assignee": "Austin Humphrey",
+          "task_title": "HOT LEAD: Schedule demo call with {{contact.firstname}} {{contact.lastname}}",
+          "priority": "urgent",
+          "due_date": "1 day"
+        }
+      ]
+    },
+    {
+      "workflowName": "Demo Scheduled Follow-Up",
+      "workflowId": "demo_scheduled_workflow",
+      "description": "Pre and post-demo automation sequence",
+      "trigger": {
+        "type": "meeting_scheduled",
+        "meeting_type": "demo"
+      },
+      "actions": [
+        {
+          "delay": "1 day before meeting",
+          "type": "send_email",
+          "template": "demo_reminder_preparation",
+          "subject": "Tomorrow's Demo - What to Expect & How to Prepare"
+        },
+        {
+          "delay": "2 hours after meeting",
+          "type": "conditional_branch",
+          "condition": "meeting_outcome_positive",
+          "true_action": {
+            "type": "send_email",
+            "template": "demo_follow_up_positive",
+            "subject": "Great demo today - Your custom analytics preview"
+          },
+          "false_action": {
+            "type": "send_email",
+            "template": "demo_follow_up_neutral",
+            "subject": "Following up on today's discussion"
+          }
+        },
+        {
+          "delay": "1 day after meeting",
+          "type": "create_task",
+          "assignee": "Austin Humphrey",
+          "task_title": "Send demo recap and next steps to {{contact.firstname}}"
+        }
+      ]
+    },
+    {
+      "workflowName": "Proposal Sent Nurture",
+      "workflowId": "proposal_nurture",
+      "description": "Follow-up sequence after proposal submission",
+      "trigger": {
+        "type": "deal_stage_change",
+        "stage": "proposal"
+      },
+      "actions": [
+        {
+          "delay": "immediate",
+          "type": "send_email",
+          "template": "proposal_submitted",
+          "subject": "Your Blaze Intelligence Proposal - Next Steps"
+        },
+        {
+          "delay": "3 days",
+          "type": "send_email",
+          "template": "proposal_value_reinforcement",
+          "subject": "The ROI behind your 67-80% cost savings"
+        },
+        {
+          "delay": "7 days",
+          "type": "create_task",
+          "assignee": "Austin Humphrey",
+          "task_title": "Follow up on proposal with {{contact.firstname}} - Check for questions",
+          "priority": "high"
+        },
+        {
+          "delay": "14 days",
+          "type": "conditional_branch",
+          "condition": "no_response_to_proposal",
+          "true_action": {
+            "type": "send_email",
+            "template": "proposal_check_in",
+            "subject": "Checking in on your analytics decision"
+          }
+        }
+      ]
+    },
+    {
+      "workflowName": "Cold Lead Nurture Campaign",
+      "workflowId": "cold_lead_nurture",
+      "description": "Long-term nurture for lower-scoring prospects",
+      "trigger": {
+        "type": "property_value",
+        "property": "qualification_status",
+        "value": "cold_lead"
+      },
+      "actions": [
+        {
+          "delay": "1 week",
+          "type": "send_email",
+          "template": "educational_content_1",
+          "subject": "How the Cardinals use AI to gain competitive edge"
+        },
+        {
+          "delay": "2 weeks",
+          "type": "send_email",
+          "template": "case_study_share",
+          "subject": "Case Study: 94.6% accuracy in player performance prediction"
+        },
+        {
+          "delay": "1 month",
+          "type": "send_email",
+          "template": "industry_insights",
+          "subject": "Sports Analytics Trends Report - Q4 2025"
+        },
+        {
+          "delay": "6 weeks",
+          "type": "send_email",
+          "template": "re_engagement_offer",
+          "subject": "Exclusive: Free analytics assessment for your team"
+        }
+      ]
+    },
+    {
+      "workflowName": "Won Deal Onboarding",
+      "workflowId": "won_deal_onboarding",
+      "description": "Client onboarding and success workflow",
+      "trigger": {
+        "type": "deal_stage_change",
+        "stage": "won"
+      },
+      "actions": [
+        {
+          "delay": "immediate",
+          "type": "send_email",
+          "template": "welcome_new_client",
+          "subject": "🏆 Welcome to Championship Analytics - Let's Get Started!"
+        },
+        {
+          "delay": "1 hour",
+          "type": "create_multiple_tasks",
+          "tasks": [
+            {
+              "title": "Set up client workspace and access",
+              "assignee": "Austin Humphrey",
+              "priority": "urgent",
+              "due_date": "2 days"
+            },
+            {
+              "title": "Schedule kickoff call with {{contact.firstname}}",
+              "assignee": "Austin Humphrey",
+              "priority": "high",
+              "due_date": "3 days"
+            },
+            {
+              "title": "Prepare custom analytics dashboard",
+              "assignee": "Austin Humphrey",
+              "priority": "high",
+              "due_date": "5 days"
+            }
+          ]
+        },
+        {
+          "delay": "3 days",
+          "type": "send_email",
+          "template": "onboarding_checklist",
+          "subject": "Your Blaze Intelligence Implementation Checklist"
+        },
+        {
+          "delay": "1 week",
+          "type": "send_email",
+          "template": "first_week_check_in",
+          "subject": "How are your first insights from Blaze Intelligence?"
+        },
+        {
+          "delay": "30 days",
+          "type": "create_task",
+          "assignee": "Austin Humphrey",
+          "task_title": "30-day success review with {{company.name}}",
+          "priority": "medium"
+        }
+      ]
+    },
+    {
+      "workflowName": "Lost Deal Recovery",
+      "workflowId": "lost_deal_recovery",
+      "description": "Re-engagement workflow for lost opportunities",
+      "trigger": {
+        "type": "deal_stage_change",
+        "stage": "closed_lost"
+      },
+      "actions": [
+        {
+          "delay": "1 day",
+          "type": "send_email",
+          "template": "lost_deal_feedback",
+          "subject": "Quick feedback on our analytics consultation"
+        },
+        {
+          "delay": "3 months",
+          "type": "conditional_branch",
+          "condition": "lost_reason_not_budget",
+          "true_action": {
+            "type": "send_email",
+            "template": "re_engagement_3_months",
+            "subject": "New developments in sports analytics you should know about"
+          }
+        },
+        {
+          "delay": "6 months",
+          "type": "create_task",
+          "assignee": "Austin Humphrey",
+          "task_title": "Re-evaluate opportunity with {{company.name}} - circumstances may have changed"
+        }
+      ]
+    }
+  ],
+  "emailTemplates": [
+    {
+      "templateId": "welcome_new_lead",
+      "subject": "Welcome to Blaze Intelligence - Your Analytics Game Changer",
+      "content": "Hi {{contact.firstname}},\\n\\nThanks for your interest in Blaze Intelligence! I'm Austin Humphrey, founder and your direct contact for championship-level sports analytics.\\n\\nI noticed you're with {{company.name}} - I'd love to learn more about your current analytics setup and how we can help you gain that competitive edge.\\n\\nHere's what makes us different:\\n• 67-80% cost savings vs competitors\\n• 94.6% accuracy with <100ms latency\\n• Vision AI with micro-expression analysis\\n• Real-time readiness tracking\\n\\nI'll follow up personally within 24 hours to discuss your specific needs.\\n\\nTalk soon,\\nAustin"
+    },
+    {
+      "templateId": "hot_lead_priority_outreach",
+      "subject": "{{contact.firstname}} - Priority Analytics Consultation Available",
+      "content": "{{contact.firstname}},\\n\\nBased on your organization profile and analytics needs, you qualify for our priority consultation program.\\n\\nI'm personally reaching out because {{company.name}} fits perfectly with our championship-level clients who are seeing 67-80% cost savings and dramatic performance improvements.\\n\\nI have a 30-minute slot available this week for a custom analytics preview specifically for {{company.name}}.\\n\\nInterested in seeing what championship analytics looks like?\\n\\nBest,\\nAustin Humphrey\\n(210) 273-5538"
+    }
+  ]
+}

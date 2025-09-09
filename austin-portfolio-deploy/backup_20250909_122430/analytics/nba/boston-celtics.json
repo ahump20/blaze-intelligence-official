@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-28T07:48:54.481Z",
+  "team": "Boston Celtics",
+  "league": "NBA",
+  "division": "Atlantic",
+  "conference": "Eastern",
+  "season": "2024-25",
+  "readiness": {
+    "overall": 97.2,
+    "offense": 98.7,
+    "defense": 94.9,
+    "rebounding": 100,
+    "depth": 99.8
+  },
+  "leverage": {
+    "current": 3.3,
+    "trend": "increasing",
+    "championship_odds": 0.149
+  },
+  "efficiency_metrics": {
+    "offensive_rating": 116.2,
+    "defensive_rating": 106.6,
+    "net_rating": -8.1,
+    "pace": 107.4
+  },
+  "advanced_stats": {
+    "effective_fg_percentage": 52.8,
+    "turnover_rate": 16.4,
+    "offensive_rebound_rate": 29.2,
+    "free_throw_rate": 19.1
+  },
+  "metrics_count": 28
+}

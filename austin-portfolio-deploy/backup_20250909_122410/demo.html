@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Demo | Blaze Intelligence - Experience Championship Intelligence</title>
+    <meta name="description" content="Interactive demonstration of the Blaze Intelligence Platform. Experience real-time analytics, vision AI, and championship intelligence in action.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/enhanced-charts.js" defer></script>
+    
+    <!-- Blaze Intelligence Live Data Integration -->
+    <script src="js/r2-integration.js" defer></script>
+    <script src="js/cardinals-readiness-board.js" defer></script>
+    
+    <style>
+        body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .demo-card { background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 1rem; padding: 1.5rem; }
+        .feature-locked { opacity: 0.5; position: relative; }
+        .feature-locked::after { content: '🔒 Upgrade to unlock'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; }
+        .demo-banner { background: linear-gradient(90deg, #FF8C00, #BF5700); padding: 0.75rem; text-align: center; font-weight: bold; }
+        .metric-live { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    </style>
+    
+    <!-- Analytics & Testing -->
+    <script src="js/analytics-config.js"></script>
+    <script src="js/ab-testing.js" defer></script>
+    <script src="js/sentry-config.js"></script>
+</head>
+<body>
+    <!-- Demo Mode Banner -->
+    <div class="demo-banner">
+        🎮 DEMO MODE - Exploring as St. Louis Cardinals | <a href="/contact.html" class="underline">Unlock Full Access</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-black/50 backdrop-blur-lg border-b border-slate-800 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+            <div class="flex items-center gap-6">
+                <span class="text-sm text-slate-400">Demo User</span>
+                <a href="/contact.html" class="px-4 py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600">
+                    Get Full Access
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Demo Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-black mb-2">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">
+                    CARDINALS COMMAND CENTER
+                </span>
+            </h1>
+            <p class="text-slate-400">Live demo with 2024-2025 season data</p>
+        </div>
+
+        <!-- Key Metrics Grid -->
+        <div class="grid md:grid-cols-4 gap-4 mb-8">
+            <div class="demo-card text-center">
+                <div class="text-3xl font-bold text-cyan-400 metric-live">86.6%</div>
+                <div class="text-sm text-slate-400">Team Readiness</div>
+                <div class="text-xs text-green-400 mt-1">↑ 3.2% from yesterday</div>
+            </div>
+            <div class="demo-card text-center">
+                <div class="text-3xl font-bold text-orange-400 metric-live">2.85x</div>
+                <div class="text-sm text-slate-400">Leverage Factor</div>
+                <div class="text-xs text-yellow-400 mt-1">High pressure situation</div>
+            </div>
+            <div class="demo-card text-center">
+                <div class="text-3xl font-bold text-green-400">73.2%</div>
+                <div class="text-sm text-slate-400">Win Probability</div>
+                <div class="text-xs text-green-400 mt-1">vs. Cubs tonight</div>
+            </div>
+            <div class="demo-card text-center">
+                <div class="text-3xl font-bold text-red-400">+12</div>
+                <div class="text-sm text-slate-400">Momentum Index</div>
+                <div class="text-xs text-slate-500 mt-1">Last 10 games</div>
+            </div>
+        </div>
+
+        <!-- Interactive Features -->
+        <div class="grid lg:grid-cols-2 gap-8 mb-8">
+            <!-- Lineup Optimizer (Active) -->
+            <div class="demo-card">
+                <h2 class="text-xl font-bold text-cyan-400 mb-4">📊 Lineup Optimizer</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
+                        <span>1. Nolan Arenado (3B)</span>
+                        <span class="text-green-400">OPS: .887</span>
+                    </div>
+                    <div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
+                        <span>2. Paul Goldschmidt (1B)</span>
+                        <span class="text-green-400">OPS: .748</span>
+                    </div>
+                    <div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
+                        <span>3. Nolan Gorman (2B)</span>
+                        <span class="text-yellow-400">OPS: .756</span>
+                    </div>
+                    <div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
+                        <span>4. Tyler O'Neill (LF)</span>
+                        <span class="text-yellow-400">OPS: .798</span>
+                    </div>
+                </div>
+                <button class="mt-4 w-full px-4 py-2 bg-cyan-500 text-white font-semibold rounded hover:bg-cyan-600">
+                    Optimize Lineup →
+                </button>
+            </div>
+
+            <!-- Injury Risk Assessment (Locked) -->
+            <div class="demo-card feature-locked">
+                <h2 class="text-xl font-bold text-orange-400 mb-4">🏥 Injury Risk Assessment</h2>
+                <div class="space-y-3 blur-sm">
+                    <div class="p-2 bg-slate-800/50 rounded">
+                        <div class="flex justify-between">
+                            <span>Player Name</span>
+                            <span class="text-red-400">Risk: High</span>
+                        </div>
+                    </div>
+                    <div class="p-2 bg-slate-800/50 rounded">
+                        <div class="flex justify-between">
+                            <span>Player Name</span>
+                            <span class="text-yellow-400">Risk: Medium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Chart -->
+        <div class="demo-card mb-8">
+            <h2 class="text-xl font-bold text-cyan-400 mb-4">📈 Season Performance Trend</h2>
+            <div id="performance-chart" style="height: 300px; position: relative;">
+                <!-- Chart will be rendered here -->
+            </div>
+        </div>
+
+        <!-- Feature Comparison -->
+        <div class="demo-card mb-8">
+            <h2 class="text-xl font-bold text-orange-400 mb-4">🎯 Demo vs Full Access</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-green-400 mb-3">✅ Available in Demo</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>• Basic lineup optimization</li>
+                        <li>• Team readiness metrics</li>
+                        <li>• Win probability calculator</li>
+                        <li>• Historical performance data</li>
+                        <li>• Basic player statistics</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-cyan-400 mb-3">🔒 Full Access Features</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>• Real-time injury risk AI</li>
+                        <li>• Advanced biomechanical analysis</li>
+                        <li>• Micro-expression detection</li>
+                        <li>• Custom alerts & notifications</li>
+                        <li>• API access for integration</li>
+                        <li>• Unlimited historical data</li>
+                        <li>• Export reports & insights</li>
+                        <li>• Priority support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="text-center p-8 bg-gradient-to-r from-orange-500/10 to-cyan-500/10 rounded-2xl border border-cyan-500/30">
+            <h2 class="text-3xl font-bold mb-4">Ready for Championship-Level Analytics?</h2>
+            <p class="text-slate-300 mb-6">Join teams using Blaze Intelligence to gain competitive advantage</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/contact.html" class="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600">
+                    Start 14-Day Free Trial
+                </a>
+                <a href="/savings-calculator.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                    Calculate Your Savings
+                </a>
+            </div>
+            <p class="text-sm text-slate-400 mt-4">No credit card required • Setup in 5 minutes</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Simulate live data updates
+            function updateMetrics() {
+                const readiness = document.querySelector('.metric-live');
+                if (readiness) {
+                    const current = parseFloat(readiness.textContent);
+                    const change = (Math.random() - 0.5) * 2;
+                    readiness.textContent = (current + change).toFixed(1) + '%';
+                }
+            }
+            
+            // Update every 5 seconds for demo effect
+            setInterval(updateMetrics, 5000);
+            
+            // Create performance chart
+            if (typeof enhancedCharts !== 'undefined') {
+                const chartData = [
+                    { label: 'Apr', value: 68, color: '#FF6B6B' },
+                    { label: 'May', value: 72, color: '#4ECDC4' },
+                    { label: 'Jun', value: 75, color: '#45B7D1' },
+                    { label: 'Jul', value: 71, color: '#FFA500' },
+                    { label: 'Aug', value: 78, color: '#95E1D3' },
+                    { label: 'Sep', value: 76, color: '#A8E6CF' }
+                ];
+                
+                enhancedCharts.createBarChart('performance-chart', chartData, {
+                    title: 'Monthly Win Rate %',
+                    benchmark: 50
+                });
+            }
+            
+            // Demo interactions
+            document.querySelector('button').addEventListener('click', function() {
+                alert('🎯 Lineup optimized! In full version, this would provide AI-powered recommendations based on matchups, fatigue, and performance trends.');
+            });
+            
+            // Track demo usage
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'demo_view', {
+                    'demo_type': 'cardinals_dashboard',
+                    'features_viewed': 'lineup_optimizer'
+                });
+            }
+        });
+    </script>
+</body>
+</html>

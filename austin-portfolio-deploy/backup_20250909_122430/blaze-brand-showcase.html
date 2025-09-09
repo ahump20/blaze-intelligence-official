@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Championship Brand Identity</title>
+    <link rel="stylesheet" href="brand-identity-system.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--blaze-font-primary);
+            background: var(--blaze-oil-black);
+        }
+        
+        .showcase-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--blaze-heritage-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .showcase-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(191, 87, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(135, 206, 235, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0, 106, 107, 0.1) 0%, transparent 50%);
+            animation: blaze-ambient-glow 8s ease-in-out infinite alternate;
+        }
+        
+        @keyframes blaze-ambient-glow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+        
+        .brand-hero-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+        
+        .brand-logo {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            font-family: var(--blaze-font-display);
+            background: var(--blaze-sunset-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .brand-tagline {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--blaze-cardinals-blue-light);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+        
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .color-swatch {
+            background: var(--blaze-pearl);
+            border-radius: var(--blaze-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--blaze-shadow-lg);
+            transition: transform 0.3s ease;
+        }
+        
+        .color-swatch:hover {
+            transform: translateY(-8px);
+        }
+        
+        .color-display {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        .color-info {
+            padding: 1.5rem;
+            background: var(--blaze-pearl);
+        }
+        
+        .color-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--blaze-oil-black);
+        }
+        
+        .color-description {
+            font-size: 0.9rem;
+            color: var(--blaze-charcoal);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .color-hex {
+            font-family: var(--blaze-font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--blaze-vancouver-teal);
+            background: var(--blaze-champagne);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--blaze-radius-sm);
+            display: inline-block;
+        }
+        
+        .brand-personality {
+            background: var(--blaze-pearl);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            border-radius: var(--blaze-radius-xl);
+        }
+        
+        .personality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .personality-trait {
+            background: var(--blaze-champagne);
+            padding: 2rem;
+            border-radius: var(--blaze-radius-lg);
+            border-left: 4px solid var(--blaze-burnt-orange);
+        }
+        
+        .trait-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--blaze-burnt-orange);
+            margin-bottom: 1rem;
+        }
+        
+        .trait-description {
+            color: var(--blaze-charcoal);
+            line-height: 1.6;
+        }
+        
+        .component-showcase {
+            padding: 4rem 2rem;
+            background: var(--blaze-oil-black);
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .demo-card {
+            background: var(--blaze-pearl);
+            padding: 2rem;
+            border-radius: var(--blaze-radius-lg);
+            box-shadow: var(--blaze-shadow-lg);
+        }
+        
+        .heritage-timeline {
+            background: var(--blaze-championship-gradient);
+            padding: 4rem 2rem;
+            color: var(--blaze-pearl);
+            text-align: center;
+        }
+        
+        .timeline-items {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--blaze-radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+        }
+        
+        .timeline-year {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-team {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-element {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .packaging-concept {
+            background: var(--blaze-pearl);
+            padding: 4rem 2rem;
+        }
+        
+        .package-mockup {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .package-item {
+            background: var(--blaze-champagne);
+            padding: 2rem;
+            border-radius: var(--blaze-radius-lg);
+            border: 2px solid var(--blaze-burnt-orange);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--blaze-sunset-gradient);
+        }
+        
+        .package-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--blaze-burnt-orange);
+            margin-bottom: 1rem;
+        }
+        
+        .package-description {
+            color: var(--blaze-charcoal);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body class="blaze-brand-valid">
+    <!-- Hero Section -->
+    <section class="showcase-hero">
+        <div class="brand-hero-content">
+            <h1 class="brand-logo">BLAZE INTELLIGENCE</h1>
+            <p class="brand-tagline">Where Texas Heritage Meets Championship Excellence</p>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <div class="blaze-heritage-badge">🏆 Championship DNA</div>
+                <div class="blaze-heritage-badge">🛢️ Oil Money Sophistication</div>
+                <div class="blaze-heritage-badge">🎯 Executive Precision</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Color Palette -->
+    <section style="background: var(--blaze-pearl); padding: 4rem 2rem;">
+        <div class="blaze-container">
+            <h2 class="blaze-h2" style="text-align: center; margin-bottom: 3rem;">Championship Color System</h2>
+            
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-display" style="background: var(--blaze-burnt-orange); color: var(--blaze-pearl);">
+                        TEXAS BURNT ORANGE
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Foundation</div>
+                        <div class="color-description">The bold confidence of Texas Longhorn heritage. Oil baron swagger meets championship determination.</div>
+                        <div class="color-hex">#BF5700</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="color-display" style="background: var(--blaze-cardinals-blue); color: var(--blaze-oil-black);">
+                        CARDINALS BLUE
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Championship Sophistication</div>
+                        <div class="color-description">Crisp as a perfect double-play turn. The refined elegance of dynasty-level excellence.</div>
+                        <div class="color-hex">#87CEEB</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="color-display" style="background: var(--blaze-vancouver-teal); color: var(--blaze-pearl);">
+                        VANCOUVER TEAL
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Heritage Depth</div>
+                        <div class="color-description">Memphis Grizzlies throwback nostalgia. Deep as championship trophies and oil wells.</div>
+                        <div class="color-hex">#006A6B</div>
+                    </div>
+                </div>
+                
+                <div class="color-swatch">
+                    <div class="color-display" style="background: var(--blaze-titans-columbia); color: var(--blaze-pearl);">
+                        TITANS COLUMBIA
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Classic Refinement</div>
+                        <div class="color-description">1998 Titans jersey nostalgia. The timeless blue of championship memories.</div>
+                        <div class="color-hex">#4B92DB</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Brand Personality -->
+    <section class="brand-personality">
+        <div class="blaze-container">
+            <h2 class="blaze-h2" style="text-align: center;">Brand DNA: Old Money Texas Meets Championship Legacy</h2>
+            
+            <div class="personality-grid">
+                <div class="personality-trait">
+                    <div class="trait-title">🛢️ Oil Baron Sophistication</div>
+                    <div class="trait-description">Not cowboy - aristocracy. Think Jerry Jones' suite level, not parking lot tailgate. Steinbrenner dynasty vibes with Texas swagger.</div>
+                </div>
+                
+                <div class="personality-trait">
+                    <div class="trait-title">🏆 Championship Pedigree</div>
+                    <div class="trait-description">Rings earned, not bought. The quiet confidence that comes from systematic excellence and proven results.</div>
+                </div>
+                
+                <div class="personality-trait">
+                    <div class="trait-title">⚖️ Unwavering Integrity</div>
+                    <div class="trait-description">Strong moral compass guides every decision. Integrity above all else - the foundation of lasting legacy.</div>
+                </div>
+                
+                <div class="personality-trait">
+                    <div class="trait-title">🎯 Executive Precision</div>
+                    <div class="trait-description">Every detail matters. Typography that graces Forbes covers and Sports Illustrated. Professional sophistication at every touchpoint.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Heritage Timeline -->
+    <section class="heritage-timeline">
+        <div class="blaze-container">
+            <h2 class="blaze-h2" style="color: var(--blaze-pearl); margin-bottom: 1rem;">Sports Heritage Inspiration</h2>
+            <p style="opacity: 0.9; font-size: 1.1rem;">Nostalgic elements without low-class ranch imagery</p>
+            
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-year">1998</div>
+                    <div class="timeline-team">Tennessee Oilers</div>
+                    <div class="timeline-element">Columbia Blue Nostalgia</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2001</div>
+                    <div class="timeline-team">Memphis Grizzlies</div>
+                    <div class="timeline-element">Vancouver Teal Throwback</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">Historic</div>
+                    <div class="timeline-team">St. Louis Cardinals</div>
+                    <div class="timeline-element">Baby Blue Excellence</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">Legacy</div>
+                    <div class="timeline-team">Texas Longhorns</div>
+                    <div class="timeline-element">Burnt Orange Foundation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Component Showcase -->
+    <section class="component-showcase">
+        <div class="blaze-container">
+            <h2 class="blaze-h2" style="color: var(--blaze-pearl); text-align: center; margin-bottom: 3rem;">Championship Components</h2>
+            
+            <div class="component-grid">
+                <div class="blaze-championship-card">
+                    <h3 class="blaze-h3">Executive Metrics</h3>
+                    <div class="blaze-metric-value">$47.3M</div>
+                    <div class="blaze-metric-label">Hidden Pipeline Value</div>
+                    <div class="executive-insight" style="margin-top: 1rem; padding: 1rem; background: rgba(0, 255, 100, 0.1); border-left: 3px solid var(--blaze-vancouver-teal); border-radius: var(--blaze-radius-sm);">
+                        Championship Impact: Dynasty-level talent acquisition
+                    </div>
+                </div>
+                
+                <div class="blaze-championship-card">
+                    <h3 class="blaze-h3">Brand Elements</h3>
+                    <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                        <button class="blaze-cta-primary">Primary Action</button>
+                        <button class="blaze-cta-secondary">Secondary</button>
+                    </div>
+                    <div class="blaze-heritage-badge">🏆 Championship Grade</div>
+                </div>
+                
+                <div class="blaze-championship-card">
+                    <h3 class="blaze-h3">Data Visualization</h3>
+                    <div class="blaze-data-visualization">
+                        <div style="height: 100px; background: var(--blaze-sunset-gradient); border-radius: var(--blaze-radius-md); display: flex; align-items: center; justify-content: center; color: var(--blaze-pearl); font-weight: 700;">
+                            Championship Analytics
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Packaging Concept -->
+    <section class="packaging-concept">
+        <div class="blaze-container">
+            <h2 class="blaze-h2" style="text-align: center; margin-bottom: 3rem;">Sophisticated Packaging Aesthetic</h2>
+            
+            <div class="package-mockup">
+                <div class="package-item">
+                    <div class="package-title">Executive Briefcase</div>
+                    <div class="package-description">Sleek leather portfolio with championship brand embossing. Oil money sophistication meets modern functionality.</div>
+                </div>
+                
+                <div class="package-item">
+                    <div class="package-title">Digital Platform</div>
+                    <div class="package-description">Clean interfaces with premium materials. Every pixel reflects championship-level attention to detail.</div>
+                </div>
+                
+                <div class="package-item">
+                    <div class="package-title">Presentation Decks</div>
+                    <div class="package-description">Executive-grade templates that command respect in any boardroom. Heritage colors with modern typography.</div>
+                </div>
+                
+                <div class="package-item">
+                    <div class="package-title">Brand Collateral</div>
+                    <div class="package-description">Business cards, letterhead, and signage that exude old money Texas confidence and championship pedigree.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final Brand Statement -->
+    <section style="background: var(--blaze-heritage-gradient); padding: 4rem 2rem; text-align: center; color: var(--blaze-pearl);">
+        <div class="blaze-container">
+            <h2 class="blaze-h2" style="color: var(--blaze-pearl);">This Is Championship Branding</h2>
+            <p style="font-size: 1.3rem; margin: 2rem 0; opacity: 0.9; line-height: 1.6;">
+                The vibrant collaboration of Texas Longhorns burnt orange and St. Louis Cardinals baby blue, 
+                harmonizing with Memphis Grizzlies Vancouver teal and Tennessee Oilers nostalgia. 
+                <strong>Refined, adventurous, and absolutely devoid of low-class ranch imagery.</strong>
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--blaze-cardinals-blue-light);">SOPHISTICATED</div>
+                    <div style="opacity: 0.8;">Oil money confidence</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--blaze-cardinals-blue-light);">TIMELESS</div>
+                    <div style="opacity: 0.8;">Championship legacy</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--blaze-cardinals-blue-light);">DYNAMIC</div>
+                    <div style="opacity: 0.8;">Fresh yet nostalgic</div>
+                </div>
+            </div>
+            
+            <button class="blaze-cta-primary" style="margin-top: 2rem;">
+                Deploy Championship Brand
+            </button>
+        </div>
+    </section>
+</body>
+</html>

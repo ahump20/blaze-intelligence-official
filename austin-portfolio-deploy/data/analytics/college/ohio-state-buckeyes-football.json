@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-08-28T07:48:54.482Z",
+  "program": "Ohio State Buckeyes",
+  "sport": "football",
+  "conference": "Big Ten",
+  "division": "NCAA Division I",
+  "season": "2025",
+  "readiness": {
+    "overall": 92.9,
+    "talent_level": 99.8,
+    "coaching": 91.3,
+    "facilities": 89.9,
+    "recruiting": 89.9
+  },
+  "leverage": {
+    "current": 1.61,
+    "trend": "stable",
+    "playoff_positioning": "strong"
+  },
+  "academic_metrics": {
+    "apr_score": 958,
+    "graduation_rate": 77,
+    "academic_progress": 3
+  },
+  "nil_market": {
+    "total_valuation_millions": 9,
+    "avg_deal_value": 26822,
+    "top_earners": 6
+  },
+  "recruiting_data": {
+    "class_ranking": 27,
+    "commits": 19,
+    "transfer_portal_net": 1
+  },
+  "metrics_count": 22
+}

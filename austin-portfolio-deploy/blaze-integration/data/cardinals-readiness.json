@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-08-28T08:53:50.520Z",
+  "team": "Cardinals",
+  "readiness_score": 100,
+  "championship_probability": 0.697,
+  "key_metrics": {
+    "avg_havf": 1.586,
+    "high_leverage_plays": 1135,
+    "championship_moments": 157
+  },
+  "live_events": 9
+}

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Blaze Intelligence">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0B0B0F">
+
+<title>Blaze Intelligence | Championship Mobile App</title>
+
+<link rel="apple-touch-startup-image" href="/splash/splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="/splash/splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="/splash/splash-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="/splash/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+
+<link rel="stylesheet" href="/public/brand.css">
+<link rel="stylesheet" href="/public/brand-components.css">
+
+<div class="ios-status-bar"></div>
+
+<div class="pull-to-refresh" id="pullRefresh">
+<div class="spinner"></div>
+</div>
+
+<div class="view active" id="dashboard">
+<div class="championship-card">
+<h2 style="color: #fff; margin: 0 0 8px;">Championship Dashboard</h2>
+<p style="color: #9CA3AF; margin: 0;">Real-time sports intelligence at your fingertips</p>
+</div>
+
+<div class="metric-grid">
+<div class="metric-item haptic">
+<div class="metric-value" id="accuracy">94.6%</div>
+<div class="metric-label">Accuracy</div>
+</div>
+<div class="metric-item haptic">
+<div class="metric-value" id="latency"><100ms</div>
+<div class="metric-label">Latency</div>
+</div>
+<div class="metric-item haptic">
+<div class="metric-value" id="dataPoints">2.8M+</div>
+<div class="metric-label">Data Points</div>
+</div>
+<div class="metric-item haptic">
+<div class="metric-value" id="readiness">86.6%</div>
+<div class="metric-label">Readiness</div>
+</div>
+</div>
+
+<h3 style="color: #fff; margin: 20px 0 12px;">Live Cardinals Feed</h3>
+<div class="live-feed" id="liveFeed">
+<div class="view" id="analytics">
+<h2 style="color: #fff; margin: 0 0 16px;">Live Analytics</h2>
+
+<div class="deployment-container">
+<iframe src="https://blaze-intelligence.pages.dev" title="Production Analytics"></iframe>
+</div>
+
+<div style="margin-top: 16px;">
+<button class="ios-button haptic" onclick="refreshAnalytics()">
+Refresh Analytics
+</button>
+</div>
+</div>
+
+<div class="view" id="replit">
+<h2 style="color: #fff; margin: 0 0 16px;">Development Environment</h2>
+
+<div class="deployment-container">
+<iframe src="https://35179f3c-00f3-409f-95da-bed1c6ba912c-00-3tftlc85yrdac.spock.replit.dev/" title="Replit Environment"></iframe>
+</div>
+
+<div style="margin-top: 16px;">
+<button class="ios-button haptic" onclick="reloadReplit()">
+Reload Environment
+</button>
+</div>
+</div>
+
+<div class="ios-tab-bar">
+<div class="tab-item active haptic" onclick="switchTab('dashboard', this)">
+<div class="tab-icon">📊</div>
+<div class="tab-label">Dashboard</div>
+</div>
+<div class="tab-item haptic" onclick="switchTab('analytics', this)">
+<div class="tab-icon">📈</div>
+<div class="tab-label">Analytics</div>
+</div>
+<div class="tab-item haptic" onclick="switchTab('championship', this)">
+<div class="tab-icon">🏆</div>
+<div class="tab-label">Championship</div>
+</div>
+<div class="tab-item haptic" onclick="switchTab('replit', this)">
+<div class="tab-icon">🚀</div>
+<div class="tab-label">Dev</div>
+</div>
+<div class="tab-item haptic" onclick="switchTab('profile', this)">
+<div class="tab-icon">👤</div>
+<div class="tab-label">Profile</div>
+</div>
+</div>
+</div>
+
+<script>
+// iOS App State
+let currentView = 'dashboard';
+let deploymentIndex = 0;
+const deployments = [
+'http://localhost:8090/blaze-intelligence-championship.html',
+'https://blaze-intelligence.pages.dev',
+'https://4ce1b7a1.blaze-intelligence.pages.dev',
+'https://35179f3c-00f3-409f-95da-bed1c6ba912c-00-3tftlc85yrdac.spock.replit.dev/'
+];
+
+// Tab Switching
+function switchTab(viewId, tabElement) {
+// Haptic feedback
+if (window.navigator.vibrate) {
+window.navigator.vibrate(10);
+}
+
+// Update active tab
+document.querySelectorAll('.tab-item').forEach(tab => {
+tab.classList.remove('active');
+});
+tabElement.classList.add('active');
+
+// Update active view
+document.querySelectorAll('.view').forEach(view => {
+view.classList.remove('active');
+});
+document.getElementById(viewId).classList.add('active');
+
+currentView = viewId;
+
+// Update navigation title
+const titles = {
+dashboard: 'Dashboard',
+analytics: 'Live Analytics',
+championship: 'Championship',
+replit: 'Development',
+profile: 'Profile'
+};
+document.querySelector('.ios-nav-title').textContent = titles[viewId] || 'Blaze Intelligence';
+}
+
+// Navigation
+function handleBack() {
+if (window.navigator.vibrate) {
+window.navigator.vibrate(10);
+}
+
+if (currentView !== 'dashboard') {
+switchTab('dashboard', document.querySelector('.tab-item'));
+} else {
+// Go to home screen (PWA)
+if (window.matchMedia('(display-mode: standalone)').matches) {
+window.close();
+}
+}
+}
+
+function handleSettings() {
+if (window.navigator.vibrate) {
+window.navigator.vibrate(10);
+}
+alert('Settings coming soon!');
+}
+
+// Live Feed Simulation
+function updateLiveFeed() {
+const feed = document.getElementById('liveFeed');
+const events = [
+'Cardinals scored 7 - MLB',
+'Pressure index: 78%',
+'Win probability: 65%',
+'Titans field goal - NFL',
+'Clutch performance detected',
+'Championship moment triggered'
+];
+
+const event = events[Math.floor(Math.random() * events.length)];
+const time = new Date().toLocaleTimeString();
+
+const item = document.createElement('div');
+item.className = 'feed-item';
+item.innerHTML = `
+<div class="feed-indicator"></div>
+<div style="flex: 1;">
+<div style="color: #fff; font-size: 14px;">${event}</div>
+<div style="color: #9CA3AF; font-size: 12px;">${time}</div>
+</div>
+`;
+
+feed.insertBefore(item, feed.firstChild);
+
+// Keep only last 10 items
+while (feed.children.length > 10) {
+feed.removeChild(feed.lastChild);
+}
+}
+
+// Update metrics
+function updateMetrics() {
+const readiness = (80 + Math.random() * 20).toFixed(1);
+document.getElementById('readiness').textContent = readiness + '%';
+}
+
+// Championship View
+function openChampionshipView() {
+switchTab('championship', document.querySelectorAll('.tab-item')[2]);
+}
+
+// Refresh Analytics
+function refreshAnalytics() {
+const iframe = document.querySelector('#analytics iframe');
+iframe.src = iframe.src;
+}
+
+// Switch Deployment
+function switchDeployment() {
+deploymentIndex = (deploymentIndex + 1) % deployments.length;
+const iframe = document.querySelector('#championship iframe');
+iframe.src = deployments[deploymentIndex];
+}
+
+// Reload Replit
+function reloadReplit() {
+const iframe = document.querySelector('#replit iframe');
+iframe.src = iframe.src;
+}
+
+// Contact Support
+function contactSupport() {
+window.location.href = 'mailto:ahump20@outlook.com?subject=Blaze Intelligence Support';
+}
+
+// Pull to Refresh
+let startY = 0;
+let isPulling = false;
+
+const content = document.getElementById('content');
+const pullRefresh = document.getElementById('pullRefresh');
+
+content.addEventListener('touchstart', (e) => {
+if (content.scrollTop === 0) {
+startY = e.touches[0].clientY;
+isPulling = true;
+}
+});
+
+content.addEventListener('touchmove', (e) => {
+if (!isPulling) return;
+
+const currentY = e.touches[0].clientY;
+const diff = currentY - startY;
+
+if (diff > 0 && diff < 100) {
+pullRefresh.style.transform = `translateX(-50%) translateY(${diff}px)`;
+pullRefresh.classList.add('active');
+}
+});
+
+content.addEventListener('touchend', () => {
+if (isPulling && pullRefresh.classList.contains('active')) {
+// Trigger refresh
+pullRefresh.style.transform = 'translateX(-50%) translateY(50px)';
+
+setTimeout(() => {
+updateMetrics();
+updateLiveFeed();
+
+pullRefresh.style.transform = 'translateX(-50%) translateY(-50px)';
+pullRefresh.classList.remove('active');
+}, 1000);
+}
+
+isPulling = false;
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+// Start live feed updates
+setInterval(updateLiveFeed, 5000);
+setInterval(updateMetrics, 3000);
+updateLiveFeed();
+
+// Check if running as PWA
+if (window.matchMedia('(display-mode: standalone)').matches) {
+console.log('Running as iOS PWA');
+}
+
+// Register service worker for offline support
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('/sw.js')
+.then(reg => console.log('Service Worker registered'))
+.catch(err => console.log('Service Worker registration failed'));
+}
+
+// Request notification permission
+if ('Notification' in window && Notification.permission === 'default') {
+Notification.requestPermission();
+}
+});
+
+// Handle iOS safe areas
+function updateSafeAreas() {
+const root = document.documentElement;
+const safeAreaInsets = {
+top: parseInt(getComputedStyle(root).getPropertyValue('--safe-area-inset-top')) || 0,
+bottom: parseInt(getComputedStyle(root).getPropertyValue('--safe-area-inset-bottom')) || 0,
+left: parseInt(getComputedStyle(root).getPropertyValue('--safe-area-inset-left')) || 0,
+right: parseInt(getComputedStyle(root).getPropertyValue('--safe-area-inset-right')) || 0
+};
+console.log('Safe area insets:', safeAreaInsets);
+}
+
+window.addEventListener('resize', updateSafeAreas);
+updateSafeAreas();
+</script>
+</body>
+</html>

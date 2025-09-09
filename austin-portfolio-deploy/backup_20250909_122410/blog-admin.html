@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Admin | Blaze Intelligence CMS</title>
+    <meta name="description" content="Manage blog content and analytics insights with Blaze Intelligence Notion CMS integration.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blaze-orange': '#FF6B35',
+                        'blaze-dark': '#0A0E27',
+                        'blaze-accent': '#1A659E'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Design Tokens -->
+    <link rel="stylesheet" href="/assets/tokens.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--blaze-dark);
+            color: #e2e8f0;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+        }
+        
+        .blog-post-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .blog-post-card:hover {
+            border-color: var(--blaze-orange);
+            transform: translateY(-2px);
+        }
+        
+        .status-draft {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+        }
+        
+        .status-published {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+        
+        .status-archived {
+            background: rgba(107, 114, 128, 0.2);
+            border-color: rgba(107, 114, 128, 0.3);
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-black/95 backdrop-blur-xl border-b border-gray-800 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="text-2xl font-bold" style="color: var(--blaze-orange);">BLAZE INTELLIGENCE</div>
+                <div class="text-sm text-slate-400">/ Content Management System</div>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="/" class="text-slate-300 hover:text-white transition-colors">← Back to Site</a>
+                <div class="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium">
+                    CMS Admin
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-4xl font-bold mb-2" style="color: var(--blaze-orange);">Content Management</h1>
+                <p class="text-slate-400">Manage blog posts, insights, and analytics content via Notion integration</p>
+            </div>
+            <div class="flex gap-4">
+                <button id="sync-content-btn" class="px-6 py-3 bg-blue-500/20 border border-blue-500/30 rounded-lg text-blue-400 hover:bg-blue-500/30 transition-colors flex items-center gap-2">
+                    <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                    Sync from Notion
+                </button>
+                <button id="create-post-btn" class="px-6 py-3 rounded-lg text-white hover:opacity-90 transition-opacity flex items-center gap-2" style="background: var(--blaze-orange);">
+                    <i data-lucide="plus" class="w-5 h-5"></i>
+                    New Post
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="glass p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-2xl font-bold" id="total-posts">0</div>
+                    <i data-lucide="file-text" class="w-8 h-8 text-blue-400"></i>
+                </div>
+                <div class="text-slate-400">Total Posts</div>
+            </div>
+            
+            <div class="glass p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-2xl font-bold" id="published-posts">0</div>
+                    <i data-lucide="eye" class="w-8 h-8 text-green-400"></i>
+                </div>
+                <div class="text-slate-400">Published</div>
+            </div>
+            
+            <div class="glass p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-2xl font-bold" id="draft-posts">0</div>
+                    <i data-lucide="edit" class="w-8 h-8 text-yellow-400"></i>
+                </div>
+                <div class="text-slate-400">Drafts</div>
+            </div>
+            
+            <div class="glass p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-2xl font-bold" id="insights-count">0</div>
+                    <i data-lucide="lightbulb" class="w-8 h-8" style="color: var(--blaze-orange);"></i>
+                </div>
+                <div class="text-slate-400">Insights</div>
+            </div>
+        </div>
+
+        <!-- Content Tabs -->
+        <div class="mb-6">
+            <div class="border-b border-slate-700">
+                <nav class="-mb-px flex space-x-8">
+                    <button id="tab-posts" class="tab-btn py-2 px-1 border-b-2 font-medium text-sm transition-colors border-blaze-orange text-blaze-orange">
+                        Blog Posts
+                    </button>
+                    <button id="tab-insights" class="tab-btn py-2 px-1 border-b-2 border-transparent font-medium text-sm text-slate-400 hover:text-slate-300 hover:border-slate-300 transition-colors">
+                        Analytics Insights
+                    </button>
+                    <button id="tab-analytics" class="tab-btn py-2 px-1 border-b-2 border-transparent font-medium text-sm text-slate-400 hover:text-slate-300 hover:border-slate-300 transition-colors">
+                        Content Analytics
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Blog Posts Tab -->
+        <div id="posts-tab-content" class="tab-content">
+            <!-- Filters -->
+            <div class="flex items-center gap-4 mb-6">
+                <select id="status-filter" class="px-4 py-2 bg-slate-800/50 border border-slate-600 rounded-lg text-white">
+                    <option value="">All Status</option>
+                    <option value="Published">Published</option>
+                    <option value="Draft">Draft</option>
+                    <option value="Archived">Archived</option>
+                </select>
+                
+                <select id="team-filter" class="px-4 py-2 bg-slate-800/50 border border-slate-600 rounded-lg text-white">
+                    <option value="">All Teams</option>
+                    <option value="Cardinals">Cardinals</option>
+                    <option value="Titans">Titans</option>
+                    <option value="Longhorns">Longhorns</option>
+                    <option value="Grizzlies">Grizzlies</option>
+                </select>
+                
+                <input type="text" id="search-posts" placeholder="Search posts..." class="flex-1 px-4 py-2 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-400">
+            </div>
+
+            <!-- Posts Grid -->
+            <div id="posts-grid" class="grid gap-6">
+                <!-- Posts will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Insights Tab -->
+        <div id="insights-tab-content" class="tab-content hidden">
+            <div id="insights-grid" class="grid md:grid-cols-2 gap-6">
+                <!-- Insights will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Analytics Tab -->
+        <div id="analytics-tab-content" class="tab-content hidden">
+            <div class="glass p-8">
+                <h3 class="text-2xl font-bold mb-6">Content Performance Analytics</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-semibold mb-4">Top Performing Posts</h4>
+                        <div id="top-posts" class="space-y-3">
+                            <!-- Top posts will be loaded here -->
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-4">Content Categories</h4>
+                        <div id="category-stats" class="space-y-3">
+                            <!-- Category stats will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Post Modal -->
+    <div id="create-post-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="glass max-w-2xl w-full p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold">Create New Post</h3>
+                <button id="close-modal-btn" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <form id="create-post-form" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Title</label>
+                    <input type="text" id="post-title" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white" required>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Category</label>
+                        <select id="post-category" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white">
+                            <option value="Analytics">Analytics</option>
+                            <option value="Insights">Insights</option>
+                            <option value="Report">Report</option>
+                            <option value="News">News</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Team</label>
+                        <select id="post-team" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white">
+                            <option value="">Select Team</option>
+                            <option value="Cardinals">Cardinals</option>
+                            <option value="Titans">Titans</option>
+                            <option value="Longhorns">Longhorns</option>
+                            <option value="Grizzlies">Grizzlies</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Content</label>
+                    <textarea id="post-content" rows="8" class="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white" placeholder="Write your post content here..."></textarea>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 py-3 rounded-lg text-white font-medium hover:opacity-90 transition-opacity" style="background: var(--blaze-orange);">
+                        Create Post
+                    </button>
+                    <button type="button" id="cancel-create-btn" class="flex-1 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium transition-colors">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentPosts = [];
+        let currentInsights = [];
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            initializeTabs();
+            initializeEventListeners();
+            loadContent();
+        });
+
+        function initializeTabs() {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.id.replace('tab-', '');
+                    switchTab(tabId);
+                });
+            });
+        }
+
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.id === `tab-${tabName}`) {
+                    btn.className = 'tab-btn py-2 px-1 border-b-2 font-medium text-sm transition-colors border-blaze-orange text-blaze-orange';
+                } else {
+                    btn.className = 'tab-btn py-2 px-1 border-b-2 border-transparent font-medium text-sm text-slate-400 hover:text-slate-300 hover:border-slate-300 transition-colors';
+                }
+            });
+
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                if (content.id === `${tabName}-tab-content`) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+
+            // Load specific content if needed
+            if (tabName === 'insights' && currentInsights.length === 0) {
+                loadInsights();
+            } else if (tabName === 'analytics') {
+                loadAnalytics();
+            }
+        }
+
+        function initializeEventListeners() {
+            // Sync content button
+            document.getElementById('sync-content-btn').addEventListener('click', function() {
+                this.innerHTML = '<i data-lucide="loader" class="w-5 h-5 animate-spin"></i> Syncing...';
+                this.disabled = true;
+                
+                loadContent().finally(() => {
+                    this.innerHTML = '<i data-lucide="refresh-cw" class="w-5 h-5"></i> Sync from Notion';
+                    this.disabled = false;
+                    lucide.createIcons();
+                });
+            });
+
+            // Create post modal
+            document.getElementById('create-post-btn').addEventListener('click', () => {
+                document.getElementById('create-post-modal').classList.remove('hidden');
+                document.getElementById('create-post-modal').classList.add('flex');
+            });
+
+            document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+            document.getElementById('cancel-create-btn').addEventListener('click', closeModal);
+
+            // Form submission
+            document.getElementById('create-post-form').addEventListener('submit', handleCreatePost);
+
+            // Filters
+            document.getElementById('status-filter').addEventListener('change', filterPosts);
+            document.getElementById('team-filter').addEventListener('change', filterPosts);
+            document.getElementById('search-posts').addEventListener('input', filterPosts);
+        }
+
+        function closeModal() {
+            document.getElementById('create-post-modal').classList.add('hidden');
+            document.getElementById('create-post-modal').classList.remove('flex');
+            document.getElementById('create-post-form').reset();
+        }
+
+        async function loadContent() {
+            await Promise.all([
+                loadPosts(),
+                loadInsights()
+            ]);
+            updateStats();
+        }
+
+        async function loadPosts() {
+            try {
+                const response = await fetch('/api/notion/posts');
+                if (response.ok) {
+                    const data = await response.json();
+                    currentPosts = data.posts || [];
+                    renderPosts(currentPosts);
+                } else {
+                    console.warn('Failed to load posts from Notion');
+                    // Show demo posts if API fails
+                    currentPosts = getDemoPosts();
+                    renderPosts(currentPosts);
+                }
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                currentPosts = getDemoPosts();
+                renderPosts(currentPosts);
+            }
+        }
+
+        async function loadInsights() {
+            try {
+                const response = await fetch('/api/notion/insights');
+                if (response.ok) {
+                    const data = await response.json();
+                    currentInsights = data.insights || [];
+                    renderInsights(currentInsights);
+                } else {
+                    console.warn('Failed to load insights from Notion');
+                    currentInsights = getDemoInsights();
+                    renderInsights(currentInsights);
+                }
+            } catch (error) {
+                console.error('Error loading insights:', error);
+                currentInsights = getDemoInsights();
+                renderInsights(currentInsights);
+            }
+        }
+
+        function renderPosts(posts) {
+            const grid = document.getElementById('posts-grid');
+            
+            if (posts.length === 0) {
+                grid.innerHTML = `
+                    <div class="glass p-8 text-center">
+                        <i data-lucide="file-text" class="w-16 h-16 mx-auto mb-4 text-slate-400"></i>
+                        <h3 class="text-xl font-semibold mb-2">No Posts Found</h3>
+                        <p class="text-slate-400 mb-4">Create your first blog post to get started.</p>
+                        <button class="px-6 py-3 rounded-lg text-white hover:opacity-90 transition-opacity" style="background: var(--blaze-orange);">
+                            Create First Post
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = posts.map(post => `
+                <div class="blog-post-card glass p-6 rounded-lg">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold mb-2">${post.title}</h3>
+                            <p class="text-slate-400 text-sm mb-3">${post.excerpt || 'No excerpt available'}</p>
+                            <div class="flex items-center gap-4 text-sm text-slate-500">
+                                <span>${new Date(post.publishedDate).toLocaleDateString()}</span>
+                                <span>•</span>
+                                <span>${post.author}</span>
+                                ${post.team ? `<span>•</span><span class="text-blue-400">${post.team}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <span class="px-2 py-1 rounded text-xs font-medium status-published">
+                                Published
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            ${post.category ? `<span class="px-2 py-1 bg-slate-700 rounded text-xs">${post.category}</span>` : ''}
+                            ${post.tags ? post.tags.map(tag => `<span class="px-2 py-1 bg-slate-700 rounded text-xs">${tag}</span>`).join('') : ''}
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="p-2 hover:bg-slate-700 rounded transition-colors" title="Edit">
+                                <i data-lucide="edit" class="w-4 h-4"></i>
+                            </button>
+                            <button class="p-2 hover:bg-slate-700 rounded transition-colors" title="View">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            lucide.createIcons();
+        }
+
+        function renderInsights(insights) {
+            const grid = document.getElementById('insights-grid');
+            
+            if (insights.length === 0) {
+                grid.innerHTML = `
+                    <div class="glass p-8 text-center col-span-2">
+                        <i data-lucide="lightbulb" class="w-16 h-16 mx-auto mb-4 text-slate-400"></i>
+                        <h3 class="text-xl font-semibold mb-2">No Insights Available</h3>
+                        <p class="text-slate-400">Analytics insights will appear here as they're generated.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = insights.map(insight => `
+                <div class="glass p-6 rounded-lg">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold">${insight.title}</h3>
+                        <span class="px-2 py-1 bg-blue-500/20 border border-blue-500/30 rounded text-blue-400 text-xs">
+                            ${insight.type}
+                        </span>
+                    </div>
+                    
+                    ${insight.metric && insight.value ? `
+                        <div class="mb-3">
+                            <div class="text-2xl font-bold text-green-400">${insight.value}</div>
+                            <div class="text-sm text-slate-400">${insight.metric}</div>
+                        </div>
+                    ` : ''}
+                    
+                    <p class="text-slate-300 text-sm mb-4">${insight.description}</p>
+                    
+                    <div class="flex items-center justify-between text-xs text-slate-500">
+                        <div class="flex items-center gap-2">
+                            ${insight.team ? `<span class="text-blue-400">${insight.team}</span>` : ''}
+                            <span>${insight.confidence}% confidence</span>
+                        </div>
+                        <span>${new Date(insight.dateCreated).toLocaleDateString()}</span>
+                    </div>
+                </div>
+            `).join('');
+            
+            lucide.createIcons();
+        }
+
+        function updateStats() {
+            document.getElementById('total-posts').textContent = currentPosts.length;
+            document.getElementById('published-posts').textContent = currentPosts.filter(p => p.status === 'Published').length;
+            document.getElementById('draft-posts').textContent = currentPosts.filter(p => p.status === 'Draft').length;
+            document.getElementById('insights-count').textContent = currentInsights.length;
+        }
+
+        function filterPosts() {
+            const statusFilter = document.getElementById('status-filter').value;
+            const teamFilter = document.getElementById('team-filter').value;
+            const searchTerm = document.getElementById('search-posts').value.toLowerCase();
+
+            let filtered = currentPosts;
+
+            if (statusFilter) {
+                filtered = filtered.filter(post => post.status === statusFilter);
+            }
+
+            if (teamFilter) {
+                filtered = filtered.filter(post => post.team === teamFilter);
+            }
+
+            if (searchTerm) {
+                filtered = filtered.filter(post => 
+                    post.title.toLowerCase().includes(searchTerm) ||
+                    post.excerpt.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            renderPosts(filtered);
+        }
+
+        async function handleCreatePost(event) {
+            event.preventDefault();
+            
+            const formData = {
+                title: document.getElementById('post-title').value,
+                category: document.getElementById('post-category').value,
+                team: document.getElementById('post-team').value,
+                content: document.getElementById('post-content').value,
+                type: 'blog'
+            };
+
+            try {
+                const response = await fetch('/api/notion/content', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert('Post created successfully in Notion!');
+                    closeModal();
+                    loadPosts(); // Refresh the posts
+                } else {
+                    throw new Error('Failed to create post');
+                }
+            } catch (error) {
+                console.error('Error creating post:', error);
+                alert('Failed to create post. Please try again.');
+            }
+        }
+
+        function loadAnalytics() {
+            // Mock analytics data
+            document.getElementById('top-posts').innerHTML = `
+                <div class="flex justify-between py-2">
+                    <span class="text-slate-300">Cardinals Analytics 2025</span>
+                    <span class="text-green-400">1,234 views</span>
+                </div>
+                <div class="flex justify-between py-2">
+                    <span class="text-slate-300">Titans Performance Report</span>
+                    <span class="text-green-400">987 views</span>
+                </div>
+                <div class="flex justify-between py-2">
+                    <span class="text-slate-300">Longhorns Recruiting Update</span>
+                    <span class="text-green-400">756 views</span>
+                </div>
+            `;
+
+            document.getElementById('category-stats').innerHTML = `
+                <div class="flex justify-between py-2">
+                    <span class="text-slate-300">Analytics</span>
+                    <span class="text-blue-400">45%</span>
+                </div>
+                <div class="flex justify-between py-2">
+                    <span class="text-slate-300">Reports</span>
+                    <span class="text-blue-400">30%</span>
+                </div>
+                <div class="flex justify-between py-2">
+                    <span class="text-slate-300">Insights</span>
+                    <span class="text-blue-400">25%</span>
+                </div>
+            `;
+        }
+
+        function getDemoPosts() {
+            return [
+                {
+                    id: '1',
+                    title: 'Cardinals Analytics Deep Dive - September 2025',
+                    excerpt: 'Comprehensive analysis of Cardinals performance metrics and championship readiness.',
+                    publishedDate: '2025-09-01',
+                    author: 'Austin Humphrey',
+                    category: 'Analytics',
+                    team: 'Cardinals',
+                    status: 'Published',
+                    tags: ['MLB', 'Analytics', 'Performance']
+                },
+                {
+                    id: '2', 
+                    title: 'Titans vs Chiefs: Strategic Breakdown',
+                    excerpt: 'AI-powered analysis of the upcoming Titans matchup with predictive insights.',
+                    publishedDate: '2025-08-28',
+                    author: 'Blaze Intelligence System',
+                    category: 'Report',
+                    team: 'Titans',
+                    status: 'Published',
+                    tags: ['NFL', 'Strategy', 'Predictions']
+                }
+            ];
+        }
+
+        function getDemoInsights() {
+            return [
+                {
+                    id: '1',
+                    title: 'Cardinals Readiness Trending Upward',
+                    type: 'Performance',
+                    metric: 'Team Readiness',
+                    value: '90.2%',
+                    description: 'Cardinals showing strong championship readiness metrics with improving trend.',
+                    team: 'Cardinals',
+                    confidence: 94,
+                    dateCreated: '2025-09-02'
+                },
+                {
+                    id: '2',
+                    title: 'Longhorns Recruiting Class Impact',
+                    type: 'Recruiting',
+                    metric: 'Recruiting Score',
+                    value: '87.5',
+                    description: 'Strong recruiting class showing immediate positive impact on team metrics.',
+                    team: 'Longhorns',
+                    confidence: 89,
+                    dateCreated: '2025-09-01'
+                }
+            ];
+        }
+    </script>
+</body>
+</html>

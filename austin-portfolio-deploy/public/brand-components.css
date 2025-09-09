@@ -1,0 +1,216 @@
+.panel {
+background: var(--panel);
+border: 1px solid var(--line);
+border-radius: 16px;
+padding: 24px;
+box-shadow: var(--shadow-subtle);
+transition: var(--transition-smooth);
+}
+.panel:hover {
+box-shadow: var(--shadow-institutional);
+border-color: var(--cyan);
+}
+.panel-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 16px;
+padding-bottom: 12px;
+border-bottom: 1px solid var(--line);
+}
+.btn {
+display: inline-block;
+padding: 12px 24px;
+border-radius: 10px;
+background: linear-gradient(135deg, var(--accent), var(--cyan));
+color: var(--bg);
+font-weight: 800;
+font-size: 14px;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+border: none;
+cursor: pointer;
+transition: var(--transition-smooth);
+box-shadow: var(--shadow-subtle);
+}
+.btn:hover {
+transform: translateY(-2px);
+box-shadow: var(--shadow-institutional);
+background: linear-gradient(135deg, var(--cyan), var(--accent));
+}
+.btn-secondary {
+background: transparent;
+border: 2px solid var(--accent);
+color: var(--accent);
+}
+.btn-secondary:hover {
+background: var(--accent);
+color: var(--bg);
+}
+.viz {
+position: relative;
+width: 100%;
+background: var(--panel);
+border: 1px solid var(--line);
+border-radius: 16px;
+overflow: hidden;
+}
+.viz canvas {
+display: block;
+width: 100%;
+height: 100%;
+}
+.badge {
+display: inline-block;
+padding: 4px 12px;
+border-radius: 20px;
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+.badge-championship {
+background: linear-gradient(135deg, var(--accent), var(--cyan));
+color: var(--bg);
+}
+.badge-live {
+background: #10b981;
+color: white;
+animation: pulse 2s infinite;
+}
+.badge-beta {
+background: var(--cyan);
+color: var(--bg);
+}
+.metric-card {
+background: var(--panel);
+border: 1px solid var(--line);
+border-radius: 12px;
+padding: 20px;
+text-align: center;
+transition: var(--transition-smooth);
+}
+.metric-card:hover {
+transform: translateY(-4px);
+border-color: var(--cyan);
+box-shadow: 0 8px 24px rgba(155, 203, 235, 0.1);
+}
+.metric-value {
+font-size: 36px;
+font-weight: 800;
+color: var(--cyan);
+margin: 8px 0;
+}
+.metric-label {
+font-size: 14px;
+color: var(--muted);
+text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+.form-group {
+margin-bottom: 20px;
+}
+.form-group label {
+display: block;
+margin-bottom: 8px;
+color: var(--ink);
+font-weight: 600;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+width: 100%;
+padding: 10px 14px;
+background: var(--bg);
+border: 1px solid var(--line);
+border-radius: 8px;
+color: var(--ink);
+font-family: var(--font);
+transition: var(--transition-smooth);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+outline: none;
+border-color: var(--cyan);
+box-shadow: 0 0 0 3px rgba(155, 203, 235, 0.1);
+}
+.tooltip {
+position: absolute;
+padding: 8px 12px;
+border-radius: 8px;
+background: var(--panel);
+border: 1px solid var(--line);
+color: var(--ink);
+font-size: 12px;
+pointer-events: none;
+z-index: 1000;
+box-shadow: var(--shadow-institutional);
+}
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.7; }
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+0% { background-position: -1000px 0; }
+100% { background-position: 1000px 0; }
+}
+.grid {
+display: grid;
+gap: 24px;
+}
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 768px) {
+.grid-2, .grid-3, .grid-4 {
+grid-template-columns: 1fr;
+}
+}
+.status {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+}
+.status-dot {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+animation: pulse 2s infinite;
+}
+.status-dot.active { background: #10b981; }
+.status-dot.warning { background: #f59e0b; }
+.status-dot.error { background: #ef4444; }
+.status-dot.championship { background: var(--accent); }
+.loading {
+position: relative;
+overflow: hidden;
+}
+.loading::after {
+content: '';
+position: absolute;
+top: 0;
+left: -1000px;
+width: 1000px;
+height: 100%;
+background: linear-gradient(
+90deg,
+transparent,
+rgba(155, 203, 235, 0.1),
+transparent
+);
+animation: shimmer 2s infinite;
+}
+.gradient-championship {
+background: linear-gradient(135deg, var(--accent), var(--cyan));
+}
+.gradient-text {
+background: linear-gradient(135deg, var(--accent), var(--cyan));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}

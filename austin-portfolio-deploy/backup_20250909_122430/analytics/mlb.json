@@ -1,0 +1,914 @@
+{
+  "league": "MLB",
+  "summary": {
+    "total_teams": 30,
+    "total_championships": 119,
+    "avg_competitive_index": 105,
+    "avg_legacy_score": 59,
+    "top_performers": [
+      {
+        "name": "New York Yankees",
+        "score": 237
+      },
+      {
+        "name": "St. Louis Cardinals",
+        "score": 164
+      },
+      {
+        "name": "Boston Red Sox",
+        "score": 141
+      },
+      {
+        "name": "Oakland Athletics",
+        "score": 131
+      },
+      {
+        "name": "Los Angeles Dodgers",
+        "score": 127
+      }
+    ]
+  },
+  "teams": [
+    {
+      "id": "new-york-yankees",
+      "name": "New York Yankees",
+      "league": "MLB",
+      "division": "AL East",
+      "founded": 1901,
+      "championships": 27,
+      "metrics": {
+        "competitive_index": 268,
+        "legacy_score": 180,
+        "blaze_intelligence_score": 214,
+        "prediction_accuracy": 94.6,
+        "data_points": 31907
+      },
+      "analytics": {
+        "injury_risk": 0.29257194674936937,
+        "performance_trend": "rising",
+        "playoff_probability": 0.5025114591172282,
+        "roster_efficiency": 0.9127032432578279
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "notre-dame-fighting-irish",
+      "name": "Notre Dame Fighting Irish",
+      "league": "NCAA Football",
+      "division": "Independent",
+      "founded": 1887,
+      "championships": 13,
+      "metrics": {
+        "competitive_index": 195,
+        "legacy_score": 130,
+        "blaze_intelligence_score": 192,
+        "prediction_accuracy": 94.6,
+        "data_points": 57146
+      },
+      "analytics": {
+        "injury_risk": 0.2650373966660551,
+        "performance_trend": "rising",
+        "playoff_probability": 0.8480128415664312,
+        "roster_efficiency": 0.7830305883791594
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "michigan-wolverines",
+      "name": "Michigan Wolverines",
+      "league": "NCAA Football",
+      "division": "Big Ten",
+      "founded": 1879,
+      "championships": 12,
+      "metrics": {
+        "competitive_index": 185,
+        "legacy_score": 125,
+        "blaze_intelligence_score": 191,
+        "prediction_accuracy": 94.6,
+        "data_points": 39644
+      },
+      "analytics": {
+        "injury_risk": 0.0329416915046753,
+        "performance_trend": "declining",
+        "playoff_probability": 0.7763741857100082,
+        "roster_efficiency": 0.934276678370028
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "alabama-crimson-tide",
+      "name": "Alabama Crimson Tide",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1892,
+      "championships": 18,
+      "metrics": {
+        "competitive_index": 225,
+        "legacy_score": 145,
+        "blaze_intelligence_score": 189,
+        "prediction_accuracy": 94.6,
+        "data_points": 40984
+      },
+      "analytics": {
+        "injury_risk": 0.05906354827760382,
+        "performance_trend": "declining",
+        "playoff_probability": 0.9588718558582163,
+        "roster_efficiency": 0.7049506449460053
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "usc-trojans",
+      "name": "USC Trojans",
+      "league": "NCAA Football",
+      "division": "Pac-12",
+      "founded": 1888,
+      "championships": 11,
+      "metrics": {
+        "competitive_index": 175,
+        "legacy_score": 115,
+        "blaze_intelligence_score": 166,
+        "prediction_accuracy": 94.6,
+        "data_points": 25653
+      },
+      "analytics": {
+        "injury_risk": 0.2583772238557176,
+        "performance_trend": "stable",
+        "playoff_probability": 0.898038069056144,
+        "roster_efficiency": 0.7561277038632656
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "st.-louis-cardinals",
+      "name": "St. Louis Cardinals",
+      "league": "MLB",
+      "division": "NL Central",
+      "founded": 1882,
+      "championships": 11,
+      "metrics": {
+        "competitive_index": 164,
+        "legacy_score": 103,
+        "blaze_intelligence_score": 152,
+        "prediction_accuracy": 94.6,
+        "data_points": 21812
+      },
+      "analytics": {
+        "injury_risk": 0.2114277263936924,
+        "performance_trend": "stable",
+        "playoff_probability": 0.7770817349476904,
+        "roster_efficiency": 0.9917537045919301
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "oklahoma-sooners",
+      "name": "Oklahoma Sooners",
+      "league": "NCAA Football",
+      "division": "Big 12",
+      "founded": 1895,
+      "championships": 7,
+      "metrics": {
+        "competitive_index": 155,
+        "legacy_score": 100,
+        "blaze_intelligence_score": 151,
+        "prediction_accuracy": 94.6,
+        "data_points": 13412
+      },
+      "analytics": {
+        "injury_risk": 0.05237059421380758,
+        "performance_trend": "stable",
+        "playoff_probability": 0.4492279792249395,
+        "roster_efficiency": 0.9061824538410005
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "oakland-athletics",
+      "name": "Oakland Athletics",
+      "league": "MLB",
+      "division": "AL West",
+      "founded": 1901,
+      "championships": 9,
+      "metrics": {
+        "competitive_index": 132,
+        "legacy_score": 90,
+        "blaze_intelligence_score": 149,
+        "prediction_accuracy": 94.6,
+        "data_points": 24112
+      },
+      "analytics": {
+        "injury_risk": 0.021651990658895403,
+        "performance_trend": "declining",
+        "playoff_probability": 0.2675368291639469,
+        "roster_efficiency": 0.9584504440873165
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "ohio-state-buckeyes",
+      "name": "Ohio State Buckeyes",
+      "league": "NCAA Football",
+      "division": "Big Ten",
+      "founded": 1890,
+      "championships": 8,
+      "metrics": {
+        "competitive_index": 165,
+        "legacy_score": 105,
+        "blaze_intelligence_score": 147,
+        "prediction_accuracy": 94.6,
+        "data_points": 24713
+      },
+      "analytics": {
+        "injury_risk": 0.20636289266569155,
+        "performance_trend": "rising",
+        "playoff_probability": 0.8653255760419929,
+        "roster_efficiency": 0.8282303180455168
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "texas-longhorns",
+      "name": "Texas Longhorns",
+      "league": "NCAA Football",
+      "division": "Big 12",
+      "founded": 1893,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 145,
+        "legacy_score": 95,
+        "blaze_intelligence_score": 129,
+        "prediction_accuracy": 94.6,
+        "data_points": 51853
+      },
+      "analytics": {
+        "injury_risk": 0.01643930916166638,
+        "performance_trend": "stable",
+        "playoff_probability": 0.9227654749041452,
+        "roster_efficiency": 0.7672717859843483
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "boston-red-sox",
+      "name": "Boston Red Sox",
+      "league": "MLB",
+      "division": "AL East",
+      "founded": 1901,
+      "championships": 9,
+      "metrics": {
+        "competitive_index": 139,
+        "legacy_score": 90,
+        "blaze_intelligence_score": 128,
+        "prediction_accuracy": 94.6,
+        "data_points": 27202
+      },
+      "analytics": {
+        "injury_risk": 0.24559666649190762,
+        "performance_trend": "stable",
+        "playoff_probability": 0.5105775677236684,
+        "roster_efficiency": 0.959788853597044
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "los-angeles-dodgers",
+      "name": "Los Angeles Dodgers",
+      "league": "MLB",
+      "division": "NL West",
+      "founded": 1883,
+      "championships": 7,
+      "metrics": {
+        "competitive_index": 138,
+        "legacy_score": 83,
+        "blaze_intelligence_score": 122,
+        "prediction_accuracy": 94.6,
+        "data_points": 29509
+      },
+      "analytics": {
+        "injury_risk": 0.1866932551435821,
+        "performance_trend": "stable",
+        "playoff_probability": 0.7199697853681133,
+        "roster_efficiency": 0.9560943894567824
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "san-francisco-giants",
+      "name": "San Francisco Giants",
+      "league": "MLB",
+      "division": "NL West",
+      "founded": 1883,
+      "championships": 8,
+      "metrics": {
+        "competitive_index": 125,
+        "legacy_score": 88,
+        "blaze_intelligence_score": 117,
+        "prediction_accuracy": 94.6,
+        "data_points": 44604
+      },
+      "analytics": {
+        "injury_risk": 0.2489271063060425,
+        "performance_trend": "stable",
+        "playoff_probability": 0.7370767494599904,
+        "roster_efficiency": 0.819097494989045
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "pittsburgh-pirates",
+      "name": "Pittsburgh Pirates",
+      "league": "MLB",
+      "division": "NL Central",
+      "founded": 1881,
+      "championships": 5,
+      "metrics": {
+        "competitive_index": 103,
+        "legacy_score": 74,
+        "blaze_intelligence_score": 115,
+        "prediction_accuracy": 94.6,
+        "data_points": 28111
+      },
+      "analytics": {
+        "injury_risk": 0.03561385665702081,
+        "performance_trend": "rising",
+        "playoff_probability": 0.6529305248543957,
+        "roster_efficiency": 0.7000273889380526
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "lsu-tigers",
+      "name": "LSU Tigers",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1893,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 135,
+        "legacy_score": 90,
+        "blaze_intelligence_score": 114,
+        "prediction_accuracy": 94.6,
+        "data_points": 29298
+      },
+      "analytics": {
+        "injury_risk": 0.06927198756755117,
+        "performance_trend": "rising",
+        "playoff_probability": 0.9515228232262529,
+        "roster_efficiency": 0.8116011226606695
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "florida-gators",
+      "name": "Florida Gators",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1906,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 115,
+        "legacy_score": 75,
+        "blaze_intelligence_score": 110,
+        "prediction_accuracy": 94.6,
+        "data_points": 28260
+      },
+      "analytics": {
+        "injury_risk": 0.04210626932765651,
+        "performance_trend": "rising",
+        "playoff_probability": 0.5852827523049549,
+        "roster_efficiency": 0.8568409158655426
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "georgia-bulldogs",
+      "name": "Georgia Bulldogs",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1892,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 125,
+        "legacy_score": 85,
+        "blaze_intelligence_score": 100,
+        "prediction_accuracy": 94.6,
+        "data_points": 13436
+      },
+      "analytics": {
+        "injury_risk": 0.12197278159422437,
+        "performance_trend": "stable",
+        "playoff_probability": 0.39213121710251236,
+        "roster_efficiency": 0.9272926982544724
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "chicago-cubs",
+      "name": "Chicago Cubs",
+      "league": "MLB",
+      "division": "NL Central",
+      "founded": 1876,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 109,
+        "legacy_score": 65,
+        "blaze_intelligence_score": 96,
+        "prediction_accuracy": 94.6,
+        "data_points": 13855
+      },
+      "analytics": {
+        "injury_risk": 0.07190082260253224,
+        "performance_trend": "stable",
+        "playoff_probability": 0.46140690691604186,
+        "roster_efficiency": 0.939559670865566
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "atlanta-braves",
+      "name": "Atlanta Braves",
+      "league": "MLB",
+      "division": "NL East",
+      "founded": 1871,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 113,
+        "legacy_score": 71,
+        "blaze_intelligence_score": 95,
+        "prediction_accuracy": 94.6,
+        "data_points": 22908
+      },
+      "analytics": {
+        "injury_risk": 0.12427645058358032,
+        "performance_trend": "rising",
+        "playoff_probability": 0.5870753621841094,
+        "roster_efficiency": 0.9732046909594219
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "cincinnati-reds",
+      "name": "Cincinnati Reds",
+      "league": "MLB",
+      "division": "NL Central",
+      "founded": 1881,
+      "championships": 5,
+      "metrics": {
+        "competitive_index": 93,
+        "legacy_score": 74,
+        "blaze_intelligence_score": 95,
+        "prediction_accuracy": 94.6,
+        "data_points": 10702
+      },
+      "analytics": {
+        "injury_risk": 0.056102566294980734,
+        "performance_trend": "declining",
+        "playoff_probability": 0.8714944927251838,
+        "roster_efficiency": 0.8848711006673375
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "kansas-city-royals",
+      "name": "Kansas City Royals",
+      "league": "MLB",
+      "division": "AL Central",
+      "founded": 1969,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 106,
+        "legacy_score": 41,
+        "blaze_intelligence_score": 91,
+        "prediction_accuracy": 94.6,
+        "data_points": 54448
+      },
+      "analytics": {
+        "injury_risk": 0.02798138279290909,
+        "performance_trend": "stable",
+        "playoff_probability": 0.6072989664617772,
+        "roster_efficiency": 0.7215690084328759
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "baltimore-orioles",
+      "name": "Baltimore Orioles",
+      "league": "MLB",
+      "division": "AL East",
+      "founded": 1901,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 96,
+        "legacy_score": 60,
+        "blaze_intelligence_score": 89,
+        "prediction_accuracy": 94.6,
+        "data_points": 48181
+      },
+      "analytics": {
+        "injury_risk": 0.06260892301952829,
+        "performance_trend": "stable",
+        "playoff_probability": 0.7697783459275431,
+        "roster_efficiency": 0.726883561705034
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "detroit-tigers",
+      "name": "Detroit Tigers",
+      "league": "MLB",
+      "division": "AL Central",
+      "founded": 1901,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 116,
+        "legacy_score": 65,
+        "blaze_intelligence_score": 88,
+        "prediction_accuracy": 94.6,
+        "data_points": 31642
+      },
+      "analytics": {
+        "injury_risk": 0.08741334187151181,
+        "performance_trend": "rising",
+        "playoff_probability": 0.8802671110417979,
+        "roster_efficiency": 0.961219343257548
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "cleveland-guardians",
+      "name": "Cleveland Guardians",
+      "league": "MLB",
+      "division": "AL Central",
+      "founded": 1901,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 82,
+        "legacy_score": 55,
+        "blaze_intelligence_score": 87,
+        "prediction_accuracy": 94.6,
+        "data_points": 57541
+      },
+      "analytics": {
+        "injury_risk": 0.030426515173615852,
+        "performance_trend": "rising",
+        "playoff_probability": 0.518917787750199,
+        "roster_efficiency": 0.9924366893756758
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "houston-astros",
+      "name": "Houston Astros",
+      "league": "MLB",
+      "division": "AL West",
+      "founded": 1962,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 99,
+        "legacy_score": 42,
+        "blaze_intelligence_score": 81,
+        "prediction_accuracy": 94.6,
+        "data_points": 36672
+      },
+      "analytics": {
+        "injury_risk": 0.28574469726560653,
+        "performance_trend": "stable",
+        "playoff_probability": 0.4770981929904437,
+        "roster_efficiency": 0.7478248813048598
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "minnesota-twins",
+      "name": "Minnesota Twins",
+      "league": "MLB",
+      "division": "AL Central",
+      "founded": 1901,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 99,
+        "legacy_score": 60,
+        "blaze_intelligence_score": 76,
+        "prediction_accuracy": 94.6,
+        "data_points": 43608
+      },
+      "analytics": {
+        "injury_risk": 0.1273853965425294,
+        "performance_trend": "rising",
+        "playoff_probability": 0.25777935793730955,
+        "roster_efficiency": 0.8192421597665984
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "new-york-mets",
+      "name": "New York Mets",
+      "league": "MLB",
+      "division": "NL East",
+      "founded": 1962,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 99,
+        "legacy_score": 42,
+        "blaze_intelligence_score": 74,
+        "prediction_accuracy": 94.6,
+        "data_points": 17508
+      },
+      "analytics": {
+        "injury_risk": 0.29233076747061437,
+        "performance_trend": "stable",
+        "playoff_probability": 0.5511418229305902,
+        "roster_efficiency": 0.9238543983409716
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "chicago-white-sox",
+      "name": "Chicago White Sox",
+      "league": "MLB",
+      "division": "AL Central",
+      "founded": 1901,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 92,
+        "legacy_score": 60,
+        "blaze_intelligence_score": 73,
+        "prediction_accuracy": 94.6,
+        "data_points": 23631
+      },
+      "analytics": {
+        "injury_risk": 0.16504371696379042,
+        "performance_trend": "rising",
+        "playoff_probability": 0.7667668348749783,
+        "roster_efficiency": 0.7505850547492504
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "miami-marlins",
+      "name": "Miami Marlins",
+      "league": "MLB",
+      "division": "NL East",
+      "founded": 1993,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 85,
+        "legacy_score": 36,
+        "blaze_intelligence_score": 73,
+        "prediction_accuracy": 94.6,
+        "data_points": 53832
+      },
+      "analytics": {
+        "injury_risk": 0.23923349678015193,
+        "performance_trend": "declining",
+        "playoff_probability": 0.8542494444511257,
+        "roster_efficiency": 0.8133854166767668
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "toronto-blue-jays",
+      "name": "Toronto Blue Jays",
+      "league": "MLB",
+      "division": "AL East",
+      "founded": 1977,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 74,
+        "legacy_score": 39,
+        "blaze_intelligence_score": 70,
+        "prediction_accuracy": 94.6,
+        "data_points": 45273
+      },
+      "analytics": {
+        "injury_risk": 0.18962347646862246,
+        "performance_trend": "declining",
+        "playoff_probability": 0.4652636751172457,
+        "roster_efficiency": 0.7210001425486605
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "los-angeles-angels",
+      "name": "Los Angeles Angels",
+      "league": "MLB",
+      "division": "AL West",
+      "founded": 1961,
+      "championships": 1,
+      "metrics": {
+        "competitive_index": 90,
+        "legacy_score": 38,
+        "blaze_intelligence_score": 69,
+        "prediction_accuracy": 94.6,
+        "data_points": 43856
+      },
+      "analytics": {
+        "injury_risk": 0.13504905643420181,
+        "performance_trend": "rising",
+        "playoff_probability": 0.3679720328294783,
+        "roster_efficiency": 0.8876720099764894
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "washington-nationals",
+      "name": "Washington Nationals",
+      "league": "MLB",
+      "division": "NL East",
+      "founded": 1969,
+      "championships": 1,
+      "metrics": {
+        "competitive_index": 85,
+        "legacy_score": 36,
+        "blaze_intelligence_score": 69,
+        "prediction_accuracy": 94.6,
+        "data_points": 46761
+      },
+      "analytics": {
+        "injury_risk": 0.20252525944848154,
+        "performance_trend": "stable",
+        "playoff_probability": 0.48042119899680674,
+        "roster_efficiency": 0.9283366694408066
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "seattle-mariners",
+      "name": "Seattle Mariners",
+      "league": "MLB",
+      "division": "AL West",
+      "founded": 1977,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 73,
+        "legacy_score": 29,
+        "blaze_intelligence_score": 65,
+        "prediction_accuracy": 94.6,
+        "data_points": 19348
+      },
+      "analytics": {
+        "injury_risk": 0.03575934794737603,
+        "performance_trend": "declining",
+        "playoff_probability": 0.8243901489551286,
+        "roster_efficiency": 0.7950600422989172
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "philadelphia-phillies",
+      "name": "Philadelphia Phillies",
+      "league": "MLB",
+      "division": "NL East",
+      "founded": 1883,
+      "championships": 2,
+      "metrics": {
+        "competitive_index": 73,
+        "legacy_score": 58,
+        "blaze_intelligence_score": 61,
+        "prediction_accuracy": 94.6,
+        "data_points": 14754
+      },
+      "analytics": {
+        "injury_risk": 0.10720215101155812,
+        "performance_trend": "rising",
+        "playoff_probability": 0.51092939717575,
+        "roster_efficiency": 0.7495686341182374
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "milwaukee-brewers",
+      "name": "Milwaukee Brewers",
+      "league": "MLB",
+      "division": "NL Central",
+      "founded": 1969,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 78,
+        "legacy_score": 31,
+        "blaze_intelligence_score": 58,
+        "prediction_accuracy": 94.6,
+        "data_points": 20755
+      },
+      "analytics": {
+        "injury_risk": 0.05881821843709678,
+        "performance_trend": "stable",
+        "playoff_probability": 0.20707261480638764,
+        "roster_efficiency": 0.9861257726101172
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "texas-rangers",
+      "name": "Texas Rangers",
+      "league": "MLB",
+      "division": "AL West",
+      "founded": 1961,
+      "championships": 1,
+      "metrics": {
+        "competitive_index": 94,
+        "legacy_score": 38,
+        "blaze_intelligence_score": 56,
+        "prediction_accuracy": 94.6,
+        "data_points": 56157
+      },
+      "analytics": {
+        "injury_risk": 0.07288991545387187,
+        "performance_trend": "stable",
+        "playoff_probability": 0.214380016381911,
+        "roster_efficiency": 0.8654362142423611
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "arizona-diamondbacks",
+      "name": "Arizona Diamondbacks",
+      "league": "MLB",
+      "division": "NL West",
+      "founded": 1998,
+      "championships": 1,
+      "metrics": {
+        "competitive_index": 87,
+        "legacy_score": 30,
+        "blaze_intelligence_score": 56,
+        "prediction_accuracy": 94.6,
+        "data_points": 44935
+      },
+      "analytics": {
+        "injury_risk": 0.11617947456067894,
+        "performance_trend": "rising",
+        "playoff_probability": 0.5369508823633264,
+        "roster_efficiency": 0.9813216516848157
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "san-diego-padres",
+      "name": "San Diego Padres",
+      "league": "MLB",
+      "division": "NL West",
+      "founded": 1969,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 74,
+        "legacy_score": 31,
+        "blaze_intelligence_score": 53,
+        "prediction_accuracy": 94.6,
+        "data_points": 46295
+      },
+      "analytics": {
+        "injury_risk": 0.054103479495798724,
+        "performance_trend": "stable",
+        "playoff_probability": 0.7377121905683153,
+        "roster_efficiency": 0.8388707506577667
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "colorado-rockies",
+      "name": "Colorado Rockies",
+      "league": "MLB",
+      "division": "NL West",
+      "founded": 1993,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 71,
+        "legacy_score": 26,
+        "blaze_intelligence_score": 42,
+        "prediction_accuracy": 94.6,
+        "data_points": 43293
+      },
+      "analytics": {
+        "injury_risk": 0.22950247587585895,
+        "performance_trend": "declining",
+        "playoff_probability": 0.39600469499171465,
+        "roster_efficiency": 0.8345189156711462
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "tampa-bay-rays",
+      "name": "Tampa Bay Rays",
+      "league": "MLB",
+      "division": "AL East",
+      "founded": 1998,
+      "championships": 0,
+      "metrics": {
+        "competitive_index": 83,
+        "legacy_score": 25,
+        "blaze_intelligence_score": 41,
+        "prediction_accuracy": 94.6,
+        "data_points": 30867
+      },
+      "analytics": {
+        "injury_risk": 0.17674816826993936,
+        "performance_trend": "stable",
+        "playoff_probability": 0.21569157090165414,
+        "roster_efficiency": 0.7182893242712922
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    }
+  ],
+  "updated": "2025-09-09T12:57:25.166Z"
+}

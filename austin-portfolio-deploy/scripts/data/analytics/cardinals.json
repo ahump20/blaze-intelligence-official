@@ -1,0 +1,105 @@
+{
+  "timestamp": "2025-08-28T07:45:00.077Z",
+  "team": "St. Louis Cardinals",
+  "league": "MLB",
+  "season": "2025",
+  "readiness": {
+    "overall": 87.9,
+    "offense": 85,
+    "defense": 88.4,
+    "pitching": 86.2,
+    "baserunning": 85
+  },
+  "leverage": {
+    "current": 1.8,
+    "trend": "stable",
+    "factors": [
+      {
+        "category": "roster_health",
+        "impact": 0.6,
+        "status": "positive"
+      },
+      {
+        "category": "recent_performance",
+        "impact": 1,
+        "status": "positive"
+      },
+      {
+        "category": "schedule_strength",
+        "impact": 0.7,
+        "status": "challenging"
+      }
+    ]
+  },
+  "confidence": 90,
+  "next_games": [
+    {
+      "opponent": "Milwaukee Brewers",
+      "date": "2025-08-29",
+      "prediction_confidence": 95.9,
+      "win_probability": 0.481,
+      "key_matchup": "Offensive consistency needed"
+    },
+    {
+      "opponent": "Chicago Cubs",
+      "date": "2025-09-01",
+      "prediction_confidence": 90.2,
+      "win_probability": 0.487,
+      "key_matchup": "Bullpen depth test"
+    },
+    {
+      "opponent": "Chicago Cubs",
+      "date": "2025-09-04",
+      "prediction_confidence": 93.2,
+      "win_probability": 0.459,
+      "key_matchup": "Offensive consistency needed"
+    }
+  ],
+  "key_metrics": {
+    "batting_avg": 0.271,
+    "era": 3.64,
+    "fielding_pct": 0.988,
+    "runs_per_game": 4.9,
+    "runs_allowed_per_game": 3.9
+  },
+  "advanced_metrics": {
+    "war_leaders": [
+      {
+        "name": "Nolan Arenado",
+        "position": "3B",
+        "war": 4.4
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "position": "1B",
+        "war": 3.3
+      },
+      {
+        "name": "Tommy Edman",
+        "position": "2B",
+        "war": 2.8
+      }
+    ],
+    "pythagorean_record": {
+      "expected_win_percentage": 0.63,
+      "runs_scored_per_game": 5,
+      "runs_allowed_per_game": 3.9
+    },
+    "strength_of_schedule": 0.533
+  },
+  "data_sources": [
+    "MLB Statcast",
+    "Baseball Reference",
+    "FanGraphs",
+    "Cardinals Internal Analytics"
+  ],
+  "methodology_note": "Metrics calculated using proprietary Blaze Intelligence algorithms combining traditional sabermetrics with cognitive performance indicators.",
+  "last_updated": "2025-08-28T07:45:00.077Z",
+  "next_update": "2025-08-28T07:55:00.077Z",
+  "update_frequency": "every_10_minutes",
+  "data_quality": {
+    "completeness": 94.7,
+    "freshness_score": 98.2,
+    "accuracy_confidence": 95.8
+  }
+}

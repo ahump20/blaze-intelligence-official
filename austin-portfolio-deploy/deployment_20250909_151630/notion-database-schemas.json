@@ -1,0 +1,497 @@
+{
+  "database_schemas": {
+    "clients": {
+      "name": "🏆 Client Database",
+      "icon": "🏆",
+      "description": "Complete profiles for all target and current clients",
+      "properties": {
+        "Organization": {
+          "id": "title",
+          "name": "Organization",
+          "type": "title",
+          "title": {}
+        },
+        "League": {
+          "name": "League",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "MLB", "color": "red"},
+              {"name": "NFL", "color": "blue"},
+              {"name": "NBA", "color": "purple"},
+              {"name": "NCAA", "color": "orange"},
+              {"name": "High School", "color": "green"},
+              {"name": "Youth/Perfect Game", "color": "yellow"},
+              {"name": "International", "color": "gray"}
+            ]
+          }
+        },
+        "Status": {
+          "name": "Status",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Target", "color": "gray"},
+              {"name": "Contacted", "color": "yellow"},
+              {"name": "Demo Scheduled", "color": "orange"},
+              {"name": "Proposal Sent", "color": "blue"},
+              {"name": "Negotiating", "color": "purple"},
+              {"name": "Client", "color": "green"},
+              {"name": "Lost", "color": "red"},
+              {"name": "On Hold", "color": "brown"}
+            ]
+          }
+        },
+        "Tier": {
+          "name": "Tier",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Demo ($1,188)", "color": "green"},
+              {"name": "Professional ($50K)", "color": "blue"},
+              {"name": "Enterprise ($250K)", "color": "purple"},
+              {"name": "Custom", "color": "orange"}
+            ]
+          }
+        },
+        "Priority": {
+          "name": "Priority", 
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "🔴 High", "color": "red"},
+              {"name": "🟡 Medium", "color": "yellow"},
+              {"name": "🟢 Low", "color": "green"}
+            ]
+          }
+        },
+        "Revenue_Potential": {
+          "name": "Revenue Potential",
+          "type": "number",
+          "number": {
+            "format": "dollar"
+          }
+        },
+        "Decision_Maker": {
+          "name": "Decision Maker",
+          "type": "rich_text",
+          "rich_text": {}
+        },
+        "Contact_Info": {
+          "name": "Contact Info",
+          "type": "rich_text",
+          "rich_text": {}
+        },
+        "Last_Contact": {
+          "name": "Last Contact",
+          "type": "date",
+          "date": {}
+        },
+        "Next_Action": {
+          "name": "Next Action",
+          "type": "rich_text", 
+          "rich_text": {}
+        },
+        "Notes": {
+          "name": "Notes",
+          "type": "rich_text",
+          "rich_text": {}
+        },
+        "Readiness_Score": {
+          "name": "Readiness Score",
+          "type": "number",
+          "number": {
+            "format": "percent"
+          }
+        },
+        "Pain_Points": {
+          "name": "Pain Points",
+          "type": "multi_select",
+          "multi_select": {
+            "options": [
+              {"name": "Analytics Gap", "color": "red"},
+              {"name": "Cost Reduction", "color": "blue"},
+              {"name": "Performance Optimization", "color": "green"},
+              {"name": "Scouting Enhancement", "color": "orange"},
+              {"name": "Injury Prevention", "color": "purple"}
+            ]
+          }
+        },
+        "Competition": {
+          "name": "Competition",
+          "type": "multi_select",
+          "multi_select": {
+            "options": [
+              {"name": "Hudl", "color": "red"},
+              {"name": "Stats Inc", "color": "blue"},
+              {"name": "Second Spectrum", "color": "purple"},
+              {"name": "Catapult", "color": "orange"},
+              {"name": "In-house Solution", "color": "brown"},
+              {"name": "None", "color": "green"}
+            ]
+          }
+        }
+      },
+      "sample_records": [
+        {
+          "Organization": "St. Louis Cardinals",
+          "League": "MLB",
+          "Status": "Target",
+          "Tier": "Enterprise ($250K)",
+          "Priority": "🔴 High",
+          "Revenue_Potential": 250000,
+          "Decision_Maker": "John Mozeliak - President of Baseball Operations",
+          "Contact_Info": "Research needed - likely through MLB contacts",
+          "Pain_Points": ["Analytics Gap", "Performance Optimization"],
+          "Competition": ["Stats Inc", "In-house Solution"],
+          "Readiness_Score": 0.90,
+          "Notes": "Currently tracking 90.0% readiness via our live system. Strong analytical culture under Mozeliak. Real opportunity for real-time optimization platform. Great proof of concept potential.",
+          "Next_Action": "Research contact path through MLB network"
+        },
+        {
+          "Organization": "Tennessee Titans",
+          "League": "NFL",
+          "Status": "Target", 
+          "Tier": "Professional ($50K)",
+          "Priority": "🔴 High",
+          "Revenue_Potential": 50000,
+          "Decision_Maker": "Ran Carthon - General Manager",
+          "Pain_Points": ["Cost Reduction", "Performance Optimization"],
+          "Competition": ["Catapult", "In-house Solution"],
+          "Notes": "Performance tracking shows 81.2% overall with defensive challenges. Opportunity for specialized defensive analytics. Mike Vrabel coaching connection potential.",
+          "Next_Action": "Research NFL network connections"
+        },
+        {
+          "Organization": "University of Texas Longhorns",
+          "League": "NCAA",
+          "Status": "Target",
+          "Tier": "Professional ($50K)", 
+          "Priority": "🟡 Medium",
+          "Revenue_Potential": 50000,
+          "Decision_Maker": "Steve Sarkisian (Football) / David Pierce (Baseball)",
+          "Pain_Points": ["Scouting Enhancement", "Analytics Gap"],
+          "Competition": ["Hudl", "None"],
+          "Notes": "Strong recruiting class (#2 nationally). Perfect Game integration opportunity for baseball. Austin's UT connection provides credibility.",
+          "Next_Action": "Leverage UT alumni network"
+        },
+        {
+          "Organization": "Memphis Grizzlies",
+          "League": "NBA",
+          "Status": "Target",
+          "Tier": "Enterprise ($250K)",
+          "Priority": "🟡 Medium", 
+          "Revenue_Potential": 250000,
+          "Decision_Maker": "Zach Kleiman - Executive VP Basketball Operations",
+          "Pain_Points": ["Character Assessment", "Performance Optimization"],
+          "Competition": ["Second Spectrum", "In-house Solution"],
+          "Readiness_Score": 0.951,
+          "Notes": "Grit Index tracking at 95.1% - perfect cultural fit. Known for player development and character focus. Taylor Jenkins coaching philosophy aligns perfectly.",
+          "Next_Action": "Research connection through NBA analytics community"
+        }
+      ]
+    },
+    "research": {
+      "name": "🔬 Research Library",
+      "icon": "🔬",
+      "description": "Market intelligence and competitive analysis",
+      "properties": {
+        "Title": {
+          "id": "title",
+          "name": "Title",
+          "type": "title",
+          "title": {}
+        },
+        "Category": {
+          "name": "Category",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Market Analysis", "color": "blue"},
+              {"name": "Competitor Research", "color": "red"},
+              {"name": "Technology Trends", "color": "green"},
+              {"name": "Pricing Intelligence", "color": "orange"},
+              {"name": "Industry Reports", "color": "purple"}
+            ]
+          }
+        },
+        "Priority": {
+          "name": "Priority",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Critical", "color": "red"},
+              {"name": "High", "color": "orange"},
+              {"name": "Medium", "color": "yellow"},
+              {"name": "Low", "color": "green"}
+            ]
+          }
+        },
+        "Status": {
+          "name": "Status",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Research Needed", "color": "gray"},
+              {"name": "In Progress", "color": "yellow"},
+              {"name": "Complete", "color": "green"},
+              {"name": "Outdated", "color": "red"}
+            ]
+          }
+        },
+        "Source": {
+          "name": "Source",
+          "type": "rich_text",
+          "rich_text": {}
+        },
+        "Key_Insights": {
+          "name": "Key Insights", 
+          "type": "rich_text",
+          "rich_text": {}
+        },
+        "Action_Items": {
+          "name": "Action Items",
+          "type": "rich_text",
+          "rich_text": {}
+        },
+        "Tags": {
+          "name": "Tags",
+          "type": "multi_select",
+          "multi_select": {
+            "options": [
+              {"name": "MLB", "color": "red"},
+              {"name": "NFL", "color": "blue"},
+              {"name": "NBA", "color": "purple"},
+              {"name": "NCAA", "color": "orange"},
+              {"name": "Pricing", "color": "green"},
+              {"name": "Technology", "color": "gray"},
+              {"name": "Competition", "color": "brown"}
+            ]
+          }
+        }
+      }
+    },
+    "content": {
+      "name": "📝 Content Management System",
+      "icon": "📝", 
+      "description": "All marketing materials, case studies, and sales content",
+      "properties": {
+        "Title": {
+          "id": "title",
+          "name": "Title",
+          "type": "title",
+          "title": {}
+        },
+        "Type": {
+          "name": "Type",
+          "type": "select", 
+          "select": {
+            "options": [
+              {"name": "Blog Post", "color": "blue"},
+              {"name": "Case Study", "color": "green"},
+              {"name": "White Paper", "color": "purple"},
+              {"name": "Sales Deck", "color": "orange"},
+              {"name": "Demo Script", "color": "red"},
+              {"name": "Email Template", "color": "yellow"},
+              {"name": "Social Media", "color": "pink"},
+              {"name": "Website Copy", "color": "gray"}
+            ]
+          }
+        },
+        "Status": {
+          "name": "Status",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Draft", "color": "gray"},
+              {"name": "Review", "color": "yellow"},
+              {"name": "Approved", "color": "green"},
+              {"name": "Published", "color": "blue"},
+              {"name": "Archived", "color": "red"}
+            ]
+          }
+        },
+        "Target_Audience": {
+          "name": "Target Audience",
+          "type": "multi_select",
+          "multi_select": {
+            "options": [
+              {"name": "MLB", "color": "red"},
+              {"name": "NFL", "color": "blue"}, 
+              {"name": "NBA", "color": "purple"},
+              {"name": "NCAA", "color": "orange"},
+              {"name": "High School", "color": "green"},
+              {"name": "General", "color": "gray"},
+              {"name": "Technical", "color": "brown"},
+              {"name": "Executive", "color": "pink"}
+            ]
+          }
+        }
+      }
+    },
+    "product": {
+      "name": "⚙️ Product Documentation",
+      "icon": "⚙️",
+      "description": "Technical specifications and product roadmap",
+      "properties": {
+        "Feature": {
+          "id": "title",
+          "name": "Feature", 
+          "type": "title",
+          "title": {}
+        },
+        "Category": {
+          "name": "Category",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Vision AI", "color": "purple"},
+              {"name": "Analytics Engine", "color": "blue"},
+              {"name": "Data Pipeline", "color": "green"},
+              {"name": "API", "color": "orange"},
+              {"name": "Dashboard", "color": "red"},
+              {"name": "Integration", "color": "yellow"},
+              {"name": "Security", "color": "gray"}
+            ]
+          }
+        },
+        "Status": {
+          "name": "Status",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Concept", "color": "gray"},
+              {"name": "Planned", "color": "yellow"},
+              {"name": "In Development", "color": "orange"},
+              {"name": "Testing", "color": "blue"},
+              {"name": "Live", "color": "green"},
+              {"name": "Deprecated", "color": "red"}
+            ]
+          }
+        },
+        "Priority": {
+          "name": "Priority",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "P0 - Critical", "color": "red"},
+              {"name": "P1 - High", "color": "orange"},
+              {"name": "P2 - Medium", "color": "yellow"},
+              {"name": "P3 - Low", "color": "green"}
+            ]
+          }
+        }
+      }
+    },
+    "business_intelligence": {
+      "name": "📈 Business Intelligence", 
+      "icon": "📈",
+      "description": "Revenue tracking, pipeline management, success metrics",
+      "properties": {
+        "Metric": {
+          "id": "title",
+          "name": "Metric",
+          "type": "title",
+          "title": {}
+        },
+        "Category": {
+          "name": "Category",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Revenue", "color": "green"},
+              {"name": "Pipeline", "color": "blue"},
+              {"name": "Performance", "color": "purple"},
+              {"name": "System", "color": "orange"},
+              {"name": "Growth", "color": "red"}
+            ]
+          }
+        },
+        "Current_Value": {
+          "name": "Current Value",
+          "type": "number",
+          "number": {}
+        },
+        "Target_Value": {
+          "name": "Target Value", 
+          "type": "number",
+          "number": {}
+        },
+        "Period": {
+          "name": "Period",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Daily", "color": "blue"},
+              {"name": "Weekly", "color": "green"},
+              {"name": "Monthly", "color": "yellow"},
+              {"name": "Quarterly", "color": "orange"},
+              {"name": "Annual", "color": "red"}
+            ]
+          }
+        },
+        "Trend": {
+          "name": "Trend",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "↗️ Up", "color": "green"},
+              {"name": "↘️ Down", "color": "red"},
+              {"name": "→ Flat", "color": "gray"}
+            ]
+          }
+        }
+      }
+    },
+    "integrations": {
+      "name": "🔗 Integration Hub",
+      "icon": "🔗",
+      "description": "External platform connections and automations",
+      "properties": {
+        "Platform": {
+          "id": "title",
+          "name": "Platform",
+          "type": "title",
+          "title": {}
+        },
+        "Type": {
+          "name": "Type",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "CRM", "color": "blue"},
+              {"name": "Analytics", "color": "green"},
+              {"name": "Communication", "color": "yellow"},
+              {"name": "Development", "color": "purple"},
+              {"name": "Finance", "color": "orange"},
+              {"name": "Marketing", "color": "red"}
+            ]
+          }
+        },
+        "Status": {
+          "name": "Status",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "Connected", "color": "green"},
+              {"name": "Setup Needed", "color": "yellow"},
+              {"name": "Testing", "color": "blue"},
+              {"name": "Failed", "color": "red"},
+              {"name": "Deprecated", "color": "gray"}
+            ]
+          }
+        },
+        "Health_Check": {
+          "name": "Health Check",
+          "type": "select",
+          "select": {
+            "options": [
+              {"name": "🟢 Healthy", "color": "green"},
+              {"name": "🟡 Warning", "color": "yellow"},
+              {"name": "🔴 Error", "color": "red"}
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "topic": "MLB analytics trends",
+  "timestamp": "2025-08-28T07:45:48.731Z",
+  "findings": [
+    "Statcast data showing increased emphasis on launch angle optimization",
+    "Teams investing heavily in pitching biomechanics analysis",
+    "Exit velocity correlations with injury prevention metrics"
+  ],
+  "sources": [
+    "ESPN Analytics Team",
+    "Sports Info Solutions",
+    "The Athletic Research",
+    "Baseball Prospectus"
+  ],
+  "confidence": 90,
+  "actionable_items": [
+    "Update data collection methodology",
+    "Enhance client reporting dashboard"
+  ]
+}

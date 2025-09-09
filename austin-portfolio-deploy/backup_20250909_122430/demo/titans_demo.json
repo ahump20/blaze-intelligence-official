@@ -1,0 +1,1632 @@
+{
+  "name": "Tennessee Titans",
+  "sport": "NFL",
+  "league": "AFC",
+  "division": "South",
+  "city": "Nashville",
+  "established": 1960,
+  "colors": [
+    "#4B92DB",
+    "#0C2340",
+    "#C8102E",
+    "#8A8D8F"
+  ],
+  "mascot": "T-Rac",
+  "id": "titans",
+  "currentSeason": 2025,
+  "roster": [
+    {
+      "id": "player_1",
+      "name": "Daniel Robinson",
+      "jerseyNumber": 67,
+      "position": "QB",
+      "age": 31,
+      "height": "6'0\"",
+      "weight": 178,
+      "experience": 6,
+      "stats": {
+        "passingYards": 2828,
+        "passingTDs": 33,
+        "interceptions": 5,
+        "rushingYards": 1369,
+        "rushingTDs": 6,
+        "receptions": 17,
+        "receivingYards": 1086,
+        "receivingTDs": 11,
+        "tackles": 82,
+        "sacks": "4.7",
+        "forcedFumbles": 1
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 99,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 6,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Southern California",
+        "hometown": "Houston, TX",
+        "draftYear": 2022,
+        "draftRound": 6,
+        "draftPick": 4,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_2",
+      "name": "Gregory Brown",
+      "jerseyNumber": 30,
+      "position": "RB",
+      "age": 33,
+      "height": "6'11\"",
+      "weight": 164,
+      "experience": 5,
+      "stats": {
+        "passingYards": 3356,
+        "passingTDs": 4,
+        "interceptions": 6,
+        "rushingYards": 585,
+        "rushingTDs": 14,
+        "receptions": 8,
+        "receivingYards": 876,
+        "receivingTDs": 7,
+        "tackles": 65,
+        "sacks": "13.0",
+        "forcedFumbles": 3
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 1,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of California",
+        "hometown": "Houston, TX",
+        "draftYear": 2016,
+        "draftRound": 7,
+        "draftPick": 24,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_3",
+      "name": "Alexander White",
+      "jerseyNumber": 80,
+      "position": "FB",
+      "age": 32,
+      "height": "6'10\"",
+      "weight": 255,
+      "experience": 1,
+      "stats": {
+        "passingYards": 723,
+        "passingTDs": 24,
+        "interceptions": 2,
+        "rushingYards": 810,
+        "rushingTDs": 14,
+        "receptions": 91,
+        "receivingYards": 330,
+        "receivingTDs": 1,
+        "tackles": 47,
+        "sacks": "13.6",
+        "forcedFumbles": 2
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 20,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 5,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "San Antonio, TX",
+        "draftYear": 2021,
+        "draftRound": 7,
+        "draftPick": 19,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_4",
+      "name": "Steven Robinson",
+      "jerseyNumber": 9,
+      "position": "WR",
+      "age": 32,
+      "height": "5'10\"",
+      "weight": 239,
+      "experience": 2,
+      "stats": {
+        "passingYards": 2406,
+        "passingTDs": 22,
+        "interceptions": 0,
+        "rushingYards": 248,
+        "rushingTDs": 2,
+        "receptions": 78,
+        "receivingYards": 235,
+        "receivingTDs": 3,
+        "tackles": 108,
+        "sacks": "11.4",
+        "forcedFumbles": 4
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 6,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 5,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Vanderbilt University",
+        "hometown": "Dallas, TX",
+        "draftYear": 2016,
+        "draftRound": 4,
+        "draftPick": 29,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_5",
+      "name": "Matthew Wright",
+      "jerseyNumber": 74,
+      "position": "TE",
+      "age": 29,
+      "height": "6'2\"",
+      "weight": 140,
+      "experience": 5,
+      "stats": {
+        "passingYards": 2791,
+        "passingTDs": 33,
+        "interceptions": 2,
+        "rushingYards": 138,
+        "rushingTDs": 6,
+        "receptions": 48,
+        "receivingYards": 813,
+        "receivingTDs": 3,
+        "tackles": 12,
+        "sacks": "3.1",
+        "forcedFumbles": 3
+      },
+      "contract": {
+        "years": 2,
+        "totalValue": 52,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Florida State University",
+        "hometown": "Dallas, TX",
+        "draftYear": 2019,
+        "draftRound": 6,
+        "draftPick": 29,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_6",
+      "name": "Jeffrey Sanchez",
+      "jerseyNumber": 68,
+      "position": "LT",
+      "age": 32,
+      "height": "7'0\"",
+      "weight": 144,
+      "experience": 8,
+      "stats": {
+        "passingYards": 1625,
+        "passingTDs": 27,
+        "interceptions": 5,
+        "rushingYards": 1240,
+        "rushingTDs": 14,
+        "receptions": 59,
+        "receivingYards": 922,
+        "receivingTDs": 0,
+        "tackles": 57,
+        "sacks": "3.7",
+        "forcedFumbles": 3
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 51,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 3,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "University of California",
+        "hometown": "San Antonio, TX",
+        "draftYear": 2022,
+        "draftRound": 3,
+        "draftPick": 4,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_7",
+      "name": "Jacob Lopez",
+      "jerseyNumber": 21,
+      "position": "LG",
+      "age": 20,
+      "height": "6'9\"",
+      "weight": 148,
+      "experience": 10,
+      "stats": {
+        "passingYards": 1339,
+        "passingTDs": 13,
+        "interceptions": 3,
+        "rushingYards": 694,
+        "rushingTDs": 8,
+        "receptions": 29,
+        "receivingYards": 1306,
+        "receivingTDs": 3,
+        "tackles": 43,
+        "sacks": "8.5",
+        "forcedFumbles": 1
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 42,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 8,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "Vanderbilt University",
+        "hometown": "Birmingham, AL",
+        "draftYear": 2019,
+        "draftRound": 4,
+        "draftPick": 5,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_8",
+      "name": "Christopher Young",
+      "jerseyNumber": 59,
+      "position": "C",
+      "age": 24,
+      "height": "5'9\"",
+      "weight": 213,
+      "experience": 4,
+      "stats": {
+        "passingYards": 3496,
+        "passingTDs": 17,
+        "interceptions": 5,
+        "rushingYards": 502,
+        "rushingTDs": 4,
+        "receptions": 21,
+        "receivingYards": 196,
+        "receivingTDs": 0,
+        "tackles": 110,
+        "sacks": "2.4",
+        "forcedFumbles": 4
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 40,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 6,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Southern California",
+        "hometown": "Nashville, TN",
+        "draftYear": 2018,
+        "draftRound": 2,
+        "draftPick": 17,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_9",
+      "name": "Robert Smith",
+      "jerseyNumber": 81,
+      "position": "RG",
+      "age": 33,
+      "height": "6'1\"",
+      "weight": 161,
+      "experience": 8,
+      "stats": {
+        "passingYards": 3811,
+        "passingTDs": 33,
+        "interceptions": 0,
+        "rushingYards": 390,
+        "rushingTDs": 14,
+        "receptions": 74,
+        "receivingYards": 788,
+        "receivingTDs": 4,
+        "tackles": 0,
+        "sacks": "3.3",
+        "forcedFumbles": 2
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 29,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 9,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Vanderbilt University",
+        "hometown": "Miami, FL",
+        "draftYear": 2020,
+        "draftRound": 6,
+        "draftPick": 19,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_10",
+      "name": "Raymond Campbell",
+      "jerseyNumber": 69,
+      "position": "RT",
+      "age": 20,
+      "height": "6'6\"",
+      "weight": 184,
+      "experience": 7,
+      "stats": {
+        "passingYards": 1951,
+        "passingTDs": 27,
+        "interceptions": 7,
+        "rushingYards": 762,
+        "rushingTDs": 9,
+        "receptions": 49,
+        "receivingYards": 1124,
+        "receivingTDs": 0,
+        "tackles": 96,
+        "sacks": "4.4",
+        "forcedFumbles": 3
+      },
+      "contract": {
+        "years": 2,
+        "totalValue": 18,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 1,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Miami, FL",
+        "draftYear": 2017,
+        "draftRound": 4,
+        "draftPick": 12,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_11",
+      "name": "Brian Lewis",
+      "jerseyNumber": 77,
+      "position": "DE",
+      "age": 31,
+      "height": "6'5\"",
+      "weight": 171,
+      "experience": 3,
+      "stats": {
+        "passingYards": 2463,
+        "passingTDs": 5,
+        "interceptions": 1,
+        "rushingYards": 233,
+        "rushingTDs": 9,
+        "receptions": 84,
+        "receivingYards": 254,
+        "receivingTDs": 8,
+        "tackles": 35,
+        "sacks": "4.0",
+        "forcedFumbles": 2
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 100,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 0,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Atlanta, GA",
+        "draftYear": 2023,
+        "draftRound": 1,
+        "draftPick": 16,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_12",
+      "name": "Matthew Perez",
+      "jerseyNumber": 27,
+      "position": "DT",
+      "age": 26,
+      "height": "6'8\"",
+      "weight": 182,
+      "experience": 11,
+      "stats": {
+        "passingYards": 30,
+        "passingTDs": 17,
+        "interceptions": 3,
+        "rushingYards": 889,
+        "rushingTDs": 5,
+        "receptions": 67,
+        "receivingYards": 1212,
+        "receivingTDs": 11,
+        "tackles": 50,
+        "sacks": "9.1",
+        "forcedFumbles": 4
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 44,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 5,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "University of Texas",
+        "hometown": "Austin, TX",
+        "draftYear": 2020,
+        "draftRound": 2,
+        "draftPick": 4,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_13",
+      "name": "David Thomas",
+      "jerseyNumber": 3,
+      "position": "LB",
+      "age": 29,
+      "height": "5'8\"",
+      "weight": 302,
+      "experience": 6,
+      "stats": {
+        "passingYards": 143,
+        "passingTDs": 13,
+        "interceptions": 0,
+        "rushingYards": 444,
+        "rushingTDs": 3,
+        "receptions": 53,
+        "receivingYards": 1230,
+        "receivingTDs": 8,
+        "tackles": 51,
+        "sacks": "10.1",
+        "forcedFumbles": 1
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 43,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 0,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Florida State University",
+        "hometown": "Miami, FL",
+        "draftYear": 2017,
+        "draftRound": 5,
+        "draftPick": 22,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_14",
+      "name": "Kenneth Brown",
+      "jerseyNumber": 31,
+      "position": "CB",
+      "age": 26,
+      "height": "5'10\"",
+      "weight": 145,
+      "experience": 7,
+      "stats": {
+        "passingYards": 1357,
+        "passingTDs": 25,
+        "interceptions": 1,
+        "rushingYards": 405,
+        "rushingTDs": 11,
+        "receptions": 13,
+        "receivingYards": 682,
+        "receivingTDs": 11,
+        "tackles": 43,
+        "sacks": "9.3",
+        "forcedFumbles": 1
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 58,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 2,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Rice University",
+        "hometown": "Dallas, TX",
+        "draftYear": 2018,
+        "draftRound": 1,
+        "draftPick": 30,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_15",
+      "name": "Andrew Rodriguez",
+      "jerseyNumber": 39,
+      "position": "FS",
+      "age": 26,
+      "height": "5'11\"",
+      "weight": 169,
+      "experience": 1,
+      "stats": {
+        "passingYards": 3809,
+        "passingTDs": 24,
+        "interceptions": 1,
+        "rushingYards": 913,
+        "rushingTDs": 8,
+        "receptions": 72,
+        "receivingYards": 923,
+        "receivingTDs": 10,
+        "tackles": 42,
+        "sacks": "9.6",
+        "forcedFumbles": 4
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 55,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 9,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Florida State University",
+        "hometown": "Nashville, TN",
+        "draftYear": 2016,
+        "draftRound": 4,
+        "draftPick": 10,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_16",
+      "name": "Brian Scott",
+      "jerseyNumber": 83,
+      "position": "SS",
+      "age": 21,
+      "height": "5'8\"",
+      "weight": 305,
+      "experience": 4,
+      "stats": {
+        "passingYards": 1289,
+        "passingTDs": 10,
+        "interceptions": 7,
+        "rushingYards": 1008,
+        "rushingTDs": 7,
+        "receptions": 18,
+        "receivingYards": 698,
+        "receivingTDs": 8,
+        "tackles": 1,
+        "sacks": "4.9",
+        "forcedFumbles": 2
+      },
+      "contract": {
+        "years": 1,
+        "totalValue": 89,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 2,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Vanderbilt University",
+        "hometown": "Chicago, IL",
+        "draftYear": 2017,
+        "draftRound": 1,
+        "draftPick": 10,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_17",
+      "name": "Donald Nguyen",
+      "jerseyNumber": 1,
+      "position": "K",
+      "age": 28,
+      "height": "6'4\"",
+      "weight": 234,
+      "experience": 3,
+      "stats": {
+        "passingYards": 2851,
+        "passingTDs": 17,
+        "interceptions": 3,
+        "rushingYards": 835,
+        "rushingTDs": 10,
+        "receptions": 77,
+        "receivingYards": 1147,
+        "receivingTDs": 3,
+        "tackles": 69,
+        "sacks": "4.3",
+        "forcedFumbles": 1
+      },
+      "contract": {
+        "years": 2,
+        "totalValue": 2,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 1,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Duke University",
+        "hometown": "Houston, TX",
+        "draftYear": 2016,
+        "draftRound": 4,
+        "draftPick": 9,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_18",
+      "name": "Anthony Allen",
+      "jerseyNumber": 53,
+      "position": "P",
+      "age": 31,
+      "height": "6'9\"",
+      "weight": 291,
+      "experience": 3,
+      "stats": {
+        "passingYards": 2660,
+        "passingTDs": 31,
+        "interceptions": 2,
+        "rushingYards": 1329,
+        "rushingTDs": 8,
+        "receptions": 18,
+        "receivingYards": 288,
+        "receivingTDs": 7,
+        "tackles": 62,
+        "sacks": "8.5",
+        "forcedFumbles": 0
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 40,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 0,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Ohio State University",
+        "hometown": "Dallas, TX",
+        "draftYear": 2018,
+        "draftRound": 2,
+        "draftPick": 6,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_19",
+      "name": "Jason Davis",
+      "jerseyNumber": 48,
+      "position": "LS",
+      "age": 24,
+      "height": "6'8\"",
+      "weight": 160,
+      "experience": 11,
+      "stats": {
+        "passingYards": 3569,
+        "passingTDs": 23,
+        "interceptions": 3,
+        "rushingYards": 229,
+        "rushingTDs": 8,
+        "receptions": 67,
+        "receivingYards": 1268,
+        "receivingTDs": 2,
+        "tackles": 106,
+        "sacks": "14.4",
+        "forcedFumbles": 3
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 59,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 1,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "Atlanta, GA",
+        "draftYear": 2020,
+        "draftRound": 6,
+        "draftPick": 8,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_20",
+      "name": "Michael Williams",
+      "jerseyNumber": 11,
+      "position": "QB",
+      "age": 20,
+      "height": "6'0\"",
+      "weight": 299,
+      "experience": 7,
+      "stats": {
+        "passingYards": 1487,
+        "passingTDs": 8,
+        "interceptions": 0,
+        "rushingYards": 1497,
+        "rushingTDs": 3,
+        "receptions": 63,
+        "receivingYards": 1125,
+        "receivingTDs": 1,
+        "tackles": 114,
+        "sacks": "6.4",
+        "forcedFumbles": 3
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 72,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 5,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Birmingham, AL",
+        "draftYear": 2023,
+        "draftRound": 4,
+        "draftPick": 2,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_21",
+      "name": "Nicholas King",
+      "jerseyNumber": 73,
+      "position": "RB",
+      "age": 28,
+      "height": "6'7\"",
+      "weight": 315,
+      "experience": 1,
+      "stats": {
+        "passingYards": 3781,
+        "passingTDs": 24,
+        "interceptions": 4,
+        "rushingYards": 13,
+        "rushingTDs": 9,
+        "receptions": 47,
+        "receivingYards": 1279,
+        "receivingTDs": 3,
+        "tackles": 117,
+        "sacks": "2.8",
+        "forcedFumbles": 3
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 23,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 8,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Texas",
+        "hometown": "Miami, FL",
+        "draftYear": 2019,
+        "draftRound": 3,
+        "draftPick": 13,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_22",
+      "name": "Kevin Scott",
+      "jerseyNumber": 55,
+      "position": "FB",
+      "age": 26,
+      "height": "6'3\"",
+      "weight": 280,
+      "experience": 4,
+      "stats": {
+        "passingYards": 2127,
+        "passingTDs": 1,
+        "interceptions": 0,
+        "rushingYards": 793,
+        "rushingTDs": 12,
+        "receptions": 86,
+        "receivingYards": 213,
+        "receivingTDs": 2,
+        "tackles": 60,
+        "sacks": "6.4",
+        "forcedFumbles": 4
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 14,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 3,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "Nashville, TN",
+        "draftYear": 2023,
+        "draftRound": 5,
+        "draftPick": 4,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_23",
+      "name": "Raymond White",
+      "jerseyNumber": 36,
+      "position": "WR",
+      "age": 21,
+      "height": "6'2\"",
+      "weight": 157,
+      "experience": 8,
+      "stats": {
+        "passingYards": 830,
+        "passingTDs": 31,
+        "interceptions": 1,
+        "rushingYards": 1095,
+        "rushingTDs": 1,
+        "receptions": 17,
+        "receivingYards": 1139,
+        "receivingTDs": 2,
+        "tackles": 11,
+        "sacks": "2.7",
+        "forcedFumbles": 1
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 55,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 2,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Duke University",
+        "hometown": "New York, NY",
+        "draftYear": 2023,
+        "draftRound": 7,
+        "draftPick": 15,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_24",
+      "name": "Larry Torres",
+      "jerseyNumber": 43,
+      "position": "TE",
+      "age": 33,
+      "height": "7'0\"",
+      "weight": 245,
+      "experience": 10,
+      "stats": {
+        "passingYards": 2792,
+        "passingTDs": 9,
+        "interceptions": 0,
+        "rushingYards": 1425,
+        "rushingTDs": 2,
+        "receptions": 30,
+        "receivingYards": 1240,
+        "receivingTDs": 5,
+        "tackles": 10,
+        "sacks": "1.2",
+        "forcedFumbles": 1
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 86,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 2,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Duke University",
+        "hometown": "Louisville, KY",
+        "draftYear": 2016,
+        "draftRound": 1,
+        "draftPick": 3,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_25",
+      "name": "Steven Nguyen",
+      "jerseyNumber": 43,
+      "position": "LT",
+      "age": 22,
+      "height": "5'9\"",
+      "weight": 264,
+      "experience": 5,
+      "stats": {
+        "passingYards": 3634,
+        "passingTDs": 22,
+        "interceptions": 7,
+        "rushingYards": 353,
+        "rushingTDs": 1,
+        "receptions": 32,
+        "receivingYards": 130,
+        "receivingTDs": 9,
+        "tackles": 106,
+        "sacks": "1.9",
+        "forcedFumbles": 4
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 70,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 3,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "Los Angeles, CA",
+        "draftYear": 2019,
+        "draftRound": 5,
+        "draftPick": 11,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    }
+  ],
+  "stats": {
+    "wins": 4,
+    "losses": 11,
+    "ties": 0,
+    "pointsFor": 308,
+    "pointsAgainst": 494,
+    "totalYards": 4949,
+    "passingYards": 3936,
+    "rushingYards": 2085,
+    "turnovers": 22,
+    "sacks": 41
+  },
+  "readiness": {
+    "overall": 87.7,
+    "trend": "strong",
+    "momentum": {
+      "score": 79,
+      "category": "positive",
+      "description": "Consistent performance across key metrics"
+    },
+    "components": {
+      "offense": 85.6,
+      "defense": 84.1,
+      "specialTeams": 94.7,
+      "coaching": 94.4,
+      "chemistry": 85.8
+    },
+    "keyMetrics": {
+      "leverageFactor": 3.18,
+      "leverageCategory": "high",
+      "strategicOutlook": "Strong foundation with room for optimization"
+    },
+    "lastUpdated": "2025-09-02T22:39:19.790Z"
+  },
+  "schedule": [
+    {
+      "id": "game_1",
+      "date": "2025-09-10",
+      "opponent": "Chicago Cubs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "6-1",
+        "margin": 6
+      },
+      "attendance": 34558,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 78,
+        "humidity": 90,
+        "windSpeed": 1,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3657545
+      }
+    },
+    {
+      "id": "game_2",
+      "date": "2025-09-17",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-3",
+        "margin": 4
+      },
+      "attendance": 36900,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 71,
+        "humidity": 78,
+        "windSpeed": 1,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5294207
+      }
+    },
+    {
+      "id": "game_3",
+      "date": "2025-09-24",
+      "opponent": "Cincinnati Reds",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-9",
+        "margin": 9
+      },
+      "attendance": 27338,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 85,
+        "humidity": 86,
+        "windSpeed": 4,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1661185
+      }
+    },
+    {
+      "id": "game_4",
+      "date": "2025-10-01",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "2-5",
+        "margin": 3
+      },
+      "attendance": 26556,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 88,
+        "humidity": 82,
+        "windSpeed": 19,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1937731
+      }
+    },
+    {
+      "id": "game_5",
+      "date": "2025-10-08",
+      "opponent": "San Antonio Spurs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-1",
+        "margin": 4
+      },
+      "attendance": 53073,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 84,
+        "humidity": 57,
+        "windSpeed": 2,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4687410
+      }
+    },
+    {
+      "id": "game_6",
+      "date": "2025-10-15",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-3",
+        "margin": 6
+      },
+      "attendance": 55405,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 69,
+        "humidity": 60,
+        "windSpeed": 1,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1008836
+      }
+    },
+    {
+      "id": "game_7",
+      "date": "2025-10-22",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "10-1",
+        "margin": 7
+      },
+      "attendance": 26370,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 83,
+        "humidity": 92,
+        "windSpeed": 7,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3063315
+      }
+    },
+    {
+      "id": "game_8",
+      "date": "2025-10-29",
+      "opponent": "Denver Broncos",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "3-5",
+        "margin": 6
+      },
+      "attendance": 41793,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 79,
+        "humidity": 60,
+        "windSpeed": 13,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4081346
+      }
+    },
+    {
+      "id": "game_9",
+      "date": "2025-11-05",
+      "opponent": "Los Angeles Lakers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "10-2",
+        "margin": 4
+      },
+      "attendance": 10139,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 71,
+        "humidity": 95,
+        "windSpeed": 19,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2890786
+      }
+    },
+    {
+      "id": "game_10",
+      "date": "2025-11-12",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-10",
+        "margin": 2
+      },
+      "attendance": 49972,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 86,
+        "humidity": 86,
+        "windSpeed": 9,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4064065
+      }
+    },
+    {
+      "id": "game_11",
+      "date": "2025-11-19",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "10-4",
+        "margin": 4
+      },
+      "attendance": 26097,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 98,
+        "humidity": 67,
+        "windSpeed": 13,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2568835
+      }
+    },
+    {
+      "id": "game_12",
+      "date": "2025-11-26",
+      "opponent": "Pittsburgh Pirates",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "9-2",
+        "margin": 6
+      },
+      "attendance": 13918,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 78,
+        "humidity": 99,
+        "windSpeed": 18,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1141256
+      }
+    },
+    {
+      "id": "game_13",
+      "date": "2025-12-03",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-5",
+        "margin": 7
+      },
+      "attendance": 28458,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 64,
+        "humidity": 62,
+        "windSpeed": 0,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1918653
+      }
+    },
+    {
+      "id": "game_14",
+      "date": "2025-12-10",
+      "opponent": "San Antonio Spurs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "3-9",
+        "margin": 4
+      },
+      "attendance": 45972,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 76,
+        "humidity": 78,
+        "windSpeed": 6,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1589027
+      }
+    },
+    {
+      "id": "game_15",
+      "date": "2025-12-17",
+      "opponent": "Georgia Bulldogs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-9",
+        "margin": 3
+      },
+      "attendance": 57359,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 76,
+        "humidity": 74,
+        "windSpeed": 10,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1945989
+      }
+    },
+    {
+      "id": "game_16",
+      "date": "2025-12-24",
+      "opponent": "Jacksonville Jaguars",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-11",
+        "margin": 3
+      },
+      "attendance": 16520,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 84,
+        "humidity": 96,
+        "windSpeed": 9,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4343341
+      }
+    },
+    {
+      "id": "game_17",
+      "date": "2025-12-31",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-7",
+        "margin": 3
+      },
+      "attendance": 25749,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 61,
+        "humidity": 95,
+        "windSpeed": 9,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1332842
+      }
+    }
+  ],
+  "facilities": {
+    "stadium": {
+      "name": "Championship Stadium",
+      "capacity": 66585,
+      "yearBuilt": 1997,
+      "surface": "Natural Grass",
+      "features": [
+        "Retractable Roof",
+        "HD Video Boards",
+        "Premium Suites"
+      ]
+    },
+    "trainingFacility": {
+      "name": "Elite Training Center",
+      "squareFootage": 129707,
+      "amenities": [
+        "Weight Room",
+        "Recovery Center",
+        "Video Analysis Room",
+        "Nutrition Center"
+      ],
+      "technology": [
+        "Motion Capture",
+        "Biometric Monitoring",
+        "VR Training"
+      ]
+    }
+  },
+  "coaching": {
+    "headCoach": {
+      "name": "Dave Miller",
+      "experience": 16,
+      "record": {
+        "wins": 148,
+        "losses": 106,
+        "winPercentage": 0.583
+      },
+      "philosophy": "Championship mindset with player development focus"
+    },
+    "assistants": [
+      {
+        "name": "Jim Thompson",
+        "position": "Special Teams Coordinator",
+        "experience": 9
+      },
+      {
+        "name": "Tom Anderson",
+        "position": "Hitting Coach",
+        "experience": 6
+      },
+      {
+        "name": "Mark Taylor",
+        "position": "Hitting Coach",
+        "experience": 7
+      },
+      {
+        "name": "Steve Williams",
+        "position": "Strength & Conditioning",
+        "experience": 15
+      },
+      {
+        "name": "John Davis",
+        "position": "Offensive Coordinator",
+        "experience": 14
+      },
+      {
+        "name": "Bob Wilson",
+        "position": "Assistant Coach",
+        "experience": 2
+      },
+      {
+        "name": "Rick Smith",
+        "position": "Assistant Coach",
+        "experience": 9
+      },
+      {
+        "name": "Mike Johnson",
+        "position": "Hitting Coach",
+        "experience": 5
+      }
+    ]
+  },
+  "analytics": {
+    "dataQuality": 0.861,
+    "processingSpeed": 90,
+    "predictionAccuracy": 0.966,
+    "realTimeCapability": true,
+    "mlModelsActive": 6,
+    "dataSourcesConnected": 17,
+    "alertsConfigured": 42,
+    "dashboardsActive": 16
+  },
+  "lastUpdated": "2025-09-02T22:39:19.790Z"
+}

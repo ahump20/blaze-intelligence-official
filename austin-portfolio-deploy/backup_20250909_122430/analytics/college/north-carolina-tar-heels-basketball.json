@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-08-28T07:48:54.482Z",
+  "program": "North Carolina Tar Heels",
+  "sport": "basketball",
+  "conference": "ACC",
+  "division": "NCAA Division I",
+  "season": "2024-25",
+  "readiness": {
+    "overall": 83.9,
+    "talent_level": 83.3,
+    "coaching": 82.1,
+    "facilities": 87.3,
+    "recruiting": 83.1
+  },
+  "leverage": {
+    "current": 3.67,
+    "trend": "stable",
+    "playoff_positioning": "moderate"
+  },
+  "academic_metrics": {
+    "apr_score": 952,
+    "graduation_rate": 92,
+    "academic_progress": 3.25
+  },
+  "nil_market": {
+    "total_valuation_millions": 3.3,
+    "avg_deal_value": 6915,
+    "top_earners": 9
+  },
+  "recruiting_data": {
+    "class_ranking": 14,
+    "commits": 21,
+    "transfer_portal_net": 3
+  },
+  "metrics_count": 22
+}

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision AI Demo | Blaze Intelligence - Advanced Sports Analytics</title>
+    <meta name="description" content="Experience Blaze Intelligence Vision AI - Revolutionary biomechanical analysis, micro-expression detection, and championship character assessment powered by computer vision">
+    <meta name="keywords" content="sports vision AI, biomechanical analysis, micro-expressions, athlete assessment, computer vision, sports analytics">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="js/blaze-three-visuals.js" defer></script>
+    
+    <style>
+        :root {
+            --blaze-primary: #ff6b35;
+            --blaze-secondary: #f7931e;
+            --blaze-accent: #ffd700;
+            --blaze-dark: #0a0a0a;
+            --blaze-darker: #050505;
+            --blaze-gray: #1a1a2e;
+            --blaze-blue: #16213e;
+            --blaze-cyan: #00ffff;
+            --blaze-green: #00ff88;
+        }
+
+        body { 
+            background: linear-gradient(135deg, var(--blaze-dark) 0%, var(--blaze-gray) 50%, var(--blaze-blue) 100%);
+            color: #e2e8f0; 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-nav { 
+            background: rgba(10, 10, 10, 0.95); 
+            backdrop-filter: blur(20px); 
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-3d-container { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        .demo-container {
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card { 
+            background: rgba(30, 41, 59, 0.9); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(0, 255, 255, 0.2); 
+            border-radius: 1rem; 
+            padding: 2rem; 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 255, 255, 0.3);
+            border-color: var(--blaze-cyan);
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .interactive-demo {
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .demo-tab {
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .demo-tab.active {
+            background: linear-gradient(135deg, var(--blaze-primary), var(--blaze-secondary));
+            border-color: var(--blaze-accent);
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+        }
+
+        .metrics-display {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--blaze-primary), var(--blaze-secondary), var(--blaze-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .performance-indicator {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid var(--blaze-green);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--blaze-green);
+            margin: 0.25rem;
+        }
+
+        .live-demo-button {
+            background: linear-gradient(135deg, var(--blaze-primary), var(--blaze-secondary));
+            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .live-demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 48px rgba(255, 107, 53, 0.6);
+        }
+
+        .neural-network-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1rem 0;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(30, 30, 30, 0.8));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(0, 255, 255, 0.1),
+                transparent,
+                rgba(255, 107, 53, 0.1),
+                transparent
+            );
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translate(-100%, -100%) rotate(45deg); }
+            100% { transform: translate(100%, 100%) rotate(45deg); }
+        }
+    </style>
+    
+    <!-- Analytics & Testing -->
+    <script src="js/analytics-config.js"></script>
+    <script src="js/ab-testing.js" defer></script>
+    <script src="js/sentry-config.js"></script>
+</head>
+<body>
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+            <ul class="hidden lg:flex items-center space-x-8">
+                <li><a href="/index.html" class="text-slate-300 hover:text-white">Home</a></li>
+                <li><a href="/dashboard.html" class="text-slate-300 hover:text-white">Dashboard</a></li>
+                <li><a href="/portal.html" class="text-slate-300 hover:text-white">Portal</a></li>
+                <li><a href="/api-docs.html" class="text-slate-300 hover:text-white">API</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Neural Network Background -->
+    <div class="neural-network-bg fixed inset-0 z-0"></div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen pt-24">
+        <div id="vision-hero-3d" class="hero-3d-container"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500/20 to-cyan-400/20 border border-orange-500/30 rounded-full mb-6">
+                    <div class="w-2 h-2 bg-green-400 rounded-full pulse-animation"></div>
+                    <span class="text-sm font-semibold text-green-400">LIVE SYSTEM OPERATIONAL</span>
+                </div>
+                
+                <h1 class="text-7xl lg:text-8xl font-black mb-6">
+                    <span class="gradient-text">VISION AI</span>
+                </h1>
+                
+                <p class="text-2xl text-slate-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+                    Revolutionary computer vision platform analyzing 
+                    <span class="text-cyan-400 font-semibold">biomechanics</span>, 
+                    <span class="text-orange-400 font-semibold">micro-expressions</span>, and 
+                    <span class="text-green-400 font-semibold">championship character traits</span> 
+                    across all sports
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <div class="performance-indicator">94.6% Accuracy</div>
+                    <div class="performance-indicator">&lt;30ms Processing</div>
+                    <div class="performance-indicator">10,000+ Athletes Analyzed</div>
+                    <div class="performance-indicator">All Major Sports</div>
+                </div>
+            </div>
+
+            <!-- Interactive Demo Tabs -->
+            <div class="demo-container">
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <div class="demo-tab active" onclick="switchDemo('biomechanical')">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="activity" class="w-5 h-5"></i>
+                            <span class="font-semibold">Biomechanical Analysis</span>
+                        </div>
+                    </div>
+                    <div class="demo-tab" onclick="switchDemo('micro-expressions')">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                            <span class="font-semibold">Micro-Expression Detection</span>
+                        </div>
+                    </div>
+                    <div class="demo-tab" onclick="switchDemo('character')">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="brain" class="w-5 h-5"></i>
+                            <span class="font-semibold">Character Assessment</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo Content -->
+                <div class="interactive-demo">
+                    <div id="demo-biomechanical" class="demo-content active">
+                        <div class="grid lg:grid-cols-2 gap-8 p-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-cyan-400 mb-4">Real-Time Biomechanical Analysis</h3>
+                                <div class="mb-6 rounded-xl overflow-hidden">
+                                    <iframe
+                                        src="https://customer-mpdvoybjqct2pzls.cloudflarestream.com/138facaf760c65e9b4efab3715ae6f50/iframe?poster=https%3A%2F%2Fcustomer-mpdvoybjqct2pzls.cloudflarestream.com%2F138facaf760c65e9b4efab3715ae6f50%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+                                        loading="lazy"
+                                        style="border: none; width: 100%; height: 400px;"
+                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                        allowfullscreen="true"
+                                    ></iframe>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-4">Live Metrics</h4>
+                                <div class="metrics-display mb-4">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <p class="text-slate-400 text-sm">Joint Angles</p>
+                                            <p class="text-2xl font-bold text-cyan-400" id="joint-angle">127.3°</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-slate-400 text-sm">Force Vector</p>
+                                            <p class="text-2xl font-bold text-green-400" id="force-vector">892N</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-slate-400 text-sm">Efficiency Score</p>
+                                            <p class="text-2xl font-bold text-orange-400" id="efficiency">94.2%</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-slate-400 text-sm">Fatigue Level</p>
+                                            <p class="text-2xl font-bold text-yellow-400" id="fatigue">Low</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="biomechanical-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="demo-micro-expressions" class="demo-content hidden">
+                        <div class="grid lg:grid-cols-2 gap-8 p-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-orange-400 mb-4">Micro-Expression Detection</h3>
+                                <div class="video-placeholder mb-6">
+                                    <div class="text-center">
+                                        <i data-lucide="scan-face" class="w-16 h-16 text-orange-400 mb-4 mx-auto pulse-animation"></i>
+                                        <p class="text-xl font-semibold text-white mb-2">Facial Analysis Engine</p>
+                                        <p class="text-slate-400">Capturing expressions lasting 1/25th second</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-4">Emotional Intelligence Metrics</h4>
+                                <div class="metrics-display mb-4">
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-slate-400">Confidence Level</span>
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-24 h-2 bg-gray-700 rounded-full">
+                                                    <div class="w-4/5 h-full bg-green-400 rounded-full"></div>
+                                                </div>
+                                                <span class="text-green-400 font-bold">87%</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-slate-400">Stress Indicators</span>
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-24 h-2 bg-gray-700 rounded-full">
+                                                    <div class="w-1/4 h-full bg-yellow-400 rounded-full"></div>
+                                                </div>
+                                                <span class="text-yellow-400 font-bold">23%</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-slate-400">Focus Score</span>
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-24 h-2 bg-gray-700 rounded-full">
+                                                    <div class="w-5/6 h-full bg-cyan-400 rounded-full"></div>
+                                                </div>
+                                                <span class="text-cyan-400 font-bold">91%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="expression-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="demo-character" class="demo-content hidden">
+                        <div class="grid lg:grid-cols-2 gap-8 p-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-green-400 mb-4">Championship Character Assessment</h3>
+                                <div class="video-placeholder mb-6">
+                                    <div class="text-center">
+                                        <i data-lucide="zap" class="w-16 h-16 text-green-400 mb-4 mx-auto pulse-animation"></i>
+                                        <p class="text-xl font-semibold text-white mb-2">Character Analysis Engine</p>
+                                        <p class="text-slate-400">Validated against 10,000+ elite athletes</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-4">Championship Traits</h4>
+                                <div class="metrics-display mb-4">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-slate-400">Leadership Potential</span>
+                                                <span class="text-green-400 font-bold">Elite (94%)</span>
+                                            </div>
+                                            <div class="w-full h-2 bg-gray-700 rounded-full">
+                                                <div class="w-[94%] h-full bg-green-400 rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-slate-400">Clutch Performance</span>
+                                                <span class="text-blue-400 font-bold">High (82%)</span>
+                                            </div>
+                                            <div class="w-full h-2 bg-gray-700 rounded-full">
+                                                <div class="w-[82%] h-full bg-blue-400 rounded-full"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-slate-400">Team Chemistry</span>
+                                                <span class="text-purple-400 font-bold">Excellent (89%)</span>
+                                            </div>
+                                            <div class="w-full h-2 bg-gray-700 rounded-full">
+                                                <div class="w-[89%] h-full bg-purple-400 rounded-full"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="character-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Features -->
+            <div class="grid md:grid-cols-3 gap-8 mt-16">
+                <div class="feature-card">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center">
+                            <i data-lucide="activity" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-cyan-400">Biomechanical Precision</h3>
+                    </div>
+                    <p class="text-slate-300 mb-6">Real-time skeletal tracking with 30+ joint analysis points, measuring angles, velocities, and force vectors with millisecond precision.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>360° joint angle measurement</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Force vector analysis & power output</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Real-time fatigue detection algorithms</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Injury risk assessment & prevention</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
+                            <i data-lucide="eye" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-orange-400">Micro-Expression Mastery</h3>
+                    </div>
+                    <p class="text-slate-300 mb-6">Advanced facial recognition capturing expressions lasting 1/25th of a second. Reveals true emotional states and competitive mindset in real-time.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Confidence & composure indicators</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Stress & pressure response markers</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Focus & attention assessment</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Team chemistry & communication analysis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg flex items-center justify-center">
+                            <i data-lucide="zap" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-400">Championship DNA</h3>
+                    </div>
+                    <p class="text-slate-300 mb-6">Identifies universal performance traits and championship character patterns. Validated against 10,000+ professional athletes across all major sports.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Leadership patterns (validated across 92 teams)</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Clutch performance indicators (87% accuracy)</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Team chemistry compatibility scores</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-slate-400">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+                            <span>Draft value projections (all major leagues)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="mt-20 text-center">
+                <div class="max-w-3xl mx-auto mb-8">
+                    <h2 class="text-4xl font-bold text-white mb-4">Ready to Experience the Future?</h2>
+                    <p class="text-xl text-slate-400">Join 50+ professional organizations already using Blaze Intelligence Vision AI to gain competitive advantages.</p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/contact.html" class="live-demo-button inline-flex items-center justify-center gap-3 px-8 py-4 text-white font-bold rounded-lg text-lg">
+                        <i data-lucide="video" class="w-6 h-6"></i>
+                        Schedule Live Demo
+                    </a>
+                    <a href="/dashboard.html" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 font-bold rounded-lg hover:bg-cyan-400 hover:text-black transition-all text-lg">
+                        <i data-lucide="play" class="w-6 h-6"></i>
+                        Try Interactive Demo
+                    </a>
+                </div>
+
+                <p class="text-slate-500 text-sm mt-6">
+                    Enterprise plans starting at $250,000/year • Custom implementation included • 24/7 support
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Demo switching functionality
+        let currentDemo = 'biomechanical';
+        
+        function switchDemo(demoType) {
+            // Update tab states
+            document.querySelectorAll('.demo-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.closest('.demo-tab').classList.add('active');
+            
+            // Hide all demo content
+            document.querySelectorAll('.demo-content').forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('active');
+            });
+            
+            // Show selected demo
+            const selectedDemo = document.getElementById(`demo-${demoType}`);
+            selectedDemo.classList.remove('hidden');
+            selectedDemo.classList.add('active');
+            
+            currentDemo = demoType;
+            updateDemoCharts();
+            startLiveMetrics();
+        }
+
+        // Live metrics simulation
+        let metricsInterval;
+        
+        function startLiveMetrics() {
+            if (metricsInterval) clearInterval(metricsInterval);
+            
+            metricsInterval = setInterval(() => {
+                updateLiveMetrics();
+            }, 2000);
+        }
+        
+        function updateLiveMetrics() {
+            if (currentDemo === 'biomechanical') {
+                const jointAngle = document.getElementById('joint-angle');
+                const forceVector = document.getElementById('force-vector');
+                const efficiency = document.getElementById('efficiency');
+                const fatigue = document.getElementById('fatigue');
+                
+                if (jointAngle) jointAngle.textContent = (120 + Math.random() * 20).toFixed(1) + '°';
+                if (forceVector) forceVector.textContent = Math.floor(800 + Math.random() * 200) + 'N';
+                if (efficiency) efficiency.textContent = (90 + Math.random() * 8).toFixed(1) + '%';
+                if (fatigue) fatigue.textContent = Math.random() > 0.7 ? 'Medium' : 'Low';
+            }
+        }
+
+        // Chart initialization
+        function updateDemoCharts() {
+            const contexts = {
+                'biomechanical-chart': createBiomechanicalChart,
+                'expression-chart': createExpressionChart, 
+                'character-chart': createCharacterChart
+            };
+            
+            Object.entries(contexts).forEach(([canvasId, chartFunc]) => {
+                const canvas = document.getElementById(canvasId);
+                if (canvas) {
+                    chartFunc(canvas);
+                }
+            });
+        }
+
+        function createBiomechanicalChart(canvas) {
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 10}, (_, i) => `${i}s`),
+                    datasets: [{
+                        label: 'Joint Angle',
+                        data: Array.from({length: 10}, () => 120 + Math.random() * 20),
+                        borderColor: '#00ffff',
+                        backgroundColor: 'rgba(0, 255, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#94a3b8' }
+                        },
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#94a3b8' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createExpressionChart(canvas) {
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Confidence', 'Focus', 'Composure', 'Intensity', 'Leadership'],
+                    datasets: [{
+                        label: 'Expression Profile',
+                        data: [87, 91, 79, 85, 92],
+                        borderColor: '#ff6b35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.2)',
+                        pointBackgroundColor: '#ff6b35'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: { color: '#94a3b8' },
+                            ticks: { color: '#94a3b8', backdropColor: 'transparent' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createCharacterChart(canvas) {
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Leadership', 'Clutch', 'Chemistry', 'Resilience'],
+                    datasets: [{
+                        data: [94, 82, 89, 76],
+                        backgroundColor: ['#00ff88', '#00ffff', '#ff6b35', '#ffd700']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#94a3b8' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Initialize 3D backgrounds
+            if (typeof blazeVisuals !== 'undefined') {
+                blazeVisuals.initHeroHeader('vision-hero-3d', { 
+                    particleCount: 3000, 
+                    interactive: true,
+                    colors: ['#ff6b35', '#00ffff', '#00ff88']
+                });
+            }
+            
+            // Start demo functionality
+            updateDemoCharts();
+            startLiveMetrics();
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // GSAP animations for feature cards
+            if (typeof gsap !== 'undefined') {
+                gsap.from('.feature-card', {
+                    duration: 0.8,
+                    y: 50,
+                    opacity: 0,
+                    stagger: 0.2,
+                    scrollTrigger: {
+                        trigger: '.feature-card',
+                        start: 'top 80%'
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

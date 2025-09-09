@@ -1,0 +1,103 @@
+{
+  "timestamp": "2025-08-28T08:20:18.507Z",
+  "market_trends": {
+    "commitment_age_trend": "younger",
+    "velocity_requirements_trend": "increasing",
+    "academic_importance_trend": "critical",
+    "position_demand": {
+      "high_demand": [
+        "SS",
+        "CF",
+        "C",
+        "P"
+      ],
+      "moderate_demand": [
+        "3B",
+        "2B",
+        "RF"
+      ],
+      "lower_demand": [
+        "1B",
+        "LF",
+        "DH"
+      ],
+      "specialty_positions": {
+        "left_handed_pitching": "extremely_high",
+        "switch_hitting": "high",
+        "multi_position": "increasingly_valuable"
+      }
+    }
+  },
+  "geographic_hotspots": {
+    "southwest": {
+      "heat_level": "hot",
+      "prospects_per_state": 586,
+      "d1_concentration": 15,
+      "key_factors": [
+        "Year-round playing weather",
+        "Strong high school programs",
+        "Major league presence"
+      ]
+    },
+    "southeast": {
+      "heat_level": "moderate",
+      "prospects_per_state": 380,
+      "d1_concentration": 15,
+      "key_factors": [
+        "Deep talent pool",
+        "Strong college programs",
+        "Traditional baseball culture"
+      ]
+    },
+    "west": {
+      "heat_level": "extremely_hot",
+      "prospects_per_state": 752,
+      "d1_concentration": 15,
+      "key_factors": [
+        "Advanced training facilities",
+        "Technology integration",
+        "High performance standards"
+      ]
+    },
+    "midwest": {
+      "heat_level": "moderate",
+      "prospects_per_state": 488,
+      "d1_concentration": 15,
+      "key_factors": [
+        "Strong fundamentals",
+        "Academic emphasis",
+        "Team-first mentality"
+      ]
+    },
+    "northeast": {
+      "heat_level": "hot",
+      "prospects_per_state": 514,
+      "d1_concentration": 15,
+      "key_factors": [
+        "Academic rigor",
+        "Prep school pipeline",
+        "Elite showcase opportunities"
+      ]
+    }
+  },
+  "development_pathways": {
+    "traditional_high_school": 0.45,
+    "travel_ball_focused": 0.35,
+    "prep_school_route": 0.12,
+    "juco_pathway": 0.08
+  },
+  "success_factors": [
+    "Early skill development and fundamentals",
+    "Consistent tournament and showcase participation",
+    "Strong academic performance maintained",
+    "Position-specific skill specialization",
+    "Mental game and leadership development"
+  ],
+  "emerging_trends": [
+    "Increased importance of social media presence",
+    "Data-driven performance analysis becoming standard",
+    "Earlier recruiting timelines across all divisions",
+    "Academic requirements continuing to rise",
+    "Technology integration in skill development"
+  ]
+}

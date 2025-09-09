@@ -1,0 +1,12 @@
+# Clean URLs (no .html extension)
+/manifesto           /manifesto.html            200
+/pilot-playbook      /pilot-playbook.html       200
+/investor-narrative  /investor-narrative.html   200
+/recruiting          /recruiting.html           200
+/integration-hub     /integration-hub.html      200
+
+# API routes (preserve)
+/api/*               /api/:splat                200
+
+# Catch-all (must be last)
+/*                   /:splat                    200

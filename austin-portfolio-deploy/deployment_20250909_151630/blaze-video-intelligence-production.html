@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze Intelligence Video Analysis Platform</title>
+<meta name="description" content="Professional sports video analysis with AI-powered biomechanical intelligence. Where Texas heritage meets Silicon Valley innovation.">
+
+<link rel="icon" href="/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+
+<style>
+:root {
+/* Blaze Intelligence Brand Colors */
+--burnt-orange: #BF5700;
+--cardinal-blue: #9BCBEB;
+--tennessee-deep: #002244;
+--grizzly-teal: #00B2A9;
+--platinum: #E5E4E2;
+--graphite: #36454F;
+--pearl: #FAFAFA;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+background: linear-gradient(135deg, var(--graphite) 0%, var(--tennessee-deep) 100%);
+color: white;
+overflow-x: hidden;
+}
+
+/* Navigation */
+.nav-bar {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+background: rgba(0, 34, 68, 0.95);
+backdrop-filter: blur(20px);
+padding: 1rem 2rem;
+border-bottom: 1px solid var(--burnt-orange);
+z-index: 1000;
+}
+
+.nav-content {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.nav-brand {
+font-size: 24px;
+font-weight: 900;
+color: var(--burnt-orange);
+text-decoration: none;
+letter-spacing: -0.02em;
+}
+
+.nav-links {
+display: flex;
+gap: 2rem;
+list-style: none;
+}
+
+.nav-links a {
+color: white;
+text-decoration: none;
+font-weight: 500;
+padding: 0.5rem 1rem;
+border-radius: 6px;
+transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+background: var(--burnt-orange);
+color: white;
+}
+
+/* Hero Section */
+.hero {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 100px 2rem 2rem;
+background: radial-gradient(ellipse at center, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+}
+
+.hero-content {
+max-width: 1200px;
+text-align: center;
+}
+
+.hero-title {
+font-size: clamp(3rem, 8vw, 6rem);
+font-weight: 900;
+margin-bottom: 1rem;
+background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+line-height: 1.1;
+}
+
+.hero-subtitle {
+font-size: clamp(1.2rem, 3vw, 2rem);
+color: var(--cardinal-blue);
+margin-bottom: 2rem;
+font-weight: 600;
+}
+
+.hero-description {
+font-size: 1.2rem;
+color: var(--platinum);
+margin-bottom: 3rem;
+line-height: 1.6;
+}
+
+/* Video Upload Zone */
+.upload-zone {
+background: var(--pearl);
+color: var(--tennessee-deep);
+border-radius: 20px;
+padding: 3rem;
+margin: 2rem 0;
+border: 3px dashed var(--burnt-orange);
+transition: all 0.3s ease;
+cursor: pointer;
+position: relative;
+overflow: hidden;
+}
+
+.upload-zone:hover {
+border-color: var(--grizzly-teal);
+transform: translateY(-5px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.upload-zone.dragover {
+background: rgba(191, 87, 0, 0.1);
+border-color: var(--burnt-orange);
+transform: scale(1.02);
+}
+
+.upload-content {
+text-align: center;
+}
+
+.upload-icon {
+font-size: 4rem;
+color: var(--burnt-orange);
+margin-bottom: 1rem;
+}
+
+.upload-title {
+font-size: 1.8rem;
+font-weight: 700;
+margin-bottom: 1rem;
+color: var(--tennessee-deep);
+}
+
+.upload-description {
+font-size: 1.1rem;
+color: var(--graphite);
+margin-bottom: 2rem;
+}
+
+.file-input {
+display: none;
+}
+
+.upload-button {
+background: var(--burnt-orange);
+color: white;
+border: none;
+padding: 1rem 2rem;
+border-radius: 10px;
+font-size: 1.1rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.upload-button:hover {
+background: var(--grizzly-teal);
+transform: translateY(-2px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Sport Selection */
+.sport-selection {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 1.5rem;
+margin: 3rem 0;
+}
+
+.sport-card {
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(10px);
+border-radius: 15px;
+padding: 2rem;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s ease;
+border: 2px solid transparent;
+}
+
+.sport-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+border-color: var(--burnt-orange);
+}
+
+.sport-card.selected {
+background: rgba(191, 87, 0, 0.2);
+border-color: var(--burnt-orange);
+box-shadow: 0 0 30px rgba(191, 87, 0, 0.5);
+}
+
+.sport-icon {
+font-size: 3rem;
+margin-bottom: 1rem;
+color: var(--cardinal-blue);
+}
+
+.sport-name {
+font-size: 1.3rem;
+font-weight: 700;
+margin-bottom: 0.5rem;
+color: white;
+}
+
+.sport-description {
+font-size: 0.9rem;
+color: var(--platinum);
+line-height: 1.4;
+}
+
+/* Analysis Panel */
+.analysis-panel {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(20px);
+border-radius: 20px;
+padding: 2rem;
+margin: 2rem 0;
+border: 1px solid rgba(255, 255, 255, 0.1);
+display: none;
+}
+
+.analysis-panel.active {
+display: block;
+animation: slideInUp 0.5s ease;
+}
+
+@keyframes slideInUp {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+.video-container {
+position: relative;
+width: 100%;
+aspect-ratio: 16/9;
+background: black;
+border-radius: 15px;
+overflow: hidden;
+margin-bottom: 2rem;
+}
+
+.video-player {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.video-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+opacity: 0.7;
+}
+
+/* Analysis Controls */
+.analysis-controls {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1rem;
+margin-bottom: 2rem;
+}
+
+.control-button {
+background: var(--burnt-orange);
+color: white;
+border: none;
+padding: 1rem;
+border-radius: 10px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+position: relative;
+}
+
+.control-button:hover:not(:disabled) {
+background: var(--grizzly-teal);
+transform: translateY(-2px);
+}
+
+.control-button:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}
+
+.control-button.analyzing {
+background: var(--cardinal-blue);
+animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.7; }
+}
+
+/* Progress Bar */
+.progress-container {
+width: 100%;
+height: 6px;
+background: rgba(255, 255, 255, 0.2);
+border-radius: 3px;
+margin: 1rem 0;
+overflow: hidden;
+}
+
+.progress-bar {
+height: 100%;
+background: linear-gradient(90deg, var(--burnt-orange), var(--grizzly-teal));
+border-radius: 3px;
+width: 0%;
+transition: width 0.3s ease;
+}
+
+/* Results Section */
+.results-section {
+display: none;
+}
+
+.results-section.active {
+display: block;
+animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+
+.metrics-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+margin: 2rem 0;
+}
+
+.metric-card {
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(10px);
+border-radius: 15px;
+padding: 1.5rem;
+border-left: 4px solid var(--burnt-orange);
+}
+
+.metric-title {
+font-size: 1.1rem;
+font-weight: 600;
+color: var(--cardinal-blue);
+margin-bottom: 0.5rem;
+}
+
+.metric-value {
+font-size: 2rem;
+font-weight: 900;
+color: white;
+margin-bottom: 0.5rem;
+}
+
+.metric-unit {
+font-size: 0.9rem;
+color: var(--platinum);
+}
+
+/* Insights Section */
+.insights-section {
+background: rgba(255, 255, 255, 0.05);
+border-radius: 15px;
+padding: 2rem;
+margin: 2rem 0;
+}
+
+.insights-title {
+font-size: 1.5rem;
+font-weight: 700;
+margin-bottom: 1.5rem;
+color: var(--burnt-orange);
+}
+
+.insight-item {
+background: rgba(255, 255, 255, 0.1);
+border-radius: 10px;
+padding: 1.5rem;
+margin-bottom: 1rem;
+border-left: 4px solid var(--grizzly-teal);
+}
+
+.insight-priority {
+display: inline-block;
+background: var(--burnt-orange);
+color: white;
+padding: 0.25rem 0.5rem;
+border-radius: 4px;
+font-size: 0.8rem;
+font-weight: 600;
+margin-bottom: 0.5rem;
+}
+
+.insight-title {
+font-weight: 600;
+margin-bottom: 0.5rem;
+color: white;
+}
+
+.insight-description {
+color: var(--platinum);
+line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.nav-links {
+display: none;
+}
+
+.hero {
+padding: 120px 1rem 2rem;
+}
+
+.upload-zone {
+padding: 2rem 1rem;
+}
+
+.sport-selection {
+grid-template-columns: 1fr;
+}
+
+.analysis-controls {
+grid-template-columns: 1fr;
+}
+
+.metrics-grid {
+grid-template-columns: 1fr;
+}
+}
+
+/* Loading Animation */
+.loading-spinner {
+width: 40px;
+height: 40px;
+border: 4px solid rgba(255, 255, 255, 0.3);
+border-top: 4px solid var(--burnt-orange);
+border-radius: 50%;
+animation: spin 1s linear infinite;
+margin: 0 auto;
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+/* Success/Error Messages */
+.message {
+padding: 1rem;
+border-radius: 8px;
+margin: 1rem 0;
+font-weight: 500;
+}
+
+.message.success {
+background: rgba(0, 178, 169, 0.2);
+border: 1px solid var(--grizzly-teal);
+color: var(--grizzly-teal);
+}
+
+.message.error {
+background: rgba(220, 38, 127, 0.2);
+border: 1px solid #dc267f;
+color: #ff6b9d;
+}
+
+/* Feature Cards */
+.features-section {
+max-width: 1200px;
+margin: 4rem auto;
+padding: 0 2rem;
+}
+
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 2rem;
+margin: 3rem 0;
+}
+
+.feature-card {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border-radius: 20px;
+padding: 2rem;
+border: 1px solid rgba(255, 255, 255, 0.1);
+transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+border-color: var(--burnt-orange);
+}
+
+.feature-icon {
+font-size: 2.5rem;
+color: var(--burnt-orange);
+margin-bottom: 1rem;
+}
+
+.feature-title {
+font-size: 1.3rem;
+font-weight: 700;
+margin-bottom: 1rem;
+color: white;
+}
+
+.feature-description {
+color: var(--platinum);
+line-height: 1.6;
+}
+</style>
+</head>
+<body>
+<section class="hero">
+<div class="hero-content">
+<h1 class="hero-title">Video Intelligence</h1>
+<p class="hero-subtitle">Where Heritage Meets Algorithmic Excellence</p>
+<p class="hero-description">
+Transform raw game footage into championship-caliber biomechanical intelligence. 
+Professional sports analysis with real-time AI-powered insights.
+</p>
+
+<div class="sport-selection">
+<div class="sport-card" data-sport="baseball">
+<div class="sport-icon">⚾</div>
+<h3 class="sport-name">Baseball</h3>
+<p class="sport-description">Swing mechanics, pitching analysis, fielding efficiency</p>
+</div>
+<div class="sport-card" data-sport="football">
+<div class="sport-icon">🏈</div>
+<h3 class="sport-name">Football</h3>
+<p class="sport-description">QB mechanics, route precision, defensive technique</p>
+</div>
+<div class="sport-card" data-sport="basketball">
+<div class="sport-icon">🏀</div>
+<h3 class="sport-name">Basketball</h3>
+<p class="sport-description">Shot mechanics, movement efficiency, defensive positioning</p>
+</div>
+<div class="sport-card" data-sport="golf">
+<div class="sport-icon">⛳</div>
+<h3 class="sport-name">Golf</h3>
+<p class="sport-description">Swing plane, sequencing, short game analysis</p>
+</div>
+</div>
+
+<div class="results-section" id="resultsSection">
+<div class="metrics-grid" id="metricsGrid">
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+

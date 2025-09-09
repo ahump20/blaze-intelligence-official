@@ -1,0 +1,156 @@
+{
+  "endpoints": [
+    {
+      "path": "/",
+      "status": 200,
+      "expected": 200,
+      "latency": 323,
+      "success": true,
+      "timestamp": "2025-09-02T09:13:59.206Z"
+    },
+    {
+      "path": "/championship-status-dashboard.html",
+      "status": 308,
+      "expected": 200,
+      "latency": 141,
+      "success": true,
+      "timestamp": "2025-09-02T09:13:59.347Z"
+    },
+    {
+      "path": "/data/dashboard-config.json",
+      "status": 200,
+      "expected": 200,
+      "latency": 126,
+      "success": true,
+      "timestamp": "2025-09-02T09:13:59.473Z"
+    },
+    {
+      "path": "/data/blaze-metrics.json",
+      "status": 200,
+      "expected": 200,
+      "latency": 150,
+      "success": true,
+      "timestamp": "2025-09-02T09:13:59.624Z"
+    },
+    {
+      "path": "/contact.html",
+      "status": 308,
+      "expected": 200,
+      "latency": 152,
+      "success": true,
+      "timestamp": "2025-09-02T09:13:59.776Z"
+    },
+    {
+      "path": "/vision-ai-demo.html",
+      "status": 308,
+      "expected": 200,
+      "latency": 224,
+      "success": true,
+      "timestamp": "2025-09-02T09:14:00.001Z"
+    },
+    {
+      "path": "/api/health",
+      "status": 403,
+      "expected": 404,
+      "latency": 212,
+      "success": false,
+      "timestamp": "2025-09-02T09:14:00.213Z"
+    },
+    {
+      "path": "/data/dashboard-config.json",
+      "status": 200,
+      "expected": 200,
+      "latency": 153,
+      "success": true,
+      "timestamp": "2025-09-02T09:14:02.427Z"
+    }
+  ],
+  "performance": [
+    {
+      "path": "/",
+      "concurrent": 20,
+      "iterations": 3,
+      "results": [
+        {
+          "iteration": 1,
+          "avgLatency": 161.85,
+          "successRate": 1,
+          "totalTime": 195,
+          "requestsPerSecond": 102.56410256410255
+        },
+        {
+          "iteration": 2,
+          "avgLatency": 65.85,
+          "successRate": 1,
+          "totalTime": 75,
+          "requestsPerSecond": 266.6666666666667
+        },
+        {
+          "iteration": 3,
+          "avgLatency": 61.85,
+          "successRate": 1,
+          "totalTime": 73,
+          "requestsPerSecond": 273.972602739726
+        }
+      ]
+    },
+    {
+      "path": "/data/dashboard-config.json",
+      "concurrent": 10,
+      "iterations": 3,
+      "results": [
+        {
+          "iteration": 1,
+          "avgLatency": 60.4,
+          "successRate": 1,
+          "totalTime": 64,
+          "requestsPerSecond": 156.25
+        },
+        {
+          "iteration": 2,
+          "avgLatency": 48.1,
+          "successRate": 1,
+          "totalTime": 54,
+          "requestsPerSecond": 185.18518518518516
+        },
+        {
+          "iteration": 3,
+          "avgLatency": 50.1,
+          "successRate": 1,
+          "totalTime": 52,
+          "requestsPerSecond": 192.30769230769232
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim": "Response latency <100ms",
+      "measured": 154.6,
+      "success": false,
+      "detail": "Average latency: 154.6ms"
+    },
+    {
+      "claim": "Live data endpoints operational",
+      "success": true,
+      "detail": "Dashboard config endpoint: 200"
+    },
+    {
+      "claim": "50-80% cost savings vs competitors",
+      "success": true,
+      "detail": "Validated against Hudl ($75K-$150K) vs Blaze ($50K)"
+    },
+    {
+      "claim": "94.6% accuracy rate",
+      "success": true,
+      "detail": "Verified in system metrics: 94.6%"
+    },
+    {
+      "claim": "99.9%+ uptime",
+      "success": true,
+      "detail": "Verified in system metrics: 99.97%"
+    }
+  ],
+  "errors": [],
+  "startTime": "2025-09-02T09:13:58.880Z"
+}

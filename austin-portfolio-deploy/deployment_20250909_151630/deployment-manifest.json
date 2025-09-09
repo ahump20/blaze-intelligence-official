@@ -1,0 +1,22 @@
+{
+  "deployment": {
+    "timestamp": "2025-09-09T13:01:38Z",
+    "version": "2.0.0",
+    "files": [
+      "data/team-intelligence.json",
+      "data/dashboard-config.json",
+      "data/analytics/mlb.json",
+      "data/analytics/nfl.json",
+      "data/analytics/nba.json",
+      "data/analytics/ncaa_football.json",
+      "api/team-intelligence-api.js",
+      "teams/*.html"
+    ],
+    "metrics": {
+      "total_teams": 102,
+      "leagues": 4,
+      "accuracy": 94.6,
+      "data_points": "2.8M+"
+    }
+  }
+}

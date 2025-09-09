@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Championship Analytics Platform</title>
+    <meta name="description" content="Professional sports analytics powered by AI. Real-time insights for MLB, NFL, NBA, NCAA teams.">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            z-index: 1;
+        }
+
+        #three-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 1200px;
+        }
+
+        /* Metric Cards */
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #FF6B35;
+        }
+
+        /* Live Badge */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid #FF6B35;
+            border-radius: 100px;
+            color: #FF6B35;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #FF6B35;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #FF6B35;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #FF8555;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 14px 32px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 107, 53, 0.5);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #FF6B35, #FFB84D);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Stats Section */
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B35, #FFB84D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        /* Charts Container */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            height: 300px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg"></div>
+                    <div>
+                        <div class="text-xl font-bold">Blaze</div>
+                        <div class="text-sm text-gray-400">Intelligence</div>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
+                    <a href="#analytics" class="text-gray-300 hover:text-white transition">Analytics</a>
+                    <a href="/dashboard.html" class="text-gray-300 hover:text-white transition">Dashboard</a>
+                    <a href="/pricing.html" class="text-gray-300 hover:text-white transition">Pricing</a>
+                    <a href="/contact.html" class="text-gray-300 hover:text-white transition">Contact</a>
+                    <a href="#" class="btn-primary">Start Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div id="three-container"></div>
+        
+        <div class="hero-content">
+            <!-- Live Data Badge -->
+            <div class="mb-8">
+                <span class="live-badge">
+                    <span class="live-dot"></span>
+                    LIVE DATA STREAMING
+                </span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="text-5xl md:text-7xl font-black mb-6">
+                Turn Data Into<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-300">
+                    Championships
+                </span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
+                Professional sports analytics powered by AI.<br>
+                Real-time insights, predictive modeling, and actionable intelligence 
+                for teams that refuse to settle for second place.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex gap-4 justify-center mb-16">
+                <a href="/trial" class="btn-primary">Get Started Free →</a>
+                <a href="/demo" class="btn-secondary">View Live Demo ↗</a>
+            </div>
+
+            <!-- Live Metrics Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="metric-card">
+                    <div class="text-sm text-gray-400 mb-2">Win Probability</div>
+                    <div class="text-3xl font-bold text-orange-400">79.7%</div>
+                    <div class="text-sm text-green-400">↑ 12.3%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="text-sm text-gray-400 mb-2">Team Readiness</div>
+                    <div class="text-3xl font-bold text-orange-400">88%</div>
+                    <div class="text-sm text-green-400">↑ 5%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="text-sm text-gray-400 mb-2">Power Index</div>
+                    <div class="text-3xl font-bold text-orange-400">78</div>
+                    <div class="text-sm text-green-400">↑ 8 pts</div>
+                </div>
+                <div class="metric-card">
+                    <div class="text-sm text-gray-400 mb-2">Accuracy</div>
+                    <div class="text-3xl font-bold text-orange-400">94.6%</div>
+                    <div class="text-sm text-yellow-400">Industry Best</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="text-orange-500 font-bold mb-4">FEATURES</div>
+                <h2 class="text-4xl md:text-5xl font-black mb-4">Everything You Need to Win</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Championship-level analytics tools designed for modern sports organizations. 
+                    From youth leagues to professional teams.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Real-Time Analytics -->
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="text-2xl font-bold mb-3">Real-Time Analytics</h3>
+                    <p class="text-gray-400 mb-4">
+                        Live data streaming with sub-100ms latency. Track performance metrics, 
+                        player stats, and game dynamics as they happen.
+                    </p>
+                    <a href="#" class="text-orange-400 font-semibold hover:text-orange-300">
+                        Learn more →
+                    </a>
+                </div>
+
+                <!-- AI Predictions -->
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="text-2xl font-bold mb-3">AI Predictions</h3>
+                    <p class="text-gray-400 mb-4">
+                        Machine learning models with 94.6% accuracy. Predict outcomes, 
+                        identify patterns, and optimize strategies.
+                    </p>
+                    <a href="#" class="text-orange-400 font-semibold hover:text-orange-300">
+                        Learn more →
+                    </a>
+                </div>
+
+                <!-- Pattern Recognition -->
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="text-2xl font-bold mb-3">Pattern Recognition</h3>
+                    <p class="text-gray-400 mb-4">
+                        Discover hidden correlations like our 82.1% Power-Win relationship. 
+                        Turn patterns into competitive advantages.
+                    </p>
+                    <a href="#" class="text-orange-400 font-semibold hover:text-orange-300">
+                        Learn more →
+                    </a>
+                </div>
+
+                <!-- Custom Reports -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="text-2xl font-bold mb-3">Custom Reports</h3>
+                    <p class="text-gray-400 mb-4">
+                        Automated insights tailored to your team. Daily briefings, 
+                        game reports, and strategic recommendations.
+                    </p>
+                    <a href="#" class="text-orange-400 font-semibold hover:text-orange-300">
+                        Learn more →
+                    </a>
+                </div>
+
+                <!-- API Integration -->
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="text-2xl font-bold mb-3">API Integration</h3>
+                    <p class="text-gray-400 mb-4">
+                        Connect with any platform. RESTful APIs, webhooks, 
+                        and real-time data streams for seamless integration.
+                    </p>
+                    <a href="#" class="text-orange-400 font-semibold hover:text-orange-300">
+                        Learn more →
+                    </a>
+                </div>
+
+                <!-- Multi-Sport Support -->
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="text-2xl font-bold mb-3">Multi-Sport Support</h3>
+                    <p class="text-gray-400 mb-4">
+                        Complete coverage across MLB, NFL, NBA, NCAA, and more. 
+                        246+ teams monitored 24/7.
+                    </p>
+                    <a href="#" class="text-orange-400 font-semibold hover:text-orange-300">
+                        Learn more →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Analytics Dashboard Preview -->
+    <section id="analytics" class="py-24 px-6 bg-gradient-to-b from-transparent to-orange-950/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="text-orange-500 font-bold mb-4">LIVE ANALYTICS</div>
+                <h2 class="text-4xl md:text-5xl font-black mb-4">Real-Time Team Performance</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Watch your data come alive with interactive visualizations and live updates.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Performance Radar -->
+                <div class="chart-container">
+                    <h3 class="text-xl font-bold mb-4">Team Performance Matrix</h3>
+                    <canvas id="radarChart"></canvas>
+                </div>
+
+                <!-- Trend Analysis -->
+                <div class="chart-container">
+                    <h3 class="text-xl font-bold mb-4">7-Day Win Probability Trend</h3>
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Team Cards -->
+            <div class="grid md:grid-cols-4 gap-6 mt-12">
+                <div class="metric-card text-center">
+                    <div class="text-2xl mb-2">⚾</div>
+                    <div class="font-bold">Cardinals</div>
+                    <div class="text-2xl font-bold text-orange-400 mt-2">87.3%</div>
+                    <div class="text-sm text-gray-400">Win Probability</div>
+                </div>
+                <div class="metric-card text-center">
+                    <div class="text-2xl mb-2">🏈</div>
+                    <div class="font-bold">Titans</div>
+                    <div class="text-2xl font-bold text-orange-400 mt-2">92.1%</div>
+                    <div class="text-sm text-gray-400">Team Readiness</div>
+                </div>
+                <div class="metric-card text-center">
+                    <div class="text-2xl mb-2">🤘</div>
+                    <div class="font-bold">Longhorns</div>
+                    <div class="text-2xl font-bold text-orange-400 mt-2">#3</div>
+                    <div class="text-sm text-gray-400">Recruiting Rank</div>
+                </div>
+                <div class="metric-card text-center">
+                    <div class="text-2xl mb-2">🏀</div>
+                    <div class="font-bold">Grizzlies</div>
+                    <div class="text-2xl font-bold text-orange-400 mt-2">114.7</div>
+                    <div class="text-sm text-gray-400">Offensive Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Stats -->
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="text-orange-500 font-bold mb-4">PERFORMANCE</div>
+                <h2 class="text-4xl md:text-5xl font-black mb-4">Numbers That Matter</h2>
+                <p class="text-xl text-gray-400">Trusted by champions. Proven by data.</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="stat-number">94.6%</div>
+                    <div class="text-gray-400">Prediction Accuracy</div>
+                </div>
+                <div>
+                    <div class="stat-number">2.8M+</div>
+                    <div class="text-gray-400">Daily Data Points</div>
+                </div>
+                <div>
+                    <div class="stat-number">&lt;100ms</div>
+                    <div class="text-gray-400">Response Time</div>
+                </div>
+                <div>
+                    <div class="stat-number">246+</div>
+                    <div class="text-gray-400">Teams Monitored</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="bg-gradient-to-br from-orange-600/20 to-orange-800/20 rounded-3xl p-16 border border-orange-600/30">
+                <h2 class="text-4xl md:text-5xl font-black mb-6">Ready to Dominate?</h2>
+                <p class="text-xl text-gray-300 mb-8">
+                    Join teams that are already winning with Blaze Intelligence. 
+                    Start your free trial today.
+                </p>
+                <a href="/trial" class="btn-primary text-lg">Get Started Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg"></div>
+                        <div class="text-xl font-bold">Blaze Intelligence</div>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Professional sports analytics powered by AI.<br>
+                        Turning data into championships since 2024.
+                    </p>
+                </div>
+                
+                <div class="flex gap-12">
+                    <div>
+                        <h4 class="font-semibold mb-3">Product</h4>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><a href="#features" class="hover:text-white transition">Features</a></li>
+                            <li><a href="/dashboard.html" class="hover:text-white transition">Dashboard</a></li>
+                            <li><a href="/api-docs.html" class="hover:text-white transition">API Docs</a></li>
+                            <li><a href="#" class="hover:text-white transition">Integrations</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3">Company</h4>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><a href="/about.html" class="hover:text-white transition">About</a></li>
+                            <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+                            <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                            <li><a href="/contact.html" class="hover:text-white transition">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3">Support</h4>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+                            <li><a href="/status.html" class="hover:text-white transition">Status</a></li>
+                            <li><a href="/terms.html" class="hover:text-white transition">Terms</a></li>
+                            <li><a href="/privacy.html" class="hover:text-white transition">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
+                © 2024 Blaze Intelligence. All rights reserved. Built in Boerne, TX 🤠
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Three.js Particle Animation
+        function initThreeJS() {
+            const container = document.getElementById('three-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+            
+            // Create particles
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+            const colors = [];
+            
+            for (let i = 0; i < 1000; i++) {
+                vertices.push(
+                    Math.random() * 2000 - 1000,
+                    Math.random() * 2000 - 1000,
+                    Math.random() * 2000 - 1000
+                );
+                
+                // Orange to gold gradient colors
+                const color = new THREE.Color();
+                color.setHSL(0.08 + Math.random() * 0.05, 1, 0.5 + Math.random() * 0.2);
+                colors.push(color.r, color.g, color.b);
+            }
+            
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+            
+            const material = new THREE.PointsMaterial({
+                size: 2,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+            
+            camera.position.z = 500;
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.x += 0.0005;
+                particles.rotation.y += 0.0005;
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Initialize Charts
+        function initCharts() {
+            // Radar Chart
+            const radarCtx = document.getElementById('radarChart');
+            if (radarCtx) {
+                new Chart(radarCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Offense', 'Defense', 'Special Teams', 'Coaching', 'Momentum', 'Health'],
+                        datasets: [{
+                            label: 'Current Performance',
+                            data: [92, 88, 76, 94, 85, 91],
+                            borderColor: '#FF6B35',
+                            backgroundColor: 'rgba(255, 107, 53, 0.2)',
+                            pointBackgroundColor: '#FF6B35',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#FF6B35'
+                        }, {
+                            label: 'League Average',
+                            data: [75, 75, 75, 75, 75, 75],
+                            borderColor: 'rgba(255, 255, 255, 0.3)',
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            pointBackgroundColor: 'rgba(255, 255, 255, 0.3)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(255, 255, 255, 0.3)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: { color: 'rgba(255, 255, 255, 0.5)' },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                angleLines: { color: 'rgba(255, 255, 255, 0.1)' }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: { color: 'white' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Trend Chart
+            const trendCtx = document.getElementById('trendChart');
+            if (trendCtx) {
+                new Chart(trendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Win Probability',
+                            data: [72, 75, 73, 78, 82, 85, 87],
+                            borderColor: '#FF6B35',
+                            backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 60,
+                                max: 100,
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            },
+                            x: {
+                                ticks: { color: 'rgba(255, 255, 255, 0.7)' },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Update metrics with animation
+        function updateMetrics() {
+            const metrics = document.querySelectorAll('.metric-card');
+            metrics.forEach(card => {
+                const valueElement = card.querySelector('.text-3xl');
+                if (valueElement && Math.random() > 0.7) {
+                    const currentValue = parseFloat(valueElement.textContent);
+                    const change = (Math.random() - 0.5) * 5;
+                    const newValue = Math.max(0, currentValue + change);
+                    
+                    if (valueElement.textContent.includes('%')) {
+                        valueElement.textContent = newValue.toFixed(1) + '%';
+                    } else {
+                        valueElement.textContent = Math.round(newValue).toString();
+                    }
+                    
+                    // Flash animation
+                    card.style.borderColor = '#FF6B35';
+                    setTimeout(() => {
+                        card.style.borderColor = '';
+                    }, 500);
+                }
+            });
+        }
+
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            initThreeJS();
+            initCharts();
+            
+            // Update metrics periodically
+            setInterval(updateMetrics, 3000);
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

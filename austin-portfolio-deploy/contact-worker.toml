@@ -1,0 +1,10 @@
+name = "blaze-contact-handler"
+main = "contact-form-worker.js"
+compatibility_date = "2024-01-01"
+
+[env.production]
+route = { pattern = "blaze-intelligence-lsl.pages.dev/api/contact", zone_name = "pages.dev" }
+
+[[kv_namespaces]]
+binding = "LEADS"
+id = "LEADS_KV_ID"

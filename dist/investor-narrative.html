@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Narrative — The $50B Conviction Economy — Blaze Intelligence</title>
+    <meta name="description" content="The $50B conviction economy and Blaze's path to category creation.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Investor Narrative — The $50B Conviction Economy">
+    <meta property="og:description" content="The $50B conviction economy and Blaze's path to category creation.">
+    <meta property="og:site_name" content="Blaze Intelligence">
+    <meta property="og:type" content="article">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Investor Narrative — The $50B Conviction Economy">
+    <meta name="twitter:description" content="The $50B conviction economy and Blaze's path to category creation.">
+    
+    <!-- Theme -->
+    <meta name="theme-color" content="#BF5700">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://blaze-intelligence.com/investor-narrative">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Investor Narrative — The $50B Conviction Economy",
+      "description": "The $50B conviction economy and Blaze's path to category creation.",
+      "datePublished": "2025-08-20",
+      "dateModified": "2025-08-20",
+      "author": {
+        "@type": "Organization",
+        "name": "Blaze Intelligence",
+        "url": "https://blaze-intelligence.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Blaze Intelligence",
+        "url": "https://blaze-intelligence.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://blaze-intelligence.com/logo.png"
+        }
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --dark-burnt-orange: #8B3A00;
+            --black: #000000;
+            --dark-gray: #0A0A0A;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--burnt-orange);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 120px auto 80px;
+            padding: 0 20px;
+        }
+        
+        .prose {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .prose h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .prose h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--burnt-orange);
+        }
+        
+        .prose h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 30px 0 15px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .prose p {
+            margin: 20px 0;
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .prose ul, .prose ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .prose li {
+            margin: 10px 0;
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .prose strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .prose em {
+            color: var(--burnt-orange);
+            font-style: italic;
+        }
+        
+        .prose blockquote {
+            border-left: 4px solid var(--burnt-orange);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .prose code {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Consolas, monospace;
+            font-size: 0.9em;
+        }
+        
+        .prose pre {
+            background: var(--dark-gray);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+        
+        .prose pre code {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .prose hr {
+            border: none;
+            border-top: 1px solid rgba(191, 87, 0, 0.3);
+            margin: 40px 0;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h4 {
+            color: var(--burnt-orange);
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 8px 0;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+                font-size: 14px;
+            }
+            
+            .prose h1 {
+                font-size: 36px;
+            }
+            
+            .prose h2 {
+                font-size: 28px;
+            }
+            
+            main {
+                margin-top: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span>🔥</span>
+                <span>BLAZE INTELLIGENCE</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/manifesto">Manifesto</a>
+                <a href="/recruiting">Recruiting</a>
+            </div>
+        </div>
+    </nav>
+    
+    <main>
+        <article class="prose">
+            <h1>Blaze Intelligence: The $50B Conviction Economy</h1>
+<h2>The Opportunity</h2>
+<p>Professional sports is a $500B global industry where 90% of decisions are still made on gut feel dressed as statistics. The gap between what elite evaluators &quot;know&quot; and what they can prove costs teams hundreds of millions in mistaken contracts, missed talent, and lost games.</p>
+<p><strong>Blaze Intelligence bridges that gap by turning instinct into auditable signal.</strong></p>
+<h2>Market Timing: Why Now</h2>
+<ol>
+<li><strong>Biosignal Ubiquity</strong>: Wearables penetration hit 78% in pro sports (2024)</li>
+<li><strong>Computer Vision Maturity</strong>: Real-time pose/micro-expression at &lt;50ms latency</li>
+<li><strong>Decision Fatigue</strong>: Teams drowning in data but starving for conviction</li>
+<li><strong>Cultural Shift</strong>: &quot;Intangibles&quot; no longer dismissed as unmeasurable</li>
+</ol>
+<h2>The Product: Champion Enigma Engine (CEE)</h2>
+<p>Multi-modal system that quantifies traditionally unmeasurable qualities:</p>
+<ul>
+<li><strong>Inputs</strong>: Video, biosignals, game telemetry, historical patterns</li>
+<li><strong>Processing</strong>: Visual cortex analysis + physiological decoding + psychological profiling</li>
+<li><strong>Outputs</strong>: 8 Champion Dimensions with evidence trails and confidence bounds</li>
+</ul>
+<p><strong>Not another analytics dashboard. It&#39;s conviction infrastructure.</strong></p>
+<h2>Go-to-Market: Land &amp; Expand</h2>
+<h3>Phase 1: MLB Proof (Months 1-6)</h3>
+<ul>
+<li><strong>Target</strong>: 1 innovative franchise (Cardinals pipeline built)</li>
+<li><strong>Deliverable</strong>: +2 wins via CEE-driven decisions</li>
+<li><strong>Price</strong>: $500K pilot → $2M annual</li>
+</ul>
+<h3>Phase 2: Sport Expansion (Months 7-18)</h3>
+<ul>
+<li><strong>NFL</strong>: 4 teams ($8M ARR)</li>
+<li><strong>NBA</strong>: 3 teams ($6M ARR)  </li>
+<li><strong>NCAA Power 5</strong>: 10 programs ($5M ARR)</li>
+<li><strong>Total Year 2 ARR</strong>: $20M</li>
+</ul>
+<h3>Phase 3: Platform Economy (Year 2+)</h3>
+<ul>
+<li><strong>API Marketplace</strong>: Third-party apps build on CEE</li>
+<li><strong>Talent Graph</strong>: Global recruiting intelligence network</li>
+<li><strong>Gaming Bridge</strong>: 100M gamers&#39; telemetry → athletic insights</li>
+<li><strong>Consumer Layer</strong>: Blaze Backyard app (10M downloads Year 3)</li>
+</ul>
+<h2>Revenue Model</h2>
+<h3>Enterprise (Teams/Leagues)</h3>
+<ul>
+<li><strong>Pilot</strong>: $500K (12 weeks)</li>
+<li><strong>Annual Platform</strong>: $2-5M/team</li>
+<li><strong>Decision Room</strong>: $100K/event (draft, trade deadline)</li>
+<li><strong>Custom Dimensions</strong>: $250K development</li>
+</ul>
+<h3>Platform (Ecosystem)</h3>
+<ul>
+<li><strong>API Access</strong>: $50K-500K/year</li>
+<li><strong>Talent Graph</strong>: $25K/program</li>
+<li><strong>Data Co-ops</strong>: Revenue share</li>
+</ul>
+<h3>Consumer</h3>
+<ul>
+<li><strong>Backyard App</strong>: $19.99/month</li>
+<li><strong>Digital Combines</strong>: $99/report</li>
+<li><strong>Camps</strong>: $500/athlete</li>
+</ul>
+<h2>Competitive Moat</h2>
+<ol>
+<li><strong>Multi-Modal Patent Portfolio</strong>: Visual+bio+behavioral fusion</li>
+<li><strong>Evidence Requirement</strong>: Every score traceable (others can&#39;t follow)</li>
+<li><strong>Network Effects</strong>: More teams = better patterns = higher accuracy</li>
+<li><strong>Cultural Capital</strong>: &quot;Blaze Score&quot; becoming industry standard</li>
+</ol>
+<h2>Traction &amp; Proof Points</h2>
+<ul>
+<li><strong>Infrastructure</strong>: Production Worker + Pages + Integration Hub live</li>
+<li><strong>Data Pipeline</strong>: MLB/NFL/NCAA feeds integrated</li>
+<li><strong>Competitive Validation</strong>: 67-80% cost savings vs. Hudl verified</li>
+<li><strong>Technical Team</strong>: MCP server ecosystem battle-tested</li>
+<li><strong>IP</strong>: QPEF™, Decision Velocity Model™, Champion Enigma™ trademarked</li>
+</ul>
+<h2>Financial Projections</h2>
+<h3>Year 1</h3>
+<ul>
+<li>Revenue: $2M (4 pilots)</li>
+<li>Burn: $3M</li>
+<li>Team: 8 people</li>
+</ul>
+<h3>Year 2</h3>
+<ul>
+<li>Revenue: $20M (20 teams)</li>
+<li>Gross Margin: 75%</li>
+<li>Team: 25 people</li>
+</ul>
+<h3>Year 3</h3>
+<ul>
+<li>Revenue: $75M (50 teams + platform)</li>
+<li>EBITDA Positive</li>
+<li>Team: 60 people</li>
+</ul>
+<h3>Year 5</h3>
+<ul>
+<li>Revenue: $500M</li>
+<li>EBITDA: $200M (40%)</li>
+<li>Exit Multiple: 10x Revenue = $5B valuation</li>
+</ul>
+<h2>Use of Funds ($10M Series A)</h2>
+<ul>
+<li><strong>Product</strong> (40%): CEE hardening, mobile app, API platform</li>
+<li><strong>GTM</strong> (30%): Enterprise sales, pilot subsidies</li>
+<li><strong>Data</strong> (20%): Biosignal partnerships, compute infrastructure</li>
+<li><strong>Team</strong> (10%): Technical leadership, sport-specific experts</li>
+</ul>
+<h2>Why We Win</h2>
+<ol>
+<li><strong>Timing</strong>: Intersection of biosignal ubiquity and decision fatigue</li>
+<li><strong>Philosophy</strong>: Instinct as measurable substrate (paradigm shift)</li>
+<li><strong>Product</strong>: Evidence-linked conviction (not black box)</li>
+<li><strong>Team</strong>: Technical depth + sport credibility</li>
+<li><strong>Network</strong>: Cardinals, Titans, Texas, Memphis partnerships</li>
+</ol>
+<h2>The Ask</h2>
+<p>$10M Series A at $40M pre-money valuation</p>
+<ul>
+<li>Lead: $5M (sports-focused or enterprise SaaS fund)</li>
+<li>Strategic: $3M (league, media, or gaming partner)</li>
+<li>Angels: $2M (athletes, coaches, executives)</li>
+</ul>
+<h2>Exit Scenarios</h2>
+<h3>Strategic Acquisition (Years 3-5)</h3>
+<ul>
+<li><strong>Acquirers</strong>: Fanatics, DraftKings, Nike, Apple</li>
+<li><strong>Multiple</strong>: 10-15x revenue</li>
+<li><strong>Value</strong>: $5-7.5B</li>
+</ul>
+<h3>Growth Equity → IPO (Years 5-7)</h3>
+<ul>
+<li><strong>Comps</strong>: Palantir (conviction infrastructure), Toast (vertical SaaS)</li>
+<li><strong>Multiple</strong>: 8-12x revenue</li>
+<li><strong>Market Cap</strong>: $6-10B</li>
+</ul>
+<h3>Platform Roll-up (Years 4-6)</h3>
+<ul>
+<li><strong>Acquire</strong>: Adjacent tools (video, wearables, recruiting)</li>
+<li><strong>Create</strong>: Sports intelligence conglomerate</li>
+<li><strong>Value</strong>: $10B+</li>
+</ul>
+<h2>Why Now, Why Us</h2>
+<p>The old world treats conviction as mystique. The new world—our world—instruments it.</p>
+<p>Every elite organization will need conviction infrastructure within 36 months. The only question is whether they build (impossible), buy from us (optimal), or lose to those who do.</p>
+<p><strong>Blaze Intelligence isn&#39;t just measuring performance. We&#39;re creating a new asset class: Conviction.</strong></p>
+<hr>
+<p><strong>Contact</strong>: <a href="mailto:austin@blaze-intelligence.com">austin@blaze-intelligence.com</a><br><strong>Deck</strong>: <a href="https://blaze-intelligence.com/investors">Request Access</a><br><strong>Demo</strong>: <a href="https://calendly.com/blaze-intelligence">Schedule</a></p>
+
+        </article>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <a href="/manifesto">Manifesto</a>
+                <a href="/pilot-playbook">Pilot Playbook</a>
+                <a href="/recruiting">Global Recruiting Leaderboard</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="/pilot-playbook">MLB Pilot Playbook</a>
+                <a href="/investor-narrative">Investor Narrative</a>
+                <a href="/integration-hub">Integration Hub</a>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="mailto:austin@blaze-intelligence.com">Email Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <a href="https://github.com/blaze-intelligence" target="_blank">GitHub</a>
+                <a href="https://twitter.com/blazeintel" target="_blank">Twitter</a>
+                <a href="https://linkedin.com/company/blaze-intelligence" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Blaze Intelligence. Belief with receipts.
+        </div>
+    </footer>
+    
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_TOKEN"}'></script>
+</body>
+</html>

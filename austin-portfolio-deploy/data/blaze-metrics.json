@@ -1,0 +1,55 @@
+{
+  "ts": "2025-09-02T00:36:06.268Z",
+  "lastUpdate": "2025-09-02T00:36:06.268Z",
+  "updateDuration": 331,
+  "cardinals": {
+    "readiness": 90,
+    "leverage": 2.2,
+    "trend": "up",
+    "lastGame": {
+      "opponent": "Athletics",
+      "result": "L 11-3",
+      "date": "2025-09-01"
+    },
+    "confidence": 91.27589786229552,
+    "liveGame": false,
+    "timestamp": "2025-09-02T00:36:06.170Z"
+  },
+  "titans": {
+    "performance": 81.2,
+    "offenseRating": 82.9,
+    "defenseRating": 72.9,
+    "trend": "up",
+    "liveGame": false,
+    "confidence": 86.4,
+    "timestamp": "2025-09-02T00:36:06.186Z"
+  },
+  "grizzlies": {
+    "gritIndex": 95.1,
+    "characterScore": 90,
+    "teamChemistry": 97.9,
+    "trend": "up",
+    "confidence": 93.1,
+    "timestamp": "2025-09-02T00:36:06.190Z"
+  },
+  "longhorns": {
+    "recruiting": 54,
+    "class2026": {
+      "commits": 17,
+      "nationalRank": 2,
+      "conferenceRank": 1
+    },
+    "liveGame": false,
+    "confidence": 87.2,
+    "timestamp": "2025-09-02T00:36:06.268Z"
+  },
+  "systemMetrics": {
+    "accuracy": 94.6,
+    "latency": 66,
+    "dataPoints": 2889446,
+    "uptime": 99.97,
+    "apisActive": 4,
+    "lastUpdate": "2025-09-02T00:36:06.268Z",
+    "timestamp": "2025-09-02T00:36:06.268Z"
+  }
+}

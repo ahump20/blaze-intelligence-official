@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Labs | Blaze Intelligence - Championship Research Environments</title>
+    <meta name="description" content="Specialized analytics labs for Cardinals, Titans, Longhorns, and Grizzlies. Real-time performance tracking and cognitive intelligence research.">
+    <meta name="keywords" content="sports analytics labs, cardinals analytics, titans analytics, longhorns analytics, grizzlies analytics">
+    
+    <!-- Enhanced Font Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'burnt-orange': {
+                            '100': '#FFF3E0',
+                            '200': '#FFE0B2', 
+                            '300': '#DEB887',
+                            '400': '#D2691E',
+                            '500': '#BF5700',
+                            '600': '#A0522D',
+                            '700': '#8B4513',
+                            '800': '#654321',
+                            '900': '#3D2914',
+                        },
+                        'neon': {
+                            'blue': '#00FFFF',
+                            'green': '#00FF00', 
+                            'orange': '#FF8C00',
+                            'purple': '#9400D3'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Chart.js for live data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Blaze Unified Data System -->
+    <script src="js/blaze-unified-data.js" defer></script>
+    
+    <style>
+        :root {
+            --primary-orange: #BF5700;
+            --accent-orange: #D2691E;
+            --light-orange: #DEB887;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --neon-blue: #00FFFF;
+            --neon-green: #00FF00;
+            --neon-orange: #FF8C00;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: #e2e8f0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .mono-font {
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-radius: 1rem;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--neon-orange) 0%, var(--accent-orange) 50%, #A0522D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .neon-text {
+            color: var(--neon-blue);
+            text-shadow: 0 0 4px currentColor;
+        }
+
+        .enhanced-btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, var(--primary-orange), var(--accent-orange));
+            border: 2px solid var(--neon-orange);
+            box-shadow: 0 0 12px rgba(255, 140, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .enhanced-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
+        }
+
+        .lab-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 1rem;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 24px rgba(0, 255, 255, 0.15);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-live {
+            background: rgba(34, 197, 94, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-beta {
+            background: rgba(249, 115, 22, 0.2);
+            color: #f59e0b;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .loading-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="/" class="text-2xl font-bold neon-text tracking-tighter hover:scale-105 transition-transform">
+                    BLAZE INTELLIGENCE
+                </a>
+                <span class="ml-3 text-xs text-slate-500 bg-slate-800 px-2 py-1 rounded-full">v2.0</span>
+            </div>
+            
+            <ul class="hidden lg:flex items-center space-x-6">
+                <li><a href="/platform" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">🚀 Platform</a></li>
+                <li><a href="/labs" class="text-orange-400 font-bold transition-colors duration-200">⚡ Labs</a></li>
+                <li><a href="/portfolio" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">🏆 Portfolio</a></li>
+                <li><a href="/insights" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">📊 Insights</a></li>
+                <li><a href="/about" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">👨‍💼 About</a></li>
+                <li><a href="/#contact" class="enhanced-btn text-white font-semibold px-6 py-3 rounded-full transition-all duration-300">START PROJECT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- Labs Hero -->
+        <section class="py-20 lg:py-32 bg-black/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-4xl mx-auto mb-20">
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-gradient reveal">ANALYTICS LABS</h1>
+                    <p class="mt-6 text-xl md:text-2xl text-slate-400 reveal" style="transition-delay: 100ms;">Championship-level research environments for team-specific intelligence</p>
+                    <div class="flex items-center justify-center gap-2 mt-4 reveal" style="transition-delay: 200ms;">
+                        <div class="w-3 h-3 bg-neon-green rounded-full loading-pulse"></div>
+                        <span class="text-neon-green mono-font text-sm font-bold">4 ACTIVE LABS • LIVE DATA STREAMS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Primary Labs Grid -->
+        <section class="py-20 bg-black/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Cardinals Lab -->
+                    <div class="lab-card p-8 reveal">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-white">🔴</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-red-400">CARDINALS INTELLIGENCE LAB</h3>
+                                    <p class="text-slate-400">St. Louis Cardinals Analytics Hub</p>
+                                </div>
+                            </div>
+                            <div class="status-indicator status-live">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                LIVE
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-6">Real-time readiness tracking, leverage analysis, and championship preparation metrics for the St. Louis Cardinals organization.</p>
+                        
+                        <!-- Live Cardinals Data -->
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-red-400" id="cardinals-readiness">86.6</div>
+                                <div class="text-xs text-slate-400">Team Readiness</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-orange-400" id="cardinals-leverage">2.85</div>
+                                <div class="text-xs text-slate-400">Leverage Factor</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-green-400" id="cardinals-confidence">High</div>
+                                <div class="text-xs text-slate-400">Trend</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Offense Rating</span>
+                                <span class="text-neon-blue font-mono">87.1</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Defense Rating</span>
+                                <span class="text-neon-blue font-mono">88.5</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Pitching Score</span>
+                                <span class="text-neon-blue font-mono">85.4</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Last Updated</span>
+                                <span class="text-neon-green font-mono" id="cardinals-updated">2 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Titans Lab -->
+                    <div class="lab-card p-8 reveal" style="transition-delay: 100ms;">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-white">🟦</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-blue-400">TITANS ANALYTICS LAB</h3>
+                                    <p class="text-slate-400">Tennessee Titans Research Hub</p>
+                                </div>
+                            </div>
+                            <div class="status-indicator status-live">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                LIVE
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-6">Decision velocity optimization, pressure analytics, and cognitive performance metrics for championship-level NFL execution.</p>
+                        
+                        <!-- Live Titans Data -->
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-blue-400" id="titans-epa">0.074</div>
+                                <div class="text-xs text-slate-400">EPA/Play</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-orange-400" id="titans-velocity">0.42s</div>
+                                <div class="text-xs text-slate-400">Decision Velocity</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-green-400" id="titans-pressure">84.2</div>
+                                <div class="text-xs text-slate-400">Pressure Rating</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Offensive Efficiency</span>
+                                <span class="text-neon-blue font-mono">76.3%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Defensive DVOA</span>
+                                <span class="text-neon-blue font-mono">-8.2%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Special Teams</span>
+                                <span class="text-neon-blue font-mono">12.4</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Status</span>
+                                <span class="text-neon-green font-mono">Monitoring</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Longhorns Lab -->
+                    <div class="lab-card p-8 reveal" style="transition-delay: 200ms;">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-white">🟠</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-orange-400">LONGHORNS ANALYTICS LAB</h3>
+                                    <p class="text-slate-400">Texas Longhorns Research Center</p>
+                                </div>
+                            </div>
+                            <div class="status-indicator status-live">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                LIVE
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-6">SEC transition analytics, recruiting intelligence, and NIL valuation modeling for Texas Longhorns football program.</p>
+                        
+                        <!-- Live Longhorns Data -->
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-orange-400" id="longhorns-sp">18.7</div>
+                                <div class="text-xs text-slate-400">SP+ Rating</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-red-400" id="longhorns-sec">87.3</div>
+                                <div class="text-xs text-slate-400">SEC Readiness</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-green-400" id="longhorns-nil">0.89</div>
+                                <div class="text-xs text-slate-400">NIL Impact</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Recruiting Rank</span>
+                                <span class="text-neon-blue font-mono">#3</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Transfer Portal</span>
+                                <span class="text-neon-blue font-mono">Elite</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Conference Prep</span>
+                                <span class="text-neon-blue font-mono">94.2%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Championship Odds</span>
+                                <span class="text-neon-green font-mono">Strong</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grizzlies Lab -->
+                    <div class="lab-card p-8 reveal" style="transition-delay: 300ms;">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-white">🟣</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-purple-400">GRIZZLIES ANALYTICS LAB</h3>
+                                    <p class="text-slate-400">Memphis Grizzlies Vision AI Hub</p>
+                                </div>
+                            </div>
+                            <div class="status-indicator status-beta">
+                                <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                                BETA
+                            </div>
+                        </div>
+                        
+                        <p class="text-slate-300 mb-6">Advanced vision AI, micro-expression analysis, and character assessment algorithms for Memphis Grizzlies grit evaluation.</p>
+                        
+                        <!-- Live Grizzlies Data -->
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-purple-400" id="grizzlies-grit">87.3</div>
+                                <div class="text-xs text-slate-400">Grit Score</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-blue-400" id="grizzlies-vision">95.7%</div>
+                                <div class="text-xs text-slate-400">Vision AI Accuracy</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-green-400" id="grizzlies-character">91.4</div>
+                                <div class="text-xs text-slate-400">Character Algorithm</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Micro-Expression Detection</span>
+                                <span class="text-neon-blue font-mono">Active</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Biomechanical Analysis</span>
+                                <span class="text-neon-blue font-mono">Enhanced</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Determination Metrics</span>
+                                <span class="text-neon-blue font-mono">Elite</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Development Status</span>
+                                <span class="text-orange-400 font-mono">Beta Testing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab Features Overview -->
+                <div class="mt-16 glass-card p-8 lg:p-12 reveal" style="transition-delay: 400ms;">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-bold neon-text mb-4">UNIFIED LAB INFRASTRUCTURE</h3>
+                        <p class="text-xl text-slate-300">Shared intelligence systems powering all research environments</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-neon-blue to-neon-green rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <i data-lucide="activity" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-neon-blue mb-2">Real-Time Processing</h4>
+                            <p class="text-sm text-slate-400">Live data streams with <100ms latency</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-neon-orange to-burnt-orange-500 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <i data-lucide="eye" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-neon-orange mb-2">Vision AI</h4>
+                            <p class="text-sm text-slate-400">Micro-expression and biomechanical analysis</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <i data-lucide="brain" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-purple-400 mb-2">Cognitive Models</h4>
+                            <p class="text-sm text-slate-400">Pattern recognition and decision velocity</p>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-green-400 mb-2">Predictive Analytics</h4>
+                            <p class="text-sm text-slate-400">Championship probability modeling</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Access Labs -->
+                <div class="text-center mt-16 reveal" style="transition-delay: 500ms;">
+                    <h3 class="text-3xl font-bold text-gradient mb-8">Ready to access the labs?</h3>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                        <a href="/#contact" class="enhanced-btn text-white font-semibold px-10 py-5 rounded-full flex items-center gap-3 text-lg">
+                            REQUEST LAB ACCESS <i data-lucide="key" class="w-5 h-5"></i>
+                        </a>
+                        <a href="/platform" class="glass-card hover:bg-slate-700/50 text-white font-semibold px-10 py-5 rounded-full transition-all duration-300 flex items-center gap-3 hover:scale-105">
+                            VIEW PLATFORM <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black/50 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="text-2xl font-bold neon-text mb-2">BLAZE INTELLIGENCE</div>
+                <div class="text-slate-400">Where cognitive performance meets quarterly performance.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Reveal Animation Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Listen for data updates from unified system
+        window.addEventListener('blazeDataUpdate', (event) => {
+            const { lab, data } = event.detail;
+            console.log(`Lab ${lab} updated:`, data);
+        });
+
+        // Manual refresh buttons for demo
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add refresh capability to each lab card
+            document.querySelectorAll('.lab-card').forEach(card => {
+                card.style.cursor = 'pointer';
+                card.title = 'Click to refresh data';
+                
+                card.addEventListener('click', () => {
+                    const labKey = card.querySelector('[id$="-readiness"], [id$="-epa"], [id$="-sp"], [id$="-grit"]')?.id.split('-')[0];
+                    if (labKey && window.blazeUnifiedData) {
+                        window.blazeUnifiedData.refreshLab(labKey);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

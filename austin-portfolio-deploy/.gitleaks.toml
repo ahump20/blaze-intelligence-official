@@ -1,0 +1,87 @@
+# Gitleaks Configuration for Blaze Intelligence
+# Prevents accidental secret commits
+
+title = "Gitleaks Config - Blaze Intelligence"
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(?:api|key|token|secret|password)[\s]*[=:>][\s]*['"]?[0-9a-zA-Z\-_]{20,}'''
+path = '''.*'''
+
+[[rules]]
+id = "openai-api-key"
+description = "OpenAI API Key"
+regex = '''sk-[a-zA-Z0-9]{20}T3BlbkFJ[a-zA-Z0-9]{20}'''
+
+[[rules]]
+id = "anthropic-api-key"
+description = "Anthropic API Key"
+regex = '''sk-ant-api[a-zA-Z0-9\-_]{95}'''
+
+[[rules]]
+id = "github-pat"
+description = "GitHub Personal Access Token"
+regex = '''ghp_[a-zA-Z0-9]{36}'''
+
+[[rules]]
+id = "stripe-key"
+description = "Stripe API Key"
+regex = '''(?:sk|pk)_(?:test|live)_[0-9a-zA-Z]{24}'''
+
+[[rules]]
+id = "airtable-key"
+description = "Airtable API Key"
+regex = '''pat[a-zA-Z0-9]{14}\.[a-zA-Z0-9]{16}'''
+
+[[rules]]
+id = "hubspot-key"
+description = "HubSpot API Key"
+regex = '''pat-na1-[a-f0-9\-]{36}'''
+
+[[rules]]
+id = "aws-access-key"
+description = "AWS Access Key"
+regex = '''AKIA[0-9A-Z]{16}'''
+
+[[rules]]
+id = "aws-secret-key"
+description = "AWS Secret Key"
+regex = '''[0-9a-zA-Z/+]{40}'''
+
+[[rules]]
+id = "cloudflare-api-token"
+description = "Cloudflare API Token"
+regex = '''[a-zA-Z0-9\-_]{40}'''
+
+[[rules]]
+id = "jwt-token"
+description = "JWT Token"
+regex = '''eyJ[a-zA-Z0-9\-_]+\.eyJ[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+'''
+
+# Allowlist certain files
+[allowlist]
+description = "Allowlisted files"
+files = [
+    ".env.example",
+    ".gitleaks.toml",
+    "README.md",
+]
+
+paths = [
+    '''(.*)?\.env\.example$''',
+    '''(.*)?README\.md$''',
+]
+
+# Stop words for reducing false positives
+stopwords = [
+    "example",
+    "test",
+    "demo",
+    "placeholder",
+    "your_key_here",
+    "your_token_here",
+    "your_secret_here",
+    "CHANGEME",
+    "TODO",
+]

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Portal | Blaze Intelligence</title>
+<meta name="description" content="Secure client portal for accessing Blaze Intelligence analytics and insights">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'burnt-orange': {
+'500': '#BF5700',
+'600': '#A0522D'
+},
+'neon': {
+'blue': '#00FFFF',
+'green': '#00FF00',
+'orange': '#FF8C00'
+}
+}
+}
+}
+}
+</script>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<script src="js/analytics-config.js"></script>
+<script src="js/ab-testing.js" defer></script>
+<script src="js/sentry-config.js"></script>
+</head>
+<body>
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
+<div id="portal-hero-3d" class="hero-3d-container"></div>
+
+<div class="relative z-10 w-full max-w-6xl mx-auto px-4">
+<div class="grid md:grid-cols-3 gap-6 mt-16">
+<div class="portal-card text-center">
+<div class="feature-icon mx-auto">
+<i data-lucide="bar-chart-3" class="w-6 h-6 text-white"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Real-Time Analytics</h3>
+<p class="text-slate-400 text-sm">Access live performance metrics and predictive insights</p>
+</div>
+
+<div class="portal-card text-center">
+<div class="feature-icon mx-auto">
+<i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Enterprise Security</h3>
+<p class="text-slate-400 text-sm">Bank-level encryption and multi-factor authentication</p>
+</div>
+
+<div class="portal-card text-center">
+<div class="feature-icon mx-auto">
+<i data-lucide="users" class="w-6 h-6 text-white"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Team Collaboration</h3>
+<p class="text-slate-400 text-sm">Share insights and coordinate with your entire organization</p>
+</div>
+</div>
+</div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Initialize Lucide icons
+if (typeof lucide !== 'undefined') {
+lucide.createIcons();
+}
+
+// Initialize Three.js hero background
+if (typeof blazeVisuals !== 'undefined') {
+blazeVisuals.initHeroHeader('portal-hero-3d', {
+particleCount: 1500,
+interactive: true
+});
+}
+
+// Handle login form submission
+const loginForm = document.getElementById('loginForm');
+if (loginForm) {
+loginForm.addEventListener('submit', function(e) {
+e.preventDefault();
+
+// Show loading state
+const submitBtn = loginForm.querySelector('button[type="submit"]');
+const originalText = submitBtn.textContent;
+submitBtn.textContent = 'Authenticating...';
+submitBtn.disabled = true;
+
+// Simulate authentication
+setTimeout(() => {
+// In production, this would make an API call
+window.location.href = '/dashboard.html';
+}, 1500);
+});
+}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+  "sport": "mlb",
+  "last_updated": "2025-08-28T07:50:58.556Z",
+  "apis": {
+    "primary": {
+      "name": "MLB Stats API",
+      "base_url": "https://statsapi.mlb.com/api/v1",
+      "endpoints": {
+        "teams": "/teams",
+        "team_stats": "/teams/{teamId}/stats",
+        "games": "/schedule",
+        "players": "/teams/{teamId}/roster"
+      },
+      "rate_limit": "60 requests/minute",
+      "authentication": "none",
+      "data_quality": "official"
+    },
+    "secondary": {
+      "name": "Baseball Reference API",
+      "base_url": "https://www.baseball-reference.com/api",
+      "endpoints": {
+        "team_stats": "/teams/{team}/stats",
+        "advanced_stats": "/teams/{team}/advanced"
+      },
+      "rate_limit": "10 requests/minute",
+      "authentication": "api_key",
+      "data_quality": "comprehensive"
+    },
+    "alternative": {
+      "name": "ESPN MLB API",
+      "base_url": "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb",
+      "endpoints": {
+        "scoreboard": "/scoreboard",
+        "teams": "/teams",
+        "standings": "/standings"
+      },
+      "rate_limit": "100 requests/minute",
+      "authentication": "none",
+      "data_quality": "real_time"
+    }
+  },
+  "connection_settings": {
+    "timeout_ms": 10000,
+    "retry_attempts": 3,
+    "retry_delay_ms": 1000,
+    "connection_pool_size": 5
+  },
+  "data_mapping": {
+    "team_name": "team.name",
+    "readiness": {
+      "overall": "calculated_field",
+      "offense": "stats.batting.ops",
+      "defense": "stats.fielding.percentage",
+      "pitching": "stats.pitching.era"
+    },
+    "leverage": {
+      "current": "calculated_field",
+      "trend": "derived_from_recent_games"
+    }
+  },
+  "validation_rules": {
+    "readiness_range": [
+      0,
+      100
+    ],
+    "leverage_range": [
+      0.5,
+      5
+    ],
+    "required_fields": [
+      "team",
+      "readiness",
+      "leverage"
+    ],
+    "data_freshness_hours": 6
+  }
+}

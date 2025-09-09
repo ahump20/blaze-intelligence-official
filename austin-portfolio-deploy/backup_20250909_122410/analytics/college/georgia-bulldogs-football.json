@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-08-28T07:48:54.482Z",
+  "program": "Georgia Bulldogs",
+  "sport": "football",
+  "conference": "SEC",
+  "division": "NCAA Division I",
+  "season": "2025",
+  "readiness": {
+    "overall": 90.6,
+    "talent_level": 84.7,
+    "coaching": 87.9,
+    "facilities": 92.2,
+    "recruiting": 92.6
+  },
+  "leverage": {
+    "current": 1.89,
+    "trend": "decreasing",
+    "playoff_positioning": "moderate"
+  },
+  "academic_metrics": {
+    "apr_score": 951,
+    "graduation_rate": 76,
+    "academic_progress": 3.38
+  },
+  "nil_market": {
+    "total_valuation_millions": 2.6,
+    "avg_deal_value": 21741,
+    "top_earners": 6
+  },
+  "recruiting_data": {
+    "class_ranking": 12,
+    "commits": 24,
+    "transfer_portal_net": -4
+  },
+  "metrics_count": 22
+}

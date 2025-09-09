@@ -1,0 +1,19 @@
+{
+  "topic": "High school sports recruiting",
+  "timestamp": "2025-08-28T08:00:00.567Z",
+  "findings": [
+    "Video analysis platforms changing scouting workflows",
+    "Academic performance predictors in athletic success",
+    "Geographic recruiting patterns shifting with technology"
+  ],
+  "sources": [
+    "ESPN Analytics Team",
+    "Sports Info Solutions"
+  ],
+  "confidence": 92,
+  "actionable_items": [
+    "Update data collection methodology",
+    "Enhance client reporting dashboard",
+    "Develop new performance indicators"
+  ]
+}
