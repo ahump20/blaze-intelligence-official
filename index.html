@@ -1142,10 +1142,9 @@
     </footer>
     
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.min.js"></script>
     
     <script>
         // Initialize AOS
@@ -1279,14 +1278,6 @@
         });
         
         // Counter animation for stats
-        const countUpOptions = {
-            duration: 2.5,
-            useEasing: true,
-            useGrouping: true,
-            separator: ',',
-            decimal: '.'
-        };
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1294,13 +1285,28 @@
                     statValues.forEach(stat => {
                         const endValue = parseFloat(stat.getAttribute('data-count'));
                         const decimals = endValue % 1 !== 0 ? 1 : 0;
-                        const countUp = new CountUp(stat, endValue, {
-                            ...countUpOptions,
-                            decimalPlaces: decimals
-                        });
-                        if (!countUp.error) {
-                            countUp.start();
+                        // Animate the counter
+                        const duration = 2500;
+                        const startTime = Date.now();
+                        const startValue = 0;
+                        
+                        function updateCounter() {
+                            const now = Date.now();
+                            const progress = Math.min((now - startTime) / duration, 1);
+                            const currentValue = startValue + (endValue - startValue) * progress;
+                            
+                            if (decimals > 0) {
+                                stat.textContent = currentValue.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            } else {
+                                stat.textContent = Math.floor(currentValue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            }
+                            
+                            if (progress < 1) {
+                                requestAnimationFrame(updateCounter);
+                            }
                         }
+                        
+                        updateCounter();
                     });
                     observer.disconnect();
                 }
