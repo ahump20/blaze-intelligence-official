@@ -1,0 +1,507 @@
+/* Professional Theme - Blaze Intelligence */
+/* Aligned with localhost:8090 design standards */
+
+:root {
+  --bi-orange: #BF5700;
+  --bi-orange-light: #FF6B1A;
+  --bi-navy: #0A192F;
+  --bi-navy-darker: #050F1F;
+  --bi-navy-light: #112240;
+  --bi-slate: #8892B0;
+  --bi-slate-light: #A8B2D1;
+  --bi-white: #E6F1FF;
+  --bi-accent: #64FFDA;
+  --bi-warning: #FFB86C;
+  --bi-error: #FF5555;
+  --bi-success: #50FA7B;
+  
+  --nav-height: 70px;
+  --border-radius: 8px;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+}
+
+/* Professional Navigation Bar */
+.professional-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background: rgba(10, 25, 47, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+  z-index: 1000;
+  transition: var(--transition-smooth);
+}
+
+.professional-nav.scrolled {
+  background: rgba(5, 15, 31, 0.98);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo Section */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--bi-orange);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--bi-white);
+  box-shadow: 0 0 20px rgba(191, 87, 0, 0.4);
+}
+
+.nav-logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--bi-white);
+  letter-spacing: 0.5px;
+}
+
+.nav-logo-text span {
+  color: var(--bi-orange);
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  color: var(--bi-slate-light);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--bi-white);
+  background: rgba(191, 87, 0, 0.1);
+}
+
+.nav-link.active {
+  color: var(--bi-orange);
+  background: rgba(191, 87, 0, 0.15);
+}
+
+.nav-link.highlight {
+  background: var(--bi-orange);
+  color: var(--bi-white);
+  font-weight: 600;
+}
+
+.nav-link.highlight:hover {
+  background: var(--bi-orange-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(191, 87, 0, 0.4);
+}
+
+/* League Indicators */
+.league-indicators {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: rgba(17, 34, 64, 0.5);
+  border-radius: var(--border-radius);
+  margin-left: 1rem;
+}
+
+.league-badge {
+  padding: 0.25rem 0.5rem;
+  background: rgba(191, 87, 0, 0.2);
+  color: var(--bi-orange);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  border: 1px solid rgba(191, 87, 0, 0.3);
+}
+
+.league-badge.active {
+  background: var(--bi-orange);
+  color: var(--bi-white);
+  border-color: var(--bi-orange);
+}
+
+/* Season Indicator */
+.season-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--bi-slate);
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+}
+
+.season-indicator .season-label {
+  color: var(--bi-slate);
+}
+
+.season-indicator .season-value {
+  color: var(--bi-accent);
+  font-weight: 600;
+}
+
+/* Professional Hero Section */
+.professional-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: var(--nav-height);
+  background: linear-gradient(135deg, var(--bi-navy) 0%, var(--bi-navy-darker) 100%);
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(191, 87, 0, 0.2);
+  border: 1px solid rgba(191, 87, 0, 0.3);
+  border-radius: 100px;
+  color: var(--bi-orange);
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+.hero-badge .badge-icon {
+  width: 8px;
+  height: 8px;
+  background: var(--bi-orange);
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  color: var(--bi-white);
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.hero-title .highlight {
+  color: var(--bi-orange);
+  position: relative;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: var(--bi-slate-light);
+  margin-bottom: 2rem;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.hero-features {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.hero-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(17, 34, 64, 0.4);
+  border: 1px solid rgba(155, 203, 235, 0.2);
+  border-radius: var(--border-radius);
+  color: var(--bi-slate-light);
+  font-size: 0.875rem;
+}
+
+.hero-feature .feature-icon {
+  color: var(--bi-accent);
+  font-size: 1rem;
+}
+
+.hero-feature .feature-text {
+  font-weight: 500;
+}
+
+.hero-feature .feature-value {
+  color: var(--bi-orange);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+/* Professional CTA Buttons */
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cta-button.primary {
+  background: var(--bi-orange);
+  color: var(--bi-white);
+  border: 2px solid var(--bi-orange);
+}
+
+.cta-button.primary:hover {
+  background: var(--bi-orange-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(191, 87, 0, 0.4);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: var(--bi-accent);
+  border: 2px solid var(--bi-accent);
+}
+
+.cta-button.secondary:hover {
+  background: rgba(100, 255, 218, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+}
+
+.cta-button.ghost {
+  background: transparent;
+  color: var(--bi-slate-light);
+  border: 2px solid rgba(136, 146, 176, 0.3);
+}
+
+.cta-button.ghost:hover {
+  background: rgba(136, 146, 176, 0.1);
+  border-color: var(--bi-slate-light);
+  color: var(--bi-white);
+}
+
+/* Metrics Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+.metric-card {
+  background: rgba(17, 34, 64, 0.3);
+  border: 1px solid rgba(155, 203, 235, 0.1);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--bi-orange), var(--bi-accent));
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(191, 87, 0, 0.3);
+  background: rgba(17, 34, 64, 0.5);
+}
+
+.metric-card:hover::before {
+  opacity: 1;
+}
+
+.metric-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--bi-orange);
+  font-family: var(--font-mono);
+  margin-bottom: 0.5rem;
+}
+
+.metric-label {
+  font-size: 0.875rem;
+  color: var(--bi-slate);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* Professional Section Styles */
+.professional-section {
+  padding: 5rem 2rem;
+  position: relative;
+  background: var(--bi-navy);
+  border-top: 1px solid rgba(136, 146, 176, 0.1);
+}
+
+.professional-section.dark {
+  background: var(--bi-navy-darker);
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(191, 87, 0, 0.1);
+  border: 1px solid rgba(191, 87, 0, 0.2);
+  border-radius: 100px;
+  color: var(--bi-orange);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  color: var(--bi-white);
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: var(--bi-slate-light);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .mobile-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--bi-slate-light);
+    transition: var(--transition-fast);
+  }
+  
+  .mobile-menu-toggle:hover span {
+    background: var(--bi-orange);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .league-indicators {
+    display: none;
+  }
+}

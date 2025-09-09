@@ -39,6 +39,7 @@
     <!-- Professional Styles -->
     <link rel="stylesheet" href="/public/css/blaze-professional.css">
     <link rel="stylesheet" href="/public/css/enhanced-visuals.css">
+    <link rel="stylesheet" href="/public/css/professional-theme.css">
     
     <style>
         :root {
@@ -2008,29 +2009,48 @@
         </div>
     </div>
     
-    <!-- Navigation -->
-    <nav id="navbar" class="nav-professional">
+    <!-- Professional Navigation -->
+    <nav class="professional-nav" id="professionalNav">
         <div class="nav-container">
-            <a href="/" class="logo">
-                <div class="logo-icon">B</div>
-                <span>Blaze Intelligence</span>
-            </a>
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-links" id="navLinks">
-                <a href="#hero" class="nav-link active">Home</a>
-                <a href="#features" class="nav-link">Platform</a>
-                <a href="/pressure-dashboard" class="nav-link" style="color: var(--burnt-orange); font-weight: 600;">Pressure Terminal ⚡</a>
-                <a href="#championship" class="nav-link">Analytics</a>
-                <a href="#neural-coach" class="nav-link">Neural Coach™</a>
-                <a href="#digital-combine" class="nav-link">Digital Combine™</a>
-                <a href="#pricing" class="nav-link">Pricing</a>
-                <a href="/live-demo" class="nav-link" style="color: var(--success);">Live Demo ↗</a>
-                <button class="btn btn-primary" onclick="navigateToLogin()">
-                    Get Started →
-                </button>
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <div class="nav-logo">
+                    <div class="nav-logo-icon">B</div>
+                    <div class="nav-logo-text">Blaze <span>Intelligence</span></div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="/" class="nav-link active">Home</a>
+                    <a href="#platform" class="nav-link">Platform</a>
+                    <a href="/pressure-dashboard" class="nav-link">Pressure Terminal 🔥</a>
+                    <a href="#analytics" class="nav-link">Analytics</a>
+                    <a href="/neural-coach" class="nav-link">Neural Coach™</a>
+                    <a href="#digital-combine" class="nav-link">Digital Combine™</a>
+                    <a href="#pricing" class="nav-link">Pricing</a>
+                    <a href="/live-demo" class="nav-link">Live Demo 🚀</a>
+                    <a href="#contact" class="nav-link highlight">Get Started</a>
+                </div>
             </div>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="league-indicators">
+                    <span class="league-badge active">🏈 College Football</span>
+                    <span class="league-badge">🏈 NFL</span>
+                    <span class="league-badge">⚾ MLB</span>
+                </div>
+                
+                <div class="season-indicator">
+                    <span class="season-label">Season:</span>
+                    <span class="season-value">2023-2024</span>
+                    <span class="season-label" style="margin-left: 1rem;">Last Update:</span>
+                    <span class="season-value" id="lastUpdate">--</span>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
     
