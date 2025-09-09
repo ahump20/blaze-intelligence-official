@@ -8,6 +8,10 @@ Allow: /pricing.html
 Allow: /contact.html
 Allow: /manifesto.html
 Allow: /app.html
+Allow: /live-demo.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /blog
 
 # Assets
 Allow: /src/
@@ -15,9 +19,20 @@ Allow: /assets/
 Allow: /icons/
 Allow: /public/
 
-# Disallow removed pages directory
+# API endpoints - block from crawling
+Disallow: /api/
+Disallow: /api/auth/
+Disallow: /api/stripe/
+Disallow: /api/metrics
+Disallow: /api/health
+Disallow: /api/monitoring
+
+# Admin and internal directories
+Disallow: /admin/
+Disallow: /uploads/
+Disallow: /logs/
 Disallow: /removed-pages/
 Disallow: /backups/
 
 # Sitemap
-Sitemap: https://blaze-intelligence.pages.dev/sitemap.xml
+Sitemap: https://blaze-intelligence.com/sitemap.xml

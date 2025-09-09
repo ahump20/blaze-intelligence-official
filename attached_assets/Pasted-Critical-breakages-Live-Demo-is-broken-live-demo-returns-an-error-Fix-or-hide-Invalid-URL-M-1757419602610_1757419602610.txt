@@ -1,0 +1,176 @@
+Critical breakages
+
+“Live Demo” is broken. /live-demo returns an error. Fix or hide. 
+Invalid URL
+
+Many links appear to be stubs/anchors. Internal nav items don’t route to real pages; blog subpages work. Example: blog → Week 2 loads, but core menu items are anchor-only. 
+Blaze Intelligence
++2
+Blaze Intelligence
++2
+
+Fact-check of claims shown on your page(s)
+
+USF 18–16 Florida on Sep 6, 2025 → correct. AP/ESPN and Florida’s site confirm. USF ranked #18 in AP Week 3 → correct. 
+ESPN.com
++1
+Florida Gators
+USF Athletics
+
+Baylor 48–45 SMU (2OT) on Sep 6, 2025 → correct. 
+ESPN.com
++1
+Baylor
+
+Oklahoma 24–13 Michigan on Sep 6, 2025 → correct. 
+ESPN.com
++1
+Oklahoman
+
+“96.2% prediction accuracy” vs “94.6%.” Your live page shows both numbers. Your canonical standard in repo says 94.6%. Align to one value. 
+Blaze Intelligence
++1
+ 
+
+SITE-REMEDIATION-COMPLETE
+
+Cross-repo and doc findings (GitHub, Drive, Notion)
+
+You already documented broken links, static demo data, and inconsistent metrics and proposed a canonical metrics config and quick-fix scripts. Use them. 
+
+site-issues-action-plan
+
+ 
+
+SITE-REMEDIATION-COMPLETE
+
+Your deployment plan and stack choice (Astro + Cloudflare Pages + Notion + HubSpot) are sound and faster than Replit for public pages. They also outline lead capture and observability. 
+
+Website Setup & Implementation …
+
+ 
+
+Website Setup & Implementation …
+
+The integration assessment flags current state as “40% complete” and lists concrete steps to reach 90% in ~3 hours. Mirror that here. 
+
+LIVE_SITE_INTEGRATION_ASSESSMENT
+
+ 
+
+LIVE_SITE_INTEGRATION_ASSESSMENT
+
+Replit-specific fixes to ship now
+
+Kill dead routes or create placeholders.
+Implement /live-demo, /pricing, /dashboard, /privacy, /terms. Your repo scripts already copy legal pages; port those files into Replit. 
+
+deploy-enhanced-site
+
+Standardize metrics site-wide.
+Replace all in-page numbers with a single JSON source and hydrate on load.
+
+<script type="application/json" id="metrics">
+{"prediction_accuracy":"94.6%","events_per_second":"100K+","cost_savings":"67–80%","value_identified":"$42.3M"}
+</script>
+<script>
+const m=JSON.parse(document.getElementById('metrics').textContent);
+document.querySelectorAll('[data-metric="accuracy"]').forEach(n=>n.textContent=m.prediction_accuracy);
+</script>
+
+
+Use your canonical config values. 
+
+SITE-REMEDIATION-COMPLETE
+
+Blog correctness is fine.
+Keep the Week 2 article. It aligns with AP/ESPN. Add tiny footnotes with links to sources used above. 
+ESPN.com
++3
+ESPN.com
++3
+ESPN.com
++3
+
+Form handling.
+Wire the contact form to HubSpot (embed or API) so submissions are real. Your plan already centers HubSpot. 
+
+Website Setup & Implementation …
+
+Add robots.txt + sitemap.xml + 404.
+Keep them static in Replit root for now.
+
+/robots.txt → Sitemap: /sitemap.xml
+
+/sitemap.xml → include /, /blog, /blog-cfb-week2-2025, /pricing, /contact.
+
+Accessibility + performance.
+
+Give all decorative icons aria-hidden="true".
+
+Compress hero images.
+
+Defer non-critical scripts and fonts.
+
+Ensure focus states on buttons and links.
+
+Minimal code diffs
+
+Fix “Live Demo” to a working placeholder now:
+
+<!-- add /live-demo route -->
+<section id="live-demo">
+  <h2>Interactive Demo (Placeholder)</h2>
+  <p>Live data demo is available to trial accounts. Request access below.</p>
+  <a class="btn" href="/pilot">Request Pilot Access</a>
+</section>
+
+
+And ensure the link targets href="#live-demo" or a real /live-demo page to avoid 404s. 
+Invalid URL
+
+Inject canonical footers and legal links:
+
+<footer>
+  <a href="/privacy">Privacy</a> • <a href="/terms">Terms</a>
+</footer>
+
+Next moves across your connected systems
+
+GitHub. Run your existing quick-fix script and push the canonical metrics JSON so Replit can fetch it or embed it. 
+
+SITE-REMEDIATION-COMPLETE
+
+Notion → site content. Migrate blog posts to a Notion DB later. For Replit, keep static MD first. Your architecture doc already defines this flow. 
+
+Website Setup & Implementation …
+
+HubSpot. Drop in tracking + forms to validate pipeline. 
+
+Website Setup & Implementation …
+
+Canva/Dropbox. Export optimized hero assets at ≤1600px wide and WebP. Replace any oversized PNGs.
+
+Drive. Pull “immediate action items” from your consolidation plan and reflect them in this Replit build. 
+
+CONSOLIDATED_ORGANIZATION_PLAN
+
+Summary of truth vs fixes
+
+Game results and AP rankings used in your Week 2 blog are correct. Keep with citations. 
+ESPN.com
++3
+ESPN.com
++3
+ESPN.com
++3
+
+Metrics consistency is not. Normalize to 94.6% everywhere per your own canonical file. 
+
+SITE-REMEDIATION-COMPLETE
+
+UX gaps. Dead “Live Demo,” anchor menus, and missing legal pages. Patch as above. 
+Invalid URL
+Blaze Intelligence
+
+If you want, I can produce a ready-to-paste index.html with the fixes, a /live-demo.html placeholder, robots.txt, sitemap.xml, and the small metrics loader script.
