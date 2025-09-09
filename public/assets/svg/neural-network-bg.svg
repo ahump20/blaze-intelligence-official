@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="nodeGlow">
+      <stop offset="0%" style="stop-color:#BF5700;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#BF5700;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+  </defs>
+  
+  <!-- Dark background -->
+  <rect width="1920" height="1080" fill="#0A192F"/>
+  
+  <!-- Neural network connections -->
+  <g stroke="#112240" stroke-width="1" opacity="0.3">
+    <!-- Layer 1 to Layer 2 -->
+    <line x1="200" y1="200" x2="600" y2="150" stroke="#9BCBEB" opacity="0.4"/>
+    <line x1="200" y1="200" x2="600" y2="350" stroke="#9BCBEB" opacity="0.4"/>
+    <line x1="200" y1="200" x2="600" y2="550" stroke="#9BCBEB" opacity="0.4"/>
+    
+    <line x1="200" y1="400" x2="600" y2="150" stroke="#112240" opacity="0.2"/>
+    <line x1="200" y1="400" x2="600" y2="350" stroke="#9BCBEB" opacity="0.4"/>
+    <line x1="200" y1="400" x2="600" y2="550" stroke="#112240" opacity="0.2"/>
+    
+    <line x1="200" y1="600" x2="600" y2="150" stroke="#112240" opacity="0.2"/>
+    <line x1="200" y1="600" x2="600" y2="350" stroke="#112240" opacity="0.2"/>
+    <line x1="200" y1="600" x2="600" y2="550" stroke="#9BCBEB" opacity="0.4"/>
+    
+    <!-- Layer 2 to Layer 3 -->
+    <line x1="600" y1="150" x2="1000" y2="250" stroke="#BF5700" opacity="0.5"/>
+    <line x1="600" y1="150" x2="1000" y2="450" stroke="#112240" opacity="0.2"/>
+    
+    <line x1="600" y1="350" x2="1000" y2="250" stroke="#112240" opacity="0.2"/>
+    <line x1="600" y1="350" x2="1000" y2="450" stroke="#BF5700" opacity="0.5"/>
+    
+    <line x1="600" y1="550" x2="1000" y2="250" stroke="#112240" opacity="0.2"/>
+    <line x1="600" y1="550" x2="1000" y2="450" stroke="#9BCBEB" opacity="0.4"/>
+    
+    <!-- Layer 3 to Output -->
+    <line x1="1000" y1="250" x2="1400" y2="400" stroke="#BF5700" opacity="0.6"/>
+    <line x1="1000" y1="450" x2="1400" y2="400" stroke="#9BCBEB" opacity="0.5"/>
+  </g>
+  
+  <!-- Neural network nodes -->
+  <!-- Input layer -->
+  <g fill="#112240">
+    <circle cx="200" cy="200" r="15" fill="#112240" stroke="#9BCBEB" stroke-width="2">
+      <animate attributeName="fill" values="#112240;#1a2744;#112240" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="400" r="15" fill="#112240" stroke="#64748b" stroke-width="1"/>
+    <circle cx="200" cy="600" r="15" fill="#112240" stroke="#64748b" stroke-width="1"/>
+    <circle cx="200" cy="800" r="10" fill="#112240" stroke="#64748b" stroke-width="0.5" opacity="0.5"/>
+  </g>
+  
+  <!-- Hidden layer 1 -->
+  <g>
+    <circle cx="600" cy="150" r="18" fill="#112240" stroke="#BF5700" stroke-width="2">
+      <animate attributeName="r" values="18;22;18" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="350" r="18" fill="#112240" stroke="#9BCBEB" stroke-width="2">
+      <animate attributeName="fill" values="#112240;#1a2744;#112240" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="550" r="18" fill="#112240" stroke="#64748b" stroke-width="1"/>
+    <circle cx="600" cy="750" r="12" fill="#112240" stroke="#64748b" stroke-width="0.5" opacity="0.5"/>
+  </g>
+  
+  <!-- Hidden layer 2 -->
+  <g>
+    <circle cx="1000" cy="250" r="20" fill="#112240" stroke="#BF5700" stroke-width="3">
+      <animate attributeName="stroke-width" values="3;5;3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1000" cy="450" r="20" fill="#112240" stroke="#9BCBEB" stroke-width="2"/>
+    <circle cx="1000" cy="650" r="15" fill="#112240" stroke="#64748b" stroke-width="1" opacity="0.7"/>
+  </g>
+  
+  <!-- Output layer -->
+  <circle cx="1400" cy="400" r="25" fill="url(#nodeGlow)" stroke="#BF5700" stroke-width="3">
+    <animate attributeName="r" values="25;30;25" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Data flow particles -->
+  <g>
+    <circle r="3" fill="#BF5700" filter="url(#blur)">
+      <animateMotion dur="3s" repeatCount="indefinite">
+        <mpath href="#path1"/>
+      </animateMotion>
+    </circle>
+    <circle r="3" fill="#9BCBEB" filter="url(#blur)">
+      <animateMotion dur="4s" repeatCount="indefinite">
+        <mpath href="#path2"/>
+      </animateMotion>
+    </circle>
+  </g>
+  
+  <!-- Paths for particle animation -->
+  <path id="path1" d="M 200,200 Q 400,175 600,150 T 1000,250 T 1400,400" fill="none"/>
+  <path id="path2" d="M 200,600 Q 400,575 600,550 T 1000,450 T 1400,400" fill="none"/>
+  
+  <!-- Grid overlay -->
+  <g stroke="#112240" stroke-width="0.5" opacity="0.1">
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none"/>
+    </pattern>
+    <rect width="1920" height="1080" fill="url(#grid)"/>
+  </g>
+</svg>

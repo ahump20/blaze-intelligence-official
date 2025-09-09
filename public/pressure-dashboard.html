@@ -15,6 +15,16 @@
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
+    <!-- Vis.js for Network Graph -->
+    <script src="https://unpkg.com/vis-network@latest/dist/vis-network.min.js"></script>
+    <link href="https://unpkg.com/vis-network@latest/dist/dist/vis-network.min.css" rel="stylesheet" />
+    
+    <!-- Custom Analytics Modules -->
+    <script src="/js/pressure-stream.js"></script>
+    <script src="/js/chemistry-network.js"></script>
+    <script src="/src/analytics/momentum-engine.js"></script>
+    <script src="/src/compliance/legal-notices.js"></script>
+    
     <style>
         :root {
             --burnt-orange: #BF5700;
@@ -116,6 +126,29 @@
             max-width: 1920px;
             margin-left: auto;
             margin-right: auto;
+        }
+        
+        /* Pressure Stream Specific */
+        #pressureStreamViz {
+            min-height: 380px;
+            position: relative;
+        }
+        
+        /* Chemistry Network Specific */
+        #chemistryNetworkViz {
+            min-height: 500px;
+            position: relative;
+        }
+        
+        /* Legal Compliance Banner */
+        .compliance-banner {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 0.5rem 1rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--slate);
+            margin-bottom: 1rem;
         }
         
         .viz-panel {
@@ -327,15 +360,54 @@
         </div>
     </header>
     
+    <!-- Legal Compliance Banner -->
+    <div class="compliance-banner">
+        <i class="fas fa-info-circle"></i> All performance data is derived from publicly available statistics. 
+        <a href="#" onclick="LegalCompliance.fairUse.addDisclaimer(this.parentElement)" style="color: var(--burnt-orange);">View Legal Notices</a>
+    </div>
+    
     <!-- Main Dashboard Grid -->
     <div class="dashboard-container">
-        <!-- Pressure Stream Visualization -->
+        <!-- Pressure Stream Visualization (Bloomberg-Grade) -->
         <div class="viz-panel pressure-stream-panel">
             <div class="panel-header">
-                <h3 class="panel-title">Win Probability & Pressure Stream</h3>
+                <h3 class="panel-title">Win Probability × Pressure Stream</h3>
                 <span class="panel-metric">REAL-TIME</span>
             </div>
-            <div id="pressureStream"></div>
+            <div id="pressureStreamViz"></div>
+        </div>
+        
+        <!-- Team Chemistry Network -->
+        <div class="viz-panel chemistry-network-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Dynamic Chemistry Network</h3>
+                <span class="panel-metric">SYNERGY ANALYSIS</span>
+            </div>
+            <div id="chemistryNetworkViz"></div>
+        </div>
+        
+        <!-- Momentum Engine Predictions -->
+        <div class="viz-panel momentum-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Momentum Engine</h3>
+                <span class="panel-metric">BAYESIAN + XGBOOST</span>
+            </div>
+            <div id="momentumPredictions">
+                <div class="momentum-metrics">
+                    <div class="metric">
+                        <span class="metric-label">Win Probability</span>
+                        <span class="metric-value" id="winProb">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Momentum</span>
+                        <span class="metric-value" id="momentum">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Confidence</span>
+                        <span class="metric-value" id="confidence">--</span>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- Pressure Heatmap -->

@@ -1,0 +1,283 @@
+Below is an integrated, execution-ready upgrade that fuses the three strategy tracks into one system—**Pressure-First Analytics**, **Quantified Athlete**, and **Investor-Grade Visual Vernacular**—and maps them to code, data contracts, page structure, and acceptance criteria. Everything here extends the plans you uploaded and turns them into a concrete build plan for your current Replit site.
+
+> Sources: GPU & visualization stack and motion system (cutting-edge visuals brief)  • Strategic & technical blueprint (ClutchPoint/expanded strategy)  • Pressure-focused, investor-grade platform style & open-source stack guidance&#x20;
+
+---
+
+## A. What changes where (page map → modules)
+
+| Page / Section                       | Module (new or upgraded)                                                                        | Primary user value                                                                          |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| **Hero**                             | **Pressure Stream** (D3 canvas) — live Win Prob + Pressure glow, with event markers             | Tells coaches and execs where the game truly swung; one glance narrative of momentum        |
+| **Live Intelligence**                | **Pressure Heatmap** (Canvas/WebGL) + **Clutch Rings KPI** (Three.js)                           | Spatial pressure & tempo hotspots + proof KPIs (accuracy, latency) for investor credibility |
+| **Neural Coach™ / Combine™**         | **Biomech Pose Overlay** (canvas) + **Biometric micro-panel** (HR/HRV trend)                    | Real-time skill cues + fatigue flags for athletes and trainers                              |
+| **Team Chemistry**                   | **Dynamic Network Graph** (vis.js/sigma.js) + **Familiarity Index**                             | Shows lineup synergies/pass lanes; actionable substitution insights                         |
+| **Ghost Play** (new, hero-level 3-D) | 3-D reconstructions of key plays with overlays (passing lanes/court control)                    | Analyst-grade review and investor demo that’s novel yet purposeful                          |
+| **NIL Engine**                       | **NIL Ribbon** (3-D parametric ribbon) — length/twist/spikes map to followers/engagement/awards | A unique, visual “shape of marketability” for recruiting & brand teams                      |
+| **Reports**                          | One-click PDF/CSV for **Clutch Splits**, **EoCC**, **Chemistry Deltas**, **NIL**                | Investor decks & coach packets; all assets embedded and branded                             |
+
+All visuals adhere to the **Bloomberg-meets-sports** aesthetic, dark-mode first, with burnt-orange and cardinal-blue accents; clarity > spectacle; one hero-quality 3-D per page is enough.&#x20;
+
+---
+
+## B. Data contracts (API-ready now; simulated data OK)
+
+> The schema mirrors leading providers so you can swap to Sportradar/Stats Perform later with minimal code churn.&#x20;
+
+```ts
+// Live pressure stream (SSE or WS)
+type PressureTick = {
+  t: number;                   // epoch ms
+  wp: number;                  // win probability [0..1]
+  pressure: number;            // leverage-based pressure [0..1]
+  event?: { code: string; label: string; team: string; playerId?: string };
+};
+
+// Heatmap (bin-level)
+type PressureHeatMap = {
+  court: "nba" | "nfl" | "mlb" | "cfb";
+  bins: Array<{ x: number; y: number; pressure: number; count: number }>; // x,y in [-1..1]
+};
+
+// Chemistry & familiarity
+type ChemistryEdge = { from: string; to: string; weight: number; eff: number };
+type FamiliarityIndex = { pair: [string,string]; minutes: number; deltaEff: number };
+
+// Biometric micro-panel (athlete consented)
+type Biometrics = { ts: number; hr: number; hrv?: number; load?: number };
+
+// Scouting/EoCC (basketball example)
+type ClutchSplits = {
+  playerId: string; name: string;
+  effHighP: number; effLowP: number;  // efficiencies under high/low pressure
+  eocc: number;                       // Estimation of Clutch Competency (computed)  // :contentReference[oaicite:5]{index=5}
+};
+```
+
+> During staging, generate **synthetic** ticks matching this shape (including extreme moments) so the site breathes like real data; later, drop in live adapters.&#x20;
+
+---
+
+## C. Visual modules (novel, but decision-focused)
+
+### 1) Pressure Stream (D3 Canvas; 60 fps)
+
+* **Why**: coaches see inflection points instantly; execs see a credible, investor-grade narrative of momentum.
+* **How**: win-prob line + pressure glow; markers on **high-leverage** events; brushed zoom; scrubbable timeline.
+* **Novelty**: pressure glow is weighted by leverage, not just frequency; the area literally “burns” when moments matter.
+
+> Implement with D3 canvas (not SVG) for sustained 60 fps updates; keep event annotations short and factual.&#x20;
+
+### 2) Pressure Heatmap (Canvas→WebGL)
+
+* **Why**: spatial pressure & tempo for real coaching decisions.
+* **How**: glowing hexbins where **brightness ∝ pressure × event count**; deck.gl or PixiJS if bins explode.
+* **Novelty**: toggles between **field control** (Voronoi overlay) and **pressure** to expose where momentum actually shifts.
+
+> Use GPU when bins >10k (Pixi/Deck.gl) as recommended in the GPU stack brief.&#x20;
+
+### 3) Clutch Rings (Three.js KPI)
+
+* 2 torus arcs for **accuracy** & **latency** rotating subtly—hero-quality but compact; shows your system reliability at a glance.
+
+### 4) NIL Ribbon (Three.js parametric)
+
+* **Length** maps to log(followers), **twist** to engagement, **spikes** to awards; a unique, memorable NIL readout.
+
+### 5) Biomech Pose Overlay (canvas)
+
+* Smoothed joints & bones glow under **strain**; toggles to show **fatigue** or **flow/clutch** cues (athlete-friendly).
+* Privacy by design; nothing stored without consent.
+
+### 6) Dynamic Chemistry Graph (vis.js/sigma.js)
+
+* Real-time pass/assist edges; **Familiarity Index** tooltips; lineup simulation: “what if we sub Player X?” → projected efficiency delta.&#x20;
+
+### 7) Ghost Play (Three.js hero)
+
+* 3-D replay with overlays (passing lanes, court control); camera presets (sky/sideline/first-person).
+* **Physics core** in WebAssembly for smooth 60 fps on laptops; overlays toggleable to remain analyst-friendly.&#x20;
+
+---
+
+## D. Analytics engine upgrades
+
+### The Pressure Principle → **Pressure Spectrum** (continuous)
+
+* Leverage-driven pressure time-series (not binary “clutch”); **pressure waves** cascade through plays and amplify subsequent moments.&#x20;
+
+### Trinity of Pressure Performance → **Quantified Athlete**
+
+* Fuse **Physiological Resilience** (HRV, VO₂, recovery), **Psychological Fortitude** (MTI, AEQ, CD-RISC, flow vs clutch), and **Tactical Execution** (EoCC) into one scouting pane with drill-downs per domain.&#x20;
+
+### Momentum Engine (Bayesian + XGBoost + Sequence model)
+
+* Probabilistic baseline (Bayes) + non-linear accuracy (XGBoost) + temporal context (LSTM/Transformer).
+* Output feeds **Pressure Stream** and the ghost-play narrative line; compute **in browser** where possible via TensorFlow\.js for zero-latency feel.&#x20;
+
+---
+
+## E. Investor-grade UX rules (enforced)
+
+* **Desktop-first** layout for war-rooms; mobile shows summaries; load in \~3 s, sustain 60 fps interactions.&#x20;
+* **Dark-mode default**, limited palette, Texas accent colors; **no rainbow pies**.&#x20;
+* Animations serve comprehension (focus/transition), not spectacle.&#x20;
+
+---
+
+## F. Build checklist (two-week sprints)
+
+**Sprint 1 – Pressure core**
+
+* Implement `/api/game/pressure-stream`, `/api/game/pressure-heatmap`.
+* Ship **Pressure Stream** + **KPI rings**; real or synthetic ticks (same schema).
+* Budgets: TTFV ≤ 3 s; stream at 20 Hz; CPU ≤ 30%; memory ≤ 100 MB.
+
+**Sprint 2 – Chemistry & NIL**
+
+* Familiarity Index calc + **Dynamic Chemistry** graph.
+* **NIL Ribbon** wired to form; export NIL worksheet (CSV/PDF).
+
+**Sprint 3 – Quantified Athlete pane**
+
+* Biometrics micro-panel (HR & HRV trend), privacy gates & consent logs.
+* Clutch splits card with **EoCC** and **Δ efficiency** under high vs low pressure.&#x20;
+
+**Sprint 4 – Ghost Play + polish**
+
+* Prototype play parser → 3-D reconstruction; add passing lanes/court-control overlays; wasm physics core.
+* Accessibility pass; reduced motion fallback; on-page **GIF/WEBM** exporter for clips.
+
+---
+
+## G. Code drop-ins (ready to paste)
+
+**Pressure Stream (D3 canvas, live SSE)**
+
+```html
+<section id="pressureStream" class="viz" style="height:38vh"></section>
+<script type="module">
+import * as d3 from 'https://cdn.skypack.dev/d3@7';
+const el=document.querySelector('#pressureStream'), W=el.clientWidth, H=el.clientHeight, M={t:24,r:28,b:26,l:40};
+const cvs=d3.select(el).append('canvas').attr('width',W).attr('height',H).node(), ctx=cvs.getContext('2d');
+const x=d3.scaleTime().range([M.l,W-M.r]), y=d3.scaleLinear().domain([0,1]).range([H-M.b,M.t]); let data=[];
+const src=new EventSource('/api/game/pressure-stream');
+src.onmessage=e=>{ const t=JSON.parse(e.data); data.push(t); const mx=d3.max(data,d=>d.t), mn=mx-1000*60*18; data=data.filter(d=>d.t>=mn); x.domain([mn,mx]); draw(); };
+function draw(){ ctx.clearRect(0,0,W,H);
+  // pressure glow
+  const grd=ctx.createLinearGradient(0,M.t,0,H-M.b); grd.addColorStop(0,'rgba(191,87,0,.25)'); grd.addColorStop(1,'rgba(155,203,235,.08)'); ctx.fillStyle=grd;
+  ctx.beginPath(); ctx.moveTo(x(data[0]?.t||0), y(0)); data.forEach(d=>ctx.lineTo(x(d.t), y(d.pressure))); ctx.lineTo(x(data[data.length-1]?.t||0), y(0)); ctx.fill();
+  // win prob line
+  ctx.strokeStyle='#9BCBEB'; ctx.lineWidth=2; ctx.beginPath(); data.forEach((d,i)=>{ const X=x(d.t), Y=y(d.wp); i?ctx.lineTo(X,Y):ctx.moveTo(X,Y); }); ctx.stroke();
+  // events
+  ctx.fillStyle='#BF5700'; data.filter(d=>d.event).forEach(d=>{ ctx.beginPath(); ctx.arc(x(d.t), y(d.wp), 3, 0, 2*Math.PI); ctx.fill(); });
+}
+</script>
+```
+
+**Chemistry Graph (vis.js) – live update handler**
+
+```js
+function handleGameEvent(evt){ // evt: SUCCESSFUL_PASS or SUBSTITUTION
+  if(evt.type==='SUCCESSFUL_PASS'){
+    const id=`${evt.from}-${evt.to}`, e=edges.get(id);
+    e ? edges.update({id,value:e.value+1,title:`${e.value+1} successful passes`})
+      : edges.add({id,from:evt.from,to:evt.to,value:1,title:'1 successful pass'});
+  } else if(evt.type==='SUBSTITUTION'){ nodes.remove({id:evt.out}); nodes.add({id:evt.in,label:evt.name,group:'bench'}); }
+}
+```
+
+**NIL Ribbon (Three.js) – update hook**
+
+```js
+// after form submit:
+updateNILRibbon(+followers.value, +engagement.value/100, +awards.value);
+```
+
+**Pose overlay – draw each frame**
+
+```js
+// drawPose(keypoints) // feed from MediaPipe/OpenPose
+```
+
+> For 3-D modules and GPU stack, follow the hybrid Canvas/WebGL guidance and performance rules in the visuals brief (GPU-accelerated rendering, LOD systems, texture atlasing, and WebSocket/SSE streaming) to keep 60 fps at scale.&#x20;
+
+---
+
+## H. Acceptance criteria (non-negotiable)
+
+* **Narrative clarity**: coaches and execs can answer “what changed the game?” in ≤10 s using Pressure Stream + Heatmap.
+* **Actionability**: lineup suggestion based on Chemistry + Δ efficiency appears in ≤3 s after a substitution.
+* **Investor credibility**: accuracy & latency KPIs visible above the fold; performance budget met (TTFV ≤ 3 s, 60 fps).
+* **Privacy**: biometrics gated behind explicit consent; no persistence without opt-in.
+* **Exportability**: every view can export a high-res PNG/PDF or a 6–8 s WEBM clip for decks.
+* **API-ready**: switch from simulated feeds to live provider by swapping the adapter, not refactoring the app.&#x20;
+
+---
+
+## I. Why this is novel, and for whom
+
+* **Coaches** get pressure-aware film replacement (Ghost Play) + chemistry-aware lineup deltas in real time.&#x20;
+* **Athletes** get biomech overlays and stress-readiness cues, framed in positive, actionable feedback loops (not raw HR dumps).&#x20;
+* **Front offices** get investor-grade dashboards that feel like Bloomberg—serious, fast, and exportable—while still uniquely “Texas” in polish.&#x20;
+
+If you want, I can open a PR against `ahump20/blaze-intelligence-official` that adds:
+
+1. `/api/*` mock endpoints,
+2. the three visual modules and CSS,
+3. a sample data worker for live ticks, and
+4. a “swap provider” adapter to go from simulated → Sportradar/Stats Perform in minutes.
+
+
+To truly elevate Blaze Intelligence into a championship‑level platform, each of the three research plans you uploaded should be fused into one cohesive architecture. Below is a concrete implementation roadmap that marries **cutting‑edge GPU‑accelerated visualization**, **pressure‑first analytics**, and an **investor‑grade design language** while remaining accessible to coaches, athletes and front‑office executives of all ages.  Key recommendations are tied to the cited research documents.
+
+---
+
+### 1. Adopt a GPU‑accelerated, WebGL‑centric stack
+
+The MD brief recommends hybrid rendering—2D Canvas for small datasets and WebGL for larger ones—and highlights libraries like **Kepler.gl**, **Sigma.js** and **PixiJS**.  Implement WebGL components for heat maps, network graphs and 3D highlights, while using Canvas/D3 for real‑time line charts.  Use **DuckDB‑Wasm** on the client for 10–50× faster analytics, and build the data pipeline as Kafka → Backend → WebSockets/SSE → Frontend to keep sub‑100 ms latency.  This ensures your site remains investor‑grade on desktop and responsive on mobile.
+
+### 2. Pressure‑centric analytics as the core narrative
+
+Both PDFs stress that the platform’s differentiator is quantifying and visualising pressure.  The **Pressure Spectrum** defines a continuous leverage index that accounts for score, clock and context.  Build an API that streams **PressureTick** objects (timestamp, win probability, pressure, optional event) to drive a **Pressure Stream** chart.  Use D3‑Canvas to render win‑probability lines and a heat‑coded pressure band; intensity “burns” brighter when leverage peaks, making micro‑moments jump out.  This immediately answers the question “what changed the game?” for coaches and executives.
+
+### 3. Quantified Athlete framework
+
+Expand scouting and player development by implementing the **Trinity of Pressure Performance**—physiological resilience, psychological fortitude and tactical execution.  Integrate wearable data (HRV, VO₂, lactate threshold) to compute a **Pressure‑Readiness** score and plot it over time.  Include validated psychometric instruments (MTI, AEQ, CD‑RISC) for mental toughness and combine these with play‑by‑play efficiency metrics (EoCC) to produce a **Clutch Competency Index**.  This trifecta yields holistic dashboards for coaches (fatigue alerts), athletes (personal improvement plans) and executives (draft‑risk mitigation).
+
+### 4. Chemistry & familiarity network
+
+Introduce the **Familiarity Index** module from the strategy doc: track shared court time, passes and assists to quantify lineup chemistry.  Visualise interactions as a dynamic network using Sigma.js or vis.js; thicker, brighter edges indicate high‑frequency, high‑efficiency connections.  Overlay this network on a court diagram to reveal “hot zones” where certain duos excel.  Allow coaches to run “what if” substitutions and see projected impacts on chemistry and efficiency in real time.
+
+### 5. NIL and marketability visualisation
+
+Replace generic bar graphs with the **NIL Ribbon**: a 3D twisted ribbon where **length ∝ log(followers)**, **twist ∝ engagement rate** and **spikes ∝ awards**.  This satisfies the decision‑focused design philosophy—coaches and agents can instantly see how social reach translates into value.  Hook the ribbon to your NIL form; on submit, call `updateNILRibbon(followers, engagement/100, awards)` to morph the shape live.
+
+### 6. Ghost Play & biomechanical overlays
+
+For showpiece analysis and recruiting showcases, implement a **3‑D Ghost Play** reconstruction.  Render the court and players in Three.js; overlay passing lanes, Voronoi territories or defensive zones (use Delaunay triangulation for 5–10× faster Voronoi generation).  Add a **Biomech Pose Overlay**—a canvas layer that draws a smooth, glowing skeleton on live video, highlighting joints under stress.  Feed pose keypoints from MediaPipe or similar; use our provided `drawPose()` API for immediate integration.  This helps trainers spot mechanical breakdowns in real time.
+
+### 7. Investor‑grade UX and Texas heritage
+
+Follow the investor‑pitch aesthetic: **dark mode first**, burnt orange and cardinal blue accents, clean typography, and subtle motion that aids comprehension.  Avoid rainbow pies and gimmicks; the PDF explicitly states charts must be “immediately understandable at a glance”.  Optimise for desktop war rooms but degrade gracefully to mobile.  Build with Vite and Zustand for 30 % faster production builds and <1 KB state management; target first paint ≤ 3 s and 60 fps interactions.  Reinforce regional identity through colour and subtle motifs—Texas burnt orange stripes or playbook icons—without cluttering the UI.
+
+### 8. Implementation roadmap
+
+1. **Phase 1 (Weeks 1–4): Foundation** – Set up Vite build system, DuckDB‑Wasm analytics engine, Zustand, and WebSocket/SSE back‑end.  Build the Pressure Stream and KPI rings with synthetic but realistic data.
+2. **Phase 2 (Weeks 5–8): Core Visuals** – Implement hexbin heat maps, familiarity network graphs, Sankey/flow diagrams and dynamic dashboards.  Integrate DuckDB queries for slice‑and‑dice analytics.
+3. **Phase 3 (Weeks 9–12): Advanced Features** – Add React Suspense, service workers for offline support, a command palette, custom WebGL shaders and real‑time biometric streams.  Launch the NIL Ribbon and Clutch Competency dashboards.
+4. **Phase 4 (Weeks 13–16): Polish** – Optimize bundle size (<500 KB initial load), achieve consistent 60 fps, implement keyboard navigation and collaborative annotation features; add export to PDF/CSV and GIF/WEBM capture.
+
+### 9. Compliance & data ethics
+
+Building the Quantified Athlete means handling sensitive biometrics.  Explicit consent is mandatory and data must be anonymised, securely stored and used only for agreed‑upon purposes.  Provide athletes with clear opt‑in/out controls and audit trails to build trust.  This ensures legal compliance while enabling deep insights.
+
+### 10. Cross‑audience accessibility
+
+Ensure that analytics and visualisations speak to multiple audiences:
+
+* **Coaches** see tactical recommendations (best lineup under high pressure, chemistry graphs).
+* **Athletes** get personalised feedback and fatigue alerts without being overwhelmed.
+* **Executives/investors** see reliability metrics (accuracy, latency) and market insights (NIL, Clutch Competency) in an investor‑grade style.
+
+By following these implementation steps and aligning with the research‑backed strategies—pressure‑focused analytics, holistic athlete profiling, GPU‑accelerated visualisation and investor‑grade aesthetics—you can transform Blaze Intelligence into a truly novel, decision‑driving platform for teams, athletes and executives alike.
