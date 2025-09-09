@@ -74,9 +74,9 @@ app.get('/lone-star-legends', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'lone-star-legends.html'));
 });
 
-// Catch-all for other routes - serve index.html (SPA-like behavior)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+// Handle 404s by serving index.html
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
