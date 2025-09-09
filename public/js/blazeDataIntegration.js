@@ -20,12 +20,18 @@ class BlazeDataIntegration {
 
     async fetchInitialData() {
         try {
-            // Fetch NBA players data
-            const playersResponse = await fetch('/api/sports/nba/players');
-            if (playersResponse.ok) {
-                this.players = await playersResponse.json();
-                this.renderPlayerCards();
-            }
+            // Fetch multi-sport data - NFL, MLB, CFB
+            const [nflPlayers, mlbPlayers, cfbPlayers] = await Promise.all([
+                fetch('/api/sports/nfl/players'),
+                fetch('/api/sports/mlb/players'),
+                fetch('/api/sports/cfb/players')
+            ]);
+
+            this.players = {
+                nfl: nflPlayers.ok ? await nflPlayers.json() : [],
+                mlb: mlbPlayers.ok ? await mlbPlayers.json() : [],
+                cfb: cfbPlayers.ok ? await cfbPlayers.json() : []
+            };
 
             // Fetch live games
             const gamesResponse = await fetch('/api/sports/live');
@@ -35,11 +41,20 @@ class BlazeDataIntegration {
             }
 
             // Fetch team standings
-            const standingsResponse = await fetch('/api/sports/nba/standings');
-            if (standingsResponse.ok) {
-                this.standings = await standingsResponse.json();
-                this.updateStandings();
-            }
+            const [nflStandings, mlbStandings, cfbStandings] = await Promise.all([
+                fetch('/api/sports/nfl/standings'),
+                fetch('/api/sports/mlb/standings'),
+                fetch('/api/sports/cfb/standings')
+            ]);
+            
+            this.standings = {
+                nfl: nflStandings.ok ? await nflStandings.json() : null,
+                mlb: mlbStandings.ok ? await mlbStandings.json() : null,
+                cfb: cfbStandings.ok ? await cfbStandings.json() : null
+            };
+            
+            this.renderPlayerCards();
+            this.updateStandings();
         } catch (error) {
             console.error('Error fetching initial data:', error);
             // Use fallback data if API fails
@@ -49,44 +64,68 @@ class BlazeDataIntegration {
 
     loadFallbackData() {
         // Comprehensive fallback data for demo purposes
-        this.players = [
-            {
-                id: 1,
-                name: 'LeBron James',
-                team: 'LAL',
-                position: 'SF',
-                stats: { ppg: 25.3, rpg: 7.3, apg: 8.0, per: 23.2 },
-                trending: 'up',
-                injuryRisk: 15
-            },
-            {
-                id: 2,
-                name: 'Giannis Antetokounmpo',
-                team: 'MIL',
-                position: 'PF',
-                stats: { ppg: 30.4, rpg: 11.5, apg: 6.5, per: 31.8 },
-                trending: 'up',
-                injuryRisk: 8
-            },
-            {
-                id: 3,
-                name: 'Nikola Jokić',
-                team: 'DEN',
-                position: 'C',
-                stats: { ppg: 26.4, rpg: 12.4, apg: 9.0, per: 31.5 },
-                trending: 'stable',
-                injuryRisk: 5
-            },
-            {
-                id: 4,
-                name: 'Jayson Tatum',
-                team: 'BOS',
-                position: 'SF',
-                stats: { ppg: 27.0, rpg: 8.1, apg: 4.9, per: 23.9 },
-                trending: 'up',
-                injuryRisk: 6
-            }
-        ];
+        this.players = {
+            nfl: [
+                {
+                    id: 1,
+                    name: 'Dak Prescott',
+                    team: 'DAL',
+                    position: 'QB',
+                    stats: { passingYards: 4516, passingTDs: 36, qbr: 105.9 },
+                    trending: 'up',
+                    injuryRisk: 10
+                },
+                {
+                    id: 2,
+                    name: 'CeeDee Lamb',
+                    team: 'DAL',
+                    position: 'WR',
+                    stats: { receptions: 135, receivingYards: 1749, receivingTDs: 12 },
+                    trending: 'up',
+                    injuryRisk: 8
+                }
+            ],
+            mlb: [
+                {
+                    id: 1,
+                    name: 'José Altuve',
+                    team: 'HOU',
+                    position: '2B',
+                    stats: { avg: .304, hr: 15, rbi: 69, sb: 18 },
+                    trending: 'stable',
+                    injuryRisk: 12
+                },
+                {
+                    id: 2,
+                    name: 'Ronald Acuña Jr.',
+                    team: 'ATL',
+                    position: 'OF',
+                    stats: { avg: .337, hr: 41, rbi: 106, sb: 73 },
+                    trending: 'up',
+                    injuryRisk: 15
+                }
+            ],
+            cfb: [
+                {
+                    id: 1,
+                    name: 'Quinn Ewers',
+                    team: 'TEX',
+                    position: 'QB',
+                    stats: { passingYards: 3479, passingTDs: 22, qbr: 84.2 },
+                    trending: 'up',
+                    injuryRisk: 6
+                },
+                {
+                    id: 2,
+                    name: 'Jaylen Daniels',
+                    team: 'LSU',
+                    position: 'QB',
+                    stats: { passingYards: 3812, passingTDs: 40, qbr: 91.2 },
+                    trending: 'up',
+                    injuryRisk: 8
+                }
+            ]
+        };
 
         this.renderPlayerCards();
         this.initializeCharts();
@@ -98,7 +137,14 @@ class BlazeDataIntegration {
 
         container.innerHTML = '';
         
-        this.players.slice(0, 8).forEach((player, index) => {
+        // Combine players from all sports
+        const allPlayers = [
+            ...(this.players.nfl || []).slice(0, 3),
+            ...(this.players.mlb || []).slice(0, 3), 
+            ...(this.players.cfb || []).slice(0, 2)
+        ];
+        
+        allPlayers.forEach((player, index) => {
             const card = document.createElement('div');
             card.className = 'player-stat-card';
             card.setAttribute('data-aos', 'fade-up');
@@ -107,6 +153,67 @@ class BlazeDataIntegration {
             const trendIcon = player.trending === 'up' ? '📈' : player.trending === 'down' ? '📉' : '➡️';
             const riskColor = player.injuryRisk < 10 ? '#00DC82' : player.injuryRisk < 20 ? '#FFB800' : '#FF3838';
             
+            // Sport-specific stats display
+            let statsHtml = '';
+            if (player.stats.passingYards !== undefined) {
+                // Football player (NFL/CFB)
+                statsHtml = `
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.passingYards}</div>
+                        <div class="metric-label">Pass Yds</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.passingTDs}</div>
+                        <div class="metric-label">Pass TDs</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.qbr.toFixed(1)}</div>
+                        <div class="metric-label">QBR</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${(player.stats.completionPct || 68.5).toFixed(1)}%</div>
+                        <div class="metric-label">Comp%</div>
+                    </div>`;
+            } else if (player.stats.receptions !== undefined) {
+                // NFL WR
+                statsHtml = `
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.receptions}</div>
+                        <div class="metric-label">Rec</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.receivingYards}</div>
+                        <div class="metric-label">Rec Yds</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.receivingTDs}</div>
+                        <div class="metric-label">Rec TDs</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.yardsPerReception?.toFixed(1) || '13.0'}</div>
+                        <div class="metric-label">YPR</div>
+                    </div>`;
+            } else if (player.stats.avg !== undefined) {
+                // MLB player
+                statsHtml = `
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.avg.toFixed(3)}</div>
+                        <div class="metric-label">AVG</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.hr}</div>
+                        <div class="metric-label">HR</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.rbi}</div>
+                        <div class="metric-label">RBI</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">${player.stats.sb}</div>
+                        <div class="metric-label">SB</div>
+                    </div>`;
+            }
+            
             card.innerHTML = `
                 <div class="player-stat-header">
                     <span class="player-name">${player.name}</span>
@@ -114,22 +221,7 @@ class BlazeDataIntegration {
                 </div>
                 <div class="player-team">${player.team}</div>
                 <div class="player-metrics">
-                    <div class="metric">
-                        <div class="metric-value">${player.stats.ppg.toFixed(1)}</div>
-                        <div class="metric-label">PPG</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">${player.stats.rpg.toFixed(1)}</div>
-                        <div class="metric-label">RPG</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">${player.stats.apg.toFixed(1)}</div>
-                        <div class="metric-label">APG</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">${player.stats.per.toFixed(1)}</div>
-                        <div class="metric-label">PER</div>
-                    </div>
+                    ${statsHtml}
                 </div>
                 <div class="player-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(191, 87, 0, 0.1);">
                     <div style="display: flex; align-items: center; gap: 5px;">
