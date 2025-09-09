@@ -7,6 +7,14 @@ class BlazeDataIntegration {
         this.charts = {};
         this.activePlayerProfile = null;
         this.liveDataFeed = [];
+        // Initialize players as empty object to prevent errors
+        this.players = {
+            nfl: [],
+            mlb: [],
+            cfb: []
+        };
+        this.liveGames = [];
+        this.standings = {};
         this.init();
     }
 
@@ -588,15 +596,14 @@ class BlazeDataIntegration {
 
     simulateDataUpdate() {
         // Simulate real-time data changes
-        if (this.players && typeof this.players === 'object') {
-            // Handle both array and object structures
-            if (Array.isArray(this.players)) {
-                // Legacy array structure
-                this.players.forEach(player => {
-                    this.updatePlayerStats(player);
-                });
-            } else {
-                // New multi-sport object structure
+        if (!this.players) {
+            console.warn('Players data not initialized yet');
+            return;
+        }
+
+        try {
+            if (typeof this.players === 'object' && !Array.isArray(this.players)) {
+                // Multi-sport object structure
                 Object.keys(this.players).forEach(sport => {
                     if (this.players[sport] && Array.isArray(this.players[sport])) {
                         this.players[sport].forEach(player => {
@@ -604,22 +611,36 @@ class BlazeDataIntegration {
                         });
                     }
                 });
+            } else if (Array.isArray(this.players)) {
+                // Legacy array structure
+                this.players.forEach(player => {
+                    this.updatePlayerStats(player);
+                });
             }
+        } catch (error) {
+            console.error('Error in simulateDataUpdate:', error);
         }
     }
 
     updatePlayerStats(player) {
         // Small random fluctuations in stats
-        if (Math.random() > 0.8) {
+        if (!player || !player.stats || Math.random() <= 0.8) {
+            return;
+        }
+        
+        try {
             // Update stats based on sport
             if (player.stats.passingYards !== undefined) {
                 player.stats.passingYards += Math.floor(Math.random() * 20 - 10);
+                player.stats.passingYards = Math.max(0, player.stats.passingYards); // Prevent negative values
             }
             if (player.stats.avg !== undefined) {
                 player.stats.avg += (Math.random() - 0.5) * 0.01;
+                player.stats.avg = Math.max(0, Math.min(1, player.stats.avg)); // Keep between 0 and 1
             }
             if (player.stats.receptions !== undefined) {
                 player.stats.receptions += Math.random() > 0.9 ? 1 : 0;
+                player.stats.receptions = Math.max(0, player.stats.receptions); // Prevent negative values
             }
             
             // Update trending
@@ -627,6 +648,8 @@ class BlazeDataIntegration {
             if (rand > 0.8) player.trending = 'up';
             else if (rand < 0.2) player.trending = 'down';
             else player.trending = 'stable';
+        } catch (error) {
+            console.error('Error updating player stats:', error, player);
         }
     }
 
