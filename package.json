@@ -19,6 +19,7 @@
     "deploy:pages": "echo 'Deploy to Cloudflare Pages'",
     "start": "NODE_ENV=production node server.js",
     "start:prod": "NODE_ENV=production PM2_HOME=.pm2 npx pm2 start ecosystem.config.js",
+    "start:production": "NODE_ENV=production PM2_HOME=.pm2 npx pm2 start ecosystem.config.js",
     "dev": "NODE_ENV=development node server.js",
     "logs": "npx pm2 logs",
     "monitor": "npx pm2 monit",
