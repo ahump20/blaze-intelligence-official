@@ -1,0 +1,235 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Analytics - Blaze Intelligence</title>
+<link rel="stylesheet" href="/brand.css"><link rel="stylesheet" href="/brand-components.css">
+<meta name="description" content="Investor-grade sports analytics dashboards with real-time metrics">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+.analytics-container{max-width:1400px;margin:80px auto;padding:0 20px}
+.analytics-header{text-align:center;margin-bottom:48px}
+.analytics-title{font-size:48px;background:linear-gradient(135deg,#E5E7EB,#BF5700);
+                 -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(500px,1fr));gap:32px;margin-bottom:48px}
+.chart-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}
+.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.chart-title{color:var(--ink);font-size:18px;font-weight:700}
+.chart-badge{padding:4px 12px;background:rgba(155,203,235,0.2);border:1px solid var(--accent-2);
+             border-radius:20px;font-size:11px;color:var(--accent-2);font-weight:600}
+.metrics-table{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;
+               overflow:hidden}
+.metrics-table thead{background:#0B0B0F}
+.metrics-table th{padding:16px;text-align:left;color:var(--muted);font-size:12px;
+                  text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.metrics-table td{padding:16px;border-top:1px solid var(--line);color:var(--ink)}
+.metrics-table tr:hover{background:rgba(191,87,0,0.05)}
+.status-indicator{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}
+.status-green{background:#00ff00}
+.status-yellow{background:#ffff00}
+.status-red{background:#ff0000}
+</style>
+</head><body>
+<div id="header"></div>
+
+<div class="analytics-container">
+  <div class="analytics-header">
+    <h1 class="analytics-title">Analytics Dashboard</h1>
+    <p class="muted">Investor-grade metrics and performance analytics</p>
+    <div id="badgeStrip" style="margin-top:24px"></div>
+  </div>
+  
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">Prediction Accuracy Trend</h3>
+        <span class="chart-badge">LIVE</span>
+      </div>
+      <canvas id="accuracyChart" width="400" height="200"></canvas>
+    </div>
+    
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">System Latency (p95)</h3>
+        <span class="chart-badge">LIVE</span>
+      </div>
+      <canvas id="latencyChart" width="400" height="200"></canvas>
+    </div>
+    
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">Data Points Processed</h3>
+        <span class="chart-badge">24H</span>
+      </div>
+      <canvas id="dataChart" width="400" height="200"></canvas>
+    </div>
+    
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">API Usage by League</h3>
+        <span class="chart-badge">7D</span>
+      </div>
+      <canvas id="usageChart" width="400" height="200"></canvas>
+    </div>
+  </div>
+  
+  <h2 style="color:var(--ink);margin-bottom:24px">System Health Metrics</h2>
+  <table class="metrics-table">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Status</th>
+        <th>Uptime</th>
+        <th>Response Time</th>
+        <th>Error Rate</th>
+        <th>Last Check</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MLB Data Pipeline</td>
+        <td><span class="status-indicator status-green"></span>Operational</td>
+        <td>99.99%</td>
+        <td>45ms</td>
+        <td>0.01%</td>
+        <td>2 min ago</td>
+      </tr>
+      <tr>
+        <td>NFL Analytics Engine</td>
+        <td><span class="status-indicator status-green"></span>Operational</td>
+        <td>99.98%</td>
+        <td>72ms</td>
+        <td>0.02%</td>
+        <td>1 min ago</td>
+      </tr>
+      <tr>
+        <td>NIL Valuation API</td>
+        <td><span class="status-indicator status-green"></span>Operational</td>
+        <td>99.95%</td>
+        <td>120ms</td>
+        <td>0.05%</td>
+        <td>3 min ago</td>
+      </tr>
+      <tr>
+        <td>Digital Combine Processing</td>
+        <td><span class="status-indicator status-yellow"></span>Degraded</td>
+        <td>98.50%</td>
+        <td>250ms</td>
+        <td>1.2%</td>
+        <td>30 sec ago</td>
+      </tr>
+      <tr>
+        <td>Pressure Terminal</td>
+        <td><span class="status-indicator status-green"></span>Operational</td>
+        <td>99.97%</td>
+        <td>35ms</td>
+        <td>0.01%</td>
+        <td>15 sec ago</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="footer"></div>
+
+<script type="module">
+  import { METRICS, injectBadges } from '/js/metrics.js';
+  
+  const loadPartial = async (id, path)=>{ 
+    try {
+      const html = await fetch(path).then(r=>r.text()); 
+      document.querySelector(id).innerHTML = html; 
+    } catch(e) {
+      console.warn('Failed to load partial:', path);
+    }
+  };
+  await loadPartial('#header','/partials/header.html');
+  await loadPartial('#footer','/partials/footer.html');
+  
+  injectBadges(document.querySelector('#badgeStrip'));
+  
+  // Chart configurations
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      y: {
+        grid: { color: 'rgba(155,203,235,0.1)' },
+        ticks: { color: '#9CA3AF' }
+      },
+      x: {
+        grid: { color: 'rgba(155,203,235,0.1)' },
+        ticks: { color: '#9CA3AF' }
+      }
+    }
+  };
+  
+  // Accuracy Chart
+  new Chart(document.getElementById('accuracyChart'), {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        data: [94.2, 94.5, 94.3, 94.6, 94.7, 94.6],
+        borderColor: '#BF5700',
+        backgroundColor: 'rgba(191,87,0,0.1)',
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: chartOptions
+  });
+  
+  // Latency Chart
+  new Chart(document.getElementById('latencyChart'), {
+    type: 'bar',
+    data: {
+      labels: ['12am', '4am', '8am', '12pm', '4pm', '8pm'],
+      datasets: [{
+        data: [85, 72, 95, 98, 92, 88],
+        backgroundColor: '#9BCBEB'
+      }]
+    },
+    options: chartOptions
+  });
+  
+  // Data Points Chart
+  new Chart(document.getElementById('dataChart'), {
+    type: 'line',
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        data: [380000, 420000, 410000, 450000, 480000, 520000, 510000],
+        borderColor: '#9BCBEB',
+        backgroundColor: 'rgba(155,203,235,0.1)',
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: chartOptions
+  });
+  
+  // Usage Chart
+  new Chart(document.getElementById('usageChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['MLB', 'NFL', 'NBA', 'NCAA'],
+      datasets: [{
+        data: [35, 30, 20, 15],
+        backgroundColor: ['#BF5700', '#9BCBEB', '#E5E7EB', '#9CA3AF']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'right',
+          labels: { color: '#9CA3AF' }
+        }
+      }
+    }
+  });
+</script>
+</body></html>

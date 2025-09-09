@@ -1,0 +1,200 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NIL Engine - Blaze Intelligence</title>
+<link rel="stylesheet" href="/brand.css"><link rel="stylesheet" href="/brand-components.css">
+<meta name="description" content="Advanced NIL valuation algorithms for college athletes">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+.nil-container{max-width:1400px;margin:80px auto;padding:0 20px}
+.nil-header{text-align:center;margin-bottom:48px}
+.nil-title{font-size:48px;background:linear-gradient(135deg,#E5E7EB,#BF5700);
+           -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.valuation-form{max-width:600px;margin:0 auto 48px;background:var(--panel);
+                border:1px solid var(--line);border-radius:16px;padding:32px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;color:var(--muted);font-size:14px;margin-bottom:8px;font-weight:600}
+.form-input{width:100%;padding:12px;background:#0B0B0F;border:1px solid var(--line);
+            border-radius:8px;color:var(--ink);font-size:16px}
+.calculate-btn{width:100%;padding:14px;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+               color:#0B0B0F;border:none;border-radius:8px;font-size:16px;font-weight:700;
+               cursor:pointer;transition:transform 0.2s}
+.calculate-btn:hover{transform:translateY(-2px)}
+#nilRibbon{width:100%;height:500px;background:#0B0B0F;border-radius:16px;
+           border:1px solid var(--line);margin-bottom:32px}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
+.result-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+             padding:24px;text-align:center}
+.result-label{color:var(--muted);font-size:14px;margin-bottom:8px}
+.result-value{font-size:32px;font-weight:700;color:var(--accent);font-family:monospace}
+.result-change{color:var(--accent-2);font-size:14px;margin-top:8px}
+</style>
+</head><body>
+<div id="header"></div>
+
+<div class="nil-container">
+  <div class="nil-header">
+    <h1 class="nil-title">NIL Valuation Engine™</h1>
+    <p class="muted">Real-time Name, Image, and Likeness valuations powered by AI</p>
+    <div id="badgeStrip" style="margin-top:24px"></div>
+  </div>
+  
+  <div class="valuation-form">
+    <h2 style="color:var(--ink);margin-bottom:24px">Athlete Valuation Calculator</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Athlete Name</label>
+        <input type="text" id="athleteName" class="form-input" placeholder="Arch Manning">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Sport</label>
+        <select id="sport" class="form-input">
+          <option value="football">Football</option>
+          <option value="basketball">Basketball</option>
+          <option value="baseball">Baseball</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Social Media Followers</label>
+        <input type="number" id="followers" class="form-input" placeholder="250000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Engagement Rate (%)</label>
+        <input type="number" id="engagement" class="form-input" placeholder="4.5" step="0.1">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">School/University</label>
+      <input type="text" id="school" class="form-input" placeholder="University of Texas">
+    </div>
+    <button class="calculate-btn" onclick="calculateNIL()">Calculate NIL Value</button>
+  </div>
+  
+  <div id="nilRibbon"></div>
+  
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="result-label">Annual NIL Value</div>
+      <div class="result-value" id="nilValue">$0</div>
+      <div class="result-change">↑ 12.3% vs last month</div>
+    </div>
+    <div class="result-card">
+      <div class="result-label">Per Post Value</div>
+      <div class="result-value" id="postValue">$0</div>
+      <div class="result-change">Based on engagement</div>
+    </div>
+    <div class="result-card">
+      <div class="result-label">Brand Partnerships</div>
+      <div class="result-value" id="partnerships">0</div>
+      <div class="result-change">Recommended deals</div>
+    </div>
+    <div class="result-card">
+      <div class="result-label">Market Rank</div>
+      <div class="result-value" id="marketRank">#0</div>
+      <div class="result-change">In your sport</div>
+    </div>
+  </div>
+</div>
+
+<div id="footer"></div>
+
+<script type="module">
+  import { METRICS, injectBadges } from '/js/metrics.js';
+  
+  const loadPartial = async (id, path)=>{ 
+    try {
+      const html = await fetch(path).then(r=>r.text()); 
+      document.querySelector(id).innerHTML = html; 
+    } catch(e) {
+      console.warn('Failed to load partial:', path);
+    }
+  };
+  await loadPartial('#header','/partials/header.html');
+  await loadPartial('#footer','/partials/footer.html');
+  
+  injectBadges(document.querySelector('#badgeStrip'));
+</script>
+
+<script>
+  // Three.js NIL Ribbon Visualization
+  let scene, camera, renderer, ribbon;
+  
+  function initNILRibbon() {
+    const container = document.getElementById('nilRibbon');
+    const width = container.clientWidth;
+    const height = 500;
+    
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(75, width/height, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    container.appendChild(renderer.domElement);
+    
+    // Create ribbon geometry
+    const geometry = new THREE.BufferGeometry();
+    const vertices = [];
+    const colors = [];
+    
+    for(let i = 0; i < 100; i++) {
+      const x = (i - 50) * 0.5;
+      const y = Math.sin(i * 0.1) * 5;
+      const z = Math.cos(i * 0.1) * 2;
+      vertices.push(x, y, z);
+      
+      const color = new THREE.Color();
+      color.setHSL(i / 100, 1, 0.5);
+      colors.push(color.r, color.g, color.b);
+    }
+    
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    
+    const material = new THREE.LineBasicMaterial({ 
+      vertexColors: true, 
+      linewidth: 3 
+    });
+    
+    ribbon = new THREE.Line(geometry, material);
+    scene.add(ribbon);
+    
+    camera.position.z = 30;
+    
+    animate();
+  }
+  
+  function animate() {
+    requestAnimationFrame(animate);
+    ribbon.rotation.y += 0.01;
+    ribbon.rotation.x += 0.005;
+    renderer.render(scene, camera);
+  }
+  
+  function calculateNIL() {
+    const followers = parseInt(document.getElementById('followers').value) || 0;
+    const engagement = parseFloat(document.getElementById('engagement').value) || 0;
+    
+    // Simplified NIL calculation
+    const baseValue = followers * 0.10; // $0.10 per follower base
+    const engagementMultiplier = 1 + (engagement / 10);
+    const nilValue = Math.round(baseValue * engagementMultiplier);
+    const postValue = Math.round(nilValue / 365);
+    const partnerships = Math.round(followers / 50000);
+    const rank = Math.max(1, 100 - Math.round(followers / 10000));
+    
+    document.getElementById('nilValue').textContent = '$' + nilValue.toLocaleString();
+    document.getElementById('postValue').textContent = '$' + postValue.toLocaleString();
+    document.getElementById('partnerships').textContent = partnerships;
+    document.getElementById('marketRank').textContent = '#' + rank;
+  }
+  
+  // Initialize Three.js on load
+  window.addEventListener('load', initNILRibbon);
+  window.addEventListener('resize', () => {
+    const container = document.getElementById('nilRibbon');
+    camera.aspect = container.clientWidth / 500;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, 500);
+  });
+</script>
+</body></html>

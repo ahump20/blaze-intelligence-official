@@ -514,6 +514,48 @@ app.get('/api/mlb/cardinals/health', async (req, res) => {
   }
 });
 
+// SSE endpoint for Pressure Stream
+app.get('/api/game/pressure-stream', (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  
+  const send = (data) => {
+    res.write(`data: ${JSON.stringify(data)}\n\n`);
+  };
+  
+  // Send initial data
+  let t = Date.now();
+  let wp = 0.5;
+  let p = 0.2;
+  
+  // Send real-time pressure data every 2 seconds
+  const interval = setInterval(() => {
+    t = Date.now();
+    
+    // Generate realistic pressure dynamics
+    const drift = (Math.random() - 0.5) * 0.04;
+    wp = Math.max(0, Math.min(1, wp + drift * (1 + p)));
+    p = Math.max(0, Math.min(1, p + (Math.random() - 0.5) * 0.1));
+    
+    // Randomly generate high-leverage events
+    const event = Math.random() < 0.08 ? {
+      code: 'PLAY',
+      label: 'High-leverage',
+      team: Math.random() > 0.5 ? 'HOME' : 'AWAY'
+    } : undefined;
+    
+    send({ t, wp, p, event });
+  }, 2000);
+  
+  // Clean up on client disconnect
+  req.on('close', () => {
+    clearInterval(interval);
+    res.end();
+  });
+});
+
 // Digital Combine API endpoints
 const dcRoutes = digitalCombineBackend.createExpressRoutes();
 

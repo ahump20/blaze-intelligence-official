@@ -1,0 +1,128 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Get Started - Blaze Intelligence</title>
+<link rel="stylesheet" href="/brand.css"><link rel="stylesheet" href="/brand-components.css">
+<meta name="description" content="Join Blaze Intelligence and transform your sports analytics">
+<style>
+.auth-container{max-width:500px;margin:80px auto;padding:0 20px}
+.auth-form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px}
+.form-title{font-size:32px;color:var(--ink);margin-bottom:8px;font-weight:700}
+.form-subtitle{color:var(--muted);margin-bottom:32px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;color:var(--muted);font-size:14px;margin-bottom:8px;font-weight:600}
+.form-input{width:100%;padding:12px;background:#0B0B0F;border:1px solid var(--line);border-radius:8px;
+            color:var(--ink);font-size:16px;transition:all 0.2s}
+.form-input:focus{outline:none;border-color:var(--accent)}
+.form-select{width:100%;padding:12px;background:#0B0B0F;border:1px solid var(--line);border-radius:8px;
+             color:var(--ink);font-size:16px;cursor:pointer}
+.form-btn{width:100%;padding:14px;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+          color:#0B0B0F;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;
+          transition:transform 0.2s;margin-top:24px}
+.form-btn:hover{transform:translateY(-2px)}
+.form-footer{text-align:center;margin-top:24px;color:var(--muted);font-size:14px}
+.form-footer a{color:var(--accent-2)}
+.plan-selector{display:grid;gap:12px;margin-bottom:20px}
+.plan-option{padding:16px;background:#0B0B0F;border:2px solid var(--line);border-radius:8px;cursor:pointer;
+             transition:all 0.2s}
+.plan-option:hover{border-color:var(--accent)}
+.plan-option.selected{border-color:var(--accent);background:rgba(191,87,0,0.1)}
+.plan-name{font-weight:700;color:var(--ink);margin-bottom:4px}
+.plan-price{color:var(--accent);font-size:20px;font-weight:700}
+.plan-desc{color:var(--muted);font-size:12px;margin-top:4px}
+</style>
+</head><body>
+<div id="header"></div>
+
+<div class="auth-container">
+  <form class="auth-form" action="/api/auth/register" method="POST">
+    <h1 class="form-title">Join Blaze Intelligence</h1>
+    <p class="form-subtitle">Start your journey to championship-level analytics</p>
+    
+    <div class="form-group">
+      <label class="form-label">Organization Name</label>
+      <input type="text" name="organization" class="form-input" placeholder="Texas Longhorns" required>
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Your Name</label>
+      <input type="text" name="name" class="form-input" placeholder="Coach Smith" required>
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input type="email" name="email" class="form-input" placeholder="coach@team.com" required>
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input type="tel" name="phone" class="form-input" placeholder="(512) 555-0100">
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Select Your Plan</label>
+      <div class="plan-selector">
+        <label class="plan-option">
+          <input type="radio" name="plan" value="grassroots" style="display:none">
+          <div class="plan-name">Grassroots</div>
+          <div class="plan-price">$97/month</div>
+          <div class="plan-desc">Perfect for youth teams and developing programs</div>
+        </label>
+        <label class="plan-option selected">
+          <input type="radio" name="plan" value="competitive" checked style="display:none">
+          <div class="plan-name">Competitive</div>
+          <div class="plan-price">$497/month</div>
+          <div class="plan-desc">Advanced analytics for serious competitors</div>
+        </label>
+        <label class="plan-option">
+          <input type="radio" name="plan" value="elite" style="display:none">
+          <div class="plan-name">Elite</div>
+          <div class="plan-price">Custom Pricing</div>
+          <div class="plan-desc">Enterprise solutions for professional organizations</div>
+        </label>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Primary Sport</label>
+      <select name="sport" class="form-select" required>
+        <option value="">Select a sport</option>
+        <option value="mlb">Baseball (MLB)</option>
+        <option value="nfl">Football (NFL)</option>
+        <option value="nba">Basketball (NBA)</option>
+        <option value="ncaa">College Athletics (NCAA)</option>
+        <option value="youth">Youth Sports</option>
+      </select>
+    </div>
+    
+    <button type="submit" class="form-btn">Start Free Trial</button>
+    
+    <div class="form-footer">
+      Already have an account? <a href="/login.html">Sign In</a>
+    </div>
+  </form>
+</div>
+
+<div id="footer"></div>
+
+<script type="module">
+  const loadPartial = async (id, path)=>{ 
+    try {
+      const html = await fetch(path).then(r=>r.text()); 
+      document.querySelector(id).innerHTML = html; 
+    } catch(e) {
+      console.warn('Failed to load partial:', path);
+    }
+  };
+  await loadPartial('#header','/partials/header.html');
+  await loadPartial('#footer','/partials/footer.html');
+  
+  // Plan selector interaction
+  document.querySelectorAll('.plan-option').forEach(option => {
+    option.addEventListener('click', function() {
+      document.querySelectorAll('.plan-option').forEach(o => o.classList.remove('selected'));
+      this.classList.add('selected');
+      this.querySelector('input[type="radio"]').checked = true;
+    });
+  });
+</script>
+</body></html>
