@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Analytics | Blaze Intelligence</title>
+    <meta name="description" content="Real-time sports analytics with live data from NBA, NFL, and MLB">
+    
+    <!-- Brand System -->
+    <link rel="stylesheet" href="/brand.css">
+    <link rel="stylesheet" href="/brand-components.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    
+    <style>
+        .analytics-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero-analytics {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+        }
+        
+        .live-scores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .sport-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sport-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .sport-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #10b981;
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .game-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .game-item {
+            background: rgba(15, 15, 15, 0.5);
+            border: 1px solid rgba(155, 203, 235, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .game-item:hover {
+            transform: translateX(4px);
+            border-color: var(--burnt-orange);
+        }
+        
+        .team-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-name {
+            font-weight: 600;
+            color: var(--platinum);
+        }
+        
+        .team-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--cardinal-blue);
+        }
+        
+        .game-status {
+            font-size: 0.875rem;
+            color: var(--burnt-orange);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        
+        .pressure-stream-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        #pressureCanvas {
+            width: 100%;
+            height: 320px;
+            border-radius: 12px;
+        }
+        
+        .tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(15, 15, 15, 0.95);
+            border: 1px solid var(--burnt-orange);
+            border-radius: 8px;
+            color: var(--platinum);
+            font-size: 0.875rem;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(15, 15, 15, 0.5);
+            border: 1px solid rgba(155, 203, 235, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cardinal-blue);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--platinum);
+            opacity: 0.7;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+    
+    <!-- Hero Section with Three.js -->
+    <section id="hero-analytics" class="hero-analytics">
+        <div style="position: absolute; inset: 0; display: grid; place-content: center; z-index: 2;">
+            <h1 style="font-size: 3rem; font-weight: 900; color: #E5E7EB; text-align: center; margin: 0;">
+                Live Sports Analytics
+            </h1>
+            <p style="font-size: 1.25rem; color: #9BCBEB; text-align: center; margin-top: 1rem;">
+                Real-time data from NBA, NFL, and MLB
+            </p>
+        </div>
+    </section>
+    
+    <div class="analytics-container">
+        <!-- Pressure Stream Visualization -->
+        <div class="pressure-stream-container">
+            <h2 style="margin: 0 0 1rem; color: var(--burnt-orange);">
+                <i class="fas fa-chart-line"></i> Live Pressure Stream
+            </h2>
+            <canvas id="pressureCanvas"></canvas>
+            <div id="pressureTooltip" class="tooltip"></div>
+        </div>
+        
+        <!-- Live Scores Grid -->
+        <div class="live-scores-grid">
+            <!-- NBA Section -->
+            <div class="sport-section">
+                <div class="sport-header">
+                    <div class="sport-title">
+                        <i class="fas fa-basketball-ball"></i> NBA
+                    </div>
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span>LIVE</span>
+                    </div>
+                </div>
+                <div id="nba-games" class="game-list">
+                    <div class="game-item">
+                        <div style="text-align: center; color: #9CA3AF;">
+                            Loading NBA games...
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFL Section -->
+            <div class="sport-section">
+                <div class="sport-header">
+                    <div class="sport-title">
+                        <i class="fas fa-football-ball"></i> NFL
+                    </div>
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span>LIVE</span>
+                    </div>
+                </div>
+                <div id="nfl-games" class="game-list">
+                    <div class="game-item">
+                        <div style="text-align: center; color: #9CA3AF;">
+                            Loading NFL games...
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MLB Section -->
+            <div class="sport-section">
+                <div class="sport-header">
+                    <div class="sport-title">
+                        <i class="fas fa-baseball-ball"></i> MLB
+                    </div>
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span>LIVE</span>
+                    </div>
+                </div>
+                <div id="mlb-games" class="game-list">
+                    <div class="game-item">
+                        <div style="text-align: center; color: #9CA3AF;">
+                            Loading MLB games...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="total-games">0</div>
+                <div class="stat-label">Total Games Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="live-games">0</div>
+                <div class="stat-label">Games In Progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avg-score">0</div>
+                <div class="stat-label">Avg Score Differential</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="update-rate">2s</div>
+                <div class="stat-label">Update Frequency</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    
+    <script type="module">
+        // Three.js Hero Background
+        import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+        
+        const hero = document.querySelector('#hero-analytics');
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(hero.clientWidth, hero.clientHeight);
+        hero.appendChild(renderer.domElement);
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(55, hero.clientWidth / hero.clientHeight, 0.1, 100);
+        camera.position.z = 5;
+        
+        // Create shader material for animated background
+        const geometry = new THREE.PlaneGeometry(10, 6, 1, 1);
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0 },
+                colorA: { value: new THREE.Color(0xBF5700) },
+                colorB: { value: new THREE.Color(0x9BCBEB) }
+            },
+            transparent: true,
+            vertexShader: `
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                precision highp float;
+                varying vec2 vUv;
+                uniform float time;
+                uniform vec3 colorA;
+                uniform vec3 colorB;
+                
+                float noise(vec2 p) {
+                    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+                }
+                
+                void main() {
+                    vec2 uv = vUv * vec2(1.8, 1.0);
+                    float n = noise(uv + time * 0.1);
+                    float swirl = abs(sin(uv.x * 6.283 + time * 0.4)) * 0.35 + n * 0.25;
+                    vec3 color = mix(colorA, colorB, uv.x + 0.15 * sin(time * 0.2));
+                    color *= 0.25 + 0.75 * swirl;
+                    gl_FragColor = vec4(color, 0.9);
+                }
+            `
+        });
+        
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        
+        const clock = new THREE.Clock();
+        function animate() {
+            material.uniforms.time.value = clock.getElapsedTime();
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = hero.clientWidth / hero.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(hero.clientWidth, hero.clientHeight);
+        });
+    </script>
+    
+    <script>
+        // Load header and footer
+        fetch('/partials/header.html')
+            .then(response => response.text())
+            .then(html => document.getElementById('header-container').innerHTML = html);
+        
+        fetch('/partials/footer.html')
+            .then(response => response.text())
+            .then(html => document.getElementById('footer-container').innerHTML = html);
+        
+        // Pressure Stream Visualization
+        const canvas = document.getElementById('pressureCanvas');
+        const ctx = canvas.getContext('2d');
+        const tooltip = document.getElementById('pressureTooltip');
+        
+        // Set canvas size
+        canvas.width = canvas.offsetWidth;
+        canvas.height = 320;
+        
+        let pressureData = [];
+        const maxDataPoints = 100;
+        
+        // Connect to SSE for pressure stream
+        const eventSource = new EventSource('/api/game/pressure-stream');
+        
+        eventSource.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            pressureData.push(data);
+            
+            if (pressureData.length > maxDataPoints) {
+                pressureData.shift();
+            }
+            
+            drawPressureStream();
+        };
+        
+        function drawPressureStream() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (pressureData.length < 2) return;
+            
+            const padding = 40;
+            const graphWidth = canvas.width - padding * 2;
+            const graphHeight = canvas.height - padding * 2;
+            
+            // Draw grid
+            ctx.strokeStyle = 'rgba(155, 203, 235, 0.1)';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i <= 10; i++) {
+                const y = padding + (graphHeight / 10) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(canvas.width - padding, y);
+                ctx.stroke();
+            }
+            
+            // Draw pressure area
+            const gradient = ctx.createLinearGradient(0, padding, 0, canvas.height - padding);
+            gradient.addColorStop(0, 'rgba(191, 87, 0, 0.3)');
+            gradient.addColorStop(1, 'rgba(155, 203, 235, 0.1)');
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(padding, canvas.height - padding);
+            
+            pressureData.forEach((data, index) => {
+                const x = padding + (index / (maxDataPoints - 1)) * graphWidth;
+                const y = canvas.height - padding - (data.p * graphHeight);
+                ctx.lineTo(x, y);
+            });
+            
+            ctx.lineTo(canvas.width - padding, canvas.height - padding);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Draw win probability line
+            ctx.strokeStyle = '#9BCBEB';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            pressureData.forEach((data, index) => {
+                const x = padding + (index / (maxDataPoints - 1)) * graphWidth;
+                const y = canvas.height - padding - (data.wp * graphHeight);
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+            
+            ctx.stroke();
+            
+            // Draw event markers
+            ctx.fillStyle = '#BF5700';
+            pressureData.forEach((data, index) => {
+                if (data.event) {
+                    const x = padding + (index / (maxDataPoints - 1)) * graphWidth;
+                    const y = canvas.height - padding - (data.wp * graphHeight);
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+            
+            // Draw axes labels
+            ctx.fillStyle = '#9CA3AF';
+            ctx.font = '12px Inter';
+            ctx.textAlign = 'center';
+            
+            // Y-axis labels
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 10; i++) {
+                const value = (i * 10) + '%';
+                const y = canvas.height - padding - (i / 10) * graphHeight;
+                ctx.fillText(value, padding - 10, y + 4);
+            }
+        }
+        
+        // Fetch live sports data
+        async function fetchLiveScores() {
+            try {
+                const response = await fetch('/api/balldontlie/live');
+                const data = await response.json();
+                
+                updateNBAGames(data.nba);
+                updateNFLGames(data.nfl);
+                updateMLBGames(data.mlb);
+                
+                updateStats(data);
+            } catch (error) {
+                console.error('Error fetching live scores:', error);
+            }
+        }
+        
+        function updateNBAGames(games) {
+            const container = document.getElementById('nba-games');
+            
+            if (!games || games.length === 0) {
+                container.innerHTML = '<div class="game-item"><div style="text-align: center; color: #9CA3AF;">No NBA games today</div></div>';
+                return;
+            }
+            
+            container.innerHTML = games.slice(0, 5).map(game => `
+                <div class="game-item">
+                    <div class="team-row">
+                        <span class="team-name">${game.home_team?.name || 'Home Team'}</span>
+                        <span class="team-score">${game.home_team_score || 0}</span>
+                    </div>
+                    <div class="team-row">
+                        <span class="team-name">${game.visitor_team?.name || 'Away Team'}</span>
+                        <span class="team-score">${game.visitor_team_score || 0}</span>
+                    </div>
+                    <div class="game-status">${game.status || 'Scheduled'}</div>
+                </div>
+            `).join('');
+        }
+        
+        function updateNFLGames(games) {
+            const container = document.getElementById('nfl-games');
+            
+            if (!games || games.length === 0) {
+                container.innerHTML = '<div class="game-item"><div style="text-align: center; color: #9CA3AF;">No NFL games today</div></div>';
+                return;
+            }
+            
+            container.innerHTML = games.slice(0, 5).map(game => `
+                <div class="game-item">
+                    <div class="team-row">
+                        <span class="team-name">${game.home_team?.name || 'Home Team'}</span>
+                        <span class="team-score">${game.home_score || 0}</span>
+                    </div>
+                    <div class="team-row">
+                        <span class="team-name">${game.away_team?.name || 'Away Team'}</span>
+                        <span class="team-score">${game.away_score || 0}</span>
+                    </div>
+                    <div class="game-status">${game.status || 'Scheduled'}</div>
+                </div>
+            `).join('');
+        }
+        
+        function updateMLBGames(games) {
+            const container = document.getElementById('mlb-games');
+            
+            if (!games || games.length === 0) {
+                container.innerHTML = '<div class="game-item"><div style="text-align: center; color: #9CA3AF;">No MLB games today</div></div>';
+                return;
+            }
+            
+            container.innerHTML = games.slice(0, 5).map(game => `
+                <div class="game-item">
+                    <div class="team-row">
+                        <span class="team-name">${game.home_team?.name || 'Home Team'}</span>
+                        <span class="team-score">${game.home_score || 0}</span>
+                    </div>
+                    <div class="team-row">
+                        <span class="team-name">${game.away_team?.name || 'Away Team'}</span>
+                        <span class="team-score">${game.away_score || 0}</span>
+                    </div>
+                    <div class="game-status">${game.inning ? `Inning ${game.inning}` : 'Scheduled'}</div>
+                </div>
+            `).join('');
+        }
+        
+        function updateStats(data) {
+            const totalGames = (data.nba?.length || 0) + (data.nfl?.length || 0) + (data.mlb?.length || 0);
+            document.getElementById('total-games').textContent = totalGames;
+            
+            let liveGames = 0;
+            if (data.nba) liveGames += data.nba.filter(g => g.status === 'In Progress').length;
+            if (data.nfl) liveGames += data.nfl.filter(g => g.status === 'In Progress').length;
+            if (data.mlb) liveGames += data.mlb.filter(g => g.inning).length;
+            document.getElementById('live-games').textContent = liveGames;
+            
+            // Calculate average score differential
+            let totalDiff = 0;
+            let gameCount = 0;
+            
+            if (data.nba) {
+                data.nba.forEach(game => {
+                    if (game.home_team_score && game.visitor_team_score) {
+                        totalDiff += Math.abs(game.home_team_score - game.visitor_team_score);
+                        gameCount++;
+                    }
+                });
+            }
+            
+            const avgDiff = gameCount > 0 ? Math.round(totalDiff / gameCount) : 0;
+            document.getElementById('avg-score').textContent = avgDiff;
+        }
+        
+        // Initial fetch and set up polling
+        fetchLiveScores();
+        setInterval(fetchLiveScores, 30000); // Update every 30 seconds
+        
+        // Canvas mouse interaction
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const padding = 40;
+            const graphWidth = canvas.width - padding * 2;
+            const dataIndex = Math.floor(((x - padding) / graphWidth) * pressureData.length);
+            
+            if (dataIndex >= 0 && dataIndex < pressureData.length) {
+                const data = pressureData[dataIndex];
+                tooltip.innerHTML = `
+                    <strong>Win Probability: ${(data.wp * 100).toFixed(1)}%</strong><br>
+                    Pressure: ${(data.p * 100).toFixed(0)}%
+                    ${data.event ? `<br>Event: ${data.event.label}` : ''}
+                `;
+                tooltip.style.display = 'block';
+                tooltip.style.left = (e.clientX + 10) + 'px';
+                tooltip.style.top = (e.clientY - 40) + 'px';
+            }
+        });
+        
+        canvas.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze Intelligence - Integration Test Suite</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'JetBrains Mono', 'Courier New', monospace;
+background: #0a0a0a;
+color: #00ff00;
+padding: 20px;
+min-height: 100vh;
+}
+
+.terminal {
+background: #000;
+border: 2px solid #00ff00;
+border-radius: 8px;
+padding: 20px;
+max-width: 1200px;
+margin: 0 auto;
+box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+h1 {
+color: #BF5700;
+margin-bottom: 20px;
+text-align: center;
+text-shadow: 0 0 10px rgba(191, 87, 0, 0.5);
+}
+
+.test-section {
+margin-bottom: 30px;
+border-left: 3px solid #BF5700;
+padding-left: 15px;
+}
+
+.test-section h2 {
+color: #00B2A9;
+margin-bottom: 15px;
+}
+
+.test-item {
+background: rgba(0, 255, 0, 0.05);
+border: 1px solid rgba(0, 255, 0, 0.2);
+border-radius: 4px;
+padding: 10px;
+margin-bottom: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.test-name {
+flex: 1;
+font-size: 14px;
+}
+
+.test-status {
+padding: 5px 10px;
+border-radius: 4px;
+font-size: 12px;
+font-weight: bold;
+min-width: 100px;
+text-align: center;
+}
+
+.status-pending {
+background: rgba(255, 255, 0, 0.2);
+color: #ffff00;
+}
+
+.status-running {
+background: rgba(0, 178, 169, 0.2);
+color: #00B2A9;
+animation: pulse 1s infinite;
+}
+
+.status-success {
+background: rgba(0, 255, 0, 0.2);
+color: #00ff00;
+}
+
+.status-error {
+background: rgba(255, 0, 0, 0.2);
+color: #ff0000;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.5; }
+}
+
+.control-panel {
+display: flex;
+gap: 15px;
+margin-bottom: 30px;
+justify-content: center;
+}
+
+button {
+background: linear-gradient(135deg, #BF5700, #FF7A00);
+border: none;
+color: white;
+padding: 10px 20px;
+border-radius: 6px;
+cursor: pointer;
+font-weight: bold;
+transition: all 0.3s ease;
+}
+
+button:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(191, 87, 0, 0.4);
+}
+
+button:disabled {
+background: #333;
+cursor: not-allowed;
+transform: none;
+}
+
+.log-output {
+background: rgba(0, 0, 0, 0.5);
+border: 1px solid rgba(0, 255, 0, 0.3);
+border-radius: 4px;
+padding: 15px;
+margin-top: 20px;
+height: 200px;
+overflow-y: auto;
+font-size: 12px;
+line-height: 1.5;
+}
+
+.log-entry {
+margin-bottom: 5px;
+opacity: 0;
+animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+to { opacity: 1; }
+}
+
+.log-success { color: #00ff00; }
+.log-error { color: #ff0000; }
+.log-warning { color: #ffff00; }
+.log-info { color: #00B2A9; }
+
+.summary {
+background: rgba(191, 87, 0, 0.1);
+border: 1px solid #BF5700;
+border-radius: 8px;
+padding: 20px;
+margin-top: 30px;
+text-align: center;
+}
+
+.summary h3 {
+color: #BF5700;
+margin-bottom: 15px;
+}
+
+.summary-stats {
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+}
+
+.stat {
+margin: 10px;
+}
+
+.stat-value {
+font-size: 24px;
+font-weight: bold;
+color: #FF7A00;
+}
+
+.stat-label {
+font-size: 12px;
+color: rgba(255, 255, 255, 0.6);
+text-transform: uppercase;
+}
+
+.progress-bar {
+width: 100%;
+height: 4px;
+background: rgba(0, 255, 0, 0.1);
+border-radius: 2px;
+overflow: hidden;
+margin: 20px 0;
+}
+
+.progress-fill {
+height: 100%;
+background: linear-gradient(90deg, #BF5700, #FF7A00);
+width: 0%;
+transition: width 0.3s ease;
+}
+</style>
+</head>
+<body>
+<div class="terminal">
+<h1>🔥 BLAZE INTELLIGENCE - INTEGRATION TEST SUITE</h1>
+
+<div class="control-panel">
+<button onclick="runAllTests()">▶️ Run All Tests</button>
+<button onclick="runAPITests()">🔌 Test APIs Only</button>
+<button onclick="runUITests()">🎨 Test UI Only</button>
+<button onclick="clearResults()">🗑️ Clear Results</button>
+</div>
+
+<div class="progress-bar">
+<div class="progress-fill" id="progress"></div>
+</div>
+
+<div class="test-section">
+<h2>📡 API Integration Tests</h2>
+<div class="test-item">
+<span class="test-name">MLB Stats API Connection</span>
+<span class="test-status status-pending" id="test-mlb-api">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">ESPN API Connection</span>
+<span class="test-status status-pending" id="test-espn-api">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">SportsRadar API (if configured)</span>
+<span class="test-status status-pending" id="test-sportradar">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">Live Scoreboard API</span>
+<span class="test-status status-pending" id="test-scoreboard">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">Cloudflare Gateway</span>
+<span class="test-status status-pending" id="test-gateway">Pending</span>
+</div>
+</div>
+
+<div class="test-section">
+<h2>🎯 Module Loading Tests</h2>
+<div class="test-item">
+<span class="test-name">Sports Data Hub Module</span>
+<span class="test-status status-pending" id="test-data-hub">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">Team Intelligence Cards</span>
+<span class="test-status status-pending" id="test-cards">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">Live Scoreboard Integration</span>
+<span class="test-status status-pending" id="test-live-score">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">API Configuration</span>
+<span class="test-status status-pending" id="test-config">Pending</span>
+</div>
+</div>
+
+<div class="test-section">
+<h2>🏆 Data Retrieval Tests</h2>
+<div class="test-item">
+<span class="test-name">Texas MLB Teams Data</span>
+<span class="test-status status-pending" id="test-mlb-teams">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">Texas NFL Teams Data</span>
+<span class="test-status status-pending" id="test-nfl-teams">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">Texas NCAA Teams Data</span>
+<span class="test-status status-pending" id="test-ncaa-teams">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">Live Scores Retrieval</span>
+<span class="test-status status-pending" id="test-live-data">Pending</span>
+</div>
+</div>
+
+<div class="test-section">
+<h2>⚡ Performance Tests</h2>
+<div class="test-item">
+<span class="test-name">API Response Time (<100ms)</span>
+<span class="test-status status-pending" id="test-response-time">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">Cache Performance</span>
+<span class="test-status status-pending" id="test-cache">Pending</span>
+</div>
+<div class="test-item">
+<span class="test-name">WebSocket Connection</span>
+<span class="test-status status-pending" id="test-websocket">Pending</span>
+</div>
+</div>
+
+<div class="log-output" id="log-output">
+<div class="log-entry log-info">🚀 Test suite initialized. Click "Run All Tests" to begin.</div>
+</div>
+
+<div class="summary" id="summary" style="display: none;">
+<h3>📊 Test Results Summary</h3>
+<div class="summary-stats">
+<div class="stat">
+<div class="stat-value" id="total-tests">0</div>
+<div class="stat-label">Total Tests</div>
+</div>
+<div class="stat">
+<div class="stat-value" id="passed-tests">0</div>
+<div class="stat-label">Passed</div>
+</div>
+<div class="stat">
+<div class="stat-value" id="failed-tests">0</div>
+<div class="stat-label">Failed</div>
+</div>
+<div class="stat">
+<div class="stat-value" id="success-rate">0%</div>
+<div class="stat-label">Success Rate</div>
+</div>
+</div>
+</div>
+</div>
+

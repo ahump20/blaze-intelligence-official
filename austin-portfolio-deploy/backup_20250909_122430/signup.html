@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Blaze Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .signup-container {
+            max-width: 450px;
+            width: 90%;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #BF5700, #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            width: 30px;
+            height: 4px;
+            background: rgba(191, 87, 0, 0.3);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background: #BF5700;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #BF5700;
+            box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: #666;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .role-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .role-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 16px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .role-option:hover {
+            border-color: #BF5700;
+            background: rgba(191, 87, 0, 0.1);
+        }
+
+        .role-option.selected {
+            border-color: #BF5700;
+            background: rgba(191, 87, 0, 0.2);
+        }
+
+        .role-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .role-name {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(191, 87, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            border-color: #BF5700;
+            transform: translateY(-2px);
+        }
+
+        .pricing-card.selected {
+            border-color: #BF5700;
+            background: rgba(191, 87, 0, 0.1);
+        }
+
+        .pricing-card.recommended::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #BF5700;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #FF8C00;
+            margin-bottom: 8px;
+        }
+
+        .plan-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .plan-period {
+            color: #999;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+
+        .plan-features {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, #BF5700, #FF8C00);
+            border: none;
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(191, 87, 0, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            background: transparent;
+            border: 2px solid rgba(191, 87, 0, 0.5);
+            color: #FF8C00;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-secondary:hover {
+            border-color: #BF5700;
+            background: rgba(191, 87, 0, 0.1);
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+        }
+
+        .auth-switch a {
+            color: #FF8C00;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #ff6b6b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            color: #4CAF50;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .terms-checkbox input {
+            margin-top: 2px;
+        }
+
+        .terms-checkbox a {
+            color: #FF8C00;
+            text-decoration: none;
+        }
+
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .signup-container {
+                margin: 10px;
+                padding: 30px 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .role-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo-section">
+            <div class="logo">🔥 Blaze Intelligence</div>
+            <div class="tagline">Join the Championship Analytics Revolution</div>
+        </div>
+
+        <div class="step-indicator">
+            <div class="step active" data-step="1"></div>
+            <div class="step" data-step="2"></div>
+            <div class="step" data-step="3"></div>
+        </div>
+
+        <div id="error-container"></div>
+        <div id="success-container"></div>
+
+        <!-- Step 1: Basic Information -->
+        <div id="step1" class="form-section active">
+            <h3 style="margin-bottom: 20px; color: #FF8C00;">Tell us about yourself</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" class="form-control" placeholder="John" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" class="form-control" placeholder="Doe" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="john.doe@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number (Optional)</label>
+                <input type="tel" id="phone" class="form-control" placeholder="(555) 123-4567">
+            </div>
+
+            <div class="form-group">
+                <label for="organization">Organization/Team</label>
+                <input type="text" id="organization" class="form-control" placeholder="Texas Longhorns, Cardinals, etc." required>
+            </div>
+
+            <button type="button" class="btn-primary" onclick="nextStep()">Continue</button>
+        </div>
+
+        <!-- Step 2: Role Selection -->
+        <div id="step2" class="form-section">
+            <h3 style="margin-bottom: 20px; color: #FF8C00;">What's your role?</h3>
+            
+            <div class="role-selector">
+                <div class="role-option" data-role="coach">
+                    <span class="role-icon">👨‍🏫</span>
+                    <div class="role-name">Coach</div>
+                </div>
+                <div class="role-option" data-role="scout">
+                    <span class="role-icon">🔍</span>
+                    <div class="role-name">Scout</div>
+                </div>
+                <div class="role-option" data-role="athlete">
+                    <span class="role-icon">🏃‍♂️</span>
+                    <div class="role-name">Athlete</div>
+                </div>
+                <div class="role-option" data-role="analyst">
+                    <span class="role-icon">📊</span>
+                    <div class="role-name">Analyst</div>
+                </div>
+                <div class="role-option" data-role="parent">
+                    <span class="role-icon">👨‍👩‍👧‍👦</span>
+                    <div class="role-name">Parent</div>
+                </div>
+                <div class="role-option" data-role="executive">
+                    <span class="role-icon">💼</span>
+                    <div class="role-name">Executive</div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+                <button type="button" class="btn-secondary" onclick="prevStep()">Back</button>
+                <button type="button" class="btn-primary" onclick="nextStep()" disabled id="roleNext">Continue</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Plan Selection & Account Creation -->
+        <div id="step3" class="form-section">
+            <h3 style="margin-bottom: 20px; color: #FF8C00;">Choose your plan</h3>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card" data-plan="starter">
+                    <div class="plan-name">Starter</div>
+                    <div class="plan-price">$99</div>
+                    <div class="plan-period">per month</div>
+                    <div class="plan-features">
+                        Basic analytics<br>
+                        3 athletes<br>
+                        Email support
+                    </div>
+                </div>
+                <div class="pricing-card recommended" data-plan="pro">
+                    <div class="plan-name">Pro</div>
+                    <div class="plan-price">$199</div>
+                    <div class="plan-period">per month</div>
+                    <div class="plan-features">
+                        Advanced AI insights<br>
+                        Unlimited athletes<br>
+                        Priority support<br>
+                        Team collaboration
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Create Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Minimum 8 characters" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+            </div>
+
+            <div class="terms-checkbox">
+                <input type="checkbox" id="termsAccept" required>
+                <label for="termsAccept">
+                    I agree to the <a href="/terms.html" target="_blank">Terms of Service</a> and 
+                    <a href="/privacy.html" target="_blank">Privacy Policy</a>
+                </label>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+                <button type="button" class="btn-secondary" onclick="prevStep()">Back</button>
+                <button type="button" class="btn-primary" onclick="createAccount()" id="createBtn">Create Account</button>
+            </div>
+        </div>
+
+        <div class="auth-switch">
+            Already have an account? <a href="/login.html">Sign in here</a>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let selectedRole = '';
+        let selectedPlan = '';
+
+        // Step navigation
+        function nextStep() {
+            if (validateStep(currentStep)) {
+                currentStep++;
+                updateStep();
+            }
+        }
+
+        function prevStep() {
+            currentStep--;
+            updateStep();
+        }
+
+        function updateStep() {
+            // Update step indicators
+            document.querySelectorAll('.step').forEach((step, index) => {
+                if (index < currentStep) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+
+            // Update form sections
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`step${currentStep}`).classList.add('active');
+        }
+
+        function validateStep(step) {
+            const errorContainer = document.getElementById('error-container');
+            errorContainer.innerHTML = '';
+
+            switch (step) {
+                case 1:
+                    const firstName = document.getElementById('firstName').value;
+                    const lastName = document.getElementById('lastName').value;
+                    const email = document.getElementById('email').value;
+                    const organization = document.getElementById('organization').value;
+
+                    if (!firstName || !lastName || !email || !organization) {
+                        showError('Please fill in all required fields.');
+                        return false;
+                    }
+
+                    if (!isValidEmail(email)) {
+                        showError('Please enter a valid email address.');
+                        return false;
+                    }
+                    break;
+
+                case 2:
+                    if (!selectedRole) {
+                        showError('Please select your role.');
+                        return false;
+                    }
+                    break;
+
+                case 3:
+                    if (!selectedPlan) {
+                        showError('Please select a plan.');
+                        return false;
+                    }
+                    break;
+            }
+            return true;
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showError(message) {
+            document.getElementById('error-container').innerHTML = 
+                `<div class="error-message">${message}</div>`;
+        }
+
+        function showSuccess(message) {
+            document.getElementById('success-container').innerHTML = 
+                `<div class="success-message">${message}</div>`;
+        }
+        
+        // Utility function to determine organization size based on role and context
+        function determineOrgSize(userData) {
+            const orgSizeMapping = {
+                'head-coach': 'mid-market',
+                'assistant-coach': 'mid-market', 
+                'gm': 'enterprise',
+                'scout': 'small-team',
+                'analyst': 'small-team',
+                'athlete': 'individual',
+                'media': 'small-team'
+            };
+            
+            // Check if they provided organization info
+            if (userData.organization && userData.organization !== 'Individual') {
+                // Basic heuristics for org size
+                const org = userData.organization.toLowerCase();
+                if (org.includes('university') || org.includes('college') || org.includes('mlb') || org.includes('nfl') || org.includes('nba')) {
+                    return 'enterprise';
+                } else if (org.includes('high school') || org.includes('hs')) {
+                    return 'mid-market';
+                } else {
+                    return 'small-team';
+                }
+            }
+            
+            return orgSizeMapping[userData.role] || 'individual';
+        }
+
+        // Role selection
+        document.querySelectorAll('.role-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.role-option').forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedRole = option.dataset.role;
+                document.getElementById('roleNext').disabled = false;
+            });
+        });
+
+        // Plan selection
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedPlan = card.dataset.plan;
+            });
+        });
+
+        // Default to Pro plan
+        document.querySelector('[data-plan="pro"]').click();
+
+        // Account creation
+        // Load onboarding system
+        const onboardingSystemScript = document.createElement('script');
+        onboardingSystemScript.src = '/js/client-onboarding-system.js';
+        onboardingSystemScript.onload = function() {
+            window.onboardingSystem = new ClientOnboardingSystem();
+        };
+        document.head.appendChild(onboardingSystemScript);
+
+        async function createAccount() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const termsAccept = document.getElementById('termsAccept').checked;
+
+            // Validation
+            if (password.length < 8) {
+                showError('Password must be at least 8 characters long.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showError('Passwords do not match.');
+                return;
+            }
+
+            if (!termsAccept) {
+                showError('Please accept the Terms of Service and Privacy Policy.');
+                return;
+            }
+
+            const createBtn = document.getElementById('createBtn');
+            createBtn.disabled = true;
+            createBtn.textContent = 'Creating Account...';
+
+            try {
+                // Collect all form data
+                const userData = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    organization: document.getElementById('organization').value,
+                    role: selectedRole,
+                    plan: selectedPlan,
+                    password: password
+                };
+
+                // Simulate account creation (in production, this would call your API)
+                await simulateAccountCreation(userData);
+
+                // Trigger intelligent onboarding automation
+                if (window.onboardingSystem) {
+                    try {
+                        // Qualify the lead automatically
+                        const qualification = await window.onboardingSystem.qualifyLead({
+                            id: `lead_${Date.now()}`,
+                            email: userData.email,
+                            organization: userData.organization || 'Individual',
+                            role: userData.role,
+                            primarySport: userData.primarySport || 'mlb',
+                            organizationSize: determineOrgSize(userData),
+                            timeframe: 'this-month',
+                            source: 'website_signup'
+                        });
+                        
+                        // Store qualification for later use
+                        localStorage.setItem('user_qualification', JSON.stringify(qualification));
+                        
+                        // Show enhanced success message with qualification results
+                        showSuccess(`🎉 Account created successfully!<br>
+                            <strong>Priority Level:</strong> ${qualification.priority.toUpperCase()}<br>
+                            <strong>Qualification Score:</strong> ${qualification.score}/100<br>
+                            <small>Intelligent onboarding sequence activated. Redirecting...</small>`);
+                            
+                    } catch (error) {
+                        console.error('Onboarding automation error:', error);
+                        // Fallback to standard success message
+                        showSuccess('🎉 Account created successfully! Redirecting to login...');
+                    }
+                } else {
+                    showSuccess('🎉 Account created successfully! Redirecting to login...');
+                }
+                
+                setTimeout(() => {
+                    window.location.href = `/login.html?email=${encodeURIComponent(userData.email)}&onboarding=true`;
+                }, 3000);
+
+            } catch (error) {
+                showError(error.message);
+                createBtn.disabled = false;
+                createBtn.textContent = 'Create Account';
+            }
+        }
+
+        async function simulateAccountCreation(userData) {
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // In production, you would:
+            // 1. Send data to your backend API
+            // 2. Create user in database
+            // 3. Send welcome email
+            // 4. Set up user permissions based on role
+            // 5. Initialize payment for selected plan
+
+            console.log('Account created:', userData);
+            
+            // For demo purposes, we'll just store in localStorage
+            const accounts = JSON.parse(localStorage.getItem('demo_accounts') || '[]');
+            accounts.push({
+                ...userData,
+                id: Date.now(),
+                createdAt: new Date().toISOString(),
+                verified: false
+            });
+            localStorage.setItem('demo_accounts', JSON.stringify(accounts));
+        }
+
+        // Auto-fill email from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailParam = urlParams.get('email');
+        if (emailParam) {
+            document.getElementById('email').value = emailParam;
+        }
+    </script>
+</body>
+</html>

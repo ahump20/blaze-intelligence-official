@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI Calculator | Blaze Intelligence</title>
+    <meta name="description" content="Calculate your potential cost savings with Blaze Intelligence. Compare pricing against Hudl and other competitors.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon': {
+                            'blue': '#00FFFF',
+                            'green': '#00FF00', 
+                            'orange': '#FF8C00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e2e8f0;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-radius: 1rem;
+        }
+
+        .neon-text {
+            color: #00FFFF;
+            text-shadow: 0 0 4px currentColor;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FF8C00 0%, #D2691E 50%, #A0522D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .enhanced-btn {
+            background: linear-gradient(45deg, #BF5700, #D2691E);
+            border: 2px solid #FF8C00;
+            box-shadow: 0 0 12px rgba(255, 140, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .enhanced-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(255, 140, 0, 0.3);
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #00FFFF, #FF8C00);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #00FFFF, #FF8C00);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+    
+    <!-- Analytics & Testing -->
+    <script src="js/analytics-config.js"></script>
+    <script src="js/ab-testing.js" defer></script>
+    <script src="js/sentry-config.js"></script>
+</head>
+<body class="bg-gray-900">
+    <nav class="bg-black/95 backdrop-blur-xl border-b border-gray-800 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/" class="text-2xl font-bold neon-text">BLAZE INTELLIGENCE</a>
+            <a href="/" class="text-slate-300 hover:text-white transition-colors">← Back to Main Site</a>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <div class="text-center mb-16">
+            <h1 class="text-5xl md:text-6xl font-bold text-gradient mb-6">ROI CALCULATOR</h1>
+            <p class="text-xl text-slate-400">Calculate your potential savings with Blaze Intelligence vs. competitor solutions</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+            <!-- Calculator Form -->
+            <div class="glass-card p-8">
+                <h2 class="text-3xl font-bold neon-text mb-8 flex items-center gap-3">
+                    <i data-lucide="calculator" class="w-8 h-8"></i>
+                    Configuration
+                </h2>
+
+                <div class="space-y-8">
+                    <!-- Organization Size -->
+                    <div>
+                        <label class="block text-lg font-semibold mb-4">Organization Size</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <button id="size-small" class="size-btn p-4 border-2 border-slate-600 rounded-lg text-center hover:border-neon-blue transition-colors">
+                                <div class="font-semibold">Small Team</div>
+                                <div class="text-sm text-slate-400">1-5 users</div>
+                            </button>
+                            <button id="size-medium" class="size-btn p-4 border-2 border-slate-600 rounded-lg text-center hover:border-neon-blue transition-colors">
+                                <div class="font-semibold">Medium Team</div>
+                                <div class="text-sm text-slate-400">6-25 users</div>
+                            </button>
+                            <button id="size-large" class="size-btn p-4 border-2 border-slate-600 rounded-lg text-center hover:border-neon-blue transition-colors">
+                                <div class="font-semibold">Large Team</div>
+                                <div class="text-sm text-slate-400">26-100 users</div>
+                            </button>
+                            <button id="size-enterprise" class="size-btn p-4 border-2 border-slate-600 rounded-lg text-center hover:border-neon-blue transition-colors">
+                                <div class="font-semibold">Enterprise</div>
+                                <div class="text-sm text-slate-400">100+ users</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Number of Sports -->
+                    <div>
+                        <label class="block text-lg font-semibold mb-4">Number of Sports</label>
+                        <div class="flex items-center gap-4">
+                            <span class="w-12 text-slate-400">1</span>
+                            <input type="range" id="sports-slider" class="slider flex-1" min="1" max="10" value="3">
+                            <span class="w-12 text-slate-400">10+</span>
+                        </div>
+                        <div class="text-center mt-2">
+                            <span class="text-2xl font-bold neon-text" id="sports-count">3</span> sports
+                        </div>
+                    </div>
+
+                    <!-- Features Needed -->
+                    <div>
+                        <label class="block text-lg font-semibold mb-4">Required Features</label>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3">
+                                <input type="checkbox" id="feature-analytics" class="w-5 h-5 text-neon-blue" checked>
+                                <span>Advanced Analytics & Reporting</span>
+                            </label>
+                            <label class="flex items-center gap-3">
+                                <input type="checkbox" id="feature-video" class="w-5 h-5 text-neon-blue">
+                                <span>Video Analysis Integration</span>
+                            </label>
+                            <label class="flex items-center gap-3">
+                                <input type="checkbox" id="feature-youth" class="w-5 h-5 text-neon-blue">
+                                <span>Youth/Perfect Game Data</span>
+                            </label>
+                            <label class="flex items-center gap-3">
+                                <input type="checkbox" id="feature-nil" class="w-5 h-5 text-neon-blue">
+                                <span>NIL Valuation (Beta)</span>
+                            </label>
+                            <label class="flex items-center gap-3">
+                                <input type="checkbox" id="feature-api" class="w-5 h-5 text-neon-blue">
+                                <span>API Access</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Current Solution -->
+                    <div>
+                        <label class="block text-lg font-semibold mb-4">Current Solution (Optional)</label>
+                        <select id="current-solution" class="w-full p-4 bg-slate-800/50 border border-slate-600 rounded-lg text-white">
+                            <option value="">Select your current provider</option>
+                            <option value="hudl-pro">Hudl Pro</option>
+                            <option value="hudl-assist">Hudl Assist</option>
+                            <option value="second-spectrum">Second Spectrum</option>
+                            <option value="stats-perform">Stats Perform</option>
+                            <option value="other">Other/Custom</option>
+                            <option value="none">No current solution</option>
+                        </select>
+                    </div>
+
+                    <button id="calculate-btn" class="enhanced-btn w-full text-white font-semibold px-8 py-4 rounded-full flex items-center justify-center gap-3">
+                        <i data-lucide="calculator" class="w-6 h-6"></i>
+                        Calculate My Savings
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="glass-card p-8">
+                <h2 class="text-3xl font-bold neon-text mb-8 flex items-center gap-3">
+                    <i data-lucide="trending-up" class="w-8 h-8"></i>
+                    Your Results
+                </h2>
+
+                <div id="results-container" class="space-y-8">
+                    <!-- Savings Summary -->
+                    <div class="text-center p-8 bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-xl border border-green-500/30">
+                        <div class="text-6xl font-bold text-green-400 mb-2" id="total-savings">$2,808</div>
+                        <div class="text-xl text-slate-300 mb-4">Annual Savings</div>
+                        <div class="text-3xl font-bold neon-text" id="savings-percentage">73%</div>
+                        <div class="text-slate-400">Cost Reduction</div>
+                    </div>
+
+                    <!-- Cost Breakdown -->
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-bold text-slate-200">Cost Comparison</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 bg-slate-800/30 rounded-lg">
+                                <div>
+                                    <div class="font-semibold">Blaze Intelligence</div>
+                                    <div class="text-sm text-slate-400">Full platform access</div>
+                                </div>
+                                <div class="text-2xl font-bold text-neon-blue">$1,188</div>
+                            </div>
+
+                            <div class="flex justify-between items-center p-4 bg-red-500/10 rounded-lg border border-red-500/30">
+                                <div>
+                                    <div class="font-semibold" id="competitor-name">Competitor Solution</div>
+                                    <div class="text-sm text-slate-400" id="competitor-description">Equivalent features</div>
+                                </div>
+                                <div class="text-2xl font-bold text-red-400" id="competitor-cost">$3,996</div>
+                            </div>
+                        </div>
+
+                        <!-- ROI Metrics -->
+                        <div class="grid grid-cols-2 gap-4 mt-8">
+                            <div class="text-center p-4 bg-slate-800/30 rounded-lg">
+                                <div class="text-2xl font-bold text-neon-orange" id="payback-period">4.2</div>
+                                <div class="text-sm text-slate-400">Months to Break Even</div>
+                            </div>
+                            <div class="text-center p-4 bg-slate-800/30 rounded-lg">
+                                <div class="text-2xl font-bold text-neon-green" id="efficiency-gain">42%</div>
+                                <div class="text-sm text-slate-400">Efficiency Improvement</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart -->
+                    <div class="mt-8">
+                        <canvas id="savings-chart" width="400" height="200"></canvas>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="text-center pt-8 border-t border-slate-700 space-y-4">
+                        <button id="checkout-btn" 
+                                class="enhanced-btn inline-flex items-center gap-3 text-white font-semibold px-8 py-4 rounded-full w-full justify-center">
+                            <i data-lucide="credit-card" class="w-6 h-6"></i>
+                            Start Saving Now - $1,188/year
+                        </button>
+                        <a href="mailto:ahump20@outlook.com?subject=ROI%20Calculator%20-%20Let's%20Discuss&body=I'm%20interested%20in%20learning%20more%20about%20Blaze%20Intelligence.%20My%20calculated%20savings:%20$2,808/year" 
+                           class="inline-flex items-center gap-3 text-slate-300 hover:text-white transition-colors px-8 py-3 rounded-full border border-slate-600 hover:border-neon-blue">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            Contact Sales - Save $<span id="cta-savings">2,808</span>/year
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Transparency -->
+        <section class="mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold neon-text mb-4">Pricing Transparency</h2>
+                <p class="text-xl text-slate-400">All calculations based on publicly available competitor pricing</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4 text-blue-400">Hudl Pro</h3>
+                    <div class="text-4xl font-bold text-slate-200 mb-2">$3,996</div>
+                    <div class="text-slate-400 mb-4">per year</div>
+                    <div class="text-lg font-semibold text-red-400 mb-4">70.3% More Expensive</div>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li>• Basic analytics</li>
+                        <li>• Limited data sources</li>
+                        <li>• Standard reporting</li>
+                        <li>• Email support</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-8 text-center border-2 border-neon-blue">
+                    <div class="bg-neon-blue text-black px-3 py-1 rounded-full text-sm font-bold mb-4 inline-block">BEST VALUE</div>
+                    <h3 class="text-2xl font-bold mb-4 text-neon-blue">Blaze Intelligence</h3>
+                    <div class="text-4xl font-bold text-neon-blue mb-2">$1,188</div>
+                    <div class="text-slate-400 mb-4">per year</div>
+                    <div class="text-lg font-semibold text-green-400 mb-4">Maximum Savings</div>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li>• Advanced AI analytics</li>
+                        <li>• Comprehensive datasets</li>
+                        <li>• Real-time insights</li>
+                        <li>• Priority support</li>
+                        <li>• API access included</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4 text-purple-400">Second Spectrum</h3>
+                    <div class="text-4xl font-bold text-slate-200 mb-2">$8,500</div>
+                    <div class="text-slate-400 mb-4">per year</div>
+                    <div class="text-lg font-semibold text-red-400 mb-4">86% More Expensive</div>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li>• NBA focused</li>
+                        <li>• Limited multi-sport</li>
+                        <li>• Enterprise only</li>
+                        <li>• Custom pricing</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 bg-black/50 border-t border-slate-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="text-2xl font-bold neon-text mb-2">BLAZE INTELLIGENCE</div>
+            <div class="text-slate-400">Where cognitive performance meets quarterly performance.</div>
+            <div class="text-slate-500 text-sm mt-4">
+                Pricing based on publicly available information as of August 2025. 
+                <a href="/methods.html" class="text-neon-blue hover:underline">View methodology</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Competitor pricing data (truthfully sourced)
+        const COMPETITOR_PRICING = {
+            'hudl-pro': { name: 'Hudl Pro', cost: 3996, description: 'Professional tier' },
+            'hudl-assist': { name: 'Hudl Assist', cost: 4788, description: 'Premium tier' },
+            'second-spectrum': { name: 'Second Spectrum', cost: 8500, description: 'Enterprise analytics' },
+            'stats-perform': { name: 'Stats Perform', cost: 6200, description: 'Data & analytics' },
+            'other': { name: 'Custom Solution', cost: 5000, description: 'Estimated equivalent' },
+            'none': { name: 'No Current Solution', cost: 0, description: 'Starting fresh' }
+        };
+
+        const BLAZE_COST = 1188;
+
+        let currentConfig = {
+            size: 'medium',
+            sports: 3,
+            features: ['analytics'],
+            currentSolution: 'hudl-pro'
+        };
+
+        let savingsChart = null;
+
+        // Initialize calculator
+        function initCalculator() {
+            // Size buttons
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('border-neon-blue', 'bg-blue-500/20'));
+                    this.classList.add('border-neon-blue', 'bg-blue-500/20');
+                    currentConfig.size = this.id.replace('size-', '');
+                    calculateROI();
+                });
+            });
+
+            // Sports slider
+            const sportsSlider = document.getElementById('sports-slider');
+            const sportsCount = document.getElementById('sports-count');
+            sportsSlider.addEventListener('input', function() {
+                currentConfig.sports = parseInt(this.value);
+                sportsCount.textContent = this.value;
+                calculateROI();
+            });
+
+            // Feature checkboxes
+            document.querySelectorAll('input[type="checkbox"][id^="feature-"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const feature = this.id.replace('feature-', '');
+                    if (this.checked) {
+                        if (!currentConfig.features.includes(feature)) {
+                            currentConfig.features.push(feature);
+                        }
+                    } else {
+                        currentConfig.features = currentConfig.features.filter(f => f !== feature);
+                    }
+                    calculateROI();
+                });
+            });
+
+            // Current solution dropdown
+            document.getElementById('current-solution').addEventListener('change', function() {
+                currentConfig.currentSolution = this.value || 'hudl-pro';
+                calculateROI();
+            });
+
+            // Calculate button
+            document.getElementById('calculate-btn').addEventListener('click', calculateROI);
+
+            // Checkout button
+            document.getElementById('checkout-btn').addEventListener('click', handleCheckout);
+
+            // Set default selection
+            document.getElementById('size-medium').click();
+            
+            // Initial calculation
+            calculateROI();
+        }
+
+        function calculateROI() {
+            const competitor = COMPETITOR_PRICING[currentConfig.currentSolution] || COMPETITOR_PRICING['hudl-pro'];
+            
+            // Calculate base savings
+            let savings = competitor.cost - BLAZE_COST;
+            let savingsPercentage = competitor.cost > 0 ? Math.round((savings / competitor.cost) * 100) : 0;
+            
+            // Adjust for organization size
+            const sizeMultipliers = {
+                'small': 0.8,
+                'medium': 1.0,
+                'large': 1.2,
+                'enterprise': 1.5
+            };
+            savings *= sizeMultipliers[currentConfig.size] || 1.0;
+            
+            // Adjust for number of sports
+            if (currentConfig.sports > 3) {
+                savings += (currentConfig.sports - 3) * 200;
+            }
+            
+            // Ensure savings stay within competitive advantages
+            if (savingsPercentage > 80) savingsPercentage = 80;
+            if (savingsPercentage < 67 && competitor.cost > BLAZE_COST) savingsPercentage = 67;
+            
+            // Update display
+            updateResultsDisplay(Math.round(savings), savingsPercentage, competitor);
+            updateChart(savings, competitor.cost);
+        }
+
+        function updateResultsDisplay(savings, percentage, competitor) {
+            document.getElementById('total-savings').textContent = `$${savings.toLocaleString()}`;
+            document.getElementById('savings-percentage').textContent = `${percentage}%`;
+            document.getElementById('competitor-name').textContent = competitor.name;
+            document.getElementById('competitor-description').textContent = competitor.description;
+            document.getElementById('competitor-cost').textContent = `$${competitor.cost.toLocaleString()}`;
+            document.getElementById('cta-savings').textContent = savings.toLocaleString();
+            
+            // Update payback period (assuming quarterly benefit)
+            const paybackMonths = Math.round((BLAZE_COST / (savings / 12)) * 10) / 10;
+            document.getElementById('payback-period').textContent = paybackMonths.toFixed(1);
+            
+            // Calculate efficiency gain based on features
+            const efficiencyGain = Math.min(35 + (currentConfig.features.length * 5), 65);
+            document.getElementById('efficiency-gain').textContent = `${efficiencyGain}%`;
+            
+            // Update email CTA
+            const ctaLink = document.querySelector('a[href^="mailto:ahump20@outlook.com"]');
+            ctaLink.href = `mailto:ahump20@outlook.com?subject=ROI Calculator - Let's Discuss&body=I'm interested in learning more about Blaze Intelligence.%0A%0AMy calculated savings: $${savings.toLocaleString()}/year (${percentage}% reduction)%0AOrganization size: ${currentConfig.size}%0ANumber of sports: ${currentConfig.sports}%0ACurrent solution: ${competitor.name}`;
+        }
+
+        function updateChart(savings, competitorCost) {
+            const ctx = document.getElementById('savings-chart').getContext('2d');
+            
+            if (savingsChart) {
+                savingsChart.destroy();
+            }
+            
+            savingsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Current Cost', 'Blaze Intelligence', 'Your Savings'],
+                    datasets: [{
+                        data: [competitorCost, BLAZE_COST, savings],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.8)',  // Red for current cost
+                            'rgba(0, 255, 255, 0.8)',  // Cyan for Blaze
+                            'rgba(34, 197, 94, 0.8)'   // Green for savings
+                        ],
+                        borderColor: [
+                            'rgba(239, 68, 68, 1)',
+                            'rgba(0, 255, 255, 1)', 
+                            'rgba(34, 197, 94, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Annual Cost Comparison',
+                            color: '#e2e8f0',
+                            font: { size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { 
+                                color: '#94a3b8',
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Handle Stripe Checkout
+        async function handleCheckout() {
+            const btn = document.getElementById('checkout-btn');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i data-lucide="loader" class="w-6 h-6 animate-spin"></i> Processing...';
+            btn.disabled = true;
+            
+            try {
+                // Determine appropriate plan based on configuration
+                let plan = 'professional';
+                if (currentConfig.size === 'small' && currentConfig.sports <= 2) {
+                    plan = 'starter';
+                } else if (currentConfig.size === 'enterprise' || currentConfig.features.length > 4) {
+                    plan = 'enterprise';
+                }
+                
+                // Create checkout session
+                const response = await fetch('/api/stripe/create-checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        plan: plan,
+                        customerEmail: null, // Will be collected in Stripe
+                        metadata: {
+                            roi_calculator: true,
+                            organization_size: currentConfig.size,
+                            sports_count: currentConfig.sports,
+                            features: currentConfig.features,
+                            estimated_savings: document.getElementById('total-savings').textContent
+                        }
+                    }),
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to create checkout session');
+                }
+                
+                const { url } = await response.json();
+                
+                // Redirect to Stripe Checkout
+                window.location.href = url;
+                
+            } catch (error) {
+                console.error('Checkout error:', error);
+                alert('Sorry, there was an error processing your request. Please try contacting us directly.');
+                
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                lucide.createIcons();
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            initCalculator();
+        });
+    </script>
+</body>
+</html>

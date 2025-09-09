@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Blaze Intelligence</title>
+<meta name="description" content="Get in touch with Blaze Intelligence for championship-level sports analytics">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+.glass-nav { background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 255, 255, 0.2); }
+.hero-3d-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+.contact-form { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 2px solid rgba(0, 255, 255, 0.3); border-radius: 1rem; padding: 3rem; }
+.input-field { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; width: 100%; transition: all 0.3s ease; }
+.input-field:focus { outline: none; border-color: #00FFFF; box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.1); }
+.submit-btn { background: linear-gradient(45deg, #BF5700, #FF8C00); color: white; font-weight: 600; padding: 1rem 2rem; border-radius: 0.5rem; width: 100%; transition: all 0.3s ease; cursor: pointer; border: none; }
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.contact-card { background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(255, 140, 0, 0.2); border-radius: 1rem; padding: 2rem; }
+.checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; }
+.checkbox-item { display: flex; align-items: center; gap: 0.5rem; }
+.checkbox-item input[type="checkbox"] { 
+width: 1rem; height: 1rem; 
+accent-color: #00FFFF;
+background: rgba(30, 41, 59, 0.5);
+}
+.success-message { 
+background: linear-gradient(45deg, #10B981, #059669); 
+color: white; 
+padding: 1rem; 
+border-radius: 0.5rem; 
+text-align: center; 
+margin-top: 1rem;
+display: none;
+}
+.step-indicator { 
+display: flex; 
+justify-content: space-between; 
+margin-bottom: 2rem; 
+padding: 0 1rem;
+}
+.step { 
+display: flex; 
+align-items: center; 
+gap: 0.5rem; 
+color: #64748b;
+transition: all 0.3s ease;
+}
+.step.active { color: #00FFFF; }
+.step.completed { color: #10B981; }
+.step-number { 
+width: 2rem; 
+height: 2rem; 
+border-radius: 50%; 
+border: 2px solid currentColor; 
+display: flex; 
+align-items: center; 
+justify-content: center; 
+font-weight: bold; 
+}
+.form-step { display: none; }
+.form-step.active { display: block; }
+</style>
+
+<div class="contact-form">
+<div class="step-indicator">
+<div class="step active" id="step-1">
+<div class="step-number">1</div>
+<span class="hidden sm:block">Contact Info</span>
+</div>
+<div class="step" id="step-2">
+<div class="step-number">2</div>
+<span class="hidden sm:block">Organization</span>
+</div>
+<div class="step" id="step-3">
+<div class="step-number">3</div>
+<span class="hidden sm:block">Requirements</span>
+</div>
+</div>
+
+<h2 class="text-2xl font-bold text-cyan-400 mb-6">Get Championship-Level Analytics</h2>
+
+<form id="contactForm" class="contact-form space-y-6">
+<div class="form-step" id="form-step-2">
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">Organization/Team Name *</label>
+<input type="text" name="company" class="input-field" required placeholder="e.g., St. Louis Cardinals, University of Texas">
+</div>
+
+<div class="grid md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">Your Role/Title *</label>
+<select name="jobTitle" class="input-field" required>
+<option value="">Select your role</option>
+<option value="General Manager">General Manager</option>
+<option value="VP of Analytics">VP of Analytics</option>
+<option value="Director of Analytics">Director of Analytics</option>
+<option value="Head Coach">Head Coach</option>
+<option value="Assistant Coach">Assistant Coach</option>
+<option value="Sports Scientist">Sports Scientist</option>
+<option value="Performance Director">Performance Director</option>
+<option value="Technology Director">Technology Director</option>
+<option value="Data Analyst">Data Analyst</option>
+<option value="Athletic Director">Athletic Director</option>
+<option value="Consultant">Consultant</option>
+<option value="Student">Student/Researcher</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">Organization Type *</label>
+<select name="organizationType" class="input-field" required>
+<option value="">Select organization type</option>
+<option value="Professional Sports Team">Professional Sports Team</option>
+<option value="NCAA Division I">NCAA Division I</option>
+<option value="NCAA Division II/III">NCAA Division II/III</option>
+<option value="High School">High School</option>
+<option value="Youth Organization">Youth Organization</option>
+<option value="Sports Technology Company">Sports Technology Company</option>
+<option value="Sports Analytics Firm">Sports Analytics Firm</option>
+<option value="Individual Coach">Individual Coach</option>
+<option value="Other">Other</option>
+</select>
+</div>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">Primary Sport Focus</label>
+<select name="sport" class="input-field">
+<option value="">Select primary sport</option>
+<option value="baseball">Baseball (MLB/NCAA/High School)</option>
+<option value="football">Football (NFL/NCAA/High School)</option>
+<option value="basketball">Basketball (NBA/NCAA/High School)</option>
+<option value="multi-sport">Multi-Sport Organization</option>
+<option value="other">Other Sport</option>
+</select>
+</div>
+
+<div class="flex justify-between">
+<button type="button" class="prev-btn bg-slate-600 hover:bg-slate-700 text-white px-6 py-2 rounded-lg transition-all">
+← Previous
+</button>
+<button type="button" class="next-btn bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2 rounded-lg transition-all">
+Next Step →
+</button>
+</div>
+</div>
+</div>
+
+<div class="space-y-8">
+<div class="contact-card">
+<h3 class="text-xl font-bold text-cyan-400 mb-4">Instant Access</h3>
+<div class="space-y-4">
+<a href="/demo.html" class="block w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-lg text-center transition-all">
+🚀 Try Live Demo
+</a>
+<a href="/dashboard.html" class="block w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-semibold py-3 px-4 rounded-lg text-center transition-all">
+📊 View Dashboard
+</a>
+<a href="/data.html" class="block w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-semibold py-3 px-4 rounded-lg text-center transition-all">
+📈 Explore Analytics
+</a>
+</div>
+</div>
+

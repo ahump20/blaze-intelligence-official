@@ -1,0 +1,172 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live Intelligence - Blaze Intelligence</title>
+<link rel="stylesheet" href="/brand.css"><link rel="stylesheet" href="/brand-components.css">
+<meta name="description" content="Real-time game analytics and pressure metrics across MLB, NFL, and NCAA">
+<style>
+.live-container{max-width:1400px;margin:80px auto;padding:0 20px}
+.live-header{text-align:center;margin-bottom:48px}
+.live-title{font-size:48px;background:linear-gradient(135deg,#E5E7EB,#BF5700);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:24px}
+.game-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;
+           position:relative;overflow:hidden}
+.game-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+                   background:var(--accent);opacity:0;transition:opacity 0.3s}
+.game-card.live::before{opacity:1;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.game-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.game-status{padding:4px 12px;background:rgba(191,87,0,0.2);border:1px solid var(--accent);
+             border-radius:20px;font-size:12px;color:var(--accent);font-weight:600}
+.team-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;
+          border-bottom:1px solid var(--line)}
+.team-name{font-weight:600;color:var(--ink)}
+.team-score{font-size:24px;font-weight:700;color:var(--accent)}
+.pressure-bar{height:8px;background:#0B0B0F;border-radius:4px;margin:16px 0;overflow:hidden}
+.pressure-fill{height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent));
+               transition:width 0.5s ease}
+.metric-row{display:flex;justify-content:space-between;margin-top:12px}
+.metric-label{color:var(--muted);font-size:12px}
+.metric-value{color:var(--ink);font-weight:600}
+.heatmap-container{margin-top:32px}
+.heatmap-canvas{width:100%;height:400px;background:#0B0B0F;border-radius:8px;border:1px solid var(--line)}
+</style>
+</head><body>
+<div id="header"></div>
+
+<div class="live-container">
+  <div class="live-header">
+    <h1 class="live-title">Live Intelligence Dashboard</h1>
+    <p class="muted">Real-time pressure analytics across all major leagues</p>
+    <div id="badgeStrip" style="margin-top:24px"></div>
+  </div>
+  
+  <div class="live-grid">
+    <div class="game-card live">
+      <div class="game-header">
+        <span class="game-status">LIVE - 7th Inning</span>
+        <span style="color:var(--muted);font-size:12px">MLB</span>
+      </div>
+      <div class="team-row">
+        <span class="team-name">St. Louis Cardinals</span>
+        <span class="team-score">5</span>
+      </div>
+      <div class="team-row">
+        <span class="team-name">Chicago Cubs</span>
+        <span class="team-score">3</span>
+      </div>
+      <div class="pressure-bar">
+        <div class="pressure-fill" style="width:72%"></div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Win Probability</span>
+        <span class="metric-value">72.3%</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Pressure Index</span>
+        <span class="metric-value">8.4/10</span>
+      </div>
+    </div>
+    
+    <div class="game-card live">
+      <div class="game-header">
+        <span class="game-status">LIVE - 3rd Quarter</span>
+        <span style="color:var(--muted);font-size:12px">NFL</span>
+      </div>
+      <div class="team-row">
+        <span class="team-name">Dallas Cowboys</span>
+        <span class="team-score">21</span>
+      </div>
+      <div class="team-row">
+        <span class="team-name">Philadelphia Eagles</span>
+        <span class="team-score">17</span>
+      </div>
+      <div class="pressure-bar">
+        <div class="pressure-fill" style="width:58%"></div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Win Probability</span>
+        <span class="metric-value">58.1%</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Pressure Index</span>
+        <span class="metric-value">7.2/10</span>
+      </div>
+    </div>
+    
+    <div class="game-card">
+      <div class="game-header">
+        <span class="game-status" style="background:rgba(155,203,235,0.2);border-color:var(--accent-2);color:var(--accent-2)">UPCOMING</span>
+        <span style="color:var(--muted);font-size:12px">NCAA</span>
+      </div>
+      <div class="team-row">
+        <span class="team-name">Texas Longhorns</span>
+        <span class="team-score">-</span>
+      </div>
+      <div class="team-row">
+        <span class="team-name">Oklahoma Sooners</span>
+        <span class="team-score">-</span>
+      </div>
+      <div class="pressure-bar">
+        <div class="pressure-fill" style="width:50%"></div>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Pre-game Prediction</span>
+        <span class="metric-value">52.1%</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Kickoff</span>
+        <span class="metric-value">7:00 PM CT</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="heatmap-container">
+    <h2 style="color:var(--ink);margin-bottom:16px">Pressure Heatmap</h2>
+    <canvas id="heatmap" class="heatmap-canvas"></canvas>
+  </div>
+</div>
+
+<div id="footer"></div>
+
+<script type="module">
+  import { METRICS, injectBadges } from '/js/metrics.js';
+  
+  const loadPartial = async (id, path)=>{ 
+    try {
+      const html = await fetch(path).then(r=>r.text()); 
+      document.querySelector(id).innerHTML = html; 
+    } catch(e) {
+      console.warn('Failed to load partial:', path);
+    }
+  };
+  await loadPartial('#header','/partials/header.html');
+  await loadPartial('#footer','/partials/footer.html');
+  
+  injectBadges(document.querySelector('#badgeStrip'));
+  
+  // Draw pressure heatmap
+  const canvas = document.getElementById('heatmap');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth;
+  canvas.height = 400;
+  
+  // Generate heatmap gradient
+  const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+  gradient.addColorStop(0, 'rgba(155,203,235,0.3)');
+  gradient.addColorStop(0.5, 'rgba(191,87,0,0.5)');
+  gradient.addColorStop(1, 'rgba(191,87,0,0.8)');
+  
+  // Draw heatmap visualization
+  for(let i = 0; i < 50; i++) {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    const radius = Math.random() * 50 + 20;
+    const radGrad = ctx.createRadialGradient(x, y, 0, x, y, radius);
+    radGrad.addColorStop(0, 'rgba(191,87,0,0.5)');
+    radGrad.addColorStop(1, 'rgba(191,87,0,0)');
+    ctx.fillStyle = radGrad;
+    ctx.fillRect(x - radius, y - radius, radius * 2, radius * 2);
+  }
+</script>
+</body></html>

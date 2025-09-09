@@ -1,0 +1,5621 @@
+{
+  "name": "St. Louis Cardinals",
+  "sport": "MLB",
+  "league": "National League",
+  "division": "Central",
+  "city": "St. Louis",
+  "established": 1882,
+  "colors": [
+    "#C41E3A",
+    "#0C2340",
+    "#FEDB00"
+  ],
+  "mascot": "Fredbird",
+  "id": "cardinals",
+  "currentSeason": 2025,
+  "roster": [
+    {
+      "id": "player_1",
+      "name": "Edward Anderson",
+      "jerseyNumber": 63,
+      "position": "C",
+      "age": 20,
+      "height": "6'6\"",
+      "weight": 208,
+      "experience": 10,
+      "stats": {
+        "battingAverage": "0.242",
+        "homeRuns": 1,
+        "rbi": 13,
+        "runs": 81,
+        "hits": 39,
+        "doubles": 30,
+        "triples": 6,
+        "stolenBases": 27,
+        "era": "5.20",
+        "wins": 0,
+        "losses": 8,
+        "saves": 25,
+        "strikeouts": 30,
+        "walks": 74
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 15,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 6,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "Louisville, KY",
+        "draftYear": 2016,
+        "draftRound": 3,
+        "draftPick": 31,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_2",
+      "name": "Anthony Sanchez",
+      "jerseyNumber": 47,
+      "position": "1B",
+      "age": 28,
+      "height": "6'5\"",
+      "weight": 172,
+      "experience": 5,
+      "stats": {
+        "battingAverage": "0.231",
+        "homeRuns": 14,
+        "rbi": 116,
+        "runs": 82,
+        "hits": 84,
+        "doubles": 11,
+        "triples": 9,
+        "stolenBases": 3,
+        "era": "5.87",
+        "wins": 14,
+        "losses": 1,
+        "saves": 8,
+        "strikeouts": 174,
+        "walks": 78
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 8,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 9,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Chicago, IL",
+        "draftYear": 2018,
+        "draftRound": 1,
+        "draftPick": 17,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_3",
+      "name": "Edward Adams",
+      "jerseyNumber": 53,
+      "position": "2B",
+      "age": 26,
+      "height": "7'1\"",
+      "weight": 283,
+      "experience": 4,
+      "stats": {
+        "battingAverage": "0.352",
+        "homeRuns": 3,
+        "rbi": 12,
+        "runs": 44,
+        "hits": 123,
+        "doubles": 10,
+        "triples": 5,
+        "stolenBases": 13,
+        "era": "3.14",
+        "wins": 5,
+        "losses": 0,
+        "saves": 23,
+        "strikeouts": 26,
+        "walks": 3
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 45,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 6,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Ohio State University",
+        "hometown": "Austin, TX",
+        "draftYear": 2022,
+        "draftRound": 5,
+        "draftPick": 16,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_4",
+      "name": "David Martin",
+      "jerseyNumber": 12,
+      "position": "3B",
+      "age": 33,
+      "height": "6'7\"",
+      "weight": 162,
+      "experience": 9,
+      "stats": {
+        "battingAverage": "0.304",
+        "homeRuns": 25,
+        "rbi": 5,
+        "runs": 26,
+        "hits": 72,
+        "doubles": 27,
+        "triples": 3,
+        "stolenBases": 16,
+        "era": "5.54",
+        "wins": 7,
+        "losses": 12,
+        "saves": 31,
+        "strikeouts": 235,
+        "walks": 41
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 98,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 2,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Alabama",
+        "hometown": "Miami, FL",
+        "draftYear": 2018,
+        "draftRound": 5,
+        "draftPick": 24,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_5",
+      "name": "Larry Jackson",
+      "jerseyNumber": 49,
+      "position": "SS",
+      "age": 25,
+      "height": "5'11\"",
+      "weight": 282,
+      "experience": 3,
+      "stats": {
+        "battingAverage": "0.260",
+        "homeRuns": 27,
+        "rbi": 9,
+        "runs": 95,
+        "hits": 34,
+        "doubles": 18,
+        "triples": 0,
+        "stolenBases": 20,
+        "era": "5.26",
+        "wins": 5,
+        "losses": 4,
+        "saves": 0,
+        "strikeouts": 226,
+        "walks": 39
+      },
+      "contract": {
+        "years": 2,
+        "totalValue": 10,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Miami, FL",
+        "draftYear": 2021,
+        "draftRound": 4,
+        "draftPick": 7,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_6",
+      "name": "Benjamin Brown",
+      "jerseyNumber": 84,
+      "position": "LF",
+      "age": 31,
+      "height": "6'8\"",
+      "weight": 272,
+      "experience": 6,
+      "stats": {
+        "battingAverage": "0.274",
+        "homeRuns": 4,
+        "rbi": 49,
+        "runs": 76,
+        "hits": 13,
+        "doubles": 33,
+        "triples": 6,
+        "stolenBases": 3,
+        "era": "3.10",
+        "wins": 16,
+        "losses": 9,
+        "saves": 28,
+        "strikeouts": 187,
+        "walks": 70
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 74,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 0,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "University of Southern California",
+        "hometown": "Phoenix, AZ",
+        "draftYear": 2023,
+        "draftRound": 3,
+        "draftPick": 5,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_7",
+      "name": "Anthony Lee",
+      "jerseyNumber": 45,
+      "position": "CF",
+      "age": 22,
+      "height": "6'0\"",
+      "weight": 165,
+      "experience": 1,
+      "stats": {
+        "battingAverage": "0.389",
+        "homeRuns": 6,
+        "rbi": 90,
+        "runs": 12,
+        "hits": 169,
+        "doubles": 18,
+        "triples": 9,
+        "stolenBases": 3,
+        "era": "3.11",
+        "wins": 11,
+        "losses": 5,
+        "saves": 0,
+        "strikeouts": 94,
+        "walks": 19
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 51,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 4,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Georgia Institute of Technology",
+        "hometown": "Birmingham, AL",
+        "draftYear": 2015,
+        "draftRound": 1,
+        "draftPick": 1,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_8",
+      "name": "Scott Thompson",
+      "jerseyNumber": 70,
+      "position": "RF",
+      "age": 22,
+      "height": "6'9\"",
+      "weight": 234,
+      "experience": 6,
+      "stats": {
+        "battingAverage": "0.311",
+        "homeRuns": 21,
+        "rbi": 93,
+        "runs": 56,
+        "hits": 116,
+        "doubles": 31,
+        "triples": 4,
+        "stolenBases": 12,
+        "era": "4.13",
+        "wins": 8,
+        "losses": 13,
+        "saves": 3,
+        "strikeouts": 103,
+        "walks": 24
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 88,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 5,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of California",
+        "hometown": "Louisville, KY",
+        "draftYear": 2020,
+        "draftRound": 4,
+        "draftPick": 30,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_9",
+      "name": "John Nguyen",
+      "jerseyNumber": 89,
+      "position": "SP",
+      "age": 30,
+      "height": "5'10\"",
+      "weight": 149,
+      "experience": 7,
+      "stats": {
+        "battingAverage": "0.358",
+        "homeRuns": 35,
+        "rbi": 40,
+        "runs": 49,
+        "hits": 52,
+        "doubles": 1,
+        "triples": 8,
+        "stolenBases": 2,
+        "era": "4.66",
+        "wins": 19,
+        "losses": 4,
+        "saves": 23,
+        "strikeouts": 103,
+        "walks": 30
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 23,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 6,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "Atlanta, GA",
+        "draftYear": 2021,
+        "draftRound": 1,
+        "draftPick": 21,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_10",
+      "name": "Jason Moore",
+      "jerseyNumber": 8,
+      "position": "RP",
+      "age": 31,
+      "height": "5'8\"",
+      "weight": 187,
+      "experience": 6,
+      "stats": {
+        "battingAverage": "0.215",
+        "homeRuns": 27,
+        "rbi": 4,
+        "runs": 59,
+        "hits": 6,
+        "doubles": 18,
+        "triples": 6,
+        "stolenBases": 12,
+        "era": "4.06",
+        "wins": 1,
+        "losses": 10,
+        "saves": 21,
+        "strikeouts": 122,
+        "walks": 0
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 80,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 5,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Florida State University",
+        "hometown": "Atlanta, GA",
+        "draftYear": 2021,
+        "draftRound": 1,
+        "draftPick": 12,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_11",
+      "name": "David Davis",
+      "jerseyNumber": 67,
+      "position": "CL",
+      "age": 23,
+      "height": "6'0\"",
+      "weight": 288,
+      "experience": 5,
+      "stats": {
+        "battingAverage": "0.303",
+        "homeRuns": 21,
+        "rbi": 81,
+        "runs": 47,
+        "hits": 148,
+        "doubles": 35,
+        "triples": 4,
+        "stolenBases": 9,
+        "era": "3.99",
+        "wins": 10,
+        "losses": 13,
+        "saves": 12,
+        "strikeouts": 154,
+        "walks": 4
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 61,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 2,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Alabama",
+        "hometown": "Phoenix, AZ",
+        "draftYear": 2017,
+        "draftRound": 3,
+        "draftPick": 28,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_12",
+      "name": "Jason Miller",
+      "jerseyNumber": 5,
+      "position": "DH",
+      "age": 22,
+      "height": "7'0\"",
+      "weight": 308,
+      "experience": 11,
+      "stats": {
+        "battingAverage": "0.342",
+        "homeRuns": 25,
+        "rbi": 110,
+        "runs": 78,
+        "hits": 167,
+        "doubles": 3,
+        "triples": 6,
+        "stolenBases": 27,
+        "era": "3.16",
+        "wins": 2,
+        "losses": 1,
+        "saves": 34,
+        "strikeouts": 117,
+        "walks": 32
+      },
+      "contract": {
+        "years": 2,
+        "totalValue": 58,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 3,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "Dallas, TX",
+        "draftYear": 2015,
+        "draftRound": 2,
+        "draftPick": 21,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_13",
+      "name": "Nicholas Nelson",
+      "jerseyNumber": 57,
+      "position": "UT",
+      "age": 27,
+      "height": "5'7\"",
+      "weight": 250,
+      "experience": 10,
+      "stats": {
+        "battingAverage": "0.356",
+        "homeRuns": 25,
+        "rbi": 6,
+        "runs": 19,
+        "hits": 169,
+        "doubles": 8,
+        "triples": 9,
+        "stolenBases": 22,
+        "era": "2.64",
+        "wins": 17,
+        "losses": 8,
+        "saves": 8,
+        "strikeouts": 218,
+        "walks": 33
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 100,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 8,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Texas",
+        "hometown": "Memphis, TN",
+        "draftYear": 2023,
+        "draftRound": 5,
+        "draftPick": 27,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_14",
+      "name": "James Rivera",
+      "jerseyNumber": 89,
+      "position": "C",
+      "age": 31,
+      "height": "6'6\"",
+      "weight": 305,
+      "experience": 8,
+      "stats": {
+        "battingAverage": "0.241",
+        "homeRuns": 14,
+        "rbi": 81,
+        "runs": 66,
+        "hits": 56,
+        "doubles": 16,
+        "triples": 5,
+        "stolenBases": 12,
+        "era": "2.16",
+        "wins": 19,
+        "losses": 10,
+        "saves": 25,
+        "strikeouts": 235,
+        "walks": 1
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 25,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 9,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "Memphis, TN",
+        "draftYear": 2017,
+        "draftRound": 7,
+        "draftPick": 5,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_15",
+      "name": "Justin Nguyen",
+      "jerseyNumber": 56,
+      "position": "1B",
+      "age": 33,
+      "height": "6'5\"",
+      "weight": 185,
+      "experience": 11,
+      "stats": {
+        "battingAverage": "0.248",
+        "homeRuns": 23,
+        "rbi": 55,
+        "runs": 15,
+        "hits": 42,
+        "doubles": 23,
+        "triples": 8,
+        "stolenBases": 26,
+        "era": "3.61",
+        "wins": 15,
+        "losses": 12,
+        "saves": 0,
+        "strikeouts": 63,
+        "walks": 26
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 32,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 6,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Duke University",
+        "hometown": "Birmingham, AL",
+        "draftYear": 2016,
+        "draftRound": 2,
+        "draftPick": 21,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_16",
+      "name": "Scott Davis",
+      "jerseyNumber": 97,
+      "position": "2B",
+      "age": 27,
+      "height": "6'2\"",
+      "weight": 197,
+      "experience": 7,
+      "stats": {
+        "battingAverage": "0.360",
+        "homeRuns": 28,
+        "rbi": 64,
+        "runs": 35,
+        "hits": 109,
+        "doubles": 2,
+        "triples": 5,
+        "stolenBases": 5,
+        "era": "3.61",
+        "wins": 2,
+        "losses": 10,
+        "saves": 15,
+        "strikeouts": 174,
+        "walks": 37
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 16,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 8,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Alabama",
+        "hometown": "Dallas, TX",
+        "draftYear": 2023,
+        "draftRound": 1,
+        "draftPick": 30,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_17",
+      "name": "William Garcia",
+      "jerseyNumber": 93,
+      "position": "3B",
+      "age": 22,
+      "height": "6'8\"",
+      "weight": 228,
+      "experience": 11,
+      "stats": {
+        "battingAverage": "0.270",
+        "homeRuns": 30,
+        "rbi": 13,
+        "runs": 63,
+        "hits": 150,
+        "doubles": 5,
+        "triples": 0,
+        "stolenBases": 26,
+        "era": "4.17",
+        "wins": 11,
+        "losses": 2,
+        "saves": 22,
+        "strikeouts": 160,
+        "walks": 62
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 55,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 5,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Florida State University",
+        "hometown": "Atlanta, GA",
+        "draftYear": 2022,
+        "draftRound": 1,
+        "draftPick": 9,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_18",
+      "name": "Jonathan King",
+      "jerseyNumber": 81,
+      "position": "SS",
+      "age": 26,
+      "height": "6'1\"",
+      "weight": 152,
+      "experience": 3,
+      "stats": {
+        "battingAverage": "0.312",
+        "homeRuns": 29,
+        "rbi": 112,
+        "runs": 22,
+        "hits": 35,
+        "doubles": 27,
+        "triples": 8,
+        "stolenBases": 0,
+        "era": "5.84",
+        "wins": 16,
+        "losses": 12,
+        "saves": 0,
+        "strikeouts": 52,
+        "walks": 41
+      },
+      "contract": {
+        "years": 1,
+        "totalValue": 82,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 2,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Rice University",
+        "hometown": "San Antonio, TX",
+        "draftYear": 2015,
+        "draftRound": 4,
+        "draftPick": 29,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_19",
+      "name": "Jason Flores",
+      "jerseyNumber": 19,
+      "position": "LF",
+      "age": 28,
+      "height": "7'2\"",
+      "weight": 176,
+      "experience": 9,
+      "stats": {
+        "battingAverage": "0.328",
+        "homeRuns": 8,
+        "rbi": 16,
+        "runs": 76,
+        "hits": 115,
+        "doubles": 1,
+        "triples": 7,
+        "stolenBases": 13,
+        "era": "2.59",
+        "wins": 14,
+        "losses": 9,
+        "saves": 26,
+        "strikeouts": 38,
+        "walks": 78
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 21,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 7,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of California",
+        "hometown": "Atlanta, GA",
+        "draftYear": 2020,
+        "draftRound": 1,
+        "draftPick": 17,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_20",
+      "name": "Benjamin Rodriguez",
+      "jerseyNumber": 55,
+      "position": "CF",
+      "age": 23,
+      "height": "6'3\"",
+      "weight": 206,
+      "experience": 0,
+      "stats": {
+        "battingAverage": "0.264",
+        "homeRuns": 12,
+        "rbi": 90,
+        "runs": 43,
+        "hits": 12,
+        "doubles": 4,
+        "triples": 6,
+        "stolenBases": 0,
+        "era": "3.33",
+        "wins": 4,
+        "losses": 5,
+        "saves": 1,
+        "strikeouts": 38,
+        "walks": 63
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 22,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 9,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Rice University",
+        "hometown": "Birmingham, AL",
+        "draftYear": 2022,
+        "draftRound": 6,
+        "draftPick": 21,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_21",
+      "name": "Paul Walker",
+      "jerseyNumber": 63,
+      "position": "RF",
+      "age": 28,
+      "height": "5'10\"",
+      "weight": 286,
+      "experience": 9,
+      "stats": {
+        "battingAverage": "0.229",
+        "homeRuns": 29,
+        "rbi": 101,
+        "runs": 49,
+        "hits": 175,
+        "doubles": 36,
+        "triples": 2,
+        "stolenBases": 23,
+        "era": "5.36",
+        "wins": 11,
+        "losses": 13,
+        "saves": 31,
+        "strikeouts": 195,
+        "walks": 44
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 86,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 0,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Ohio State University",
+        "hometown": "Nashville, TN",
+        "draftYear": 2019,
+        "draftRound": 2,
+        "draftPick": 6,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_22",
+      "name": "Larry Rodriguez",
+      "jerseyNumber": 58,
+      "position": "SP",
+      "age": 24,
+      "height": "7'2\"",
+      "weight": 178,
+      "experience": 10,
+      "stats": {
+        "battingAverage": "0.265",
+        "homeRuns": 7,
+        "rbi": 20,
+        "runs": 11,
+        "hits": 38,
+        "doubles": 10,
+        "triples": 0,
+        "stolenBases": 22,
+        "era": "5.19",
+        "wins": 5,
+        "losses": 5,
+        "saves": 23,
+        "strikeouts": 98,
+        "walks": 70
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 31,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 0,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of California",
+        "hometown": "Nashville, TN",
+        "draftYear": 2016,
+        "draftRound": 3,
+        "draftPick": 14,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_23",
+      "name": "Joshua Anderson",
+      "jerseyNumber": 92,
+      "position": "RP",
+      "age": 22,
+      "height": "5'6\"",
+      "weight": 252,
+      "experience": 7,
+      "stats": {
+        "battingAverage": "0.248",
+        "homeRuns": 25,
+        "rbi": 16,
+        "runs": 15,
+        "hits": 27,
+        "doubles": 15,
+        "triples": 1,
+        "stolenBases": 12,
+        "era": "3.56",
+        "wins": 16,
+        "losses": 12,
+        "saves": 21,
+        "strikeouts": 244,
+        "walks": 58
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 61,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 5,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Nashville, TN",
+        "draftYear": 2018,
+        "draftRound": 3,
+        "draftPick": 20,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_24",
+      "name": "Andrew Moore",
+      "jerseyNumber": 95,
+      "position": "CL",
+      "age": 20,
+      "height": "7'0\"",
+      "weight": 312,
+      "experience": 8,
+      "stats": {
+        "battingAverage": "0.246",
+        "homeRuns": 14,
+        "rbi": 116,
+        "runs": 2,
+        "hits": 159,
+        "doubles": 16,
+        "triples": 9,
+        "stolenBases": 13,
+        "era": "3.43",
+        "wins": 11,
+        "losses": 13,
+        "saves": 3,
+        "strikeouts": 196,
+        "walks": 37
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 27,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Memphis, TN",
+        "draftYear": 2017,
+        "draftRound": 1,
+        "draftPick": 20,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_25",
+      "name": "Daniel Miller",
+      "jerseyNumber": 83,
+      "position": "DH",
+      "age": 25,
+      "height": "6'8\"",
+      "weight": 155,
+      "experience": 2,
+      "stats": {
+        "battingAverage": "0.362",
+        "homeRuns": 12,
+        "rbi": 36,
+        "runs": 33,
+        "hits": 145,
+        "doubles": 9,
+        "triples": 9,
+        "stolenBases": 18,
+        "era": "4.95",
+        "wins": 11,
+        "losses": 1,
+        "saves": 26,
+        "strikeouts": 62,
+        "walks": 42
+      },
+      "contract": {
+        "years": 1,
+        "totalValue": 1,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 6,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Chicago, IL",
+        "draftYear": 2018,
+        "draftRound": 2,
+        "draftPick": 15,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    }
+  ],
+  "stats": {
+    "wins": 106,
+    "losses": 90,
+    "winPercentage": 0,
+    "runsScored": 778,
+    "runsAllowed": 744,
+    "teamERA": "4.35",
+    "teamBattingAvg": "0.257",
+    "homeRuns": 188,
+    "stolenBases": 59,
+    "errors": 84
+  },
+  "readiness": {
+    "overall": 84.2,
+    "trend": "positive",
+    "momentum": {
+      "score": 77,
+      "category": "positive",
+      "description": "Consistent performance across key metrics"
+    },
+    "components": {
+      "offense": 93.9,
+      "defense": 83.9,
+      "specialTeams": 88.3,
+      "coaching": 94.8,
+      "chemistry": 88.5
+    },
+    "keyMetrics": {
+      "leverageFactor": 2.53,
+      "leverageCategory": "high",
+      "strategicOutlook": "Strong foundation with room for optimization"
+    },
+    "lastUpdated": "2025-09-02T22:39:19.784Z"
+  },
+  "schedule": [
+    {
+      "id": "game_1",
+      "date": "2025-03-28",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-11",
+        "margin": 3
+      },
+      "attendance": 42902,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 89,
+        "humidity": 78,
+        "windSpeed": 4,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5832827
+      }
+    },
+    {
+      "id": "game_2",
+      "date": "2025-03-29",
+      "opponent": "Chicago Cubs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-2",
+        "margin": 5
+      },
+      "attendance": 44486,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 89,
+        "humidity": 63,
+        "windSpeed": 7,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1767044
+      }
+    },
+    {
+      "id": "game_3",
+      "date": "2025-03-30",
+      "opponent": "Oklahoma Sooners",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "5-6",
+        "margin": 9
+      },
+      "attendance": 12153,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 60,
+        "humidity": 66,
+        "windSpeed": 2,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1324734
+      }
+    },
+    {
+      "id": "game_4",
+      "date": "2025-03-31",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-8",
+        "margin": 2
+      },
+      "attendance": 12711,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 63,
+        "humidity": 93,
+        "windSpeed": 8,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4811410
+      }
+    },
+    {
+      "id": "game_5",
+      "date": "2025-04-01",
+      "opponent": "Indianapolis Colts",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-5",
+        "margin": 5
+      },
+      "attendance": 24570,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 74,
+        "humidity": 80,
+        "windSpeed": 19,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2027807
+      }
+    },
+    {
+      "id": "game_6",
+      "date": "2025-04-02",
+      "opponent": "LSU Tigers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-9",
+        "margin": 2
+      },
+      "attendance": 23844,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 92,
+        "humidity": 43,
+        "windSpeed": 8,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2192755
+      }
+    },
+    {
+      "id": "game_7",
+      "date": "2025-04-03",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-5",
+        "margin": 8
+      },
+      "attendance": 26482,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 98,
+        "humidity": 79,
+        "windSpeed": 13,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3033580
+      }
+    },
+    {
+      "id": "game_8",
+      "date": "2025-04-04",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-6",
+        "margin": 2
+      },
+      "attendance": 13333,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 66,
+        "humidity": 94,
+        "windSpeed": 8,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2279272
+      }
+    },
+    {
+      "id": "game_9",
+      "date": "2025-04-05",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-5",
+        "margin": 9
+      },
+      "attendance": 44750,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 84,
+        "humidity": 77,
+        "windSpeed": 14,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5584940
+      }
+    },
+    {
+      "id": "game_10",
+      "date": "2025-04-06",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-11",
+        "margin": 6
+      },
+      "attendance": 39092,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 75,
+        "humidity": 57,
+        "windSpeed": 10,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4408627
+      }
+    },
+    {
+      "id": "game_11",
+      "date": "2025-04-08",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "6-6",
+        "margin": 10
+      },
+      "attendance": 45543,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 88,
+        "humidity": 57,
+        "windSpeed": 15,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4581818
+      }
+    },
+    {
+      "id": "game_12",
+      "date": "2025-04-09",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-8",
+        "margin": 8
+      },
+      "attendance": 20150,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 94,
+        "humidity": 82,
+        "windSpeed": 18,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5791116
+      }
+    },
+    {
+      "id": "game_13",
+      "date": "2025-04-10",
+      "opponent": "Los Angeles Lakers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "5-9",
+        "margin": 2
+      },
+      "attendance": 21440,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 80,
+        "humidity": 59,
+        "windSpeed": 6,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3805298
+      }
+    },
+    {
+      "id": "game_14",
+      "date": "2025-04-11",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-4",
+        "margin": 5
+      },
+      "attendance": 48166,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 90,
+        "humidity": 46,
+        "windSpeed": 14,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5563440
+      }
+    },
+    {
+      "id": "game_15",
+      "date": "2025-04-12",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-12",
+        "margin": 8
+      },
+      "attendance": 14215,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 84,
+        "humidity": 44,
+        "windSpeed": 3,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5502944
+      }
+    },
+    {
+      "id": "game_16",
+      "date": "2025-04-13",
+      "opponent": "Houston Texans",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "5-5",
+        "margin": 9
+      },
+      "attendance": 24199,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 67,
+        "humidity": 91,
+        "windSpeed": 19,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2085063
+      }
+    },
+    {
+      "id": "game_17",
+      "date": "2025-04-14",
+      "opponent": "San Antonio Spurs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "7-2",
+        "margin": 10
+      },
+      "attendance": 13943,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 87,
+        "humidity": 91,
+        "windSpeed": 10,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5182728
+      }
+    },
+    {
+      "id": "game_18",
+      "date": "2025-04-15",
+      "opponent": "Dallas Mavericks",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-9",
+        "margin": 4
+      },
+      "attendance": 13101,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 80,
+        "humidity": 84,
+        "windSpeed": 8,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4201978
+      }
+    },
+    {
+      "id": "game_19",
+      "date": "2025-04-16",
+      "opponent": "Denver Broncos",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-5",
+        "margin": 1
+      },
+      "attendance": 54321,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 73,
+        "humidity": 71,
+        "windSpeed": 18,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3285222
+      }
+    },
+    {
+      "id": "game_20",
+      "date": "2025-04-17",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "2-10",
+        "margin": 1
+      },
+      "attendance": 28772,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 89,
+        "humidity": 43,
+        "windSpeed": 19,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5236224
+      }
+    },
+    {
+      "id": "game_21",
+      "date": "2025-04-19",
+      "opponent": "Milwaukee Brewers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-4",
+        "margin": 5
+      },
+      "attendance": 28676,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 60,
+        "humidity": 66,
+        "windSpeed": 17,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2139128
+      }
+    },
+    {
+      "id": "game_22",
+      "date": "2025-04-20",
+      "opponent": "Pittsburgh Pirates",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "10-6",
+        "margin": 5
+      },
+      "attendance": 28360,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 70,
+        "humidity": 43,
+        "windSpeed": 12,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5091361
+      }
+    },
+    {
+      "id": "game_23",
+      "date": "2025-04-21",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-6",
+        "margin": 9
+      },
+      "attendance": 53024,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 61,
+        "humidity": 54,
+        "windSpeed": 17,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3926821
+      }
+    },
+    {
+      "id": "game_24",
+      "date": "2025-04-22",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "6-5",
+        "margin": 6
+      },
+      "attendance": 26982,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 85,
+        "humidity": 54,
+        "windSpeed": 10,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3492781
+      }
+    },
+    {
+      "id": "game_25",
+      "date": "2025-04-23",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-2",
+        "margin": 4
+      },
+      "attendance": 36760,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 95,
+        "humidity": 90,
+        "windSpeed": 16,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3241366
+      }
+    },
+    {
+      "id": "game_26",
+      "date": "2025-04-24",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-6",
+        "margin": 4
+      },
+      "attendance": 47398,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 64,
+        "humidity": 42,
+        "windSpeed": 5,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3219143
+      }
+    },
+    {
+      "id": "game_27",
+      "date": "2025-04-25",
+      "opponent": "Jacksonville Jaguars",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-8",
+        "margin": 8
+      },
+      "attendance": 48258,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 95,
+        "humidity": 95,
+        "windSpeed": 19,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1135706
+      }
+    },
+    {
+      "id": "game_28",
+      "date": "2025-04-26",
+      "opponent": "Dallas Mavericks",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-12",
+        "margin": 9
+      },
+      "attendance": 16451,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 85,
+        "humidity": 65,
+        "windSpeed": 3,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5531612
+      }
+    },
+    {
+      "id": "game_29",
+      "date": "2025-04-27",
+      "opponent": "Jacksonville Jaguars",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-10",
+        "margin": 5
+      },
+      "attendance": 49768,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 88,
+        "humidity": 68,
+        "windSpeed": 1,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3896384
+      }
+    },
+    {
+      "id": "game_30",
+      "date": "2025-04-28",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "3-6",
+        "margin": 3
+      },
+      "attendance": 42001,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 67,
+        "humidity": 67,
+        "windSpeed": 8,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3001985
+      }
+    },
+    {
+      "id": "game_31",
+      "date": "2025-04-30",
+      "opponent": "Golden State Warriors",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "7-1",
+        "margin": 5
+      },
+      "attendance": 41763,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 68,
+        "humidity": 88,
+        "windSpeed": 14,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1324027
+      }
+    },
+    {
+      "id": "game_32",
+      "date": "2025-05-01",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-4",
+        "margin": 2
+      },
+      "attendance": 10848,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 73,
+        "humidity": 82,
+        "windSpeed": 12,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1655093
+      }
+    },
+    {
+      "id": "game_33",
+      "date": "2025-05-02",
+      "opponent": "Milwaukee Brewers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-9",
+        "margin": 5
+      },
+      "attendance": 25042,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 99,
+        "humidity": 53,
+        "windSpeed": 10,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3029331
+      }
+    },
+    {
+      "id": "game_34",
+      "date": "2025-05-03",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-8",
+        "margin": 2
+      },
+      "attendance": 41883,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 81,
+        "humidity": 53,
+        "windSpeed": 18,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5608758
+      }
+    },
+    {
+      "id": "game_35",
+      "date": "2025-05-04",
+      "opponent": "Milwaukee Brewers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "6-2",
+        "margin": 3
+      },
+      "attendance": 33051,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 66,
+        "humidity": 63,
+        "windSpeed": 1,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1518610
+      }
+    },
+    {
+      "id": "game_36",
+      "date": "2025-05-05",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-4",
+        "margin": 4
+      },
+      "attendance": 59549,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 83,
+        "humidity": 58,
+        "windSpeed": 2,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2229920
+      }
+    },
+    {
+      "id": "game_37",
+      "date": "2025-05-06",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-4",
+        "margin": 3
+      },
+      "attendance": 43923,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 95,
+        "humidity": 75,
+        "windSpeed": 2,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3351589
+      }
+    },
+    {
+      "id": "game_38",
+      "date": "2025-05-07",
+      "opponent": "Cincinnati Reds",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-1",
+        "margin": 7
+      },
+      "attendance": 20014,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 92,
+        "humidity": 44,
+        "windSpeed": 12,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3312983
+      }
+    },
+    {
+      "id": "game_39",
+      "date": "2025-05-08",
+      "opponent": "Jacksonville Jaguars",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "3-10",
+        "margin": 4
+      },
+      "attendance": 14836,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 77,
+        "humidity": 79,
+        "windSpeed": 0,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1220644
+      }
+    },
+    {
+      "id": "game_40",
+      "date": "2025-05-09",
+      "opponent": "Chicago Cubs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "12-5",
+        "margin": 5
+      },
+      "attendance": 34643,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 77,
+        "humidity": 49,
+        "windSpeed": 6,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4319569
+      }
+    },
+    {
+      "id": "game_41",
+      "date": "2025-05-11",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "4-9",
+        "margin": 7
+      },
+      "attendance": 19507,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 70,
+        "humidity": 98,
+        "windSpeed": 2,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5229648
+      }
+    },
+    {
+      "id": "game_42",
+      "date": "2025-05-12",
+      "opponent": "LSU Tigers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-3",
+        "margin": 8
+      },
+      "attendance": 18433,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 65,
+        "humidity": 72,
+        "windSpeed": 17,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2871206
+      }
+    },
+    {
+      "id": "game_43",
+      "date": "2025-05-13",
+      "opponent": "LSU Tigers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-6",
+        "margin": 5
+      },
+      "attendance": 43156,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 74,
+        "humidity": 94,
+        "windSpeed": 3,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1530860
+      }
+    },
+    {
+      "id": "game_44",
+      "date": "2025-05-14",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-3",
+        "margin": 6
+      },
+      "attendance": 49179,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 86,
+        "humidity": 65,
+        "windSpeed": 11,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2688133
+      }
+    },
+    {
+      "id": "game_45",
+      "date": "2025-05-15",
+      "opponent": "Oklahoma Sooners",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "7-6",
+        "margin": 7
+      },
+      "attendance": 35201,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 72,
+        "humidity": 45,
+        "windSpeed": 10,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2696105
+      }
+    },
+    {
+      "id": "game_46",
+      "date": "2025-05-16",
+      "opponent": "Cincinnati Reds",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-8",
+        "margin": 4
+      },
+      "attendance": 12987,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 88,
+        "humidity": 73,
+        "windSpeed": 11,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2276472
+      }
+    },
+    {
+      "id": "game_47",
+      "date": "2025-05-17",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "7-6",
+        "margin": 4
+      },
+      "attendance": 28057,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 66,
+        "humidity": 49,
+        "windSpeed": 13,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5425508
+      }
+    },
+    {
+      "id": "game_48",
+      "date": "2025-05-18",
+      "opponent": "Milwaukee Brewers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "9-1",
+        "margin": 6
+      },
+      "attendance": 50045,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 89,
+        "humidity": 97,
+        "windSpeed": 16,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1432021
+      }
+    },
+    {
+      "id": "game_49",
+      "date": "2025-05-19",
+      "opponent": "LSU Tigers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-6",
+        "margin": 10
+      },
+      "attendance": 23555,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 63,
+        "humidity": 64,
+        "windSpeed": 16,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2070191
+      }
+    },
+    {
+      "id": "game_50",
+      "date": "2025-05-20",
+      "opponent": "Golden State Warriors",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-6",
+        "margin": 3
+      },
+      "attendance": 15396,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 68,
+        "humidity": 60,
+        "windSpeed": 4,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4630137
+      }
+    },
+    {
+      "id": "game_51",
+      "date": "2025-05-22",
+      "opponent": "Milwaukee Brewers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "2-7",
+        "margin": 4
+      },
+      "attendance": 36213,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 95,
+        "humidity": 72,
+        "windSpeed": 19,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2597513
+      }
+    },
+    {
+      "id": "game_52",
+      "date": "2025-05-23",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-6",
+        "margin": 5
+      },
+      "attendance": 15056,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 75,
+        "humidity": 64,
+        "windSpeed": 15,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1027846
+      }
+    },
+    {
+      "id": "game_53",
+      "date": "2025-05-24",
+      "opponent": "Pittsburgh Pirates",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-4",
+        "margin": 3
+      },
+      "attendance": 37326,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 86,
+        "humidity": 66,
+        "windSpeed": 16,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1497236
+      }
+    },
+    {
+      "id": "game_54",
+      "date": "2025-05-25",
+      "opponent": "Golden State Warriors",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "6-4",
+        "margin": 9
+      },
+      "attendance": 41648,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 70,
+        "humidity": 47,
+        "windSpeed": 10,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4654763
+      }
+    },
+    {
+      "id": "game_55",
+      "date": "2025-05-26",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-4",
+        "margin": 5
+      },
+      "attendance": 54250,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 66,
+        "humidity": 47,
+        "windSpeed": 3,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3949314
+      }
+    },
+    {
+      "id": "game_56",
+      "date": "2025-05-27",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-1",
+        "margin": 5
+      },
+      "attendance": 41496,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 62,
+        "humidity": 55,
+        "windSpeed": 19,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1772222
+      }
+    },
+    {
+      "id": "game_57",
+      "date": "2025-05-28",
+      "opponent": "Golden State Warriors",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-5",
+        "margin": 7
+      },
+      "attendance": 51062,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 74,
+        "humidity": 46,
+        "windSpeed": 11,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4676169
+      }
+    },
+    {
+      "id": "game_58",
+      "date": "2025-05-29",
+      "opponent": "Golden State Warriors",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "2-12",
+        "margin": 7
+      },
+      "attendance": 41510,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 63,
+        "humidity": 68,
+        "windSpeed": 5,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5413655
+      }
+    },
+    {
+      "id": "game_59",
+      "date": "2025-05-30",
+      "opponent": "Indianapolis Colts",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "6-5",
+        "margin": 7
+      },
+      "attendance": 21730,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 66,
+        "humidity": 79,
+        "windSpeed": 4,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4478979
+      }
+    },
+    {
+      "id": "game_60",
+      "date": "2025-05-31",
+      "opponent": "LSU Tigers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "6-1",
+        "margin": 10
+      },
+      "attendance": 30100,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 91,
+        "humidity": 78,
+        "windSpeed": 18,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3346207
+      }
+    },
+    {
+      "id": "game_61",
+      "date": "2025-06-02",
+      "opponent": "Milwaukee Brewers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-5",
+        "margin": 9
+      },
+      "attendance": 29700,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 79,
+        "humidity": 50,
+        "windSpeed": 14,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4620490
+      }
+    },
+    {
+      "id": "game_62",
+      "date": "2025-06-03",
+      "opponent": "Milwaukee Brewers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "5-3",
+        "margin": 10
+      },
+      "attendance": 26892,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 99,
+        "humidity": 51,
+        "windSpeed": 9,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4359148
+      }
+    },
+    {
+      "id": "game_63",
+      "date": "2025-06-04",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-6",
+        "margin": 4
+      },
+      "attendance": 32052,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 95,
+        "humidity": 89,
+        "windSpeed": 14,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2819567
+      }
+    },
+    {
+      "id": "game_64",
+      "date": "2025-06-05",
+      "opponent": "Oklahoma Sooners",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-6",
+        "margin": 2
+      },
+      "attendance": 47136,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 64,
+        "humidity": 66,
+        "windSpeed": 5,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2269335
+      }
+    },
+    {
+      "id": "game_65",
+      "date": "2025-06-06",
+      "opponent": "Georgia Bulldogs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-7",
+        "margin": 2
+      },
+      "attendance": 55308,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 97,
+        "humidity": 81,
+        "windSpeed": 1,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5626039
+      }
+    },
+    {
+      "id": "game_66",
+      "date": "2025-06-07",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-2",
+        "margin": 6
+      },
+      "attendance": 47620,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 67,
+        "humidity": 72,
+        "windSpeed": 19,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4019327
+      }
+    },
+    {
+      "id": "game_67",
+      "date": "2025-06-08",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "6-7",
+        "margin": 6
+      },
+      "attendance": 50818,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 78,
+        "humidity": 41,
+        "windSpeed": 10,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2071528
+      }
+    },
+    {
+      "id": "game_68",
+      "date": "2025-06-09",
+      "opponent": "San Antonio Spurs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "10-6",
+        "margin": 7
+      },
+      "attendance": 15846,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 94,
+        "humidity": 79,
+        "windSpeed": 10,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2565500
+      }
+    },
+    {
+      "id": "game_69",
+      "date": "2025-06-10",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-4",
+        "margin": 6
+      },
+      "attendance": 11163,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 75,
+        "humidity": 90,
+        "windSpeed": 12,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2375542
+      }
+    },
+    {
+      "id": "game_70",
+      "date": "2025-06-11",
+      "opponent": "Cincinnati Reds",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-8",
+        "margin": 4
+      },
+      "attendance": 24905,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 70,
+        "humidity": 45,
+        "windSpeed": 9,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3491151
+      }
+    },
+    {
+      "id": "game_71",
+      "date": "2025-06-13",
+      "opponent": "San Antonio Spurs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "6-10",
+        "margin": 3
+      },
+      "attendance": 50967,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 85,
+        "humidity": 54,
+        "windSpeed": 0,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1878212
+      }
+    },
+    {
+      "id": "game_72",
+      "date": "2025-06-14",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-1",
+        "margin": 6
+      },
+      "attendance": 55608,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 73,
+        "humidity": 75,
+        "windSpeed": 2,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5461103
+      }
+    },
+    {
+      "id": "game_73",
+      "date": "2025-06-15",
+      "opponent": "Chicago Cubs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "3-9",
+        "margin": 6
+      },
+      "attendance": 22151,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 90,
+        "humidity": 92,
+        "windSpeed": 1,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2337346
+      }
+    },
+    {
+      "id": "game_74",
+      "date": "2025-06-16",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-12",
+        "margin": 9
+      },
+      "attendance": 44591,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 92,
+        "humidity": 75,
+        "windSpeed": 15,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5559690
+      }
+    },
+    {
+      "id": "game_75",
+      "date": "2025-06-17",
+      "opponent": "Georgia Bulldogs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-9",
+        "margin": 7
+      },
+      "attendance": 37001,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 61,
+        "humidity": 41,
+        "windSpeed": 1,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5465359
+      }
+    },
+    {
+      "id": "game_76",
+      "date": "2025-06-18",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-3",
+        "margin": 4
+      },
+      "attendance": 30125,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 81,
+        "humidity": 90,
+        "windSpeed": 13,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4400213
+      }
+    },
+    {
+      "id": "game_77",
+      "date": "2025-06-19",
+      "opponent": "Denver Broncos",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-4",
+        "margin": 9
+      },
+      "attendance": 29778,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 99,
+        "humidity": 50,
+        "windSpeed": 14,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3596440
+      }
+    },
+    {
+      "id": "game_78",
+      "date": "2025-06-20",
+      "opponent": "Houston Texans",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-6",
+        "margin": 3
+      },
+      "attendance": 37572,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 62,
+        "humidity": 99,
+        "windSpeed": 12,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1713927
+      }
+    },
+    {
+      "id": "game_79",
+      "date": "2025-06-21",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-5",
+        "margin": 4
+      },
+      "attendance": 15192,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 70,
+        "humidity": 60,
+        "windSpeed": 16,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1178006
+      }
+    },
+    {
+      "id": "game_80",
+      "date": "2025-06-22",
+      "opponent": "Milwaukee Brewers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "10-6",
+        "margin": 5
+      },
+      "attendance": 15371,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 91,
+        "humidity": 51,
+        "windSpeed": 13,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1219608
+      }
+    },
+    {
+      "id": "game_81",
+      "date": "2025-06-24",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-4",
+        "margin": 4
+      },
+      "attendance": 43581,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 63,
+        "humidity": 80,
+        "windSpeed": 10,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4120952
+      }
+    },
+    {
+      "id": "game_82",
+      "date": "2025-06-25",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-7",
+        "margin": 4
+      },
+      "attendance": 17086,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 70,
+        "humidity": 95,
+        "windSpeed": 18,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5169201
+      }
+    },
+    {
+      "id": "game_83",
+      "date": "2025-06-26",
+      "opponent": "Cincinnati Reds",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-5",
+        "margin": 5
+      },
+      "attendance": 42995,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 63,
+        "humidity": 96,
+        "windSpeed": 7,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3484369
+      }
+    },
+    {
+      "id": "game_84",
+      "date": "2025-06-27",
+      "opponent": "Milwaukee Brewers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-6",
+        "margin": 3
+      },
+      "attendance": 36996,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 93,
+        "humidity": 69,
+        "windSpeed": 1,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1505669
+      }
+    },
+    {
+      "id": "game_85",
+      "date": "2025-06-28",
+      "opponent": "Denver Broncos",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-8",
+        "margin": 5
+      },
+      "attendance": 46451,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 93,
+        "humidity": 51,
+        "windSpeed": 12,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2299831
+      }
+    },
+    {
+      "id": "game_86",
+      "date": "2025-06-29",
+      "opponent": "Jacksonville Jaguars",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-7",
+        "margin": 7
+      },
+      "attendance": 39811,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 91,
+        "humidity": 40,
+        "windSpeed": 13,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5446916
+      }
+    },
+    {
+      "id": "game_87",
+      "date": "2025-06-30",
+      "opponent": "Dallas Mavericks",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-1",
+        "margin": 9
+      },
+      "attendance": 14475,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 72,
+        "humidity": 56,
+        "windSpeed": 15,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5635428
+      }
+    },
+    {
+      "id": "game_88",
+      "date": "2025-07-01",
+      "opponent": "Jacksonville Jaguars",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "6-3",
+        "margin": 1
+      },
+      "attendance": 58903,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 91,
+        "humidity": 91,
+        "windSpeed": 12,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5951871
+      }
+    },
+    {
+      "id": "game_89",
+      "date": "2025-07-02",
+      "opponent": "Chicago Cubs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "12-4",
+        "margin": 4
+      },
+      "attendance": 14310,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 82,
+        "humidity": 67,
+        "windSpeed": 6,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1821433
+      }
+    },
+    {
+      "id": "game_90",
+      "date": "2025-07-03",
+      "opponent": "Dallas Mavericks",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "10-5",
+        "margin": 3
+      },
+      "attendance": 49023,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 77,
+        "humidity": 43,
+        "windSpeed": 17,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4838006
+      }
+    },
+    {
+      "id": "game_91",
+      "date": "2025-07-05",
+      "opponent": "Chicago Cubs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "7-1",
+        "margin": 2
+      },
+      "attendance": 32177,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 89,
+        "humidity": 97,
+        "windSpeed": 15,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3931439
+      }
+    },
+    {
+      "id": "game_92",
+      "date": "2025-07-06",
+      "opponent": "Denver Broncos",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "3-10",
+        "margin": 1
+      },
+      "attendance": 11990,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 61,
+        "humidity": 54,
+        "windSpeed": 7,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5699574
+      }
+    },
+    {
+      "id": "game_93",
+      "date": "2025-07-07",
+      "opponent": "Golden State Warriors",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "4-9",
+        "margin": 4
+      },
+      "attendance": 44806,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 70,
+        "humidity": 97,
+        "windSpeed": 8,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4706352
+      }
+    },
+    {
+      "id": "game_94",
+      "date": "2025-07-08",
+      "opponent": "Oklahoma Sooners",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-9",
+        "margin": 7
+      },
+      "attendance": 27064,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 92,
+        "humidity": 73,
+        "windSpeed": 9,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1680769
+      }
+    },
+    {
+      "id": "game_95",
+      "date": "2025-07-09",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "12-5",
+        "margin": 5
+      },
+      "attendance": 33556,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 66,
+        "humidity": 45,
+        "windSpeed": 6,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5694511
+      }
+    },
+    {
+      "id": "game_96",
+      "date": "2025-07-10",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-3",
+        "margin": 3
+      },
+      "attendance": 30567,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 63,
+        "humidity": 70,
+        "windSpeed": 15,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5307775
+      }
+    },
+    {
+      "id": "game_97",
+      "date": "2025-07-11",
+      "opponent": "Cincinnati Reds",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "4-9",
+        "margin": 3
+      },
+      "attendance": 29105,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 82,
+        "humidity": 56,
+        "windSpeed": 19,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5677611
+      }
+    },
+    {
+      "id": "game_98",
+      "date": "2025-07-12",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-2",
+        "margin": 9
+      },
+      "attendance": 37688,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 97,
+        "humidity": 69,
+        "windSpeed": 14,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1808325
+      }
+    },
+    {
+      "id": "game_99",
+      "date": "2025-07-13",
+      "opponent": "Oklahoma Sooners",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-3",
+        "margin": 6
+      },
+      "attendance": 36183,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 82,
+        "humidity": 62,
+        "windSpeed": 19,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1059850
+      }
+    },
+    {
+      "id": "game_100",
+      "date": "2025-07-14",
+      "opponent": "Chicago Cubs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-8",
+        "margin": 10
+      },
+      "attendance": 22528,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 99,
+        "humidity": 76,
+        "windSpeed": 4,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4722313
+      }
+    },
+    {
+      "id": "game_101",
+      "date": "2025-07-16",
+      "opponent": "Milwaukee Brewers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "12-5",
+        "margin": 7
+      },
+      "attendance": 45754,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 94,
+        "humidity": 57,
+        "windSpeed": 4,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1530822
+      }
+    },
+    {
+      "id": "game_102",
+      "date": "2025-07-17",
+      "opponent": "LSU Tigers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-12",
+        "margin": 1
+      },
+      "attendance": 27072,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 90,
+        "humidity": 54,
+        "windSpeed": 19,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1198704
+      }
+    },
+    {
+      "id": "game_103",
+      "date": "2025-07-18",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-1",
+        "margin": 2
+      },
+      "attendance": 47163,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 63,
+        "humidity": 77,
+        "windSpeed": 16,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3824578
+      }
+    },
+    {
+      "id": "game_104",
+      "date": "2025-07-19",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-2",
+        "margin": 2
+      },
+      "attendance": 37587,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 80,
+        "humidity": 67,
+        "windSpeed": 4,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2992614
+      }
+    },
+    {
+      "id": "game_105",
+      "date": "2025-07-20",
+      "opponent": "Golden State Warriors",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "9-4",
+        "margin": 10
+      },
+      "attendance": 18286,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 83,
+        "humidity": 85,
+        "windSpeed": 9,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4882884
+      }
+    },
+    {
+      "id": "game_106",
+      "date": "2025-07-21",
+      "opponent": "Chicago Cubs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "4-11",
+        "margin": 1
+      },
+      "attendance": 18715,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 98,
+        "humidity": 93,
+        "windSpeed": 5,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4169848
+      }
+    },
+    {
+      "id": "game_107",
+      "date": "2025-07-22",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "2-5",
+        "margin": 8
+      },
+      "attendance": 13978,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 74,
+        "humidity": 46,
+        "windSpeed": 9,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4107066
+      }
+    },
+    {
+      "id": "game_108",
+      "date": "2025-07-23",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-12",
+        "margin": 5
+      },
+      "attendance": 16913,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 88,
+        "humidity": 95,
+        "windSpeed": 18,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5713873
+      }
+    },
+    {
+      "id": "game_109",
+      "date": "2025-07-24",
+      "opponent": "Oklahoma Sooners",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-6",
+        "margin": 2
+      },
+      "attendance": 35230,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 89,
+        "humidity": 91,
+        "windSpeed": 5,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5167031
+      }
+    },
+    {
+      "id": "game_110",
+      "date": "2025-07-25",
+      "opponent": "Golden State Warriors",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-2",
+        "margin": 5
+      },
+      "attendance": 43278,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 85,
+        "humidity": 89,
+        "windSpeed": 12,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1160764
+      }
+    },
+    {
+      "id": "game_111",
+      "date": "2025-07-27",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-6",
+        "margin": 8
+      },
+      "attendance": 29130,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 62,
+        "humidity": 65,
+        "windSpeed": 9,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4429666
+      }
+    },
+    {
+      "id": "game_112",
+      "date": "2025-07-28",
+      "opponent": "Oklahoma Sooners",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-5",
+        "margin": 9
+      },
+      "attendance": 23589,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 98,
+        "humidity": 55,
+        "windSpeed": 6,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3107131
+      }
+    },
+    {
+      "id": "game_113",
+      "date": "2025-07-29",
+      "opponent": "Oklahoma Sooners",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-5",
+        "margin": 4
+      },
+      "attendance": 41876,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 93,
+        "humidity": 81,
+        "windSpeed": 14,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2536134
+      }
+    },
+    {
+      "id": "game_114",
+      "date": "2025-07-30",
+      "opponent": "Chicago Cubs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "9-2",
+        "margin": 6
+      },
+      "attendance": 51507,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 67,
+        "humidity": 97,
+        "windSpeed": 9,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2149344
+      }
+    },
+    {
+      "id": "game_115",
+      "date": "2025-07-31",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "5-4",
+        "margin": 10
+      },
+      "attendance": 10492,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 64,
+        "humidity": 77,
+        "windSpeed": 4,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1408275
+      }
+    },
+    {
+      "id": "game_116",
+      "date": "2025-08-01",
+      "opponent": "Dallas Mavericks",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "12-4",
+        "margin": 6
+      },
+      "attendance": 49859,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 70,
+        "humidity": 57,
+        "windSpeed": 10,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5488301
+      }
+    },
+    {
+      "id": "game_117",
+      "date": "2025-08-02",
+      "opponent": "Dallas Mavericks",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "7-4",
+        "margin": 10
+      },
+      "attendance": 48956,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 82,
+        "humidity": 70,
+        "windSpeed": 13,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1716069
+      }
+    },
+    {
+      "id": "game_118",
+      "date": "2025-08-03",
+      "opponent": "Dallas Mavericks",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "9-2",
+        "margin": 9
+      },
+      "attendance": 34645,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 77,
+        "humidity": 99,
+        "windSpeed": 5,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2175573
+      }
+    },
+    {
+      "id": "game_119",
+      "date": "2025-08-04",
+      "opponent": "Denver Broncos",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-1",
+        "margin": 6
+      },
+      "attendance": 47645,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 66,
+        "humidity": 63,
+        "windSpeed": 3,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4957146
+      }
+    },
+    {
+      "id": "game_120",
+      "date": "2025-08-05",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "6-1",
+        "margin": 3
+      },
+      "attendance": 33103,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 76,
+        "humidity": 56,
+        "windSpeed": 7,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5114205
+      }
+    },
+    {
+      "id": "game_121",
+      "date": "2025-08-07",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "6-12",
+        "margin": 9
+      },
+      "attendance": 32131,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 72,
+        "humidity": 71,
+        "windSpeed": 10,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1974312
+      }
+    },
+    {
+      "id": "game_122",
+      "date": "2025-08-08",
+      "opponent": "Denver Broncos",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "12-4",
+        "margin": 5
+      },
+      "attendance": 59596,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 62,
+        "humidity": 89,
+        "windSpeed": 2,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5298585
+      }
+    },
+    {
+      "id": "game_123",
+      "date": "2025-08-09",
+      "opponent": "Denver Broncos",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-12",
+        "margin": 5
+      },
+      "attendance": 49279,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 95,
+        "humidity": 76,
+        "windSpeed": 19,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2060466
+      }
+    },
+    {
+      "id": "game_124",
+      "date": "2025-08-10",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-11",
+        "margin": 9
+      },
+      "attendance": 50952,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 91,
+        "humidity": 74,
+        "windSpeed": 2,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5522117
+      }
+    },
+    {
+      "id": "game_125",
+      "date": "2025-08-11",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-5",
+        "margin": 7
+      },
+      "attendance": 49188,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 99,
+        "humidity": 45,
+        "windSpeed": 5,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2395544
+      }
+    },
+    {
+      "id": "game_126",
+      "date": "2025-08-12",
+      "opponent": "Dallas Mavericks",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-10",
+        "margin": 7
+      },
+      "attendance": 29135,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 75,
+        "humidity": 71,
+        "windSpeed": 8,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5168461
+      }
+    },
+    {
+      "id": "game_127",
+      "date": "2025-08-13",
+      "opponent": "Dallas Mavericks",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-7",
+        "margin": 9
+      },
+      "attendance": 23458,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 96,
+        "humidity": 89,
+        "windSpeed": 1,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4117144
+      }
+    },
+    {
+      "id": "game_128",
+      "date": "2025-08-14",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "9-1",
+        "margin": 2
+      },
+      "attendance": 18533,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 64,
+        "humidity": 68,
+        "windSpeed": 11,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5166815
+      }
+    },
+    {
+      "id": "game_129",
+      "date": "2025-08-15",
+      "opponent": "Georgia Bulldogs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-9",
+        "margin": 6
+      },
+      "attendance": 55794,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 92,
+        "humidity": 90,
+        "windSpeed": 15,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3543941
+      }
+    },
+    {
+      "id": "game_130",
+      "date": "2025-08-16",
+      "opponent": "San Antonio Spurs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-11",
+        "margin": 8
+      },
+      "attendance": 11834,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 97,
+        "humidity": 51,
+        "windSpeed": 14,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4419493
+      }
+    },
+    {
+      "id": "game_131",
+      "date": "2025-08-18",
+      "opponent": "San Antonio Spurs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-4",
+        "margin": 2
+      },
+      "attendance": 57404,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 84,
+        "humidity": 48,
+        "windSpeed": 12,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5558530
+      }
+    },
+    {
+      "id": "game_132",
+      "date": "2025-08-19",
+      "opponent": "Milwaukee Brewers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-5",
+        "margin": 6
+      },
+      "attendance": 26391,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 90,
+        "humidity": 48,
+        "windSpeed": 4,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2037833
+      }
+    },
+    {
+      "id": "game_133",
+      "date": "2025-08-20",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-5",
+        "margin": 3
+      },
+      "attendance": 46477,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 60,
+        "humidity": 69,
+        "windSpeed": 16,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4351965
+      }
+    },
+    {
+      "id": "game_134",
+      "date": "2025-08-21",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-3",
+        "margin": 1
+      },
+      "attendance": 20016,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 92,
+        "humidity": 68,
+        "windSpeed": 13,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5940322
+      }
+    },
+    {
+      "id": "game_135",
+      "date": "2025-08-22",
+      "opponent": "Oklahoma Sooners",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-5",
+        "margin": 3
+      },
+      "attendance": 36520,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 91,
+        "humidity": 51,
+        "windSpeed": 8,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1226721
+      }
+    },
+    {
+      "id": "game_136",
+      "date": "2025-08-23",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "7-1",
+        "margin": 10
+      },
+      "attendance": 46156,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 62,
+        "humidity": 72,
+        "windSpeed": 11,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2637989
+      }
+    },
+    {
+      "id": "game_137",
+      "date": "2025-08-24",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-3",
+        "margin": 7
+      },
+      "attendance": 56701,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 60,
+        "humidity": 40,
+        "windSpeed": 2,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2129513
+      }
+    },
+    {
+      "id": "game_138",
+      "date": "2025-08-25",
+      "opponent": "Oklahoma Sooners",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "10-6",
+        "margin": 2
+      },
+      "attendance": 20986,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 67,
+        "humidity": 89,
+        "windSpeed": 0,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3645586
+      }
+    },
+    {
+      "id": "game_139",
+      "date": "2025-08-26",
+      "opponent": "Cincinnati Reds",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-9",
+        "margin": 4
+      },
+      "attendance": 49169,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 95,
+        "humidity": 64,
+        "windSpeed": 14,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4091681
+      }
+    },
+    {
+      "id": "game_140",
+      "date": "2025-08-27",
+      "opponent": "Chicago Cubs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-8",
+        "margin": 10
+      },
+      "attendance": 52179,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 83,
+        "humidity": 92,
+        "windSpeed": 14,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1009075
+      }
+    },
+    {
+      "id": "game_141",
+      "date": "2025-08-29",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-4",
+        "margin": 3
+      },
+      "attendance": 19626,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 63,
+        "humidity": 42,
+        "windSpeed": 3,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5607465
+      }
+    },
+    {
+      "id": "game_142",
+      "date": "2025-08-30",
+      "opponent": "Houston Texans",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-10",
+        "margin": 6
+      },
+      "attendance": 44443,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 61,
+        "humidity": 97,
+        "windSpeed": 0,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5739641
+      }
+    },
+    {
+      "id": "game_143",
+      "date": "2025-08-31",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-6",
+        "margin": 3
+      },
+      "attendance": 16580,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 69,
+        "humidity": 93,
+        "windSpeed": 11,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1375293
+      }
+    },
+    {
+      "id": "game_144",
+      "date": "2025-09-01",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-5",
+        "margin": 4
+      },
+      "attendance": 58795,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 87,
+        "humidity": 94,
+        "windSpeed": 8,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1936499
+      }
+    },
+    {
+      "id": "game_145",
+      "date": "2025-09-02",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-4",
+        "margin": 6
+      },
+      "attendance": 47008,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 93,
+        "humidity": 73,
+        "windSpeed": 18,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3169399
+      }
+    },
+    {
+      "id": "game_146",
+      "date": "2025-09-03",
+      "opponent": "Milwaukee Brewers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "7-1",
+        "margin": 9
+      },
+      "attendance": 12503,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 90,
+        "humidity": 97,
+        "windSpeed": 5,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4525096
+      }
+    },
+    {
+      "id": "game_147",
+      "date": "2025-09-04",
+      "opponent": "Georgia Bulldogs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "7-2",
+        "margin": 3
+      },
+      "attendance": 50949,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 67,
+        "humidity": 54,
+        "windSpeed": 2,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4235918
+      }
+    },
+    {
+      "id": "game_148",
+      "date": "2025-09-05",
+      "opponent": "Milwaukee Brewers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "6-9",
+        "margin": 9
+      },
+      "attendance": 26751,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 88,
+        "humidity": 48,
+        "windSpeed": 1,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3096102
+      }
+    },
+    {
+      "id": "game_149",
+      "date": "2025-09-06",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-5",
+        "margin": 10
+      },
+      "attendance": 18985,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 67,
+        "humidity": 45,
+        "windSpeed": 1,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4459699
+      }
+    },
+    {
+      "id": "game_150",
+      "date": "2025-09-07",
+      "opponent": "Chicago Cubs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-11",
+        "margin": 5
+      },
+      "attendance": 41835,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 91,
+        "humidity": 55,
+        "windSpeed": 1,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4457619
+      }
+    },
+    {
+      "id": "game_151",
+      "date": "2025-09-09",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-9",
+        "margin": 10
+      },
+      "attendance": 51866,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 84,
+        "humidity": 92,
+        "windSpeed": 4,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1668017
+      }
+    },
+    {
+      "id": "game_152",
+      "date": "2025-09-10",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-4",
+        "margin": 4
+      },
+      "attendance": 18080,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 93,
+        "humidity": 81,
+        "windSpeed": 11,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5898245
+      }
+    },
+    {
+      "id": "game_153",
+      "date": "2025-09-11",
+      "opponent": "Cincinnati Reds",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-7",
+        "margin": 8
+      },
+      "attendance": 56171,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 86,
+        "humidity": 57,
+        "windSpeed": 11,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4529999
+      }
+    },
+    {
+      "id": "game_154",
+      "date": "2025-09-12",
+      "opponent": "Dallas Mavericks",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "9-2",
+        "margin": 2
+      },
+      "attendance": 48187,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 66,
+        "humidity": 48,
+        "windSpeed": 6,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1949156
+      }
+    },
+    {
+      "id": "game_155",
+      "date": "2025-09-13",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-5",
+        "margin": 8
+      },
+      "attendance": 53991,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 92,
+        "humidity": 71,
+        "windSpeed": 4,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5712211
+      }
+    },
+    {
+      "id": "game_156",
+      "date": "2025-09-14",
+      "opponent": "Chicago Cubs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-10",
+        "margin": 4
+      },
+      "attendance": 13349,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 80,
+        "humidity": 59,
+        "windSpeed": 1,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1759495
+      }
+    },
+    {
+      "id": "game_157",
+      "date": "2025-09-15",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "5-2",
+        "margin": 10
+      },
+      "attendance": 30045,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 61,
+        "humidity": 82,
+        "windSpeed": 5,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2337369
+      }
+    },
+    {
+      "id": "game_158",
+      "date": "2025-09-16",
+      "opponent": "San Antonio Spurs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-2",
+        "margin": 5
+      },
+      "attendance": 53633,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 85,
+        "humidity": 52,
+        "windSpeed": 8,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3002970
+      }
+    },
+    {
+      "id": "game_159",
+      "date": "2025-09-17",
+      "opponent": "Denver Broncos",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "5-12",
+        "margin": 2
+      },
+      "attendance": 47900,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 67,
+        "humidity": 47,
+        "windSpeed": 5,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5654994
+      }
+    },
+    {
+      "id": "game_160",
+      "date": "2025-09-18",
+      "opponent": "San Antonio Spurs",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-6",
+        "margin": 7
+      },
+      "attendance": 17911,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 95,
+        "humidity": 96,
+        "windSpeed": 7,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2156930
+      }
+    },
+    {
+      "id": "game_161",
+      "date": "2025-09-20",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "7-5",
+        "margin": 3
+      },
+      "attendance": 31474,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 82,
+        "humidity": 44,
+        "windSpeed": 3,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2032440
+      }
+    },
+    {
+      "id": "game_162",
+      "date": "2025-09-21",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-9",
+        "margin": 4
+      },
+      "attendance": 20201,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 68,
+        "humidity": 78,
+        "windSpeed": 14,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2887314
+      }
+    }
+  ],
+  "facilities": {
+    "stadium": {
+      "name": "Championship Stadium",
+      "capacity": 61634,
+      "yearBuilt": 2020,
+      "surface": "Natural Grass",
+      "features": [
+        "Retractable Roof",
+        "HD Video Boards",
+        "Premium Suites"
+      ]
+    },
+    "trainingFacility": {
+      "name": "Elite Training Center",
+      "squareFootage": 127842,
+      "amenities": [
+        "Weight Room",
+        "Recovery Center",
+        "Video Analysis Room",
+        "Nutrition Center"
+      ],
+      "technology": [
+        "Motion Capture",
+        "Biometric Monitoring",
+        "VR Training"
+      ]
+    }
+  },
+  "coaching": {
+    "headCoach": {
+      "name": "Dave Miller",
+      "experience": 5,
+      "record": {
+        "wins": 92,
+        "losses": 80,
+        "winPercentage": 0.535
+      },
+      "philosophy": "Championship mindset with player development focus"
+    },
+    "assistants": [
+      {
+        "name": "Jim Thompson",
+        "position": "Assistant Coach",
+        "experience": 5
+      },
+      {
+        "name": "Steve Williams",
+        "position": "Analytics Coordinator",
+        "experience": 3
+      },
+      {
+        "name": "Mike Johnson",
+        "position": "Hitting Coach",
+        "experience": 12
+      },
+      {
+        "name": "Jim Thompson",
+        "position": "Assistant Coach",
+        "experience": 16
+      },
+      {
+        "name": "John Davis",
+        "position": "Assistant Coach",
+        "experience": 12
+      },
+      {
+        "name": "Jim Thompson",
+        "position": "Player Development",
+        "experience": 15
+      },
+      {
+        "name": "Paul Brown",
+        "position": "Bench Coach",
+        "experience": 15
+      },
+      {
+        "name": "Steve Williams",
+        "position": "Pitching Coach",
+        "experience": 11
+      }
+    ]
+  },
+  "analytics": {
+    "dataQuality": 0.964,
+    "processingSpeed": 94,
+    "predictionAccuracy": 0.927,
+    "realTimeCapability": true,
+    "mlModelsActive": 8,
+    "dataSourcesConnected": 25,
+    "alertsConfigured": 34,
+    "dashboardsActive": 16
+  },
+  "lastUpdated": "2025-09-02T22:39:19.790Z"
+}

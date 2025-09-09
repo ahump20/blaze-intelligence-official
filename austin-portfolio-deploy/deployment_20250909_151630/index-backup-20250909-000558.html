@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze Intelligence | Championship Sports Analytics & AI Platform</title>
+<meta name="description" content="Revolutionary sports intelligence platform combining AI, computer vision, and advanced analytics. Serving MLB, NFL, NBA, NCAA with 94.6% accuracy and <100ms response times.">
+<meta name="keywords" content="sports analytics, AI, computer vision, MLB analytics, NFL analytics, NBA analytics, NCAA recruiting, sports intelligence, performance analytics, biomechanical analysis">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://blaze-intelligence.pages.dev/">
+<meta property="twitter:title" content="Blaze Intelligence | Championship Sports Analytics">
+<meta property="twitter:description" content="Where cognitive performance meets quarterly performance. Advanced AI-driven sports analytics.">
+
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#ff6b35">
+<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'blaze': {
+'primary': '#ff6b35',
+'secondary': '#f7931e',
+'accent': '#ffd700',
+'dark': '#0a0a0a',
+'darker': '#050505',
+'gray': '#1a1a2e',
+'blue': '#16213e',
+'cyan': '#00ffff',
+'green': '#00ff88'
+}
+},
+fontFamily: {
+'mono': ['JetBrains Mono', 'monospace']
+}
+}
+}
+}
+</script>
+
+<style>
+:root {
+--blaze-primary: #ff6b35;
+--blaze-secondary: #f7931e;
+--blaze-accent: #ffd700;
+--blaze-dark: #0a0a0a;
+--blaze-gray: #1a1a2e;
+--blaze-blue: #16213e;
+--blaze-cyan: #00ffff;
+--blaze-green: #00ff88;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+background: linear-gradient(135deg, var(--blaze-dark) 0%, var(--blaze-gray) 50%, var(--blaze-blue) 100%);
+color: #e2e8f0;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+overflow-x: hidden;
+min-height: 100vh;
+}
+
+/* Glass morphism effects */
+.glass-nav {
+background: rgba(10, 10, 10, 0.95);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-card {
+background: rgba(30, 41, 59, 0.9);
+backdrop-filter: blur(15px);
+-webkit-backdrop-filter: blur(15px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+border-radius: 1rem;
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Advanced gradient text */
+.gradient-text {
+background: linear-gradient(135deg, var(--blaze-primary), var(--blaze-secondary), var(--blaze-accent));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+background-size: 200% 200%;
+animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+0%, 100% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+}
+
+/* Neon glow effects */
+.neon-text {
+color: var(--blaze-cyan);
+text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+}
+
+.neon-border {
+border: 2px solid var(--blaze-cyan);
+box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+/* Enhanced buttons */
+.cta-button {
+background: linear-gradient(135deg, var(--blaze-primary), var(--blaze-secondary));
+border: 2px solid var(--blaze-accent);
+box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+overflow: hidden;
+}
+
+.cta-button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+transition: left 0.5s;
+}
+
+.cta-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 12px 48px rgba(255, 107, 53, 0.6);
+}
+
+.cta-button:hover::before {
+left: 100%;
+}
+
+/* Metric cards */
+.metric-card {
+background: rgba(10, 10, 10, 0.6);
+backdrop-filter: blur(20px);
+border: 1px solid rgba(0, 255, 255, 0.3);
+border-radius: 1rem;
+padding: 2rem;
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+overflow: hidden;
+}
+
+.metric-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.05), transparent);
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+.metric-card:hover {
+transform: translateY(-8px);
+border-color: var(--blaze-cyan);
+box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+}
+
+.metric-card:hover::before {
+opacity: 1;
+}
+
+.metric-value {
+font-size: 3rem;
+font-weight: 900;
+color: var(--blaze-cyan);
+text-shadow: 0 0 20px currentColor;
+font-family: 'JetBrains Mono', monospace;
+}
+
+/* 3D visualization containers */
+.hero-3d-container {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 0;
+pointer-events: none;
+opacity: 0.8;
+}
+
+.viz-container {
+position: relative;
+width: 100%;
+height: 500px;
+border-radius: 1rem;
+overflow: hidden;
+background: rgba(10, 10, 10, 0.5);
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animated elements */
+.animate-float {
+animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+0%, 100% { transform: translateY(0px); }
+50% { transform: translateY(-20px); }
+}
+
+.pulse-glow {
+animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+from { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+to { box-shadow: 0 0 40px rgba(0, 255, 255, 0.6); }
+}
+
+/* Scroll reveal animations */
+.reveal {
+opacity: 0;
+transform: translateY(50px);
+transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* Loading states */
+.loading-skeleton {
+background: linear-gradient(90deg, #1e293b, #334155, #1e293b);
+background-size: 200% 100%;
+animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+0% { background-position: 200% 0; }
+100% { background-position: -200% 0; }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+.metric-value { font-size: 2rem; }
+.glass-card { margin: 1rem; }
+.hero-3d-container { height: 60vh; }
+}
+
+/* Performance indicators */
+.status-indicator {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.5rem 1rem;
+background: rgba(0, 255, 136, 0.2);
+border: 1px solid var(--blaze-green);
+border-radius: 20px;
+font-size: 0.875rem;
+font-weight: 600;
+color: var(--blaze-green);
+animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.7; }
+}
+
+.feature-highlight {
+background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(0, 255, 255, 0.1));
+border: 1px solid rgba(255, 107, 53, 0.3);
+border-radius: 12px;
+padding: 1.5rem;
+margin: 1rem 0;
+}
+
+/* Interactive elements */
+.interactive-card {
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.interactive-card:hover {
+transform: scale(1.02);
+}
+
+/* Data visualization styles */
+.chart-container {
+background: rgba(10, 10, 10, 0.8);
+border-radius: 12px;
+padding: 1rem;
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Navigation enhancements */
+.nav-link {
+position: relative;
+padding: 0.5rem 1rem;
+border-radius: 8px;
+transition: all 0.3s ease;
+}
+
+.nav-link::after {
+content: '';
+position: absolute;
+bottom: -2px;
+left: 50%;
+width: 0;
+height: 2px;
+background: var(--blaze-cyan);
+transition: all 0.3s ease;
+transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+width: 80%;
+}
+</style>
+
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center">
+<a href="#home" class="text-2xl font-bold neon-text tracking-tight hover:scale-105 transition-transform animate-float">
+🔥 BLAZE INTELLIGENCE
+</a>
+</div>
+
+<ul class="hidden lg:flex items-center space-x-2">
+<li><a href="#features" class="nav-link text-slate-300 hover:text-white font-medium">Features</a></li>
+<li><a href="#analytics" class="nav-link text-slate-300 hover:text-white font-medium">Analytics</a></li>
+<li><a href="/vision-ai-demo.html" class="nav-link text-slate-300 hover:text-white font-medium">Vision AI</a></li>
+<li><a href="/dashboard.html" class="nav-link text-slate-300 hover:text-white font-medium">Dashboard</a></li>
+<li><a href="/testimonials.html" class="nav-link text-slate-300 hover:text-white font-medium">Success Stories</a></li>
+<li><a href="/blog/" class="nav-link text-slate-300 hover:text-white font-medium">Insights</a></li>
+<li><a href="#pricing" class="nav-link text-slate-300 hover:text-white font-medium">Pricing</a></li>
+<li><a href="/contact.html" class="cta-button text-white font-semibold px-6 py-3 rounded-full">
+Get Started
+</a></li>
+</ul>
+
+<button id="mobile-menu-toggle" class="lg:hidden text-white z-50 p-2 rounded-lg hover:bg-slate-800 transition-colors">
+<i data-lucide="menu" class="w-6 h-6"></i>
+</button>
+</div>
+</nav>
+
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<div class="status-indicator mb-8">
+<div class="w-2 h-2 bg-green-400 rounded-full"></div>
+<span>LIVE SYSTEM OPERATIONAL</span>
+</div>
+
+<div class="flex flex-wrap justify-center gap-4 mb-12">
+<div class="status-indicator" id="live-accuracy">94.6% Accuracy</div>
+<div class="status-indicator" id="live-latency">&lt;100ms Latency</div>
+<div class="status-indicator" id="live-datapoints">2.8M+ Data Points</div>
+<div class="status-indicator" id="live-uptime">99.9% Uptime</div>
+<div class="status-indicator">Enterprise Ready</div>
+</div>
+
+<section id="analytics" class="py-20 lg:py-32 relative">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+<div class="metric-card reveal interactive-card" data-metric="cardinals">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-white">Cardinals Readiness</h3>
+<i data-lucide="activity" class="w-6 h-6 text-cyan-400"></i>
+</div>
+<div class="metric-value" id="cardinals-readiness">--</div>
+<p class="text-sm text-slate-400 mt-2">Live MLB Analytics</p>
+<div class="mt-4 h-16 chart-container">
+<canvas id="cardinals-chart"></canvas>
+</div>
+</div>
+
+<div class="metric-card reveal interactive-card" data-metric="titans">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-white">Titans Performance</h3>
+<i data-lucide="zap" class="w-6 h-6 text-orange-400"></i>
+</div>
+<div class="metric-value" id="titans-performance">--</div>
+<p class="text-sm text-slate-400 mt-2">NFL Analytics</p>
+<div class="mt-4 h-16 chart-container">
+<canvas id="titans-chart"></canvas>
+</div>
+</div>
+
+<div class="metric-card reveal interactive-card" data-metric="longhorns">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-white">Longhorns Recruiting</h3>
+<i data-lucide="target" class="w-6 h-6 text-yellow-400"></i>
+</div>
+<div class="metric-value" id="longhorns-recruiting">--</div>
+<p class="text-sm text-slate-400 mt-2">NCAA Pipeline</p>
+<div class="mt-4 h-16 chart-container">
+<canvas id="longhorns-chart"></canvas>
+</div>
+</div>
+
+<div class="metric-card reveal interactive-card" data-metric="grizzlies">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-white">Grizzlies Grit Index</h3>
+<i data-lucide="shield" class="w-6 h-6 text-green-400"></i>
+</div>
+<div class="metric-value" id="grizzlies-grit">--</div>
+<p class="text-sm text-slate-400 mt-2">NBA Character Analysis</p>
+<div class="mt-4 h-16 chart-container">
+<canvas id="grizzlies-chart"></canvas>
+</div>
+</div>
+</div>
+
+<section id="features" class="py-20 lg:py-32">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-6xl font-bold neon-text mb-6 reveal">CHAMPIONSHIP FEATURES</h2>
+<p class="text-xl text-slate-300 max-w-3xl mx-auto reveal">
+Advanced AI and computer vision technologies designed for professional sports organizations
+</p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="glass-card p-8 reveal">
+<div class="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mb-6">
+<i data-lucide="activity" class="w-8 h-8 text-white"></i>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4">Multi-Sport Analytics</h3>
+<p class="text-slate-300 mb-6">
+Comprehensive analytics platform covering MLB, NFL, NBA, and NCAA with 
+real-time performance tracking and predictive modeling capabilities.
+</p>
+<ul class="space-y-2 text-sm text-slate-400">
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Live data from major leagues
+</li>
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Predictive performance models
+</li>
+<li class="flex items-center gap-2">
+<i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+Custom reporting dashboards
+</li>
+</ul>
+<a href="/dashboard.html" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold mt-6">
+View Dashboard <i data-lucide="arrow-right" class="w-4 h-4"></i>
+</a>
+</div>
+
+<section id="pricing" class="py-20 lg:py-32">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-6xl font-bold gradient-text mb-6 reveal">CHAMPIONSHIP PRICING</h2>
+<p class="text-xl text-slate-300 max-w-3xl mx-auto reveal">
+Flexible pricing options designed for organizations of all sizes, 
+with 67-80% savings compared to traditional sports analytics platforms
+</p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="glass-card p-8 reveal neon-border">
+<div class="text-center mb-8">
+<div class="inline-block px-3 py-1 bg-cyan-400/20 text-cyan-400 text-sm font-semibold rounded-full mb-4">
+MOST POPULAR
+</div>
+<h3 class="text-2xl font-bold text-white mb-2">Professional</h3>
+<div class="text-4xl font-black text-cyan-400 mb-2">$50,000</div>
+<p class="text-slate-400">per year</p>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Full analytics suite access</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Real-time data feeds</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Custom reporting</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>100,000 API calls/month</span>
+</li>
+<li class="flex items-center gap-3">
+<i data-lucide="check" class="w-5 h-5 text-green-400"></i>
+<span>Priority support</span>
+</li>
+</ul>
+<a href="#contact" class="w-full cta-button text-center text-white font-bold py-4 rounded-lg">
+Upgrade Now
+</a>
+</div>
+
+<section id="contact" class="py-20 lg:py-32">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<h2 class="text-4xl md:text-6xl font-bold neon-text mb-8 reveal">
+READY FOR CHAMPIONSHIP ANALYTICS?
+</h2>
+<p class="text-xl text-slate-300 mb-12 reveal">
+Join 50+ professional organizations already using Blaze Intelligence 
+to gain competitive advantages in their sports operations
+</p>
+
+<div class="flex flex-col sm:flex-row gap-6 justify-center reveal">
+<a href="/contact.html" class="cta-button text-white font-bold px-10 py-5 rounded-full flex items-center justify-center gap-3 text-lg">
+<i data-lucide="mail" class="w-6 h-6"></i>
+Schedule Demo
+</a>
+<a href="tel:+12102735538" class="glass-card hover:bg-slate-700/50 text-white font-bold px-10 py-5 rounded-full transition-all duration-300 flex items-center justify-center gap-3 neon-border">
+<i data-lucide="phone" class="w-6 h-6"></i>
+Call Now: (210) 273-5538
+</a>
+</div>
+
+<p class="text-slate-500 text-sm mt-8">
+Enterprise implementations available • Custom pricing for Fortune 500 • 24/7 support included
+</p>
+</div>
+</section>
+</main>
+

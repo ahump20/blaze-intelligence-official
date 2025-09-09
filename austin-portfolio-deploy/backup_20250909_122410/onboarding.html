@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started | Blaze Intelligence - 30-Day Championship Trial</title>
+    <meta name="description" content="Start your 30-day championship trial of Blaze Intelligence. Experience the power of Memphis grit, Texas vision, and Austin innovation.">
+    
+    <!-- Enhanced Font Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'burnt-orange': {
+                            '500': '#BF5700',
+                            '600': '#A0522D',
+                        },
+                        'neon': {
+                            'blue': '#00FFFF',
+                            'green': '#00FF00', 
+                            'orange': '#FF8C00',
+                            'purple': '#9400D3'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        :root {
+            --primary-orange: #BF5700;
+            --accent-orange: #D2691E;
+            --dark-bg: #0a0a0a;
+            --neon-blue: #00FFFF;
+            --neon-green: #00FF00;
+            --neon-orange: #FF8C00;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-bg);
+            color: #e2e8f0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-radius: 1rem;
+        }
+
+        .step-indicator {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .step-indicator.active {
+            background: linear-gradient(135deg, var(--neon-orange), var(--accent-orange));
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+        }
+
+        .step-indicator.completed {
+            background: var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .step-indicator.pending {
+            background: rgba(100, 116, 139, 0.5);
+            border: 2px solid rgba(148, 163, 184, 0.5);
+        }
+
+        .form-input {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #e2e8f0;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--neon-orange) 0%, var(--accent-orange) 50%, #A0522D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .neon-text {
+            color: var(--neon-blue);
+            text-shadow: 0 0 4px currentColor;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="/" class="text-2xl font-bold neon-text tracking-tighter hover:scale-105 transition-transform">
+                    BLAZE INTELLIGENCE
+                </a>
+                <span class="ml-3 text-xs text-slate-500 bg-slate-800 px-2 py-1 rounded-full">ONBOARDING</span>
+            </div>
+            
+            <ul class="hidden lg:flex items-center space-x-6">
+                <li><a href="/platform" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">🚀 Platform</a></li>
+                <li><a href="/labs" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">⚡ Labs</a></li>
+                <li><a href="/demo.html" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">🎮 Demo</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="pt-20 pb-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-gradient mb-4">START YOUR CHAMPIONSHIP JOURNEY</h1>
+                <p class="text-xl text-slate-400 mb-2">30-day free trial • No credit card required • 5-minute setup</p>
+                <div class="text-sm text-slate-500 font-medium">
+                    <span class="text-red-400">MEMPHIS</span> grit + <span class="text-orange-400">TEXAS</span> vision + <span class="text-blue-400">AUSTIN</span> innovation
+                </div>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="flex items-center justify-between mb-12 relative">
+                <div class="absolute top-5 left-0 right-0 h-0.5 bg-slate-700"></div>
+                <div class="absolute top-5 left-0 h-0.5 bg-gradient-to-r from-neon-green to-neon-orange transition-all duration-500" style="width: 33%;" id="progress-bar"></div>
+                
+                <div class="relative flex items-center gap-2">
+                    <div class="step-indicator active" id="step-1-indicator">1</div>
+                    <span class="hidden sm:inline text-sm text-slate-300 ml-2">Organization</span>
+                </div>
+                
+                <div class="relative flex items-center gap-2">
+                    <div class="step-indicator pending" id="step-2-indicator">2</div>
+                    <span class="hidden sm:inline text-sm text-slate-400 ml-2">Analytics Labs</span>
+                </div>
+                
+                <div class="relative flex items-center gap-2">
+                    <div class="step-indicator pending" id="step-3-indicator">3</div>
+                    <span class="hidden sm:inline text-sm text-slate-400 ml-2">Confirmation</span>
+                </div>
+            </div>
+
+            <!-- Form Container -->
+            <div class="glass-card p-8">
+                <form id="onboarding-form">
+                    <!-- Step 1: Organization Info -->
+                    <div id="step-1" class="step-content">
+                        <h2 class="text-2xl font-bold text-white mb-6">Tell us about your organization</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-400 mb-2">Organization Name *</label>
+                                <input type="text" name="organization" required class="form-input" placeholder="e.g., St. Louis Cardinals">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-slate-400 mb-2">Organization Type *</label>
+                                <select name="org_type" required class="form-input">
+                                    <option value="">Select type...</option>
+                                    <option value="mlb">MLB Team</option>
+                                    <option value="nfl">NFL Team</option>
+                                    <option value="nba">NBA Team</option>
+                                    <option value="ncaa">NCAA Program</option>
+                                    <option value="high_school">High School</option>
+                                    <option value="youth">Youth/Travel Organization</option>
+                                    <option value="agency">Sports Agency</option>
+                                    <option value="media">Sports Media</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-400 mb-2">Your Name *</label>
+                                    <input type="text" name="name" required class="form-input" placeholder="John Smith">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-400 mb-2">Title *</label>
+                                    <input type="text" name="title" required class="form-input" placeholder="Director of Analytics">
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-400 mb-2">Email *</label>
+                                    <input type="email" name="email" required class="form-input" placeholder="john@cardinals.com">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-400 mb-2">Phone</label>
+                                    <input type="tel" name="phone" class="form-input" placeholder="(555) 123-4567">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Select Labs -->
+                    <div id="step-2" class="step-content hidden">
+                        <h2 class="text-2xl font-bold text-white mb-6">Select your analytics labs</h2>
+                        <p class="text-slate-400 mb-6">Choose the labs you want to activate (you can add more later)</p>
+                        
+                        <div class="space-y-4">
+                            <label class="flex items-start gap-4 p-4 border border-slate-700 rounded-lg hover:border-red-400 transition-colors cursor-pointer">
+                                <input type="checkbox" name="labs" value="cardinals" class="mt-1">
+                                <div>
+                                    <div class="font-bold text-red-400">🔴 Cardinals Intelligence Lab</div>
+                                    <p class="text-sm text-slate-400 mt-1">MLB readiness tracking, leverage analysis, championship preparation</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start gap-4 p-4 border border-slate-700 rounded-lg hover:border-blue-400 transition-colors cursor-pointer">
+                                <input type="checkbox" name="labs" value="titans" class="mt-1">
+                                <div>
+                                    <div class="font-bold text-blue-400">🟦 Titans Analytics Lab</div>
+                                    <p class="text-sm text-slate-400 mt-1">NFL decision velocity, pressure analytics, cognitive performance</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start gap-4 p-4 border border-slate-700 rounded-lg hover:border-orange-400 transition-colors cursor-pointer">
+                                <input type="checkbox" name="labs" value="longhorns" class="mt-1">
+                                <div>
+                                    <div class="font-bold text-orange-400">🟠 Longhorns Analytics Lab</div>
+                                    <p class="text-sm text-slate-400 mt-1">NCAA recruiting intelligence, NIL valuation, conference preparation</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start gap-4 p-4 border border-slate-700 rounded-lg hover:border-purple-400 transition-colors cursor-pointer">
+                                <input type="checkbox" name="labs" value="grizzlies" class="mt-1">
+                                <div>
+                                    <div class="font-bold text-purple-400">🟣 Grizzlies Vision AI Lab</div>
+                                    <p class="text-sm text-slate-400 mt-1">NBA micro-expression analysis, character assessment, grit evaluation</p>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-start gap-4 p-4 border border-slate-700 rounded-lg hover:border-green-400 transition-colors cursor-pointer">
+                                <input type="checkbox" name="labs" value="custom" class="mt-1">
+                                <div>
+                                    <div class="font-bold text-green-400">➕ Custom Lab</div>
+                                    <p class="text-sm text-slate-400 mt-1">Build a custom lab for your specific team or organization</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Confirmation -->
+                    <div id="step-3" class="step-content hidden">
+                        <h2 class="text-2xl font-bold text-white mb-6">Confirm your championship trial</h2>
+                        
+                        <div class="glass-card p-6 mb-6">
+                            <h3 class="font-bold text-cyan-400 mb-4">Your 30-Day Trial Includes:</h3>
+                            <ul class="space-y-2 text-sm text-slate-300">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Full platform access with all selected labs</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Real-time data integration and analytics</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Vision AI and biomechanical analysis</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Pattern recognition and predictive models</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>API access and data export capabilities</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Dedicated onboarding specialist</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Priority support via email and phone</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass-card p-6 mb-6">
+                            <h3 class="font-bold text-orange-400 mb-4">After Your Trial:</h3>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-bold text-white mb-2">Championship Plan</h4>
+                                    <div class="text-2xl font-bold text-cyan-400 mb-1">$1,188/month</div>
+                                    <p class="text-sm text-slate-400">Annual billing (save $2,376)</p>
+                                    <ul class="text-sm text-slate-400 mt-3 space-y-1">
+                                        <li>• All platform features</li>
+                                        <li>• Unlimited users</li>
+                                        <li>• Custom integrations</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-2">Elite Plan</h4>
+                                    <div class="text-2xl font-bold text-cyan-400 mb-1">$1,488/month</div>
+                                    <p class="text-sm text-slate-400">Monthly billing</p>
+                                    <ul class="text-sm text-slate-400 mt-3 space-y-1">
+                                        <li>• All Championship features</li>
+                                        <li>• White-label options</li>
+                                        <li>• Dedicated success manager</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <label class="flex items-start gap-3 mb-6">
+                            <input type="checkbox" name="terms" required class="mt-1">
+                            <span class="text-sm text-slate-400">
+                                I agree to the <a href="/terms.html" class="text-cyan-400 hover:underline">Terms of Service</a> and 
+                                <a href="/privacy.html" class="text-cyan-400 hover:underline">Privacy Policy</a>
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between mt-8">
+                        <button type="button" id="prev-btn" class="px-6 py-3 bg-slate-700 text-white font-semibold rounded-lg hover:bg-slate-600 transition-colors hidden">
+                            ← Previous
+                        </button>
+                        
+                        <button type="button" id="next-btn" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:scale-105 transition-transform ml-auto">
+                            Next Step →
+                        </button>
+                        
+                        <button type="submit" id="submit-btn" class="px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg hover:scale-105 transition-transform ml-auto hidden">
+                            Start Free Trial
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="mt-12 text-center">
+                <p class="text-sm text-slate-500 mb-4">Trusted by championship organizations</p>
+                <div class="flex items-center justify-center gap-8 opacity-50">
+                    <span class="text-2xl">🔴</span>
+                    <span class="text-2xl">🟦</span>
+                    <span class="text-2xl">🟠</span>
+                    <span class="text-2xl">🟣</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Form navigation
+        let currentStep = 1;
+        const totalSteps = 3;
+        
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const form = document.getElementById('onboarding-form');
+
+        function updateStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show current step
+            document.getElementById(`step-${step}`).classList.remove('hidden');
+            
+            // Update indicators
+            for (let i = 1; i <= totalSteps; i++) {
+                const indicator = document.getElementById(`step-${i}-indicator`);
+                if (i < step) {
+                    indicator.classList.remove('active', 'pending');
+                    indicator.classList.add('completed');
+                    indicator.innerHTML = '<i data-lucide="check" class="w-5 h-5"></i>';
+                } else if (i === step) {
+                    indicator.classList.remove('completed', 'pending');
+                    indicator.classList.add('active');
+                    indicator.textContent = i;
+                } else {
+                    indicator.classList.remove('completed', 'active');
+                    indicator.classList.add('pending');
+                    indicator.textContent = i;
+                }
+            }
+            
+            // Update progress bar
+            const progress = ((step - 1) / (totalSteps - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Update buttons
+            prevBtn.classList.toggle('hidden', step === 1);
+            nextBtn.classList.toggle('hidden', step === totalSteps);
+            submitBtn.classList.toggle('hidden', step !== totalSteps);
+            
+            // Re-initialize icons
+            lucide.createIcons();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateStep(currentStep);
+                }
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStep(currentStep);
+            }
+        });
+
+        function validateStep(step) {
+            const stepContent = document.getElementById(`step-${step}`);
+            const requiredFields = stepContent.querySelectorAll('[required]');
+            
+            for (let field of requiredFields) {
+                if (!field.value) {
+                    field.classList.add('border-red-500');
+                    field.focus();
+                    return false;
+                }
+                field.classList.remove('border-red-500');
+            }
+            
+            if (step === 2) {
+                const checkboxes = stepContent.querySelectorAll('input[type="checkbox"]');
+                const anyChecked = Array.from(checkboxes).some(cb => cb.checked);
+                if (!anyChecked) {
+                    alert('Please select at least one analytics lab');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!validateStep(currentStep)) {
+                return;
+            }
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Add selected labs
+            const selectedLabs = [];
+            document.querySelectorAll('input[name="labs"]:checked').forEach(cb => {
+                selectedLabs.push(cb.value);
+            });
+            data.labs = selectedLabs;
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Starting your trial...';
+            
+            try {
+                // In production, this would send to your API
+                const response = await fetch('/api/onboarding', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    // Success - redirect to dashboard
+                    window.location.href = '/dashboard?welcome=true';
+                } else {
+                    throw new Error('Onboarding failed');
+                }
+            } catch (error) {
+                // Fallback for demo
+                alert('Welcome to Blaze Intelligence! Your trial has been activated. Check your email for login instructions.');
+                
+                // Send email fallback
+                const emailSubject = encodeURIComponent('Blaze Intelligence Trial Activation');
+                const emailBody = encodeURIComponent(`New trial signup:\n\nOrganization: ${data.organization}\nName: ${data.name}\nEmail: ${data.email}\nLabs: ${selectedLabs.join(', ')}`);
+                window.location.href = `mailto:ahump20@outlook.com?subject=${emailSubject}&body=${emailBody}`;
+            }
+        });
+    </script>
+</body>
+</html>

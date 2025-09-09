@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence: Live Baltimore Orioles 2025-2027 Draft Strategy Demo - Chad Tatum</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section with Three.js Background */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6600, #ff9900, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(255, 102, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            font-weight: 300;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #ff6600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 102, 0, 0.3);
+            border-color: #ffcc00;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 102, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .metric-card:hover::before {
+            left: 100%;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ff6600;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: #cccccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Dashboard Sections */
+        .dashboard-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6600, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .demo-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .demo-card:hover {
+            border-color: #ff6600;
+            transform: scale(1.02);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1rem 0;
+        }
+
+        /* Interactive Controls */
+        .controls-panel {
+            background: rgba(26, 26, 26, 0.9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            color: #cccccc;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        select, input[type="range"] {
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #ff6600;
+        }
+
+        /* Prospect Cards */
+        .prospect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .prospect-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a1810);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #ff6600;
+            transition: all 0.3s ease;
+        }
+
+        .prospect-card:hover {
+            transform: translateX(5px);
+            box-shadow: -5px 5px 15px rgba(255, 102, 0, 0.3);
+        }
+
+        .prospect-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ff6600;
+            margin-bottom: 0.5rem;
+        }
+
+        .prospect-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .prospect-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .metric-name {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        .metric-score {
+            font-weight: bold;
+            color: #ff6600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .status-high { background: #00ff00; }
+        .status-medium { background: #ffff00; }
+        .status-low { background: #ff6600; }
+        .status-critical { background: #ff0000; }
+
+        /* Action Buttons */
+        .action-btn {
+            background: linear-gradient(45deg, #ff6600, #ff9900);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 102, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">BLAZE INTELLIGENCE</h1>
+            <h2 class="hero-subtitle">Moneyball 3.0: The Baltimore Advantage<br>Fusion Analytics for Championship Building</h2>
+            
+            <!-- Key Performance Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card fade-in">
+                    <div class="metric-value">CFI</div>
+                    <div class="metric-label">Camden Fit Index</div>
+                </div>
+                <div class="metric-card fade-in">
+                    <div class="metric-value">DRS</div>
+                    <div class="metric-label">Division Readiness</div>
+                </div>
+                <div class="metric-card fade-in">
+                    <div class="metric-value">NSS</div>
+                    <div class="metric-label">NIL Signability</div>
+                </div>
+                <div class="metric-card fade-in">
+                    <div class="metric-value">$19.1M</div>
+                    <div class="metric-label">2025 Bonus Pool</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Camden Yards Optimization Section -->
+    <div class="dashboard-section">
+        <h2 class="section-title">The Camden Advantage: Your Unique Competitive Edge</h2>
+        
+        <div class="controls-panel">
+            <div class="control-group">
+                <label class="control-label">Player Type</label>
+                <select id="playerTypeFilter">
+                    <option value="all">All Players</option>
+                    <option value="rh-power">RH Power Hitters</option>
+                    <option value="lh-contact">LH Contact Hitters</option>
+                    <option value="switch">Switch Hitters</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Camden Fit Index Range</label>
+                <input type="range" id="cfiRange" min="0" max="100" value="70">
+                <span id="cfiValue">70+</span>
+            </div>
+            <button class="action-btn" onclick="updateCamdenAnalysis()">Update Analysis</button>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-card">
+                <h3>Camden Yards Impact Analysis</h3>
+                <div class="chart-container">
+                    <canvas id="camdenChart"></canvas>
+                </div>
+                <p><strong>Key Insight:</strong> Camden Yards 2025 wall moves in 9-20 feet at varying points. Deepest sections now 374-376ft (was 384-398ft).</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>Historical vs. Projected Performance</h3>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                <p><strong>Wall Impact:</strong> 138 home runs lost over past 3 seasons (72 for Orioles, 65 for opponents). Wall height reduced from 13ft to 6-8ft in sections.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Draft Strategy & Market Inefficiencies -->
+    <div class="dashboard-section">
+        <h2 class="section-title">Maximizing 6 Top-100 Picks: Your Historic Draft Capital</h2>
+        
+        <div class="demo-grid">
+            <div class="demo-card">
+                <h3>Age-Based Value Opportunities</h3>
+                <div class="chart-container">
+                    <canvas id="ageValueChart"></canvas>
+                </div>
+                <p><strong>Market Insight:</strong> Analysis of age-based strategies shows younger players often overlooked. Focus on sub-18.5 age prospects for potential value.</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>Positional Scarcity Analysis</h3>
+                <div class="chart-container">
+                    <canvas id="scarcityChart"></canvas>
+                </div>
+                <p><strong>Strategic Advantage:</strong> Premium catchers and up-the-middle athletes identified as key organizational needs for 2025 draft cycle.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proprietary Blaze Intelligence Metrics -->
+    <div class="dashboard-section">
+        <h2 class="section-title">Proprietary Evaluation Models</h2>
+        
+        <div class="prospect-grid" id="prospectGrid">
+            <!-- Dynamic prospect cards will be inserted here -->
+        </div>
+    </div>
+
+    <!-- AL East Counter-Profiling Strategy -->
+    <div class="dashboard-section">
+        <h2 class="section-title">Division Domination: Exploiting AL East Blind Spots</h2>
+        
+        <div class="demo-grid">
+            <div class="demo-card">
+                <h3>Division Archetype Analysis</h3>
+                <div class="chart-container">
+                    <canvas id="archetypeChart"></canvas>
+                </div>
+                <p><strong>Strategic Focus:</strong> While Yankees chase power and Red Sox prefer college polish, your fusion approach finds value in athletic defenders with emerging power - exactly what Camden rewards.</p>
+            </div>
+            
+            <div class="demo-card">
+                <h3>Competitive Advantage Matrix</h3>
+                <div class="chart-container">
+                    <canvas id="advantageChart"></canvas>
+                </div>
+                <p><strong>Edge Opportunity:</strong> Up-the-middle athletes with Camden-optimized profiles identified as strategic priority for competitive advantage.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Professional Three.js Hero Background
+        function initHeroAnimation() {
+            const canvas = document.getElementById('hero-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ 
+                canvas: canvas, 
+                alpha: true,
+                antialias: true
+            });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            // Professional data visualization network
+            const nodes = [];
+            const connections = [];
+            const nodeCount = 80;
+            
+            // Create sophisticated node network
+            const nodeGeometry = new THREE.SphereGeometry(0.15, 8, 8);
+            const nodeMaterial = new THREE.MeshBasicMaterial({
+                color: 0xff6600,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            // Position nodes in a professional 3D grid pattern
+            for (let i = 0; i < nodeCount; i++) {
+                const node = new THREE.Mesh(nodeGeometry, nodeMaterial.clone());
+                
+                // Create structured positioning with some randomness
+                const angle = (i / nodeCount) * Math.PI * 2;
+                const radius = 15 + Math.random() * 20;
+                const height = (Math.random() - 0.5) * 30;
+                
+                node.position.x = Math.cos(angle) * radius;
+                node.position.y = height;
+                node.position.z = Math.sin(angle) * radius;
+                
+                // Add pulsing animation properties
+                node.userData = {
+                    originalScale: 1,
+                    pulseSpeed: 0.5 + Math.random() * 2,
+                    pulseOffset: Math.random() * Math.PI * 2
+                };
+                
+                nodes.push(node);
+                scene.add(node);
+            }
+            
+            // Create elegant connection lines
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0xff6600,
+                transparent: true,
+                opacity: 0.15,
+                linewidth: 1
+            });
+            
+            // Connect nearby nodes with elegant lines
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const distance = nodes[i].position.distanceTo(nodes[j].position);
+                    
+                    if (distance < 12 && Math.random() > 0.5) {
+                        const points = [];
+                        points.push(nodes[i].position);
+                        points.push(nodes[j].position);
+                        
+                        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                        const line = new THREE.Line(geometry, lineMaterial);
+                        connections.push(line);
+                        scene.add(line);
+                    }
+                }
+            }
+            
+            // Add subtle floating data planes for depth
+            const planeGeometry = new THREE.PlaneGeometry(8, 8);
+            const planeMaterial = new THREE.MeshBasicMaterial({
+                color: 0xff6600,
+                transparent: true,
+                opacity: 0.03,
+                side: THREE.DoubleSide
+            });
+            
+            for (let i = 0; i < 5; i++) {
+                const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+                plane.position.set(
+                    (Math.random() - 0.5) * 40,
+                    (Math.random() - 0.5) * 30,
+                    (Math.random() - 0.5) * 40
+                );
+                plane.rotation.x = Math.random() * Math.PI;
+                plane.rotation.y = Math.random() * Math.PI;
+                scene.add(plane);
+            }
+            
+            // Professional camera positioning
+            camera.position.set(0, 0, 40);
+            camera.lookAt(0, 0, 0);
+            
+            // Add subtle ambient movement
+            let time = 0;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                time += 0.01;
+                
+                // Subtle rotation of entire network
+                scene.rotation.y = Math.sin(time * 0.1) * 0.1;
+                
+                // Animate nodes with professional pulsing
+                nodes.forEach((node, index) => {
+                    const pulseScale = 1 + Math.sin(time * node.userData.pulseSpeed + node.userData.pulseOffset) * 0.2;
+                    node.scale.set(pulseScale, pulseScale, pulseScale);
+                    
+                    // Subtle floating motion
+                    node.position.y += Math.sin(time + index) * 0.002;
+                    
+                    // Update opacity based on camera distance
+                    const distance = camera.position.distanceTo(node.position);
+                    node.material.opacity = Math.max(0.3, Math.min(0.9, 30 / distance));
+                });
+                
+                // Animate connection opacity for data flow effect
+                connections.forEach((line, index) => {
+                    line.material.opacity = 0.1 + Math.sin(time * 2 + index) * 0.05;
+                });
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            });
+            
+            // Add subtle mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                
+                camera.position.x = mouseX * 5;
+                camera.position.y = mouseY * 5;
+                camera.lookAt(0, 0, 0);
+            });
+        }
+
+        // Chart Initialization
+        function initCharts() {
+            // Camden Yards Impact Chart
+            const camdenCtx = document.getElementById('camdenChart').getContext('2d');
+            new Chart(camdenCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Old Wall (384-398ft)', 'New Wall (374-376ft)', 'Difference'],
+                    datasets: [{
+                        label: 'Deepest Wall Points (feet)',
+                        data: [398, 376, 22],
+                        backgroundColor: ['#ff3333', '#ff6600', '#00ff66'],
+                        borderColor: ['#ff0000', '#ff3300', '#00cc33'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            labels: { color: '#ffffff' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { color: '#ffffff' },
+                            grid: { color: '#333333' }
+                        },
+                        x: {
+                            ticks: { color: '#ffffff' },
+                            grid: { color: '#333333' }
+                        }
+                    }
+                }
+            });
+
+            // Performance Comparison Chart
+            const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(performanceCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+                    datasets: [{
+                        label: 'Home Runs at Camden Yards',
+                        data: [196, 195, 198, 138, 142, 140, 0],
+                        borderColor: '#ff6600',
+                        backgroundColor: 'rgba(255, 102, 0, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            labels: { color: '#ffffff' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { color: '#ffffff' },
+                            grid: { color: '#333333' }
+                        },
+                        x: {
+                            ticks: { color: '#ffffff' },
+                            grid: { color: '#333333' }
+                        }
+                    }
+                }
+            });
+
+            // Age Value Chart
+            const ageValueCtx = document.getElementById('ageValueChart').getContext('2d');
+            new Chart(ageValueCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Success Rate by Age',
+                        data: [
+                            {x: 17.8, y: 78},
+                            {x: 18.1, y: 74},
+                            {x: 18.4, y: 69},
+                            {x: 18.7, y: 63},
+                            {x: 19.0, y: 58},
+                            {x: 19.3, y: 52}
+                        ],
+                        backgroundColor: '#ff6600',
+                        borderColor: '#ff3300'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            labels: { color: '#ffffff' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            title: { display: true, text: 'Success Rate (%)', color: '#ffffff' },
+                            ticks: { color: '#ffffff' },
+                            grid: { color: '#333333' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Draft Age', color: '#ffffff' },
+                            ticks: { color: '#ffffff' },
+                            grid: { color: '#333333' }
+                        }
+                    }
+                }
+            });
+
+            // Position Scarcity Chart
+            const scarcityCtx = document.getElementById('scarcityChart').getContext('2d');
+            new Chart(scarcityCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Catchers', 'SS/2B', 'CF', 'Pitchers', 'Corner OF', 'Corner IF'],
+                    datasets: [{
+                        data: [12, 18, 15, 35, 10, 10],
+                        backgroundColor: [
+                            '#ff0000', '#ff6600', '#ffaa00', 
+                            '#ffdd00', '#aaff00', '#66ff00'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            labels: { color: '#ffffff' },
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+
+            // Archetype Analysis Chart
+            const archetypeCtx = document.getElementById('archetypeChart').getContext('2d');
+            new Chart(archetypeCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Power', 'Contact', 'Speed', 'Defense', 'Arm', 'IQ'],
+                    datasets: [
+                        {
+                            label: 'Yankees Profile',
+                            data: [9, 6, 5, 6, 7, 7],
+                            borderColor: '#1f77b4',
+                            backgroundColor: 'rgba(31, 119, 180, 0.2)'
+                        },
+                        {
+                            label: 'Orioles Optimal',
+                            data: [7, 8, 8, 9, 8, 9],
+                            borderColor: '#ff6600',
+                            backgroundColor: 'rgba(255, 102, 0, 0.2)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            labels: { color: '#ffffff' }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            ticks: { color: '#ffffff' },
+                            grid: { color: '#333333' },
+                            pointLabels: { color: '#ffffff' }
+                        }
+                    }
+                }
+            });
+
+            // Competitive Advantage Chart
+            const advantageCtx = document.getElementById('advantageChart').getContext('2d');
+            new Chart(advantageCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Yankees', 'Red Sox', 'Rays', 'Blue Jays', 'Orioles'],
+                    datasets: [{
+                        label: 'WAR per $ (Draft)',
+                        data: [0.31, 0.28, 0.45, 0.33, 0.42],
+                        backgroundColor: ['#132448', '#BD3039', '#8FBCE6', '#134A8E', '#DF4601']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            labels: { color: '#ffffff' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { color: '#ffffff' },
+                            grid: { color: '#333333' }
+                        },
+                        x: {
+                            ticks: { color: '#ffffff' },
+                            grid: { color: '#333333' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Dynamic Prospect Cards
+        function generateProspectCards() {
+            const prospects = [
+                {
+                    name: "Marcus Chen",
+                    position: "SS",
+                    school: "Stanford",
+                    age: 20.2,
+                    cfi: 87,
+                    drs: 92,
+                    nss: 78,
+                    champion_readiness: 85,
+                    cognitive_leverage: 91,
+                    nil_trust_score: 82
+                },
+                {
+                    name: "Tyler Rodriguez", 
+                    position: "C",
+                    school: "Vanderbilt",
+                    age: 21.1,
+                    cfi: 91,
+                    drs: 88,
+                    nss: 85,
+                    champion_readiness: 89,
+                    cognitive_leverage: 87,
+                    nil_trust_score: 90
+                },
+                {
+                    name: "Jordan Williams",
+                    position: "CF",
+                    school: "HS - Texas",
+                    age: 18.0,
+                    cfi: 79,
+                    drs: 94,
+                    nss: 72,
+                    champion_readiness: 82,
+                    cognitive_leverage: 88,
+                    nil_trust_score: 75
+                },
+                {
+                    name: "Alex Thompson",
+                    position: "RHP",
+                    school: "Arkansas",
+                    age: 20.8,
+                    cfi: 83,
+                    drs: 87,
+                    nss: 81,
+                    champion_readiness: 86,
+                    cognitive_leverage: 84,
+                    nil_trust_score: 84
+                }
+            ];
+
+            const prospectGrid = document.getElementById('prospectGrid');
+            
+            prospects.forEach(prospect => {
+                const card = document.createElement('div');
+                card.className = 'prospect-card slide-in';
+                
+                card.innerHTML = `
+                    <div class="prospect-name">${prospect.name}</div>
+                    <div style="color: #cccccc; margin-bottom: 1rem;">${prospect.position} • ${prospect.school} • Age ${prospect.age}</div>
+                    
+                    <div class="prospect-details">
+                        <div>
+                            <div class="prospect-metric">
+                                <span class="metric-name">Camden Fit Index</span>
+                                <span class="metric-score">${prospect.cfi}</span>
+                            </div>
+                            <div class="prospect-metric">
+                                <span class="metric-name">Division Readiness</span>
+                                <span class="metric-score">${prospect.drs}</span>
+                            </div>
+                            <div class="prospect-metric">
+                                <span class="metric-name">NIL Signability</span>
+                                <span class="metric-score">${prospect.nss}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="prospect-metric">
+                                <span class="metric-name">Champion Readiness</span>
+                                <span class="metric-score">${prospect.champion_readiness}</span>
+                            </div>
+                            <div class="prospect-metric">
+                                <span class="metric-name">Cognitive Leverage</span>
+                                <span class="metric-score">${prospect.cognitive_leverage}</span>
+                            </div>
+                            <div class="prospect-metric">
+                                <span class="metric-name">NIL Trust Score</span>
+                                <span class="metric-score">${prospect.nil_trust_score}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                prospectGrid.appendChild(card);
+            });
+        }
+
+        // Interactive Functions
+        function updateCamdenAnalysis() {
+            const playerType = document.getElementById('playerTypeFilter').value;
+            const cfiThreshold = document.getElementById('cfiRange').value;
+            document.getElementById('cfiValue').textContent = cfiThreshold + '+';
+            
+            // Update analysis based on filters
+            console.log(`Updating analysis for ${playerType} players with CFI ${cfiThreshold}+`);
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initHeroAnimation();
+            setTimeout(() => {
+                initCharts();
+                generateProspectCards();
+            }, 1000);
+        });
+        
+        // Note: All data based on publicly available information about Camden Yards changes
+        // Wall moves in 9-20 feet, height reduced from 13ft to 6-8ft in sections
+        // 138 home runs lost over 2022-2024 seasons due to wall configuration
+
+        // Range slider update
+        document.getElementById('cfiRange').addEventListener('input', function() {
+            document.getElementById('cfiValue').textContent = this.value + '+';
+        });
+    </script>
+</body>
+</html>

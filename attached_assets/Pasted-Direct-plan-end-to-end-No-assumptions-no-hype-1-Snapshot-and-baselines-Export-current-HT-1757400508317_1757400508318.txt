@@ -1,0 +1,208 @@
+Direct plan, end-to-end. No assumptions, no hype.
+
+## 1) Snapshot and baselines
+
+* Export current HTML/CSS/JS from the Replit URL. Save as `baseline/` in repo.
+* Record metrics before changes:
+
+  * Performance: Lighthouse (mobile+desktop), WebPageTest.
+  * Errors: open DevTools console + Network.
+  * Size: total JS KB, requests, TTFB.
+* Claims inventory: list every numeric or “trusted by” statement on page. Mark each as:
+
+  * **Verified** (has public evidence or internal reproducible proof),
+  * **Unverified** (remove or reword),
+  * **Forward-looking** (qualify as roadmap).
+
+## 2) Content safety and claims
+
+* Remove any unverifiable lines (“trusted by …”, “enterprise partners”) unless linkable to public references or you have permission and proof (press release, case study).
+* Replace absolute claims with measurable, reproducible ones:
+
+  * Keep “sub-100 ms responses” only if your current gateway + page stack demonstrates this in logs or RUM.
+  * For prediction “accuracy” numbers, link to a methods page with dataset, time window, metric definition, and error bars; otherwise remove.
+
+## 3) UX structure upgrades (minimal churn)
+
+**Hero**
+
+* H1: “Real-time sports intelligence for decisions that win.”
+* Sub: “Under-100 ms responses. Predictive scouting, Digital Combine™, NIL valuation. No hype—reproducible metrics.”
+* Proof bar: 3 short bullets with sources (or remove).
+
+**Live Dashboard strip**
+
+* Small inline cards: Health (from your gateway `/healthz`), p95 telemetry, active sessions, ingest QPS.
+
+**Team/Player**
+
+* Sport select (MLB/NBA/NFL) → Team → Player (MLB first).
+* Team card: record, last 5, next game, **EWMA** projection of next-game scoring (transparent method).
+* Player card (MLB): season line (AVG/OBP/SLG/HR/RBI); last-10 sparkline.
+
+**Digital Combine™ demo**
+
+* Upload (or sample) → mechanics score, load balance, timing delta, coaching cue.
+* “Reproduce” tab: show equivalent `curl` hitting *your* gateway, not 3rd-party APIs.
+
+**Pricing**
+
+* 3 tiers with tangible deliverables (athlete count, dashboards, exports, API quotas). Add FAQ + Proof Policy link.
+
+**Compliance strip**
+
+* “SOC 2 Type II · COPPA/FERPA · 99.95% uptime · Reproducible metrics.”
+
+## 4) Stress tests (code + commands you can run in Replit / Claude Code)
+
+**Performance**
+
+* k6 smoke+stress:
+
+  ```bash
+  # smoke
+  k6 run --vus 10 --duration 60s k6/smoke.js
+  # analyze API surfacing on page (read-only GETs)
+  ```
+* Lighthouse CI in headless:
+
+  ```bash
+  npx @lhci/cli autorun --collect.url=$PUBLIC_URL
+  ```
+
+**Accessibility**
+
+* Pa11y:
+
+  ```bash
+  npx pa11y-ci --sitemap $PUBLIC_URL/sitemap.xml
+  ```
+
+**Security**
+
+* Secrets leak scan before every commit:
+
+  ```bash
+  npx trufflehog filesystem --only-verified=false .
+  ```
+* Dependency risk:
+
+  ```bash
+  npm audit --production
+  ```
+
+**Claims verification harness**
+
+* Add `/proof` page that:
+
+  1. fetches current health & p95 from your gateway,
+  2. explains how EWMA projection is computed,
+  3. links to any published validation reports.
+
+## 5) Concrete code changes (low-risk, vanilla)
+
+**index.html**
+Add sections: `#status`, `#dashboard`, `#combine`, improved `#pricing`, `#compliance`.
+
+**app.js** (modules or inline)
+
+* `const BASE = "<your gateway origin>";`
+* `loadSystem()` → GET `/healthz`, `/vision/analytics/system/stats`.
+* Team loaders:
+
+  * MLB: StatsAPI (`/api/v1/teams`, `/api/v1/schedule`, `/people/:id/stats`) with CORS guard.
+  * NBA: BallDontLie (`/teams`, `/games`) for last 10; if CORS blocks, proxy through your gateway.
+  * NFL: ESPN JSON scoreboard, also proxy if needed.
+* Projection:
+
+  ```js
+  function ewma(arr, alpha=0.35){ let m=null; for(const v of arr){ if(v==null) continue; m = m==null ? v : alpha*v+(1-alpha)*m;} return m; }
+  ```
+* Digital Combine demo: run on sample frames; no external calls.
+
+**styles.css**
+
+* Add card grid, pre blocks, compliance strip, responsive breakpoints.
+
+## 6) Replit deployment hardening
+
+* Ensure a **single** `serve` or `start` script (avoid port conflicts). Example:
+
+  ```json
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "start": "node server.js"   // or `python3 -m http.server 8000`
+  }
+  ```
+* If Replit injects a port, bind to `process.env.PORT`.
+* Add a simple allow-list CORS for your gateway (Origin: Replit URL) if needed.
+
+## 7) GitHub repos → concrete Agent tasks for Claude Code / Replit Agent
+
+Create issues and PR checklists in your web repo:
+
+**Issue: Implement Status Bar**
+
+* [ ] JS: `loadSystem()`; show health, p95, sessions, qps
+* [ ] Fallback when gateway unreachable
+* [ ] Unit test: render with mock JSON
+
+**Issue: Dashboard (MLB first)**
+
+* [ ] Team list & schedule (StatsAPI) with CORS or gateway proxy
+* [ ] Record, last-5, next game, EWMA projection
+* [ ] Player season stats + sparkline
+* [ ] Error states (no schedule, off-season)
+
+**Issue: Digital Combine demo**
+
+* [ ] Sample clip + local analysis path
+* [ ] Readable outputs + coaching cue
+
+**Issue: Pricing + Proof Policy**
+
+* [ ] Replace generic copy with quantifiable deliverables
+* [ ] Link to `/proof` methods page
+
+**Issue: Tooling & CI**
+
+* [ ] GitHub Actions: build, Lighthouse CI, Pa11y, `trufflehog`, `npm audit`
+* [ ] Block PR if secrets or P1 accessibility failures
+* [ ] Upload LH/Pa11y artifacts to Actions
+
+**Issue: Content audit**
+
+* [ ] Remove unverifiable claims
+* [ ] Add citations/links for remaining numbers
+* [ ] Add last-updated dates on metrics pages
+
+## 8) Localhost landing (requested check)
+
+For `http://localhost:8080/blaze-intelligence-landing.html`:
+
+* Verify it loads without console errors.
+* Ensure all external calls are proxied through the gateway (no client secrets).
+* Confirm `OPTIONS` responses and CORS headers on the gateway:
+
+  * `Access-Control-Allow-Origin: *` (or your Replit origin)
+  * `Access-Control-Allow-Methods: GET,POST,DELETE,OPTIONS`
+  * `Access-Control-Allow-Headers: content-type, x-dev-mode`
+
+## 9) Acceptance criteria (done = true)
+
+* No console errors on Replit URL.
+* Lighthouse: LCP < 2.5s (mobile), CLS < 0.1, INP < 200 ms.
+* Pa11y: no critical WCAG violations.
+* No unverifiable claims remain; `/proof` page exists.
+* Dashboard renders team + player for MLB with EWMA projection.
+* Digital Combine demo operates without external keys.
+* CI passes: audit, secret scan, Lighthouse, Pa11y.
+
+---
+
+If you want, I can output:
+
+1. A drop-in `index.html`, `app.js`, `styles.css` matching this plan.
+2. A GitHub Actions YAML with Lighthouse/Pa11y/TruffleHog gates.
+3. A k6 script for your public Replit URL.

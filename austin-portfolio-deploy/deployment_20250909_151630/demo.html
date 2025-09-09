@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Demo | Blaze Intelligence - Experience Championship Intelligence</title>
+<meta name="description" content="Interactive demonstration of the Blaze Intelligence Platform. Experience real-time analytics, vision AI, and championship intelligence in action.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="js/enhanced-charts.js" defer></script>
+
+<script src="js/analytics-config.js"></script>
+<script src="js/ab-testing.js" defer></script>
+<script src="js/sentry-config.js"></script>
+</head>
+<body>
+<nav class="bg-black/50 backdrop-blur-lg border-b border-slate-800 px-4 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+<div class="flex items-center gap-6">
+<span class="text-sm text-slate-400">Demo User</span>
+<a href="/contact.html" class="px-4 py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600">
+Get Full Access
+</a>
+</div>
+</div>
+</nav>
+
+<div class="max-w-7xl mx-auto px-4 py-8">
+<div class="grid md:grid-cols-4 gap-4 mb-8">
+<div class="demo-card text-center">
+<div class="text-3xl font-bold text-cyan-400 metric-live">86.6%</div>
+<div class="text-sm text-slate-400">Team Readiness</div>
+<div class="text-xs text-green-400 mt-1">↑ 3.2% from yesterday</div>
+</div>
+<div class="demo-card text-center">
+<div class="text-3xl font-bold text-orange-400 metric-live">2.85x</div>
+<div class="text-sm text-slate-400">Leverage Factor</div>
+<div class="text-xs text-yellow-400 mt-1">High pressure situation</div>
+</div>
+<div class="demo-card text-center">
+<div class="text-3xl font-bold text-green-400">73.2%</div>
+<div class="text-sm text-slate-400">Win Probability</div>
+<div class="text-xs text-green-400 mt-1">vs. Cubs tonight</div>
+</div>
+<div class="demo-card text-center">
+<div class="text-3xl font-bold text-red-400">+12</div>
+<div class="text-sm text-slate-400">Momentum Index</div>
+<div class="text-xs text-slate-500 mt-1">Last 10 games</div>
+</div>
+</div>
+
+<div class="demo-card">
+<h2 class="text-xl font-bold text-cyan-400 mb-4">📊 Lineup Optimizer</h2>
+<div class="space-y-3">
+<div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
+<span>1. Nolan Arenado (3B)</span>
+<span class="text-green-400">OPS: .887</span>
+</div>
+<div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
+<span>2. Paul Goldschmidt (1B)</span>
+<span class="text-green-400">OPS: .748</span>
+</div>
+<div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
+<span>3. Nolan Gorman (2B)</span>
+<span class="text-yellow-400">OPS: .756</span>
+</div>
+<div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
+<span>4. Tyler O'Neill (LF)</span>
+<span class="text-yellow-400">OPS: .798</span>
+</div>
+</div>
+<button class="mt-4 w-full px-4 py-2 bg-cyan-500 text-white font-semibold rounded hover:bg-cyan-600">
+Optimize Lineup →
+</button>
+</div>
+
+<div class="demo-card mb-8">
+<h2 class="text-xl font-bold text-cyan-400 mb-4">📈 Season Performance Trend</h2>
+<div id="performance-chart" style="height: 300px; position: relative;">
+<div class="demo-card mb-8">
+<h2 class="text-xl font-bold text-orange-400 mb-4">🎯 Demo vs Full Access</h2>
+<div class="grid md:grid-cols-2 gap-6">
+<div>
+<h3 class="font-semibold text-green-400 mb-3">✅ Available in Demo</h3>
+<ul class="space-y-2 text-sm">
+<li>• Basic lineup optimization</li>
+<li>• Team readiness metrics</li>
+<li>• Win probability calculator</li>
+<li>• Historical performance data</li>
+<li>• Basic player statistics</li>
+</ul>
+</div>
+<div>
+<h3 class="font-semibold text-cyan-400 mb-3">🔒 Full Access Features</h3>
+<ul class="space-y-2 text-sm">
+<li>• Real-time injury risk AI</li>
+<li>• Advanced biomechanical analysis</li>
+<li>• Micro-expression detection</li>
+<li>• Custom alerts & notifications</li>
+<li>• API access for integration</li>
+<li>• Unlimited historical data</li>
+<li>• Export reports & insights</li>
+<li>• Priority support</li>
+</ul>
+</div>
+</div>
+</div>
+

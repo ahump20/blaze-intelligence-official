@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 Chaos: Texas Falls, Florida State Stuns Alabama | Blaze Intelligence</title>
+<meta name="description" content="Breaking down college football's opening weekend: Ohio State tops Texas 14-7, FSU shocks Alabama 31-17, plus all Week 1 upsets and playoff implications.">
+<meta name="keywords" content="college football 2025, Texas Longhorns, Ohio State Buckeyes, Arch Manning, Alabama upset, FSU Seminoles, Week 1 results">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<canvas id="hero-canvas"></canvas>
+
+<div class="hero-overlay">
+<div class="hero-content">
+<div class="hero-badge">Week 1 Analysis</div>
+<h1 class="hero-title">Chaos Reigns Supreme</h1>
+<p class="hero-subtitle">College football's 2025 opening weekend delivered shocking upsets, defensive battles, and championship implications</p>
+<div class="hero-stats">
+<div class="hero-stat">
+<span class="hero-stat-number">3</span>
+<span class="hero-stat-label">Top-10 Upsets</span>
+</div>
+<div class="hero-stat">
+<span class="hero-stat-number">14-7</span>
+<span class="hero-stat-label">OSU Over Texas</span>
+</div>
+<div class="hero-stat">
+<span class="hero-stat-number">31-17</span>
+<span class="hero-stat-label">FSU Stuns Bama</span>
+</div>
+</div>
+</div>
+<div class="scroll-indicator">
+<svg viewBox="0 0 24 24">
+<path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+</svg>
+</div>
+</div>
+
+<div class="cta-section">
+<h2>Want Deeper College Football Analytics?</h2>
+<p>Get access to our proprietary performance metrics, predictive models, and real-time insights that give you the edge in understanding college football.</p>
+<a href="demo.html" class="cta-button">Request Demo</a>
+</div>
+</article>
+</div>
+
+<script>
+// Three.js Scene Setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ 
+canvas: document.getElementById('hero-canvas'),
+antialias: true,
+alpha: true 
+});
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+
+// Create Football Field
+const fieldGeometry = new THREE.PlaneGeometry(100, 50);
+const fieldMaterial = new THREE.MeshBasicMaterial({ 
+color: 0x00AA00,
+wireframe: true,
+opacity: 0.3,
+transparent: true
+});
+const field = new THREE.Mesh(fieldGeometry, fieldMaterial);
+field.rotation.x = -Math.PI / 2;
+scene.add(field);
+
+// Create Floating Particles
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 2000;
+const posArray = new Float32Array(particlesCount * 3);
+
+for(let i = 0; i < particlesCount * 3; i++) {
+posArray[i] = (Math.random() - 0.5) * 100;
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+const particlesMaterial = new THREE.PointsMaterial({
+size: 0.3,
+color: 0xFFB81C,
+transparent: true,
+opacity: 0.6,
+blending: THREE.AdditiveBlending
+});
+
+const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particlesMesh);
+
+// Create Goal Posts
+function createGoalPost(x) {
+const group = new THREE.Group();
+
+// Uprights
+const postGeometry = new THREE.CylinderGeometry(0.2, 0.2, 10);
+const postMaterial = new THREE.MeshBasicMaterial({ color: 0xFFB81C });
+
+const leftPost = new THREE.Mesh(postGeometry, postMaterial);
+leftPost.position.set(-5, 5, 0);
+group.add(leftPost);
+
+const rightPost = new THREE.Mesh(postGeometry, postMaterial);
+rightPost.position.set(5, 5, 0);
+group.add(rightPost);
+
+// Crossbar
+const crossbarGeometry = new THREE.CylinderGeometry(0.2, 0.2, 10);
+const crossbar = new THREE.Mesh(crossbarGeometry, postMaterial);
+crossbar.rotation.z = Math.PI / 2;
+crossbar.position.y = 10;
+group.add(crossbar);
+
+group.position.x = x;
+return group;
+}
+
+const goalPost1 = createGoalPost(-40);
+const goalPost2 = createGoalPost(40);
+scene.add(goalPost1);
+scene.add(goalPost2);
+
+// Create Dynamic Lines
+const lineGeometry = new THREE.BufferGeometry();
+const linePositions = [];
+const lineCount = 20;
+
+for(let i = 0; i < lineCount; i++) {
+const x = (Math.random() - 0.5) * 80;
+const y = Math.random() * 20;
+const z = (Math.random() - 0.5) * 40;
+
+linePositions.push(x, y, z);
+linePositions.push(x + (Math.random() - 0.5) * 10, y + Math.random() * 5, z + (Math.random() - 0.5) * 10);
+}
+
+lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+const lineMaterial = new THREE.LineBasicMaterial({ 
+color: 0xBF5700,
+opacity: 0.5,
+transparent: true
+});
+const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+scene.add(lines);
+
+// Camera Position
+camera.position.set(0, 20, 40);
+camera.lookAt(0, 0, 0);
+
+// Mouse Movement
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener('mousemove', (event) => {
+mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+});
+
+// Animation Loop
+function animate() {
+requestAnimationFrame(animate);
+
+// Rotate particles
+particlesMesh.rotation.y += 0.001;
+particlesMesh.rotation.x += 0.0005;
+
+// Animate goal posts
+goalPost1.rotation.y = Math.sin(Date.now() * 0.001) * 0.1;
+goalPost2.rotation.y = -Math.sin(Date.now() * 0.001) * 0.1;
+
+// Animate lines
+lines.rotation.y += 0.002;
+
+// Camera movement based on mouse
+camera.position.x += (mouseX * 10 - camera.position.x) * 0.05;
+camera.position.y += (mouseY * 10 + 20 - camera.position.y) * 0.05;
+camera.lookAt(0, 0, 0);
+
+renderer.render(scene, camera);
+}
+
+animate();
+
+// Handle Resize
+window.addEventListener('resize', () => {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Navbar Scroll Effect
+window.addEventListener('scroll', () => {
+const navbar = document.getElementById('navbar');
+if (window.scrollY > 100) {
+navbar.classList.add('scrolled');
+} else {
+navbar.classList.remove('scrolled');
+}
+});
+</script>
+

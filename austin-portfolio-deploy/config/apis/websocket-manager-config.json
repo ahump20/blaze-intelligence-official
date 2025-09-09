@@ -1,0 +1,14 @@
+{
+  "type": "websocket",
+  "capabilities": [
+    "real_time",
+    "subscriptions",
+    "reconnection"
+  ],
+  "configuration": {
+    "reconnect_attempts": 5,
+    "reconnect_delay": 2000,
+    "ping_interval": 30000,
+    "pong_timeout": 5000
+  }
+}

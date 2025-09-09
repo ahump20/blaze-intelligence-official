@@ -1,0 +1,9 @@
+:root{
+--blaze-orange:#FF6B35;
+--blaze-dark:#0A0E27;
+--blaze-accent:#1A659E;
+--glass-bg:rgba(255,255,255,.06);
+}
+*{box-sizing:border-box}
+a{color:inherit}
+.glass{background:var(--glass-bg);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:16px}

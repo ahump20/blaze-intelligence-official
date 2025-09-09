@@ -1,0 +1,327 @@
+/*
+BLAZE INTELLIGENCE CHAMPIONSHIP BRAND SYSTEM
+Sophisticated Texas Heritage meets Championship Legacy
+*/
+:root {
+--blaze-burnt-orange: #BF5700;
+--blaze-burnt-orange-light: #CC6A1A;
+--blaze-burnt-orange-dark: #A34700;
+--blaze-cardinals-blue: #87CEEB;
+--blaze-cardinals-blue-light: #B0D9F7;
+--blaze-cardinals-blue-dark: #5EACD8;
+--blaze-vancouver-teal: #006A6B;
+--blaze-vancouver-teal-light: #1A7D7F;
+--blaze-vancouver-teal-dark: #004D4E;
+--blaze-titans-columbia: #4B92DB;
+--blaze-titans-columbia-light: #6FA5E0;
+--blaze-titans-columbia-dark: #2C7FD6;
+--blaze-oil-black: #1A1A1A;
+--blaze-platinum: #E8E8E8;
+--blaze-champagne: #F7F3E9;
+--blaze-charcoal: #333333;
+--blaze-pearl: #FAFAFA;
+--blaze-sunset-gradient: linear-gradient(135deg, var(--blaze-burnt-orange) 0%, var(--blaze-titans-columbia) 100%);
+--blaze-championship-gradient: linear-gradient(135deg, var(--blaze-cardinals-blue) 0%, var(--blaze-vancouver-teal) 100%);
+--blaze-heritage-gradient: linear-gradient(135deg, var(--blaze-burnt-orange-dark) 0%, var(--blaze-oil-black) 100%);
+--blaze-font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+--blaze-font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+--blaze-font-mono: 'SF Mono', 'Monaco', 'Consolas', monospace;
+--blaze-space-xs: 0.25rem;
+--blaze-space-sm: 0.5rem;
+--blaze-space-md: 1rem;
+--blaze-space-lg: 1.5rem;
+--blaze-space-xl: 2rem;
+--blaze-space-2xl: 3rem;
+--blaze-space-3xl: 4rem;
+--blaze-radius-sm: 0.25rem;
+--blaze-radius-md: 0.5rem;
+--blaze-radius-lg: 1rem;
+--blaze-radius-xl: 2rem;
+--blaze-radius-pill: 50rem;
+--blaze-shadow-sm: 0 1px 2px rgba(26, 26, 26, 0.05);
+--blaze-shadow-md: 0 4px 6px rgba(26, 26, 26, 0.1);
+--blaze-shadow-lg: 0 10px 15px rgba(26, 26, 26, 0.1);
+--blaze-shadow-xl: 0 20px 25px rgba(26, 26, 26, 0.15);
+--blaze-shadow-championship: 0 0 40px rgba(191, 87, 0, 0.3);
+}
+.blaze-brand-primary {
+background: var(--blaze-burnt-orange);
+color: var(--blaze-pearl);
+}
+.blaze-brand-secondary {
+background: var(--blaze-cardinals-blue);
+color: var(--blaze-oil-black);
+}
+.blaze-brand-accent {
+background: var(--blaze-vancouver-teal);
+color: var(--blaze-pearl);
+}
+.blaze-championship-card {
+background: var(--blaze-pearl);
+border: 2px solid var(--blaze-burnt-orange);
+border-radius: var(--blaze-radius-lg);
+box-shadow: var(--blaze-shadow-championship);
+padding: var(--blaze-space-xl);
+position: relative;
+overflow: hidden;
+}
+.blaze-championship-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 4px;
+background: var(--blaze-sunset-gradient);
+}
+.blaze-executive-header {
+background: var(--blaze-heritage-gradient);
+color: var(--blaze-pearl);
+padding: var(--blaze-space-2xl) var(--blaze-space-xl);
+border-radius: var(--blaze-radius-lg);
+position: relative;
+}
+.blaze-executive-header::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="50" cy="50" r="0.5" fill="%23ffffff" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+pointer-events: none;
+}
+.blaze-metric-card {
+background: var(--blaze-pearl);
+border: 1px solid var(--blaze-platinum);
+border-radius: var(--blaze-radius-md);
+padding: var(--blaze-space-lg);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+}
+.blaze-metric-card:hover {
+transform: translateY(-2px);
+box-shadow: var(--blaze-shadow-lg);
+border-color: var(--blaze-burnt-orange);
+}
+.blaze-metric-value {
+font-size: 2.5rem;
+font-weight: 900;
+font-family: var(--blaze-font-display);
+background: var(--blaze-sunset-gradient);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+line-height: 1.1;
+}
+.blaze-metric-label {
+font-size: 0.875rem;
+color: var(--blaze-charcoal);
+text-transform: uppercase;
+letter-spacing: 0.05em;
+font-weight: 600;
+margin-top: var(--blaze-space-xs);
+}
+.blaze-cta-primary {
+background: var(--blaze-sunset-gradient);
+color: var(--blaze-pearl);
+padding: var(--blaze-space-md) var(--blaze-space-xl);
+border-radius: var(--blaze-radius-pill);
+border: none;
+font-weight: 700;
+font-size: 1.1rem;
+cursor: pointer;
+transition: all 0.3s ease;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+box-shadow: var(--blaze-shadow-md);
+}
+.blaze-cta-primary:hover {
+transform: translateY(-1px) scale(1.02);
+box-shadow: var(--blaze-shadow-xl);
+}
+.blaze-cta-secondary {
+background: transparent;
+color: var(--blaze-burnt-orange);
+padding: var(--blaze-space-md) var(--blaze-space-xl);
+border: 2px solid var(--blaze-burnt-orange);
+border-radius: var(--blaze-radius-pill);
+font-weight: 700;
+font-size: 1.1rem;
+cursor: pointer;
+transition: all 0.3s ease;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+.blaze-cta-secondary:hover {
+background: var(--blaze-burnt-orange);
+color: var(--blaze-pearl);
+transform: translateY(-1px);
+}
+.blaze-heritage-badge {
+display: inline-flex;
+align-items: center;
+gap: var(--blaze-space-sm);
+background: var(--blaze-championship-gradient);
+color: var(--blaze-pearl);
+padding: var(--blaze-space-sm) var(--blaze-space-md);
+border-radius: var(--blaze-radius-pill);
+font-size: 0.875rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+}
+.blaze-data-visualization {
+background: var(--blaze-champagne);
+border: 1px solid var(--blaze-platinum);
+border-radius: var(--blaze-radius-lg);
+padding: var(--blaze-space-xl);
+position: relative;
+overflow: hidden;
+}
+.blaze-data-visualization::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 2px;
+background: var(--blaze-championship-gradient);
+}
+.blaze-h1 {
+font-family: var(--blaze-font-display);
+font-size: clamp(2.5rem, 5vw, 4rem);
+font-weight: 900;
+line-height: 1.1;
+background: var(--blaze-heritage-gradient);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+.blaze-h2 {
+font-family: var(--blaze-font-display);
+font-size: clamp(2rem, 4vw, 3rem);
+font-weight: 800;
+line-height: 1.2;
+color: var(--blaze-burnt-orange);
+}
+.blaze-h3 {
+font-family: var(--blaze-font-display);
+font-size: clamp(1.5rem, 3vw, 2rem);
+font-weight: 700;
+line-height: 1.3;
+color: var(--blaze-vancouver-teal);
+}
+.blaze-body {
+font-family: var(--blaze-font-primary);
+font-size: 1rem;
+line-height: 1.6;
+color: var(--blaze-charcoal);
+}
+.blaze-caption {
+font-family: var(--blaze-font-primary);
+font-size: 0.875rem;
+line-height: 1.5;
+color: var(--blaze-charcoal);
+opacity: 0.8;
+}
+.blaze-container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 var(--blaze-space-md);
+}
+.blaze-grid {
+display: grid;
+gap: var(--blaze-space-lg);
+}
+.blaze-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.blaze-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.blaze-grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 768px) {
+.blaze-grid-2,
+.blaze-grid-3,
+.blaze-grid-4 {
+grid-template-columns: 1fr;
+}
+}
+@keyframes blaze-fade-up {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+@keyframes blaze-scale-in {
+from {
+opacity: 0;
+transform: scale(0.9);
+}
+to {
+opacity: 1;
+transform: scale(1);
+}
+}
+.blaze-animate-fade-up {
+animation: blaze-fade-up 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.blaze-animate-scale-in {
+animation: blaze-scale-in 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.blaze-executive-dashboard {
+background: var(--blaze-oil-black);
+color: var(--blaze-pearl);
+min-height: 100vh;
+position: relative;
+}
+.blaze-executive-dashboard::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background:
+radial-gradient(circle at 20% 20%, rgba(191, 87, 0, 0.1) 0%, transparent 50%),
+radial-gradient(circle at 80% 80%, rgba(135, 206, 235, 0.1) 0%, transparent 50%),
+radial-gradient(circle at 40% 60%, rgba(0, 106, 107, 0.1) 0%, transparent 50%);
+pointer-events: none;
+}
+.blaze-war-room-interface {
+background: rgba(26, 26, 26, 0.95);
+border: 2px solid var(--blaze-burnt-orange);
+border-radius: var(--blaze-radius-xl);
+backdrop-filter: blur(20px);
+box-shadow: var(--blaze-shadow-championship);
+position: relative;
+z-index: 10;
+}
+.blaze-brand-valid {
+--primary-check: var(--blaze-burnt-orange);
+--secondary-check: var(--blaze-cardinals-blue);
+--accent-check: var(--blaze-vancouver-teal);
+}
+@media screen {
+.blaze-brand-valid::before {
+content: "✓ BLAZE INTELLIGENCE CHAMPIONSHIP BRAND SYSTEM LOADED";
+position: fixed;
+bottom: 10px;
+right: 10px;
+background: var(--blaze-burnt-orange);
+color: var(--blaze-pearl);
+padding: 4px 8px;
+border-radius: var(--blaze-radius-sm);
+font-size: 0.75rem;
+font-weight: 600;
+z-index: 9999;
+opacity: 0;
+animation: blaze-brand-loaded 3s ease-in-out;
+}
+}
+@keyframes blaze-brand-loaded {
+0%, 90% { opacity: 0; }
+10%, 80% { opacity: 1; }
+100% { opacity: 0; }
+}

@@ -1,0 +1,150 @@
+{
+  "name": "blaze-vision-ai",
+  "version": "2.0.0",
+  "description": "Blaze Intelligence - Elite sports analytics platform with real-time data and predictive modeling",
+  "private": false,
+  "type": "module",
+  "main": "api/blaze-api.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:api": "wrangler dev --local",
+    "dev:remote": "wrangler dev",
+    "build": "turbo run build",
+    "build:production": "node build.js && npm run build:assets", 
+    "build:assets": "cp -r assets/* blaze-intelligence-production/",
+    "test": "turbo run test",
+    "test:api": "vitest run api/",
+    "test:coverage": "vitest --coverage",
+    "lint": "turbo run lint",
+    "lint:api": "eslint api/ --ext .js",
+    "lint:fix": "eslint api/ --ext .js --fix",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean",
+    "deploy": "npm run build:production && wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy --env production",
+    "deploy:pages": "wrangler pages deploy ./blaze-intelligence-production --project-name=blaze-intelligence",
+    "start": "python3 -m http.server 8080",
+    "preview": "cd blaze-intelligence-production && python3 -m http.server 3000",
+    "api:health": "curl -X GET http://localhost:8787/api/health",
+    "setup:cloudflare": "npm run setup:kv && npm run setup:r2 && npm run setup:d1",
+    "setup:kv": "wrangler kv:namespace create ANALYTICS_CACHE && wrangler kv:namespace create USER_DATA && wrangler kv:namespace create RATE_LIMITING",
+    "setup:r2": "wrangler r2 bucket create blaze-sports-data && wrangler r2 bucket create blaze-media-assets",
+    "setup:d1": "wrangler d1 create blaze-analytics && wrangler d1 execute blaze-analytics --file=./sql/schema.sql",
+    "backup": "node scripts/backup.js",
+    "migrate": "wrangler d1 migrations apply blaze-analytics",
+    "tunnel": "wrangler dev --local --port 8787 --host 0.0.0.0",
+    "logs": "wrangler tail",
+    "analytics": "wrangler analytics",
+    "security:scan": "npm audit && node scripts/security-scan.js",
+    "format": "prettier --write .",
+    "update:deps": "npm update && turbo run update"
+  },
+  "dependencies": {
+    "itty-router": "^4.0.0",
+    "@cloudflare/workers-types": "^4.20240129.0",
+    "zod": "^3.22.4",
+    "date-fns": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "turbo": "latest",
+    "tsup": "^7.0.0",
+    "vitest": "^0.34.0",
+    "wrangler": "^3.28.2",
+    "@vitest/ui": "^1.2.0",
+    "c8": "^9.0.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.4",
+    "supertest": "^6.3.4"
+  },
+  "keywords": [
+    "sports analytics",
+    "machine learning",
+    "real-time data",
+    "predictive modeling",
+    "baseball analytics",
+    "football analytics",
+    "basketball analytics",
+    "cloudflare workers",
+    "sports intelligence",
+    "blaze intelligence"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/austinhumphrey/blaze-vision-ai.git"
+  },
+  "author": {
+    "name": "Austin Humphrey",
+    "email": "ahump20@outlook.com",
+    "url": "https://blaze-intelligence.com"
+  },
+  "license": "MIT",
+  "homepage": "https://blaze-intelligence.com",
+  "bugs": {
+    "url": "https://github.com/austinhumphrey/blaze-vision-ai/issues",
+    "email": "ahump20@outlook.com"
+  },
+  "config": {
+    "deployment": {
+      "region": "auto",
+      "minify": true,
+      "sourcemap": true
+    },
+    "analytics": {
+      "enabled": true,
+      "events": ["page_view", "api_call", "error", "contact_form", "roi_calculation"]
+    },
+    "security": {
+      "cors_origins": ["https://blaze-intelligence.com", "https://www.blaze-intelligence.com"],
+      "rate_limit": {
+        "requests_per_minute": 100,
+        "burst_capacity": 200
+      }
+    }
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "printWidth": 100
+  },
+  "eslintConfig": {
+    "extends": ["eslint:recommended", "prettier"],
+    "env": {
+      "es2022": true,
+      "node": true,
+      "worker": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2022,
+      "sourceType": "module"
+    },
+    "rules": {
+      "no-console": "warn",
+      "no-unused-vars": "error",
+      "prefer-const": "error"
+    }
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://blaze-intelligence.com/support"
+  }
+}

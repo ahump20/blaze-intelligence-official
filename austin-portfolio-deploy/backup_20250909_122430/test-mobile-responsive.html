@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Mobile Responsiveness Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #000; 
+            color: #fff; 
+            margin: 0;
+            padding: 20px; 
+        }
+        .test-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        .viewport-info {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .breakpoint-test {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .test-item {
+            background: #333;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .mobile-hidden {
+            display: block;
+        }
+        .mobile-visible {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .mobile-hidden {
+                display: none;
+            }
+            .mobile-visible {
+                display: block;
+            }
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .iframe-container {
+            width: 100%;
+            border: 1px solid #444;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .iframe-controls {
+            background: #222;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #BF5700;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #9B4500;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔥 Blaze Intelligence - Mobile Responsiveness Test</h1>
+        
+        <div class="viewport-info">
+            <h2>Current Viewport</h2>
+            <div>Width: <span id="viewport-width"></span>px</div>
+            <div>Height: <span id="viewport-height"></span>px</div>
+            <div>Device Pixel Ratio: <span id="device-ratio"></span></div>
+        </div>
+        
+        <div class="breakpoint-test">
+            <h2>Breakpoint Tests</h2>
+            <div class="test-grid">
+                <div class="test-item mobile-hidden">
+                    <strong>Desktop View</strong><br>
+                    This should be hidden on mobile
+                </div>
+                <div class="test-item mobile-visible">
+                    <strong>Mobile View</strong><br>
+                    This should only show on mobile
+                </div>
+                <div class="test-item">
+                    <strong>Grid Layout</strong><br>
+                    Should stack on mobile
+                </div>
+                <div class="test-item">
+                    <strong>Responsive Grid</strong><br>
+                    Auto-fit behavior test
+                </div>
+            </div>
+        </div>
+        
+        <div class="breakpoint-test">
+            <h2>Live Site Testing</h2>
+            <div class="iframe-controls">
+                <button onclick="resizeIframe(375, 667)">iPhone SE</button>
+                <button onclick="resizeIframe(390, 844)">iPhone 12</button>
+                <button onclick="resizeIframe(768, 1024)">iPad</button>
+                <button onclick="resizeIframe(1024, 768)">iPad Landscape</button>
+                <button onclick="resizeIframe(1200, 800)">Desktop</button>
+                <button onclick="resizeIframe('100%', 600)">Full Width</button>
+            </div>
+            <div class="iframe-container">
+                <iframe id="site-iframe" src="blaze-intelligence-ultimate-enhanced.html"></iframe>
+            </div>
+        </div>
+        
+        <div class="breakpoint-test">
+            <h2>Touch & Mobile Features Test</h2>
+            <div id="touch-tests"></div>
+        </div>
+    </div>
+
+    <script>
+        function updateViewportInfo() {
+            document.getElementById('viewport-width').textContent = window.innerWidth;
+            document.getElementById('viewport-height').textContent = window.innerHeight;
+            document.getElementById('device-ratio').textContent = window.devicePixelRatio;
+        }
+        
+        function resizeIframe(width, height) {
+            const iframe = document.getElementById('site-iframe');
+            iframe.style.width = typeof width === 'number' ? width + 'px' : width;
+            iframe.style.height = typeof height === 'number' ? height + 'px' : height;
+        }
+        
+        function testTouchFeatures() {
+            const touchTestsEl = document.getElementById('touch-tests');
+            let tests = [];
+            
+            // Test touch support
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                tests.push('✅ Touch events supported');
+            } else {
+                tests.push('❌ Touch events not supported');
+            }
+            
+            // Test orientation API
+            if ('orientation' in window) {
+                tests.push(`✅ Orientation: ${window.orientation}°`);
+            } else {
+                tests.push('❌ Orientation API not available');
+            }
+            
+            // Test media queries
+            if (window.matchMedia) {
+                const mobileQuery = window.matchMedia('(max-width: 768px)');
+                tests.push(`✅ Mobile breakpoint: ${mobileQuery.matches ? 'Active' : 'Inactive'}`);
+                
+                const tabletQuery = window.matchMedia('(max-width: 1024px)');
+                tests.push(`✅ Tablet breakpoint: ${tabletQuery.matches ? 'Active' : 'Inactive'}`);
+            }
+            
+            // Test user agent
+            const isMobile = /iPhone|iPad|iPod|Android|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            tests.push(`📱 Mobile device detected: ${isMobile ? 'Yes' : 'No'}`);
+            
+            touchTestsEl.innerHTML = tests.map(test => `<div style="margin: 5px 0;">${test}</div>`).join('');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateViewportInfo();
+            testTouchFeatures();
+        });
+        
+        // Update on resize
+        window.addEventListener('resize', () => {
+            updateViewportInfo();
+            testTouchFeatures();
+        });
+        
+        // Update on orientation change
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                updateViewportInfo();
+                testTouchFeatures();
+            }, 100);
+        });
+    </script>
+</body>
+</html>

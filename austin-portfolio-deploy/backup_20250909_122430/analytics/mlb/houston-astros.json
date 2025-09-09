@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-28T07:48:54.479Z",
+  "team": "Houston Astros",
+  "league": "MLB",
+  "division": "AL West",
+  "season": "2025",
+  "market_size": "large",
+  "readiness": {
+    "overall": 83.8,
+    "offense": 81.1,
+    "defense": 82.9,
+    "pitching": 81.9,
+    "baserunning": 83.9
+  },
+  "leverage": {
+    "current": 2.76,
+    "trend": "decreasing",
+    "market_factors": [
+      {
+        "type": "regional_following",
+        "impact": 0.6
+      },
+      {
+        "type": "local_partnerships",
+        "impact": 0.5
+      },
+      {
+        "type": "media_coverage",
+        "impact": 0.4
+      }
+    ]
+  },
+  "performance_indicators": {
+    "wins_above_replacement": 30.8,
+    "run_differential": 21,
+    "pythagorean_wins": 84,
+    "strength_of_schedule": 0.534
+  },
+  "advanced_metrics": {
+    "offensive_war": 34.9,
+    "defensive_war": 20.8,
+    "pitching_war": 23.3,
+    "team_chemistry": 88
+  },
+  "metrics_count": 25,
+  "data_quality": {
+    "completeness": 95.59370537339824,
+    "accuracy": 96.76773763906807,
+    "freshness": 97.04928497504262
+  }
+}

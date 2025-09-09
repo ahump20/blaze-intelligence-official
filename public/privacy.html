@@ -1,0 +1,150 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy - Blaze Intelligence</title>
+<link rel="stylesheet" href="/brand.css"><link rel="stylesheet" href="/brand-components.css">
+<meta name="description" content="Blaze Intelligence privacy policy and data protection">
+<style>
+.legal-container{max-width:800px;margin:80px auto;padding:0 20px}
+.legal-header{text-align:center;margin-bottom:48px}
+.legal-title{font-size:48px;background:linear-gradient(135deg,#E5E7EB,#BF5700);
+             -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.legal-content{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px}
+.legal-section{margin-bottom:32px}
+.legal-h2{color:var(--ink);font-size:24px;margin-bottom:16px;font-weight:700}
+.legal-h3{color:var(--ink);font-size:18px;margin-bottom:12px;font-weight:600}
+.legal-text{color:var(--muted);line-height:1.8;margin-bottom:16px}
+.legal-list{color:var(--muted);line-height:1.8;margin-left:24px;margin-bottom:16px}
+.legal-list li{margin-bottom:8px}
+.update-date{color:var(--accent);font-weight:600}
+</style>
+</head><body>
+<div id="header"></div>
+
+<div class="legal-container">
+  <div class="legal-header">
+    <h1 class="legal-title">Privacy Policy</h1>
+    <p class="muted">Last updated: <span class="update-date">September 2025</span></p>
+  </div>
+  
+  <div class="legal-content">
+    <div class="legal-section">
+      <h2 class="legal-h2">1. Information We Collect</h2>
+      <p class="legal-text">
+        Blaze Intelligence collects information to provide and improve our sports analytics services:
+      </p>
+      <ul class="legal-list">
+        <li><strong>Account Information:</strong> Name, email, organization, phone number</li>
+        <li><strong>Performance Data:</strong> Athletic statistics, game metrics, training data</li>
+        <li><strong>Biometric Data:</strong> With explicit consent, biomechanical analysis data</li>
+        <li><strong>Usage Data:</strong> Platform interactions, feature usage, preferences</li>
+        <li><strong>Payment Information:</strong> Processed securely through Stripe</li>
+      </ul>
+    </div>
+    
+    <div class="legal-section">
+      <h2 class="legal-h2">2. How We Use Information</h2>
+      <p class="legal-text">We use collected information to:</p>
+      <ul class="legal-list">
+        <li>Provide real-time analytics and predictions</li>
+        <li>Generate NIL valuations and recommendations</li>
+        <li>Improve our algorithms and services</li>
+        <li>Communicate important updates and insights</li>
+        <li>Ensure platform security and prevent fraud</li>
+      </ul>
+    </div>
+    
+    <div class="legal-section">
+      <h2 class="legal-h2">3. Data Protection</h2>
+      <p class="legal-text">
+        We implement industry-standard security measures including:
+      </p>
+      <ul class="legal-list">
+        <li>256-bit SSL encryption for all data transmission</li>
+        <li>Encrypted data storage with access controls</li>
+        <li>Regular security audits and penetration testing</li>
+        <li>Strict employee access policies</li>
+        <li>GDPR and CCPA compliance frameworks</li>
+      </ul>
+    </div>
+    
+    <div class="legal-section">
+      <h2 class="legal-h2">4. Biometric Data Consent</h2>
+      <p class="legal-text">
+        For Digital Combine™ and biomechanical analysis features:
+      </p>
+      <ul class="legal-list">
+        <li>We require explicit written consent before processing</li>
+        <li>Data is used solely for performance analysis</li>
+        <li>You may request deletion at any time</li>
+        <li>We never sell biometric data to third parties</li>
+      </ul>
+    </div>
+    
+    <div class="legal-section">
+      <h2 class="legal-h2">5. NIL Rights Protection</h2>
+      <p class="legal-text">
+        We respect and protect Name, Image, and Likeness rights:
+      </p>
+      <ul class="legal-list">
+        <li>NIL valuations are confidential unless you choose to share</li>
+        <li>We comply with all NCAA and state NIL regulations</li>
+        <li>Athletes maintain full control over their NIL data</li>
+        <li>Partnership recommendations are suggestions only</li>
+      </ul>
+    </div>
+    
+    <div class="legal-section">
+      <h2 class="legal-h2">6. Data Sharing</h2>
+      <p class="legal-text">
+        We do not sell your personal information. We may share data with:
+      </p>
+      <ul class="legal-list">
+        <li>Service providers (hosting, analytics) under strict agreements</li>
+        <li>Legal authorities when required by law</li>
+        <li>Your organization (for team accounts)</li>
+        <li>Third parties with your explicit consent</li>
+      </ul>
+    </div>
+    
+    <div class="legal-section">
+      <h2 class="legal-h2">7. Your Rights</h2>
+      <p class="legal-text">You have the right to:</p>
+      <ul class="legal-list">
+        <li>Access your personal data</li>
+        <li>Correct inaccurate information</li>
+        <li>Request data deletion</li>
+        <li>Export your data</li>
+        <li>Opt-out of marketing communications</li>
+        <li>Withdraw consent for data processing</li>
+      </ul>
+    </div>
+    
+    <div class="legal-section">
+      <h2 class="legal-h2">8. Contact Us</h2>
+      <p class="legal-text">
+        For privacy concerns or data requests, contact our Data Protection Officer:
+      </p>
+      <p class="legal-text">
+        Email: privacy@blazeintelligence.com<br>
+        Phone: (512) 555-DATA<br>
+        Mail: 1000 Innovation Drive, Austin, TX 78701
+      </p>
+    </div>
+  </div>
+</div>
+
+<div id="footer"></div>
+
+<script type="module">
+  const loadPartial = async (id, path)=>{ 
+    try {
+      const html = await fetch(path).then(r=>r.text()); 
+      document.querySelector(id).innerHTML = html; 
+    } catch(e) {
+      console.warn('Failed to load partial:', path);
+    }
+  };
+  await loadPartial('#header','/partials/header.html');
+  await loadPartial('#footer','/partials/footer.html');
+</script>
+</body></html>

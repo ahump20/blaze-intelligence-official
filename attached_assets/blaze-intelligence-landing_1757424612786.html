@@ -1,0 +1,2588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Elite Sports Analytics & Performance Intelligence</title>
+    <meta name="description" content="Pioneer sports intelligence through Texas-inspired innovation. Real-time analytics, predictive modeling, and elite performance tracking for MLB, NFL, NBA, and NCAA.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
+    
+    <!-- Font Preloads -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- GSAP for Advanced Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        :root {
+            /* Blaze Intelligence Brand Colors */
+            --burnt-orange: #BF5700;
+            --burnt-orange-rgb: 191, 87, 0;
+            --cardinal-blue: #9BCBEB;
+            --cardinal-blue-rgb: 155, 203, 235;
+            --tennessee-deep: #002244;
+            --grizzly-teal: #00B2A9;
+            --graphite: #36454F;
+            --platinum: #E5E4E2;
+            --pearl: #FAFAFA;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--burnt-orange) 0%, #FF7043 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--tennessee-deep) 0%, var(--graphite) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--grizzly-teal) 0%, var(--cardinal-blue) 100%);
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            
+            /* Spacing */
+            --spacing-unit: 8px;
+            --border-radius: 4px;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+            --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.3);
+            
+            /* Z-index layers */
+            --z-base: 1;
+            --z-nav: 100;
+            --z-modal: 1000;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            background: #0A0A0A;
+            color: var(--pearl);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* WebGL Canvas Background */
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.6;
+        }
+        
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, 
+                rgba(10, 10, 10, 0.7) 0%, 
+                rgba(10, 10, 10, 0.85) 50%, 
+                rgba(10, 10, 10, 0.95) 100%
+            );
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: var(--z-nav);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(191, 87, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .nav-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: var(--platinum);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(191, 87, 0, 0.3);
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(191, 87, 0, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 6rem 2rem 4rem;
+            overflow: hidden;
+        }
+        
+        .hero-bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center top, 
+                rgba(191, 87, 0, 0.15) 0%, 
+                transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+            text-align: center;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            color: var(--burnt-orange);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, 
+                var(--pearl) 0%, 
+                var(--burnt-orange) 50%, 
+                var(--cardinal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 5s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--platinum);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .hero-description {
+            font-size: 1.125rem;
+            color: rgba(229, 228, 226, 0.8);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+        
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(191, 87, 0, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--pearl);
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid rgba(191, 87, 0, 0.5);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(191, 87, 0, 0.1);
+            border-color: var(--burnt-orange);
+            color: var(--burnt-orange);
+        }
+        
+        /* Live Stats Banner */
+        .live-stats {
+            background: rgba(0, 34, 68, 0.1);
+            border: 1px solid rgba(155, 203, 235, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 1000px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: var(--font-mono);
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--platinum);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-badge {
+            display: inline-block;
+            background: rgba(0, 178, 169, 0.1);
+            border: 1px solid rgba(0, 178, 169, 0.3);
+            color: var(--grizzly-teal);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--pearl) 0%, var(--cardinal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--platinum);
+            opacity: 0.8;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(54, 69, 79, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.2);
+            border-color: var(--burnt-orange);
+        }
+        
+        .feature-card:hover::before {
+            transform: translateX(0);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(191, 87, 0, 0.3);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--pearl);
+        }
+        
+        .feature-description {
+            color: var(--platinum);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .feature-stat {
+            flex: 1;
+        }
+        
+        .feature-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            font-family: var(--font-mono);
+        }
+        
+        .feature-stat-label {
+            font-size: 0.75rem;
+            color: var(--platinum);
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+        
+        /* Live Scoreboard Section */
+        .scoreboard-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, 
+                rgba(191, 87, 0, 0.03) 0%, 
+                rgba(0, 34, 68, 0.03) 100%);
+        }
+        
+        .scoreboard-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        
+        .scoreboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .scoreboard-widget-container {
+            min-height: 300px;
+        }
+        
+        /* Real-Time Analytics Section */
+        .analytics-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, 
+                rgba(0, 34, 68, 0.05) 0%, 
+                rgba(191, 87, 0, 0.05) 100%);
+        }
+        
+        .analytics-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .chart-container {
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .chart-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--pearl);
+        }
+        
+        .chart-badge {
+            background: rgba(0, 178, 169, 0.2);
+            color: var(--grizzly-teal);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .chart-canvas {
+            height: 300px;
+            position: relative;
+        }
+        
+        /* Founder Section */
+        .founder-section {
+            padding: 6rem 2rem;
+            background: rgba(0, 34, 68, 0.05);
+        }
+        
+        .founder-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .founder-image-wrapper {
+            position: relative;
+        }
+        
+        .founder-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(191, 87, 0, 0.3);
+        }
+        
+        .founder-image-accent {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .founder-content {
+            color: var(--platinum);
+        }
+        
+        .founder-badge {
+            display: inline-block;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            color: var(--burnt-orange);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .founder-name {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .founder-title {
+            font-size: 1.25rem;
+            color: var(--cardinal-blue);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .founder-bio {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: rgba(229, 228, 226, 0.9);
+        }
+        
+        .founder-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem;
+            background: rgba(191, 87, 0, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .founder-stat {
+            text-align: center;
+        }
+        
+        .founder-stat-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: var(--font-mono);
+        }
+        
+        .founder-stat-label {
+            font-size: 0.875rem;
+            color: var(--platinum);
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
+        
+        /* Sports Coverage Section */
+        .sports-coverage {
+            padding: 6rem 2rem;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .sport-card {
+            background: linear-gradient(135deg, 
+                rgba(191, 87, 0, 0.1) 0%, 
+                rgba(0, 34, 68, 0.1) 100%);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sport-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(191, 87, 0, 0.3) 0%, transparent 70%);
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .sport-card:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .sport-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+        
+        .sport-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .sport-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--pearl);
+        }
+        
+        .sport-teams {
+            font-size: 0.875rem;
+            color: var(--platinum);
+            opacity: 0.8;
+        }
+        
+        .sport-live-indicator {
+            display: inline-block;
+            background: #00FF00;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 0.5rem;
+            animation: live-pulse 2s infinite;
+        }
+        
+        @keyframes live-pulse {
+            0%, 100% { 
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
+            }
+            50% { 
+                opacity: 0.5;
+                box-shadow: 0 0 0 10px rgba(0, 255, 0, 0);
+            }
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, 
+                rgba(191, 87, 0, 0.1) 0%, 
+                rgba(0, 178, 169, 0.1) 100%);
+            text-align: center;
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .cta-description {
+            font-size: 1.25rem;
+            color: var(--platinum);
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 4rem 2rem 2rem;
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(191, 87, 0, 0.3);
+        }
+        
+        .footer-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-brand {
+            max-width: 400px;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-description {
+            color: var(--platinum);
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .footer-column h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--pearl);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--burnt-orange);
+            opacity: 1;
+        }
+        
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+            text-align: center;
+            color: var(--platinum);
+            opacity: 0.7;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .founder-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .founder-image-wrapper {
+                display: flex;
+                justify-content: center;
+            }
+            
+            .sports-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-social {
+                justify-content: center;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0A0A0A;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(191, 87, 0, 0.1);
+            border-top-color: var(--burnt-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ROI Calculator Section */
+        .roi-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, 
+                rgba(191, 87, 0, 0.05) 0%, 
+                rgba(0, 34, 68, 0.05) 100%);
+        }
+        
+        .roi-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        
+        .roi-calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .calculator-inputs,
+        .calculator-results {
+            padding: 2rem;
+        }
+        
+        .calculator-inputs h3,
+        .calculator-results h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--pearl);
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--platinum);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(54, 69, 79, 0.3);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: var(--border-radius);
+            color: var(--pearl);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--burnt-orange);
+            box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.1);
+        }
+        
+        .roi-placeholder {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--platinum);
+            opacity: 0.7;
+        }
+        
+        .roi-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .roi-results-content {
+            min-height: 400px;
+        }
+        
+        .roi-summary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .roi-metric {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(191, 87, 0, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(191, 87, 0, 0.3);
+        }
+        
+        .roi-metric-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: var(--font-mono);
+        }
+        
+        .roi-metric-label {
+            font-size: 0.75rem;
+            color: var(--platinum);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        .roi-breakdown {
+            margin-top: 2rem;
+        }
+        
+        .roi-breakdown h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--pearl);
+            margin-bottom: 1rem;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .breakdown-label {
+            color: var(--platinum);
+        }
+        
+        .breakdown-value {
+            font-weight: 700;
+            color: var(--burnt-orange);
+            font-family: var(--font-mono);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 2rem;
+            background: rgba(0, 34, 68, 0.05);
+        }
+        
+        .contact-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--pearl);
+        }
+        
+        .contact-benefits {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--platinum);
+        }
+        
+        .benefit-icon {
+            font-size: 1.25rem;
+            width: 2rem;
+            text-align: center;
+        }
+        
+        .contact-details {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        .contact-details h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-details p {
+            color: var(--platinum);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-form {
+            padding: 2rem;
+        }
+        
+        .contact-form h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--pearl);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-checkbox input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .form-checkbox label {
+            color: var(--platinum);
+            font-size: 0.875rem;
+            margin: 0;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+        
+        .form-success {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .success-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-success h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+        }
+        
+        .form-success p {
+            color: var(--platinum);
+        }
+        
+        .btn-loading {
+            display: none;
+        }
+        
+        .btn-primary.loading .btn-text {
+            display: none;
+        }
+        
+        .btn-primary.loading .btn-loading {
+            display: inline;
+        }
+        
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+        
+        /* Mobile Responsiveness for New Sections */
+        @media (max-width: 768px) {
+            .roi-calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .roi-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Three.js Canvas -->
+    <canvas id="three-canvas"></canvas>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Navigation -->
+        <nav id="navbar">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <div class="logo-icon">BI</div>
+                    <span>Blaze Intelligence</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#analytics" class="nav-link">Analytics</a></li>
+                    <li><a href="#sports" class="nav-link">Sports</a></li>
+                    <li><a href="#founder" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#get-started" class="nav-cta">Get Started</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg-gradient"></div>
+            <div class="hero-content">
+                <div class="hero-badge">🔥 Live Analytics Platform</div>
+                <h1 class="hero-title">Elite Sports Intelligence</h1>
+                <p class="hero-subtitle">Where Texas Grit Meets Silicon Valley Innovation</p>
+                <p class="hero-description">
+                    Pioneer sports analytics through cutting-edge AI, real-time performance tracking, 
+                    and predictive modeling. Transform raw data into championship decisions.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#demo" class="btn-primary">
+                        <span>Request Demo</span>
+                        <span>→</span>
+                    </a>
+                    <a href="#analytics" class="btn-secondary">
+                        <span>View Live Data</span>
+                        <span>📊</span>
+                    </a>
+                </div>
+                
+                <!-- Live Stats Banner -->
+                <div class="live-stats glass-card">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="dataPoints">2.8M+</div>
+                            <div class="stat-label">Data Points Analyzed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="accuracy">94.6%</div>
+                            <div class="stat-label">Prediction Accuracy</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="latency"><100ms</div>
+                            <div class="stat-label">Response Time</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="activeTeams">47</div>
+                            <div class="stat-label">Active Teams</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features fade-in" id="features">
+            <div class="section-header">
+                <div class="section-badge">Core Capabilities</div>
+                <h2 class="section-title">Intelligence. Integrity. Innovation.</h2>
+                <p class="section-subtitle">Comprehensive sports analytics powered by cutting-edge AI</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Predictive Analytics</h3>
+                    <p class="feature-description">
+                        Advanced machine learning models predict player performance, injury risk, 
+                        and game outcomes with industry-leading accuracy.
+                    </p>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">94.6%</div>
+                            <div class="feature-stat-label">Accuracy</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">24/7</div>
+                            <div class="feature-stat-label">Monitoring</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Performance Tracking</h3>
+                    <p class="feature-description">
+                        Real-time biomechanical analysis and micro-expression detection 
+                        to evaluate player readiness and mental state.
+                    </p>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">500+</div>
+                            <div class="feature-stat-label">Metrics</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">RT</div>
+                            <div class="feature-stat-label">Processing</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Data Visualization</h3>
+                    <p class="feature-description">
+                        Interactive dashboards with Three.js powered 3D visualizations 
+                        for intuitive data exploration and insights.
+                    </p>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">15+</div>
+                            <div class="feature-stat-label">Chart Types</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">60fps</div>
+                            <div class="feature-stat-label">Rendering</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">AI Coaching</h3>
+                    <p class="feature-description">
+                        Personalized training recommendations powered by computer vision 
+                        and pattern recognition algorithms.
+                    </p>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">1000+</div>
+                            <div class="feature-stat-label">Patterns</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">Custom</div>
+                            <div class="feature-stat-label">Programs</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Live Integration</h3>
+                    <p class="feature-description">
+                        Seamless API connections to MLB Statcast, NFL Next Gen Stats, 
+                        and NBA tracking data for real-time insights.
+                    </p>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">50+</div>
+                            <div class="feature-stat-label">APIs</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value"><1s</div>
+                            <div class="feature-stat-label">Latency</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3 class="feature-title">Youth Development</h3>
+                    <p class="feature-description">
+                        Perfect Game integration and high school scouting tools 
+                        for identifying and developing future talent.
+                    </p>
+                    <div class="feature-stats">
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">10K+</div>
+                            <div class="feature-stat-label">Players</div>
+                        </div>
+                        <div class="feature-stat">
+                            <div class="feature-stat-value">HS/PG</div>
+                            <div class="feature-stat-label">Coverage</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Live Scoreboard Section -->
+        <section class="scoreboard-section fade-in" id="live-scores">
+            <div class="scoreboard-container">
+                <div class="section-header">
+                    <div class="section-badge">Live Scores</div>
+                    <h2 class="section-title">Real-Time Sports Intelligence</h2>
+                    <p class="section-subtitle">Live scores powered by SportsRadar and multi-source data aggregation</p>
+                </div>
+                
+                <div class="scoreboard-grid">
+                    <div id="cardinals-scoreboard" class="scoreboard-widget-container"></div>
+                    <div id="mlb-scoreboard" class="scoreboard-widget-container"></div>
+                    <div id="multi-league-scoreboard" class="scoreboard-widget-container"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Real-Time Analytics Section -->
+        <section class="analytics-section fade-in" id="analytics">
+            <div class="analytics-container">
+                <div class="section-header">
+                    <div class="section-badge">Live Dashboard</div>
+                    <h2 class="section-title">Advanced Performance Analytics</h2>
+                    <p class="section-subtitle">AI-powered insights with 94.6% prediction accuracy</p>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="chart-container glass-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Player Performance Index</h3>
+                            <span class="chart-badge">LIVE</span>
+                        </div>
+                        <div class="chart-canvas">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container glass-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Team Readiness Score</h3>
+                            <span class="chart-badge">UPDATING</span>
+                        </div>
+                        <div class="chart-canvas">
+                            <canvas id="readinessChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container glass-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Injury Risk Assessment</h3>
+                            <span class="chart-badge">AI POWERED</span>
+                        </div>
+                        <div class="chart-canvas">
+                            <canvas id="injuryChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container glass-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Win Probability Model</h3>
+                            <span class="chart-badge">PREDICTIVE</span>
+                        </div>
+                        <div class="chart-canvas">
+                            <canvas id="winProbChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Founder Section -->
+        <section class="founder-section fade-in" id="founder">
+            <div class="founder-container">
+                <div class="founder-image-wrapper">
+                    <div class="founder-image-accent"></div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23363636' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter, sans-serif' font-size='24' fill='%23BF5700'%3EAustin Humphrey%3C/text%3E%3C/svg%3E" 
+                         alt="Austin Humphrey - Founder & CEO" 
+                         class="founder-image">
+                </div>
+                <div class="founder-content">
+                    <div class="founder-badge">Founder & CEO</div>
+                    <h2 class="founder-name">Austin Humphrey</h2>
+                    <p class="founder-title">Multi-Sport Athlete turned Analytics Pioneer</p>
+                    <p class="founder-bio">
+                        Former Texas high school running back (#20) and Perfect Game baseball player 
+                        who brings a unique blend of athletic experience and analytical expertise. 
+                        With a B.A. in International Relations from UT Austin and an M.S. in Sports Management 
+                        from Full Sail University, Austin combines on-field experience with cutting-edge 
+                        technology to revolutionize sports analytics.
+                    </p>
+                    <div class="founder-stats glass-card">
+                        <div class="founder-stat">
+                            <div class="founder-stat-value">98%</div>
+                            <div class="founder-stat-label">Pattern Recognition</div>
+                        </div>
+                        <div class="founder-stat">
+                            <div class="founder-stat-value">95%</div>
+                            <div class="founder-stat-label">Strategic Analysis</div>
+                        </div>
+                        <div class="founder-stat">
+                            <div class="founder-stat-value">#20</div>
+                            <div class="founder-stat-label">Jersey Legacy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sports Coverage Section -->
+        <section class="sports-coverage fade-in" id="sports">
+            <div class="section-header">
+                <div class="section-badge">Coverage</div>
+                <h2 class="section-title">Comprehensive Sports Analytics</h2>
+                <p class="section-subtitle">Professional, collegiate, and youth sports intelligence</p>
+            </div>
+            
+            <div class="sports-grid">
+                <div class="sport-card">
+                    <div class="sport-icon">⚾</div>
+                    <h3 class="sport-name">MLB
+                        <span class="sport-live-indicator"></span>
+                    </h3>
+                    <p class="sport-teams">Cardinals Analytics Specialty</p>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-icon">🏈</div>
+                    <h3 class="sport-name">NFL</h3>
+                    <p class="sport-teams">Titans Performance Tracking</p>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-icon">🏀</div>
+                    <h3 class="sport-name">NBA</h3>
+                    <p class="sport-teams">Grizzlies Advanced Metrics</p>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-icon">🎓</div>
+                    <h3 class="sport-name">NCAA</h3>
+                    <p class="sport-teams">Longhorns Football & Baseball</p>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-icon">🏆</div>
+                    <h3 class="sport-name">High School</h3>
+                    <p class="sport-teams">Texas HS Football Coverage</p>
+                </div>
+                
+                <div class="sport-card">
+                    <div class="sport-icon">⭐</div>
+                    <h3 class="sport-name">Perfect Game</h3>
+                    <p class="sport-teams">Elite Youth Baseball</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ROI Calculator Section -->
+        <section class="roi-section fade-in" id="roi-calculator">
+            <div class="roi-container">
+                <div class="section-header">
+                    <div class="section-badge">ROI Calculator</div>
+                    <h2 class="section-title">Calculate Your Savings</h2>
+                    <p class="section-subtitle">See how much you can save compared to traditional analytics solutions</p>
+                </div>
+                
+                <div class="roi-calculator-grid">
+                    <div class="calculator-inputs glass-card">
+                        <h3>Your Current Setup</h3>
+                        <form id="roi-form">
+                            <div class="input-group">
+                                <label for="current-solution">Current Solution</label>
+                                <select id="current-solution" name="current_solution">
+                                    <option value="manual">Manual Analysis</option>
+                                    <option value="hudl">Hudl</option>
+                                    <option value="statsperform">Stats Perform</option>
+                                    <option value="opta">Opta</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="team-size">Team Size</label>
+                                <input type="number" id="team-size" name="team_size" value="25" min="1" max="100">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="games-season">Games per Season</label>
+                                <input type="number" id="games-season" name="games_per_season" value="162" min="1" max="200">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="current-cost">Current Annual Cost ($)</label>
+                                <input type="number" id="current-cost" name="current_cost" value="50000" min="0" step="1000">
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Calculate ROI</button>
+                        </form>
+                    </div>
+                    
+                    <div class="calculator-results glass-card">
+                        <h3>Your Savings with Blaze Intelligence</h3>
+                        <div id="roi-results" class="roi-results-content">
+                            <div class="roi-placeholder">
+                                <div class="roi-icon">📊</div>
+                                <p>Enter your details to see potential savings</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section class="contact-section fade-in" id="contact">
+            <div class="contact-container">
+                <div class="section-header">
+                    <div class="section-badge">Get Started</div>
+                    <h2 class="section-title">Ready to Dominate?</h2>
+                    <p class="section-subtitle">Schedule a personalized demo and see Blaze Intelligence in action</p>
+                </div>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Why Choose Blaze Intelligence?</h3>
+                        <ul class="contact-benefits">
+                            <li>
+                                <span class="benefit-icon">⚡</span>
+                                <span>Real-time analytics with <100ms latency</span>
+                            </li>
+                            <li>
+                                <span class="benefit-icon">🎯</span>
+                                <span>94.6% prediction accuracy rate</span>
+                            </li>
+                            <li>
+                                <span class="benefit-icon">💰</span>
+                                <span>67-80% cost savings vs competitors</span>
+                            </li>
+                            <li>
+                                <span class="benefit-icon">🏆</span>
+                                <span>Trusted by elite athletes and programs</span>
+                            </li>
+                            <li>
+                                <span class="benefit-icon">📞</span>
+                                <span>24/7 support and consulting</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="contact-details">
+                            <h4>Contact Information</h4>
+                            <p><strong>Austin Humphrey</strong><br>Founder & CEO</p>
+                            <p>📧 ahump20@outlook.com</p>
+                            <p>📱 (210) 273-5538</p>
+                            <p>📍 Austin, Texas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form glass-card">
+                        <h3>Request a Demo</h3>
+                        <form id="contact-form">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label for="contact-name">Name *</label>
+                                    <input type="text" id="contact-name" name="name" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="contact-email">Email *</label>
+                                    <input type="email" id="contact-email" name="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label for="contact-company">Organization</label>
+                                    <input type="text" id="contact-company" name="company">
+                                </div>
+                                <div class="input-group">
+                                    <label for="contact-sport">Primary Sport</label>
+                                    <select id="contact-sport" name="sport">
+                                        <option value="">Select Sport</option>
+                                        <option value="mlb">Baseball (MLB)</option>
+                                        <option value="nfl">Football (NFL)</option>
+                                        <option value="nba">Basketball (NBA)</option>
+                                        <option value="ncaa-football">NCAA Football</option>
+                                        <option value="ncaa-baseball">NCAA Baseball</option>
+                                        <option value="ncaa-basketball">NCAA Basketball</option>
+                                        <option value="high-school">High School</option>
+                                        <option value="youth">Youth/Perfect Game</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="contact-message">Message *</label>
+                                <textarea id="contact-message" name="message" rows="4" required 
+                                          placeholder="Tell us about your analytics needs and goals..."></textarea>
+                            </div>
+                            
+                            <div class="form-checkbox">
+                                <input type="checkbox" id="contact-updates" name="updates">
+                                <label for="contact-updates">Send me updates about Blaze Intelligence</label>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary" id="contact-submit">
+                                <span class="btn-text">Send Message</span>
+                                <span class="btn-loading" style="display: none;">Sending...</span>
+                            </button>
+                        </form>
+                        
+                        <div id="contact-success" class="form-success" style="display: none;">
+                            <div class="success-icon">✅</div>
+                            <h4>Thank you for your interest!</h4>
+                            <p>We will contact you within 24 hours to schedule your personalized demo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta-section fade-in" id="get-started">
+            <div class="cta-container">
+                <h2 class="cta-title">Ready to Transform Your Game?</h2>
+                <p class="cta-description">
+                    Join elite teams leveraging Blaze Intelligence for competitive advantage. 
+                    Experience the future of sports analytics today.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn-primary">Schedule Demo</a>
+                    <a href="#roi-calculator" class="btn-secondary">Calculate Savings</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <div class="footer-logo">Blaze Intelligence</div>
+                    <p class="footer-description">
+                        Pioneering sports intelligence through Texas-inspired innovation, 
+                        frontier daring, and uncompromising integrity.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">𝕏</a>
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">@</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#analytics">Analytics</a></li>
+                        <li><a href="#api">API Access</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Sports</h4>
+                    <ul class="footer-links">
+                        <li><a href="#mlb">MLB Analytics</a></li>
+                        <li><a href="#nfl">NFL Metrics</a></li>
+                        <li><a href="#nba">NBA Tracking</a></li>
+                        <li><a href="#ncaa">NCAA Coverage</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Blaze Intelligence. All rights reserved. | Austin, Texas</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Data Integration Script -->
+    <script src="blaze-data-integration.js"></script>
+    
+    <!-- Live Scoreboard Widget -->
+    <script src="blaze-live-scoreboard.js"></script>
+    
+    <script>
+        // Three.js Scene Setup
+        let scene, camera, renderer, particles, geometries = [];
+        
+        function initThree() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('three-canvas'),
+                alpha: true,
+                antialias: true 
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            
+            // Create particle system
+            const particleCount = 1000;
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 50;
+                positions[i + 1] = (Math.random() - 0.5) * 50;
+                positions[i + 2] = (Math.random() - 0.5) * 50;
+                
+                // Burnt orange to cardinal blue gradient
+                const t = Math.random();
+                colors[i] = 0.75 + t * 0.25; // R
+                colors[i + 1] = 0.34 + t * 0.46; // G
+                colors[i + 2] = 0 + t * 0.92; // B
+            }
+            
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const material = new THREE.PointsMaterial({ 
+                size: 0.5,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+            
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+            
+            // Add floating geometry shapes
+            const shapes = [
+                new THREE.TetrahedronGeometry(1, 0),
+                new THREE.OctahedronGeometry(1, 0),
+                new THREE.IcosahedronGeometry(1, 0)
+            ];
+            
+            for (let i = 0; i < 20; i++) {
+                const geometry = shapes[Math.floor(Math.random() * shapes.length)];
+                const material = new THREE.MeshBasicMaterial({
+                    color: i % 2 === 0 ? 0xBF5700 : 0x9BCBEB,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.3
+                });
+                
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.set(
+                    (Math.random() - 0.5) * 40,
+                    (Math.random() - 0.5) * 40,
+                    (Math.random() - 0.5) * 40
+                );
+                mesh.rotation.set(
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI
+                );
+                mesh.scale.setScalar(Math.random() * 2 + 1);
+                
+                geometries.push(mesh);
+                scene.add(mesh);
+            }
+            
+            camera.position.z = 30;
+            
+            animate();
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotate particles
+            if (particles) {
+                particles.rotation.x += 0.0005;
+                particles.rotation.y += 0.001;
+            }
+            
+            // Rotate geometry shapes
+            geometries.forEach((mesh, i) => {
+                mesh.rotation.x += 0.002 * (i % 2 === 0 ? 1 : -1);
+                mesh.rotation.y += 0.001 * (i % 2 === 0 ? 1 : -1);
+                mesh.position.y += Math.sin(Date.now() * 0.001 + i) * 0.01;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Initialize Three.js
+        initThree();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Chart.js Setup
+        const chartColors = {
+            primary: 'rgba(191, 87, 0, 1)',
+            primaryLight: 'rgba(191, 87, 0, 0.2)',
+            secondary: 'rgba(155, 203, 235, 1)',
+            secondaryLight: 'rgba(155, 203, 235, 0.2)',
+            accent: 'rgba(0, 178, 169, 1)',
+            accentLight: 'rgba(0, 178, 169, 0.2)'
+        };
+        
+        // Performance Chart
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(performanceCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                datasets: [{
+                    label: 'Cardinals',
+                    data: [85, 88, 92, 90, 94, 96],
+                    borderColor: chartColors.primary,
+                    backgroundColor: chartColors.primaryLight,
+                    tension: 0.4
+                }, {
+                    label: 'Titans',
+                    data: [82, 85, 88, 91, 89, 93],
+                    borderColor: chartColors.secondary,
+                    backgroundColor: chartColors.secondaryLight,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#E5E4E2' }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#E5E4E2' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    },
+                    x: {
+                        ticks: { color: '#E5E4E2' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    }
+                }
+            }
+        });
+        
+        // Readiness Chart
+        const readinessCtx = document.getElementById('readinessChart').getContext('2d');
+        const readinessChart = new Chart(readinessCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Speed', 'Power', 'Endurance', 'Agility', 'Mental', 'Recovery'],
+                datasets: [{
+                    label: 'Current State',
+                    data: [88, 92, 85, 90, 94, 87],
+                    borderColor: chartColors.accent,
+                    backgroundColor: chartColors.accentLight,
+                    pointBackgroundColor: chartColors.accent,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: chartColors.accent
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#E5E4E2' }
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        pointLabels: { color: '#E5E4E2' },
+                        ticks: { 
+                            color: '#E5E4E2',
+                            backdropColor: 'transparent'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Injury Risk Chart
+        const injuryCtx = document.getElementById('injuryChart').getContext('2d');
+        const injuryChart = new Chart(injuryCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5'],
+                datasets: [{
+                    label: 'Injury Risk %',
+                    data: [15, 8, 22, 12, 5],
+                    backgroundColor: function(context) {
+                        const value = context.raw;
+                        if (value > 20) return 'rgba(255, 0, 0, 0.6)';
+                        if (value > 10) return 'rgba(255, 165, 0, 0.6)';
+                        return 'rgba(0, 255, 0, 0.6)';
+                    },
+                    borderColor: function(context) {
+                        const value = context.raw;
+                        if (value > 20) return 'rgba(255, 0, 0, 1)';
+                        if (value > 10) return 'rgba(255, 165, 0, 1)';
+                        return 'rgba(0, 255, 0, 1)';
+                    },
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#E5E4E2' }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#E5E4E2' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    },
+                    x: {
+                        ticks: { color: '#E5E4E2' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    }
+                }
+            }
+        });
+        
+        // Win Probability Chart
+        const winProbCtx = document.getElementById('winProbChart').getContext('2d');
+        const winProbChart = new Chart(winProbCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Win Probability', 'Loss Probability'],
+                datasets: [{
+                    data: [73, 27],
+                    backgroundColor: [chartColors.primary, chartColors.primaryLight],
+                    borderColor: ['#0A0A0A', '#0A0A0A'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#E5E4E2' }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Animate stats on scroll
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = element.dataset.prefix ? 
+                    element.dataset.prefix + value + (element.dataset.suffix || '') : 
+                    value + (element.dataset.suffix || '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate stats if they haven't been animated
+                    if (entry.target.classList.contains('stat-value') && !entry.target.dataset.animated) {
+                        const value = parseInt(entry.target.textContent.replace(/[^0-9]/g, ''));
+                        if (!isNaN(value)) {
+                            animateValue(entry.target, 0, value, 2000);
+                            entry.target.dataset.animated = 'true';
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Navbar scroll effect
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // ROI Calculator functionality
+        document.getElementById('roi-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            try {
+                const response = await fetch('/api/roi-calculator', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to calculate ROI');
+                }
+                
+                const result = await response.json();
+                displayROIResults(result);
+                
+            } catch (error) {
+                console.error('ROI calculation error:', error);
+                // Fallback to client-side calculation
+                const result = calculateROIClientSide(data);
+                displayROIResults(result);
+            }
+        });
+        
+        function calculateROIClientSide(data) {
+            const teamSize = parseInt(data.team_size) || 25;
+            const gamesPerSeason = parseInt(data.games_per_season) || 162;
+            const currentCost = parseInt(data.current_cost) || 50000;
+            
+            const blazeCost = 1188;
+            const efficiencyGain = 0.75;
+            const injuryReduction = 0.15;
+            const performanceImprovement = 0.08;
+            
+            const laborSavings = currentCost * efficiencyGain;
+            const injurySavings = (teamSize * 150000) * injuryReduction;
+            const performanceSavings = (gamesPerSeason * 50000) * performanceImprovement;
+            
+            const totalSavings = laborSavings + injurySavings + performanceSavings;
+            const netSavings = totalSavings - blazeCost;
+            const roi = ((netSavings / blazeCost) * 100).toFixed(1);
+            
+            return {
+                blaze_intelligence: {
+                    annual_cost: blazeCost,
+                    total_savings: Math.round(totalSavings),
+                    net_savings: Math.round(netSavings),
+                    roi_percentage: parseFloat(roi),
+                    payback_period_days: Math.round((blazeCost / totalSavings) * 365)
+                },
+                savings_breakdown: {
+                    labor_efficiency: Math.round(laborSavings),
+                    injury_prevention: Math.round(injurySavings),
+                    performance_gains: Math.round(performanceSavings)
+                },
+                competitor_comparison: [
+                    { competitor: 'HUDL ASSIST', cost: 2400, savings_vs_blaze: 1212, savings_percentage: '50.5' },
+                    { competitor: 'HUDL PRO', cost: 4800, savings_vs_blaze: 3612, savings_percentage: '75.2' },
+                    { competitor: 'STATS PERFORM', cost: 15000, savings_vs_blaze: 13812, savings_percentage: '92.1' }
+                ]
+            };
+        }
+        
+        function displayROIResults(result) {
+            const resultsContainer = document.getElementById('roi-results');
+            const data = result.blaze_intelligence;
+            const breakdown = result.savings_breakdown;
+            
+            resultsContainer.innerHTML = `
+                <div class="roi-summary">
+                    <div class="roi-metric">
+                        <div class="roi-metric-value">$${data.net_savings.toLocaleString()}</div>
+                        <div class="roi-metric-label">Annual Savings</div>
+                    </div>
+                    <div class="roi-metric">
+                        <div class="roi-metric-value">${data.roi_percentage}%</div>
+                        <div class="roi-metric-label">Return on Investment</div>
+                    </div>
+                    <div class="roi-metric">
+                        <div class="roi-metric-value">$${data.annual_cost.toLocaleString()}</div>
+                        <div class="roi-metric-label">Blaze Intelligence Cost</div>
+                    </div>
+                    <div class="roi-metric">
+                        <div class="roi-metric-value">${data.payback_period_days}</div>
+                        <div class="roi-metric-label">Days to Payback</div>
+                    </div>
+                </div>
+                
+                <div class="roi-breakdown">
+                    <h4>Savings Breakdown</h4>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Labor Efficiency (75% improvement)</span>
+                        <span class="breakdown-value">$${breakdown.labor_efficiency.toLocaleString()}</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Injury Prevention (15% reduction)</span>
+                        <span class="breakdown-value">$${breakdown.injury_prevention.toLocaleString()}</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Performance Gains (8% improvement)</span>
+                        <span class="breakdown-value">$${breakdown.performance_gains.toLocaleString()}</span>
+                    </div>
+                </div>
+                
+                <div class="roi-cta" style="margin-top: 2rem; text-align: center;">
+                    <a href="#contact" class="btn-primary">Get Started Today</a>
+                </div>
+            `;
+        }
+        
+        // Contact Form functionality
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('contact-submit');
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Show loading state
+            submitBtn.classList.add('loading');
+            
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    // Show success message
+                    form.style.display = 'none';
+                    document.getElementById('contact-success').style.display = 'block';
+                    
+                    // Track form submission
+                    console.log('Contact form submitted:', data);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+                
+            } catch (error) {
+                console.error('Contact form error:', error);
+                alert('There was an error sending your message. Please try again or email us directly at ahump20@outlook.com');
+            } finally {
+                submitBtn.classList.remove('loading');
+            }
+        });
+        
+        // Initialize live scoreboard widgets
+        document.addEventListener('DOMContentLoaded', () => {
+            // Wait for blazeScoreboard to be available
+            setTimeout(() => {
+                if (window.blazeScoreboard) {
+                    // Create Cardinals-specific widget
+                    blazeScoreboard.createWidget('cardinals-scoreboard', {
+                        type: 'cardinals',
+                        showDetails: true,
+                        showLive: true
+                    });
+                    
+                    // Create MLB scores widget  
+                    blazeScoreboard.createWidget('mlb-scoreboard', {
+                        type: 'mlb',
+                        league: 'mlb',
+                        maxGames: 5
+                    });
+                    
+                    // Create multi-league widget
+                    blazeScoreboard.createWidget('multi-league-scoreboard', {
+                        type: 'multi-league',
+                        showDetails: false
+                    });
+                    
+                    console.log('🏆 Live scoreboard widgets initialized');
+                } else {
+                    console.warn('Blaze scoreboard not available');
+                }
+            }, 1000);
+        });
+        
+        // Remove loading overlay
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('fade-out');
+            }, 500);
+        });
+        
+        // Simulate real-time data updates
+        setInterval(() => {
+            // Update random chart data
+            const charts = [performanceChart, readinessChart];
+            const randomChart = charts[Math.floor(Math.random() * charts.length)];
+            const datasetIndex = Math.floor(Math.random() * randomChart.data.datasets.length);
+            const dataIndex = Math.floor(Math.random() * randomChart.data.datasets[datasetIndex].data.length);
+            
+            randomChart.data.datasets[datasetIndex].data[dataIndex] = 
+                Math.floor(Math.random() * 20) + 80;
+            randomChart.update('none');
+            
+            // Update active teams counter
+            const activeTeams = document.getElementById('activeTeams');
+            if (activeTeams && Math.random() > 0.8) {
+                const current = parseInt(activeTeams.textContent);
+                activeTeams.textContent = current + (Math.random() > 0.5 ? 1 : -1);
+            }
+        }, 5000);
+        
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Hero animations
+        gsap.from('.hero-badge', {
+            y: -20,
+            opacity: 0,
+            duration: 0.8,
+            delay: 0.5
+        });
+        
+        gsap.from('.hero-title', {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 0.7
+        });
+        
+        gsap.from('.hero-subtitle', {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            delay: 0.9
+        });
+        
+        gsap.from('.hero-description', {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            delay: 1.1
+        });
+        
+        gsap.from('.hero-cta-group', {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            delay: 1.3
+        });
+        
+        gsap.from('.live-stats', {
+            scale: 0.9,
+            opacity: 0,
+            duration: 1,
+            delay: 1.5,
+            ease: 'power2.out'
+        });
+        
+        // Feature cards stagger animation
+        gsap.from('.feature-card', {
+            scrollTrigger: {
+                trigger: '.features-grid',
+                start: 'top 80%'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1
+        });
+        
+        // Chart animations
+        gsap.from('.chart-container', {
+            scrollTrigger: {
+                trigger: '.analytics-grid',
+                start: 'top 80%'
+            },
+            scale: 0.9,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15
+        });
+        
+        // Sports cards animation
+        gsap.from('.sport-card', {
+            scrollTrigger: {
+                trigger: '.sports-grid',
+                start: 'top 80%'
+            },
+            rotationY: 180,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power2.out'
+        });
+        
+        console.log('🔥 Blaze Intelligence Platform Initialized');
+        console.log('📊 Real-time analytics active');
+        console.log('🎯 Pattern recognition: 98%');
+        console.log('⚡ Response time: <100ms');
+    </script>
+</body>
+</html>

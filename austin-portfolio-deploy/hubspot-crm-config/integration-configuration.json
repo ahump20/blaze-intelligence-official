@@ -1,0 +1,293 @@
+{
+  "integrations": {
+    "blazeIntelligencePlatform": {
+      "integrationName": "Blaze Intelligence Platform Sync",
+      "description": "Real-time sync with Blaze Intelligence analytics platform",
+      "endpoints": {
+        "base_url": "https://blaze-intelligence.com/api/v1",
+        "webhooks": {
+          "client_analytics_update": "/webhooks/hubspot/analytics-update",
+          "readiness_score_change": "/webhooks/hubspot/readiness-change",
+          "platform_engagement": "/webhooks/hubspot/engagement-tracking"
+        }
+      },
+      "syncedData": [
+        {
+          "dataType": "client_analytics_scores",
+          "hubspotProperty": "current_analytics_score",
+          "syncFrequency": "real_time",
+          "direction": "inbound"
+        },
+        {
+          "dataType": "platform_usage_metrics",
+          "hubspotProperty": "platform_engagement_level",
+          "syncFrequency": "daily",
+          "direction": "inbound"
+        },
+        {
+          "dataType": "readiness_scores",
+          "hubspotProperty": "team_readiness_score",
+          "syncFrequency": "real_time",
+          "direction": "inbound"
+        },
+        {
+          "dataType": "roi_calculations",
+          "hubspotProperty": "calculated_roi_percentage",
+          "syncFrequency": "weekly",
+          "direction": "inbound"
+        }
+      ]
+    },
+    "notionWorkspace": {
+      "integrationName": "Notion CRM Sync",
+      "description": "Bidirectional sync with Notion workspace for project management",
+      "endpoints": {
+        "base_url": "https://api.notion.com/v1",
+        "databases": {
+          "client_projects": "database_id_for_client_projects",
+          "lead_research": "database_id_for_lead_research",
+          "competitive_analysis": "database_id_for_competitive_analysis"
+        }
+      },
+      "syncedData": [
+        {
+          "dataType": "client_project_status",
+          "hubspotProperty": "project_implementation_status",
+          "notionProperty": "Status",
+          "syncFrequency": "hourly",
+          "direction": "bidirectional"
+        },
+        {
+          "dataType": "lead_research_notes",
+          "hubspotProperty": "research_summary",
+          "notionProperty": "Research Notes",
+          "syncFrequency": "manual",
+          "direction": "inbound"
+        }
+      ]
+    },
+    "calendlyScheduling": {
+      "integrationName": "Calendly Meeting Sync",
+      "description": "Automatic meeting scheduling and CRM updates",
+      "endpoints": {
+        "webhooks": {
+          "meeting_scheduled": "/webhooks/calendly/scheduled",
+          "meeting_cancelled": "/webhooks/calendly/cancelled",
+          "meeting_completed": "/webhooks/calendly/completed"
+        }
+      },
+      "automatedActions": [
+        {
+          "trigger": "meeting_scheduled",
+          "actions": [
+            "update_deal_stage_to_demo",
+            "create_follow_up_task",
+            "send_demo_preparation_email"
+          ]
+        },
+        {
+          "trigger": "meeting_completed",
+          "actions": [
+            "update_last_activity_date",
+            "create_follow_up_sequence",
+            "log_meeting_outcome"
+          ]
+        }
+      ]
+    },
+    "stripePayments": {
+      "integrationName": "Stripe Payment Tracking",
+      "description": "Revenue tracking and subscription management",
+      "endpoints": {
+        "webhooks": {
+          "payment_succeeded": "/webhooks/stripe/payment-success",
+          "subscription_created": "/webhooks/stripe/subscription-created",
+          "invoice_paid": "/webhooks/stripe/invoice-paid"
+        }
+      },
+      "revenueTracking": [
+        {
+          "event": "payment_succeeded",
+          "hubspot_action": "update_deal_amount_and_close_won"
+        },
+        {
+          "event": "subscription_created",
+          "hubspot_action": "create_recurring_revenue_tracking"
+        },
+        {
+          "event": "subscription_cancelled",
+          "hubspot_action": "update_churn_risk_score"
+        }
+      ]
+    },
+    "emailTracking": {
+      "integrationName": "Advanced Email Analytics",
+      "description": "Enhanced email engagement tracking beyond HubSpot native",
+      "trackedMetrics": [
+        {
+          "metric": "email_forwarded",
+          "scoring_impact": 5,
+          "hubspot_property": "email_forward_count"
+        },
+        {
+          "metric": "link_click_depth",
+          "scoring_impact": 3,
+          "hubspot_property": "content_engagement_depth"
+        },
+        {
+          "metric": "email_reply_sentiment",
+          "scoring_impact": "variable",
+          "hubspot_property": "reply_sentiment_score"
+        }
+      ]
+    },
+    "competitorMonitoring": {
+      "integrationName": "Competitive Intelligence Sync",
+      "description": "Automated competitive landscape updates",
+      "dataSources": [
+        {
+          "source": "company_news_apis",
+          "frequency": "daily",
+          "hubspot_property": "competitor_news_updates"
+        },
+        {
+          "source": "pricing_intelligence",
+          "frequency": "weekly",
+          "hubspot_property": "competitor_pricing_changes"
+        },
+        {
+          "source": "job_posting_analysis",
+          "frequency": "weekly",
+          "hubspot_property": "competitor_hiring_trends"
+        }
+      ]
+    }
+  },
+  "webhookConfigurations": [
+    {
+      "webhookName": "Blaze Analytics Score Update",
+      "url": "https://blaze-intelligence.com/webhooks/hubspot/score-update",
+      "events": ["contact.propertyChange"],
+      "properties": ["blaze_lead_score", "qualification_status"],
+      "authentication": {
+        "type": "api_key",
+        "header": "X-Blaze-API-Key"
+      }
+    },
+    {
+      "webhookName": "Deal Stage Progression",
+      "url": "https://blaze-intelligence.com/webhooks/hubspot/deal-stage",
+      "events": ["deal.propertyChange"],
+      "properties": ["dealstage", "amount", "closedate"],
+      "authentication": {
+        "type": "oauth",
+        "scope": "crm.objects.deals.read"
+      }
+    },
+    {
+      "webhookName": "New Client Onboarding",
+      "url": "https://blaze-intelligence.com/webhooks/hubspot/onboarding",
+      "events": ["deal.creation"],
+      "filters": {
+        "dealstage": "won"
+      },
+      "authentication": {
+        "type": "api_key",
+        "header": "X-Blaze-API-Key"
+      }
+    }
+  ],
+  "apiConfigurations": [
+    {
+      "apiName": "HubSpot CRM API",
+      "baseUrl": "https://api.hubapi.com",
+      "authentication": {
+        "type": "private_app_token",
+        "scopes": [
+          "crm.objects.contacts.read",
+          "crm.objects.contacts.write",
+          "crm.objects.deals.read", 
+          "crm.objects.deals.write",
+          "crm.objects.companies.read",
+          "crm.objects.companies.write",
+          "automation"
+        ]
+      },
+      "rateLimits": {
+        "requests_per_second": 100,
+        "burst_limit": 1000
+      }
+    },
+    {
+      "apiName": "Blaze Intelligence API",
+      "baseUrl": "https://blaze-intelligence.com/api/v1",
+      "authentication": {
+        "type": "bearer_token",
+        "refresh_mechanism": "automatic"
+      },
+      "endpoints": {
+        "analytics_scores": "/analytics/scores/{team_id}",
+        "readiness_data": "/readiness/{team_id}/current",
+        "roi_calculations": "/calculations/roi",
+        "competitive_analysis": "/analysis/competitive/{organization_id}"
+      }
+    }
+  ],
+  "dataFlowMappings": [
+    {
+      "flowName": "Lead Scoring Enhancement",
+      "description": "Enhance HubSpot lead scoring with Blaze Intelligence data",
+      "trigger": "new_contact_created",
+      "steps": [
+        {
+          "step": 1,
+          "action": "fetch_organization_analytics_maturity",
+          "api": "blaze_intelligence",
+          "endpoint": "/analysis/maturity-assessment"
+        },
+        {
+          "step": 2,
+          "action": "update_hubspot_lead_score",
+          "api": "hubspot",
+          "endpoint": "/crm/v3/objects/contacts/{contactId}",
+          "property": "blaze_lead_score"
+        },
+        {
+          "step": 3,
+          "action": "trigger_qualification_workflow",
+          "condition": "score_above_threshold",
+          "threshold": 50
+        }
+      ]
+    },
+    {
+      "flowName": "Client Success Monitoring",
+      "description": "Monitor and sync client success metrics",
+      "trigger": "daily_scheduled",
+      "steps": [
+        {
+          "step": 1,
+          "action": "fetch_client_engagement_metrics",
+          "api": "blaze_intelligence",
+          "endpoint": "/clients/engagement/{client_id}"
+        },
+        {
+          "step": 2,
+          "action": "calculate_health_score",
+          "formula": "engagement_score * 0.4 + usage_score * 0.3 + satisfaction_score * 0.3"
+        },
+        {
+          "step": 3,
+          "action": "update_hubspot_health_score",
+          "api": "hubspot",
+          "property": "client_health_score"
+        },
+        {
+          "step": 4,
+          "action": "trigger_retention_workflow",
+          "condition": "health_score_below_70"
+        }
+      ]
+    }
+  ]
+}

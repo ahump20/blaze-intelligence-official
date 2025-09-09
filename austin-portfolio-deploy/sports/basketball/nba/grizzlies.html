@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memphis Grizzlies Intelligence Lab | Blaze Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'memphis-blue': '#5D76A9',
+                        'grizzly-gold': '#F5B041',
+                        'midnight': '#0F1419',
+                        'steel': '#6C7B7F'
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient-shift': 'gradient-shift 8s ease-in-out infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-midnight via-gray-900 to-memphis-blue text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-xl font-bold bg-gradient-to-r from-memphis-blue to-grizzly-gold bg-clip-text text-transparent">
+                        Blaze Intelligence
+                    </a>
+                    <span class="text-sm text-gray-300">Memphis Grizzlies Lab</span>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="/sports" class="text-gray-300 hover:text-white transition-colors">Sports Hub</a>
+                    <a href="/data" class="text-gray-300 hover:text-white transition-colors">Data</a>
+                    <a href="/contact" class="bg-memphis-blue hover:bg-memphis-blue/80 px-4 py-2 rounded-lg transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Three.js Background -->
+    <div id="hero-canvas" class="absolute inset-0 z-0"></div>
+    
+    <div class="relative z-10 min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="bg-black/40 backdrop-blur-md rounded-3xl p-12 border border-white/10">
+                <!-- Real-time Status -->
+                <div class="mb-8 flex justify-center">
+                    <div class="bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-green-400 text-sm font-medium">GRIT & GRIND 2.0 ACTIVE</span>
+                    </div>
+                </div>
+
+                <h1 class="text-6xl font-bold mb-6">
+                    <span class="bg-gradient-to-r from-memphis-blue via-grizzly-gold to-white bg-clip-text text-transparent">
+                        Memphis Grizzlies
+                    </span>
+                    <br>
+                    <span class="text-4xl text-gray-300">Intelligence Lab</span>
+                </h1>
+                
+                <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    Advanced analytics powered by <strong>Grit & Grind 2.0</strong> framework - 
+                    measuring identity-driven performance, clutch execution, and Memphis market dynamics
+                </p>
+
+                <!-- Live Metrics Dashboard -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-memphis-blue/20 backdrop-blur-sm border border-memphis-blue/30 rounded-xl p-6">
+                        <div class="text-3xl font-bold text-memphis-blue mb-2" id="grit-score">87.3</div>
+                        <div class="text-sm text-gray-300">Grit Score</div>
+                        <div class="text-xs text-green-400 mt-1">↗ +2.1 vs LY</div>
+                    </div>
+                    <div class="bg-grizzly-gold/20 backdrop-blur-sm border border-grizzly-gold/30 rounded-xl p-6">
+                        <div class="text-3xl font-bold text-grizzly-gold mb-2" id="clutch-factor">82.6</div>
+                        <div class="text-sm text-gray-300">Clutch Factor</div>
+                        <div class="text-xs text-green-400 mt-1">↗ +5.3 vs LY</div>
+                    </div>
+                    <div class="bg-steel/20 backdrop-blur-sm border border-steel/30 rounded-xl p-6">
+                        <div class="text-3xl font-bold text-steel mb-2" id="defense-rating">114.2</div>
+                        <div class="text-sm text-gray-300">Defensive Rating</div>
+                        <div class="text-xs text-red-400 mt-1">↘ -1.8 vs LY</div>
+                    </div>
+                    <div class="bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6">
+                        <div class="text-3xl font-bold text-purple-400 mb-2" id="market-impact">$34M</div>
+                        <div class="text-sm text-gray-300">Market Impact</div>
+                        <div class="text-xs text-green-400 mt-1">↗ +12% vs LY</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button class="bg-memphis-blue hover:bg-memphis-blue/80 px-6 py-3 rounded-xl font-semibold transition-colors">
+                        <i class="fas fa-chart-line mr-2"></i>Live Analytics
+                    </button>
+                    <button class="bg-grizzly-gold hover:bg-grizzly-gold/80 text-black px-6 py-3 rounded-xl font-semibold transition-colors">
+                        <i class="fas fa-fire mr-2"></i>Grit Reports
+                    </button>
+                    <button class="border border-white/30 hover:bg-white/10 px-6 py-3 rounded-xl font-semibold transition-colors">
+                        <i class="fas fa-download mr-2"></i>Export Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Strategic Intelligence Section -->
+    <div class="py-20 bg-black/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-memphis-blue to-grizzly-gold bg-clip-text text-transparent">
+                    Grit & Grind 2.0 Framework
+                </h2>
+                <p class="text-gray-300 text-lg max-w-3xl mx-auto">
+                    Revolutionary analytics measuring Memphis identity through four core pillars of championship basketball
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Identity Metrics -->
+                <div class="bg-gradient-to-br from-memphis-blue/20 to-memphis-blue/5 backdrop-blur-sm border border-memphis-blue/30 rounded-xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-memphis-blue/30 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-heart text-memphis-blue text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-memphis-blue">Identity Metrics</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Hustle Plays/Game</span>
+                            <span class="text-white font-semibold">8.7</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Effort Index</span>
+                            <span class="text-white font-semibold">94.2%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Grit Score</span>
+                            <span class="text-memphis-blue font-semibold">87.3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clutch Performance -->
+                <div class="bg-gradient-to-br from-grizzly-gold/20 to-grizzly-gold/5 backdrop-blur-sm border border-grizzly-gold/30 rounded-xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-grizzly-gold/30 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-stopwatch text-grizzly-gold text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-grizzly-gold">Clutch Analysis</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">4Q FG%</span>
+                            <span class="text-white font-semibold">47.8%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Pressure Rating</span>
+                            <span class="text-white font-semibold">82.6</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Late-Game Edge</span>
+                            <span class="text-grizzly-gold font-semibold">+5.3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Defensive Identity -->
+                <div class="bg-gradient-to-br from-steel/20 to-steel/5 backdrop-blur-sm border border-steel/30 rounded-xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-steel/30 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-shield-alt text-steel text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-steel">Defensive Grit</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Def Rating</span>
+                            <span class="text-white font-semibold">114.2</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Steals/Game</span>
+                            <span class="text-white font-semibold">7.8</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Grind Factor</span>
+                            <span class="text-steel font-semibold">91.4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Impact -->
+                <div class="bg-gradient-to-br from-purple-500/20 to-purple-500/5 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-500/30 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-city text-purple-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-400">Memphis Impact</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Economic Value</span>
+                            <span class="text-white font-semibold">$34M</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">Fan Engagement</span>
+                            <span class="text-white font-semibold">+12%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">City Pride Index</span>
+                            <span class="text-purple-400 font-semibold">88.9</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Analytics Section -->
+    <div class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Analytics Content -->
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">
+                        <span class="bg-gradient-to-r from-memphis-blue to-grizzly-gold bg-clip-text text-transparent">
+                            Advanced Performance Intelligence
+                        </span>
+                    </h2>
+                    <p class="text-gray-300 text-lg mb-8">
+                        Leveraging proprietary algorithms to decode Memphis basketball DNA through micro-moment analysis, 
+                        emotional intelligence patterns, and championship pathway optimization.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <!-- Micro-Expression Analysis -->
+                        <div class="bg-gradient-to-r from-memphis-blue/20 to-transparent p-6 rounded-xl border-l-4 border-memphis-blue">
+                            <h3 class="text-xl font-bold text-memphis-blue mb-2">Micro-Expression Engine</h3>
+                            <p class="text-gray-300 mb-3">
+                                AI-powered analysis of player facial expressions, body language, and emotional states during high-pressure moments.
+                            </p>
+                            <div class="flex items-center space-x-4 text-sm">
+                                <span class="bg-memphis-blue/20 px-3 py-1 rounded-full">95.7% Accuracy</span>
+                                <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full">Real-time Detection</span>
+                            </div>
+                        </div>
+
+                        <!-- Character Analysis -->
+                        <div class="bg-gradient-to-r from-grizzly-gold/20 to-transparent p-6 rounded-xl border-l-4 border-grizzly-gold">
+                            <h3 class="text-xl font-bold text-grizzly-gold mb-2">Character & Grit Algorithm</h3>
+                            <p class="text-gray-300 mb-3">
+                                Proprietary metrics identifying championship-level character traits through on-court decision patterns and adversity response.
+                            </p>
+                            <div class="flex items-center space-x-4 text-sm">
+                                <span class="bg-grizzly-gold/20 px-3 py-1 rounded-full">Grit Score: 87.3</span>
+                                <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full">Leadership Index: 91.8</span>
+                            </div>
+                        </div>
+
+                        <!-- Decision Velocity -->
+                        <div class="bg-gradient-to-r from-purple-500/20 to-transparent p-6 rounded-xl border-l-4 border-purple-500">
+                            <h3 class="text-xl font-bold text-purple-400 mb-2">Decision Velocity Model™</h3>
+                            <p class="text-gray-300 mb-3">
+                                Measuring cognitive processing speed from stimulus to action, identifying clutch decision-making patterns.
+                            </p>
+                            <div class="flex items-center space-x-4 text-sm">
+                                <span class="bg-purple-500/20 px-3 py-1 rounded-full">Response Time: 0.34s</span>
+                                <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full">Accuracy: 82.6%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Chart Visualization -->
+                <div class="bg-black/40 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Grit & Grind 2.0 Radar</h3>
+                    <div class="relative h-80 flex items-center justify-center">
+                        <!-- Placeholder for Interactive Chart -->
+                        <div class="w-72 h-72 border-2 border-memphis-blue/30 rounded-full relative flex items-center justify-center">
+                            <div class="w-48 h-48 border border-grizzly-gold/30 rounded-full flex items-center justify-center">
+                                <div class="w-24 h-24 border border-steel/30 rounded-full flex items-center justify-center">
+                                    <div class="text-center">
+                                        <div class="text-3xl font-bold text-memphis-blue">87.3</div>
+                                        <div class="text-xs text-gray-400">Overall</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Radar Points -->
+                            <div class="absolute top-4 left-1/2 transform -translate-x-1/2 text-center">
+                                <div class="w-3 h-3 bg-memphis-blue rounded-full mx-auto mb-1"></div>
+                                <div class="text-xs text-gray-300">Identity</div>
+                                <div class="text-xs text-memphis-blue font-bold">87.3</div>
+                            </div>
+                            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-center">
+                                <div class="w-3 h-3 bg-grizzly-gold rounded-full mx-auto mb-1"></div>
+                                <div class="text-xs text-gray-300">Clutch</div>
+                                <div class="text-xs text-grizzly-gold font-bold">82.6</div>
+                            </div>
+                            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center">
+                                <div class="w-3 h-3 bg-steel rounded-full mx-auto mb-1"></div>
+                                <div class="text-xs text-gray-300">Defense</div>
+                                <div class="text-xs text-steel font-bold">91.4</div>
+                            </div>
+                            <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-center">
+                                <div class="w-3 h-3 bg-purple-400 rounded-full mx-auto mb-1"></div>
+                                <div class="text-xs text-gray-300">Market</div>
+                                <div class="text-xs text-purple-400 font-bold">88.9</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Integration Section -->
+    <div class="py-20 bg-gradient-to-b from-black/50 to-memphis-blue/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6">Data Sources & Methods</h2>
+                <p class="text-gray-300 text-lg max-w-3xl mx-auto">
+                    Comprehensive data integration from NBA official stats, advanced tracking, and proprietary Memphis-specific metrics
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- NBA Official Data -->
+                <div class="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-database text-blue-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">NBA Official Stats</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Player Tracking Data</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Advanced Box Scores</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Shot Chart Analytics</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Hustle Stats</li>
+                    </ul>
+                </div>
+
+                <!-- Advanced Metrics -->
+                <div class="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-grizzly-gold/20 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-chart-line text-grizzly-gold text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Advanced Analytics</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Expected Value Models</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Win Probability Added</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Player Impact Metrics</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Clutch Performance</li>
+                    </ul>
+                </div>
+
+                <!-- Proprietary Intelligence -->
+                <div class="bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-memphis-blue/20 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-brain text-memphis-blue text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Blaze Intelligence</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Grit & Grind 2.0 Framework</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Micro-Expression Analysis</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Character Algorithms</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i>Memphis Market Dynamics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- API Status -->
+            <div class="mt-12 bg-gradient-to-r from-memphis-blue/10 to-grizzly-gold/10 backdrop-blur-sm border border-white/10 rounded-xl p-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">Live Data Integration</h3>
+                        <p class="text-gray-300">Real-time updates every 30 seconds during games, hourly during off-season</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 font-semibold">LIVE</span>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold" id="last-update">2m ago</div>
+                            <div class="text-sm text-gray-400">Last Update</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="py-20 bg-gradient-to-br from-memphis-blue/20 via-black to-grizzly-gold/20">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold mb-6">
+                Ready to Unleash Memphis Intelligence?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Get access to the complete Grizzlies analytics suite with real-time insights, 
+                proprietary metrics, and championship-level intelligence.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-memphis-blue hover:bg-memphis-blue/80 px-8 py-4 rounded-xl text-lg font-semibold transition-colors">
+                    <i class="fas fa-rocket mr-2"></i>Start Free Trial
+                </button>
+                <button class="bg-grizzly-gold hover:bg-grizzly-gold/80 text-black px-8 py-4 rounded-xl text-lg font-semibold transition-colors">
+                    <i class="fas fa-calendar mr-2"></i>Schedule Demo
+                </button>
+                <button class="border border-white/30 hover:bg-white/10 px-8 py-4 rounded-xl text-lg font-semibold transition-colors">
+                    <i class="fas fa-download mr-2"></i>Sample Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black/80 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-memphis-blue">Memphis Lab</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Live Analytics</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Historical Data</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Player Profiles</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Team Comparisons</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-grizzly-gold">Analytics</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Grit & Grind 2.0</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Clutch Analysis</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Micro-Expressions</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Character Metrics</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/api-docs" class="hover:text-white transition-colors">API Documentation</a></li>
+                        <li><a href="/sources-methods" class="hover:text-white transition-colors">Data Sources</a></li>
+                        <li><a href="/contact" class="hover:text-white transition-colors">Support</a></li>
+                        <li><a href="/blog" class="hover:text-white transition-colors">Research Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Austin Humphrey</li>
+                        <li>ahump20@outlook.com</li>
+                        <li>(210) 273-5538</li>
+                        <li class="pt-2">
+                            <a href="https://linkedin.com/in/john-humphrey-2033" class="text-memphis-blue hover:text-memphis-blue/80 transition-colors">
+                                <i class="fab fa-linkedin mr-1"></i>Connect
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 mt-8 text-center text-gray-400">
+                <p>&copy; 2025 Blaze Intelligence. Championship analytics for elite performance.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Three.js Hero Background
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+        document.getElementById('hero-canvas').appendChild(renderer.domElement);
+
+        // Create Memphis-themed particle system
+        const particleCount = 150;
+        const particles = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 20;
+            positions[i + 1] = (Math.random() - 0.5) * 20;
+            positions[i + 2] = (Math.random() - 0.5) * 20;
+
+            // Memphis colors: blue, gold, steel
+            const colorChoice = Math.random();
+            if (colorChoice < 0.4) {
+                colors[i] = 0.36; colors[i + 1] = 0.46; colors[i + 2] = 0.66; // Memphis blue
+            } else if (colorChoice < 0.7) {
+                colors[i] = 0.96; colors[i + 1] = 0.69; colors[i + 2] = 0.25; // Grizzly gold
+            } else {
+                colors[i] = 0.42; colors[i + 1] = 0.48; colors[i + 2] = 0.50; // Steel
+            }
+        }
+
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.05,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particleSystem = new THREE.Points(particles, material);
+        scene.add(particleSystem);
+
+        camera.position.z = 10;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particleSystem.rotation.x += 0.001;
+            particleSystem.rotation.y += 0.002;
+            
+            const positions = particleSystem.geometry.attributes.position.array;
+            for (let i = 1; i < positions.length; i += 3) {
+                positions[i] += Math.sin(Date.now() * 0.001 + positions[i]) * 0.001;
+            }
+            particleSystem.geometry.attributes.position.needsUpdate = true;
+            
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Real-time data updates
+        function updateMetrics() {
+            const metrics = {
+                'grit-score': (87.3 + (Math.random() - 0.5) * 0.4).toFixed(1),
+                'clutch-factor': (82.6 + (Math.random() - 0.5) * 0.6).toFixed(1),
+                'defense-rating': (114.2 + (Math.random() - 0.5) * 0.8).toFixed(1),
+                'market-impact': '$' + (34 + (Math.random() - 0.5) * 2).toFixed(0) + 'M',
+                'last-update': Math.floor(Math.random() * 5) + 'm ago'
+            };
+
+            Object.entries(metrics).forEach(([id, value]) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = value;
+                }
+            });
+        }
+
+        // Update metrics every 30 seconds
+        setInterval(updateMetrics, 30000);
+
+        // Responsive handling
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

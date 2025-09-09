@@ -1,0 +1,3337 @@
+{
+  "name": "Memphis Grizzlies",
+  "sport": "NBA",
+  "league": "Western Conference",
+  "division": "Southwest",
+  "city": "Memphis",
+  "established": 1995,
+  "colors": [
+    "#5D76A9",
+    "#12173F",
+    "#F5B112",
+    "#707271"
+  ],
+  "mascot": "Grizz",
+  "id": "grizzlies",
+  "currentSeason": "2025-26",
+  "roster": [
+    {
+      "id": "player_1",
+      "name": "Jonathan Jackson",
+      "jerseyNumber": 32,
+      "position": "PG",
+      "age": 20,
+      "height": "6'4\"",
+      "weight": 230,
+      "experience": 7,
+      "stats": {
+        "pointsPerGame": "9.8",
+        "reboundsPerGame": "3.2",
+        "assistsPerGame": "7.4",
+        "stealsPerGame": "2.2",
+        "blocksPerGame": "1.3",
+        "fieldGoalPercentage": "0.573",
+        "threePointPercentage": "0.326",
+        "freeThrowPercentage": "0.927",
+        "minutesPerGame": "29.0"
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 84,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 2,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "University of Texas",
+        "hometown": "Birmingham, AL",
+        "draftYear": 2015,
+        "draftRound": 5,
+        "draftPick": 4,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_2",
+      "name": "Jeffrey Garcia",
+      "jerseyNumber": 41,
+      "position": "SG",
+      "age": 31,
+      "height": "6'5\"",
+      "weight": 175,
+      "experience": 3,
+      "stats": {
+        "pointsPerGame": "13.9",
+        "reboundsPerGame": "13.7",
+        "assistsPerGame": "7.1",
+        "stealsPerGame": "1.6",
+        "blocksPerGame": "1.0",
+        "fieldGoalPercentage": "0.595",
+        "threePointPercentage": "0.448",
+        "freeThrowPercentage": "0.777",
+        "minutesPerGame": "26.9"
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 92,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Georgia Institute of Technology",
+        "hometown": "New York, NY",
+        "draftYear": 2016,
+        "draftRound": 2,
+        "draftPick": 6,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_3",
+      "name": "Nicholas Hall",
+      "jerseyNumber": 43,
+      "position": "SF",
+      "age": 26,
+      "height": "7'1\"",
+      "weight": 249,
+      "experience": 4,
+      "stats": {
+        "pointsPerGame": "11.0",
+        "reboundsPerGame": "11.1",
+        "assistsPerGame": "2.5",
+        "stealsPerGame": "0.7",
+        "blocksPerGame": "2.0",
+        "fieldGoalPercentage": "0.378",
+        "threePointPercentage": "0.277",
+        "freeThrowPercentage": "0.903",
+        "minutesPerGame": "37.3"
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 58,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 9,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of California",
+        "hometown": "Houston, TX",
+        "draftYear": 2015,
+        "draftRound": 1,
+        "draftPick": 27,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_4",
+      "name": "Ryan Taylor",
+      "jerseyNumber": 27,
+      "position": "PF",
+      "age": 31,
+      "height": "6'1\"",
+      "weight": 246,
+      "experience": 10,
+      "stats": {
+        "pointsPerGame": "13.6",
+        "reboundsPerGame": "10.3",
+        "assistsPerGame": "8.4",
+        "stealsPerGame": "0.9",
+        "blocksPerGame": "0.3",
+        "fieldGoalPercentage": "0.383",
+        "threePointPercentage": "0.290",
+        "freeThrowPercentage": "0.723",
+        "minutesPerGame": "19.2"
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 92,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 1,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Rice University",
+        "hometown": "New York, NY",
+        "draftYear": 2019,
+        "draftRound": 4,
+        "draftPick": 27,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_5",
+      "name": "Edward Lewis",
+      "jerseyNumber": 78,
+      "position": "C",
+      "age": 23,
+      "height": "5'7\"",
+      "weight": 165,
+      "experience": 9,
+      "stats": {
+        "pointsPerGame": "27.8",
+        "reboundsPerGame": "11.5",
+        "assistsPerGame": "8.0",
+        "stealsPerGame": "2.0",
+        "blocksPerGame": "2.4",
+        "fieldGoalPercentage": "0.562",
+        "threePointPercentage": "0.448",
+        "freeThrowPercentage": "0.711",
+        "minutesPerGame": "22.6"
+      },
+      "contract": {
+        "years": 1,
+        "totalValue": 23,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 3,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Florida State University",
+        "hometown": "New York, NY",
+        "draftYear": 2022,
+        "draftRound": 3,
+        "draftPick": 20,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_6",
+      "name": "Gregory Smith",
+      "jerseyNumber": 9,
+      "position": "PG",
+      "age": 30,
+      "height": "7'1\"",
+      "weight": 229,
+      "experience": 10,
+      "stats": {
+        "pointsPerGame": "20.6",
+        "reboundsPerGame": "5.5",
+        "assistsPerGame": "5.7",
+        "stealsPerGame": "0.9",
+        "blocksPerGame": "1.6",
+        "fieldGoalPercentage": "0.428",
+        "threePointPercentage": "0.498",
+        "freeThrowPercentage": "0.898",
+        "minutesPerGame": "33.4"
+      },
+      "contract": {
+        "years": 1,
+        "totalValue": 93,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Georgia Institute of Technology",
+        "hometown": "Dallas, TX",
+        "draftYear": 2021,
+        "draftRound": 2,
+        "draftPick": 1,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_7",
+      "name": "Nicholas Baker",
+      "jerseyNumber": 18,
+      "position": "SG",
+      "age": 24,
+      "height": "6'9\"",
+      "weight": 276,
+      "experience": 7,
+      "stats": {
+        "pointsPerGame": "27.7",
+        "reboundsPerGame": "2.4",
+        "assistsPerGame": "9.0",
+        "stealsPerGame": "1.7",
+        "blocksPerGame": "0.5",
+        "fieldGoalPercentage": "0.359",
+        "threePointPercentage": "0.309",
+        "freeThrowPercentage": "0.801",
+        "minutesPerGame": "17.4"
+      },
+      "contract": {
+        "years": 2,
+        "totalValue": 51,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 2,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Georgia Institute of Technology",
+        "hometown": "Nashville, TN",
+        "draftYear": 2018,
+        "draftRound": 7,
+        "draftPick": 15,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_8",
+      "name": "Joshua Green",
+      "jerseyNumber": 51,
+      "position": "SF",
+      "age": 30,
+      "height": "6'5\"",
+      "weight": 276,
+      "experience": 9,
+      "stats": {
+        "pointsPerGame": "25.6",
+        "reboundsPerGame": "6.6",
+        "assistsPerGame": "5.4",
+        "stealsPerGame": "1.1",
+        "blocksPerGame": "2.5",
+        "fieldGoalPercentage": "0.569",
+        "threePointPercentage": "0.481",
+        "freeThrowPercentage": "0.901",
+        "minutesPerGame": "36.8"
+      },
+      "contract": {
+        "years": 1,
+        "totalValue": 44,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "Miami, FL",
+        "draftYear": 2022,
+        "draftRound": 4,
+        "draftPick": 29,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_9",
+      "name": "Alexander Allen",
+      "jerseyNumber": 97,
+      "position": "PF",
+      "age": 30,
+      "height": "5'7\"",
+      "weight": 237,
+      "experience": 6,
+      "stats": {
+        "pointsPerGame": "23.7",
+        "reboundsPerGame": "9.8",
+        "assistsPerGame": "1.9",
+        "stealsPerGame": "1.4",
+        "blocksPerGame": "1.3",
+        "fieldGoalPercentage": "0.427",
+        "threePointPercentage": "0.495",
+        "freeThrowPercentage": "0.794",
+        "minutesPerGame": "29.0"
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 42,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 7,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Alabama",
+        "hometown": "Atlanta, GA",
+        "draftYear": 2018,
+        "draftRound": 5,
+        "draftPick": 12,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_10",
+      "name": "Michael Lee",
+      "jerseyNumber": 91,
+      "position": "C",
+      "age": 21,
+      "height": "6'6\"",
+      "weight": 168,
+      "experience": 8,
+      "stats": {
+        "pointsPerGame": "11.6",
+        "reboundsPerGame": "11.0",
+        "assistsPerGame": "9.8",
+        "stealsPerGame": "1.7",
+        "blocksPerGame": "1.1",
+        "fieldGoalPercentage": "0.575",
+        "threePointPercentage": "0.365",
+        "freeThrowPercentage": "0.814",
+        "minutesPerGame": "18.4"
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 48,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 0,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Duke University",
+        "hometown": "Miami, FL",
+        "draftYear": 2021,
+        "draftRound": 7,
+        "draftPick": 17,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_11",
+      "name": "Donald Adams",
+      "jerseyNumber": 45,
+      "position": "PG",
+      "age": 25,
+      "height": "6'3\"",
+      "weight": 145,
+      "experience": 9,
+      "stats": {
+        "pointsPerGame": "16.8",
+        "reboundsPerGame": "4.8",
+        "assistsPerGame": "9.5",
+        "stealsPerGame": "1.3",
+        "blocksPerGame": "2.5",
+        "fieldGoalPercentage": "0.476",
+        "threePointPercentage": "0.371",
+        "freeThrowPercentage": "0.769",
+        "minutesPerGame": "34.0"
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 43,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "New York, NY",
+        "draftYear": 2015,
+        "draftRound": 6,
+        "draftPick": 12,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_12",
+      "name": "Justin Johnson",
+      "jerseyNumber": 25,
+      "position": "SG",
+      "age": 20,
+      "height": "6'5\"",
+      "weight": 235,
+      "experience": 4,
+      "stats": {
+        "pointsPerGame": "18.2",
+        "reboundsPerGame": "13.4",
+        "assistsPerGame": "1.5",
+        "stealsPerGame": "1.0",
+        "blocksPerGame": "2.0",
+        "fieldGoalPercentage": "0.548",
+        "threePointPercentage": "0.444",
+        "freeThrowPercentage": "0.896",
+        "minutesPerGame": "36.5"
+      },
+      "contract": {
+        "years": 1,
+        "totalValue": 93,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Georgia Institute of Technology",
+        "hometown": "Phoenix, AZ",
+        "draftYear": 2023,
+        "draftRound": 5,
+        "draftPick": 26,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_13",
+      "name": "Stephen Rivera",
+      "jerseyNumber": 48,
+      "position": "SF",
+      "age": 34,
+      "height": "7'2\"",
+      "weight": 215,
+      "experience": 5,
+      "stats": {
+        "pointsPerGame": "28.4",
+        "reboundsPerGame": "11.6",
+        "assistsPerGame": "6.4",
+        "stealsPerGame": "2.2",
+        "blocksPerGame": "1.8",
+        "fieldGoalPercentage": "0.535",
+        "threePointPercentage": "0.426",
+        "freeThrowPercentage": "0.718",
+        "minutesPerGame": "17.9"
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 99,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 5,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Vanderbilt University",
+        "hometown": "Birmingham, AL",
+        "draftYear": 2015,
+        "draftRound": 4,
+        "draftPick": 6,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_14",
+      "name": "Alexander Campbell",
+      "jerseyNumber": 1,
+      "position": "PF",
+      "age": 29,
+      "height": "6'8\"",
+      "weight": 179,
+      "experience": 10,
+      "stats": {
+        "pointsPerGame": "10.0",
+        "reboundsPerGame": "2.7",
+        "assistsPerGame": "2.8",
+        "stealsPerGame": "0.9",
+        "blocksPerGame": "2.3",
+        "fieldGoalPercentage": "0.415",
+        "threePointPercentage": "0.470",
+        "freeThrowPercentage": "0.672",
+        "minutesPerGame": "30.8"
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 24,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 2,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Nashville, TN",
+        "draftYear": 2016,
+        "draftRound": 4,
+        "draftPick": 32,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_15",
+      "name": "Michael Miller",
+      "jerseyNumber": 88,
+      "position": "C",
+      "age": 28,
+      "height": "6'11\"",
+      "weight": 310,
+      "experience": 8,
+      "stats": {
+        "pointsPerGame": "27.3",
+        "reboundsPerGame": "6.7",
+        "assistsPerGame": "10.8",
+        "stealsPerGame": "2.2",
+        "blocksPerGame": "1.8",
+        "fieldGoalPercentage": "0.442",
+        "threePointPercentage": "0.302",
+        "freeThrowPercentage": "0.850",
+        "minutesPerGame": "33.9"
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 55,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 3,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of Michigan",
+        "hometown": "Chicago, IL",
+        "draftYear": 2019,
+        "draftRound": 3,
+        "draftPick": 12,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_16",
+      "name": "Jonathan Ramirez",
+      "jerseyNumber": 72,
+      "position": "PG",
+      "age": 22,
+      "height": "6'3\"",
+      "weight": 304,
+      "experience": 5,
+      "stats": {
+        "pointsPerGame": "22.0",
+        "reboundsPerGame": "4.5",
+        "assistsPerGame": "10.5",
+        "stealsPerGame": "0.6",
+        "blocksPerGame": "1.6",
+        "fieldGoalPercentage": "0.498",
+        "threePointPercentage": "0.499",
+        "freeThrowPercentage": "0.944",
+        "minutesPerGame": "31.6"
+      },
+      "contract": {
+        "years": 4,
+        "totalValue": 42,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 4,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Florida State University",
+        "hometown": "Phoenix, AZ",
+        "draftYear": 2021,
+        "draftRound": 5,
+        "draftPick": 31,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_17",
+      "name": "Samuel Green",
+      "jerseyNumber": 37,
+      "position": "SG",
+      "age": 31,
+      "height": "6'0\"",
+      "weight": 268,
+      "experience": 6,
+      "stats": {
+        "pointsPerGame": "14.1",
+        "reboundsPerGame": "8.7",
+        "assistsPerGame": "8.5",
+        "stealsPerGame": "1.7",
+        "blocksPerGame": "0.5",
+        "fieldGoalPercentage": "0.599",
+        "threePointPercentage": "0.424",
+        "freeThrowPercentage": "0.799",
+        "minutesPerGame": "21.2"
+      },
+      "contract": {
+        "years": 1,
+        "totalValue": 92,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 2,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Vanderbilt University",
+        "hometown": "Birmingham, AL",
+        "draftYear": 2017,
+        "draftRound": 4,
+        "draftPick": 31,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_18",
+      "name": "Edward Allen",
+      "jerseyNumber": 14,
+      "position": "SF",
+      "age": 27,
+      "height": "7'0\"",
+      "weight": 229,
+      "experience": 4,
+      "stats": {
+        "pointsPerGame": "18.7",
+        "reboundsPerGame": "13.4",
+        "assistsPerGame": "10.3",
+        "stealsPerGame": "2.2",
+        "blocksPerGame": "0.8",
+        "fieldGoalPercentage": "0.493",
+        "threePointPercentage": "0.405",
+        "freeThrowPercentage": "0.842",
+        "minutesPerGame": "24.9"
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 76,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 9,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "Georgia Institute of Technology",
+        "hometown": "Memphis, TN",
+        "draftYear": 2023,
+        "draftRound": 5,
+        "draftPick": 19,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_19",
+      "name": "Benjamin Hall",
+      "jerseyNumber": 43,
+      "position": "PF",
+      "age": 34,
+      "height": "7'1\"",
+      "weight": 271,
+      "experience": 2,
+      "stats": {
+        "pointsPerGame": "13.7",
+        "reboundsPerGame": "3.5",
+        "assistsPerGame": "9.7",
+        "stealsPerGame": "0.6",
+        "blocksPerGame": "1.6",
+        "fieldGoalPercentage": "0.478",
+        "threePointPercentage": "0.390",
+        "freeThrowPercentage": "0.711",
+        "minutesPerGame": "30.2"
+      },
+      "contract": {
+        "years": 2,
+        "totalValue": 58,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 5,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "Rice University",
+        "hometown": "Dallas, TX",
+        "draftYear": 2015,
+        "draftRound": 2,
+        "draftPick": 2,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_20",
+      "name": "Kenneth Harris",
+      "jerseyNumber": 74,
+      "position": "C",
+      "age": 28,
+      "height": "7'0\"",
+      "weight": 240,
+      "experience": 7,
+      "stats": {
+        "pointsPerGame": "30.0",
+        "reboundsPerGame": "2.7",
+        "assistsPerGame": "2.7",
+        "stealsPerGame": "0.7",
+        "blocksPerGame": "0.5",
+        "fieldGoalPercentage": "0.409",
+        "threePointPercentage": "0.467",
+        "freeThrowPercentage": "0.668",
+        "minutesPerGame": "16.4"
+      },
+      "contract": {
+        "years": 5,
+        "totalValue": 52,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 5,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "University of California",
+        "hometown": "Atlanta, GA",
+        "draftYear": 2021,
+        "draftRound": 2,
+        "draftPick": 12,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_21",
+      "name": "Anthony Lopez",
+      "jerseyNumber": 67,
+      "position": "PG",
+      "age": 26,
+      "height": "7'0\"",
+      "weight": 229,
+      "experience": 0,
+      "stats": {
+        "pointsPerGame": "29.1",
+        "reboundsPerGame": "6.8",
+        "assistsPerGame": "8.6",
+        "stealsPerGame": "1.0",
+        "blocksPerGame": "1.3",
+        "fieldGoalPercentage": "0.453",
+        "threePointPercentage": "0.468",
+        "freeThrowPercentage": "0.785",
+        "minutesPerGame": "26.5"
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 59,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 8,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Duke University",
+        "hometown": "Dallas, TX",
+        "draftYear": 2022,
+        "draftRound": 3,
+        "draftPick": 26,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_22",
+      "name": "Jeffrey Smith",
+      "jerseyNumber": 78,
+      "position": "SG",
+      "age": 32,
+      "height": "5'9\"",
+      "weight": 156,
+      "experience": 2,
+      "stats": {
+        "pointsPerGame": "21.0",
+        "reboundsPerGame": "4.5",
+        "assistsPerGame": "7.8",
+        "stealsPerGame": "0.8",
+        "blocksPerGame": "2.0",
+        "fieldGoalPercentage": "0.351",
+        "threePointPercentage": "0.325",
+        "freeThrowPercentage": "0.785",
+        "minutesPerGame": "22.7"
+      },
+      "contract": {
+        "years": 7,
+        "totalValue": 63,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 6,
+        "noTradeClause": true,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Georgia Institute of Technology",
+        "hometown": "Austin, TX",
+        "draftYear": 2017,
+        "draftRound": 3,
+        "draftPick": 3,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_23",
+      "name": "Andrew White",
+      "jerseyNumber": 66,
+      "position": "SF",
+      "age": 23,
+      "height": "6'5\"",
+      "weight": 162,
+      "experience": 11,
+      "stats": {
+        "pointsPerGame": "29.8",
+        "reboundsPerGame": "13.4",
+        "assistsPerGame": "2.1",
+        "stealsPerGame": "2.5",
+        "blocksPerGame": "2.7",
+        "fieldGoalPercentage": "0.460",
+        "threePointPercentage": "0.491",
+        "freeThrowPercentage": "0.707",
+        "minutesPerGame": "29.1"
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 19,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 6,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Rice University",
+        "hometown": "Birmingham, AL",
+        "draftYear": 2016,
+        "draftRound": 2,
+        "draftPick": 28,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_24",
+      "name": "Jacob Smith",
+      "jerseyNumber": 82,
+      "position": "PF",
+      "age": 34,
+      "height": "5'8\"",
+      "weight": 311,
+      "experience": 4,
+      "stats": {
+        "pointsPerGame": "9.4",
+        "reboundsPerGame": "2.4",
+        "assistsPerGame": "5.4",
+        "stealsPerGame": "1.0",
+        "blocksPerGame": "1.7",
+        "fieldGoalPercentage": "0.489",
+        "threePointPercentage": "0.458",
+        "freeThrowPercentage": "0.940",
+        "minutesPerGame": "26.1"
+      },
+      "contract": {
+        "years": 6,
+        "totalValue": 60,
+        "annualAverage": 0,
+        "guaranteed": false,
+        "incentives": 7,
+        "noTradeClause": false,
+        "status": "rookie"
+      },
+      "bio": {
+        "college": "Ohio State University",
+        "hometown": "New York, NY",
+        "draftYear": 2021,
+        "draftRound": 6,
+        "draftPick": 23,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    },
+    {
+      "id": "player_25",
+      "name": "Gary Torres",
+      "jerseyNumber": 40,
+      "position": "C",
+      "age": 34,
+      "height": "5'8\"",
+      "weight": 204,
+      "experience": 6,
+      "stats": {
+        "pointsPerGame": "13.4",
+        "reboundsPerGame": "9.7",
+        "assistsPerGame": "2.0",
+        "stealsPerGame": "1.1",
+        "blocksPerGame": "2.4",
+        "fieldGoalPercentage": "0.453",
+        "threePointPercentage": "0.359",
+        "freeThrowPercentage": "0.809",
+        "minutesPerGame": "32.7"
+      },
+      "contract": {
+        "years": 3,
+        "totalValue": 84,
+        "annualAverage": 0,
+        "guaranteed": true,
+        "incentives": 4,
+        "noTradeClause": false,
+        "status": "veteran"
+      },
+      "bio": {
+        "college": "Stanford University",
+        "hometown": "Houston, TX",
+        "draftYear": 2020,
+        "draftRound": 5,
+        "draftPick": 28,
+        "biography": "Talented athlete with strong work ethic and championship potential."
+      },
+      "status": "active"
+    }
+  ],
+  "stats": {
+    "wins": 32,
+    "losses": 32,
+    "winPercentage": 0,
+    "pointsPerGame": "117.1",
+    "pointsAllowedPerGame": "114.1",
+    "fieldGoalPercentage": "0.442",
+    "threePointPercentage": "0.314",
+    "reboundsPerGame": "44.1",
+    "assistsPerGame": "22.7",
+    "stealsPerGame": "7.8"
+  },
+  "readiness": {
+    "overall": 89.1,
+    "trend": "strong",
+    "momentum": {
+      "score": 76,
+      "category": "positive",
+      "description": "Consistent performance across key metrics"
+    },
+    "components": {
+      "offense": 81.4,
+      "defense": 75.9,
+      "specialTeams": 92.9,
+      "coaching": 83.8,
+      "chemistry": 75.3
+    },
+    "keyMetrics": {
+      "leverageFactor": 2.49,
+      "leverageCategory": "high",
+      "strategicOutlook": "Strong foundation with room for optimization"
+    },
+    "lastUpdated": "2025-09-02T22:39:19.791Z"
+  },
+  "schedule": [
+    {
+      "id": "game_1",
+      "date": "2025-10-15",
+      "opponent": "Jacksonville Jaguars",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "7-4",
+        "margin": 10
+      },
+      "attendance": 41957,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 94,
+        "humidity": 61,
+        "windSpeed": 19,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4278093
+      }
+    },
+    {
+      "id": "game_2",
+      "date": "2025-10-17",
+      "opponent": "Houston Texans",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "3-5",
+        "margin": 1
+      },
+      "attendance": 44741,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 64,
+        "humidity": 51,
+        "windSpeed": 1,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1125892
+      }
+    },
+    {
+      "id": "game_3",
+      "date": "2025-10-19",
+      "opponent": "Milwaukee Brewers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "5-7",
+        "margin": 10
+      },
+      "attendance": 38452,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 82,
+        "humidity": 83,
+        "windSpeed": 0,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4482535
+      }
+    },
+    {
+      "id": "game_4",
+      "date": "2025-10-21",
+      "opponent": "Denver Broncos",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-5",
+        "margin": 3
+      },
+      "attendance": 20639,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 82,
+        "humidity": 66,
+        "windSpeed": 5,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5741414
+      }
+    },
+    {
+      "id": "game_5",
+      "date": "2025-10-23",
+      "opponent": "Pittsburgh Pirates",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-8",
+        "margin": 10
+      },
+      "attendance": 13368,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 68,
+        "humidity": 92,
+        "windSpeed": 5,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5758716
+      }
+    },
+    {
+      "id": "game_6",
+      "date": "2025-10-26",
+      "opponent": "Oklahoma Sooners",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "6-1",
+        "margin": 6
+      },
+      "attendance": 19391,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 63,
+        "humidity": 74,
+        "windSpeed": 19,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5034414
+      }
+    },
+    {
+      "id": "game_7",
+      "date": "2025-10-28",
+      "opponent": "Cincinnati Reds",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-1",
+        "margin": 2
+      },
+      "attendance": 31839,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 94,
+        "humidity": 85,
+        "windSpeed": 9,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5054401
+      }
+    },
+    {
+      "id": "game_8",
+      "date": "2025-10-30",
+      "opponent": "Dallas Mavericks",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-2",
+        "margin": 6
+      },
+      "attendance": 59374,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 82,
+        "humidity": 81,
+        "windSpeed": 11,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2685171
+      }
+    },
+    {
+      "id": "game_9",
+      "date": "2025-11-01",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "5-6",
+        "margin": 1
+      },
+      "attendance": 11193,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 89,
+        "humidity": 84,
+        "windSpeed": 4,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3042683
+      }
+    },
+    {
+      "id": "game_10",
+      "date": "2025-11-03",
+      "opponent": "Pittsburgh Pirates",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-5",
+        "margin": 10
+      },
+      "attendance": 44365,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 93,
+        "humidity": 99,
+        "windSpeed": 13,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4372833
+      }
+    },
+    {
+      "id": "game_11",
+      "date": "2025-11-06",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-5",
+        "margin": 8
+      },
+      "attendance": 13380,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 96,
+        "humidity": 84,
+        "windSpeed": 11,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3186829
+      }
+    },
+    {
+      "id": "game_12",
+      "date": "2025-11-08",
+      "opponent": "Golden State Warriors",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "5-2",
+        "margin": 7
+      },
+      "attendance": 22413,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 81,
+        "humidity": 61,
+        "windSpeed": 11,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1750035
+      }
+    },
+    {
+      "id": "game_13",
+      "date": "2025-11-10",
+      "opponent": "Chicago Cubs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "10-1",
+        "margin": 4
+      },
+      "attendance": 43435,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 68,
+        "humidity": 49,
+        "windSpeed": 0,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5050336
+      }
+    },
+    {
+      "id": "game_14",
+      "date": "2025-11-12",
+      "opponent": "Golden State Warriors",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "4-5",
+        "margin": 6
+      },
+      "attendance": 27962,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 82,
+        "humidity": 58,
+        "windSpeed": 5,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3331581
+      }
+    },
+    {
+      "id": "game_15",
+      "date": "2025-11-14",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-2",
+        "margin": 3
+      },
+      "attendance": 33199,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 79,
+        "humidity": 51,
+        "windSpeed": 0,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1411585
+      }
+    },
+    {
+      "id": "game_16",
+      "date": "2025-11-17",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-4",
+        "margin": 6
+      },
+      "attendance": 14062,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 82,
+        "humidity": 45,
+        "windSpeed": 3,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2593628
+      }
+    },
+    {
+      "id": "game_17",
+      "date": "2025-11-19",
+      "opponent": "LSU Tigers",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-6",
+        "margin": 2
+      },
+      "attendance": 47893,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 74,
+        "humidity": 98,
+        "windSpeed": 12,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3463392
+      }
+    },
+    {
+      "id": "game_18",
+      "date": "2025-11-21",
+      "opponent": "Indianapolis Colts",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-2",
+        "margin": 4
+      },
+      "attendance": 24762,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 99,
+        "humidity": 91,
+        "windSpeed": 1,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1909093
+      }
+    },
+    {
+      "id": "game_19",
+      "date": "2025-11-23",
+      "opponent": "Denver Broncos",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-6",
+        "margin": 6
+      },
+      "attendance": 54534,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 85,
+        "humidity": 55,
+        "windSpeed": 9,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3606275
+      }
+    },
+    {
+      "id": "game_20",
+      "date": "2025-11-25",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "5-12",
+        "margin": 9
+      },
+      "attendance": 43389,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 83,
+        "humidity": 84,
+        "windSpeed": 9,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2561968
+      }
+    },
+    {
+      "id": "game_21",
+      "date": "2025-11-28",
+      "opponent": "Houston Texans",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "5-9",
+        "margin": 5
+      },
+      "attendance": 55816,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 77,
+        "humidity": 50,
+        "windSpeed": 17,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4020610
+      }
+    },
+    {
+      "id": "game_22",
+      "date": "2025-11-30",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "6-4",
+        "margin": 3
+      },
+      "attendance": 25171,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 75,
+        "humidity": 89,
+        "windSpeed": 18,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4105491
+      }
+    },
+    {
+      "id": "game_23",
+      "date": "2025-12-02",
+      "opponent": "San Antonio Spurs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-7",
+        "margin": 4
+      },
+      "attendance": 31205,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 94,
+        "humidity": 91,
+        "windSpeed": 0,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4084528
+      }
+    },
+    {
+      "id": "game_24",
+      "date": "2025-12-04",
+      "opponent": "Pittsburgh Pirates",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-12",
+        "margin": 9
+      },
+      "attendance": 19802,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 63,
+        "humidity": 44,
+        "windSpeed": 6,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1068070
+      }
+    },
+    {
+      "id": "game_25",
+      "date": "2025-12-06",
+      "opponent": "Cincinnati Reds",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "2-10",
+        "margin": 10
+      },
+      "attendance": 45433,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 87,
+        "humidity": 79,
+        "windSpeed": 14,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5997352
+      }
+    },
+    {
+      "id": "game_26",
+      "date": "2025-12-09",
+      "opponent": "Los Angeles Lakers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-6",
+        "margin": 9
+      },
+      "attendance": 55899,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 96,
+        "humidity": 49,
+        "windSpeed": 5,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4299875
+      }
+    },
+    {
+      "id": "game_27",
+      "date": "2025-12-11",
+      "opponent": "Los Angeles Lakers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-5",
+        "margin": 9
+      },
+      "attendance": 20079,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 62,
+        "humidity": 58,
+        "windSpeed": 5,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4999095
+      }
+    },
+    {
+      "id": "game_28",
+      "date": "2025-12-13",
+      "opponent": "Georgia Bulldogs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "10-5",
+        "margin": 9
+      },
+      "attendance": 26978,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 78,
+        "humidity": 64,
+        "windSpeed": 0,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4216258
+      }
+    },
+    {
+      "id": "game_29",
+      "date": "2025-12-15",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "6-6",
+        "margin": 7
+      },
+      "attendance": 44173,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 81,
+        "humidity": 80,
+        "windSpeed": 8,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1154207
+      }
+    },
+    {
+      "id": "game_30",
+      "date": "2025-12-17",
+      "opponent": "Milwaukee Brewers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "5-5",
+        "margin": 3
+      },
+      "attendance": 38985,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 72,
+        "humidity": 94,
+        "windSpeed": 14,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5520646
+      }
+    },
+    {
+      "id": "game_31",
+      "date": "2025-12-20",
+      "opponent": "Cincinnati Reds",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "12-5",
+        "margin": 2
+      },
+      "attendance": 38738,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 61,
+        "humidity": 62,
+        "windSpeed": 7,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1691274
+      }
+    },
+    {
+      "id": "game_32",
+      "date": "2025-12-22",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-8",
+        "margin": 2
+      },
+      "attendance": 43106,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 64,
+        "humidity": 89,
+        "windSpeed": 10,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1802717
+      }
+    },
+    {
+      "id": "game_33",
+      "date": "2025-12-24",
+      "opponent": "Pittsburgh Pirates",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "7-5",
+        "margin": 9
+      },
+      "attendance": 14820,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 89,
+        "humidity": 73,
+        "windSpeed": 15,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4897843
+      }
+    },
+    {
+      "id": "game_34",
+      "date": "2025-12-26",
+      "opponent": "Golden State Warriors",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "5-5",
+        "margin": 10
+      },
+      "attendance": 56251,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 82,
+        "humidity": 46,
+        "windSpeed": 6,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4965350
+      }
+    },
+    {
+      "id": "game_35",
+      "date": "2025-12-28",
+      "opponent": "Chicago Cubs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-8",
+        "margin": 7
+      },
+      "attendance": 14497,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 60,
+        "humidity": 48,
+        "windSpeed": 19,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3912936
+      }
+    },
+    {
+      "id": "game_36",
+      "date": "2025-12-31",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-10",
+        "margin": 3
+      },
+      "attendance": 35665,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 92,
+        "humidity": 68,
+        "windSpeed": 5,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2231648
+      }
+    },
+    {
+      "id": "game_37",
+      "date": "2026-01-02",
+      "opponent": "Oklahoma Sooners",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "5-9",
+        "margin": 5
+      },
+      "attendance": 34854,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 78,
+        "humidity": 47,
+        "windSpeed": 18,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2790339
+      }
+    },
+    {
+      "id": "game_38",
+      "date": "2026-01-04",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "8-5",
+        "margin": 2
+      },
+      "attendance": 34257,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 86,
+        "humidity": 66,
+        "windSpeed": 19,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2032032
+      }
+    },
+    {
+      "id": "game_39",
+      "date": "2026-01-06",
+      "opponent": "Golden State Warriors",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "1-10",
+        "margin": 5
+      },
+      "attendance": 42943,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 67,
+        "humidity": 88,
+        "windSpeed": 17,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1546652
+      }
+    },
+    {
+      "id": "game_40",
+      "date": "2026-01-08",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "9-6",
+        "margin": 2
+      },
+      "attendance": 22692,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 98,
+        "humidity": 70,
+        "windSpeed": 10,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3971984
+      }
+    },
+    {
+      "id": "game_41",
+      "date": "2026-01-11",
+      "opponent": "Indianapolis Colts",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-3",
+        "margin": 9
+      },
+      "attendance": 20397,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 74,
+        "humidity": 55,
+        "windSpeed": 9,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2365328
+      }
+    },
+    {
+      "id": "game_42",
+      "date": "2026-01-13",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-2",
+        "margin": 9
+      },
+      "attendance": 23223,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 78,
+        "humidity": 95,
+        "windSpeed": 9,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2404229
+      }
+    },
+    {
+      "id": "game_43",
+      "date": "2026-01-15",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-8",
+        "margin": 5
+      },
+      "attendance": 33071,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 71,
+        "humidity": 72,
+        "windSpeed": 4,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5207379
+      }
+    },
+    {
+      "id": "game_44",
+      "date": "2026-01-17",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "1-5",
+        "margin": 1
+      },
+      "attendance": 12611,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 78,
+        "humidity": 95,
+        "windSpeed": 11,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5893954
+      }
+    },
+    {
+      "id": "game_45",
+      "date": "2026-01-19",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-8",
+        "margin": 9
+      },
+      "attendance": 11180,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 60,
+        "humidity": 75,
+        "windSpeed": 19,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3728310
+      }
+    },
+    {
+      "id": "game_46",
+      "date": "2026-01-22",
+      "opponent": "Cincinnati Reds",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "7-6",
+        "margin": 4
+      },
+      "attendance": 33660,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 95,
+        "humidity": 47,
+        "windSpeed": 5,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4821550
+      }
+    },
+    {
+      "id": "game_47",
+      "date": "2026-01-24",
+      "opponent": "Pittsburgh Pirates",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "10-2",
+        "margin": 7
+      },
+      "attendance": 45801,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 70,
+        "humidity": 95,
+        "windSpeed": 5,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3838918
+      }
+    },
+    {
+      "id": "game_48",
+      "date": "2026-01-26",
+      "opponent": "Georgia Bulldogs",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-5",
+        "margin": 1
+      },
+      "attendance": 34319,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 77,
+        "humidity": 91,
+        "windSpeed": 7,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3585486
+      }
+    },
+    {
+      "id": "game_49",
+      "date": "2026-01-28",
+      "opponent": "Oklahoma Sooners",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-2",
+        "margin": 2
+      },
+      "attendance": 27947,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 85,
+        "humidity": 50,
+        "windSpeed": 3,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3845318
+      }
+    },
+    {
+      "id": "game_50",
+      "date": "2026-01-30",
+      "opponent": "San Antonio Spurs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "12-4",
+        "margin": 10
+      },
+      "attendance": 50993,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 95,
+        "humidity": 42,
+        "windSpeed": 13,
+        "windDirection": "N"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5000338
+      }
+    },
+    {
+      "id": "game_51",
+      "date": "2026-02-02",
+      "opponent": "Pittsburgh Pirates",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-9",
+        "margin": 2
+      },
+      "attendance": 20886,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 98,
+        "humidity": 52,
+        "windSpeed": 2,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4710467
+      }
+    },
+    {
+      "id": "game_52",
+      "date": "2026-02-04",
+      "opponent": "Indianapolis Colts",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "6-7",
+        "margin": 2
+      },
+      "attendance": 56002,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 85,
+        "humidity": 88,
+        "windSpeed": 6,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4380912
+      }
+    },
+    {
+      "id": "game_53",
+      "date": "2026-02-06",
+      "opponent": "Pittsburgh Pirates",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "5-12",
+        "margin": 5
+      },
+      "attendance": 15699,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 80,
+        "humidity": 48,
+        "windSpeed": 2,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3553471
+      }
+    },
+    {
+      "id": "game_54",
+      "date": "2026-02-08",
+      "opponent": "Los Angeles Lakers",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "5-10",
+        "margin": 3
+      },
+      "attendance": 56077,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 84,
+        "humidity": 43,
+        "windSpeed": 10,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2499326
+      }
+    },
+    {
+      "id": "game_55",
+      "date": "2026-02-10",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-3",
+        "margin": 5
+      },
+      "attendance": 48782,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 73,
+        "humidity": 48,
+        "windSpeed": 12,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3473544
+      }
+    },
+    {
+      "id": "game_56",
+      "date": "2026-02-13",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "5-5",
+        "margin": 8
+      },
+      "attendance": 19676,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 77,
+        "humidity": 64,
+        "windSpeed": 13,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5170965
+      }
+    },
+    {
+      "id": "game_57",
+      "date": "2026-02-15",
+      "opponent": "Los Angeles Lakers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "5-1",
+        "margin": 6
+      },
+      "attendance": 33885,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 87,
+        "humidity": 75,
+        "windSpeed": 19,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2317447
+      }
+    },
+    {
+      "id": "game_58",
+      "date": "2026-02-17",
+      "opponent": "Los Angeles Lakers",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-1",
+        "margin": 9
+      },
+      "attendance": 50886,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 68,
+        "humidity": 62,
+        "windSpeed": 11,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5717420
+      }
+    },
+    {
+      "id": "game_59",
+      "date": "2026-02-19",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "6-5",
+        "margin": 2
+      },
+      "attendance": 15055,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 96,
+        "humidity": 57,
+        "windSpeed": 12,
+        "windDirection": "E"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2188527
+      }
+    },
+    {
+      "id": "game_60",
+      "date": "2026-02-21",
+      "opponent": "Houston Texans",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "6-7",
+        "margin": 8
+      },
+      "attendance": 23527,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 69,
+        "humidity": 70,
+        "windSpeed": 15,
+        "windDirection": "SW"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4225087
+      }
+    },
+    {
+      "id": "game_61",
+      "date": "2026-02-24",
+      "opponent": "Dallas Mavericks",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "5-8",
+        "margin": 5
+      },
+      "attendance": 22562,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 70,
+        "humidity": 90,
+        "windSpeed": 7,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5612451
+      }
+    },
+    {
+      "id": "game_62",
+      "date": "2026-02-26",
+      "opponent": "Houston Texans",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "2-11",
+        "margin": 3
+      },
+      "attendance": 49738,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 76,
+        "humidity": 50,
+        "windSpeed": 2,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4010887
+      }
+    },
+    {
+      "id": "game_63",
+      "date": "2026-02-28",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "5-10",
+        "margin": 7
+      },
+      "attendance": 38081,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 63,
+        "humidity": 50,
+        "windSpeed": 1,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2289157
+      }
+    },
+    {
+      "id": "game_64",
+      "date": "2026-03-02",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-5",
+        "margin": 9
+      },
+      "attendance": 13032,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 84,
+        "humidity": 76,
+        "windSpeed": 6,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3743647
+      }
+    },
+    {
+      "id": "game_65",
+      "date": "2026-03-04",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "2-6",
+        "margin": 4
+      },
+      "attendance": 28785,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 82,
+        "humidity": 59,
+        "windSpeed": 4,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4646989
+      }
+    },
+    {
+      "id": "game_66",
+      "date": "2026-03-07",
+      "opponent": "Golden State Warriors",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-2",
+        "margin": 2
+      },
+      "attendance": 53459,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 86,
+        "humidity": 49,
+        "windSpeed": 15,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4983740
+      }
+    },
+    {
+      "id": "game_67",
+      "date": "2026-03-09",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "3-9",
+        "margin": 4
+      },
+      "attendance": 39850,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 68,
+        "humidity": 66,
+        "windSpeed": 15,
+        "windDirection": "NE"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1795932
+      }
+    },
+    {
+      "id": "game_68",
+      "date": "2026-03-11",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "11-2",
+        "margin": 1
+      },
+      "attendance": 14235,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 83,
+        "humidity": 80,
+        "windSpeed": 17,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3678787
+      }
+    },
+    {
+      "id": "game_69",
+      "date": "2026-03-13",
+      "opponent": "Golden State Warriors",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "11-2",
+        "margin": 1
+      },
+      "attendance": 32857,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 75,
+        "humidity": 42,
+        "windSpeed": 4,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3075034
+      }
+    },
+    {
+      "id": "game_70",
+      "date": "2026-03-15",
+      "opponent": "Chicago Cubs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-3",
+        "margin": 5
+      },
+      "attendance": 29065,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 97,
+        "humidity": 56,
+        "windSpeed": 10,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2781938
+      }
+    },
+    {
+      "id": "game_71",
+      "date": "2026-03-18",
+      "opponent": "Indianapolis Colts",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "5-5",
+        "margin": 10
+      },
+      "attendance": 49042,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 75,
+        "humidity": 56,
+        "windSpeed": 6,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3324652
+      }
+    },
+    {
+      "id": "game_72",
+      "date": "2026-03-20",
+      "opponent": "Georgia Bulldogs",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "9-4",
+        "margin": 10
+      },
+      "attendance": 36111,
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": 84,
+        "humidity": 79,
+        "windSpeed": 4,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Fox Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 5306168
+      }
+    },
+    {
+      "id": "game_73",
+      "date": "2026-03-22",
+      "opponent": "Alabama Crimson Tide",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "3-11",
+        "margin": 1
+      },
+      "attendance": 17226,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 71,
+        "humidity": 47,
+        "windSpeed": 10,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2713662
+      }
+    },
+    {
+      "id": "game_74",
+      "date": "2026-03-24",
+      "opponent": "Alabama Crimson Tide",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "6-5",
+        "margin": 10
+      },
+      "attendance": 13980,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 90,
+        "humidity": 87,
+        "windSpeed": 8,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "CBS Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4244625
+      }
+    },
+    {
+      "id": "game_75",
+      "date": "2026-03-26",
+      "opponent": "Jacksonville Jaguars",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "8-4",
+        "margin": 7
+      },
+      "attendance": 50241,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 92,
+        "humidity": 83,
+        "windSpeed": 17,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2971404
+      }
+    },
+    {
+      "id": "game_76",
+      "date": "2026-03-29",
+      "opponent": "Milwaukee Brewers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "2-9",
+        "margin": 7
+      },
+      "attendance": 21906,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 98,
+        "humidity": 98,
+        "windSpeed": 8,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3626243
+      }
+    },
+    {
+      "id": "game_77",
+      "date": "2026-03-31",
+      "opponent": "Dallas Mavericks",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-10",
+        "margin": 10
+      },
+      "attendance": 30318,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 98,
+        "humidity": 46,
+        "windSpeed": 10,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3921905
+      }
+    },
+    {
+      "id": "game_78",
+      "date": "2026-04-02",
+      "opponent": "LSU Tigers",
+      "location": "away",
+      "result": {
+        "outcome": "loss",
+        "score": "4-6",
+        "margin": 5
+      },
+      "attendance": 33238,
+      "weather": {
+        "condition": "Cloudy",
+        "temperature": 73,
+        "humidity": 70,
+        "windSpeed": 19,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2967201
+      }
+    },
+    {
+      "id": "game_79",
+      "date": "2026-04-04",
+      "opponent": "Chicago Cubs",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "4-6",
+        "margin": 4
+      },
+      "attendance": 17534,
+      "weather": {
+        "condition": "Clear",
+        "temperature": 82,
+        "humidity": 79,
+        "windSpeed": 19,
+        "windDirection": "S"
+      },
+      "broadcast": {
+        "network": "NBC Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 3343470
+      }
+    },
+    {
+      "id": "game_80",
+      "date": "2026-04-06",
+      "opponent": "Houston Texans",
+      "location": "away",
+      "result": {
+        "outcome": "win",
+        "score": "5-3",
+        "margin": 6
+      },
+      "attendance": 30301,
+      "weather": {
+        "condition": "Overcast",
+        "temperature": 96,
+        "humidity": 61,
+        "windSpeed": 15,
+        "windDirection": "NW"
+      },
+      "broadcast": {
+        "network": "ESPN",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 1090494
+      }
+    },
+    {
+      "id": "game_81",
+      "date": "2026-04-09",
+      "opponent": "Dallas Mavericks",
+      "location": "home",
+      "result": {
+        "outcome": "loss",
+        "score": "5-6",
+        "margin": 10
+      },
+      "attendance": 12278,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 71,
+        "humidity": 77,
+        "windSpeed": 15,
+        "windDirection": "SE"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 4303129
+      }
+    },
+    {
+      "id": "game_82",
+      "date": "2026-04-11",
+      "opponent": "Denver Broncos",
+      "location": "home",
+      "result": {
+        "outcome": "win",
+        "score": "7-2",
+        "margin": 5
+      },
+      "attendance": 31004,
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": 75,
+        "humidity": 50,
+        "windSpeed": 8,
+        "windDirection": "W"
+      },
+      "broadcast": {
+        "network": "Turner Sports",
+        "announcers": [
+          "Play-by-play announcer",
+          "Color commentator"
+        ],
+        "viewership": 2025070
+      }
+    }
+  ],
+  "facilities": {
+    "stadium": {
+      "name": "Championship Stadium",
+      "capacity": 56082,
+      "yearBuilt": 2000,
+      "surface": "Natural Grass",
+      "features": [
+        "Retractable Roof",
+        "HD Video Boards",
+        "Premium Suites"
+      ]
+    },
+    "trainingFacility": {
+      "name": "Elite Training Center",
+      "squareFootage": 127394,
+      "amenities": [
+        "Weight Room",
+        "Recovery Center",
+        "Video Analysis Room",
+        "Nutrition Center"
+      ],
+      "technology": [
+        "Motion Capture",
+        "Biometric Monitoring",
+        "VR Training"
+      ]
+    }
+  },
+  "coaching": {
+    "headCoach": {
+      "name": "Steve Williams",
+      "experience": 23,
+      "record": {
+        "wins": 71,
+        "losses": 100,
+        "winPercentage": 0.415
+      },
+      "philosophy": "Championship mindset with player development focus"
+    },
+    "assistants": [
+      {
+        "name": "John Davis",
+        "position": "Analytics Coordinator",
+        "experience": 16
+      },
+      {
+        "name": "Jim Thompson",
+        "position": "Pitching Coach",
+        "experience": 12
+      },
+      {
+        "name": "Mike Johnson",
+        "position": "Pitching Coach",
+        "experience": 13
+      },
+      {
+        "name": "Dave Miller",
+        "position": "Analytics Coordinator",
+        "experience": 16
+      },
+      {
+        "name": "Paul Brown",
+        "position": "Assistant Coach",
+        "experience": 15
+      },
+      {
+        "name": "Mike Johnson",
+        "position": "Pitching Coach",
+        "experience": 13
+      },
+      {
+        "name": "Rick Smith",
+        "position": "Analytics Coordinator",
+        "experience": 16
+      },
+      {
+        "name": "Paul Brown",
+        "position": "Assistant Coach",
+        "experience": 7
+      }
+    ]
+  },
+  "analytics": {
+    "dataQuality": 0.874,
+    "processingSpeed": 79,
+    "predictionAccuracy": 0.975,
+    "realTimeCapability": true,
+    "mlModelsActive": 6,
+    "dataSourcesConnected": 16,
+    "alertsConfigured": 53,
+    "dashboardsActive": 19
+  },
+  "lastUpdated": "2025-09-02T22:39:19.791Z"
+}

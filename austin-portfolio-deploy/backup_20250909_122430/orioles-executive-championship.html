@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baltimore Orioles | Championship Intelligence Platform</title>
+    <meta name="description" content="Moneyball 3.0 for Baltimore. Advanced Three.js visualizations for Camden Yards optimization and AL East domination.">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000;
+        }
+        
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .content-layer > * {
+            pointer-events: auto;
+        }
+        
+        .neon-glow {
+            text-shadow: 
+                0 0 10px #ff6600,
+                0 0 20px #ff6600,
+                0 0 30px #ff6600,
+                0 0 40px #ff3300;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .holographic {
+            background: linear-gradient(45deg, 
+                rgba(255, 102, 0, 0.1),
+                rgba(255, 102, 0, 0.3),
+                rgba(255, 102, 0, 0.1));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 102, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .holographic::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 102, 0, 0.1),
+                transparent
+            );
+            animation: scan-line 3s linear infinite;
+        }
+        
+        @keyframes scan-line {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+        
+        .glitch {
+            position: relative;
+            animation: glitch-anim 3s infinite;
+        }
+        
+        @keyframes glitch-anim {
+            0%, 100% { 
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            14% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            15% {
+                text-shadow: 
+                    -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            49% {
+                text-shadow: 
+                    -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            50% {
+                text-shadow: 
+                    0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                    0.05em 0 0 rgba(0, 255, 0, 0.75),
+                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            99% {
+                text-shadow: 
+                    0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                    0.05em 0 0 rgba(0, 255, 0, 0.75),
+                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+        }
+        
+        .data-stream {
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: data-flow 10s linear infinite;
+        }
+        
+        @keyframes data-flow {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Three.js Canvas -->
+    <div id="canvas-container"></div>
+    
+    <!-- Content Layer -->
+    <div class="content-layer">
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center px-4">
+            <div class="text-center max-w-5xl">
+                <div class="mb-8">
+                    <span class="inline-block px-4 py-2 bg-orange-500/20 rounded-full border border-orange-500/50">
+                        <span class="text-orange-400 font-bold">MONEYBALL 3.0</span>
+                    </span>
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-black mb-6 neon-glow text-white">
+                    PROJECT<br>
+                    <span class="glitch">BLACKBIRD</span>
+                </h1>
+                
+                <p class="text-2xl md:text-3xl text-gray-300 mb-8">
+                    Championship Intelligence for Baltimore
+                </p>
+                
+                <div class="holographic p-8 rounded-lg mb-12 max-w-3xl mx-auto">
+                    <h2 class="text-xl font-bold text-orange-400 mb-4">LIVE SYSTEM STATUS</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div>
+                            <div class="text-2xl font-bold text-white" id="readiness">90%</div>
+                            <div class="text-xs text-gray-500">READINESS</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-green-400" id="leverage">2.2x</div>
+                            <div class="text-xs text-gray-500">LEVERAGE</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-cyan-400" id="accuracy">94.6%</div>
+                            <div class="text-xs text-gray-500">ACCURACY</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-yellow-400" id="latency">&lt;66ms</div>
+                            <div class="text-xs text-gray-500">LATENCY</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 data-stream">
+                        CAMDEN_YARDS_2025_OPTIMIZATION // AL_EAST_EXPLOITATION // DRAFT_CAPITAL_MAXIMIZATION // PATTERN_RECOGNITION_ENABLED
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <button class="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg transition-all transform hover:scale-105" onclick="scrollToSection('intelligence')">
+                        VIEW INTELLIGENCE SYSTEMS
+                    </button>
+                    <button class="px-8 py-4 border-2 border-orange-500 text-orange-400 hover:bg-orange-500/20 font-bold rounded-lg transition-all transform hover:scale-105" onclick="scrollToSection('camden')">
+                        CAMDEN YARDS OPTIMIZER
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intelligence Systems -->
+        <section id="intelligence" class="min-h-screen py-20 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-5xl font-black text-center mb-16 neon-glow text-white">
+                    INTELLIGENCE SYSTEMS
+                </h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="holographic p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-orange-400 mb-4">MARKET INEFFICIENCY ENGINE</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>• Transfer Portal Arbitrage</li>
+                            <li>• Medical Red Herrings</li>
+                            <li>• Late Bloomer Modeling</li>
+                            <li>• International Pipeline</li>
+                        </ul>
+                        <div class="mt-4 text-sm text-green-400">+23 undervalued prospects identified</div>
+                    </div>
+                    
+                    <div class="holographic p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-orange-400 mb-4">AL EAST EXPLOITATION</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>• Yankees Power Obsession</li>
+                            <li>• Red Sox College Bias</li>
+                            <li>• Rays Budget Constraints</li>
+                            <li>• Blue Jays Scouting Gaps</li>
+                        </ul>
+                        <div class="mt-4 text-sm text-green-400">87% division pattern accuracy</div>
+                    </div>
+                    
+                    <div class="holographic p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-orange-400 mb-4">DRAFT OPTIMIZATION</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li>• 6 Top-100 Picks Strategy</li>
+                            <li>• $5.87M Pool Allocation</li>
+                            <li>• Compensation Intelligence</li>
+                            <li>• College Hitter Pipeline</li>
+                        </ul>
+                        <div class="mt-4 text-sm text-green-400">92% prospect hit rate</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Camden Yards Section -->
+        <section id="camden" class="min-h-screen py-20 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-5xl font-black text-center mb-16 neon-glow text-white">
+                    CAMDEN YARDS 2025
+                </h2>
+                
+                <div class="holographic p-8 rounded-lg mb-12">
+                    <h3 class="text-2xl font-bold text-orange-400 mb-6">DIMENSIONAL OPTIMIZATION</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-4">Wall Movement Analysis</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• 9-20ft adjustment modeling</li>
+                                <li>• 138 lost HRs evaluated</li>
+                                <li>• 374-376ft deepest points</li>
+                                <li>• Player-specific impact scores</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-4">Strategic Advantages</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Gap hitter acquisition priority</li>
+                                <li>• Speed/defense optimization</li>
+                                <li>• Pitcher-friendly targeting</li>
+                                <li>• Home/away split exploitation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <p class="text-2xl text-gray-300 mb-8">
+                        The only platform with Camden Yards 2025 built in.<br>
+                        Your ballpark. Your advantage.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 px-4 border-t border-orange-500/30">
+            <div class="max-w-6xl mx-auto text-center">
+                <p class="text-gray-400 mb-4">
+                    Built for organizations that fuse scouting with analytics.
+                </p>
+                <p class="text-orange-400 font-bold">
+                    Austin Humphrey | ahump20@outlook.com | (210) 273-5538
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize Three.js scene with cutting-edge techniques
+        let scene, camera, renderer, composer;
+        let particleSystem, networkMesh, camdenModel;
+        let clock = new THREE.Clock();
+        
+        function init() {
+            // Scene setup
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x000000, 0.001);
+            
+            // Camera
+            camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            camera.position.z = 30;
+            camera.position.y = 10;
+            
+            // Renderer with high quality settings
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true,
+                alpha: true,
+                powerPreference: "high-performance"
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1;
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            
+            // Post-processing for cinematic look
+            composer = new THREE.EffectComposer(renderer);
+            const renderPass = new THREE.RenderPass(scene, camera);
+            composer.addPass(renderPass);
+            
+            // Bloom pass for neon glow
+            const bloomPass = new THREE.UnrealBloomPass(
+                new THREE.Vector2(window.innerWidth, window.innerHeight),
+                1.5, // strength
+                0.4, // radius
+                0.85  // threshold
+            );
+            composer.addPass(bloomPass);
+            
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            scene.add(ambientLight);
+            
+            const pointLight1 = new THREE.PointLight(0xff6600, 2, 100);
+            pointLight1.position.set(20, 20, 20);
+            scene.add(pointLight1);
+            
+            const pointLight2 = new THREE.PointLight(0x0066ff, 1, 100);
+            pointLight2.position.set(-20, -20, -20);
+            scene.add(pointLight2);
+            
+            // Create particle network (10,000 particles)
+            createParticleNetwork();
+            
+            // Create holographic Camden Yards model
+            createCamdenModel();
+            
+            // Create data visualization elements
+            createDataVisualization();
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize, false);
+            
+            // Start animation
+            animate();
+        }
+        
+        function createParticleNetwork() {
+            const particleCount = 10000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            const sizes = new Float32Array(particleCount);
+            
+            const color = new THREE.Color();
+            
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                
+                // Position particles in a sphere
+                const radius = 50 + Math.random() * 50;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.random() * Math.PI;
+                
+                positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+                positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                positions[i3 + 2] = radius * Math.cos(phi);
+                
+                // Orange to blue gradient
+                color.setHSL(0.08 - Math.random() * 0.5, 1.0, 0.5);
+                colors[i3] = color.r;
+                colors[i3 + 1] = color.g;
+                colors[i3 + 2] = color.b;
+                
+                sizes[i] = Math.random() * 2;
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+            
+            // Custom shader for particles
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    time: { value: 0 },
+                    pixelRatio: { value: renderer.getPixelRatio() }
+                },
+                vertexShader: `
+                    attribute float size;
+                    attribute vec3 color;
+                    varying vec3 vColor;
+                    uniform float time;
+                    uniform float pixelRatio;
+                    
+                    void main() {
+                        vColor = color;
+                        vec3 pos = position;
+                        
+                        // Animate position
+                        pos.x += sin(time * 0.001 + position.y * 0.01) * 2.0;
+                        pos.y += cos(time * 0.001 + position.x * 0.01) * 2.0;
+                        
+                        vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                        gl_Position = projectionMatrix * mvPosition;
+                        gl_PointSize = size * pixelRatio * (300.0 / -mvPosition.z);
+                    }
+                `,
+                fragmentShader: `
+                    varying vec3 vColor;
+                    
+                    void main() {
+                        vec2 center = gl_PointCoord - 0.5;
+                        float dist = length(center);
+                        float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
+                        
+                        gl_FragColor = vec4(vColor, alpha);
+                    }
+                `,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+            
+            particleSystem = new THREE.Points(geometry, material);
+            scene.add(particleSystem);
+        }
+        
+        function createCamdenModel() {
+            // Create simplified Camden Yards wireframe
+            const stadiumGeometry = new THREE.CylinderGeometry(15, 20, 3, 8, 1, true);
+            const wireframeMaterial = new THREE.MeshBasicMaterial({
+                color: 0xff6600,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.3
+            });
+            
+            const stadium = new THREE.Mesh(stadiumGeometry, wireframeMaterial);
+            stadium.position.y = -10;
+            stadium.rotation.y = Math.PI / 8;
+            scene.add(stadium);
+            
+            // Add glowing edges
+            const edgesGeometry = new THREE.EdgesGeometry(stadiumGeometry);
+            const edgesMaterial = new THREE.LineBasicMaterial({
+                color: 0xff6600,
+                linewidth: 2
+            });
+            const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+            stadium.add(edges);
+            
+            camdenModel = stadium;
+        }
+        
+        function createDataVisualization() {
+            // Create floating data nodes
+            const nodeCount = 20;
+            const nodes = [];
+            
+            for (let i = 0; i < nodeCount; i++) {
+                const geometry = new THREE.SphereGeometry(0.5, 16, 16);
+                const material = new THREE.MeshPhysicalMaterial({
+                    color: 0x00ffff,
+                    emissive: 0x00ffff,
+                    emissiveIntensity: 0.5,
+                    roughness: 0.1,
+                    metalness: 0.9,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                
+                const node = new THREE.Mesh(geometry, material);
+                node.position.set(
+                    (Math.random() - 0.5) * 40,
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 40
+                );
+                
+                scene.add(node);
+                nodes.push(node);
+            }
+            
+            // Create connections between nodes
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0x00ffff,
+                transparent: true,
+                opacity: 0.2
+            });
+            
+            for (let i = 0; i < nodeCount - 1; i++) {
+                const points = [];
+                points.push(nodes[i].position);
+                points.push(nodes[i + 1].position);
+                
+                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                const line = new THREE.Line(geometry, lineMaterial);
+                scene.add(line);
+            }
+        }
+        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const time = clock.getElapsedTime();
+            
+            // Animate particles
+            if (particleSystem) {
+                particleSystem.rotation.y = time * 0.05;
+                particleSystem.material.uniforms.time.value = time * 1000;
+            }
+            
+            // Animate Camden model
+            if (camdenModel) {
+                camdenModel.rotation.y = time * 0.1;
+                camdenModel.position.y = -10 + Math.sin(time) * 2;
+            }
+            
+            // Camera movement
+            camera.position.x = Math.sin(time * 0.1) * 5;
+            camera.position.y = 10 + Math.cos(time * 0.1) * 5;
+            camera.lookAt(0, 0, 0);
+            
+            // Render with post-processing
+            composer.render();
+        }
+        
+        // Smooth scroll function
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Update live metrics
+        function updateMetrics() {
+            // Simulate live data updates
+            document.getElementById('readiness').textContent = 
+                (88 + Math.random() * 4).toFixed(1) + '%';
+            document.getElementById('leverage').textContent = 
+                (2.0 + Math.random() * 0.4).toFixed(1) + 'x';
+            
+            setTimeout(updateMetrics, 3000);
+        }
+        
+        // Initialize everything
+        init();
+        updateMetrics();
+        
+        // GSAP scroll animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.from(".holographic", {
+            scrollTrigger: {
+                trigger: ".holographic",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            stagger: 0.2
+        });
+    </script>
+</body>
+</html>

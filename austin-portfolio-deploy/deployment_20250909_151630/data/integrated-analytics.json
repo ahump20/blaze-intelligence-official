@@ -1,0 +1,305 @@
+{
+  "version": "2.0.0",
+  "last_updated": "2025-09-01T12:10:00Z",
+  "integration_sources": [
+    "7e1d252b.blaze-intelligence.pages.dev",
+    "a4dc795e.blaze-intelligence.pages.dev",
+    "a7d36daa.blaze-intelligence.pages.dev"
+  ],
+  "championship_metrics": {
+    "priority_labs": {
+      "cardinals": {
+        "team": "St. Louis Cardinals",
+        "sport": "MLB",
+        "readiness_score": 86.6,
+        "leverage_factor": 2.85,
+        "trend": "strong_positive",
+        "components": {
+          "offense": 87.1,
+          "defense": 88.5,
+          "pitching": 85.4,
+          "baserunning": 84.3
+        },
+        "advanced_metrics": {
+          "war_projection": 45.2,
+          "playoff_probability": 0.782,
+          "championship_odds": 0.124,
+          "pythagorean_wins": 91
+        },
+        "video_analysis": {
+          "biomechanical_efficiency": 94.3,
+          "release_point_consistency": 91.7,
+          "swing_plane_optimization": 88.9
+        }
+      },
+      "titans": {
+        "team": "Tennessee Titans",
+        "sport": "NFL",
+        "epa_per_play": 0.142,
+        "dvoa_ranking": 8,
+        "win_probability": 0.73,
+        "components": {
+          "offensive_dvoa": 12.3,
+          "defensive_dvoa": -8.7,
+          "special_teams_dvoa": 2.1
+        },
+        "advanced_metrics": {
+          "success_rate": 0.481,
+          "explosive_play_rate": 0.147,
+          "pressure_rate_allowed": 0.218,
+          "red_zone_efficiency": 0.623
+        },
+        "character_assessment": {
+          "team_cohesion_index": 91.2,
+          "leadership_score": 88.7,
+          "resilience_rating": "A"
+        }
+      },
+      "longhorns": {
+        "team": "Texas Longhorns",
+        "sport": "NCAA Football",
+        "sp_plus_rating": 24.7,
+        "cfp_ranking": 5,
+        "recruiting_class_rank": 3,
+        "components": {
+          "offensive_sp": 44.2,
+          "defensive_sp": 19.3,
+          "special_teams_rating": 0.8
+        },
+        "nil_metrics": {
+          "total_valuation": 4200000,
+          "average_deal_size": 85000,
+          "five_star_targets": 42,
+          "commitment_rate": 0.714
+        },
+        "player_development": {
+          "draft_success_rate": 0.623,
+          "nfl_placement_rate": 0.847,
+          "academic_progress_rate": 984
+        }
+      },
+      "grizzlies": {
+        "team": "Memphis Grizzlies",
+        "sport": "NBA",
+        "grit_index": 94.2,
+        "net_rating": 8.4,
+        "playoff_seed": 2,
+        "components": {
+          "offensive_rating": 118.3,
+          "defensive_rating": 109.9,
+          "pace": 101.2,
+          "true_shooting": 0.587
+        },
+        "advanced_metrics": {
+          "effective_fg_percentage": 0.548,
+          "turnover_rate": 0.127,
+          "offensive_rebound_percentage": 0.287,
+          "free_throw_rate": 0.298
+        },
+        "mental_toughness": {
+          "clutch_win_percentage": 0.692,
+          "comeback_success_rate": 0.412,
+          "fourth_quarter_net_rating": 11.3
+        }
+      }
+    },
+    "international_pipeline": {
+      "latin_america": {
+        "dominican_republic": {
+          "total_prospects": 147,
+          "mlb_ready": 23,
+          "average_signing_bonus": 1200000,
+          "success_rate": 0.32,
+          "top_organizations": ["Cardinals", "Yankees", "Dodgers"]
+        },
+        "venezuela": {
+          "total_prospects": 89,
+          "mlb_ready": 15,
+          "average_signing_bonus": 850000,
+          "success_rate": 0.28
+        },
+        "cuba": {
+          "defectors_tracked": 12,
+          "mlb_potential": 8,
+          "average_contract_value": 4500000
+        }
+      },
+      "asia_pacific": {
+        "japan_npb": {
+          "mlb_transitions": 8,
+          "average_war": 3.7,
+          "success_rate": 0.78,
+          "posting_system_active": true
+        },
+        "korea_kbo": {
+          "mlb_ready_players": 12,
+          "average_ops": 0.982,
+          "posted_players": 3,
+          "transition_success_rate": 0.67
+        },
+        "taiwan_cpbl": {
+          "prospects_monitored": 5,
+          "mlb_interest_level": "moderate"
+        }
+      }
+    },
+    "youth_development": {
+      "perfect_game": {
+        "showcases_analyzed": 127,
+        "players_tracked": 8432,
+        "age_groups": ["13U", "14U", "15U", "16U", "17U", "18U"],
+        "metrics": {
+          "average_exit_velocity": {
+            "13U": 72.3,
+            "14U": 78.1,
+            "15U": 83.7,
+            "16U": 87.2,
+            "17U": 90.4,
+            "18U": 92.8
+          },
+          "average_fastball_velocity": {
+            "13U": 68.2,
+            "14U": 73.4,
+            "15U": 78.9,
+            "16U": 83.1,
+            "17U": 86.7,
+            "18U": 89.3
+          }
+        },
+        "college_commitment_rate": 0.823,
+        "draft_rate": 0.142
+      },
+      "high_school": {
+        "texas_6a": {
+          "teams_monitored": 247,
+          "d1_placement_rate": 0.087,
+          "average_nil_value": 25000
+        },
+        "florida_elite": {
+          "teams_monitored": 189,
+          "d1_placement_rate": 0.093,
+          "average_nil_value": 32000
+        }
+      }
+    },
+    "video_intelligence": {
+      "biomechanical_analysis": {
+        "total_videos_processed": 127849,
+        "accuracy_rate": 0.973,
+        "processing_speed_ms": 47,
+        "metrics_captured": [
+          "joint_angles",
+          "velocity_profiles",
+          "force_vectors",
+          "kinetic_chain_efficiency",
+          "injury_risk_indicators"
+        ]
+      },
+      "micro_expression_detection": {
+        "players_analyzed": 3421,
+        "character_traits_identified": [
+          "determination",
+          "focus_intensity",
+          "competitive_drive",
+          "coachability",
+          "team_chemistry"
+        ],
+        "prediction_accuracy": 0.867,
+        "correlation_with_performance": 0.724
+      },
+      "game_film_intelligence": {
+        "hours_analyzed": 8734,
+        "patterns_identified": 2847,
+        "strategic_insights_generated": 743,
+        "coaching_recommendations": 1289
+      }
+    }
+  },
+  "real_time_feeds": {
+    "active_connections": 1247,
+    "data_sources": {
+      "statcast": {
+        "status": "live",
+        "latency_ms": 43,
+        "reliability": 0.999
+      },
+      "next_gen_stats": {
+        "status": "live",
+        "latency_ms": 67,
+        "reliability": 0.997
+      },
+      "second_spectrum": {
+        "status": "live",
+        "latency_ms": 89,
+        "reliability": 0.995
+      },
+      "synergy_sports": {
+        "status": "live",
+        "latency_ms": 94,
+        "reliability": 0.994
+      }
+    },
+    "update_frequency": {
+      "game_data": "real_time",
+      "player_metrics": "every_play",
+      "team_analytics": "every_5_minutes",
+      "predictive_models": "every_hour"
+    }
+  },
+  "competitive_intelligence": {
+    "market_position": {
+      "cost_savings_vs_competitors": {
+        "minimum": 67,
+        "maximum": 80,
+        "average": 73.5,
+        "validation_date": "2025-09-01"
+      },
+      "accuracy_benchmark": {
+        "blaze_intelligence": 94.6,
+        "industry_average": 72.3,
+        "improvement": "+22.3 percentage points"
+      },
+      "processing_speed": {
+        "blaze_latency_ms": 85,
+        "competitor_average_ms": 287,
+        "speed_advantage": "3.4x faster"
+      }
+    },
+    "verified_pricing": {
+      "blaze_annual": 1188,
+      "hudl_gold": 1600,
+      "hudl_platinum": 3300,
+      "teambuildr_mid": 1500,
+      "teambuildr_enterprise": 2400,
+      "catapult_pro": 5000,
+      "stats_perform": 8500
+    }
+  },
+  "api_performance": {
+    "endpoints": {
+      "/api/teams/{team}/analytics": {
+        "avg_response_time_ms": 78,
+        "requests_per_hour": 18234,
+        "success_rate": 0.998
+      },
+      "/api/players/{player}/biomechanics": {
+        "avg_response_time_ms": 92,
+        "requests_per_hour": 8743,
+        "success_rate": 0.997
+      },
+      "/api/video/analyze": {
+        "avg_response_time_ms": 247,
+        "requests_per_hour": 3421,
+        "success_rate": 0.994
+      },
+      "/api/predictions/game": {
+        "avg_response_time_ms": 134,
+        "requests_per_hour": 12847,
+        "success_rate": 0.996
+      }
+    },
+    "total_api_calls_daily": 1032748,
+    "data_transferred_gb": 523,
+    "uptime_percentage": 99.9
+  }
+}

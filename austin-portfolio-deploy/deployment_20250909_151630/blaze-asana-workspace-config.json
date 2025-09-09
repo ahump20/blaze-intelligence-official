@@ -1,0 +1,482 @@
+{
+  "workspace_name": "Blaze Intelligence",
+  "description": "Sports intelligence, operations, and analytics consulting firm - championship-level business strategy execution",
+  "projects": [
+    {
+      "name": "Q4 2025 Revenue Sprint ($325K Target)",
+      "description": "Strategic campaign to achieve $325K revenue target by Q4 2025",
+      "color": "red",
+      "sections": [
+        {
+          "name": "Professional Teams Pipeline",
+          "tasks": [
+            {
+              "name": "Cardinals Analytics Partnership Proposal",
+              "notes": "Develop comprehensive MLB analytics proposal targeting Cardinals organization",
+              "due_date": "2025-01-15",
+              "assignee": "austin@blazeintelligence.com",
+              "tags": ["MLB", "High-Priority", "Professional"]
+            },
+            {
+              "name": "Titans Performance Analytics Demo",
+              "notes": "Create NFL performance analytics demonstration for Titans management",
+              "due_date": "2025-01-20",
+              "tags": ["NFL", "Demo", "Professional"]
+            },
+            {
+              "name": "Grizzlies Player Development Analytics",
+              "notes": "Build NBA player development analytics showcase for Grizzlies",
+              "due_date": "2025-01-25",
+              "tags": ["NBA", "Player-Development", "Professional"]
+            }
+          ]
+        },
+        {
+          "name": "College Programs Outreach",
+          "tasks": [
+            {
+              "name": "Longhorns Recruiting Intelligence Platform",
+              "notes": "Design comprehensive recruiting analytics solution for Texas Longhorns",
+              "due_date": "2025-02-01",
+              "tags": ["NCAA", "Recruiting", "Power5"]
+            },
+            {
+              "name": "Power 5 Conference Analysis",
+              "notes": "Research and target top 10 Power 5 programs for analytics partnerships",
+              "due_date": "2025-01-30",
+              "tags": ["NCAA", "Research", "Power5"]
+            }
+          ]
+        },
+        {
+          "name": "Youth & Development Markets",
+          "tasks": [
+            {
+              "name": "Perfect Game Integration Strategy",
+              "notes": "Develop youth baseball analytics integration with Perfect Game database",
+              "due_date": "2025-02-05",
+              "tags": ["Youth", "Perfect-Game", "Integration"]
+            },
+            {
+              "name": "High School Recruiting Analytics",
+              "notes": "Build analytics platform for high school recruiting departments",
+              "due_date": "2025-02-10",
+              "tags": ["HS", "Recruiting", "Youth"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2026 Scale-Up Campaign ($1.875M Target)",
+      "description": "Strategic expansion to achieve $1.875M annual revenue target",
+      "color": "blue",
+      "sections": [
+        {
+          "name": "Enterprise Partnerships",
+          "tasks": [
+            {
+              "name": "MLB Organization Multi-Team Contract",
+              "notes": "Develop enterprise-level analytics platform for multiple MLB teams",
+              "due_date": "2025-03-01",
+              "tags": ["MLB", "Enterprise", "Multi-Team"]
+            },
+            {
+              "name": "NFL Analytics Suite Partnership",
+              "notes": "Create comprehensive NFL analytics suite for team partnerships",
+              "due_date": "2025-03-15",
+              "tags": ["NFL", "Enterprise", "Suite"]
+            },
+            {
+              "name": "NCAA Conference-Wide Platform",
+              "notes": "Build conference-wide analytics platform for major NCAA conferences",
+              "due_date": "2025-04-01",
+              "tags": ["NCAA", "Conference", "Enterprise"]
+            }
+          ]
+        },
+        {
+          "name": "International Markets",
+          "tasks": [
+            {
+              "name": "KBO (Korea Baseball) Analytics Partnership",
+              "notes": "Develop analytics platform for Korean Baseball Organization teams",
+              "due_date": "2025-04-15",
+              "tags": ["KBO", "International", "Baseball"]
+            },
+            {
+              "name": "NPB (Japan) Prospect Pipeline",
+              "notes": "Build NPB prospect analytics and scouting intelligence system",
+              "due_date": "2025-05-01",
+              "tags": ["NPB", "International", "Prospects"]
+            },
+            {
+              "name": "Latin American Pipeline Intelligence",
+              "notes": "Create comprehensive Latin American prospect tracking system",
+              "due_date": "2025-05-15",
+              "tags": ["Latin-America", "International", "Pipeline"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Multi-Platform AI Coordination",
+      "description": "Orchestrate work across ChatGPT 5 Pro, Gemini 2.5 Pro, and Claude Opus 4.1",
+      "color": "purple",
+      "sections": [
+        {
+          "name": "Daily AI Workflow Coordination",
+          "tasks": [
+            {
+              "name": "Morning AI Briefing Protocol",
+              "notes": "Coordinate daily briefings across all AI platforms - Claude integrations check, ChatGPT market analysis, Gemini data processing",
+              "recurring": true,
+              "tags": ["Daily", "Coordination", "AI-Workflow"]
+            },
+            {
+              "name": "Evening AI Review Protocol",
+              "notes": "Synthesize daily progress reports and optimize workflows for next day",
+              "recurring": true,
+              "tags": ["Daily", "Review", "AI-Workflow"]
+            },
+            {
+              "name": "Weekly AI Model Performance Analysis",
+              "notes": "Analyze task routing efficiency and model performance optimization",
+              "recurring": "weekly",
+              "tags": ["Weekly", "Analysis", "Performance"]
+            }
+          ]
+        },
+        {
+          "name": "Task Routing & Optimization",
+          "tasks": [
+            {
+              "name": "Claude Opus 4.1 - Strategic & Integration Tasks",
+              "notes": "Route strategic planning, system architecture, integration orchestration, and complex code implementation to Claude",
+              "tags": ["Claude", "Strategy", "Integration"]
+            },
+            {
+              "name": "ChatGPT 5 Pro - Research & Automation Tasks",
+              "notes": "Route market research, autonomous data gathering, web scraping, and long-form content to ChatGPT Agent Mode",
+              "tags": ["ChatGPT", "Research", "Automation"]
+            },
+            {
+              "name": "Gemini 2.5 Pro/Flash - Data & Processing Tasks",
+              "notes": "Route large dataset analysis, video/audio processing, real-time streaming, and high-volume classification to Gemini",
+              "tags": ["Gemini", "Data", "Processing"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Product Development Pipeline",
+      "description": "Core Blaze Intelligence platform and feature development",
+      "color": "green",
+      "sections": [
+        {
+          "name": "Vision AI Coaching Platform",
+          "tasks": [
+            {
+              "name": "Biomechanical Analysis Engine",
+              "notes": "Develop AI system to analyze player biomechanics, form, and technique from video",
+              "due_date": "2025-02-15",
+              "tags": ["Vision-AI", "Biomechanics", "Core-Product"]
+            },
+            {
+              "name": "Micro-Expression & Character Analysis",
+              "notes": "Build AI system to read micro-expressions, body language, and character indicators for grit/determination assessment",
+              "due_date": "2025-03-01",
+              "tags": ["Vision-AI", "Character", "Micro-Expression"]
+            },
+            {
+              "name": "Integrated Coaching Interface",
+              "notes": "Create user-friendly coaching interface combining biomechanical and character analysis",
+              "due_date": "2025-03-15",
+              "tags": ["Vision-AI", "UI", "Coaching"]
+            }
+          ]
+        },
+        {
+          "name": "Analytics Platform Core",
+          "tasks": [
+            {
+              "name": "Real-Time Data Ingestion System",
+              "notes": "Build robust data ingestion system for MLB, NFL, NBA, NCAA real-time feeds",
+              "due_date": "2025-02-20",
+              "tags": ["Data-Pipeline", "Real-Time", "Core-Product"]
+            },
+            {
+              "name": "Pattern Recognition Engine",
+              "notes": "Develop proprietary pattern recognition algorithms for competitive advantage identification",
+              "due_date": "2025-03-10",
+              "tags": ["AI", "Pattern-Recognition", "Algorithms"]
+            },
+            {
+              "name": "Client Dashboard & Reporting",
+              "notes": "Create comprehensive client dashboard with Three.js visualizations and hero headers",
+              "due_date": "2025-03-20",
+              "tags": ["Dashboard", "ThreeJS", "Client-Interface"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Integration Hub Management",
+      "description": "Manage integrations with HubSpot, Notion, Stripe, and other tools",
+      "color": "orange",
+      "sections": [
+        {
+          "name": "CRM & Sales Integration",
+          "tasks": [
+            {
+              "name": "HubSpot Pipeline Configuration",
+              "notes": "Set up HubSpot sales pipeline for professional teams, college programs, and youth organizations",
+              "due_date": "2025-01-10",
+              "tags": ["HubSpot", "CRM", "Pipeline"]
+            },
+            {
+              "name": "Stripe Revenue Tracking Integration",
+              "notes": "Configure Stripe integration for revenue tracking and goal monitoring",
+              "due_date": "2025-01-12",
+              "tags": ["Stripe", "Revenue", "Integration"]
+            },
+            {
+              "name": "Notion Knowledge Base Sync",
+              "notes": "Establish bidirectional sync between Asana tasks and Notion documentation",
+              "due_date": "2025-01-15",
+              "tags": ["Notion", "Knowledge-Base", "Sync"]
+            }
+          ]
+        },
+        {
+          "name": "Analytics & Reporting Integration",
+          "tasks": [
+            {
+              "name": "Airtable Data Structure Integration",
+              "notes": "Connect Airtable bases for client data, prospect tracking, and analytics results",
+              "due_date": "2025-01-18",
+              "tags": ["Airtable", "Data", "Structure"]
+            },
+            {
+              "name": "Linear Technical Task Management",
+              "notes": "Integrate Linear for technical development tasks and bug tracking",
+              "due_date": "2025-01-20",
+              "tags": ["Linear", "Technical", "Development"]
+            },
+            {
+              "name": "Sentry Error Monitoring Setup",
+              "notes": "Configure Sentry for system monitoring and error tracking across all platforms",
+              "due_date": "2025-01-22",
+              "tags": ["Sentry", "Monitoring", "Error-Tracking"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "goals": [
+    {
+      "name": "Q4 2025 Revenue Target",
+      "description": "Achieve $325,000 in revenue by Q4 2025",
+      "target": 325000,
+      "unit": "USD",
+      "due_date": "2025-12-31",
+      "metric_type": "currency",
+      "owner": "austin@blazeintelligence.com"
+    },
+    {
+      "name": "2026 Annual Revenue Target",
+      "description": "Scale to $1,875,000 in annual revenue for 2026",
+      "target": 1875000,
+      "unit": "USD",
+      "due_date": "2026-12-31",
+      "metric_type": "currency",
+      "owner": "austin@blazeintelligence.com"
+    },
+    {
+      "name": "Professional Team Partnerships",
+      "description": "Secure partnerships with 5 professional teams (MLB, NFL, NBA)",
+      "target": 5,
+      "unit": "partnerships",
+      "due_date": "2025-06-30",
+      "metric_type": "number",
+      "owner": "austin@blazeintelligence.com"
+    },
+    {
+      "name": "College Program Clients",
+      "description": "Onboard 10 college programs as analytics clients",
+      "target": 10,
+      "unit": "clients",
+      "due_date": "2025-09-30",
+      "metric_type": "number",
+      "owner": "austin@blazeintelligence.com"
+    },
+    {
+      "name": "Vision AI Platform Launch",
+      "description": "Successfully launch Vision AI coaching platform with biomechanical and character analysis",
+      "target": 1,
+      "unit": "platform",
+      "due_date": "2025-03-31",
+      "metric_type": "milestone",
+      "owner": "austin@blazeintelligence.com"
+    }
+  ],
+  "templates": [
+    {
+      "name": "Professional Team Outreach Template",
+      "description": "Template for reaching out to professional teams (MLB, NFL, NBA)",
+      "tasks": [
+        {
+          "name": "Research Team Analytics Needs",
+          "notes": "Research current analytics setup, pain points, and decision makers",
+          "duration": 2,
+          "tags": ["Research", "Professional"]
+        },
+        {
+          "name": "Create Custom Analytics Demo",
+          "notes": "Build tailored demo showcasing team-specific analytics capabilities",
+          "duration": 5,
+          "tags": ["Demo", "Customization"]
+        },
+        {
+          "name": "Identify Decision Makers",
+          "notes": "Map organizational structure and identify key decision makers",
+          "duration": 1,
+          "tags": ["Research", "Stakeholders"]
+        },
+        {
+          "name": "Initial Outreach Email",
+          "notes": "Send personalized introduction email with value proposition",
+          "duration": 1,
+          "tags": ["Outreach", "Email"]
+        },
+        {
+          "name": "Follow-up & Demo Scheduling",
+          "notes": "Follow up on initial outreach and schedule demo presentation",
+          "duration": 2,
+          "tags": ["Follow-up", "Scheduling"]
+        },
+        {
+          "name": "Demo Presentation",
+          "notes": "Deliver comprehensive analytics demo and Q&A session",
+          "duration": 3,
+          "tags": ["Demo", "Presentation"]
+        },
+        {
+          "name": "Proposal Development",
+          "notes": "Create detailed partnership proposal with pricing and deliverables",
+          "duration": 5,
+          "tags": ["Proposal", "Pricing"]
+        },
+        {
+          "name": "Contract Negotiation",
+          "notes": "Negotiate terms, timeline, and finalize partnership agreement",
+          "duration": 7,
+          "tags": ["Negotiation", "Contract"]
+        }
+      ]
+    },
+    {
+      "name": "College Program Outreach Template",
+      "description": "Template for approaching college athletic programs",
+      "tasks": [
+        {
+          "name": "Conference & Program Analysis",
+          "notes": "Analyze conference standings, recruiting needs, and budget considerations",
+          "duration": 2,
+          "tags": ["Research", "NCAA"]
+        },
+        {
+          "name": "Recruiting Analytics Demo Creation",
+          "notes": "Build recruiting-focused analytics demonstration",
+          "duration": 4,
+          "tags": ["Demo", "Recruiting"]
+        },
+        {
+          "name": "Athletic Director Outreach",
+          "notes": "Initial contact with Athletic Director and relevant coaching staff",
+          "duration": 1,
+          "tags": ["Outreach", "AD"]
+        },
+        {
+          "name": "Compliance Review",
+          "notes": "Review NCAA compliance requirements for analytics partnerships",
+          "duration": 2,
+          "tags": ["Compliance", "NCAA"]
+        },
+        {
+          "name": "Budget Proposal",
+          "notes": "Create budget-appropriate proposal for college program resources",
+          "duration": 3,
+          "tags": ["Proposal", "Budget"]
+        }
+      ]
+    },
+    {
+      "name": "Youth Organization Partnership Template",
+      "description": "Template for youth baseball/sports organization partnerships",
+      "tasks": [
+        {
+          "name": "Perfect Game Integration Research",
+          "notes": "Research integration opportunities with Perfect Game database",
+          "duration": 2,
+          "tags": ["Research", "Perfect-Game"]
+        },
+        {
+          "name": "Youth Development Analytics Demo",
+          "notes": "Create age-appropriate analytics demonstration for youth development",
+          "duration": 3,
+          "tags": ["Demo", "Youth"]
+        },
+        {
+          "name": "Parent & Coach Education Materials",
+          "notes": "Develop educational materials explaining analytics benefits for youth athletes",
+          "duration": 4,
+          "tags": ["Education", "Materials"]
+        },
+        {
+          "name": "Tournament Director Outreach",
+          "notes": "Connect with tournament directors and youth organization leaders",
+          "duration": 2,
+          "tags": ["Outreach", "Youth-Leaders"]
+        },
+        {
+          "name": "Pilot Program Proposal",
+          "notes": "Propose pilot program with measurable outcomes for youth development",
+          "duration": 3,
+          "tags": ["Pilot", "Youth-Development"]
+        }
+      ]
+    }
+  ],
+  "custom_fields": [
+    {
+      "name": "Revenue Impact",
+      "type": "enum",
+      "options": ["High ($100K+)", "Medium ($25K-$100K)", "Low (<$25K)", "Strategic Value"]
+    },
+    {
+      "name": "Client Segment",
+      "type": "enum",
+      "options": ["Professional Teams", "College Programs", "Youth Organizations", "International Markets"]
+    },
+    {
+      "name": "AI Model Assignment",
+      "type": "enum",
+      "options": ["Claude Opus 4.1", "ChatGPT 5 Pro", "Gemini 2.5 Pro", "Multi-Model"]
+    },
+    {
+      "name": "Integration Status",
+      "type": "enum",
+      "options": ["Not Started", "In Progress", "Testing", "Live", "Needs Update"]
+    },
+    {
+      "name": "Priority Level",
+      "type": "enum",
+      "options": ["P0 - Critical", "P1 - High", "P2 - Medium", "P3 - Low"]
+    }
+  ]
+}

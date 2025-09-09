@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-09-01T10:15:59.038Z",
+  "system_status": "operational",
+  "api_endpoints": {
+    "health": "https://6a9977b8.blaze-intelligence-lsl.pages.dev/api/health",
+    "catalog": "https://6a9977b8.blaze-intelligence-lsl.pages.dev/api/catalog",
+    "search": "https://6a9977b8.blaze-intelligence-lsl.pages.dev/api/search",
+    "cardinals": "https://6a9977b8.blaze-intelligence-lsl.pages.dev/api/teams/cardinals"
+  },
+  "priority_labs": {
+    "cardinals": {
+      "url": "https://6a9977b8.blaze-intelligence-lsl.pages.dev/sports/baseball/mlb/cardinals.html",
+      "readiness_score": 86.64,
+      "status": "active"
+    },
+    "titans": {
+      "url": "https://6a9977b8.blaze-intelligence-lsl.pages.dev/sports/football/nfl/titans.html",
+      "status": "active"
+    }
+  },
+  "agents": [
+    {
+      "name": "Cardinals Readiness Board",
+      "schedule": "*/10 * * * *",
+      "endpoint": "/api/teams/cardinals",
+      "status": "configured"
+    },
+    {
+      "name": "Content Catalog Agent",
+      "schedule": "0 6 * * *",
+      "endpoint": "/api/catalog",
+      "status": "configured"
+    }
+  ]
+}

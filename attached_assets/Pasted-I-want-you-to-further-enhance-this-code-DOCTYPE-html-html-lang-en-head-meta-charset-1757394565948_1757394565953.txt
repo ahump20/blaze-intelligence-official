@@ -1,0 +1,2293 @@
+I want you to further enhance this code <!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blaze Intelligence | Pioneering Sports Analytics</title>
+
+    <meta name="description" content="Where Texas heritage meets algorithmic excellence. Professional-grade sports intelligence platform for teams, analysts, and serious investors.">
+
+    
+
+    <!-- Three.js -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    
+
+    <!-- GSAP for animations -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    
+
+    <!-- Chart.js for data visualization -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        :root {
+
+            --burnt-orange: #BF5700;
+
+            --cardinal-blue: #9BCBEB;
+
+            --tennessee-deep: #002244;
+
+            --vancouver-teal: #00B2A9;
+
+            --platinum: #E5E4E2;
+
+            --graphite: #36454F;
+
+            --pearl: #FAFAFA;
+
+            --glass: rgba(255, 255, 255, 0.05);
+
+            --glass-border: rgba(255, 255, 255, 0.1);
+
+        }
+
+
+
+        @font-face {
+
+            font-family: 'Inter';
+
+            src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+        }
+
+
+
+        body {
+
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            background: #000;
+
+            color: var(--pearl);
+
+            overflow-x: hidden;
+
+            line-height: 1.6;
+
+        }
+
+
+
+        /* Navigation */
+
+        nav {
+
+            position: fixed;
+
+            top: 0;
+
+            width: 100%;
+
+            z-index: 1000;
+
+            backdrop-filter: blur(20px);
+
+            background: rgba(0, 0, 0, 0.7);
+
+            border-bottom: 1px solid var(--glass-border);
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .nav-container {
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+            padding: 1rem 2rem;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+
+
+        .logo {
+
+            font-size: 1.5rem;
+
+            font-weight: 900;
+
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            letter-spacing: -0.5px;
+
+        }
+
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 2rem;
+
+            align-items: center;
+
+        }
+
+
+
+        .nav-links a {
+
+            color: var(--platinum);
+
+            text-decoration: none;
+
+            font-weight: 500;
+
+            transition: color 0.3s;
+
+            position: relative;
+
+        }
+
+
+
+        .nav-links a:hover {
+
+            color: var(--cardinal-blue);
+
+        }
+
+
+
+        .nav-links a::after {
+
+            content: '';
+
+            position: absolute;
+
+            bottom: -5px;
+
+            left: 0;
+
+            width: 0;
+
+            height: 2px;
+
+            background: var(--burnt-orange);
+
+            transition: width 0.3s;
+
+        }
+
+
+
+        .nav-links a:hover::after {
+
+            width: 100%;
+
+        }
+
+
+
+        .cta-button {
+
+            background: linear-gradient(135deg, var(--burnt-orange), #E67300);
+
+            color: white;
+
+            padding: 0.75rem 1.5rem;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            transition: all 0.3s;
+
+            border: none;
+
+            cursor: pointer;
+
+            display: inline-block;
+
+        }
+
+
+
+        .cta-button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+
+        }
+
+
+
+        /* Hero Section */
+
+        #hero {
+
+            position: relative;
+
+            height: 100vh;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+
+        #three-canvas {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            z-index: 1;
+
+        }
+
+
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 10;
+
+            text-align: center;
+
+            max-width: 900px;
+
+            padding: 0 2rem;
+
+        }
+
+
+
+        .hero-badge {
+
+            display: inline-block;
+
+            padding: 0.5rem 1rem;
+
+            background: var(--glass);
+
+            border: 1px solid var(--glass-border);
+
+            border-radius: 50px;
+
+            margin-bottom: 2rem;
+
+            font-size: 0.875rem;
+
+            color: var(--cardinal-blue);
+
+            backdrop-filter: blur(10px);
+
+        }
+
+
+
+        h1 {
+
+            font-size: clamp(2.5rem, 8vw, 5rem);
+
+            font-weight: 900;
+
+            line-height: 1.1;
+
+            margin-bottom: 1.5rem;
+
+            background: linear-gradient(135deg, var(--pearl) 0%, var(--cardinal-blue) 100%);
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+        }
+
+
+
+        .hero-subtitle {
+
+            font-size: 1.25rem;
+
+            color: var(--platinum);
+
+            margin-bottom: 2rem;
+
+            opacity: 0.9;
+
+        }
+
+
+
+        .hero-cta {
+
+            display: flex;
+
+            gap: 1rem;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        .secondary-button {
+
+            background: transparent;
+
+            color: var(--cardinal-blue);
+
+            padding: 0.75rem 1.5rem;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            transition: all 0.3s;
+
+            border: 2px solid var(--cardinal-blue);
+
+            cursor: pointer;
+
+            display: inline-block;
+
+        }
+
+
+
+        .secondary-button:hover {
+
+            background: var(--cardinal-blue);
+
+            color: var(--tennessee-deep);
+
+        }
+
+
+
+        /* Live Data Ticker */
+
+        .live-ticker {
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 0;
+
+            right: 0;
+
+            background: rgba(0, 34, 68, 0.9);
+
+            backdrop-filter: blur(10px);
+
+            padding: 1rem;
+
+            border-top: 1px solid var(--glass-border);
+
+            z-index: 100;
+
+        }
+
+
+
+        .ticker-content {
+
+            display: flex;
+
+            animation: scroll 30s linear infinite;
+
+            gap: 3rem;
+
+        }
+
+
+
+        @keyframes scroll {
+
+            0% { transform: translateX(0); }
+
+            100% { transform: translateX(-50%); }
+
+        }
+
+
+
+        .ticker-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 1rem;
+
+            white-space: nowrap;
+
+        }
+
+
+
+        .ticker-label {
+
+            color: var(--cardinal-blue);
+
+            font-weight: 600;
+
+        }
+
+
+
+        .ticker-value {
+
+            color: var(--pearl);
+
+            font-family: 'JetBrains Mono', monospace;
+
+        }
+
+
+
+        .ticker-change {
+
+            padding: 0.25rem 0.5rem;
+
+            border-radius: 4px;
+
+            font-size: 0.875rem;
+
+            font-weight: 600;
+
+        }
+
+
+
+        .ticker-up {
+
+            background: rgba(0, 178, 169, 0.2);
+
+            color: var(--vancouver-teal);
+
+        }
+
+
+
+        .ticker-down {
+
+            background: rgba(191, 87, 0, 0.2);
+
+            color: var(--burnt-orange);
+
+        }
+
+
+
+        /* Features Section */
+
+        .section {
+
+            padding: 5rem 2rem;
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+        }
+
+
+
+        .section-header {
+
+            text-align: center;
+
+            margin-bottom: 4rem;
+
+        }
+
+
+
+        .section-badge {
+
+            display: inline-block;
+
+            padding: 0.5rem 1rem;
+
+            background: var(--glass);
+
+            border: 1px solid var(--burnt-orange);
+
+            border-radius: 50px;
+
+            margin-bottom: 1rem;
+
+            font-size: 0.875rem;
+
+            color: var(--burnt-orange);
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+
+        h2 {
+
+            font-size: clamp(2rem, 5vw, 3.5rem);
+
+            font-weight: 900;
+
+            margin-bottom: 1rem;
+
+            background: linear-gradient(135deg, var(--pearl), var(--cardinal-blue));
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+        }
+
+
+
+        .section-subtitle {
+
+            font-size: 1.125rem;
+
+            color: var(--platinum);
+
+            max-width: 600px;
+
+            margin: 0 auto;
+
+        }
+
+
+
+        .features-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+
+            gap: 2rem;
+
+            margin-top: 3rem;
+
+        }
+
+
+
+        .feature-card {
+
+            background: var(--glass);
+
+            border: 1px solid var(--glass-border);
+
+            border-radius: 16px;
+
+            padding: 2rem;
+
+            backdrop-filter: blur(10px);
+
+            transition: all 0.3s;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+
+        .feature-card::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            height: 3px;
+
+            background: linear-gradient(90deg, var(--burnt-orange), var(--cardinal-blue));
+
+            transform: scaleX(0);
+
+            transition: transform 0.3s;
+
+        }
+
+
+
+        .feature-card:hover {
+
+            transform: translateY(-5px);
+
+            border-color: var(--burnt-orange);
+
+        }
+
+
+
+        .feature-card:hover::before {
+
+            transform: scaleX(1);
+
+        }
+
+
+
+        .feature-icon {
+
+            width: 60px;
+
+            height: 60px;
+
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 1.5rem;
+
+            font-size: 1.5rem;
+
+        }
+
+
+
+        .feature-title {
+
+            font-size: 1.5rem;
+
+            font-weight: 700;
+
+            margin-bottom: 1rem;
+
+            color: var(--pearl);
+
+        }
+
+
+
+        .feature-description {
+
+            color: var(--platinum);
+
+            line-height: 1.6;
+
+            margin-bottom: 1.5rem;
+
+        }
+
+
+
+        .feature-stats {
+
+            display: flex;
+
+            gap: 2rem;
+
+            padding-top: 1.5rem;
+
+            border-top: 1px solid var(--glass-border);
+
+        }
+
+
+
+        .stat {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+
+        .stat-value {
+
+            font-size: 1.5rem;
+
+            font-weight: 700;
+
+            color: var(--cardinal-blue);
+
+            font-family: 'JetBrains Mono', monospace;
+
+        }
+
+
+
+        .stat-label {
+
+            font-size: 0.875rem;
+
+            color: var(--platinum);
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+
+        /* Analytics Dashboard Preview */
+
+        .dashboard-preview {
+
+            background: linear-gradient(135deg, rgba(0, 34, 68, 0.5), rgba(0, 0, 0, 0.8));
+
+            border-radius: 24px;
+
+            padding: 2rem;
+
+            border: 1px solid var(--glass-border);
+
+            margin-top: 3rem;
+
+        }
+
+
+
+        .dashboard-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 2rem;
+
+        }
+
+
+
+        .dashboard-title {
+
+            font-size: 1.25rem;
+
+            font-weight: 700;
+
+            color: var(--pearl);
+
+        }
+
+
+
+        .dashboard-controls {
+
+            display: flex;
+
+            gap: 0.5rem;
+
+        }
+
+
+
+        .control-dot {
+
+            width: 12px;
+
+            height: 12px;
+
+            border-radius: 50%;
+
+            background: var(--glass-border);
+
+        }
+
+
+
+        .control-dot:first-child { background: #ff5f57; }
+
+        .control-dot:nth-child(2) { background: #ffbd2e; }
+
+        .control-dot:nth-child(3) { background: #28ca42; }
+
+
+
+        .charts-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+            gap: 1.5rem;
+
+        }
+
+
+
+        .chart-container {
+
+            background: var(--glass);
+
+            border-radius: 12px;
+
+            padding: 1.5rem;
+
+            border: 1px solid var(--glass-border);
+
+        }
+
+
+
+        .chart-title {
+
+            font-size: 0.875rem;
+
+            color: var(--cardinal-blue);
+
+            margin-bottom: 1rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+
+        /* Founder Section */
+
+        .founder-section {
+
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(0, 34, 68, 0.1));
+
+            border-radius: 24px;
+
+            padding: 3rem;
+
+            margin-top: 5rem;
+
+            border: 1px solid var(--glass-border);
+
+        }
+
+
+
+        .founder-content {
+
+            display: grid;
+
+            grid-template-columns: 200px 1fr;
+
+            gap: 3rem;
+
+            align-items: center;
+
+        }
+
+
+
+        .founder-image {
+
+            width: 200px;
+
+            height: 200px;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            border: 3px solid var(--burnt-orange);
+
+        }
+
+
+
+        .founder-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+
+        .founder-info h3 {
+
+            font-size: 2rem;
+
+            margin-bottom: 0.5rem;
+
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+        }
+
+
+
+        .founder-title {
+
+            color: var(--cardinal-blue);
+
+            font-size: 1.125rem;
+
+            margin-bottom: 1.5rem;
+
+        }
+
+
+
+        .founder-bio {
+
+            color: var(--platinum);
+
+            line-height: 1.8;
+
+            margin-bottom: 1.5rem;
+
+        }
+
+
+
+        .founder-links {
+
+            display: flex;
+
+            gap: 1rem;
+
+        }
+
+
+
+        /* Footer */
+
+        footer {
+
+            background: #000;
+
+            border-top: 1px solid var(--glass-border);
+
+            padding: 3rem 2rem 2rem;
+
+            margin-top: 5rem;
+
+        }
+
+
+
+        .footer-content {
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+
+            gap: 3rem;
+
+        }
+
+
+
+        .footer-brand h3 {
+
+            font-size: 1.5rem;
+
+            margin-bottom: 1rem;
+
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+        }
+
+
+
+        .footer-tagline {
+
+            color: var(--platinum);
+
+            margin-bottom: 1.5rem;
+
+        }
+
+
+
+        .footer-column h4 {
+
+            color: var(--pearl);
+
+            margin-bottom: 1rem;
+
+            font-size: 0.875rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+
+        .footer-column ul {
+
+            list-style: none;
+
+        }
+
+
+
+        .footer-column a {
+
+            color: var(--platinum);
+
+            text-decoration: none;
+
+            display: block;
+
+            padding: 0.25rem 0;
+
+            transition: color 0.3s;
+
+        }
+
+
+
+        .footer-column a:hover {
+
+            color: var(--cardinal-blue);
+
+        }
+
+
+
+        .footer-bottom {
+
+            text-align: center;
+
+            padding-top: 2rem;
+
+            margin-top: 2rem;
+
+            border-top: 1px solid var(--glass-border);
+
+            color: var(--platinum);
+
+            font-size: 0.875rem;
+
+        }
+
+
+
+        /* Loading Animation */
+
+        .loading-overlay {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            background: #000;
+
+            z-index: 10000;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition: opacity 0.5s;
+
+        }
+
+
+
+        .loading-logo {
+
+            font-size: 3rem;
+
+            font-weight: 900;
+
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            animation: pulse 1.5s ease-in-out infinite;
+
+        }
+
+
+
+        @keyframes pulse {
+
+            0%, 100% { opacity: 1; }
+
+            50% { opacity: 0.5; }
+
+        }
+
+
+
+        /* Responsive */
+
+        @media (max-width: 768px) {
+
+            .nav-links {
+
+                display: none;
+
+            }
+
+
+
+            .hero-cta {
+
+                flex-direction: column;
+
+                align-items: center;
+
+            }
+
+
+
+            .features-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+
+            .founder-content {
+
+                grid-template-columns: 1fr;
+
+                text-align: center;
+
+            }
+
+
+
+            .founder-image {
+
+                margin: 0 auto;
+
+            }
+
+
+
+            .footer-content {
+
+                grid-template-columns: 1fr;
+
+                text-align: center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Loading Overlay -->
+
+    <div class="loading-overlay" id="loadingOverlay">
+
+        <div class="loading-logo">BLAZE</div>
+
+    </div>
+
+
+
+    <!-- Navigation -->
+
+    <nav id="navbar">
+
+        <div class="nav-container">
+
+            <div class="logo">BLAZE INTELLIGENCE</div>
+
+            <div class="nav-links">
+
+                <a href="#features">Features</a>
+
+                <a href="#analytics">Analytics</a>
+
+                <a href="#about">About</a>
+
+                <a href="#contact">Contact</a>
+
+                <a href="#" class="cta-button">Request Demo</a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- Hero Section -->
+
+    <section id="hero">
+
+        <canvas id="three-canvas"></canvas>
+
+        <div class="hero-content">
+
+            <div class="hero-badge">🔥 Pioneering Sports Intelligence</div>
+
+            <h1>Where Texas Heritage Meets Algorithmic Excellence</h1>
+
+            <p class="hero-subtitle">Professional-grade analytics platform delivering real-time intelligence for teams, analysts, and serious sports investors.</p>
+
+            <div class="hero-cta">
+
+                <a href="#" class="cta-button">Start Free Trial</a>
+
+                <a href="#features" class="secondary-button">Explore Platform</a>
+
+            </div>
+
+        </div>
+
+        
+
+        <!-- Live Data Ticker -->
+
+        <div class="live-ticker">
+
+            <div class="ticker-content" id="tickerContent">
+
+                <!-- Ticker items will be dynamically inserted -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Features Section -->
+
+    <section class="section" id="features">
+
+        <div class="section-header">
+
+            <span class="section-badge">Core Capabilities</span>
+
+            <h2>Intelligence That Drives Decisions</h2>
+
+            <p class="section-subtitle">Three pillars of professional sports analytics, unified in one powerful platform.</p>
+
+        </div>
+
+
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">📊</div>
+
+                <h3 class="feature-title">Pro Analytics</h3>
+
+                <p class="feature-description">Real-time performance intelligence engineered for professional teams. Advanced metrics, predictive modeling, and tactical insights that transform raw data into competitive advantage.</p>
+
+                <div class="feature-stats">
+
+                    <div class="stat">
+
+                        <span class="stat-value">95%+</span>
+
+                        <span class="stat-label">Accuracy</span>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <span class="stat-value"><100ms</span>
+
+                        <span class="stat-label">Latency</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🎯</div>
+
+                <h3 class="feature-title">Betting Edge</h3>
+
+                <p class="feature-description">Institutional-grade analytics for serious sports investors. Proprietary algorithms analyze thousands of data points to identify value and inefficiencies in real-time markets.</p>
+
+                <div class="feature-stats">
+
+                    <div class="stat">
+
+                        <span class="stat-value">10K+</span>
+
+                        <span class="stat-label">Data Points</span>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <span class="stat-value">24/7</span>
+
+                        <span class="stat-label">Monitoring</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">⚡</div>
+
+                <h3 class="feature-title">Talent Scout</h3>
+
+                <p class="feature-description">AI-powered player evaluation and recruitment intelligence. Deep learning models assess potential, predict development trajectories, and identify undervalued talent.</p>
+
+                <div class="feature-stats">
+
+                    <div class="stat">
+
+                        <span class="stat-value">500K+</span>
+
+                        <span class="stat-label">Players</span>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <span class="stat-value">50+</span>
+
+                        <span class="stat-label">Metrics</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Analytics Dashboard Preview -->
+
+    <section class="section" id="analytics">
+
+        <div class="section-header">
+
+            <span class="section-badge">Live Platform</span>
+
+            <h2>Real-Time Intelligence Dashboard</h2>
+
+            <p class="section-subtitle">Experience the power of professional sports analytics with live data streams.</p>
+
+        </div>
+
+
+
+        <div class="dashboard-preview">
+
+            <div class="dashboard-header">
+
+                <div class="dashboard-title">Performance Analytics</div>
+
+                <div class="dashboard-controls">
+
+                    <span class="control-dot"></span>
+
+                    <span class="control-dot"></span>
+
+                    <span class="control-dot"></span>
+
+                </div>
+
+            </div>
+
+            <div class="charts-grid">
+
+                <div class="chart-container">
+
+                    <div class="chart-title">Player Performance Index</div>
+
+                    <canvas id="performanceChart"></canvas>
+
+                </div>
+
+                <div class="chart-container">
+
+                    <div class="chart-title">Team Efficiency Metrics</div>
+
+                    <canvas id="efficiencyChart"></canvas>
+
+                </div>
+
+                <div class="chart-container">
+
+                    <div class="chart-title">Predictive Win Probability</div>
+
+                    <canvas id="winProbChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Founder Section -->
+
+    <section class="section" id="about">
+
+        <div class="founder-section">
+
+            <div class="founder-content">
+
+                <div class="founder-image">
+
+                    <div style="background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; font-weight: 900;">JH</div>
+
+                </div>
+
+                <div class="founder-info">
+
+                    <h3>John Austin Humphrey</h3>
+
+                    <div class="founder-title">Founder & Chief Executive Officer</div>
+
+                    <p class="founder-bio">
+
+                        Combining deep sports industry knowledge with cutting-edge technology expertise, Austin leads Blaze Intelligence's mission to revolutionize sports analytics. With a background in International Relations from UT Austin and an M.S. in Sports Management from Full Sail University, he brings a unique perspective to the intersection of sports, data, and technology.
+
+                    </p>
+
+                    <div class="founder-links">
+
+                        <a href="https://www.linkedin.com/in/john-humphrey-2033" class="secondary-button" target="_blank">LinkedIn</a>
+
+                        <a href="mailto:ahump20@outlook.com" class="secondary-button">Contact</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <h3>BLAZE INTELLIGENCE</h3>
+
+                <p class="footer-tagline">Intelligence. Integrity. Innovation.</p>
+
+                <p style="color: var(--platinum); font-size: 0.875rem;">
+
+                    Pioneering sports intelligence through Texas-inspired innovation and uncompromising integrity.
+
+                </p>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Product</h4>
+
+                <ul>
+
+                    <li><a href="#">Pro Analytics</a></li>
+
+                    <li><a href="#">Betting Edge</a></li>
+
+                    <li><a href="#">Talent Scout</a></li>
+
+                    <li><a href="#">API Access</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Company</h4>
+
+                <ul>
+
+                    <li><a href="#">About</a></li>
+
+                    <li><a href="#">Careers</a></li>
+
+                    <li><a href="#">Press</a></li>
+
+                    <li><a href="#">Partners</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Resources</h4>
+
+                <ul>
+
+                    <li><a href="#">Documentation</a></li>
+
+                    <li><a href="#">Blog</a></li>
+
+                    <li><a href="#">Support</a></li>
+
+                    <li><a href="#">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>&copy; 2025 Blaze Intelligence. All rights reserved. | Boerne, Texas</p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script>
+
+        // Three.js Scene
+
+        let scene, camera, renderer, particles, mouseX = 0, mouseY = 0;
+
+
+
+        function initThree() {
+
+            scene = new THREE.Scene();
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+            camera.position.z = 5;
+
+
+
+            renderer = new THREE.WebGLRenderer({ 
+
+                canvas: document.getElementById('three-canvas'),
+
+                alpha: true,
+
+                antialias: true 
+
+            });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+
+
+            // Create particle system
+
+            const geometry = new THREE.BufferGeometry();
+
+            const vertices = [];
+
+            const colors = [];
+
+
+
+            for (let i = 0; i < 2000; i++) {
+
+                vertices.push(
+
+                    Math.random() * 20 - 10,
+
+                    Math.random() * 20 - 10,
+
+                    Math.random() * 20 - 10
+
+                );
+
+
+
+                // Alternate between burnt orange and cardinal blue
+
+                if (i % 2 === 0) {
+
+                    colors.push(0.75, 0.34, 0, 0.5); // Burnt orange
+
+                } else {
+
+                    colors.push(0.61, 0.80, 0.92, 0.5); // Cardinal blue
+
+                }
+
+            }
+
+
+
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 4));
+
+
+
+            const material = new THREE.PointsMaterial({
+
+                size: 0.02,
+
+                vertexColors: true,
+
+                transparent: true,
+
+                blending: THREE.AdditiveBlending
+
+            });
+
+
+
+            particles = new THREE.Points(geometry, material);
+
+            scene.add(particles);
+
+
+
+            // Add connecting lines
+
+            const lineMaterial = new THREE.LineBasicMaterial({ 
+
+                color: 0xBF5700, 
+
+                opacity: 0.1, 
+
+                transparent: true 
+
+            });
+
+            
+
+            for (let i = 0; i < 50; i++) {
+
+                const lineGeometry = new THREE.BufferGeometry();
+
+                const lineVertices = [];
+
+                
+
+                for (let j = 0; j < 2; j++) {
+
+                    lineVertices.push(
+
+                        Math.random() * 10 - 5,
+
+                        Math.random() * 10 - 5,
+
+                        Math.random() * 10 - 5
+
+                    );
+
+                }
+
+                
+
+                lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(lineVertices, 3));
+
+                const line = new THREE.Line(lineGeometry, lineMaterial);
+
+                scene.add(line);
+
+            }
+
+
+
+            // Mouse movement
+
+            document.addEventListener('mousemove', (event) => {
+
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            });
+
+
+
+            animate();
+
+        }
+
+
+
+        function animate() {
+
+            requestAnimationFrame(animate);
+
+
+
+            particles.rotation.x += 0.0005;
+
+            particles.rotation.y += 0.0005;
+
+
+
+            // Mouse influence
+
+            camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+
+            camera.position.y += (mouseY * 0.5 - camera.position.y) * 0.05;
+
+            camera.lookAt(scene.position);
+
+
+
+            renderer.render(scene, camera);
+
+        }
+
+
+
+        // Initialize Charts
+
+        function initCharts() {
+
+            // Performance Chart
+
+            const perfCtx = document.getElementById('performanceChart').getContext('2d');
+
+            new Chart(perfCtx, {
+
+                type: 'line',
+
+                data: {
+
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+
+                    datasets: [{
+
+                        label: 'Performance Index',
+
+                        data: [85, 88, 92, 95],
+
+                        borderColor: '#9BCBEB',
+
+                        backgroundColor: 'rgba(155, 203, 235, 0.1)',
+
+                        tension: 0.4
+
+                    }]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: { display: false }
+
+                    },
+
+                    scales: {
+
+                        y: {
+
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+
+                            ticks: { color: '#E5E4E2' }
+
+                        },
+
+                        x: {
+
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+
+                            ticks: { color: '#E5E4E2' }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+
+
+            // Efficiency Chart
+
+            const effCtx = document.getElementById('efficiencyChart').getContext('2d');
+
+            new Chart(effCtx, {
+
+                type: 'bar',
+
+                data: {
+
+                    labels: ['Offense', 'Defense', 'Special Teams'],
+
+                    datasets: [{
+
+                        label: 'Efficiency',
+
+                        data: [78, 92, 85],
+
+                        backgroundColor: [
+
+                            'rgba(191, 87, 0, 0.8)',
+
+                            'rgba(155, 203, 235, 0.8)',
+
+                            'rgba(0, 178, 169, 0.8)'
+
+                        ]
+
+                    }]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: { display: false }
+
+                    },
+
+                    scales: {
+
+                        y: {
+
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+
+                            ticks: { color: '#E5E4E2' }
+
+                        },
+
+                        x: {
+
+                            grid: { display: false },
+
+                            ticks: { color: '#E5E4E2' }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+
+
+            // Win Probability Chart
+
+            const winCtx = document.getElementById('winProbChart').getContext('2d');
+
+            new Chart(winCtx, {
+
+                type: 'doughnut',
+
+                data: {
+
+                    labels: ['Win', 'Loss'],
+
+                    datasets: [{
+
+                        data: [73, 27],
+
+                        backgroundColor: [
+
+                            'rgba(0, 178, 169, 0.8)',
+
+                            'rgba(54, 69, 79, 0.8)'
+
+                        ],
+
+                        borderWidth: 0
+
+                    }]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: {
+
+                            position: 'bottom',
+
+                            labels: { color: '#E5E4E2' }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        }
+
+
+
+        // Live Ticker Data
+
+        function initTicker() {
+
+            const tickerData = [
+
+                { label: 'DAL', value: '127-118', change: '+9', trend: 'up' },
+
+                { label: 'HOU', value: '98-95', change: '+3', trend: 'up' },
+
+                { label: 'SA', value: '105-108', change: '-3', trend: 'down' },
+
+                { label: 'Player Efficiency', value: '28.5', change: '+2.3', trend: 'up' },
+
+                { label: 'Team Rating', value: '112.4', change: '+1.1', trend: 'up' },
+
+                { label: 'Win Probability', value: '73%', change: '+5%', trend: 'up' }
+
+            ];
+
+
+
+            const tickerContent = document.getElementById('tickerContent');
+
+            let tickerHTML = '';
+
+
+
+            // Create two sets for seamless loop
+
+            for (let i = 0; i < 2; i++) {
+
+                tickerData.forEach(item => {
+
+                    tickerHTML += `
+
+                        <div class="ticker-item">
+
+                            <span class="ticker-label">${item.label}:</span>
+
+                            <span class="ticker-value">${item.value}</span>
+
+                            <span class="ticker-change ticker-${item.trend}">${item.change}</span>
+
+                        </div>
+
+                    `;
+
+                });
+
+            }
+
+
+
+            tickerContent.innerHTML = tickerHTML;
+
+        }
+
+
+
+        // Smooth scroll
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                const target = document.querySelector(this.getAttribute('href'));
+
+                if (target) {
+
+                    target.scrollIntoView({ behavior: 'smooth' });
+
+                }
+
+            });
+
+        });
+
+
+
+        // Navbar scroll effect
+
+        window.addEventListener('scroll', () => {
+
+            const navbar = document.getElementById('navbar');
+
+            if (window.scrollY > 50) {
+
+                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+
+            } else {
+
+                navbar.style.background = 'rgba(0, 0, 0, 0.7)';
+
+            }
+
+        });
+
+
+
+        // Initialize everything
+
+        window.addEventListener('load', () => {
+
+            initThree();
+
+            initCharts();
+
+            initTicker();
+
+
+
+            // Hide loading overlay
+
+            setTimeout(() => {
+
+                const overlay = document.getElementById('loadingOverlay');
+
+                overlay.style.opacity = '0';
+
+                setTimeout(() => {
+
+                    overlay.style.display = 'none';
+
+                }, 500);
+
+            }, 1500);
+
+
+
+            // GSAP Animations
+
+            gsap.registerPlugin(ScrollTrigger);
+
+
+
+            gsap.from('.hero-content > *', {
+
+                y: 50,
+
+                opacity: 0,
+
+                duration: 1,
+
+                stagger: 0.2,
+
+                delay: 1.5
+
+            });
+
+
+
+            gsap.from('.feature-card', {
+
+                scrollTrigger: {
+
+                    trigger: '.features-grid',
+
+                    start: 'top 80%'
+
+                },
+
+                y: 50,
+
+                opacity: 0,
+
+                duration: 0.8,
+
+                stagger: 0.2
+
+            });
+
+
+
+            gsap.from('.dashboard-preview', {
+
+                scrollTrigger: {
+
+                    trigger: '.dashboard-preview',
+
+                    start: 'top 80%'
+
+                },
+
+                scale: 0.9,
+
+                opacity: 0,
+
+                duration: 1
+
+            });
+
+        });
+
+
+
+        // Handle window resize
+
+        window.addEventListener('resize', () => {
+
+            if (camera && renderer) {
+
+                camera.aspect = window.innerWidth / window.innerHeight;
+
+                camera.updateProjectionMatrix();
+
+                renderer.setSize(window.innerWidth, window.innerHeight);
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+
+
+
+Please create and build Blaze Intelligence's main home landing page fully professionally polished with real-time data and player analytics, three.js and hero header branded aesthetics, visuals, and design, and over production and deployment launch-ready site. Please refer to the pages https://blaze-intelligence-lsl.pages.dev/ & https://a4dc795e.blaze-intelligence.pages.dev/ to see what i've already built and want to fully enhance and improve upon. I've also attached a headshot of myself to use as a "Founder's photo" if needed and logos and other visuals you can use in crafting the site. do not lie or make any false claims such as "being trusted by pro sports teams" etc.. The current Replit site that I would like enhanced and improved upon can be found here: https://35179f3c-00f3-409f-95da-bed1c6ba912c-00-3tftlc85yrdac.spock.replit.dev/
+
+
+
+Please create and build Blaze Intelligence's main home landing page fully professionally polished with real-time data and player analytics, three.js and hero header branded aesthetics, visuals, and design, and over production and deployment launch-ready site. Please refer to the pages https://blaze-intelligence-lsl.pages.dev/ & https://a4dc795e.blaze-intelligence.pages.dev/ to see what i've already built and want to fully enhance and improve upon. I've also attached a headshot of myself to use as a "Founder's photo" if needed and logos and other visuals you can use in crafting the site. do not lie or make any false claims such as "being trusted by pro sports teams" etc.. The current Replit site that I would like enhanced and improved upon can be found here: https://35179f3c-00f3-409f-95da-bed1c6ba912c-00-3tftlc85yrdac.spock.replit.dev/
+
+
+
+http://localhost:8080/blaze-intelligence-landing.html

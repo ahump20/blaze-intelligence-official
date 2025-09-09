@@ -1,0 +1,80 @@
+Understood. I’ll **apply the updates across both repos** so the site reads from the same source of truth and the live pages don’t diverge.
+
+### Repo scope to update
+
+* **ahump20/blaze-intelligence** (primary UI)
+* **ahump20/blaze-intelligence-official** (production configs + workers)
+
+### Minimal changes to ship
+
+1. **Unify claims (both repos)**
+
+* Import canonical metrics from `austin-portfolio-deploy/metrics-config.js` and replace hard-coded numbers.
+* Pages: Home, About/Methods, Features, Pricing.
+* Selectors to add:
+  `data-metric="accuracy" | "data-points" | "savings-range" | "annual-price"`.
+* JS inject (one-liner init in layout): map selectors → `BLAZE_METRICS`.
+
+2. **Fix dead routes (both)**
+
+* Add `/public/live-demo.html`, `/privacy.html`, `/terms.html`.
+* Footer → link to those pages.
+
+3. **Data endpoints (primary repo)**
+
+* Temporary `API_BASE = https://blaze-intelligence.pages.dev` for dashboards/analytics until CF Access is removed.
+* After Cloudflare fix, flip to `https://blaze-intelligence.com`.
+
+4. **Contact/lead (primary repo)**
+
+* Embed HubSpot form (portal/form IDs you use).
+* Fallback: POST to worker from **official repo** (`blaze-lead-capture…workers.dev`) if HubSpot blocked.
+
+5. **SEO basics (both)**
+
+* `/robots.txt` with sitemap.
+* `/sitemap.xml` (home, blog index + latest posts, pricing, contact, live-demo).
+
+6. **Cloudflare step (custom domain)**
+
+* Remove Zero Trust Access for `blaze-intelligence.com` → attach domain to Pages.
+* Verify `200` → then switch `API_BASE`.
+
+### Commit/PR plan
+
+* Branch: `feat/unify-metrics-and-routes`
+* Commits:
+
+  1. **feat(metrics):** inject BLAZE\_METRICS + replace placeholders.
+  2. **feat(routes):** add live-demo/privacy/terms + footer links.
+  3. **chore(api):** temp API\_BASE = pages.dev (flip after CF change).
+  4. **feat(contact):** HubSpot embed + worker fallback.
+  5. **chore(seo):** robots + sitemap.
+
+### Commands (Wrangler)
+
+```bash
+# Deploy primary
+npx wrangler pages deploy ./dist --project-name blaze-intelligence --branch main
+
+# After CF Access removal, flip API_BASE and redeploy
+```
+
+If you want, I’ll open PRs on both repos following this plan and tag you for review.
+
+
+I’ve reviewed the available connectors and internal sources to see how they can inform the site updates. Here’s what I found and how we can incorporate them:
+
+* **Notion & Drive as a CMS:** The Notion workspace contains pages like “Blaze Intelligence Site” and “Blaze Backyard: Development & Deployment Strategy” that outline product vision, technical architecture and monetization plans. These documents don’t directly define web‐front updates but illustrate the importance of structured content. Consider migrating your blog and knowledge sections to a Notion or Google Drive–backed CMS, pulling content dynamically into the site via API; this allows internal stakeholders to manage posts without editing code.
+
+* **HubSpot for lead capture:** The existing API docs include a lead capture endpoint; connecting a HubSpot form will centralize contact management and feed leads directly into the CRM. Use the HubSpot embed (portal ID & form ID) on the contact page and ensure fallback posting to `blaze-lead-capture.humphrey‑austin20.workers.dev` for resilience.
+
+* **File downloads via Box/Drive/Dropbox:** If you want to share sample datasets, whitepapers or case studies, store them in Google Drive, Box or Dropbox and link them from the site (e.g., a “Resources” page). This keeps large files off your production repo and allows non‑technical team members to update them. Use the appropriate connector APIs to fetch file metadata and generate secure links.
+
+* **Real-time data integration:** For dashboards and live analytics, continue using the GitHub-hosted data (e.g., Cardinals readiness JSON) but note that you could move frequently updated datasets into a cloud storage bucket (Dropbox, Drive, or Box) and fetch them via API. That simplifies the deployment pipeline; your build just reads from the storage and caches results.
+
+* **Calendar & scheduling:** If users need to book demos, consider embedding a Google Calendar–based scheduler or use HubSpot meetings. This eliminates back-and-forth emails and leverages the user’s connected calendar.
+
+* **Design assets via Canva:** Use Canva to create polished hero images or diagrams; export them to your drive and link them into the site. This keeps your visuals consistent without bloating the repo.
+
+By incorporating these connectors into your development plan, you’ll streamline content updates (Notion/Drive), strengthen lead capture (HubSpot), provide easy access to resources (Box/Dropbox/Drive), support live data workflows, and improve the overall user experience.

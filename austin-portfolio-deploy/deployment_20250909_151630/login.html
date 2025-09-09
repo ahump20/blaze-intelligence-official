@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Blaze Intelligence</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+color: #fff;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.login-container {
+max-width: 400px;
+width: 90%;
+background: rgba(26, 26, 46, 0.9);
+backdrop-filter: blur(20px);
+border-radius: 20px;
+border: 1px solid rgba(191, 87, 0, 0.3);
+padding: 40px;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.logo-section {
+text-align: center;
+margin-bottom: 30px;
+}
+
+.logo {
+font-size: 2.5rem;
+background: linear-gradient(135deg, #BF5700, #FF8C00);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.tagline {
+color: #999;
+font-size: 0.9rem;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 6px;
+color: #ccc;
+font-weight: 500;
+}
+
+.form-control {
+width: 100%;
+padding: 12px 16px;
+background: rgba(0, 0, 0, 0.4);
+border: 2px solid rgba(191, 87, 0, 0.3);
+border-radius: 8px;
+color: #fff;
+font-size: 1rem;
+transition: all 0.3s ease;
+}
+
+.form-control:focus {
+outline: none;
+border-color: #BF5700;
+box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.2);
+}
+
+.form-control::placeholder {
+color: #666;
+}
+
+.btn-primary {
+width: 100%;
+background: linear-gradient(135deg, #BF5700, #FF8C00);
+border: none;
+color: white;
+padding: 14px;
+border-radius: 8px;
+font-size: 1rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(191, 87, 0, 0.4);
+}
+
+.btn-primary:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+}
+
+.divider {
+text-align: center;
+margin: 20px 0;
+color: #666;
+position: relative;
+}
+
+.divider::before {
+content: '';
+position: absolute;
+top: 50%;
+left: 0;
+right: 0;
+height: 1px;
+background: rgba(191, 87, 0, 0.3);
+}
+
+.divider span {
+background: rgba(26, 26, 46, 0.9);
+padding: 0 20px;
+}
+
+.demo-section {
+background: rgba(191, 87, 0, 0.1);
+border: 1px solid rgba(191, 87, 0, 0.3);
+border-radius: 8px;
+padding: 16px;
+margin-bottom: 20px;
+}
+
+.demo-title {
+color: #FF8C00;
+font-weight: 600;
+margin-bottom: 8px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.demo-accounts {
+font-size: 0.85rem;
+color: #ccc;
+line-height: 1.4;
+}
+
+.demo-accounts strong {
+color: #BF5700;
+}
+
+.social-login {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+margin-bottom: 20px;
+}
+
+.btn-social {
+padding: 12px;
+border: 2px solid rgba(255, 255, 255, 0.2);
+background: rgba(0, 0, 0, 0.3);
+color: #fff;
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s ease;
+text-decoration: none;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+font-weight: 500;
+}
+
+.btn-social:hover {
+border-color: #BF5700;
+background: rgba(191, 87, 0, 0.1);
+color: #FF8C00;
+}
+
+.footer-links {
+text-align: center;
+}
+
+.footer-links a {
+color: #999;
+text-decoration: none;
+margin: 0 10px;
+font-size: 0.9rem;
+transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+color: #FF8C00;
+}
+
+.auth-switch {
+text-align: center;
+margin-top: 20px;
+color: #999;
+}
+
+.auth-switch a {
+color: #FF8C00;
+text-decoration: none;
+font-weight: 500;
+}
+
+.auth-switch a:hover {
+text-decoration: underline;
+}
+
+.loading-spinner {
+display: none;
+margin-right: 8px;
+}
+
+.error-message {
+background: rgba(220, 53, 69, 0.2);
+border: 1px solid #dc3545;
+color: #ff6b6b;
+padding: 12px;
+border-radius: 8px;
+margin-bottom: 20px;
+font-size: 0.9rem;
+}
+
+.success-message {
+background: rgba(40, 167, 69, 0.2);
+border: 1px solid #28a745;
+color: #4CAF50;
+padding: 12px;
+border-radius: 8px;
+margin-bottom: 20px;
+font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+.login-container {
+margin: 20px;
+padding: 30px 20px;
+}
+
+.social-login {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+<div class="login-container">
+<div class="logo-section">
+<div class="logo">🔥 Blaze Intelligence</div>
+<div class="tagline">Championship Sports Analytics</div>
+</div>
+
+<div class="demo-section">
+<div class="demo-title">
+🎯 Demo Accounts Available
+</div>
+<div class="demo-accounts">
+<strong>Coach:</strong> coach@demo.com / coach123<br>
+<strong>Scout:</strong> scout@demo.com / scout123<br>
+<strong>Athlete:</strong> athlete@demo.com / athlete123
+</div>
+</div>
+
+<div id="error-container"></div>
+<div id="success-container"></div>
+
+<form id="loginForm">
+<div class="form-group">
+<label for="email">Email Address</label>
+<input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+</div>
+
+<div class="form-group">
+<label for="password">Password</label>
+<input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+</div>
+
+<button type="submit" class="btn-primary" id="loginBtn">
+<span class="loading-spinner">⟳</span>
+Sign In
+</button>
+</form>
+
+<div class="divider">
+<span>or continue with</span>
+</div>
+
+<div class="social-login">
+<a href="#" class="btn-social" onclick="socialLogin('google')">
+🔍 Google
+</a>
+<a href="#" class="btn-social" onclick="socialLogin('microsoft')">
+Ⓜ️ Microsoft
+</a>
+</div>
+
+<div class="auth-switch">
+Don't have an account? <a href="/signup.html">Sign up here</a>
+</div>
+
+<div class="footer-links">
+<a href="/forgot-password.html">Forgot Password?</a>
+<a href="/">Back to Home</a>
+</div>
+</div>
+
+<script>
+// Authentication system
+class BlazeAuth {
+constructor() {
+this.apiBase = '/api';
+this.initializeAuth();
+}
+
+initializeAuth() {
+// Check if user is already logged in
+const token = localStorage.getItem('blaze_token');
+if (token && this.isValidToken(token)) {
+window.location.href = '/dashboard.html';
+}
+}
+
+isValidToken(token) {
+try {
+const payload = JSON.parse(atob(token.split('.')[1]));
+return payload.exp > Date.now() / 1000;
+} catch {
+return false;
+}
+}
+
+async login(email, password) {
+try {
+// Demo account validation
+const demoAccounts = {
+'coach@demo.com': { password: 'coach123', role: 'coach', name: 'Coach Johnson' },
+'scout@demo.com': { password: 'scout123', role: 'scout', name: 'Scout Miller' },
+'athlete@demo.com': { password: 'athlete123', role: 'athlete', name: 'Alex Rodriguez' }
+};
+
+if (demoAccounts[email] && demoAccounts[email].password === password) {
+// Create demo JWT token
+const user = demoAccounts[email];
+const token = this.createDemoToken(email, user);
+
+localStorage.setItem('blaze_token', token);
+localStorage.setItem('blaze_user', JSON.stringify({
+email,
+name: user.name,
+role: user.role
+}));
+
+return {
+success: true,
+token,
+user: {
+email,
+name: user.name,
+role: user.role
+}
+};
+}
+
+// Real authentication would go here
+// For now, simulate API call
+const response = await fetch(`${this.apiBase}/auth/login`, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify({ email, password })
+});
+
+if (response.ok) {
+const data = await response.json();
+localStorage.setItem('blaze_token', data.token);
+localStorage.setItem('blaze_user', JSON.stringify(data.user));
+return data;
+} else {
+throw new Error('Invalid email or password');
+}
+
+} catch (error) {
+throw new Error(error.message || 'Login failed. Please try again.');
+}
+}
+
+createDemoToken(email, user) {
+const header = { alg: 'HS256', typ: 'JWT' };
+const payload = {
+email,
+name: user.name,
+role: user.role,
+exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60), // 24 hours
+iat: Math.floor(Date.now() / 1000),
+demo: true
+};
+
+// Simple demo token (not secure, just for demo purposes)
+return btoa(JSON.stringify(header)) + '.' + 
+btoa(JSON.stringify(payload)) + '.' + 
+'demo-signature';
+}
+
+async socialLogin(provider) {
+// In production, this would redirect to OAuth provider
+alert(`${provider} login will be implemented in production. Use demo accounts for now.`);
+}
+}
+
+// Initialize authentication
+const auth = new BlazeAuth();
+
+// Form handling
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+e.preventDefault();
+
+const email = document.getElementById('email').value;
+const password = document.getElementById('password').value;
+const loginBtn = document.getElementById('loginBtn');
+const spinner = document.querySelector('.loading-spinner');
+
+// Clear previous messages
+document.getElementById('error-container').innerHTML = '';
+document.getElementById('success-container').innerHTML = '';
+
+try {
+// Show loading state
+loginBtn.disabled = true;
+spinner.style.display = 'inline-block';
+loginBtn.textContent = 'Signing In...';
+
+const result = await auth.login(email, password);
+
+if (result.success) {
+// Show success message
+document.getElementById('success-container').innerHTML = 
+'<div class="success-message">Login successful! Redirecting to dashboard...</div>';
+
+// Redirect to dashboard after short delay
+setTimeout(() => {
+window.location.href = '/dashboard.html';
+}, 1500);
+}
+
+} catch (error) {
+// Show error message
+document.getElementById('error-container').innerHTML = 
+`<div class="error-message">${error.message}</div>`;
+
+// Reset form state
+loginBtn.disabled = false;
+spinner.style.display = 'none';
+loginBtn.innerHTML = '<span class="loading-spinner">⟳</span>Sign In';
+}
+});
+
+// Social login handlers
+function socialLogin(provider) {
+auth.socialLogin(provider);
+}
+
+// Auto-fill demo account on click
+document.querySelector('.demo-accounts').addEventListener('click', (e) => {
+const text = e.target.textContent;
+if (text.includes('coach@demo.com')) {
+document.getElementById('email').value = 'coach@demo.com';
+document.getElementById('password').value = 'coach123';
+} else if (text.includes('scout@demo.com')) {
+document.getElementById('email').value = 'scout@demo.com';
+document.getElementById('password').value = 'scout123';
+} else if (text.includes('athlete@demo.com')) {
+document.getElementById('email').value = 'athlete@demo.com';
+document.getElementById('password').value = 'athlete123';
+}
+});
+</script>
+</body>
+</html>

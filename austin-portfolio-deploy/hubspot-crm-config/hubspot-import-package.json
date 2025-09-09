@@ -1,0 +1,240 @@
+{
+  "importPackage": {
+    "packageName": "Blaze Intelligence CRM Configuration",
+    "version": "1.0.0",
+    "description": "Complete HubSpot CRM setup for Blaze Intelligence sports analytics consulting",
+    "created": "2025-09-02",
+    "author": "Austin Humphrey - Blaze Intelligence",
+    "requirements": {
+      "hubspot_tier": "Professional or Enterprise",
+      "required_permissions": [
+        "Super Admin",
+        "Marketing Hub Professional",
+        "Sales Hub Professional",
+        "Operations Hub Starter"
+      ]
+    },
+    "importOrder": [
+      {
+        "step": 1,
+        "component": "custom_properties",
+        "file": "custom-properties-config.json",
+        "import_method": "property_settings_bulk_import",
+        "estimated_time": "5-10 minutes"
+      },
+      {
+        "step": 2,
+        "component": "sales_pipeline",
+        "file": "sales-pipeline-config.json", 
+        "import_method": "pipeline_configuration",
+        "estimated_time": "3-5 minutes"
+      },
+      {
+        "step": 3,
+        "component": "lead_scoring",
+        "file": "lead-scoring-system.json",
+        "import_method": "scoring_model_creation",
+        "estimated_time": "10-15 minutes"
+      },
+      {
+        "step": 4,
+        "component": "workflows",
+        "file": "automated-workflows.json",
+        "import_method": "workflow_builder_import",
+        "estimated_time": "20-30 minutes"
+      },
+      {
+        "step": 5,
+        "component": "integrations",
+        "file": "integration-configuration.json",
+        "import_method": "api_configuration",
+        "estimated_time": "15-25 minutes"
+      }
+    ]
+  },
+  "quickStartGuide": {
+    "preImplementation": [
+      {
+        "task": "Backup Current Configuration",
+        "description": "Export existing HubSpot configuration before implementing changes",
+        "critical": true
+      },
+      {
+        "task": "Gather API Keys",
+        "description": "Collect necessary API keys for Blaze Intelligence platform, Notion, Stripe, and Calendly",
+        "required_keys": [
+          "HUBSPOT_PRIVATE_APP_TOKEN",
+          "BLAZE_INTELLIGENCE_API_KEY", 
+          "NOTION_INTEGRATION_TOKEN",
+          "STRIPE_WEBHOOK_SECRET",
+          "CALENDLY_WEBHOOK_SECRET"
+        ]
+      },
+      {
+        "task": "Team Training Preparation",
+        "description": "Schedule training sessions for Austin Humphrey and any team members",
+        "duration": "2-4 hours"
+      }
+    ],
+    "implementation": [
+      {
+        "phase": "Phase 1: Foundation Setup (Day 1)",
+        "tasks": [
+          "Import custom properties for contacts, deals, and companies",
+          "Configure Blaze Intelligence Championship Pipeline",
+          "Set up basic lead scoring model",
+          "Test property visibility and field dependencies"
+        ]
+      },
+      {
+        "phase": "Phase 2: Automation & Workflows (Day 2-3)", 
+        "tasks": [
+          "Import and configure all automated workflows",
+          "Set up email templates and sequences",
+          "Configure trigger conditions and enrollment criteria",
+          "Test workflow execution with sample data"
+        ]
+      },
+      {
+        "phase": "Phase 3: Integrations & APIs (Day 4-5)",
+        "tasks": [
+          "Configure Blaze Intelligence platform sync",
+          "Set up Notion workspace integration",
+          "Configure Stripe payment tracking",
+          "Implement Calendly meeting automation",
+          "Test all data flows and webhooks"
+        ]
+      },
+      {
+        "phase": "Phase 4: Testing & Validation (Day 6-7)",
+        "tasks": [
+          "Create test contacts and deals",
+          "Validate lead scoring calculations",
+          "Test complete sales cycle workflows",
+          "Verify integration data accuracy",
+          "Train team on new processes"
+        ]
+      }
+    ],
+    "postImplementation": [
+      {
+        "task": "Data Migration",
+        "description": "Import existing prospect and client data into new structure",
+        "timeline": "Week 2"
+      },
+      {
+        "task": "Performance Monitoring",
+        "description": "Monitor system performance and workflow effectiveness",
+        "timeline": "Ongoing - First 30 days critical"
+      },
+      {
+        "task": "Optimization",
+        "description": "Fine-tune scoring models and workflows based on initial performance",
+        "timeline": "30-60 days post-launch"
+      }
+    ]
+  },
+  "revenueTargets": {
+    "q4_2025": {
+      "target": "$325,000",
+      "breakdown": {
+        "enterprise_deals": {
+          "count": 1,
+          "average_value": "$250,000",
+          "total": "$250,000"
+        },
+        "professional_deals": {
+          "count": 1,
+          "average_value": "$50,000", 
+          "total": "$50,000"
+        },
+        "youth_select_deals": {
+          "count": 1,
+          "average_value": "$25,000",
+          "total": "$25,000"
+        }
+      }
+    },
+    "2026": {
+      "target": "$1,875,000",
+      "breakdown": {
+        "enterprise_deals": {
+          "count": 3,
+          "average_value": "$250,000",
+          "total": "$750,000"
+        },
+        "professional_deals": {
+          "count": 15,
+          "average_value": "$50,000",
+          "total": "$750,000"
+        },
+        "collegiate_deals": {
+          "count": 10,
+          "average_value": "$25,000",
+          "total": "$250,000"
+        },
+        "youth_select_deals": {
+          "count": 13,
+          "average_value": "$25,000",
+          "total": "$125,000"
+        }
+      }
+    }
+  },
+  "kpiDashboard": {
+    "leadGeneration": [
+      "New leads per month",
+      "Lead source attribution",
+      "Cost per lead by channel",
+      "Lead-to-opportunity conversion rate"
+    ],
+    "salesPerformance": [
+      "Pipeline velocity",
+      "Average deal size by tier",
+      "Win rate by organization type",
+      "Sales cycle length by deal size"
+    ],
+    "clientSuccess": [
+      "Client satisfaction scores",
+      "Platform adoption rates",
+      "Retention and expansion revenue",
+      "Time to first value delivery"
+    ],
+    "competitivePosition": [
+      "Win rate vs specific competitors",
+      "Average savings delivered to clients",
+      "Competitive displacement rate",
+      "Market share growth"
+    ]
+  },
+  "troubleshooting": {
+    "commonIssues": [
+      {
+        "issue": "Lead scoring not calculating correctly",
+        "solution": "Check property dependencies and ensure all required fields are populated",
+        "escalation": "Contact HubSpot support if calculation logic appears broken"
+      },
+      {
+        "issue": "Workflows not triggering",
+        "solution": "Verify enrollment criteria, check contact permissions, validate trigger conditions",
+        "escalation": "Review workflow logs in HubSpot Operations Hub"
+      },
+      {
+        "issue": "Integration sync failures",
+        "solution": "Verify API keys, check webhook endpoints, review authentication tokens",
+        "escalation": "Test API connections independently and review error logs"
+      }
+    ],
+    "supportContacts": {
+      "primary": {
+        "name": "Austin Humphrey",
+        "email": "ahump20@outlook.com",
+        "phone": "(210) 273-5538"
+      },
+      "hubspot_support": {
+        "professional_tier": "Chat and email support included",
+        "enterprise_tier": "Dedicated customer success manager available"
+      }
+    }
+  }
+}

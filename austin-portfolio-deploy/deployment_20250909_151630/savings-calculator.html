@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze vs Hudl Cost Calculator | Verified Savings Analysis</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+color: #e2e8f0;
+min-height: 100vh;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+.hero {
+text-align: center;
+padding: 3rem 0;
+background: rgba(0,0,0,0.3);
+backdrop-filter: blur(10px);
+border-radius: 20px;
+margin-bottom: 3rem;
+}
+
+.hero h1 {
+font-size: 2.5rem;
+font-weight: 900;
+background: linear-gradient(45deg, #00ffff, #ff8c00);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-bottom: 1rem;
+}
+
+.calculator-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 3rem;
+margin: 2rem 0;
+}
+
+.calculator-panel {
+background: rgba(30, 41, 59, 0.9);
+border-radius: 16px;
+padding: 2rem;
+border: 1px solid rgba(0, 255, 255, 0.3);
+backdrop-filter: blur(15px);
+}
+
+.form-group {
+margin-bottom: 2rem;
+}
+
+.form-label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: 600;
+color: #00ffff;
+}
+
+.form-select {
+width: 100%;
+padding: 1rem;
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 8px;
+background: rgba(0,0,0,0.3);
+color: #e2e8f0;
+font-size: 1rem;
+}
+
+.form-input {
+width: 100%;
+padding: 1rem;
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 8px;
+background: rgba(0,0,0,0.3);
+color: #e2e8f0;
+font-size: 1rem;
+}
+
+.results-panel {
+grid-column: 1 / -1;
+background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(0, 255, 255, 0.1));
+border: 1px solid rgba(16, 185, 129, 0.3);
+border-radius: 16px;
+padding: 3rem;
+text-align: center;
+}
+
+.savings-amount {
+font-size: 4rem;
+font-weight: 900;
+color: #10b981;
+margin: 1rem 0;
+text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+}
+
+.savings-percentage {
+font-size: 2rem;
+color: #00ffff;
+margin-bottom: 2rem;
+}
+
+.cost-breakdown {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 2rem;
+margin: 2rem 0;
+}
+
+.cost-item {
+background: rgba(0,0,0,0.3);
+padding: 1.5rem;
+border-radius: 12px;
+border: 1px solid rgba(255,255,255,0.1);
+}
+
+.cost-label {
+font-size: 0.9rem;
+color: #94a3b8;
+margin-bottom: 0.5rem;
+}
+
+.cost-value {
+font-size: 1.8rem;
+font-weight: bold;
+color: #e2e8f0;
+}
+
+.hudl-cost { border-color: rgba(239, 68, 68, 0.3); }
+.blaze-cost { border-color: rgba(16, 185, 129, 0.3); }
+.savings-cost { border-color: rgba(0, 255, 255, 0.3); }
+
+.comparison-chart {
+margin: 2rem 0;
+padding: 2rem;
+background: rgba(0,0,0,0.3);
+border-radius: 12px;
+}
+
+.chart-bars {
+display: flex;
+align-items: end;
+gap: 2rem;
+height: 200px;
+margin: 2rem 0;
+}
+
+.chart-bar {
+flex: 1;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.bar {
+width: 100%;
+background: linear-gradient(to top, #ef4444, #dc2626);
+border-radius: 4px 4px 0 0;
+display: flex;
+align-items: end;
+justify-content: center;
+color: white;
+font-weight: bold;
+padding: 1rem 0;
+}
+
+.blaze-bar {
+background: linear-gradient(to top, #10b981, #059669);
+}
+
+.bar-label {
+margin-top: 1rem;
+font-weight: bold;
+text-align: center;
+}
+
+.feature-comparison {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 1rem;
+margin: 2rem 0;
+background: rgba(0,0,0,0.3);
+border-radius: 12px;
+padding: 2rem;
+}
+
+.feature-header {
+font-weight: bold;
+padding: 1rem;
+background: rgba(0, 255, 255, 0.1);
+border-radius: 8px;
+text-align: center;
+}
+
+.feature-row {
+display: contents;
+}
+
+.feature-cell {
+padding: 1rem;
+text-align: center;
+border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.check { color: #10b981; }
+.cross { color: #ef4444; }
+
+.disclaimer {
+margin-top: 2rem;
+padding: 1.5rem;
+background: rgba(245, 158, 11, 0.1);
+border: 1px solid rgba(245, 158, 11, 0.3);
+border-radius: 12px;
+font-size: 0.9rem;
+color: #fbbf24;
+}
+
+.verified-badge {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+background: rgba(16, 185, 129, 0.2);
+border: 1px solid rgba(16, 185, 129, 0.3);
+padding: 0.5rem 1rem;
+border-radius: 20px;
+font-size: 0.9rem;
+color: #10b981;
+margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+.calculator-grid {
+grid-template-columns: 1fr;
+}
+
+.cost-breakdown {
+grid-template-columns: 1fr;
+}
+
+.feature-comparison {
+grid-template-columns: 1fr;
+}
+}
+</style>
+
+</html>

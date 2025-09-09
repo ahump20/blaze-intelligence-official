@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Blaze Intelligence</title>
+<meta name="description" content="Get in touch with Blaze Intelligence for championship-level sports analytics">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="js/blaze-three-visuals.js" defer></script>
+
+<style>
+body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+.glass-nav { background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 255, 255, 0.2); }
+.hero-3d-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+.contact-form { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 2px solid rgba(0, 255, 255, 0.3); border-radius: 1rem; padding: 3rem; }
+.input-field { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; width: 100%; transition: all 0.3s ease; }
+.input-field:focus { outline: none; border-color: #00FFFF; box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.1); }
+.submit-btn { background: linear-gradient(45deg, #BF5700, #FF8C00); color: white; font-weight: 600; padding: 1rem 2rem; border-radius: 0.5rem; width: 100%; transition: all 0.3s ease; }
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3); }
+.contact-card { background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(255, 140, 0, 0.2); border-radius: 1rem; padding: 2rem; }
+</style>
+
+<div class="contact-form">
+<h2 class="text-2xl font-bold text-cyan-400 mb-6">Send Us a Message</h2>
+<form id="contactForm" class="space-y-6">
+<div class="grid md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">First Name</label>
+<input type="text" class="input-field" required>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">Last Name</label>
+<input type="text" class="input-field" required>
+</div>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">Email</label>
+<input type="email" class="input-field" required>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">Organization</label>
+<input type="text" class="input-field">
+</div>
+
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">Team/Sport</label>
+<select class="input-field">
+<option>Select your focus</option>
+<option>MLB</option>
+<option>NFL</option>
+<option>NBA</option>
+<option>NCAA Football</option>
+<option>NCAA Baseball</option>
+<option>High School Sports</option>
+<option>Youth/Perfect Game Baseball</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-slate-300 mb-2">Message</label>
+<textarea class="input-field" rows="4" required></textarea>
+</div>
+
+<button type="submit" class="submit-btn">
+Send Message
+</button>
+</form>
+</div>
+
+<div class="grid md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
+<div class="text-center">
+<div class="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+<i data-lucide="trending-up" class="w-8 h-8 text-orange-400"></i>
+</div>
+<h4 class="font-bold text-white mb-2">competitive advantages</h4>
+<p class="text-sm text-slate-400">Compared to traditional analytics platforms</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+<i data-lucide="zap" class="w-8 h-8 text-cyan-400"></i>
+</div>
+<h4 class="font-bold text-white mb-2">Real-Time Intelligence</h4>
+<p class="text-sm text-slate-400">Sub-100ms response times</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+<i data-lucide="shield-check" class="w-8 h-8 text-green-400"></i>
+</div>
+<h4 class="font-bold text-white mb-2">Proven Results</h4>
+<p class="text-sm text-slate-400">Digital Combine prediction algorithms</p>
+</div>
+</div>
+</div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+lucide.createIcons();
+
+if (typeof blazeVisuals !== 'undefined') {
+blazeVisuals.initHeroHeader('contact-hero-3d', { 
+particleCount: 1500, 
+interactive: true 
+});
+}
+
+// Handle form submission with real backend
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+contactForm.addEventListener('submit', async function(e) {
+e.preventDefault();
+
+const submitBtn = contactForm.querySelector('button[type="submit"]');
+const originalText = submitBtn.textContent;
+submitBtn.textContent = 'Sending...';
+submitBtn.disabled = true;
+
+// Collect form data
+const formData = {
+firstName: contactForm.querySelector('input[type="text"]').value,
+lastName: contactForm.querySelectorAll('input[type="text"]')[1].value,
+email: contactForm.querySelector('input[type="email"]').value,
+organization: contactForm.querySelectorAll('input[type="text"]')[2].value,
+sport: contactForm.querySelector('select').value,
+message: contactForm.querySelector('textarea').value
+};
+
+try {
+// Send to backend worker
+const response = await fetch('/api/contact', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify(formData)
+});
+
+const result = await response.json();
+
+if (result.success) {
+submitBtn.textContent = '✓ Message Sent!';
+submitBtn.style.background = 'linear-gradient(45deg, #00FF00, #00CC00)';
+
+// Show success message
+const successMsg = document.createElement('div');
+successMsg.className = 'text-green-400 text-sm mt-2';
+successMsg.textContent = result.message || 'Thank you! We\'ll be in touch soon.';
+submitBtn.parentElement.appendChild(successMsg);
+
+setTimeout(() => {
+contactForm.reset();
+submitBtn.textContent = originalText;
+submitBtn.style.background = '';
+submitBtn.disabled = false;
+if (successMsg) successMsg.remove();
+}, 4000);
+} else {
+throw new Error(result.error || 'Submission failed');
+}
+} catch (error) {
+console.error('Form submission error:', error);
+submitBtn.textContent = '✗ Error - Please Try Again';
+submitBtn.style.background = 'linear-gradient(45deg, #FF0000, #CC0000)';
+
+setTimeout(() => {
+submitBtn.textContent = originalText;
+submitBtn.style.background = '';
+submitBtn.disabled = false;
+}, 3000);
+}
+});
+}
+});
+</script>
+
+<script>
+// Production Contact Form Handler
+document.addEventListener('DOMContentLoaded', function() {
+const forms = document.querySelectorAll('form[id*="contact"], form[class*="contact"]');
+forms.forEach(form => {
+form.addEventListener('submit', async function(e) {
+e.preventDefault();
+
+const formData = new FormData(form);
+const data = {
+name: formData.get('name'),
+email: formData.get('email'),
+organization: formData.get('organization') || formData.get('company') || '',
+interest: formData.get('interest') || formData.get('subject') || 'General Inquiry',
+message: formData.get('message') || ''
+};
+
+try {
+const response = await fetch('https://blaze-contact-api.humphrey-austin20.workers.dev/', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+},
+body: JSON.stringify(data)
+});
+
+const result = await response.json();
+
+if (result.success) {
+alert('Thank you for your interest! We will contact you within 24 hours.');
+form.reset();
+} else {
+alert('Please email us directly at ahump20@outlook.com or call (210) 273-5538');
+}
+} catch (error) {
+console.error('Form submission error:', error);
+alert('Please email us directly at ahump20@outlook.com or call (210) 273-5538');
+}
+});
+});
+});
+</script>
+</body>
+</html>

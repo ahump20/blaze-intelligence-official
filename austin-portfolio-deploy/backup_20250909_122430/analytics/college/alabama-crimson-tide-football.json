@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-08-28T07:48:54.482Z",
+  "program": "Alabama Crimson Tide",
+  "sport": "football",
+  "conference": "SEC",
+  "division": "NCAA Division I",
+  "season": "2025",
+  "readiness": {
+    "overall": 87.8,
+    "talent_level": 92.9,
+    "coaching": 89.1,
+    "facilities": 87.8,
+    "recruiting": 93.1
+  },
+  "leverage": {
+    "current": 3.58,
+    "trend": "increasing",
+    "playoff_positioning": "moderate"
+  },
+  "academic_metrics": {
+    "apr_score": 967,
+    "graduation_rate": 86,
+    "academic_progress": 3.32
+  },
+  "nil_market": {
+    "total_valuation_millions": 2.3,
+    "avg_deal_value": 48183,
+    "top_earners": 4
+  },
+  "recruiting_data": {
+    "class_ranking": 46,
+    "commits": 15,
+    "transfer_portal_net": 3
+  },
+  "metrics_count": 22
+}

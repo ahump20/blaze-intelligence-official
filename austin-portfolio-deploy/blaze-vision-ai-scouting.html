@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Vision AI Film Breakdown & Scouting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .vision-analysis-overlay {
+            background: linear-gradient(45deg, 
+                rgba(191, 87, 0, 0.1) 0%, 
+                rgba(0, 178, 169, 0.1) 50%, 
+                rgba(255, 181, 0, 0.1) 100%);
+            backdrop-filter: blur(10px);
+            animation: visionScan 3s ease-in-out infinite;
+        }
+        
+        @keyframes visionScan {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        
+        .biomechanical-grid {
+            background-image: 
+                linear-gradient(rgba(191, 87, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(191, 87, 0, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: gridPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        .ai-analysis-point {
+            width: 8px;
+            height: 8px;
+            background: #BF5700;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 15px rgba(191, 87, 0, 0.8);
+            animation: aiPointPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes aiPointPulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: scale(1.5);
+                opacity: 1;
+            }
+        }
+        
+        .film-breakdown-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .film-breakdown-card:hover {
+            border-color: rgba(191, 87, 0, 0.5);
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .biomechanics-analyzer {
+            background: radial-gradient(circle at center, rgba(0, 178, 169, 0.1), transparent 70%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-timeline {
+            background: linear-gradient(90deg, 
+                rgba(191, 87, 0, 0.2) 0%, 
+                rgba(255, 181, 0, 0.3) 50%, 
+                rgba(0, 178, 169, 0.2) 100%);
+            height: 6px;
+            border-radius: 3px;
+            position: relative;
+        }
+        
+        .timeline-marker {
+            width: 12px;
+            height: 12px;
+            background: #BF5700;
+            border-radius: 50%;
+            position: absolute;
+            top: -3px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(191, 87, 0, 0.6);
+            transition: all 0.2s ease;
+        }
+        
+        .timeline-marker:hover {
+            transform: scale(1.3);
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.9);
+        }
+        
+        .gait-analysis-line {
+            stroke: #BF5700;
+            stroke-width: 3;
+            fill: none;
+            stroke-dasharray: 5, 5;
+            animation: gaitFlow 2s linear infinite;
+        }
+        
+        @keyframes gaitFlow {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: 20; }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-950/95 backdrop-blur-md border-b border-orange-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-orange-500 blur-lg opacity-50"></div>
+                        <i data-lucide="eye" class="relative w-8 h-8 text-orange-500"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-orange-500 to-teal-400 bg-clip-text text-transparent">
+                            BLAZE VISION AI
+                        </h1>
+                        <p class="text-[10px] text-gray-400 tracking-widest">FILM BREAKDOWN & BIOMECHANICAL ANALYSIS</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2 text-xs">
+                        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <span class="text-gray-400">VISION AI: ACTIVE</span>
+                    </div>
+                    <button id="back-to-command" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-teal-500 text-white rounded-lg text-sm font-semibold hover:shadow-lg transition">
+                        ← Command Center
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-16 p-4">
+        <!-- Header Section -->
+        <header class="mb-6">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                    <span class="bg-gradient-to-r from-orange-500 via-yellow-500 to-teal-400 bg-clip-text text-transparent">
+                        Vision AI Film Breakdown
+                    </span>
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Advanced computer vision and biomechanical analysis for championship-level athletic performance optimization
+                </p>
+            </div>
+        </header>
+
+        <!-- Video Upload & Analysis Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Video Upload Panel -->
+            <div class="film-breakdown-card rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-orange-400 mb-4 flex items-center gap-2">
+                    <i data-lucide="upload" class="w-5 h-5"></i>
+                    Video Upload & Processing
+                </h3>
+                
+                <div id="video-upload-zone" class="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center hover:border-orange-500/50 transition cursor-pointer">
+                    <i data-lucide="video" class="w-12 h-12 text-gray-400 mx-auto mb-3"></i>
+                    <p class="text-sm text-gray-400 mb-2">Drop video file here or click to browse</p>
+                    <p class="text-xs text-gray-500">Supported: MP4, MOV, AVI (Max: 500MB)</p>
+                    <input type="file" id="video-input" class="hidden" accept="video/*">
+                </div>
+                
+                <div id="upload-progress" class="mt-4 hidden">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-gray-300">Processing...</span>
+                        <span id="progress-percent" class="text-sm text-orange-400">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div id="progress-bar" class="bg-gradient-to-r from-orange-500 to-teal-400 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Analysis Options -->
+            <div class="film-breakdown-card rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-teal-400 mb-4 flex items-center gap-2">
+                    <i data-lucide="brain" class="w-5 h-5"></i>
+                    Analysis Configuration
+                </h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="text-sm font-medium text-gray-300 mb-2 block">Sport Type</label>
+                        <select id="sport-select" class="w-full bg-gray-800 border border-gray-600 rounded p-2 text-white">
+                            <option value="baseball">Baseball</option>
+                            <option value="football">Football</option>
+                            <option value="basketball">Basketball</option>
+                            <option value="track">Track & Field</option>
+                            <option value="general">General Athletics</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="text-sm font-medium text-gray-300 mb-2 block">Analysis Focus</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" id="biomechanics" checked class="text-orange-500">
+                                <span class="text-sm">Biomechanical Analysis</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" id="form-technique" checked class="text-orange-500">
+                                <span class="text-sm">Form & Technique</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" id="movement-patterns" checked class="text-orange-500">
+                                <span class="text-sm">Movement Patterns</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" id="injury-risk" checked class="text-orange-500">
+                                <span class="text-sm">Injury Risk Assessment</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button id="start-analysis" class="w-full py-3 bg-gradient-to-r from-orange-500 to-teal-500 text-white rounded font-semibold hover:shadow-lg transition disabled:opacity-50" disabled>
+                        Start AI Analysis
+                    </button>
+                </div>
+            </div>
+
+            <!-- Real-time Analysis Status -->
+            <div class="film-breakdown-card rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-yellow-400 mb-4 flex items-center gap-2">
+                    <i data-lucide="activity" class="w-5 h-5"></i>
+                    Analysis Status
+                </h3>
+                
+                <div id="analysis-status" class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-300">Video Processing</span>
+                        <span class="text-xs text-gray-500">Waiting...</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-300">Pose Detection</span>
+                        <span class="text-xs text-gray-500">Waiting...</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-300">Biomechanics</span>
+                        <span class="text-xs text-gray-500">Waiting...</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-300">Movement Analysis</span>
+                        <span class="text-xs text-gray-500">Waiting...</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-300">Report Generation</span>
+                        <span class="text-xs text-gray-500">Waiting...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Player & Analysis Display -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Video Player with Overlay Analysis -->
+            <div class="film-breakdown-card rounded-xl p-4">
+                <h3 class="text-lg font-semibold text-orange-400 mb-4 flex items-center gap-2">
+                    <i data-lucide="play" class="w-5 h-5"></i>
+                    Video Analysis Player
+                </h3>
+                
+                <div class="relative biomechanics-analyzer rounded-lg overflow-hidden" style="height: 400px;">
+                    <div id="video-container" class="w-full h-full bg-gray-900 flex items-center justify-center">
+                        <div class="text-center text-gray-400">
+                            <i data-lucide="video-off" class="w-16 h-16 mx-auto mb-3 opacity-50"></i>
+                            <p>Upload a video to begin analysis</p>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Analysis Overlay Points (will be positioned dynamically) -->
+                    <div id="analysis-overlay" class="absolute inset-0 pointer-events-none">
+                        <!-- Analysis points will be added here dynamically -->
+                    </div>
+                    
+                    <!-- Video Controls -->
+                    <div class="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur p-3">
+                        <div class="video-timeline mb-2">
+                            <div id="timeline-progress" class="timeline-marker" style="left: 0%"></div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button id="play-pause" class="text-white hover:text-orange-400 transition">
+                                <i data-lucide="play" class="w-5 h-5"></i>
+                            </button>
+                            <span id="video-time" class="text-sm text-gray-300">00:00 / 00:00</span>
+                            <div class="flex-1"></div>
+                            <button id="slow-motion" class="text-white hover:text-orange-400 transition text-sm">0.25x</button>
+                            <button id="normal-speed" class="text-white hover:text-orange-400 transition text-sm">1x</button>
+                            <button id="frame-by-frame" class="text-white hover:text-orange-400 transition">
+                                <i data-lucide="skip-forward" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Analysis Feed -->
+            <div class="film-breakdown-card rounded-xl p-4">
+                <h3 class="text-lg font-semibold text-teal-400 mb-4 flex items-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5"></i>
+                    Live Analysis Feed
+                </h3>
+                
+                <div id="live-analysis-feed" class="h-96 overflow-y-auto space-y-3 bg-gray-900/30 rounded p-3">
+                    <div class="text-center text-gray-400 mt-20">
+                        <i data-lucide="radar" class="w-12 h-12 mx-auto mb-3 opacity-50"></i>
+                        <p>AI analysis will appear here during video processing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Biomechanical Analysis Dashboard -->
+        <div class="film-breakdown-card rounded-xl p-6 mb-8">
+            <h3 class="text-lg font-semibold text-orange-400 mb-4 flex items-center gap-2">
+                <i data-lucide="activity" class="w-5 h-5"></i>
+                Biomechanical Analysis Dashboard
+            </h3>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <!-- Force Vector Analysis -->
+                <div class="bg-gray-900/50 rounded-lg p-4">
+                    <h4 class="text-sm font-semibold text-gray-300 mb-3">Force Vectors</h4>
+                    <div class="relative h-32 biomechanical-grid rounded">
+                        <svg id="force-vectors" width="100%" height="100%" class="absolute inset-0">
+                            <!-- Force vectors will be drawn here -->
+                        </svg>
+                    </div>
+                    <div class="mt-2 text-xs text-gray-400">
+                        <div class="flex justify-between">
+                            <span>Peak Force:</span>
+                            <span id="peak-force" class="text-orange-400">0 N</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Joint Angles -->
+                <div class="bg-gray-900/50 rounded-lg p-4">
+                    <h4 class="text-sm font-semibold text-gray-300 mb-3">Joint Angles</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-400">Knee:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="knee-angle" class="text-sm text-cyan-300">0°</span>
+                                <div class="w-16 h-2 bg-gray-700 rounded">
+                                    <div id="knee-bar" class="h-2 bg-orange-500 rounded transition-all" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-400">Hip:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="hip-angle" class="text-sm text-cyan-300">0°</span>
+                                <div class="w-16 h-2 bg-gray-700 rounded">
+                                    <div id="hip-bar" class="h-2 bg-teal-500 rounded transition-all" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-400">Ankle:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="ankle-angle" class="text-sm text-cyan-300">0°</span>
+                                <div class="w-16 h-2 bg-gray-700 rounded">
+                                    <div id="ankle-bar" class="h-2 bg-yellow-500 rounded transition-all" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movement Efficiency -->
+                <div class="bg-gray-900/50 rounded-lg p-4">
+                    <h4 class="text-sm font-semibold text-gray-300 mb-3">Movement Efficiency</h4>
+                    <div class="relative h-24 flex items-center justify-center">
+                        <div class="relative w-20 h-20">
+                            <svg class="w-full h-full transform -rotate-90">
+                                <circle cx="40" cy="40" r="32" stroke="#374151" stroke-width="6" fill="none"/>
+                                <circle id="efficiency-circle" cx="40" cy="40" r="32" stroke="#BF5700" stroke-width="6" 
+                                        fill="none" stroke-dasharray="0 201" stroke-linecap="round"
+                                        class="transition-all duration-1000"/>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span id="efficiency-percent" class="text-lg font-bold text-orange-400">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-400">Overall Efficiency Rating</p>
+                    </div>
+                </div>
+
+                <!-- Injury Risk Indicator -->
+                <div class="bg-gray-900/50 rounded-lg p-4">
+                    <h4 class="text-sm font-semibold text-gray-300 mb-3">Injury Risk</h4>
+                    <div class="relative h-24 flex items-center justify-center">
+                        <div class="relative">
+                            <div id="risk-indicator" class="w-16 h-16 rounded-full border-4 border-green-500 flex items-center justify-center transition-all duration-500">
+                                <span id="risk-level" class="text-xs font-bold text-green-400">LOW</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-2">
+                        <p class="text-xs text-gray-400">Risk Assessment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actionable Recommendations -->
+        <div class="film-breakdown-card rounded-xl p-6 mb-8">
+            <h3 class="text-lg font-semibold text-yellow-400 mb-4 flex items-center gap-2">
+                <i data-lucide="target" class="w-5 h-5"></i>
+                AI-Generated Actionable Recommendations
+            </h3>
+            
+            <div id="recommendations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Recommendations will be populated here -->
+                <div class="bg-gray-900/30 rounded-lg p-4 border border-gray-700 text-center">
+                    <i data-lucide="loader" class="w-8 h-8 text-gray-400 mx-auto mb-3 animate-spin opacity-50"></i>
+                    <p class="text-sm text-gray-400">Upload and analyze video to generate personalized recommendations</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Character & Mental Analysis -->
+        <div class="film-breakdown-card rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center gap-2">
+                <i data-lucide="user-check" class="w-5 h-5"></i>
+                Character & Mental Performance Analysis
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-900/30 rounded-lg p-4">
+                    <h4 class="text-sm font-semibold text-gray-300 mb-3">Body Language Analysis</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-xs text-gray-400">Confidence:</span>
+                            <span id="confidence-score" class="text-sm text-green-400">0%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs text-gray-400">Focus:</span>
+                            <span id="focus-score" class="text-sm text-blue-400">0%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs text-gray-400">Intensity:</span>
+                            <span id="intensity-score" class="text-sm text-orange-400">0%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900/30 rounded-lg p-4">
+                    <h4 class="text-sm font-semibold text-gray-300 mb-3">Pressure Response</h4>
+                    <div id="pressure-analysis" class="text-sm text-gray-300">
+                        <p class="text-xs text-gray-500">Analysis will appear after video processing...</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900/30 rounded-lg p-4">
+                    <h4 class="text-sm font-semibold text-gray-300 mb-3">Championship Traits</h4>
+                    <div id="championship-traits" class="space-y-2">
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                            <span>Grit & Determination</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                            <span>Leadership Presence</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                            <span>Competitive Fire</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Global variables
+        let currentVideo = null;
+        let analysisData = {};
+        let isAnalyzing = false;
+
+        // Initialize the app
+        function init() {
+            setupEventListeners();
+            simulateRealTimeAnalysis();
+        }
+
+        function setupEventListeners() {
+            // Back to command center
+            document.getElementById('back-to-command').addEventListener('click', () => {
+                window.location.href = 'blaze-unified-command-center.html';
+            });
+
+            // Video upload
+            const uploadZone = document.getElementById('video-upload-zone');
+            const videoInput = document.getElementById('video-input');
+            
+            uploadZone.addEventListener('click', () => videoInput.click());
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.classList.add('border-orange-500');
+            });
+            uploadZone.addEventListener('dragleave', () => {
+                uploadZone.classList.remove('border-orange-500');
+            });
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('border-orange-500');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) handleVideoUpload(files[0]);
+            });
+            
+            videoInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleVideoUpload(e.target.files[0]);
+                }
+            });
+
+            // Start analysis button
+            document.getElementById('start-analysis').addEventListener('click', startAIAnalysis);
+
+            // Video controls
+            document.getElementById('play-pause').addEventListener('click', togglePlayPause);
+            document.getElementById('slow-motion').addEventListener('click', () => setPlaybackSpeed(0.25));
+            document.getElementById('normal-speed').addEventListener('click', () => setPlaybackSpeed(1.0));
+            document.getElementById('frame-by-frame').addEventListener('click', frameByFrame);
+        }
+
+        function handleVideoUpload(file) {
+            if (!file.type.startsWith('video/')) {
+                alert('Please select a valid video file.');
+                return;
+            }
+
+            if (file.size > 500 * 1024 * 1024) { // 500MB limit
+                alert('File size must be less than 500MB.');
+                return;
+            }
+
+            currentVideo = file;
+            displayVideo(file);
+            enableAnalysisButton();
+            simulateUploadProgress();
+        }
+
+        function displayVideo(file) {
+            const container = document.getElementById('video-container');
+            const video = document.createElement('video');
+            video.controls = false;
+            video.className = 'w-full h-full object-contain';
+            video.src = URL.createObjectURL(file);
+            
+            container.innerHTML = '';
+            container.appendChild(video);
+        }
+
+        function simulateUploadProgress() {
+            const progressDiv = document.getElementById('upload-progress');
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercent = document.getElementById('progress-percent');
+            
+            progressDiv.classList.remove('hidden');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        progressDiv.classList.add('hidden');
+                    }, 1000);
+                }
+                
+                progressBar.style.width = progress + '%';
+                progressPercent.textContent = Math.round(progress) + '%';
+            }, 200);
+        }
+
+        function enableAnalysisButton() {
+            document.getElementById('start-analysis').disabled = false;
+        }
+
+        async function startAIAnalysis() {
+            if (!currentVideo || isAnalyzing) return;
+            
+            isAnalyzing = true;
+            const button = document.getElementById('start-analysis');
+            button.textContent = 'Analyzing...';
+            button.disabled = true;
+            
+            // Update analysis status
+            updateAnalysisStatus();
+            
+            // Start live analysis feed
+            startLiveAnalysisFeed();
+            
+            // Simulate AI analysis process
+            await simulateAIAnalysis();
+            
+            // Generate recommendations
+            generateRecommendations();
+            
+            // Update character analysis
+            updateCharacterAnalysis();
+            
+            isAnalyzing = false;
+            button.textContent = 'Analysis Complete';
+        }
+
+        function updateAnalysisStatus() {
+            const statusItems = [
+                { name: 'Video Processing', delay: 1000 },
+                { name: 'Pose Detection', delay: 2500 },
+                { name: 'Biomechanics', delay: 4000 },
+                { name: 'Movement Analysis', delay: 5500 },
+                { name: 'Report Generation', delay: 7000 }
+            ];
+            
+            statusItems.forEach(item => {
+                setTimeout(() => {
+                    const elements = document.querySelectorAll('#analysis-status .flex');
+                    elements.forEach(el => {
+                        if (el.children[0].textContent === item.name) {
+                            el.children[1].textContent = 'Processing...';
+                            el.children[1].className = 'text-xs text-orange-400';
+                            
+                            setTimeout(() => {
+                                el.children[1].textContent = 'Complete ✓';
+                                el.children[1].className = 'text-xs text-green-400';
+                            }, 1500);
+                        }
+                    });
+                }, item.delay);
+            });
+        }
+
+        function startLiveAnalysisFeed() {
+            const feed = document.getElementById('live-analysis-feed');
+            feed.innerHTML = '';
+            
+            const analysisMessages = [
+                { time: 1000, type: 'biomechanics', message: 'Detecting key body landmarks and joint positions...', icon: 'target' },
+                { time: 2500, type: 'movement', message: 'Analyzing movement patterns and force vectors...', icon: 'activity' },
+                { time: 4000, type: 'technique', message: 'Evaluating form efficiency and technique optimization...', icon: 'check-circle' },
+                { time: 5500, type: 'risk', message: 'Assessing injury risk factors and biomechanical stress...', icon: 'alert-triangle' },
+                { time: 7000, type: 'recommendations', message: 'Generating personalized improvement recommendations...', icon: 'lightbulb' },
+                { time: 8500, type: 'character', message: 'Analyzing body language and mental performance indicators...', icon: 'user-check' }
+            ];
+            
+            analysisMessages.forEach(msg => {
+                setTimeout(() => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `flex items-start gap-3 p-3 bg-gray-800/50 rounded border-l-4 border-${getColorByType(msg.type)}-500`;
+                    messageDiv.innerHTML = `
+                        <i data-lucide="${msg.icon}" class="w-4 h-4 text-${getColorByType(msg.type)}-400 mt-0.5 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-sm text-gray-300">${msg.message}</p>
+                            <p class="text-xs text-gray-500 mt-1">${new Date().toLocaleTimeString()}</p>
+                        </div>
+                    `;
+                    feed.appendChild(messageDiv);
+                    feed.scrollTop = feed.scrollHeight;
+                    lucide.createIcons();
+                }, msg.time);
+            });
+        }
+
+        function getColorByType(type) {
+            const colors = {
+                biomechanics: 'orange',
+                movement: 'teal',
+                technique: 'green',
+                risk: 'yellow',
+                recommendations: 'blue',
+                character: 'purple'
+            };
+            return colors[type] || 'gray';
+        }
+
+        async function simulateAIAnalysis() {
+            // Simulate biomechanical data updates
+            for (let i = 0; i <= 100; i += 5) {
+                setTimeout(() => {
+                    updateBiomechanicalData(i);
+                }, i * 80);
+            }
+            
+            return new Promise(resolve => {
+                setTimeout(resolve, 8000);
+            });
+        }
+
+        function updateBiomechanicalData(progress) {
+            // Update joint angles
+            const kneeAngle = 90 + Math.sin(progress * 0.1) * 30;
+            const hipAngle = 120 + Math.cos(progress * 0.15) * 25;
+            const ankleAngle = 95 + Math.sin(progress * 0.2) * 15;
+            
+            document.getElementById('knee-angle').textContent = Math.round(kneeAngle) + '°';
+            document.getElementById('hip-angle').textContent = Math.round(hipAngle) + '°';
+            document.getElementById('ankle-angle').textContent = Math.round(ankleAngle) + '°';
+            
+            document.getElementById('knee-bar').style.width = (kneeAngle / 180 * 100) + '%';
+            document.getElementById('hip-bar').style.width = (hipAngle / 180 * 100) + '%';
+            document.getElementById('ankle-bar').style.width = (ankleAngle / 180 * 100) + '%';
+            
+            // Update efficiency
+            const efficiency = Math.min(progress, 87 + Math.random() * 8);
+            document.getElementById('efficiency-percent').textContent = Math.round(efficiency) + '%';
+            const circumference = 2 * Math.PI * 32;
+            const offset = circumference - (efficiency / 100) * circumference;
+            document.getElementById('efficiency-circle').style.strokeDasharray = `${circumference - offset} ${offset}`;
+            
+            // Update injury risk
+            const riskLevel = efficiency > 80 ? 'LOW' : efficiency > 60 ? 'MEDIUM' : 'HIGH';
+            const riskColor = efficiency > 80 ? 'green' : efficiency > 60 ? 'yellow' : 'red';
+            document.getElementById('risk-level').textContent = riskLevel;
+            document.getElementById('risk-indicator').className = `w-16 h-16 rounded-full border-4 border-${riskColor}-500 flex items-center justify-center transition-all duration-500`;
+            document.getElementById('risk-level').className = `text-xs font-bold text-${riskColor}-400`;
+            
+            // Update force
+            const peakForce = 1200 + Math.random() * 300;
+            document.getElementById('peak-force').textContent = Math.round(peakForce) + ' N';
+        }
+
+        function generateRecommendations() {
+            const recommendations = [
+                {
+                    icon: 'target',
+                    title: 'Hip Drive Optimization',
+                    description: 'Increase hip extension velocity by 12% through targeted strength training.',
+                    action: 'Focus on explosive hip thrusts and single-leg deadlifts',
+                    priority: 'high'
+                },
+                {
+                    icon: 'activity',
+                    title: 'Knee Tracking Alignment',
+                    description: 'Improve lateral knee stability to reduce injury risk by 23%.',
+                    action: 'Incorporate lateral lunges and glute medius strengthening',
+                    priority: 'medium'
+                },
+                {
+                    icon: 'zap',
+                    title: 'Power Transfer Enhancement',
+                    description: 'Optimize kinetic chain efficiency for 8% power increase.',
+                    action: 'Practice medicine ball rotational throws and core stability',
+                    priority: 'high'
+                },
+                {
+                    icon: 'shield',
+                    title: 'Injury Prevention Protocol',
+                    description: 'Address movement compensations in left ankle dorsiflexion.',
+                    action: 'Daily ankle mobility work and calf stretching routine',
+                    priority: 'medium'
+                },
+                {
+                    icon: 'trending-up',
+                    title: 'Performance Timing',
+                    description: 'Enhance rhythm and timing through tempo work.',
+                    action: 'Use metronome training for consistency development',
+                    priority: 'low'
+                },
+                {
+                    icon: 'brain',
+                    title: 'Mental Focus Enhancement',
+                    description: 'Improve concentration during critical movement phases.',
+                    action: 'Visualization and mindfulness training integration',
+                    priority: 'medium'
+                }
+            ];
+            
+            const grid = document.getElementById('recommendations-grid');
+            grid.innerHTML = '';
+            
+            recommendations.forEach((rec, index) => {
+                setTimeout(() => {
+                    const recDiv = document.createElement('div');
+                    recDiv.className = `bg-gray-900/50 rounded-lg p-4 border border-gray-600 hover:border-${getPriorityColor(rec.priority)}-500 transition-all duration-300 hover:transform hover:scale-105`;
+                    recDiv.innerHTML = `
+                        <div class="flex items-start gap-3 mb-3">
+                            <div class="w-8 h-8 bg-${getPriorityColor(rec.priority)}-500/20 rounded-lg flex items-center justify-center">
+                                <i data-lucide="${rec.icon}" class="w-4 h-4 text-${getPriorityColor(rec.priority)}-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-sm font-semibold text-gray-200 mb-1">${rec.title}</h4>
+                                <span class="text-xs px-2 py-1 bg-${getPriorityColor(rec.priority)}-500/20 text-${getPriorityColor(rec.priority)}-300 rounded uppercase">${rec.priority}</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-3">${rec.description}</p>
+                        <div class="bg-gray-800/50 rounded p-2">
+                            <p class="text-xs text-gray-400 mb-1">Action Plan:</p>
+                            <p class="text-xs text-gray-300">${rec.action}</p>
+                        </div>
+                    `;
+                    grid.appendChild(recDiv);
+                    lucide.createIcons();
+                }, index * 200);
+            });
+        }
+
+        function getPriorityColor(priority) {
+            const colors = { high: 'red', medium: 'yellow', low: 'green' };
+            return colors[priority] || 'gray';
+        }
+
+        function updateCharacterAnalysis() {
+            setTimeout(() => {
+                // Body language scores
+                const confidence = 75 + Math.random() * 20;
+                const focus = 80 + Math.random() * 15;
+                const intensity = 85 + Math.random() * 10;
+                
+                document.getElementById('confidence-score').textContent = Math.round(confidence) + '%';
+                document.getElementById('focus-score').textContent = Math.round(focus) + '%';
+                document.getElementById('intensity-score').textContent = Math.round(intensity) + '%';
+                
+                // Pressure response analysis
+                const pressureAnalysis = document.getElementById('pressure-analysis');
+                pressureAnalysis.innerHTML = `
+                    <p class="text-sm text-gray-300 mb-2">Maintains composure under pressure with 87% consistency.</p>
+                    <p class="text-xs text-gray-400">Shows strong mental resilience and adaptive response patterns during high-stress moments.</p>
+                `;
+                
+                // Championship traits
+                const traits = document.getElementById('championship-traits');
+                traits.innerHTML = `
+                    <div class="flex items-center gap-2 text-xs text-green-400">
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                        <span>High Grit & Determination (92%)</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-orange-400">
+                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                        <span>Strong Leadership Presence (78%)</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-red-400">
+                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                        <span>Elite Competitive Fire (95%)</span>
+                    </div>
+                `;
+            }, 6000);
+        }
+
+        function simulateRealTimeAnalysis() {
+            // Add some animated analysis points to the overlay
+            setInterval(() => {
+                const overlay = document.getElementById('analysis-overlay');
+                if (overlay && currentVideo) {
+                    // Simulate AI detection points
+                    const point = document.createElement('div');
+                    point.className = 'ai-analysis-point';
+                    point.style.left = Math.random() * 80 + 10 + '%';
+                    point.style.top = Math.random() * 60 + 20 + '%';
+                    overlay.appendChild(point);
+                    
+                    setTimeout(() => {
+                        if (point.parentNode) {
+                            point.parentNode.removeChild(point);
+                        }
+                    }, 3000);
+                }
+            }, 2000);
+        }
+
+        // Video control functions
+        function togglePlayPause() {
+            // Implementation for play/pause functionality
+        }
+
+        function setPlaybackSpeed(speed) {
+            // Implementation for playback speed control
+        }
+
+        function frameByFrame() {
+            // Implementation for frame-by-frame analysis
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

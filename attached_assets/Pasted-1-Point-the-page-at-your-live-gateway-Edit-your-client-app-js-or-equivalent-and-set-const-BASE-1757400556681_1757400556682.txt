@@ -1,0 +1,190 @@
+1) Point the page at your live gateway
+
+Edit your client app.js (or equivalent) and set:
+
+const BASE = "https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev";
+
+
+If you have multiple envs, read from window.__ENV.BASE and inject it at build.
+
+2) Drop in a Status Bar (health + live KPIs)
+
+Add a strip near the top:
+
+<section id="status" class="strip">
+  <span id="sb-health">—</span>
+  <span id="sb-p95">p95: —</span>
+  <span id="sb-sessions">sessions: —</span>
+  <span id="sb-qps">ingest qps: —</span>
+</section>
+
+async function j(url){const r=await fetch(url);return r.ok?r.text():null;}
+async function jx(url){const r=await fetch(url);return r.ok? r.json():null;}
+
+async function loadStatus(){
+  const health = await j(`${BASE}/healthz`);
+  document.getElementById('sb-health').textContent = health || 'unknown';
+
+  const s = await jx(`${BASE}/vision/analytics/system/stats`);
+  if (s){
+    document.getElementById('sb-p95').textContent = `p95: ${(s.telemetry_p95_ms??0).toFixed(0)}ms`;
+    document.getElementById('sb-sessions').textContent = `sessions: ${s.active_sessions??0}`;
+    document.getElementById('sb-qps').textContent = `ingest qps: ${(s.ingest_qps??0).toFixed(1)}`;
+  }
+}
+setInterval(loadStatus, 5000);
+loadStatus();
+
+3) Live player/team dashboard (safe, no secrets)
+MLB (public StatsAPI)
+async function mlbTeams(){return (await jx('https://statsapi.mlb.com/api/v1/teams?sportId=1'))?.teams||[];}
+async function mlbRoster(teamId){return (await jx(`https://statsapi.mlb.com/api/v1/teams/${teamId}/roster`))?.roster||[];}
+async function mlbTeamSchedule(teamId){
+  const y=new Date().getFullYear();
+  const d=await jx(`https://statsapi.mlb.com/api/v1/schedule?teamId=${teamId}&sportId=1&season=${y}&gameType=R&hydrate=linescore,team`);
+  return d?.dates?.flatMap(x=>x.games)||[];
+}
+function ewma(arr,a=0.35){let m=null;for(const v of arr){if(v==null)continue;m=m==null?v:a*v+(1-a)*m;}return m;}
+
+
+If CORS blocks in Replit, create a tiny Worker router on your gateway that fetches these same URLs server-side and expose them as /proxy/mlb/*. Then call your gateway, not the 3rd-party API from the browser.
+
+NBA/NFL (optional)
+
+NBA: BallDon’tLie /teams, /games.
+
+NFL: ESPN scoreboard JSON.
+Use the same gateway proxy pattern to avoid browser CORS and to keep keys off the client if you add any paid data later.
+
+4) Real-time Blaze stream (Grit Index)
+
+Create a session, then open the WebSocket:
+
+async function startSession(player="test_player", sport="baseball"){
+  const sessionId = "demo-" + Math.random().toString(36).slice(2,8);
+  await fetch(`${BASE}/vision/sessions`,{
+    method:"POST",
+    headers:{'Content-Type':'application/json','X-Dev-Mode':'true'},
+    body: JSON.stringify({session_id:sessionId, player_id:player, sport})
+  });
+  const ws = new WebSocket(`${BASE.replace('https://','wss://')}/vision/session/${sessionId}/stream`);
+  ws.onmessage = (ev)=>{
+    try{
+      const msg = JSON.parse(ev.data);
+      if (msg?.scores?.grit_index) {
+        document.getElementById('live-grit').textContent = msg.scores.grit_index.toFixed(2);
+      }
+    }catch{ /* show raw string */ }
+  };
+  return sessionId;
+}
+
+5) Start feeding real-time data into the latest version
+
+Two options—pick one:
+
+A) Simulated telemetry (good for demo)
+function sendTelemetry(sessionId){
+  const payload = [{
+    session_id: sessionId,
+    t: Date.now(),
+    device: { fps: 60, resolution:[1920,1080], has_webgpu:true, has_webgl:true, camera_count:1 },
+    // add small randomized motion/pose fields if your Worker maps them
+  }];
+  return fetch(`${BASE}/vision/telemetry`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','X-Dev-Mode':'true'},
+    body: JSON.stringify(payload)
+  });
+}
+async function beginDemoFeed(){
+  const id = await startSession("test_player","baseball");
+  setInterval(()=>sendTelemetry(id), 1000);
+}
+
+B) Real device/browser feed (production)
+
+Capture frames/pose locally (WebRTC + WebGL/WebGPU).
+
+Transform to your Worker’s expected schema.
+
+POST batches to /vision/telemetry at 10–30 Hz (or your allowed rate).
+
+Never send private keys from the browser. All vendor calls go via the Worker.
+
+6) Digital Combine™ demo on the page
+
+Provide an Upload and a Sample clip button.
+
+Run a light client-side pipeline (or send frame hashes/pose vectors to your Worker) and render:
+
+Mechanics score, Load balance, Timing delta, “Next drill” cue.
+
+Add a “Reproduce” tab with copy-paste curl pointing to your gateway (no third-party endpoints).
+
+7) Make the Replit app reliable
+
+Single port: bind to process.env.PORT || 8000.
+
+package.json:
+
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "node server.js"  // or python http.server $PORT
+  }
+}
+
+
+CORS on the Worker:
+
+new Response(body, { headers:{
+  "Access-Control-Allow-Origin": "*",               // or your Replit origin
+  "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS",
+  "Access-Control-Allow-Headers": "content-type, x-dev-mode"
+}});
+
+
+Serve static assets with cache headers; avoid bundling any secrets.
+
+8) Verify every claim on the page
+
+Keep “sub-100 ms responses” only if your Worker + RUM show it today.
+
+If you list an “accuracy” number, link to a short Methods page describing dataset, metric, window, and error bars.
+
+Remove “trusted by” unless publicly verifiable.
+
+9) Quick stress & quality checks (you can run in Replit shell)
+# Performance snapshot
+npx @lhci/cli autorun --collect.url="https://<your-replit-url>/"
+
+# Accessibility
+npx pa11y-ci --sitemap https://<your-replit-url>/sitemap.xml || true
+
+# Secrets scan (repo)
+npx trufflehog filesystem --only-verified=false .
+
+# Basic load (k6 smoke; add /healthz, main page, and stats JSON)
+# (if k6 available)
+
+10) Claude Code / Replit Agent worklist from your GitHub repos
+
+Create issues and PRs in the web repo (e.g., ahump20/blaze-intelligence-official):
+
+Status Bar pulling /healthz + /vision/analytics/system/stats
+
+Dashboard (MLB first): teams, schedule, record, last-5, EWMA projection; roster + player season line
+
+Digital Combine demo with upload + sample asset + cues
+
+Proof page documenting metrics and projections + live stats widgets
+
+Gateway proxy endpoints for MLB/NBA/NFL to solve CORS and centralize keys
+
+CI gates: Lighthouse CI, Pa11y, TruffleHog, npm audit (fail PR on critical)
+
+CSP & headers: basic CSP, X-Content-Type-Options, Referrer-Policy
+
+Content audit: remove or qualify any unverifiable claims; add dates/sources

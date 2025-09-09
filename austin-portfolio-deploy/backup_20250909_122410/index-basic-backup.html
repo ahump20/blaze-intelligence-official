@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Blaze Intelligence — Championship Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/tokens.css"/>
+  <style>
+    body{margin:0;background:var(--blaze-dark);color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    header{position:sticky;top:0;z-index:10;padding:.9rem 1.2rem;background:#000a;border-bottom:1px solid #ffffff22}
+    .brand{font-family:"Space Grotesk",system-ui,sans-serif;font-weight:700;letter-spacing:.5px}
+    .wrap{max-width:1120px;margin:0 auto;padding:1.2rem}
+    .hero{display:grid;gap:18px;grid-template-columns:1.1fr .9fr;align-items:center;margin-top:1.2rem}
+    .hero h1{font-family:"Space Grotesk";font-size:clamp(32px,5vw,56px);margin:.2rem 0;background:linear-gradient(135deg,var(--blaze-orange),#ffb86b);-webkit-background-clip:text;color:transparent}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:18px}
+    .card{padding:18px}
+    .card h3{margin:.2rem 0 6px}
+    .meta{opacity:.8;font-size:.95rem}
+    .glass{background:rgba(255,255,255,.06);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:16px}
+    a.btn{display:inline-flex;gap:.5rem;align-items:center;padding:.8rem 1.1rem;border-radius:12px;border:1px solid #ffffff22;text-decoration:none;color:#fff}
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+    .kpis .glass{padding:14px;text-align:center}
+    footer{margin:40px 0 24px;opacity:.85;font-size:.9rem}
+    @media (max-width:920px){.hero{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <div class="brand">🔥 BLAZE</div>
+      <nav style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="/platform">Platform</a>
+        <a class="btn" href="/os">Championship OS</a>
+        <a class="btn" href="/dashboard">Live Dashboard</a>
+        <a class="btn" href="/videos">Videos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="glass" style="padding:22px">
+        <span class="meta">Unified Hub</span>
+        <h1>Turn instinct into intelligence.</h1>
+        <p class="meta" style="max-width:60ch">
+          One clean entry point. The Platform demo, the Championship OS, and your video/dashboards are linked here—
+          matching the visuals and KPIs from your PDFs: <strong>94.6% accuracy</strong>, <strong>&lt;100ms</strong>, <strong>2.8M+ data points</strong>.
+        </p>
+        <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
+          <a class="btn" href="/platform">Explore Platform →</a>
+          <a class="btn" href="/os">Open Championship OS →</a>
+        </div>
+        <div class="kpis">
+          <div class="glass"><div class="meta">Accuracy</div><div style="font-size:28px;font-weight:800">94.6%</div></div>
+          <div class="glass"><div class="meta">Latency</div><div style="font-size:28px;font-weight:800">&lt;100ms</div></div>
+          <div class="glass"><div class="meta">Data Points</div><div style="font-size:28px;font-weight:800">2.8M+</div></div>
+          <div class="glass"><div class="meta">Coverage</div><div style="font-size:28px;font-weight:800">MLB • NFL • NBA • NCAA</div></div>
+        </div>
+      </div>
+
+      <div class="glass card" id="readiness">
+        <h3 style="margin:0 0 6px">Cardinals Readiness</h3>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div>
+            <div class="meta">Updated <span id="r-ts">—</span></div>
+            <div style="font-size:32px;font-weight:800"><span id="r-val">—</span></div>
+            <div class="meta">Leverage: <span id="r-lev">—</span></div>
+          </div>
+          <div style="width:90px;height:90px;border-radius:50%;border:6px solid #ffffff22;display:grid;place-items:center">
+            <strong id="r-pct">--</strong>
+          </div>
+        </div>
+        <div class="meta" style="margin-top:8px">Source: /data/blaze-metrics.json</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <a class="glass card" href="/platform">
+        <h3>Platform Demo</h3>
+        <div class="meta">Full marketing shell, pricing, live sections</div>
+      </a>
+      <a class="glass card" href="/os">
+        <h3>Championship OS</h3>
+        <div class="meta">227 teams • 16 leagues • 94.6% accuracy</div>
+      </a>
+      <a class="glass card" href="/videos">
+        <h3>Intelligence in Action</h3>
+        <div class="meta">Pattern Recognition (44:16) • Decision Velocity (6:05)</div>
+      </a>
+      <a class="glass card" href="/dashboard">
+        <h3>Live Dashboard</h3>
+        <div class="meta">Interactive charts & live tiles</div>
+      </a>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div>© 2025 Blaze Intelligence • <a href="/terms" style="color:#fff">Terms</a> • <a href="/privacy" style="color:#fff">Privacy</a></div>
+  </footer>
+
+  <script>
+    (async () => {
+      try {
+        const r = await fetch('/data/blaze-metrics.json', {cache:'no-store'});
+        if (!r.ok) return;
+        const j = await r.json();
+        const pct = Math.round((j.cardinals?.readiness ?? 0) * 100);
+        document.getElementById('r-ts').textContent = new Date(j.ts || Date.now()).toLocaleString();
+        document.getElementById('r-val').textContent = pct + '/100';
+        document.getElementById('r-lev').textContent = (j.cardinals?.leverage ?? 1).toFixed(2);
+        document.getElementById('r-pct').textContent = pct + '%';
+      } catch {}
+    })();
+  </script>
+</body>
+</html>

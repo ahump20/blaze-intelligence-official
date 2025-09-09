@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 Blaze Intelligence — Championship Sports Analytics Platform</title>
+<meta name="description" content="Revolutionary AI-powered sports analytics serving MLB, NFL, NBA, and NCAA with real-time intelligence">
+
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'blaze-orange': '#FF6B35',
+'blaze-gold': '#FFD700',
+'blaze-cyan': '#00FFFF',
+'blaze-green': '#00FF88',
+}
+}
+}
+}
+</script>
+
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+background: #000;
+color: #fff;
+overflow-x: hidden;
+}
+
+/* Background Video Styles */
+.bg-video-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -2;
+overflow: hidden;
+}
+
+.bg-video {
+width: 100%;
+height: 100%;
+object-fit: cover;
+opacity: 0.3;
+filter: blur(2px);
+}
+
+.bg-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(
+135deg,
+rgba(0,0,0,0.9) 0%,
+rgba(255,107,53,0.1) 50%,
+rgba(0,0,0,0.95) 100%
+);
+z-index: -1;
+}
+
+/* Hero Canvas */
+#hero-canvas {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 1;
+}
+
+/* Neon Effects */
+.neon-text {
+color: #00FFFF;
+text-shadow: 
+0 0 10px #00FFFF,
+0 0 20px #00FFFF,
+0 0 30px #00FFFF;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.8; }
+}
+
+.gradient-text {
+background: linear-gradient(135deg, #FF6B35, #FFD700, #00FFFF);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+/* Glass Card */
+.glass-card {
+background: rgba(30, 41, 59, 0.8);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+border-radius: 12px;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Live Data Stream */
+.data-stream {
+position: relative;
+overflow: hidden;
+border: 1px solid rgba(0, 255, 255, 0.3);
+border-radius: 8px;
+background: rgba(0, 255, 255, 0.05);
+}
+
+.data-stream::before {
+content: '';
+position: absolute;
+top: -2px;
+left: -100%;
+width: 100%;
+height: 2px;
+background: linear-gradient(90deg, transparent, #00FFFF, transparent);
+animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+0% { left: -100%; }
+100% { left: 100%; }
+}
+
+/* Chart Container */
+.chart-container {
+position: relative;
+height: 300px;
+background: rgba(10, 10, 10, 0.9);
+border-radius: 12px;
+padding: 1rem;
+border: 1px solid rgba(255, 107, 53, 0.3);
+}
+
+/* Status Badge */
+.status-badge {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 8px 16px;
+background: rgba(0, 255, 136, 0.1);
+border: 1px solid rgba(0, 255, 136, 0.3);
+border-radius: 9999px;
+color: #00FF88;
+font-size: 0.875rem;
+font-weight: 600;
+}
+
+.status-badge::before {
+content: '';
+width: 8px;
+height: 8px;
+background: #00FF88;
+border-radius: 50%;
+animation: blink 2s infinite;
+}
+
+@keyframes blink {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.3; }
+}
+</style>
+</head>
+<body>
+<nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">
+<div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<h1 class="text-2xl font-bold gradient-text">🔥 BLAZE INTELLIGENCE</h1>
+<div class="status-badge">LIVE SYSTEM</div>
+</div>
+<div class="flex items-center gap-6">
+<a href="/videos/" class="text-gray-300 hover:text-white transition">Videos</a>
+<a href="/dashboard.html" class="text-gray-300 hover:text-white transition">Dashboard</a>
+<a href="/contact.html" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full font-semibold hover:scale-105 transition">
+Get Started
+</a>
+</div>
+</div>
+</nav>
+
+<section class="py-20 relative z-10">
+<div class="max-w-7xl mx-auto px-4">
+<h2 class="text-5xl font-bold text-center gradient-text mb-12">LIVE DATA STREAMS</h2>
+
+<div class="glass-card p-6 data-stream">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold">Cardinals Analytics</h3>
+<i data-lucide="activity" class="w-5 h-5 text-red-500"></i>
+</div>
+<div class="text-3xl font-bold text-red-500 mb-2" id="cardinals-metric">87.3%</div>
+<div class="text-sm text-gray-400">Team Readiness Index</div>
+<canvas id="cardinals-spark" class="mt-4" height="50"></canvas>
+</div>
+
+<div class="glass-card p-6 data-stream">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold">Longhorns Recruiting</h3>
+<i data-lucide="trending-up" class="w-5 h-5 text-orange-500"></i>
+</div>
+<div class="text-3xl font-bold text-orange-500 mb-2" id="longhorns-metric">156</div>
+<div class="text-sm text-gray-400">5-Star Prospects</div>
+<canvas id="longhorns-spark" class="mt-4" height="50"></canvas>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+<div class="glass-card p-6">
+<h3 class="text-2xl font-bold mb-4 gradient-text">Live Performance Trends</h3>
+<div class="chart-container">
+<canvas id="trend-chart"></canvas>
+</div>
+</div>
+</div>
+
+<div class="glass-card p-6">
+<h3 class="text-2xl font-bold mb-4 gradient-text">Real-Time Data Feed</h3>
+<div class="space-y-2 max-h-96 overflow-y-auto" id="data-feed">
+<section class="py-20 relative z-10">
+<div class="max-w-7xl mx-auto px-4">
+<h2 class="text-5xl font-bold text-center gradient-text mb-12">ANALYTICS IN ACTION</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<a href="/videos/sports-conversation/" class="glass-card overflow-hidden group">
+<div class="aspect-video relative">
+<img src="https://videodelivery.net/138facaf760c65e9b4efab3715ae6f50/thumbnails/thumbnail.jpg" 
+class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<h3 class="text-xl font-bold">AI in Sports</h3>
+<p class="text-sm text-gray-300">44m 16s</p>
+</div>
+</div>
+</a>
+
+<a href="/videos/dmk-final-presentation/" class="glass-card overflow-hidden group">
+<div class="aspect-video relative">
+<img src="https://videodelivery.net/eec1d7b09566f8acbcbadab3a0df5924/thumbnails/thumbnail.jpg" 
+class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<h3 class="text-xl font-bold">Digital Marketing Strategy</h3>
+<p class="text-sm text-gray-300">12 min</p>
+</div>
+</div>
+</a>
+
+<a href="/videos/ut-dctf-nil-sponsorship-proposal/" class="glass-card overflow-hidden group">
+<div class="aspect-video relative">
+<img src="https://videodelivery.net/acb0f50e86caf8f840f3b36a0c463229/thumbnails/thumbnail.jpg" 
+class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<h3 class="text-xl font-bold">NIL Partnership Strategy</h3>
+<p class="text-sm text-gray-300">15 min</p>
+</div>
+</div>
+</a>
+</div>
+</div>
+</section>
+

@@ -1,0 +1,106 @@
+{
+  "validation_date": "2025-08-28",
+  "market_research_source": "live_web_verification",
+  "blaze_intelligence": {
+    "annual_cost": 1188,
+    "monthly_equivalent": 99,
+    "setup_fee": 0,
+    "target_market": "high_school_college_youth_sports"
+  },
+  "verified_competitors": {
+    "hudl": {
+      "silver": {
+        "annual_cost": 900,
+        "monthly_equivalent": 75,
+        "target": "budget_conscious_teams",
+        "blaze_savings": 32.0,
+        "blaze_savings_percentage": "24.2%"
+      },
+      "gold": {
+        "annual_cost": 1600,
+        "monthly_equivalent": 133,
+        "target": "performance_focused_teams",
+        "blaze_savings": 412,
+        "blaze_savings_percentage": "25.8%"
+      },
+      "platinum": {
+        "annual_cost": 3300,
+        "monthly_equivalent": 275,
+        "target": "elite_competitive_teams",
+        "blaze_savings": 2112,
+        "blaze_savings_percentage": "64.0%"
+      }
+    },
+    "teambuildr": {
+      "silver": {
+        "annual_cost": 600,
+        "monthly_equivalent": 50,
+        "target": "up_to_50_athletes",
+        "blaze_comparison": "blaze_costs_more",
+        "note": "limited_capacity_not_comparable"
+      },
+      "mid_tier": {
+        "annual_cost": 1500,
+        "monthly_equivalent": 125,
+        "target": "up_to_500_athletes", 
+        "blaze_savings": 312,
+        "blaze_savings_percentage": "20.8%"
+      },
+      "enterprise": {
+        "annual_cost": 2400,
+        "monthly_equivalent": 200,
+        "target": "up_to_1000_athletes",
+        "blaze_savings": 1212,
+        "blaze_savings_percentage": "50.5%"
+      }
+    },
+    "second_spectrum": {
+      "pricing": "enterprise_custom_only",
+      "public_pricing": false,
+      "note": "acquired_by_genius_sports_2021_for_200m",
+      "market_position": "nba_nfl_professional_only",
+      "estimated_annual": "25000_to_100000_plus",
+      "not_comparable": "different_market_segment"
+    }
+  },
+  "validated_savings_claims": {
+    "conservative_range": {
+      "minimum": 20.8,
+      "maximum": 64.0,
+      "against_comparable_tiers": true
+    },
+    "realistic_competitive_comparison": {
+      "hudl_gold_vs_blaze": 25.8,
+      "teambuildr_mid_vs_blaze": 20.8,
+      "hudl_platinum_vs_blaze": 64.0
+    },
+    "recommended_marketing_claim": {
+      "range": "21-64%",
+      "conservative_claim": "25-50%",
+      "justification": "focuses_on_comparable_feature_sets"
+    }
+  },
+  "market_positioning_analysis": {
+    "blaze_competitive_advantage": [
+      "significantly_lower_than_hudl_platinum_3300",
+      "comparable_to_hudl_gold_1600_with_better_value",
+      "higher_than_basic_tiers_but_more_features",
+      "much_lower_than_enterprise_solutions"
+    ],
+    "sweet_spot": "premium_features_at_mid_tier_pricing",
+    "target_customer": "teams_wanting_platinum_features_at_gold_prices"
+  },
+  "claim_validation_result": {
+    "previous_claim": "67-80% savings",
+    "verified_reality": "21-64% savings range",
+    "recommendation": "update_to_realistic_range",
+    "truth_score": 0.75,
+    "action_required": "adjust_marketing_claims"
+  },
+  "data_sources": [
+    "hudl.com official pricing pages",
+    "teambuildr.com verified pricing structure", 
+    "second_spectrum market research and acquisition data",
+    "capterra and trustradius pricing validation"
+  ]
+}

@@ -1,0 +1,18 @@
+.nav{display:flex;gap:20px;align-items:center;justify-content:space-between;
+     padding:14px 18px;background:rgba(11,11,15,.75);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.nav a.logo{font-weight:800;letter-spacing:.3px;color:var(--ink);font-size:18px}
+.nav .links{display:flex;gap:24px;align-items:center}
+.nav .links a{color:var(--muted);transition:color 0.2s} 
+.nav .links a:hover{color:var(--accent-2)}
+.footer{padding:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;
+        display:flex;justify-content:space-between;align-items:center}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.pill{background:#111827;border:1px solid var(--line);border-radius:14px;padding:12px}
+.pill span{display:block;color:var(--muted);font-size:12px;font-weight:600}
+.pill b{font-size:18px;color:var(--ink)}
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;
+     background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#0b0b0f;font-weight:800;
+     transition:transform 0.2s}
+.btn:hover{transform:translateY(-2px)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+.muted{color:var(--muted)}

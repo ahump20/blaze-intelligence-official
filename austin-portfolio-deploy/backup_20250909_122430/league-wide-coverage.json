@@ -1,0 +1,136 @@
+{
+  "leagues": {
+    "mlb": {
+      "name": "Major League Baseball",
+      "teams": 30,
+      "divisions": {
+        "american_league": {
+          "east": ["Yankees", "Red Sox", "Rays", "Blue Jays", "Orioles"],
+          "central": ["Guardians", "Twins", "White Sox", "Tigers", "Royals"],
+          "west": ["Astros", "Rangers", "Mariners", "Angels", "Athletics"]
+        },
+        "national_league": {
+          "east": ["Braves", "Phillies", "Mets", "Marlins", "Nationals"],
+          "central": ["Brewers", "Cardinals", "Cubs", "Reds", "Pirates"],
+          "west": ["Dodgers", "Padres", "Giants", "Diamondbacks", "Rockies"]
+        }
+      },
+      "metrics": {
+        "batting": ["AVG", "OBP", "SLG", "OPS", "WAR", "wRC+"],
+        "pitching": ["ERA", "WHIP", "K/9", "BB/9", "FIP", "xFIP"],
+        "fielding": ["DRS", "UZR", "OAA", "Fielding%"]
+      }
+    },
+    "nfl": {
+      "name": "National Football League",
+      "teams": 32,
+      "conferences": {
+        "afc": {
+          "east": ["Bills", "Dolphins", "Patriots", "Jets"],
+          "north": ["Ravens", "Bengals", "Browns", "Steelers"],
+          "south": ["Texans", "Colts", "Jaguars", "Titans"],
+          "west": ["Chiefs", "Chargers", "Broncos", "Raiders"]
+        },
+        "nfc": {
+          "east": ["Cowboys", "Eagles", "Giants", "Commanders"],
+          "north": ["Lions", "Packers", "Vikings", "Bears"],
+          "south": ["Buccaneers", "Saints", "Falcons", "Panthers"],
+          "west": ["49ers", "Rams", "Seahawks", "Cardinals"]
+        }
+      },
+      "metrics": {
+        "offense": ["Yards/Game", "Points/Game", "3rd Down%", "Red Zone%"],
+        "defense": ["Yards Allowed", "Points Allowed", "Sacks", "Turnovers"],
+        "special_teams": ["FG%", "Punt Average", "Return Average"]
+      }
+    },
+    "nba": {
+      "name": "National Basketball Association",
+      "teams": 30,
+      "conferences": {
+        "eastern": {
+          "atlantic": ["Celtics", "Nets", "Knicks", "76ers", "Raptors"],
+          "central": ["Bucks", "Bulls", "Cavaliers", "Pistons", "Pacers"],
+          "southeast": ["Hawks", "Hornets", "Heat", "Magic", "Wizards"]
+        },
+        "western": {
+          "northwest": ["Nuggets", "Timberwolves", "Thunder", "Trail Blazers", "Jazz"],
+          "pacific": ["Warriors", "Clippers", "Lakers", "Suns", "Kings"],
+          "southwest": ["Mavericks", "Rockets", "Grizzlies", "Pelicans", "Spurs"]
+        }
+      },
+      "metrics": {
+        "offense": ["PPG", "FG%", "3P%", "eFG%", "TS%", "ORtg"],
+        "defense": ["DRtg", "Opp FG%", "Blocks", "Steals", "Def Reb%"],
+        "advanced": ["PER", "Win Shares", "BPM", "VORP", "Net Rating"]
+      }
+    },
+    "ncaa": {
+      "name": "NCAA Division I",
+      "football": {
+        "power5": ["SEC", "Big Ten", "Big 12", "ACC", "Pac-12"],
+        "group5": ["AAC", "Mountain West", "MAC", "Sun Belt", "Conference USA"],
+        "teams": 133
+      },
+      "basketball": {
+        "major_conferences": 32,
+        "teams": 362,
+        "tournament_size": 68
+      },
+      "metrics": {
+        "team": ["SRS", "SOS", "Sagarin Rating", "SP+", "FPI"],
+        "recruiting": ["247 Composite", "Rivals Rankings", "ESPN Rankings"]
+      }
+    },
+    "youth_sports": {
+      "name": "Youth & High School",
+      "organizations": {
+        "perfect_game": {
+          "coverage": "Baseball",
+          "age_groups": ["13U", "14U", "15U", "16U", "17U", "18U"],
+          "events": ["WWBA", "BCS", "Super25", "National Championships"]
+        },
+        "maxpreps": {
+          "coverage": "High School Sports",
+          "sports": ["Football", "Basketball", "Baseball", "Softball", "Volleyball"]
+        },
+        "prep_baseball_report": {
+          "coverage": "Baseball Scouting",
+          "regions": 50
+        }
+      },
+      "metrics": {
+        "baseball": ["Exit Velocity", "60-yard dash", "Pop Time", "Velocity"],
+        "football": ["40-yard dash", "Vertical Jump", "Bench Press", "Shuttle"],
+        "basketball": ["Vertical", "Lane Agility", "3PT Shooting", "Sprint"]
+      }
+    }
+  },
+  "international_coverage": {
+    "baseball": {
+      "regions": ["Dominican Republic", "Venezuela", "Cuba", "Japan (NPB)", "Korea (KBO)", "Mexico (LMB)"],
+      "scouting": ["International Free Agents", "Posting System", "Rule 5 Draft"]
+    },
+    "basketball": {
+      "leagues": ["EuroLeague", "Liga ACB", "NBL", "CBA"],
+      "draft_prospects": "International Draft Combine"
+    }
+  },
+  "data_sources": {
+    "official": ["MLB Statcast", "NFL Next Gen Stats", "NBA Tracking Data", "NCAA Statistics"],
+    "third_party": ["Baseball Reference", "Pro Football Focus", "Basketball Reference", "KenPom"],
+    "proprietary": ["Blaze Vision AI", "Micro-Expression Detection", "Biomechanical Analysis"]
+  },
+  "update_frequency": {
+    "live_games": "Real-time (<100ms)",
+    "statistics": "Every 10 minutes",
+    "predictions": "Hourly",
+    "scouting_reports": "Daily"
+  },
+  "coverage_stats": {
+    "total_teams_covered": 500,
+    "total_players_tracked": 25000,
+    "data_points_daily": "15K+",
+    "accuracy_rate": "94.6%"
+  }
+}

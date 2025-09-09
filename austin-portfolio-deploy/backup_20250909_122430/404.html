@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Blaze Intelligence</title>
+    <style>
+        :root {
+            --primary-color: #BF5700;
+            --dark-bg: #0d0d0d;
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--dark-bg);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 8rem;
+            margin: 0;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        h2 {
+            font-size: 2rem;
+            margin: 1rem 0;
+            color: #999;
+        }
+        p {
+            color: #666;
+            margin: 2rem 0;
+        }
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        a {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        a:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <h2>Page Not Found</h2>
+        <p>The page you're looking for doesn't exist or has been moved.</p>
+        <div class="buttons">
+            <a href="/">Go Home</a>
+            <a href="/contact.html">Contact Us</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-08-28T07:48:54.479Z",
+  "team": "New York Yankees",
+  "league": "MLB",
+  "division": "AL East",
+  "season": "2025",
+  "market_size": "major",
+  "readiness": {
+    "overall": 82.6,
+    "offense": 83.8,
+    "defense": 84.2,
+    "pitching": 79,
+    "baserunning": 80.3
+  },
+  "leverage": {
+    "current": 3.16,
+    "trend": "decreasing",
+    "market_factors": [
+      {
+        "type": "media_attention",
+        "impact": 0.8
+      },
+      {
+        "type": "sponsorship_opportunities",
+        "impact": 0.9
+      },
+      {
+        "type": "fan_base_size",
+        "impact": 0.7
+      }
+    ]
+  },
+  "performance_indicators": {
+    "wins_above_replacement": 19.4,
+    "run_differential": 29,
+    "pythagorean_wins": 87,
+    "strength_of_schedule": 0.527
+  },
+  "advanced_metrics": {
+    "offensive_war": 29.2,
+    "defensive_war": 23.4,
+    "pitching_war": 23.2,
+    "team_chemistry": 91
+  },
+  "metrics_count": 25,
+  "data_quality": {
+    "completeness": 96.57604846823205,
+    "accuracy": 95.72091982741198,
+    "freshness": 97.80986316794092
+  }
+}

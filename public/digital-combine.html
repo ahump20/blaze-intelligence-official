@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Combine™ | AI-Powered Biomechanical Analysis | Blaze Intelligence</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/public/css/professional-theme.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #0A192F 0%, #050F1F 100%);
+            min-height: 100vh;
+            padding-top: 70px;
+        }
+        
+        .combine-hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .combine-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('/assets/images/biomech-athlete.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .combine-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .combine-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #E6F1FF;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+        
+        .combine-title span {
+            color: #BF5700;
+        }
+        
+        .combine-subtitle {
+            font-size: 1.25rem;
+            color: #8892B0;
+            margin-bottom: 3rem;
+        }
+        
+        /* Upload Section */
+        .upload-section {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            padding: 2rem;
+            background: rgba(17, 34, 64, 0.4);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(191, 87, 0, 0.5);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .upload-area:hover {
+            border-color: #BF5700;
+            background: rgba(191, 87, 0, 0.05);
+        }
+        
+        .upload-area.dragover {
+            border-color: #00FF88;
+            background: rgba(0, 255, 136, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: #BF5700;
+            margin-bottom: 1rem;
+        }
+        
+        .upload-text {
+            font-size: 1.125rem;
+            color: #E6F1FF;
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-subtext {
+            font-size: 0.875rem;
+            color: #8892B0;
+        }
+        
+        .upload-input {
+            display: none;
+        }
+        
+        /* Sample Clips */
+        .sample-clips {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(136, 146, 176, 0.2);
+        }
+        
+        .sample-clips-title {
+            font-size: 0.875rem;
+            color: #8892B0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        
+        .sample-clips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .sample-clip-btn {
+            padding: 1rem;
+            background: rgba(17, 34, 64, 0.6);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 8px;
+            color: #E6F1FF;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .sample-clip-btn:hover {
+            background: rgba(191, 87, 0, 0.2);
+            border-color: rgba(191, 87, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .sample-clip-icon {
+            font-size: 1.5rem;
+        }
+        
+        /* Analysis Results */
+        .analysis-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: none;
+        }
+        
+        .analysis-section.active {
+            display: block;
+        }
+        
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .analysis-card {
+            background: rgba(17, 34, 64, 0.4);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .analysis-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #BF5700, #64FFDA);
+        }
+        
+        .analysis-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: #8892B0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #BF5700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .metric-bar {
+            height: 8px;
+            background: rgba(17, 34, 64, 0.8);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #BF5700, #FFD700);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+        
+        .coaching-cue {
+            padding: 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .coaching-cue-title {
+            font-size: 0.875rem;
+            color: #00FF88;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .coaching-cue-text {
+            color: #E6F1FF;
+            line-height: 1.6;
+        }
+        
+        /* Code Examples */
+        .code-section {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: #000;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+        }
+        
+        .code-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(136, 146, 176, 0.2);
+        }
+        
+        .code-tab {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: #8892B0;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .code-tab.active {
+            color: #BF5700;
+        }
+        
+        .code-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #BF5700;
+        }
+        
+        .code-content {
+            background: #0A0E1B;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        
+        .code-content pre {
+            margin: 0;
+            color: #E6F1FF;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(191, 87, 0, 0.2);
+            border: 1px solid rgba(191, 87, 0, 0.5);
+            color: #BF5700;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(191, 87, 0, 0.3);
+        }
+        
+        .copy-btn.copied {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: rgba(0, 255, 136, 0.5);
+            color: #00FF88;
+        }
+        
+        /* Loading State */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 15, 31, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .loading-overlay.active {
+            display: flex;
+        }
+        
+        .loading-content {
+            text-align: center;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(191, 87, 0, 0.2);
+            border-top-color: #BF5700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: #E6F1FF;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .loading-subtext {
+            color: #8892B0;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Navigation -->
+    <nav class="professional-nav" id="professionalNav">
+        <div class="nav-container">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <div class="nav-logo">
+                    <div class="nav-logo-icon">B</div>
+                    <div class="nav-logo-text">Blaze <span>Intelligence</span></div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/#platform" class="nav-link">Platform</a>
+                    <a href="/pressure-terminal" class="nav-link">Pressure Terminal</a>
+                    <a href="/#analytics" class="nav-link">Analytics</a>
+                    <a href="/neural-coach" class="nav-link">Neural Coach™</a>
+                    <a href="/digital-combine" class="nav-link active">Digital Combine™</a>
+                    <a href="/#pricing" class="nav-link">Pricing</a>
+                    <a href="/live-demo" class="nav-link">Live Demo</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <div class="combine-hero">
+        <div class="combine-content">
+            <h1 class="combine-title">Digital Combine™ <span>Demo</span></h1>
+            <p class="combine-subtitle">Upload or select a clip for instant biomechanical analysis</p>
+            
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <div class="upload-text">Drop your clip here</div>
+                    <div class="upload-subtext">or click to browse</div>
+                    <input type="file" class="upload-input" id="uploadInput" accept="video/*">
+                </div>
+                
+                <div class="sample-clips">
+                    <div class="sample-clips-title">Or try a sample clip:</div>
+                    <div class="sample-clips-grid">
+                        <button class="sample-clip-btn" onclick="analyzeSample('baseball')">
+                            <span class="sample-clip-icon">⚾</span>
+                            <span>Baseball Swing Analysis</span>
+                        </button>
+                        <button class="sample-clip-btn" onclick="analyzeSample('football')">
+                            <span class="sample-clip-icon">🏈</span>
+                            <span>Football Quarterback Throw</span>
+                        </button>
+                        <button class="sample-clip-btn" onclick="analyzeSample('basketball')">
+                            <span class="sample-clip-icon">🏀</span>
+                            <span>Basketball Free Throw</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analysis Results -->
+            <div class="analysis-section" id="analysisSection">
+                <h2 style="color: #E6F1FF; margin-bottom: 2rem; text-align: center;">Analysis Results</h2>
+                
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <div class="analysis-metric">
+                            <span class="metric-label">Mechanics Score</span>
+                            <span class="metric-value" id="mechanicsScore">--</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="mechanicsBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <div class="analysis-metric">
+                            <span class="metric-label">Load Balance</span>
+                            <span class="metric-value" id="loadBalance">--</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="balanceBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <div class="analysis-metric">
+                            <span class="metric-label">Timing Delta</span>
+                            <span class="metric-value" id="timingDelta">--</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="timingBar" style="width: 0%"></div>
+                        </div>
+                        <div style="color: #8892B0; font-size: 0.75rem; margin-top: 0.5rem;">
+                            Optimal: &lt; 50ms
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="coaching-cue">
+                    <div class="coaching-cue-title">Coaching Cue</div>
+                    <div class="coaching-cue-text" id="coachingCue">--</div>
+                </div>
+            </div>
+            
+            <!-- Code Examples -->
+            <div class="code-section">
+                <h3 style="color: #E6F1FF; margin-bottom: 1.5rem;">Reproduce this analysis</h3>
+                
+                <div class="code-tabs">
+                    <button class="code-tab active" onclick="showCode('curl')">cURL</button>
+                    <button class="code-tab" onclick="showCode('javascript')">JavaScript</button>
+                </div>
+                
+                <div style="position: relative;">
+                    <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+                    
+                    <div class="code-content" id="curlCode">
+                        <pre>curl -X POST https://api.blaze-intelligence.com/v1/digital-combine \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "video_url": "https://example.com/clip.mp4",
+    "analysis_type": "biomechanics",
+    "sport": "baseball"
+  }'</pre>
+                    </div>
+                    
+                    <div class="code-content" id="javascriptCode" style="display: none;">
+                        <pre>const analyzeClip = async (videoUrl) => {
+  const response = await fetch('https://api.blaze-intelligence.com/v1/digital-combine', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      video_url: videoUrl,
+      analysis_type: 'biomechanics',
+      sport: 'baseball'
+    })
+  });
+
+  return await response.json();
+};</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Analyzing biomechanics...</div>
+            <div class="loading-subtext">Processing with AI models</div>
+        </div>
+    </div>
+    
+    <script>
+        // Upload functionality
+        const uploadArea = document.getElementById('uploadArea');
+        const uploadInput = document.getElementById('uploadInput');
+        const analysisSection = document.getElementById('analysisSection');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        
+        uploadArea.addEventListener('click', () => {
+            uploadInput.click();
+        });
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileUpload(files[0]);
+            }
+        });
+        
+        uploadInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
+        
+        function handleFileUpload(file) {
+            console.log('Uploading file:', file.name);
+            performAnalysis();
+        }
+        
+        function analyzeSample(sport) {
+            console.log('Analyzing sample:', sport);
+            performAnalysis();
+        }
+        
+        function performAnalysis() {
+            loadingOverlay.classList.add('active');
+            
+            // Simulate analysis delay
+            setTimeout(() => {
+                loadingOverlay.classList.remove('active');
+                showResults();
+            }, 3000);
+        }
+        
+        function showResults() {
+            analysisSection.classList.add('active');
+            
+            // Simulate analysis results
+            const mechanics = 85 + Math.random() * 10;
+            const balance = 75 + Math.random() * 15;
+            const timing = 30 + Math.random() * 40;
+            
+            document.getElementById('mechanicsScore').textContent = mechanics.toFixed(0);
+            document.getElementById('loadBalance').textContent = balance.toFixed(0) + '%';
+            document.getElementById('timingDelta').textContent = timing.toFixed(0) + 'ms';
+            
+            // Animate bars
+            setTimeout(() => {
+                document.getElementById('mechanicsBar').style.width = mechanics + '%';
+                document.getElementById('balanceBar').style.width = balance + '%';
+                document.getElementById('timingBar').style.width = (100 - timing) + '%';
+            }, 100);
+            
+            // Coaching cue
+            const cues = [
+                'Excellent hip rotation through contact. Maintain this form for consistent power.',
+                'Strong balance throughout motion. Focus on follow-through for improved accuracy.',
+                'Good timing on release. Work on maintaining consistent arm angle.',
+                'Solid mechanics overall. Small adjustment to stance could increase efficiency.'
+            ];
+            
+            document.getElementById('coachingCue').textContent = cues[Math.floor(Math.random() * cues.length)];
+            
+            // Scroll to results
+            analysisSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Code tabs
+        function showCode(language) {
+            document.querySelectorAll('.code-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.code-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            if (language === 'curl') {
+                document.querySelector('.code-tab:nth-child(1)').classList.add('active');
+                document.getElementById('curlCode').style.display = 'block';
+            } else {
+                document.querySelector('.code-tab:nth-child(2)').classList.add('active');
+                document.getElementById('javascriptCode').style.display = 'block';
+            }
+        }
+        
+        function copyCode() {
+            const activeCode = document.querySelector('.code-content:not([style*="display: none"]) pre');
+            const text = activeCode.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = 'Copy Code';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

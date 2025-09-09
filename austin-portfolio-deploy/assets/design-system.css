@@ -1,0 +1,69 @@
+/* ================================
+BLAZE INTELLIGENCE DESIGN TOKENS
+Championship Intelligence Platform
+================================ */
+:root {
+--blaze-orange: #FF6B35;
+--blaze-dark: #0A0E27;
+--blaze-accent: #1A659E;
+--blaze-orange-light: #FF8C5F;
+--blaze-orange-dark: #E55A2B;
+--blaze-dark-light: #0F1435;
+--blaze-dark-lighter: #1A1F45;
+--blaze-accent-light: #2077B8;
+--blaze-accent-dark: #155284;
+--cardinals-red: #C41E3A;
+--cardinals-yellow: #FEDB00;
+--titans-blue: #0C2340;
+--titans-light-blue: #4B92DB;
+--longhorns-orange: #BF5700;
+--longhorns-white: #FFFFFF;
+--grizzlies-blue: #5D76A9;
+--grizzlies-yellow: #12173D;
+--success: #10B981;
+--warning: #F59E0B;
+--error: #EF4444;
+--info: #3B82F6;
+--live: #00FF00;
+--beta: #FFA500;
+--enterprise: #9333EA;
+--glass-bg: rgba(255, 255, 255, 0.06);
+--glass-bg-dark: rgba(10, 14, 39, 0.85);
+--glass-border: rgba(255, 255, 255, 0.12);
+--glass-border-accent: rgba(255, 107, 53, 0.3);
+--font-primary: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+--font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+--gradient-primary: linear-gradient(135deg, var(--blaze-orange), var(--blaze-accent));
+--gradient-text: linear-gradient(135deg, var(--blaze-orange), #FFD700, #00FFFF);
+--gradient-cardinals: linear-gradient(135deg, var(--cardinals-red), var(--cardinals-yellow));
+--gradient-titans: linear-gradient(135deg, var(--titans-blue), var(--titans-light-blue));
+--gradient-longhorns: linear-gradient(135deg, var(--longhorns-orange), #FFD700);
+--gradient-grizzlies: linear-gradient(135deg, var(--grizzlies-blue), var(--grizzlies-yellow));
+}
+* { box-sizing: border-box; }
+body {
+font-family: var(--font-secondary);
+background: var(--blaze-dark);
+color: #e2e8f0;
+overflow-x: hidden;
+}
+h1, h2, h3 {
+font-family: var(--font-primary);
+}
+.glass {
+background: var(--glass-bg);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+border: 1px solid var(--glass-border);
+border-radius: 16px;
+}
+.text-gradient {
+background: var(--gradient-text);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+.cardinals-accent { border-color: var(--cardinals-red); }
+.titans-accent { border-color: var(--titans-blue); }
+.longhorns-accent { border-color: var(--longhorns-orange); }
+.grizzlies-accent { border-color: var(--grizzlies-blue); }

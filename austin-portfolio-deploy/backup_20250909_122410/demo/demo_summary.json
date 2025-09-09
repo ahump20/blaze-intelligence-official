@@ -1,0 +1,34 @@
+{
+  "generated": "2025-09-02T22:39:19.798Z",
+  "teams": 4,
+  "totalPlayers": 25,
+  "totalGames": 273,
+  "liveGamesActive": 0,
+  "dataQuality": "production",
+  "features": {
+    "realTimeData": true,
+    "historicalData": true,
+    "liveSimulation": true,
+    "injuryPrevention": true,
+    "socialCommunity": true,
+    "performanceAnalytics": true,
+    "visionAI": true,
+    "mobilePlatform": true
+  },
+  "endpoints": {
+    "teams": "/api/demo/teams",
+    "players": "/api/demo/players",
+    "performance": "/api/demo/performance",
+    "live": "/api/demo/live",
+    "analytics": "/api/demo/analytics"
+  },
+  "sampleQueries": [
+    "Cardinals current readiness score",
+    "Titans offensive performance trends",
+    "Longhorns recruiting pipeline status",
+    "Grizzlies team chemistry metrics",
+    "Live game simulations",
+    "Player injury risk assessments",
+    "Performance prediction models"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-08-28T07:48:54.482Z",
+  "program": "Kentucky Wildcats",
+  "sport": "basketball",
+  "conference": "SEC",
+  "division": "NCAA Division I",
+  "season": "2024-25",
+  "readiness": {
+    "overall": 89.7,
+    "talent_level": 90.6,
+    "coaching": 85.5,
+    "facilities": 91.6,
+    "recruiting": 86.5
+  },
+  "leverage": {
+    "current": 2.21,
+    "trend": "increasing",
+    "playoff_positioning": "moderate"
+  },
+  "academic_metrics": {
+    "apr_score": 985,
+    "graduation_rate": 82,
+    "academic_progress": 3.11
+  },
+  "nil_market": {
+    "total_valuation_millions": 2.4,
+    "avg_deal_value": 11908,
+    "top_earners": 5
+  },
+  "recruiting_data": {
+    "class_ranking": 28,
+    "commits": 21,
+    "transfer_portal_net": 4
+  },
+  "metrics_count": 22
+}

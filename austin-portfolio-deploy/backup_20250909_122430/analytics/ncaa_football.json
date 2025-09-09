@@ -1,0 +1,254 @@
+{
+  "league": "NCAA_FOOTBALL",
+  "summary": {
+    "total_teams": 10,
+    "total_championships": 83,
+    "avg_competitive_index": 162,
+    "avg_legacy_score": 107,
+    "top_performers": [
+      {
+        "name": "Alabama Crimson Tide",
+        "score": 212
+      },
+      {
+        "name": "Michigan Wolverines",
+        "score": 188
+      },
+      {
+        "name": "Notre Dame Fighting Irish",
+        "score": 168
+      },
+      {
+        "name": "USC Trojans",
+        "score": 164
+      },
+      {
+        "name": "Ohio State Buckeyes",
+        "score": 161
+      }
+    ]
+  },
+  "teams": [
+    {
+      "id": "notre-dame-fighting-irish",
+      "name": "Notre Dame Fighting Irish",
+      "league": "NCAA Football",
+      "division": "Independent",
+      "founded": 1887,
+      "championships": 13,
+      "metrics": {
+        "competitive_index": 195,
+        "legacy_score": 130,
+        "blaze_intelligence_score": 192,
+        "prediction_accuracy": 94.6,
+        "data_points": 57146
+      },
+      "analytics": {
+        "injury_risk": 0.2650373966660551,
+        "performance_trend": "rising",
+        "playoff_probability": 0.8480128415664312,
+        "roster_efficiency": 0.7830305883791594
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "michigan-wolverines",
+      "name": "Michigan Wolverines",
+      "league": "NCAA Football",
+      "division": "Big Ten",
+      "founded": 1879,
+      "championships": 12,
+      "metrics": {
+        "competitive_index": 185,
+        "legacy_score": 125,
+        "blaze_intelligence_score": 191,
+        "prediction_accuracy": 94.6,
+        "data_points": 39644
+      },
+      "analytics": {
+        "injury_risk": 0.0329416915046753,
+        "performance_trend": "declining",
+        "playoff_probability": 0.7763741857100082,
+        "roster_efficiency": 0.934276678370028
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "alabama-crimson-tide",
+      "name": "Alabama Crimson Tide",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1892,
+      "championships": 18,
+      "metrics": {
+        "competitive_index": 225,
+        "legacy_score": 145,
+        "blaze_intelligence_score": 189,
+        "prediction_accuracy": 94.6,
+        "data_points": 40984
+      },
+      "analytics": {
+        "injury_risk": 0.05906354827760382,
+        "performance_trend": "declining",
+        "playoff_probability": 0.9588718558582163,
+        "roster_efficiency": 0.7049506449460053
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "usc-trojans",
+      "name": "USC Trojans",
+      "league": "NCAA Football",
+      "division": "Pac-12",
+      "founded": 1888,
+      "championships": 11,
+      "metrics": {
+        "competitive_index": 175,
+        "legacy_score": 115,
+        "blaze_intelligence_score": 166,
+        "prediction_accuracy": 94.6,
+        "data_points": 25653
+      },
+      "analytics": {
+        "injury_risk": 0.2583772238557176,
+        "performance_trend": "stable",
+        "playoff_probability": 0.898038069056144,
+        "roster_efficiency": 0.7561277038632656
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "oklahoma-sooners",
+      "name": "Oklahoma Sooners",
+      "league": "NCAA Football",
+      "division": "Big 12",
+      "founded": 1895,
+      "championships": 7,
+      "metrics": {
+        "competitive_index": 155,
+        "legacy_score": 100,
+        "blaze_intelligence_score": 151,
+        "prediction_accuracy": 94.6,
+        "data_points": 13412
+      },
+      "analytics": {
+        "injury_risk": 0.05237059421380758,
+        "performance_trend": "stable",
+        "playoff_probability": 0.4492279792249395,
+        "roster_efficiency": 0.9061824538410005
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "ohio-state-buckeyes",
+      "name": "Ohio State Buckeyes",
+      "league": "NCAA Football",
+      "division": "Big Ten",
+      "founded": 1890,
+      "championships": 8,
+      "metrics": {
+        "competitive_index": 165,
+        "legacy_score": 105,
+        "blaze_intelligence_score": 147,
+        "prediction_accuracy": 94.6,
+        "data_points": 24713
+      },
+      "analytics": {
+        "injury_risk": 0.20636289266569155,
+        "performance_trend": "rising",
+        "playoff_probability": 0.8653255760419929,
+        "roster_efficiency": 0.8282303180455168
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "texas-longhorns",
+      "name": "Texas Longhorns",
+      "league": "NCAA Football",
+      "division": "Big 12",
+      "founded": 1893,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 145,
+        "legacy_score": 95,
+        "blaze_intelligence_score": 129,
+        "prediction_accuracy": 94.6,
+        "data_points": 51853
+      },
+      "analytics": {
+        "injury_risk": 0.01643930916166638,
+        "performance_trend": "stable",
+        "playoff_probability": 0.9227654749041452,
+        "roster_efficiency": 0.7672717859843483
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "lsu-tigers",
+      "name": "LSU Tigers",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1893,
+      "championships": 4,
+      "metrics": {
+        "competitive_index": 135,
+        "legacy_score": 90,
+        "blaze_intelligence_score": 114,
+        "prediction_accuracy": 94.6,
+        "data_points": 29298
+      },
+      "analytics": {
+        "injury_risk": 0.06927198756755117,
+        "performance_trend": "rising",
+        "playoff_probability": 0.9515228232262529,
+        "roster_efficiency": 0.8116011226606695
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "florida-gators",
+      "name": "Florida Gators",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1906,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 115,
+        "legacy_score": 75,
+        "blaze_intelligence_score": 110,
+        "prediction_accuracy": 94.6,
+        "data_points": 28260
+      },
+      "analytics": {
+        "injury_risk": 0.04210626932765651,
+        "performance_trend": "rising",
+        "playoff_probability": 0.5852827523049549,
+        "roster_efficiency": 0.8568409158655426
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    },
+    {
+      "id": "georgia-bulldogs",
+      "name": "Georgia Bulldogs",
+      "league": "NCAA Football",
+      "division": "SEC",
+      "founded": 1892,
+      "championships": 3,
+      "metrics": {
+        "competitive_index": 125,
+        "legacy_score": 85,
+        "blaze_intelligence_score": 100,
+        "prediction_accuracy": 94.6,
+        "data_points": 13436
+      },
+      "analytics": {
+        "injury_risk": 0.12197278159422437,
+        "performance_trend": "stable",
+        "playoff_probability": 0.39213121710251236,
+        "roster_efficiency": 0.9272926982544724
+      },
+      "last_updated": "2025-09-09T12:56:45.590Z"
+    }
+  ],
+  "updated": "2025-09-09T12:57:25.168Z"
+}

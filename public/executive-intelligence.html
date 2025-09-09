@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Executive Intelligence Center</title>
+    <meta name="description" content="Professional sports analytics platform with neurobiological monitoring, AI-driven insights, and championship-level strategic thinking. By Austin Humphrey.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Three.js -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="/brand.css">
+    <link rel="stylesheet" href="/brand-components.css">
+    
+    <style>
+        :root {
+            --bg: #0B0B0F;
+            --panel: #0f172a;
+            --ink: #E5E7EB;
+            --muted: #9CA3AF;
+            --line: #1F2937;
+            --accent: #BF5700;
+            --cyan: #9BCBEB;
+            --teal: #00B2A9;
+            --navy: #002244;
+            --font: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+        }
+        
+        /* Executive Header */
+        .executive-header {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, rgba(0, 34, 68, 0.1) 100%);
+            border-bottom: 1px solid var(--line);
+            padding: 2rem;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--bg);
+        }
+        
+        .header-info h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--ink) 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-subtitle {
+            color: var(--muted);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .date-badge {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            color: var(--cyan);
+            font-size: 0.875rem;
+        }
+        
+        /* Navigation Tabs */
+        .exec-nav {
+            background: var(--panel);
+            border-bottom: 1px solid var(--line);
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-tabs {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+        }
+        
+        .nav-tab {
+            padding: 1rem 0;
+            color: var(--muted);
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        
+        .nav-tab:hover {
+            color: var(--ink);
+        }
+        
+        .nav-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        /* Research Dashboard Grid */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .research-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .research-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(191, 87, 0, 0.2);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        
+        .card-badge {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Neurobiological Monitoring */
+        .neuro-monitor {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .monitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .monitor-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--cyan);
+        }
+        
+        .monitor-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 178, 169, 0.1);
+            border: 1px solid var(--teal);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: var(--teal);
+            font-size: 0.875rem;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--teal);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .biomarkers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .biomarker {
+            background: rgba(155, 203, 235, 0.05);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .biomarker-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--cyan);
+            font-family: var(--font-mono);
+        }
+        
+        .biomarker-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+        
+        .biomarker-trend {
+            font-size: 0.875rem;
+            color: var(--teal);
+            margin-top: 0.5rem;
+        }
+        
+        /* Master Journal Section */
+        .journal-section {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.05) 0%, transparent 100%);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .journal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .journal-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+        
+        .journal-link {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .journal-link:hover {
+            background: #FF6B00;
+            transform: translateY(-2px);
+        }
+        
+        .journal-content {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .journal-quote {
+            background: rgba(15, 23, 42, 0.4);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--ink);
+            line-height: 1.8;
+        }
+        
+        .journal-author {
+            display: block;
+            margin-top: 1rem;
+            color: var(--muted);
+            font-style: normal;
+            font-size: 0.875rem;
+        }
+        
+        /* Live Season Stats */
+        .season-stats {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        
+        .season-label {
+            background: rgba(155, 203, 235, 0.1);
+            border: 1px solid var(--cyan);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            color: var(--cyan);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .stats-table th {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 2px solid var(--line);
+            color: var(--muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .stats-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--line);
+            color: var(--ink);
+        }
+        
+        .stats-table tr:hover {
+            background: rgba(155, 203, 235, 0.05);
+        }
+        
+        .team-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        /* Portfolio Integration */
+        .portfolio-embed {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .portfolio-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 12px;
+            background: var(--bg);
+        }
+        
+        /* AI Insights Panel */
+        .ai-insights {
+            background: linear-gradient(135deg, rgba(155, 203, 235, 0.05) 0%, rgba(191, 87, 0, 0.05) 100%);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .insight-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .insight-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--cyan);
+        }
+        
+        .insight-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--cyan));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+        
+        .insight-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+        
+        .insight-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--cyan);
+            font-family: var(--font-mono);
+        }
+        
+        /* Championship Analytics */
+        .championship-section {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-container {
+            height: 400px;
+            margin-top: 1.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .biomarkers-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .nav-tabs {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Executive Header -->
+    <header class="executive-header">
+        <div class="header-content">
+            <div class="header-title">
+                <div class="logo-circle">AH</div>
+                <div class="header-info">
+                    <h1>Executive Intelligence Center</h1>
+                    <div class="header-subtitle">Austin Humphrey • Founder & Chief Intelligence Officer</div>
+                </div>
+            </div>
+            <div class="date-badge">
+                <i class="fas fa-calendar"></i> September 9, 2025
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav class="exec-nav">
+        <div class="nav-tabs">
+            <a href="#research" class="nav-tab active">Research Dashboard</a>
+            <a href="#neuro" class="nav-tab">Neurobiological Monitoring</a>
+            <a href="#season" class="nav-tab">2025 Season Analytics</a>
+            <a href="#journal" class="nav-tab">Master Journal</a>
+            <a href="#portfolio" class="nav-tab">Portfolio</a>
+            <a href="#ai" class="nav-tab">AI Insights</a>
+        </div>
+    </nav>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        
+        <!-- Master Journal Section -->
+        <section id="journal" class="journal-section">
+            <div class="journal-header">
+                <h2 class="journal-title">Austin Humphrey Mastery Journal</h2>
+                <a href="https://new.express.adobe.com/webpage/hJ7k9WoQYDZRS" target="_blank" class="journal-link">
+                    <i class="fas fa-external-link-alt"></i> View Full Journal
+                </a>
+            </div>
+            
+            <div class="journal-content">
+                <blockquote class="journal-quote">
+                    "Memphis is a full-throated song, gritty and raw, sung from a place that knows pain but still chooses to celebrate. A city can often be complicated. One place can wear many hats."
+                    <span class="journal-author">— John T. Edge, TrueSouth on Memphis, TN</span>
+                </blockquote>
+                
+                <blockquote class="journal-quote">
+                    "Don't just bounce back. Adopt an attitude whereby you accept that work is going to stretch your capabilities to the limit and that you have the ability to not just cope but also flourish."
+                    <span class="journal-author">— From Stretch (Willyerd, Mistick, & Grenny, 2016)</span>
+                </blockquote>
+                
+                <blockquote class="journal-quote">
+                    "The MAN6224‑O Sports Management & Operations course has catalyzed a paradigm‑shifting understanding of how artificial intelligence, neurobiological biomarker detection, and video game‑based training methodologies are revolutionizing collegiate athletics."
+                    <span class="journal-author">— Austin Humphrey, Executive Strategic Intelligence Synthesis</span>
+                </blockquote>
+            </div>
+        </section>
+        
+        <!-- Neurobiological Monitoring Dashboard -->
+        <section id="neuro" class="neuro-monitor">
+            <div class="monitor-header">
+                <h2 class="monitor-title">Neurobiological Performance Monitoring</h2>
+                <div class="monitor-status">
+                    <span class="status-dot"></span>
+                    <span>Real-Time Monitoring Active</span>
+                </div>
+            </div>
+            
+            <div class="biomarkers-grid">
+                <div class="biomarker">
+                    <div class="biomarker-value">68</div>
+                    <div class="biomarker-label">HRV Score</div>
+                    <div class="biomarker-trend">↑ 5% from baseline</div>
+                </div>
+                <div class="biomarker">
+                    <div class="biomarker-value">142</div>
+                    <div class="biomarker-label">Cortisol (nmol/L)</div>
+                    <div class="biomarker-trend">Optimal range</div>
+                </div>
+                <div class="biomarker">
+                    <div class="biomarker-value">0.82</div>
+                    <div class="biomarker-label">GSR Conductance</div>
+                    <div class="biomarker-trend">Low stress</div>
+                </div>
+                <div class="biomarker">
+                    <div class="biomarker-value">94%</div>
+                    <div class="biomarker-label">Recovery Index</div>
+                    <div class="biomarker-trend">Peak performance</div>
+                </div>
+                <div class="biomarker">
+                    <div class="biomarker-value">7.2ms</div>
+                    <div class="biomarker-label">Reaction Time</div>
+                    <div class="biomarker-trend">↓ 12% improved</div>
+                </div>
+                <div class="biomarker">
+                    <div class="biomarker-value">88%</div>
+                    <div class="biomarker-label">Cognitive Load</div>
+                    <div class="biomarker-trend">High engagement</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Research Dashboard -->
+        <section id="research" class="research-grid">
+            <div class="research-card">
+                <div class="card-header">
+                    <h3 class="card-title">Cognitive Performance Architecture</h3>
+                    <span class="card-badge">ACTIVE</span>
+                </div>
+                <p style="color: var(--muted); margin-bottom: 1rem;">
+                    Real-time monitoring of athlete cognitive load through EEG mapping, pupillometric responses, and galvanic skin conductance.
+                </p>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--cyan);">127</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Athletes Monitored</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">92%</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Prediction Accuracy</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-card">
+                <div class="card-header">
+                    <h3 class="card-title">NIL Valuation Engine™</h3>
+                    <span class="card-badge">2025 MODEL</span>
+                </div>
+                <p style="color: var(--muted); margin-bottom: 1rem;">
+                    Machine learning models integrating social media engagement, performance metrics, and market size for accurate NIL valuations.
+                </p>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--cyan);">$20.5M</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Annual Cap/School</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">3,247</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Athletes Valued</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-card">
+                <div class="card-header">
+                    <h3 class="card-title">Injury Prevention AI</h3>
+                    <span class="card-badge">ML ACTIVE</span>
+                </div>
+                <p style="color: var(--muted); margin-bottom: 1rem;">
+                    Predictive models using cfDNA markers, HRV trends, and tissue load monitoring to identify injury risk 14 days before symptoms.
+                </p>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--cyan);">87%</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Prevention Rate</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">14 days</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Early Detection</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-card">
+                <div class="card-header">
+                    <h3 class="card-title">Neurogaming Training</h3>
+                    <span class="card-badge">VR ENABLED</span>
+                </div>
+                <p style="color: var(--muted); margin-bottom: 1rem;">
+                    Sport-specific virtual reality training protocols enhancing reaction time, decision-making, and spatial awareness.
+                </p>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--cyan);">23%</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Reaction Improvement</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">42</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Training Modules</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-card">
+                <div class="card-header">
+                    <h3 class="card-title">Championship Psychology</h3>
+                    <span class="card-badge">TEXAS MODEL</span>
+                </div>
+                <p style="color: var(--muted); margin-bottom: 1rem;">
+                    Implementing Augie Garrido's philosophical framework with modern psychological performance metrics and team dynamics analysis.
+                </p>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--cyan);">6</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Championships</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">94%</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Win Rate</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="research-card">
+                <div class="card-header">
+                    <h3 class="card-title">Memphis Grit Index™</h3>
+                    <span class="card-badge">PROPRIETARY</span>
+                </div>
+                <p style="color: var(--muted); margin-bottom: 1rem;">
+                    Quantifying resilience, adaptability, and mental toughness through behavioral analysis and performance under pressure metrics.
+                </p>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--cyan);">8.7/10</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Avg Grit Score</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">Elite</div>
+                        <div style="font-size: 0.75rem; color: var(--muted);">Performance Tier</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 2025 Season Live Statistics -->
+        <section id="season" class="season-stats">
+            <div class="stats-header">
+                <h2 class="stats-title">2025 Season Live Statistics</h2>
+                <span class="season-label">Week 2 • September 9, 2025</span>
+            </div>
+            
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Team</th>
+                        <th>League</th>
+                        <th>Record</th>
+                        <th>Win %</th>
+                        <th>Streak</th>
+                        <th>Championship Odds</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>St. Louis Cardinals</strong></td>
+                        <td>MLB</td>
+                        <td>81-58</td>
+                        <td>.583</td>
+                        <td>W3</td>
+                        <td>12.4%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tennessee Titans</strong></td>
+                        <td>NFL</td>
+                        <td>1-0</td>
+                        <td>1.000</td>
+                        <td>W1</td>
+                        <td>8.2%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Texas Longhorns</strong></td>
+                        <td>NCAA FB</td>
+                        <td>2-0</td>
+                        <td>1.000</td>
+                        <td>W2</td>
+                        <td>18.7%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Memphis Grizzlies</strong></td>
+                        <td>NBA</td>
+                        <td>0-0</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>6.3%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>San Antonio Spurs</strong></td>
+                        <td>NBA</td>
+                        <td>0-0</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>22.1%</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 2rem; padding: 1rem; background: rgba(155, 203, 235, 0.05); border-radius: 8px;">
+                <h3 style="color: var(--cyan); margin-bottom: 0.5rem;">Key Insights for September 9, 2025:</h3>
+                <ul style="color: var(--muted); list-style: none; padding: 0;">
+                    <li>• Cardinals maintain NL Central lead with strong pitching rotation</li>
+                    <li>• Titans open season with dominant 31-17 victory over Bears</li>
+                    <li>• Texas ranked #3 in AP Poll after 52-10 win over Rice</li>
+                    <li>• NBA season begins October 22, 2025</li>
+                    <li>• Wembanyama leads Spurs as championship favorites</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- AI Insights Panel -->
+        <section id="ai" class="ai-insights">
+            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">AI-Powered Strategic Intelligence</h2>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-icon">🧠</div>
+                    <div class="insight-title">Pattern Recognition</div>
+                    <div class="insight-value">94.6%</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">⚡</div>
+                    <div class="insight-title">Processing Speed</div>
+                    <div class="insight-value"><100ms</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">📊</div>
+                    <div class="insight-title">Data Points</div>
+                    <div class="insight-value">2.8M+</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-icon">🎯</div>
+                    <div class="insight-title">Prediction Accuracy</div>
+                    <div class="insight-value">92.3%</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Championship Analytics -->
+        <section class="championship-section">
+            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Championship Probability Matrix</h2>
+            <div class="chart-container">
+                <canvas id="championshipChart"></canvas>
+            </div>
+        </section>
+        
+        <!-- Portfolio Integration -->
+        <section id="portfolio" class="portfolio-embed">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.25rem; font-weight: 700;">Austin Humphrey Portfolio</h2>
+                <a href="https://ahump20.github.io/austin-humphrey-portfolio/" target="_blank" style="background: var(--cyan); color: var(--bg); padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                    <i class="fas fa-external-link-alt"></i> Open Full Portfolio
+                </a>
+            </div>
+            <iframe src="https://ahump20.github.io/austin-humphrey-portfolio/" class="portfolio-iframe" title="Austin Humphrey Portfolio"></iframe>
+        </section>
+        
+        <!-- External Data Sources -->
+        <section style="background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
+            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">External Intelligence Sources</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <a href="https://www.espn.com/mlb/team/_/name/stl/st-louis-cardinals" target="_blank" style="background: rgba(191, 87, 0, 0.1); border: 1px solid var(--accent); padding: 1rem; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+                    <div style="color: var(--accent); font-weight: 600;">ESPN Cardinals</div>
+                </a>
+                <a href="https://www.mlb.com/cardinals" target="_blank" style="background: rgba(191, 87, 0, 0.1); border: 1px solid var(--accent); padding: 1rem; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+                    <div style="color: var(--accent); font-weight: 600;">MLB Cardinals</div>
+                </a>
+                <a href="https://texassports.com/sports/baseball" target="_blank" style="background: rgba(191, 87, 0, 0.1); border: 1px solid var(--accent); padding: 1rem; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+                    <div style="color: var(--accent); font-weight: 600;">Texas Baseball</div>
+                </a>
+                <a href="https://www.grizzlies.com" target="_blank" style="background: rgba(155, 203, 235, 0.1); border: 1px solid var(--cyan); padding: 1rem; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+                    <div style="color: var(--cyan); font-weight: 600;">Memphis Grizzlies</div>
+                </a>
+                <a href="https://www.titansonline.com" target="_blank" style="background: rgba(155, 203, 235, 0.1); border: 1px solid var(--cyan); padding: 1rem; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+                    <div style="color: var(--cyan); font-weight: 600;">Tennessee Titans</div>
+                </a>
+                <a href="https://www.spurs.com" target="_blank" style="background: rgba(155, 203, 235, 0.1); border: 1px solid var(--cyan); padding: 1rem; border-radius: 8px; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+                    <div style="color: var(--cyan); font-weight: 600;">San Antonio Spurs</div>
+                </a>
+            </div>
+        </section>
+        
+    </div>
+    
+    <!-- Championship Analytics Chart -->
+    <script>
+        // Championship Probability Chart
+        const ctx = document.getElementById('championshipChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Offense', 'Defense', 'Coaching', 'Depth', 'Experience', 'Momentum'],
+                datasets: [{
+                    label: 'Texas Longhorns',
+                    data: [92, 88, 95, 87, 83, 91],
+                    borderColor: '#BF5700',
+                    backgroundColor: 'rgba(191, 87, 0, 0.2)',
+                    pointBackgroundColor: '#BF5700',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#BF5700'
+                }, {
+                    label: 'St. Louis Cardinals',
+                    data: [85, 82, 88, 79, 91, 86],
+                    borderColor: '#9BCBEB',
+                    backgroundColor: 'rgba(155, 203, 235, 0.2)',
+                    pointBackgroundColor: '#9BCBEB',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#9BCBEB'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#E5E7EB',
+                            font: {
+                                family: 'Inter'
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: '#1F2937'
+                        },
+                        grid: {
+                            color: '#1F2937'
+                        },
+                        pointLabels: {
+                            color: '#9CA3AF',
+                            font: {
+                                family: 'Inter',
+                                size: 11
+                            }
+                        },
+                        ticks: {
+                            color: '#9CA3AF',
+                            backdropColor: 'transparent'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Update biomarkers in real-time (simulated)
+        setInterval(() => {
+            const hrvElement = document.querySelector('.biomarker-value');
+            if (hrvElement) {
+                const currentValue = parseInt(hrvElement.textContent);
+                const newValue = currentValue + Math.floor(Math.random() * 5) - 2;
+                hrvElement.textContent = Math.max(60, Math.min(75, newValue));
+            }
+        }, 5000);
+        
+        // Tab navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const target = tab.getAttribute('href').substring(1);
+                const section = document.getElementById(target);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

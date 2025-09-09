@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Revenue Dashboard | Blaze Intelligence</title>
+    <meta name="description" content="Real-time revenue tracking and financial analytics for Blaze Intelligence.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .glass-card { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .metric-card { transition: all 0.3s ease; }
+        .metric-card:hover { transform: translateY(-2px); }
+        .status-indicator { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+        .status-active { background: #10b981; }
+        .status-trial { background: #f59e0b; }
+        .status-canceled { background: #ef4444; }
+        .chart-container { position: relative; height: 300px; }
+        .pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+                    <div class="hidden md:flex items-center space-x-2 px-3 py-1 bg-green-500/20 rounded-full">
+                        <div class="w-2 h-2 bg-green-400 rounded-full pulse"></div>
+                        <span class="text-sm text-green-400 font-medium">Live</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-slate-400" id="last-updated">Last updated: --</span>
+                    <button onclick="refreshData()" 
+                            class="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
+                            id="refresh-btn">
+                        Refresh
+                    </button>
+                    <a href="/dashboard.html" class="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-4xl font-black text-white mb-2">
+                    Revenue Dashboard
+                </h1>
+                <p class="text-lg text-slate-400">
+                    Real-time financial analytics and subscription metrics
+                </p>
+            </div>
+
+            <!-- Key Metrics Row -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Monthly Recurring Revenue -->
+                <div class="metric-card glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-sm font-medium text-slate-400">Monthly Recurring Revenue</h3>
+                        <i data-lucide="trending-up" class="w-4 h-4 text-green-400"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-white" id="mrr-value">$0</div>
+                    <div class="text-sm text-green-400 flex items-center mt-2">
+                        <span id="mrr-change">+0%</span>
+                        <span class="text-slate-500 ml-1">from last month</span>
+                    </div>
+                </div>
+
+                <!-- Annual Recurring Revenue -->
+                <div class="metric-card glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-sm font-medium text-slate-400">Annual Recurring Revenue</h3>
+                        <i data-lucide="target" class="w-4 h-4 text-blue-400"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-white" id="arr-value">$0</div>
+                    <div class="text-sm text-blue-400 flex items-center mt-2">
+                        <span id="arr-progress">0%</span>
+                        <span class="text-slate-500 ml-1">of 2026 target</span>
+                    </div>
+                </div>
+
+                <!-- Active Subscriptions -->
+                <div class="metric-card glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-sm font-medium text-slate-400">Active Subscriptions</h3>
+                        <i data-lucide="users" class="w-4 h-4 text-cyan-400"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-white" id="active-subs">0</div>
+                    <div class="text-sm text-cyan-400 flex items-center mt-2">
+                        <span id="sub-change">+0</span>
+                        <span class="text-slate-500 ml-1">this month</span>
+                    </div>
+                </div>
+
+                <!-- Average Revenue Per User -->
+                <div class="metric-card glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-sm font-medium text-slate-400">Avg Revenue Per User</h3>
+                        <i data-lucide="dollar-sign" class="w-4 h-4 text-orange-400"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-white" id="arpu-value">$0</div>
+                    <div class="text-sm text-orange-400 flex items-center mt-2">
+                        <span id="arpu-change">+0%</span>
+                        <span class="text-slate-500 ml-1">from last month</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- Revenue Trend Chart -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-white">Revenue Trend</h3>
+                        <select id="revenue-period" 
+                                class="px-3 py-1 bg-slate-700 text-white rounded-lg text-sm border border-slate-600"
+                                onchange="updateRevenueChart()">
+                            <option value="30">Last 30 days</option>
+                            <option value="90">Last 90 days</option>
+                            <option value="365">Last year</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenue-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Subscription Growth Chart -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-white">Subscription Growth</h3>
+                        <div class="flex items-center space-x-2">
+                            <div class="flex items-center space-x-1">
+                                <div class="w-3 h-3 bg-green-400 rounded"></div>
+                                <span class="text-xs text-slate-400">New</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <div class="w-3 h-3 bg-red-400 rounded"></div>
+                                <span class="text-xs text-slate-400">Churned</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="subscription-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tier Breakdown and Recent Transactions -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- Revenue by Tier -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-lg font-bold text-white mb-4">Revenue by Tier</h3>
+                    <div class="space-y-4" id="tier-breakdown">
+                        <!-- Tier data will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-lg font-bold text-white mb-4">Recent Transactions</h3>
+                    <div class="space-y-3" id="recent-transactions">
+                        <!-- Transaction data will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Target Progress and Forecasting -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- Q4 2025 Target Progress -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-lg font-bold text-white mb-4">Q4 2025 Target Progress</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-slate-400">Total Target: $325,000</span>
+                                <span class="text-white" id="q4-progress-text">$0 (0%)</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-3">
+                                <div class="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full transition-all duration-1000" 
+                                     id="q4-progress-bar" 
+                                     style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Individual targets -->
+                        <div class="space-y-3 mt-6">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center space-x-2">
+                                    <span class="status-indicator status-active" id="cardinals-status"></span>
+                                    <span class="text-sm text-slate-300">Cardinals ($250K)</span>
+                                </div>
+                                <span class="text-sm text-green-400" id="cardinals-status-text">Pending</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center space-x-2">
+                                    <span class="status-indicator status-trial" id="titans-status"></span>
+                                    <span class="text-sm text-slate-300">Titans ($50K)</span>
+                                </div>
+                                <span class="text-sm text-orange-400" id="titans-status-text">In Progress</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center space-x-2">
+                                    <span class="status-indicator status-trial" id="longhorns-status"></span>
+                                    <span class="text-sm text-slate-300">Longhorns ($50K)</span>
+                                </div>
+                                <span class="text-sm text-orange-400" id="longhorns-status-text">In Progress</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2026 Revenue Forecast -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-lg font-bold text-white mb-4">2026 Revenue Forecast</h3>
+                    <div class="chart-container">
+                        <canvas id="forecast-chart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <div class="text-2xl font-bold text-white" id="forecast-total">$1,875,000</div>
+                        <div class="text-sm text-slate-400">Projected ARR for 2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subscription Health Metrics -->
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-lg font-bold text-white mb-6">Subscription Health Metrics</h3>
+                <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-green-400" id="trial-conversion">85%</div>
+                        <div class="text-xs text-slate-400">Trial Conversion</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-400" id="churn-rate">2.5%</div>
+                        <div class="text-xs text-slate-400">Monthly Churn</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-purple-400" id="customer-ltv">$45,000</div>
+                        <div class="text-xs text-slate-400">Customer LTV</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-orange-400" id="cac-ratio">3.2x</div>
+                        <div class="text-xs text-slate-400">LTV:CAC Ratio</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-cyan-400" id="expansion-rate">15%</div>
+                        <div class="text-xs text-slate-400">Expansion Rate</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-red-400" id="payment-failures">1.2%</div>
+                        <div class="text-xs text-slate-400">Payment Failures</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Global variables
+        let revenueChart = null;
+        let subscriptionChart = null;
+        let forecastChart = null;
+        let refreshInterval = null;
+
+        // Mock data - in production this would come from your API
+        const mockData = {
+            mrr: 125000,
+            arr: 1500000,
+            activeSubscriptions: 18,
+            arpu: 6944,
+            q4Progress: 85000,
+            tierBreakdown: {
+                championship: { count: 2, revenue: 41667, percentage: 60 },
+                enterprise: { count: 3, revenue: 25000, percentage: 25 },
+                professional: { count: 8, revenue: 13333, percentage: 12 },
+                starter: { count: 5, revenue: 2083, percentage: 3 }
+            },
+            recentTransactions: [
+                { organization: 'Cardinals Organization', amount: 250000, tier: 'Championship', date: '2025-09-01', status: 'completed' },
+                { organization: 'University of Texas', amount: 50000, tier: 'Enterprise', date: '2025-08-28', status: 'completed' },
+                { organization: 'Memphis Grizzlies', amount: 250000, tier: 'Championship', date: '2025-08-25', status: 'completed' },
+                { organization: 'Houston High School', amount: 2500, tier: 'Starter', date: '2025-08-22', status: 'trial' },
+                { organization: 'Dallas Athletic Club', amount: 10000, tier: 'Professional', date: '2025-08-20', status: 'completed' }
+            ],
+            monthlyTrend: [
+                { date: '2025-01', revenue: 15000, subscriptions: 3 },
+                { date: '2025-02', revenue: 28000, subscriptions: 5 },
+                { date: '2025-03', revenue: 45000, subscriptions: 7 },
+                { date: '2025-04', revenue: 62000, subscriptions: 9 },
+                { date: '2025-05', revenue: 75000, subscriptions: 11 },
+                { date: '2025-06', revenue: 88000, subscriptions: 13 },
+                { date: '2025-07', revenue: 102000, subscriptions: 15 },
+                { date: '2025-08', revenue: 118000, subscriptions: 17 },
+                { date: '2025-09', revenue: 125000, subscriptions: 18 }
+            ]
+        };
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+            updateDashboard();
+            startAutoRefresh();
+            lucide.createIcons();
+        });
+
+        // Initialize all charts
+        function initializeCharts() {
+            initializeRevenueChart();
+            initializeSubscriptionChart();
+            initializeForecastChart();
+        }
+
+        // Initialize revenue trend chart
+        function initializeRevenueChart() {
+            const ctx = document.getElementById('revenue-chart').getContext('2d');
+            
+            revenueChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: mockData.monthlyTrend.map(item => {
+                        const date = new Date(item.date);
+                        return date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+                    }),
+                    datasets: [{
+                        label: 'Monthly Recurring Revenue',
+                        data: mockData.monthlyTrend.map(item => item.revenue),
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#374151' },
+                            ticks: { color: '#9ca3af' }
+                        },
+                        y: {
+                            grid: { color: '#374151' },
+                            ticks: { 
+                                color: '#9ca3af',
+                                callback: function(value) {
+                                    return '$' + (value / 1000) + 'K';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize subscription growth chart
+        function initializeSubscriptionChart() {
+            const ctx = document.getElementById('subscription-chart').getContext('2d');
+            
+            subscriptionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: mockData.monthlyTrend.slice(-6).map(item => {
+                        const date = new Date(item.date);
+                        return date.toLocaleDateString('en-US', { month: 'short' });
+                    }),
+                    datasets: [
+                        {
+                            label: 'New Subscriptions',
+                            data: [2, 2, 2, 2, 2, 1],
+                            backgroundColor: '#10b981',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Churned',
+                            data: [0, 0, 0, 0, 1, 0],
+                            backgroundColor: '#ef4444',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#374151' },
+                            ticks: { color: '#9ca3af' },
+                            stacked: true
+                        },
+                        y: {
+                            grid: { color: '#374151' },
+                            ticks: { color: '#9ca3af' },
+                            stacked: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize forecast chart
+        function initializeForecastChart() {
+            const ctx = document.getElementById('forecast-chart').getContext('2d');
+            
+            const forecastData = [
+                { month: 'Oct', value: 145000 },
+                { month: 'Nov', value: 165000 },
+                { month: 'Dec', value: 185000 },
+                { month: 'Jan', value: 205000 },
+                { month: 'Feb', value: 225000 },
+                { month: 'Mar', value: 245000 }
+            ];
+            
+            forecastChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: forecastData.map(item => item.month),
+                    datasets: [{
+                        label: 'Projected MRR',
+                        data: forecastData.map(item => item.value),
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 3,
+                        borderDash: [5, 5],
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#374151' },
+                            ticks: { color: '#9ca3af' }
+                        },
+                        y: {
+                            grid: { color: '#374151' },
+                            ticks: { 
+                                color: '#9ca3af',
+                                callback: function(value) {
+                                    return '$' + (value / 1000) + 'K';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update dashboard with current data
+        function updateDashboard() {
+            updateKeyMetrics();
+            updateTierBreakdown();
+            updateRecentTransactions();
+            updateTargetProgress();
+            updateLastUpdated();
+        }
+
+        // Update key metrics
+        function updateKeyMetrics() {
+            document.getElementById('mrr-value').textContent = '$' + (mockData.mrr / 1000).toLocaleString() + 'K';
+            document.getElementById('arr-value').textContent = '$' + (mockData.arr / 1000).toLocaleString() + 'K';
+            document.getElementById('active-subs').textContent = mockData.activeSubscriptions;
+            document.getElementById('arpu-value').textContent = '$' + mockData.arpu.toLocaleString();
+
+            // Calculate changes (mock percentages)
+            document.getElementById('mrr-change').textContent = '+12.5%';
+            document.getElementById('arr-progress').textContent = Math.round((mockData.arr / 1875000) * 100) + '%';
+            document.getElementById('sub-change').textContent = '+1';
+            document.getElementById('arpu-change').textContent = '+8.2%';
+        }
+
+        // Update tier breakdown
+        function updateTierBreakdown() {
+            const container = document.getElementById('tier-breakdown');
+            const tiers = mockData.tierBreakdown;
+            
+            container.innerHTML = '';
+            
+            Object.entries(tiers).forEach(([tier, data]) => {
+                const tierElement = document.createElement('div');
+                tierElement.className = 'flex items-center justify-between';
+                
+                const tierName = tier.charAt(0).toUpperCase() + tier.slice(1);
+                const monthlyRevenue = data.revenue.toLocaleString();
+                
+                tierElement.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <div class="w-4 h-4 rounded" style="background: ${getTierColor(tier)}"></div>
+                        <div>
+                            <div class="text-white font-medium">${tierName}</div>
+                            <div class="text-xs text-slate-400">${data.count} subscriptions</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-white font-semibold">$${monthlyRevenue}</div>
+                        <div class="text-xs text-slate-400">${data.percentage}%</div>
+                    </div>
+                `;
+                
+                container.appendChild(tierElement);
+            });
+        }
+
+        // Get tier color
+        function getTierColor(tier) {
+            const colors = {
+                championship: '#f59e0b',
+                enterprise: '#3b82f6',
+                professional: '#10b981',
+                starter: '#6b7280'
+            };
+            return colors[tier] || '#6b7280';
+        }
+
+        // Update recent transactions
+        function updateRecentTransactions() {
+            const container = document.getElementById('recent-transactions');
+            
+            container.innerHTML = '';
+            
+            mockData.recentTransactions.slice(0, 5).forEach(transaction => {
+                const transactionElement = document.createElement('div');
+                transactionElement.className = 'flex items-center justify-between p-3 bg-slate-800/30 rounded-lg';
+                
+                const statusColor = transaction.status === 'completed' ? 'text-green-400' : 
+                                   transaction.status === 'trial' ? 'text-orange-400' : 'text-slate-400';
+                
+                const date = new Date(transaction.date).toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                transactionElement.innerHTML = `
+                    <div>
+                        <div class="text-white font-medium">${transaction.organization}</div>
+                        <div class="text-xs text-slate-400">${transaction.tier} • ${date}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-white font-semibold">$${transaction.amount.toLocaleString()}</div>
+                        <div class="text-xs ${statusColor} capitalize">${transaction.status}</div>
+                    </div>
+                `;
+                
+                container.appendChild(transactionElement);
+            });
+        }
+
+        // Update target progress
+        function updateTargetProgress() {
+            const q4Target = 325000;
+            const currentProgress = mockData.q4Progress;
+            const progressPercentage = Math.round((currentProgress / q4Target) * 100);
+            
+            document.getElementById('q4-progress-text').textContent = 
+                `$${(currentProgress / 1000).toLocaleString()}K (${progressPercentage}%)`;
+            document.getElementById('q4-progress-bar').style.width = progressPercentage + '%';
+        }
+
+        // Update last updated timestamp
+        function updateLastUpdated() {
+            const now = new Date();
+            const timestamp = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('last-updated').textContent = `Last updated: ${timestamp}`;
+        }
+
+        // Refresh data
+        async function refreshData() {
+            const refreshBtn = document.getElementById('refresh-btn');
+            refreshBtn.disabled = true;
+            refreshBtn.textContent = 'Refreshing...';
+            
+            try {
+                // In production, this would fetch from your API
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+                
+                // Add some randomization to simulate real data changes
+                mockData.mrr += Math.floor(Math.random() * 5000) - 2500;
+                mockData.arr = mockData.mrr * 12;
+                mockData.activeSubscriptions += Math.random() > 0.7 ? 1 : 0;
+                
+                updateDashboard();
+                
+                // Update charts with new data
+                if (revenueChart) {
+                    revenueChart.data.datasets[0].data[revenueChart.data.datasets[0].data.length - 1] = mockData.mrr;
+                    revenueChart.update();
+                }
+                
+            } catch (error) {
+                console.error('Failed to refresh data:', error);
+            } finally {
+                refreshBtn.disabled = false;
+                refreshBtn.textContent = 'Refresh';
+            }
+        }
+
+        // Start auto refresh
+        function startAutoRefresh() {
+            // Refresh every 30 seconds
+            refreshInterval = setInterval(updateLastUpdated, 30000);
+            
+            // Full data refresh every 5 minutes
+            setInterval(refreshData, 300000);
+        }
+
+        // Update revenue chart period
+        function updateRevenueChart() {
+            const period = document.getElementById('revenue-period').value;
+            
+            // In production, this would fetch data for the selected period
+            let chartData = mockData.monthlyTrend;
+            
+            if (period === '30') {
+                chartData = mockData.monthlyTrend.slice(-1);
+            } else if (period === '90') {
+                chartData = mockData.monthlyTrend.slice(-3);
+            }
+            
+            revenueChart.data.labels = chartData.map(item => {
+                const date = new Date(item.date);
+                return date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+            });
+            
+            revenueChart.data.datasets[0].data = chartData.map(item => item.revenue);
+            revenueChart.update();
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', function() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        });
+    </script>
+</body>
+</html>

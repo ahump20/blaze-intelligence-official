@@ -1,0 +1,64 @@
+{
+  "sport": "college",
+  "last_updated": "2025-08-28T07:50:58.557Z",
+  "apis": {
+    "primary": {
+      "name": "CollegeFootballData API",
+      "base_url": "https://api.collegefootballdata.com",
+      "endpoints": {
+        "teams": "/teams",
+        "games": "/games",
+        "rankings": "/rankings",
+        "recruiting": "/recruiting/players"
+      },
+      "rate_limit": "100 requests/minute",
+      "authentication": "api_key",
+      "data_quality": "comprehensive"
+    },
+    "secondary": {
+      "name": "ESPN College API",
+      "base_url": "https://site.api.espn.com/apis/site/v2/sports/football/college-football",
+      "endpoints": {
+        "scoreboard": "/scoreboard",
+        "teams": "/teams",
+        "rankings": "/rankings"
+      },
+      "rate_limit": "100 requests/minute",
+      "authentication": "none",
+      "data_quality": "real_time"
+    }
+  },
+  "connection_settings": {
+    "timeout_ms": 10000,
+    "retry_attempts": 3,
+    "retry_delay_ms": 1000,
+    "connection_pool_size": 5
+  },
+  "data_mapping": {
+    "team_name": "school.name",
+    "readiness": {
+      "overall": "calculated_field",
+      "talent_level": "recruiting.stars",
+      "coaching": "derived_metric"
+    },
+    "academic_metrics": {
+      "apr_score": "academics.apr"
+    }
+  },
+  "validation_rules": {
+    "readiness_range": [
+      0,
+      100
+    ],
+    "leverage_range": [
+      1,
+      4
+    ],
+    "required_fields": [
+      "program",
+      "readiness",
+      "academic_metrics"
+    ],
+    "data_freshness_hours": 48
+  }
+}

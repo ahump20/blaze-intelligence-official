@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics Labs | Blaze Intelligence - Championship Research Environments</title>
+<meta name="description" content="Specialized analytics labs for Cardinals, Titans, Longhorns, and Grizzlies. Real-time performance tracking and cognitive intelligence research.">
+<meta name="keywords" content="sports analytics labs, cardinals analytics, titans analytics, longhorns analytics, grizzlies analytics">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'burnt-orange': {
+'100': '#FFF3E0',
+'200': '#FFE0B2', 
+'300': '#DEB887',
+'400': '#D2691E',
+'500': '#BF5700',
+'600': '#A0522D',
+'700': '#8B4513',
+'800': '#654321',
+'900': '#3D2914',
+},
+'neon': {
+'blue': '#00FFFF',
+'green': '#00FF00', 
+'orange': '#FF8C00',
+'purple': '#9400D3'
+}
+}
+}
+}
+}
+</script>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center">
+<a href="/" class="text-2xl font-bold neon-text tracking-tighter hover:scale-105 transition-transform">
+BLAZE INTELLIGENCE
+</a>
+<span class="ml-3 text-xs text-slate-500 bg-slate-800 px-2 py-1 rounded-full">v2.0</span>
+</div>
+
+<ul class="hidden lg:flex items-center space-x-6">
+<li><a href="/platform" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">🚀 Platform</a></li>
+<li><a href="/labs" class="text-orange-400 font-bold transition-colors duration-200">⚡ Labs</a></li>
+<li><a href="/portfolio" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">🏆 Portfolio</a></li>
+<li><a href="/insights" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">📊 Insights</a></li>
+<li><a href="/about" class="text-slate-300 hover:text-white transition-colors duration-200 font-medium">👨‍💼 About</a></li>
+<li><a href="/#contact" class="enhanced-btn text-white font-semibold px-6 py-3 rounded-full transition-all duration-300">START PROJECT</a></li>
+</ul>
+</div>
+</nav>
+
+<main class="pt-20">
+<section class="py-20 bg-black/20">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-8">
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-red-400" id="cardinals-readiness">86.6</div>
+<div class="text-xs text-slate-400">Team Readiness</div>
+</div>
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-orange-400" id="cardinals-leverage">2.85</div>
+<div class="text-xs text-slate-400">Leverage Factor</div>
+</div>
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-green-400" id="cardinals-confidence">High</div>
+<div class="text-xs text-slate-400">Trend</div>
+</div>
+</div>
+
+<div class="space-y-3 text-sm">
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Offense Rating</span>
+<span class="text-neon-blue font-mono">87.1</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Defense Rating</span>
+<span class="text-neon-blue font-mono">88.5</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Pitching Score</span>
+<span class="text-neon-blue font-mono">85.4</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Last Updated</span>
+<span class="text-neon-green font-mono" id="cardinals-updated">2 min ago</span>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-blue-400" id="titans-epa">0.074</div>
+<div class="text-xs text-slate-400">EPA/Play</div>
+</div>
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-orange-400" id="titans-velocity">0.42s</div>
+<div class="text-xs text-slate-400">Decision Velocity</div>
+</div>
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-green-400" id="titans-pressure">84.2</div>
+<div class="text-xs text-slate-400">Pressure Rating</div>
+</div>
+</div>
+
+<div class="space-y-3 text-sm">
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Offensive Efficiency</span>
+<span class="text-neon-blue font-mono">76.3%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Defensive DVOA</span>
+<span class="text-neon-blue font-mono">-8.2%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Special Teams</span>
+<span class="text-neon-blue font-mono">12.4</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Status</span>
+<span class="text-neon-green font-mono">Monitoring</span>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-orange-400" id="longhorns-sp">18.7</div>
+<div class="text-xs text-slate-400">SP+ Rating</div>
+</div>
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-red-400" id="longhorns-sec">87.3</div>
+<div class="text-xs text-slate-400">SEC Readiness</div>
+</div>
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-green-400" id="longhorns-nil">0.89</div>
+<div class="text-xs text-slate-400">NIL Impact</div>
+</div>
+</div>
+
+<div class="space-y-3 text-sm">
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Recruiting Rank</span>
+<span class="text-neon-blue font-mono">#3</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Transfer Portal</span>
+<span class="text-neon-blue font-mono">Elite</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Conference Prep</span>
+<span class="text-neon-blue font-mono">94.2%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Championship Odds</span>
+<span class="text-neon-green font-mono">Strong</span>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-purple-400" id="grizzlies-grit">87.3</div>
+<div class="text-xs text-slate-400">Grit Score</div>
+</div>
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-blue-400" id="grizzlies-vision">95.7%</div>
+<div class="text-xs text-slate-400">Vision AI Accuracy</div>
+</div>
+<div class="bg-slate-800/50 p-4 rounded-lg text-center">
+<div class="text-2xl font-bold text-green-400" id="grizzlies-character">91.4</div>
+<div class="text-xs text-slate-400">Character Algorithm</div>
+</div>
+</div>
+
+<div class="space-y-3 text-sm">
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Micro-Expression Detection</span>
+<span class="text-neon-blue font-mono">Active</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Biomechanical Analysis</span>
+<span class="text-neon-blue font-mono">Enhanced</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Determination Metrics</span>
+<span class="text-neon-blue font-mono">Elite</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400">Development Status</span>
+<span class="text-orange-400 font-mono">Beta Testing</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="text-center mt-16 reveal" style="transition-delay: 500ms;">
+<h3 class="text-3xl font-bold text-gradient mb-8">Ready to access the labs?</h3>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<a href="/#contact" class="enhanced-btn text-white font-semibold px-10 py-5 rounded-full flex items-center gap-3 text-lg">
+REQUEST LAB ACCESS <i data-lucide="key" class="w-5 h-5"></i>
+</a>
+<a href="/platform" class="glass-card hover:bg-slate-700/50 text-white font-semibold px-10 py-5 rounded-full transition-all duration-300 flex items-center gap-3 hover:scale-105">
+VIEW PLATFORM <i data-lucide="arrow-left" class="w-5 h-5"></i>
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+

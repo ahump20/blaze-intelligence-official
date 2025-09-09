@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R2 Storage Browser • Blaze Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon': {
+                            'blue': '#00FFFF',
+                            'green': '#00FF00',
+                            'orange': '#FF8C00',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .neon-text {
+            background: linear-gradient(135deg, #FF8C00 0%, #00FFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .mono-font {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+        pre {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100">
+    <!-- Header -->
+    <header class="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 py-4">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="text-2xl font-bold neon-text">BLAZE INTELLIGENCE</a>
+                <div class="text-slate-400 mono-font">R2 Storage Browser</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Storage Status -->
+        <section class="glass-card rounded-2xl p-8 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-3xl font-bold neon-text">R2 Storage Status</h1>
+                <button id="refresh-btn" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
+                    Refresh
+                </button>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="text-center">
+                    <div id="storage-status" class="text-2xl font-bold text-neon-green">Checking...</div>
+                    <div class="text-slate-400">Storage Health</div>
+                </div>
+                <div class="text-center">
+                    <div id="bucket-name" class="text-2xl font-bold text-neon-blue">blaze-intelligence-data</div>
+                    <div class="text-slate-400">Active Bucket</div>
+                </div>
+                <div class="text-center">
+                    <div id="cache-size" class="text-2xl font-bold text-neon-orange">0</div>
+                    <div class="text-slate-400">Cached Datasets</div>
+                </div>
+            </div>
+
+            <div id="health-info" class="p-4 bg-slate-800/50 rounded-lg mono-font text-sm">
+                <div class="text-slate-400">Service health check...</div>
+            </div>
+        </section>
+
+        <!-- Data Browser -->
+        <section class="glass-card rounded-2xl p-8 mb-8">
+            <h2 class="text-2xl font-bold text-white mb-6">Browse Sports Data</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <button class="fetch-btn bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg transition-colors" 
+                        data-sport="mlb" data-dataset="cardinals">
+                    📊 MLB Cardinals
+                </button>
+                <button class="fetch-btn bg-green-600 hover:bg-green-700 text-white p-4 rounded-lg transition-colors" 
+                        data-sport="nfl" data-dataset="titans">
+                    🏈 NFL Titans
+                </button>
+                <button class="fetch-btn bg-orange-600 hover:bg-orange-700 text-white p-4 rounded-lg transition-colors" 
+                        data-sport="cfb" data-dataset="longhorns">
+                    🎓 CFB Longhorns
+                </button>
+                <button class="fetch-btn bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-lg transition-colors" 
+                        data-sport="general" data-dataset="blaze-metrics">
+                    ⚡ Blaze Metrics
+                </button>
+            </div>
+
+            <div id="data-display" class="hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 id="data-title" class="text-xl font-bold text-white"></h3>
+                    <div id="data-meta" class="text-sm text-slate-400 mono-font"></div>
+                </div>
+                <pre id="data-content" class="text-slate-300"></pre>
+            </div>
+
+            <div id="error-display" class="hidden p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
+                <div class="text-red-400 font-bold mb-2">Error Loading Data</div>
+                <div id="error-message" class="text-red-300 mono-font"></div>
+            </div>
+        </section>
+
+        <!-- Raw API Testing -->
+        <section class="glass-card rounded-2xl p-8">
+            <h2 class="text-2xl font-bold text-white mb-6">API Testing</h2>
+            
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                <input type="text" id="api-sport" placeholder="Sport (mlb, nfl, cfb, general)" 
+                       class="bg-slate-800 border border-slate-600 text-white px-4 py-2 rounded-lg">
+                <input type="text" id="api-dataset" placeholder="Dataset name" 
+                       class="bg-slate-800 border border-slate-600 text-white px-4 py-2 rounded-lg">
+            </div>
+            
+            <div class="flex gap-4 mb-6">
+                <button id="api-get-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                    GET Data
+                </button>
+                <button id="api-health-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
+                    Health Check
+                </button>
+            </div>
+
+            <div id="api-response" class="p-4 bg-slate-800/50 rounded-lg mono-font">
+                <div class="text-slate-400">API response will appear here...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- R2 Integration Script -->
+    <script src="js/r2-integration.js"></script>
+    
+    <script>
+        // Initialize R2 Browser
+        class R2Browser {
+            constructor() {
+                this.storage = window.BlazeStorage;
+                this.setupEventListeners();
+                this.updateStatus();
+            }
+
+            setupEventListeners() {
+                // Refresh button
+                document.getElementById('refresh-btn').addEventListener('click', () => {
+                    this.storage.clearCache();
+                    this.updateStatus();
+                });
+
+                // Fetch buttons
+                document.querySelectorAll('.fetch-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const sport = e.target.dataset.sport;
+                        const dataset = e.target.dataset.dataset;
+                        this.fetchData(sport, dataset);
+                    });
+                });
+
+                // API testing
+                document.getElementById('api-get-btn').addEventListener('click', () => {
+                    const sport = document.getElementById('api-sport').value.trim();
+                    const dataset = document.getElementById('api-dataset').value.trim();
+                    if (sport && dataset) {
+                        this.fetchData(sport, dataset);
+                    }
+                });
+
+                document.getElementById('api-health-btn').addEventListener('click', () => {
+                    this.healthCheck();
+                });
+            }
+
+            async updateStatus() {
+                try {
+                    const health = await this.storage.healthCheck();
+                    const stats = this.storage.getCacheStats();
+
+                    document.getElementById('storage-status').textContent = 
+                        health.status === 'healthy' ? 'Online' : 'Offline';
+                    document.getElementById('cache-size').textContent = stats.size;
+                    
+                    document.getElementById('health-info').innerHTML = `
+                        <div class="text-neon-green">✓ Service: ${health.service}</div>
+                        <div class="text-slate-300">Status: ${health.status}</div>
+                        <div class="text-slate-300">Timestamp: ${health.timestamp || 'N/A'}</div>
+                        <div class="text-slate-300">Cache: ${stats.size} datasets (${Math.round(stats.timeout/1000/60)}min timeout)</div>
+                    `;
+                } catch (error) {
+                    document.getElementById('storage-status').textContent = 'Error';
+                    document.getElementById('health-info').innerHTML = `
+                        <div class="text-red-400">✗ Health check failed: ${error.message}</div>
+                    `;
+                }
+            }
+
+            async fetchData(sport, dataset) {
+                document.getElementById('data-display').classList.add('hidden');
+                document.getElementById('error-display').classList.add('hidden');
+
+                try {
+                    const result = await this.storage.fetchData(sport, dataset);
+                    
+                    if (result.error && !result.fallback) {
+                        throw new Error(result.error);
+                    }
+
+                    // Display data
+                    document.getElementById('data-title').textContent = 
+                        `${sport.toUpperCase()} / ${dataset}`;
+                    
+                    document.getElementById('data-meta').textContent = 
+                        result.fallback ? 'Fallback Data' : 
+                        (result.metadata ? `Size: ${result.metadata.size} bytes` : 'Live Data');
+                    
+                    document.getElementById('data-content').textContent = 
+                        JSON.stringify(result.data || result, null, 2);
+                    
+                    document.getElementById('data-display').classList.remove('hidden');
+
+                    // Also show in API response area
+                    document.getElementById('api-response').innerHTML = `
+                        <div class="text-neon-green mb-2">✓ Success - ${sport}/${dataset}</div>
+                        <div class="text-slate-300">${JSON.stringify(result, null, 2)}</div>
+                    `;
+
+                } catch (error) {
+                    document.getElementById('error-message').textContent = error.message;
+                    document.getElementById('error-display').classList.remove('hidden');
+
+                    document.getElementById('api-response').innerHTML = `
+                        <div class="text-red-400 mb-2">✗ Error - ${sport}/${dataset}</div>
+                        <div class="text-red-300">${error.message}</div>
+                    `;
+                }
+            }
+
+            async healthCheck() {
+                try {
+                    const health = await this.storage.healthCheck();
+                    document.getElementById('api-response').innerHTML = `
+                        <div class="text-neon-green mb-2">✓ Health Check Success</div>
+                        <div class="text-slate-300">${JSON.stringify(health, null, 2)}</div>
+                    `;
+                } catch (error) {
+                    document.getElementById('api-response').innerHTML = `
+                        <div class="text-red-400 mb-2">✗ Health Check Failed</div>
+                        <div class="text-red-300">${error.message}</div>
+                    `;
+                }
+            }
+        }
+
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            new R2Browser();
+        });
+    </script>
+</body>
+</html>

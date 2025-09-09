@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaze Intelligence - Enterprise Revenue Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+
+<script src="integrations/hubspot-crm-setup.js"></script>
+<script src="integrations/stripe-billing-system.js"></script>
+<script src="integrations/airtable-analytics-hub.js"></script>
+<script src="integrations/zapier-automation-engine.js"></script>
+
+<style>
+:root {
+--blaze-primary: #ff6b35;
+--blaze-secondary: #f7931e;
+--blaze-accent: #ffd700;
+--blaze-dark: #0a0a0a;
+--blaze-gray: #1a1a2e;
+--blaze-blue: #16213e;
+--blaze-cyan: #00ffff;
+--blaze-green: #00ff88;
+}
+
+body {
+background: linear-gradient(135deg, var(--blaze-dark) 0%, var(--blaze-gray) 50%, var(--blaze-blue) 100%);
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+color: #e2e8f0;
+}
+
+.dashboard-card {
+background: rgba(26, 26, 46, 0.8);
+border: 1px solid rgba(255, 107, 53, 0.3);
+border-radius: 12px;
+backdrop-filter: blur(10px);
+transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+border-color: var(--blaze-primary);
+box-shadow: 0 8px 32px rgba(255, 107, 53, 0.2);
+transform: translateY(-2px);
+}
+
+.metric-value {
+background: linear-gradient(45deg, var(--blaze-primary), var(--blaze-secondary));
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+font-weight: 800;
+}
+
+.status-indicator {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+animation: pulse 2s infinite;
+}
+
+.status-healthy { background-color: var(--blaze-green); }
+.status-warning { background-color: var(--blaze-secondary); }
+.status-critical { background-color: #ff4444; }
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.5; }
+}
+
+.chart-container {
+position: relative;
+height: 300px;
+margin: 20px 0;
+}
+
+.integration-status {
+display: flex;
+align-items: center;
+gap: 8px;
+padding: 8px 12px;
+border-radius: 6px;
+background: rgba(255, 255, 255, 0.05);
+font-size: 14px;
+}
+
+.integration-connected {
+color: var(--blaze-green);
+border: 1px solid var(--blaze-green);
+}
+
+.integration-error {
+color: #ff4444;
+border: 1px solid #ff4444;
+}
+</style>
+</head>
+<body class="min-h-screen p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="dashboard-card p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-slate-400 text-sm font-medium">Monthly Recurring Revenue</h3>
+<i data-lucide="trending-up" class="w-5 h-5 text-green-400"></i>
+</div>
+<div class="metric-value text-3xl font-bold" id="mrr-value">$0</div>
+<div class="text-sm text-green-400 mt-2" id="mrr-growth">+0% from last month</div>
+</div>
+
+<div class="dashboard-card p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-slate-400 text-sm font-medium">Active Subscriptions</h3>
+<i data-lucide="users" class="w-5 h-5 text-blue-400"></i>
+</div>
+<div class="metric-value text-3xl font-bold" id="active-subs">0</div>
+<div class="text-sm text-blue-400 mt-2" id="subs-change">+0 this month</div>
+</div>
+
+<div class="dashboard-card p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-slate-400 text-sm font-medium">Average Revenue Per User</h3>
+<i data-lucide="dollar-sign" class="w-5 h-5 text-yellow-400"></i>
+</div>
+<div class="metric-value text-3xl font-bold" id="arpu-value">$0</div>
+<div class="text-sm text-yellow-400 mt-2" id="arpu-change">+0% from last month</div>
+</div>
+
+<div class="dashboard-card p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-slate-400 text-sm font-medium">Churn Rate</h3>
+<i data-lucide="trending-down" class="w-5 h-5 text-red-400"></i>
+</div>
+<div class="metric-value text-3xl font-bold" id="churn-rate">0%</div>
+<div class="text-sm text-red-400 mt-2" id="churn-change">-0% from last month</div>
+</div>
+</div>
+
+<div class="dashboard-card p-6">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold text-white">Revenue Growth</h2>
+<div class="flex space-x-2">
+<button class="px-3 py-1 text-xs bg-gray-700 rounded-md text-white hover:bg-gray-600" data-period="7d">7D</button>
+<button class="px-3 py-1 text-xs bg-gray-700 rounded-md text-white hover:bg-gray-600" data-period="30d">30D</button>
+<button class="px-3 py-1 text-xs bg-blue-600 rounded-md text-white" data-period="90d">90D</button>
+</div>
+</div>
+<div class="chart-container">
+<canvas id="revenue-chart"></canvas>
+</div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+</div>
+<div class="mt-6 pt-4 border-t border-gray-700">
+<div class="flex justify-between text-sm">
+<span class="text-slate-400">Total Pipeline Value</span>
+<span class="text-white font-bold" id="total-pipeline">$0</span>
+</div>
+<div class="flex justify-between text-sm mt-1">
+<span class="text-slate-400">Conversion Rate</span>
+<span class="text-green-400 font-bold" id="conversion-rate">0%</span>
+</div>
+</div>
+</div>
+
+</div>
+<div class="mt-6">
+<div class="flex items-center justify-between">
+<span class="text-sm text-slate-400">Average Health Score</span>
+<div class="flex items-center">
+<div class="w-20 bg-gray-700 rounded-full h-2 mr-2">
+<div class="bg-green-400 h-2 rounded-full" style="width: 0%" id="avg-health-bar"></div>
+</div>
+<span class="text-white font-bold text-sm" id="avg-health-score">0</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+// Dashboard Controller
+class EnterpriseRevenueDashboard {
+constructor() {
+this.data = {
+mrr: 0,
+activeSubscriptions: 0,
+arpu: 0,
+churnRate: 0,
+pipelineValue: 0,
+conversionRate: 0,
+avgHealthScore: 85
+};
+
+this.charts = {};
+this.updateInterval = null;
+
+this.init();
+}
+
+async init() {
+console.log('🚀 Initializing Enterprise Revenue Dashboard');
+
+// Initialize icons
+lucide.createIcons();
+
+// Load initial data
+await this.loadData();
+
+// Initialize charts
+this.initializeCharts();
+
+// Update displays
+this.updateDisplays();
+
+// Start real-time updates
+this.startRealTimeUpdates();
+
+console.log('✅ Dashboard initialized successfully');
+}
+
+async loadData() {
+try {
+// Simulate loading data from integrations
+console.log('📊 Loading enterprise data...');
+
+// In a real implementation, these would fetch from actual APIs
+const mockData = {
+mrr: 47500 + Math.floor(Math.random() * 5000),
+activeSubscriptions: 23 + Math.floor(Math.random() * 5),
+arpu: 2065 + Math.floor(Math.random() * 200),
+churnRate: 2.1 + Math.random() * 0.8,
+pipelineValue: 234500 + Math.floor(Math.random() * 50000),
+conversionRate: 32.4 + Math.random() * 5,
+avgHealthScore: 85 + Math.floor(Math.random() * 10)
+};
+
+this.data = { ...this.data, ...mockData };
+
+console.log('✅ Data loaded successfully');
+} catch (error) {
+console.error('❌ Error loading data:', error);
+}
+}
+
+initializeCharts() {
+// Revenue Growth Chart
+const revenueCtx = document.getElementById('revenue-chart').getContext('2d');
+this.charts.revenue = new Chart(revenueCtx, {
+type: 'line',
+data: {
+labels: this.generateDateLabels(30),
+datasets: [{
+label: 'MRR',
+data: this.generateRevenueData(30),
+borderColor: '#ff6b35',
+backgroundColor: 'rgba(255, 107, 53, 0.1)',
+fill: true,
+tension: 0.4
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: { display: false }
+},
+scales: {
+y: {
+beginAtZero: false,
+grid: { color: 'rgba(255, 255, 255, 0.1)' },
+ticks: { color: '#94a3b8' }
+},
+x: {
+grid: { color: 'rgba(255, 255, 255, 0.1)' },
+ticks: { color: '#94a3b8' }
+}
+}
+}
+});
+
+// Subscription Plans Chart
+const plansCtx = document.getElementById('plans-chart').getContext('2d');
+this.charts.plans = new Chart(plansCtx, {
+type: 'doughnut',
+data: {
+labels: ['Starter', 'Professional', 'Enterprise', 'Custom'],
+datasets: [{
+data: [5, 12, 4, 2],
+backgroundColor: ['#f7931e', '#00ffff', '#8b5cf6', '#00ff88'],
+borderWidth: 2,
+borderColor: '#1a1a2e'
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: { display: false }
+}
+}
+});
+}
+
+updateDisplays() {
+// Update key metrics
+document.getElementById('mrr-value').textContent = `$${this.data.mrr.toLocaleString()}`;
+document.getElementById('active-subs').textContent = this.data.activeSubscriptions;
+document.getElementById('arpu-value').textContent = `$${this.data.arpu.toLocaleString()}`;
+document.getElementById('churn-rate').textContent = `${this.data.churnRate.toFixed(1)}%`;
+
+// Update growth indicators
+document.getElementById('mrr-growth').textContent = `+${(Math.random() * 15 + 5).toFixed(1)}% from last month`;
+document.getElementById('subs-change').textContent = `+${Math.floor(Math.random() * 3 + 1)} this month`;
+document.getElementById('arpu-change').textContent = `+${(Math.random() * 10 + 2).toFixed(1)}% from last month`;
+document.getElementById('churn-change').textContent = `-${(Math.random() * 2 + 0.5).toFixed(1)}% from last month`;
+
+// Update pipeline
+document.getElementById('total-pipeline').textContent = `$${this.data.pipelineValue.toLocaleString()}`;
+document.getElementById('conversion-rate').textContent = `${this.data.conversionRate.toFixed(1)}%`;
+
+// Update health score
+document.getElementById('avg-health-score').textContent = this.data.avgHealthScore;
+document.getElementById('avg-health-bar').style.width = `${this.data.avgHealthScore}%`;
+
+// Update plan counts
+const plansData = this.charts.plans.data.datasets[0].data;
+document.getElementById('starter-count').textContent = plansData[0];
+document.getElementById('pro-count').textContent = plansData[1];
+document.getElementById('enterprise-count').textContent = plansData[2];
+document.getElementById('custom-count').textContent = plansData[3];
+
+// Update timestamp
+document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
+
+// Update pipeline stages
+this.updatePipelineStages();
+
+// Update recent events
+this.updateRecentEvents();
+}
+
+updatePipelineStages() {
+const stages = [
+{ name: 'Lead Generated', count: 47, value: 156800 },
+{ name: 'Demo Scheduled', count: 23, value: 89400 },
+{ name: 'Demo Completed', count: 15, value: 67200 },
+{ name: 'Proposal Sent', count: 8, value: 43500 },
+{ name: 'Negotiation', count: 4, value: 28900 },
+{ name: 'Closed Won', count: 2, value: 18600 }
+];
+
+const container = document.getElementById('pipeline-stages');
+container.innerHTML = stages.map(stage => `
+<div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
+<div>
+<div class="font-medium text-white">${stage.name}</div>
+<div class="text-sm text-slate-400">${stage.count} deals</div>
+</div>
+<div class="text-right">
+<div class="font-bold text-white">$${stage.value.toLocaleString()}</div>
+</div>
+</div>
+`).join('');
+}
+
+updateRecentEvents() {
+const revenueEvents = [
+{ type: '💰', event: 'New Enterprise subscription', company: 'Cardinals Analytics LLC', amount: '$999/month', time: '2 minutes ago' },
+{ type: '📈', event: 'Subscription upgraded', company: 'Titans Performance Group', amount: '+$500/month', time: '15 minutes ago' },
+{ type: '🎉', event: 'Annual payment received', company: 'Longhorns Sports Data', amount: '$12,000', time: '1 hour ago' },
+{ type: '⚠️', event: 'Payment failed', company: 'Youth Baseball Academy', amount: '$49/month', time: '2 hours ago' }
+];
+
+const automationEvents = [
+{ type: '🤖', event: 'New lead automation triggered', detail: 'Welcome sequence started for MLB prospect', time: '5 minutes ago' },
+{ type: '📧', event: 'Churn prevention email sent', detail: 'Health score below 70 detected', time: '23 minutes ago' },
+{ type: '📞', event: 'Success call scheduled', detail: 'High-value client check-in', time: '45 minutes ago' },
+{ type: '🎯', event: 'Demo preparation completed', detail: 'Custom NFL analytics demo ready', time: '1 hour ago' }
+];
+
+document.getElementById('revenue-events').innerHTML = revenueEvents.map(event => `
+<div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
+<div class="flex items-center">
+<span class="text-lg mr-3">${event.type}</span>
+<div>
+<div class="font-medium text-white">${event.event}</div>
+<div class="text-sm text-slate-400">${event.company}</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-bold text-green-400">${event.amount}</div>
+<div class="text-xs text-slate-500">${event.time}</div>
+</div>
+</div>
+`).join('');
+
+document.getElementById('automation-events').innerHTML = automationEvents.map(event => `
+<div class="flex items-start p-3 bg-gray-800 rounded-lg">
+<span class="text-lg mr-3 mt-0.5">${event.type}</span>
+<div class="flex-1">
+<div class="font-medium text-white">${event.event}</div>
+<div class="text-sm text-slate-400 mt-1">${event.detail}</div>
+<div class="text-xs text-slate-500 mt-2">${event.time}</div>
+</div>
+</div>
+`).join('');
+}
+
+generateDateLabels(days) {
+const labels = [];
+for (let i = days - 1; i >= 0; i--) {
+const date = new Date();
+date.setDate(date.getDate() - i);
+labels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+}
+return labels;
+}
+
+generateRevenueData(days) {
+const data = [];
+let baseRevenue = 35000;
+
+for (let i = 0; i < days; i++) {
+baseRevenue += Math.random() * 2000 - 1000 + (i * 50); // Gradual growth with volatility
+data.push(Math.round(baseRevenue));
+}
+
+return data;
+}
+
+startRealTimeUpdates() {
+// Update dashboard every 30 seconds
+this.updateInterval = setInterval(async () => {
+await this.loadData();
+this.updateDisplays();
+
+// Update charts data
+if (this.charts.revenue) {
+const newData = this.generateRevenueData(30);
+this.charts.revenue.data.datasets[0].data = newData;
+this.charts.revenue.update('none');
+}
+}, 30000);
+}
+
+destroy() {
+if (this.updateInterval) {
+clearInterval(this.updateInterval);
+}
+}
+}
+
+// Initialize dashboard when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+window.enterpriseDashboard = new EnterpriseRevenueDashboard();
+});
+</script>
+</body>
+</html>

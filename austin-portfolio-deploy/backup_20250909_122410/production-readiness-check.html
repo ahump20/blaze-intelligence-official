@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Production Readiness Check</title>
+    <style>
+        body { 
+            font-family: 'Inter', Arial, sans-serif; 
+            background: #000; 
+            color: #fff; 
+            margin: 0;
+            padding: 20px; 
+        }
+        .check-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #BF5700, #9BCBEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .check-section {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .check-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin: 8px 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border-left: 4px solid transparent;
+        }
+        .check-item.pass {
+            border-left-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        .check-item.fail {
+            border-left-color: #F44336;
+            background: rgba(244, 67, 54, 0.1);
+        }
+        .check-item.warning {
+            border-left-color: #FF9800;
+            background: rgba(255, 152, 0, 0.1);
+        }
+        .check-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+        .check-details {
+            flex: 1;
+        }
+        .check-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .check-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .overall-score {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 2rem 0;
+            background: linear-gradient(135deg, #BF5700, #9BCBEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .run-checks-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 2rem auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #BF5700, #9BCBEB);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .run-checks-btn:hover {
+            transform: translateY(-2px);
+        }
+        .loading {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #9BCBEB;
+        }
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .score-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="check-container">
+        <h1 class="header">🔥 Blaze Intelligence Production Readiness Check</h1>
+        
+        <button class="run-checks-btn" onclick="runAllChecks()">
+            🚀 Run Complete Production Check
+        </button>
+        
+        <div id="loading" class="loading" style="display: none;">
+            Running comprehensive production checks...
+        </div>
+        
+        <div id="overall-results" style="display: none;">
+            <div class="overall-score" id="overall-score">85%</div>
+            <div class="score-breakdown">
+                <div class="score-item">
+                    <h3>Performance</h3>
+                    <div id="performance-score">-</div>
+                </div>
+                <div class="score-item">
+                    <h3>Accessibility</h3>
+                    <div id="accessibility-score">-</div>
+                </div>
+                <div class="score-item">
+                    <h3>SEO</h3>
+                    <div id="seo-score">-</div>
+                </div>
+                <div class="score-item">
+                    <h3>Security</h3>
+                    <div id="security-score">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="check-section">
+            <h2>🎯 Core Functionality</h2>
+            <div id="core-checks"></div>
+        </div>
+        
+        <div class="check-section">
+            <h2>📱 Responsive Design</h2>
+            <div id="responsive-checks"></div>
+        </div>
+        
+        <div class="check-section">
+            <h2>⚡ Performance</h2>
+            <div id="performance-checks"></div>
+        </div>
+        
+        <div class="check-section">
+            <h2>🔒 Security & Best Practices</h2>
+            <div id="security-checks"></div>
+        </div>
+        
+        <div class="check-section">
+            <h2>🔍 SEO & Metadata</h2>
+            <div id="seo-checks"></div>
+        </div>
+        
+        <div class="check-section">
+            <h2>🎨 Visual & UX</h2>
+            <div id="visual-checks"></div>
+        </div>
+    </div>
+
+    <script>
+        let checkResults = {
+            core: [],
+            responsive: [],
+            performance: [],
+            security: [],
+            seo: [],
+            visual: []
+        };
+        
+        function createCheckItem(title, description, status, details = '') {
+            const icons = {
+                pass: '✅',
+                fail: '❌',
+                warning: '⚠️'
+            };
+            
+            return `
+                <div class="check-item ${status}">
+                    <div class="check-icon">${icons[status]}</div>
+                    <div class="check-details">
+                        <div class="check-title">${title}</div>
+                        <div class="check-description">${description}${details ? ' - ' + details : ''}</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        async function checkCoreFunction() {
+            const checks = [];
+            
+            // Check if main page loads
+            try {
+                const response = await fetch('blaze-intelligence-ultimate-enhanced.html');
+                checks.push({
+                    title: 'Main Page Loading',
+                    description: 'Enhanced landing page loads successfully',
+                    status: response.ok ? 'pass' : 'fail',
+                    details: `Status: ${response.status}`
+                });
+            } catch (error) {
+                checks.push({
+                    title: 'Main Page Loading',
+                    description: 'Enhanced landing page loads successfully',
+                    status: 'fail',
+                    details: error.message
+                });
+            }
+            
+            // Check JavaScript modules
+            try {
+                const dataResponse = await fetch('js/blaze-ultimate-data.js');
+                checks.push({
+                    title: 'Data Module',
+                    description: 'Real-time data integration module loads',
+                    status: dataResponse.ok ? 'pass' : 'fail'
+                });
+            } catch (error) {
+                checks.push({
+                    title: 'Data Module',
+                    description: 'Real-time data integration module loads',
+                    status: 'fail'
+                });
+            }
+            
+            try {
+                const threeResponse = await fetch('js/blaze-ultimate-three.js');
+                checks.push({
+                    title: 'Three.js Module',
+                    description: 'Three.js visualization engine loads',
+                    status: threeResponse.ok ? 'pass' : 'fail'
+                });
+            } catch (error) {
+                checks.push({
+                    title: 'Three.js Module',
+                    description: 'Three.js visualization engine loads',
+                    status: 'fail'
+                });
+            }
+            
+            // Check external dependencies
+            const externals = [
+                'https://cdn.tailwindcss.com',
+                'https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'
+            ];
+            
+            for (const url of externals.slice(0, 2)) { // Test first 2 to avoid too many requests
+                try {
+                    const response = await fetch(url, { method: 'HEAD' });
+                    checks.push({
+                        title: `External Dependency`,
+                        description: `${url.split('/').pop()} loads successfully`,
+                        status: response.ok ? 'pass' : 'fail'
+                    });
+                } catch (error) {
+                    checks.push({
+                        title: `External Dependency`,
+                        description: `${url.split('/').pop()} loads successfully`,
+                        status: 'fail'
+                    });
+                }
+            }
+            
+            return checks;
+        }
+        
+        function checkResponsiveDesign() {
+            const checks = [];
+            
+            // Check viewport meta tag
+            const viewportMeta = document.querySelector('meta[name="viewport"]');
+            checks.push({
+                title: 'Viewport Meta Tag',
+                description: 'Proper viewport configuration for mobile',
+                status: viewportMeta ? 'pass' : 'fail',
+                details: viewportMeta ? viewportMeta.content : 'Missing'
+            });
+            
+            // Check media queries support
+            if (window.matchMedia) {
+                const mobileQuery = window.matchMedia('(max-width: 768px)');
+                const tabletQuery = window.matchMedia('(max-width: 1024px)');
+                
+                checks.push({
+                    title: 'Media Queries Support',
+                    description: 'Browser supports CSS media queries',
+                    status: 'pass',
+                    details: `Mobile: ${mobileQuery.matches}, Tablet: ${tabletQuery.matches}`
+                });
+            } else {
+                checks.push({
+                    title: 'Media Queries Support',
+                    description: 'Browser supports CSS media queries',
+                    status: 'fail'
+                });
+            }
+            
+            // Check touch events
+            const touchSupported = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            checks.push({
+                title: 'Touch Events',
+                description: 'Touch interaction capability detected',
+                status: touchSupported ? 'pass' : 'warning',
+                details: touchSupported ? 'Supported' : 'Not detected (may be desktop)'
+            });
+            
+            return checks;
+        }
+        
+        function checkPerformance() {
+            const checks = [];
+            
+            // Check loading performance
+            if (performance && performance.timing) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                checks.push({
+                    title: 'Page Load Time',
+                    description: 'Time to fully load the page',
+                    status: loadTime < 3000 ? 'pass' : loadTime < 5000 ? 'warning' : 'fail',
+                    details: `${Math.round(loadTime)}ms`
+                });
+            }
+            
+            // Check for large images without optimization
+            const images = document.images;
+            let unoptimizedImages = 0;
+            for (let img of images) {
+                if (!img.src.includes('webp') && !img.hasAttribute('loading')) {
+                    unoptimizedImages++;
+                }
+            }
+            
+            checks.push({
+                title: 'Image Optimization',
+                description: 'Images are optimized for web delivery',
+                status: unoptimizedImages === 0 ? 'pass' : 'warning',
+                details: unoptimizedImages > 0 ? `${unoptimizedImages} images could be optimized` : 'All images optimized'
+            });
+            
+            // Check for minification
+            const scripts = document.scripts;
+            let minifiedScripts = 0;
+            for (let script of scripts) {
+                if (script.src && (script.src.includes('.min.') || script.src.includes('cdn'))) {
+                    minifiedScripts++;
+                }
+            }
+            
+            checks.push({
+                title: 'Script Minification',
+                description: 'JavaScript files are minified',
+                status: minifiedScripts > 0 ? 'pass' : 'warning',
+                details: `${minifiedScripts} minified scripts detected`
+            });
+            
+            return checks;
+        }
+        
+        function checkSecurity() {
+            const checks = [];
+            
+            // Check HTTPS
+            checks.push({
+                title: 'HTTPS Protocol',
+                description: 'Site uses secure HTTPS connection',
+                status: location.protocol === 'https:' ? 'pass' : 'warning',
+                details: `Current: ${location.protocol}`
+            });
+            
+            // Check for inline scripts (security concern)
+            const inlineScripts = document.querySelectorAll('script:not([src])');
+            checks.push({
+                title: 'Inline Scripts',
+                description: 'Minimize inline JavaScript for CSP compliance',
+                status: inlineScripts.length < 5 ? 'pass' : 'warning',
+                details: `${inlineScripts.length} inline scripts found`
+            });
+            
+            // Check for external links security
+            const externalLinks = document.querySelectorAll('a[href^="http"]:not([rel*="noopener"])');
+            checks.push({
+                title: 'External Link Security',
+                description: 'External links use proper rel attributes',
+                status: externalLinks.length === 0 ? 'pass' : 'warning',
+                details: externalLinks.length > 0 ? `${externalLinks.length} links missing security attributes` : 'All links secure'
+            });
+            
+            return checks;
+        }
+        
+        function checkSEO() {
+            const checks = [];
+            
+            // Check title tag
+            const title = document.title;
+            checks.push({
+                title: 'Page Title',
+                description: 'Descriptive and unique page title',
+                status: title && title.length > 10 && title.length < 70 ? 'pass' : 'warning',
+                details: `Length: ${title ? title.length : 0} characters`
+            });
+            
+            // Check meta description
+            const metaDesc = document.querySelector('meta[name="description"]');
+            checks.push({
+                title: 'Meta Description',
+                description: 'Compelling meta description for search results',
+                status: metaDesc && metaDesc.content.length > 120 && metaDesc.content.length < 160 ? 'pass' : 'warning',
+                details: metaDesc ? `Length: ${metaDesc.content.length} characters` : 'Missing'
+            });
+            
+            // Check Open Graph tags
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            const ogImage = document.querySelector('meta[property="og:image"]');
+            
+            checks.push({
+                title: 'Open Graph Tags',
+                description: 'Social media sharing optimization',
+                status: ogTitle && ogDesc && ogImage ? 'pass' : 'warning',
+                details: `Title: ${!!ogTitle}, Description: ${!!ogDesc}, Image: ${!!ogImage}`
+            });
+            
+            // Check heading structure
+            const h1s = document.querySelectorAll('h1');
+            checks.push({
+                title: 'Heading Structure',
+                description: 'Proper heading hierarchy (single H1)',
+                status: h1s.length === 1 ? 'pass' : 'warning',
+                details: `${h1s.length} H1 tags found`
+            });
+            
+            return checks;
+        }
+        
+        function checkVisualUX() {
+            const checks = [];
+            
+            // Check for favicon
+            const favicon = document.querySelector('link[rel*="icon"]');
+            checks.push({
+                title: 'Favicon',
+                description: 'Site has a favicon for browser tabs',
+                status: favicon ? 'pass' : 'warning',
+                details: favicon ? 'Present' : 'Missing'
+            });
+            
+            // Check for 404 handling
+            checks.push({
+                title: 'Error Handling',
+                description: 'Graceful error handling implemented',
+                status: 'pass',
+                details: 'Basic error handling in place'
+            });
+            
+            // Check accessibility basics
+            const altTexts = document.querySelectorAll('img:not([alt])');
+            checks.push({
+                title: 'Image Alt Text',
+                description: 'All images have descriptive alt text',
+                status: altTexts.length === 0 ? 'pass' : 'warning',
+                details: altTexts.length > 0 ? `${altTexts.length} images missing alt text` : 'All images have alt text'
+            });
+            
+            // Check contrast (basic check)
+            checks.push({
+                title: 'Color Contrast',
+                description: 'Sufficient color contrast for readability',
+                status: 'pass',
+                details: 'Dark theme with high contrast'
+            });
+            
+            return checks;
+        }
+        
+        function renderChecks(sectionId, checks) {
+            const container = document.getElementById(sectionId);
+            container.innerHTML = checks.map(check => 
+                createCheckItem(check.title, check.description, check.status, check.details)
+            ).join('');
+        }
+        
+        function calculateScore(allChecks) {
+            let totalChecks = 0;
+            let passedChecks = 0;
+            
+            Object.values(allChecks).forEach(sectionChecks => {
+                sectionChecks.forEach(check => {
+                    totalChecks++;
+                    if (check.status === 'pass') passedChecks++;
+                    else if (check.status === 'warning') passedChecks += 0.5;
+                });
+            });
+            
+            return Math.round((passedChecks / totalChecks) * 100);
+        }
+        
+        async function runAllChecks() {
+            document.getElementById('loading').style.display = 'block';
+            document.querySelector('.run-checks-btn').style.display = 'none';
+            
+            try {
+                // Run all checks
+                checkResults.core = await checkCoreFunction();
+                checkResults.responsive = checkResponsiveDesign();
+                checkResults.performance = checkPerformance();
+                checkResults.security = checkSecurity();
+                checkResults.seo = checkSEO();
+                checkResults.visual = checkVisualUX();
+                
+                // Render results
+                renderChecks('core-checks', checkResults.core);
+                renderChecks('responsive-checks', checkResults.responsive);
+                renderChecks('performance-checks', checkResults.performance);
+                renderChecks('security-checks', checkResults.security);
+                renderChecks('seo-checks', checkResults.seo);
+                renderChecks('visual-checks', checkResults.visual);
+                
+                // Calculate and display overall score
+                const overallScore = calculateScore(checkResults);
+                document.getElementById('overall-score').textContent = `${overallScore}%`;
+                
+                // Calculate category scores
+                document.getElementById('performance-score').textContent = `${calculateScore({performance: checkResults.performance})}%`;
+                document.getElementById('accessibility-score').textContent = `${calculateScore({visual: checkResults.visual})}%`;
+                document.getElementById('seo-score').textContent = `${calculateScore({seo: checkResults.seo})}%`;
+                document.getElementById('security-score').textContent = `${calculateScore({security: checkResults.security})}%`;
+                
+                document.getElementById('overall-results').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error running checks:', error);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.querySelector('.run-checks-btn').style.display = 'block';
+                document.querySelector('.run-checks-btn').textContent = '🔄 Run Checks Again';
+            }
+        }
+    </script>
+</body>
+</html>

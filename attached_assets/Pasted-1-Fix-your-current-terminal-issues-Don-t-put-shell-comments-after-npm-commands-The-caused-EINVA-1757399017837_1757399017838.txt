@@ -1,0 +1,142 @@
+1) Fix your current terminal issues
+
+Don’t put shell comments after npm commands. The # caused EINVALIDTAGNAME.
+
+npm i
+
+
+Port 8080 in use:
+
+kill -9 $(lsof -t -i:8080) 2>/dev/null || true
+
+
+No dev script defined. Use what exists:
+
+npm run serve      # python http.server 8000
+npm run build
+
+
+Add a proper local dev script if you need one:
+
+"scripts": { "dev": "vite" }
+
+2) Wire the site to your live gateway (endpoints already deployed)
+
+Use the Worker origin you shipped (…/blaze-vision-ai-gateway…). In your frontend config:
+
+const BASE = "https://blaze-vision-ai-gateway.humphrey-austin20.workers.dev";
+
+
+Add CORS on the Worker responses if needed:
+
+new Response(body, {
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "content-type, x-dev-mode",
+    "Access-Control-Allow-Methods": "GET,POST,DELETE,OPTIONS"
+  }
+});
+
+
+Sanity checks (from your guide):
+
+GET /healthz
+
+POST /vision/sessions with {"session_id":"test-session","player_id":"test_player","sport":"baseball"}
+
+GET /vision/session/test-session/stream (WebSocket)
+
+GET /vision/analytics/system/stats, …/player/:id/summary, …/player/:id/trends
+
+3) Ship a real “Live Dashboard” section
+
+Add these components to the landing page:
+
+SystemStatusBar: health, p95, active sessions, ingest QPS (pull from /healthz, /vision/analytics/system/stats).
+
+TeamSelector (MLB/NBA/NFL) → team snapshot (record, last 5, next game).
+
+ProjectionCard: EWMA of recent scoring or hits/Ks for next game.
+
+PlayerSummary (MLB first): season AVG/OBP/SLG/HR/RBI + last-10 sparkline.
+
+LiveGrit: connect WS to /vision/session/:id/stream and display Grit Index.
+
+Keep all third-party data behind your gateway. No keys in client.
+
+4) Digital Combine™ demo (safe mode)
+
+Upload or choose sample clip → send frames/pose to your Worker → return:
+
+Mechanics score
+
+Load balance
+
+Timing delta
+
+Coaching cue
+
+Include a “Reproduce” tab with a copy-paste curl hitting your Worker, not vendor APIs.
+
+5) Pricing + compliance
+
+Three tiers with concrete deliverables and quotas.
+
+Add a compliance band: “SOC 2 Type II · COPPA/FERPA · 99.95% uptime”.
+
+Link to a short Proof Policy explaining metric validation and error bounds.
+
+6) Analytics + funnel
+
+Instrument:
+
+view_dashboard, select_team, player_loaded, projection_viewed, lead_submitted.
+Start with GA4; add Mixpanel if needed.
+
+7) Repo hygiene checklist
+
+.gitignore: .env*, dist/, any build artifacts.
+
+wrangler.toml: remove secrets, use vars only for non-secret constants.
+
+Add pre-commit hook running trufflehog --only-verified=false.
+
+Run npm audit fix (review breaking changes).
+
+8) Concrete tickets to create now
+
+Rotate & lock down all tokens (owner) — Done when all old keys invalid.
+
+Secret plumbing: wrangler secrets + remove from client bundle.
+
+SystemStatusBar pulling /healthz + /vision/analytics/system/stats.
+
+Live Dashboard with team/player and EWMA projection (MLB first).
+
+Live Grit WS card bound to /vision/session/:id/stream.
+
+Digital Combine demo with sample clip + safe server flow.
+
+Pricing page with deliverables + Proof Policy page.
+
+Analytics events pipeline (GA4).
+
+CORS headers on Worker; OPTIONS handler.
+
+Pre-commit secret scan + .gitignore hardening.
+
+If you want, I can output ready-to-paste HTML/JS modules for the dashboard and status bar in your current stack.
+
+Worked for 2 minutes
+
+Here’s an updated build of your Blaze Intelligence landing site with the requested enhancements and new features:
+
+Digital Combine™ Demo: A new demo section allows visitors to upload a short clip and get a mechanics score, load balance, timing delta, and a coaching cue—all calculated client‑side. The analysis is simulated without sending data offsite.
+
+Pricing Tiers Redesigned: Each plan now lists concrete deliverables (e.g. number of athletes, dashboards, exports) with clearer pricing.
+
+Trust & Compliance Strip: Added a band highlighting SOC 2 Type II, COPPA/FERPA compliance, uptime SLA, and an emphasis on verifiable metrics, aligning with best design practices for credibility
+designrush.com
+.
+
+Content Enhancements: A Digital Combine demo and clearer pricing satisfy modern sports‑site expectations of interactivity and transparency, addressing the competitive landscape where engaging features and content differentiation are critica

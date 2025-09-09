@@ -1,0 +1,38 @@
+{
+  "strategies": [
+    "token_bucket",
+    "fixed_window",
+    "sliding_window"
+  ],
+  "global_limits": {
+    "max_concurrent_requests": 20,
+    "max_requests_per_minute": 300,
+    "circuit_breaker": {
+      "failure_threshold": 5,
+      "recovery_timeout": 30000,
+      "half_open_max_calls": 3
+    }
+  },
+  "per_api_limits": {
+    "mlb_stats": {
+      "requests_per_minute": 60,
+      "concurrent_limit": 3
+    },
+    "nfl_api": {
+      "requests_per_minute": 50,
+      "concurrent_limit": 2
+    },
+    "nba_stats": {
+      "requests_per_minute": 30,
+      "concurrent_limit": 2
+    },
+    "college_football_data": {
+      "requests_per_minute": 100,
+      "concurrent_limit": 5
+    },
+    "perfect_game": {
+      "requests_per_minute": 50,
+      "concurrent_limit": 2
+    }
+  }
+}

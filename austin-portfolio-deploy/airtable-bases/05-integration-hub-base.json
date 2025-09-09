@@ -1,0 +1,889 @@
+{
+  "baseName": "Blaze Intelligence - Integration Hub",
+  "description": "API connections, data sync, automation workflows, and system integrations",
+  "tables": {
+    "integrations": {
+      "name": "Integrations",
+      "description": "All system integrations and API connections",
+      "fields": [
+        {
+          "name": "Integration Name",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Integration Type",
+          "type": "singleSelect",
+          "options": [
+            "CRM Integration",
+            "Payment Processing",
+            "Data Source",
+            "Marketing Platform",
+            "Communication Tool",
+            "Analytics Service",
+            "Storage Solution",
+            "Authentication Service",
+            "Monitoring Tool",
+            "Development Tool"
+          ],
+          "required": true
+        },
+        {
+          "name": "Platform/Service",
+          "type": "singleSelect",
+          "options": [
+            "HubSpot CRM",
+            "Notion",
+            "Asana",
+            "Stripe",
+            "Square",
+            "Cloudflare",
+            "Vercel",
+            "GitHub",
+            "Sentry",
+            "Linear",
+            "Canva",
+            "Gmail",
+            "Slack",
+            "Discord",
+            "ESPN API",
+            "MLB Stats API",
+            "NFL API",
+            "NBA API",
+            "Perfect Game API",
+            "AWS Services",
+            "Google Cloud"
+          ]
+        },
+        {
+          "name": "Connection Status",
+          "type": "singleSelect",
+          "options": [
+            "🟢 Active",
+            "🟡 Warning",
+            "🔴 Error",
+            "⚫ Disconnected",
+            "🟠 Setup Required"
+          ],
+          "required": true
+        },
+        {
+          "name": "API Endpoint/URL",
+          "type": "url"
+        },
+        {
+          "name": "Authentication Type",
+          "type": "singleSelect",
+          "options": [
+            "API Key",
+            "OAuth 2.0",
+            "Bearer Token",
+            "Basic Auth",
+            "Webhook",
+            "Service Account",
+            "Custom"
+          ]
+        },
+        {
+          "name": "Environment",
+          "type": "singleSelect",
+          "options": ["Production", "Staging", "Development", "Testing"]
+        },
+        {
+          "name": "Data Flow Direction",
+          "type": "singleSelect",
+          "options": [
+            "Inbound Only",
+            "Outbound Only", 
+            "Bidirectional",
+            "Webhook Only"
+          ]
+        },
+        {
+          "name": "Sync Frequency",
+          "type": "singleSelect",
+          "options": [
+            "Real-time",
+            "Every 5 minutes",
+            "Every 15 minutes",
+            "Hourly",
+            "Daily",
+            "Weekly",
+            "Manual",
+            "Event-triggered"
+          ]
+        },
+        {
+          "name": "Last Sync",
+          "type": "dateTime"
+        },
+        {
+          "name": "Next Sync",
+          "type": "dateTime"
+        },
+        {
+          "name": "Error Count (24h)",
+          "type": "number"
+        },
+        {
+          "name": "Success Rate (%)",
+          "type": "number"
+        },
+        {
+          "name": "Monthly API Calls",
+          "type": "number"
+        },
+        {
+          "name": "Rate Limit",
+          "type": "singleLineText",
+          "description": "API rate limit details"
+        },
+        {
+          "name": "Critical Integration",
+          "type": "checkbox",
+          "description": "Business critical - requires immediate attention if failing"
+        },
+        {
+          "name": "Documentation URL",
+          "type": "url"
+        },
+        {
+          "name": "Contact/Support",
+          "type": "singleLineText"
+        },
+        {
+          "name": "Notes",
+          "type": "longText"
+        },
+        {
+          "name": "Created Date",
+          "type": "createdTime"
+        }
+      ],
+      "sampleData": [
+        {
+          "Integration Name": "HubSpot CRM Integration",
+          "Integration Type": "CRM Integration",
+          "Platform/Service": "HubSpot CRM",
+          "Connection Status": "🟢 Active",
+          "Authentication Type": "API Key",
+          "Environment": "Production",
+          "Data Flow Direction": "Bidirectional",
+          "Sync Frequency": "Real-time",
+          "Success Rate (%)": 99.8,
+          "Monthly API Calls": 8500,
+          "Rate Limit": "10,000 calls/day",
+          "Critical Integration": true,
+          "Notes": "Primary CRM integration for lead management and client data sync. Handles contact creation, deal updates, and activity logging."
+        },
+        {
+          "Integration Name": "Stripe Payment Processing",
+          "Integration Type": "Payment Processing",
+          "Platform/Service": "Stripe",
+          "Connection Status": "🟢 Active",
+          "Authentication Type": "API Key",
+          "Environment": "Production",
+          "Data Flow Direction": "Bidirectional", 
+          "Sync Frequency": "Real-time",
+          "Success Rate (%)": 100,
+          "Monthly API Calls": 1200,
+          "Critical Integration": true,
+          "Notes": "Handles subscription billing, one-time payments, and invoice generation. Webhook configured for real-time payment updates."
+        },
+        {
+          "Integration Name": "Notion CMS",
+          "Integration Type": "Marketing Platform",
+          "Platform/Service": "Notion",
+          "Connection Status": "🟢 Active",
+          "Authentication Type": "OAuth 2.0",
+          "Environment": "Production",
+          "Data Flow Direction": "Inbound Only",
+          "Sync Frequency": "Hourly",
+          "Success Rate (%)": 98.5,
+          "Monthly API Calls": 2400,
+          "Critical Integration": false,
+          "Notes": "Content management for blog posts, case studies, and marketing materials. Auto-sync to website."
+        },
+        {
+          "Integration Name": "ESPN Sports Data API",
+          "Integration Type": "Data Source",
+          "Platform/Service": "ESPN API",
+          "Connection Status": "🟢 Active",
+          "Authentication Type": "API Key",
+          "Environment": "Production",
+          "Data Flow Direction": "Inbound Only",
+          "Sync Frequency": "Every 15 minutes",
+          "Success Rate (%)": 97.2,
+          "Monthly API Calls": 45000,
+          "Rate Limit": "1000 calls/hour",
+          "Critical Integration": true,
+          "Notes": "Primary source for live sports scores, player stats, and game data across MLB, NFL, NBA, and NCAA."
+        },
+        {
+          "Integration Name": "Cardinals Analytics MCP Server",
+          "Integration Type": "Analytics Service", 
+          "Platform/Service": "Custom API",
+          "Connection Status": "🟢 Active",
+          "Authentication Type": "Bearer Token",
+          "Environment": "Production",
+          "Data Flow Direction": "Bidirectional",
+          "Sync Frequency": "Real-time",
+          "Success Rate (%)": 99.9,
+          "Monthly API Calls": 25000,
+          "Critical Integration": true,
+          "Notes": "Custom-built analytics engine for St. Louis Cardinals. Provides real-time readiness scores, player analysis, and tactical insights."
+        }
+      ]
+    },
+    "workflows": {
+      "name": "Automation Workflows",
+      "description": "Automated processes and business logic workflows",
+      "fields": [
+        {
+          "name": "Workflow Name",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Workflow Type",
+          "type": "singleSelect",
+          "options": [
+            "Lead Management",
+            "Client Onboarding",
+            "Data Processing",
+            "Report Generation",
+            "Alert System",
+            "Billing/Payment",
+            "Support Ticket",
+            "Marketing Campaign",
+            "System Monitoring",
+            "Data Backup"
+          ]
+        },
+        {
+          "name": "Trigger Event",
+          "type": "singleLineText",
+          "description": "What starts this workflow"
+        },
+        {
+          "name": "Workflow Status",
+          "type": "singleSelect",
+          "options": [
+            "🟢 Active",
+            "🟡 Paused",
+            "🔴 Error",
+            "🟠 Testing",
+            "⚫ Disabled"
+          ]
+        },
+        {
+          "name": "Execution Frequency",
+          "type": "singleSelect",
+          "options": [
+            "Event-triggered",
+            "Every 5 minutes",
+            "Every 15 minutes", 
+            "Hourly",
+            "Daily",
+            "Weekly",
+            "Monthly"
+          ]
+        },
+        {
+          "name": "Last Execution",
+          "type": "dateTime"
+        },
+        {
+          "name": "Next Execution",
+          "type": "dateTime"
+        },
+        {
+          "name": "Success Rate (%)",
+          "type": "number"
+        },
+        {
+          "name": "Executions (30 days)",
+          "type": "number"
+        },
+        {
+          "name": "Average Duration (seconds)",
+          "type": "number"
+        },
+        {
+          "name": "Connected Integrations",
+          "type": "linkedRecord",
+          "linkedTable": "integrations"
+        },
+        {
+          "name": "Workflow Steps",
+          "type": "longText",
+          "description": "Detailed workflow logic and steps"
+        },
+        {
+          "name": "Error Handling",
+          "type": "longText",
+          "description": "How errors are handled and recovered"
+        },
+        {
+          "name": "Business Impact",
+          "type": "singleSelect",
+          "options": ["Critical", "High", "Medium", "Low"]
+        },
+        {
+          "name": "Owner",
+          "type": "singleSelect",
+          "options": ["Austin Humphrey", "System", "External Service"]
+        }
+      ],
+      "sampleData": [
+        {
+          "Workflow Name": "New Lead Processing",
+          "Workflow Type": "Lead Management",
+          "Trigger Event": "Contact form submission on website",
+          "Workflow Status": "🟢 Active",
+          "Execution Frequency": "Event-triggered",
+          "Success Rate (%)": 98.5,
+          "Executions (30 days)": 23,
+          "Average Duration (seconds)": 4.2,
+          "Business Impact": "Critical",
+          "Owner": "Austin Humphrey",
+          "Workflow Steps": "1. Validate form data\n2. Enrich contact with company data\n3. Score lead based on criteria\n4. Create HubSpot contact\n5. Assign to appropriate sales queue\n6. Send welcome email\n7. Schedule follow-up task\n8. Notify Austin via Slack"
+        },
+        {
+          "Workflow Name": "Cardinals Readiness Report Generation",
+          "Workflow Type": "Report Generation",
+          "Trigger Event": "Scheduled daily at 6 AM CT",
+          "Workflow Status": "🟢 Active", 
+          "Execution Frequency": "Daily",
+          "Success Rate (%)": 100,
+          "Executions (30 days)": 30,
+          "Average Duration (seconds)": 15.8,
+          "Business Impact": "High",
+          "Owner": "System",
+          "Workflow Steps": "1. Pull latest Cardinals roster data\n2. Analyze player performance metrics\n3. Calculate readiness scores\n4. Generate leverage opportunities\n5. Update dashboard config JSON\n6. Send summary to client portal\n7. Archive previous day's data"
+        },
+        {
+          "Workflow Name": "Invoice Generation & Payment Processing",
+          "Workflow Type": "Billing/Payment",
+          "Trigger Event": "Monthly billing date reached",
+          "Workflow Status": "🟢 Active",
+          "Execution Frequency": "Monthly",
+          "Success Rate (%)": 99.2,
+          "Executions (30 days)": 1,
+          "Average Duration (seconds)": 12.5,
+          "Business Impact": "Critical",
+          "Owner": "Austin Humphrey",
+          "Workflow Steps": "1. Calculate monthly usage\n2. Generate invoice in Stripe\n3. Send invoice to client\n4. Process payment\n5. Update subscription status\n6. Send payment confirmation\n7. Update client health score"
+        }
+      ]
+    },
+    "api_keys": {
+      "name": "API Keys & Credentials", 
+      "description": "Secure credential management and access control",
+      "fields": [
+        {
+          "name": "Key Name",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Service/Platform",
+          "type": "linkedRecord",
+          "linkedTable": "integrations"
+        },
+        {
+          "name": "Key Type",
+          "type": "singleSelect",
+          "options": [
+            "API Key",
+            "Secret Key",
+            "Access Token",
+            "Refresh Token",
+            "Client ID",
+            "Client Secret",
+            "Webhook Secret",
+            "Database Credential",
+            "SSL Certificate"
+          ]
+        },
+        {
+          "name": "Environment",
+          "type": "singleSelect",
+          "options": ["Production", "Staging", "Development", "Testing"]
+        },
+        {
+          "name": "Status",
+          "type": "singleSelect",
+          "options": [
+            "🟢 Active",
+            "🟡 Expiring Soon",
+            "🔴 Expired",
+            "🟠 Rotation Required",
+            "⚫ Revoked"
+          ]
+        },
+        {
+          "name": "Created Date",
+          "type": "date"
+        },
+        {
+          "name": "Expires Date",
+          "type": "date"
+        },
+        {
+          "name": "Last Rotated",
+          "type": "date"
+        },
+        {
+          "name": "Rotation Schedule",
+          "type": "singleSelect",
+          "options": ["30 days", "90 days", "1 year", "Never", "Manual"]
+        },
+        {
+          "name": "Access Level",
+          "type": "singleSelect",
+          "options": ["Read Only", "Read/Write", "Admin", "Full Access"]
+        },
+        {
+          "name": "Storage Location",
+          "type": "singleSelect",
+          "options": [
+            "Environment Variables",
+            "Vercel Secrets",
+            "GitHub Secrets",
+            "1Password Vault",
+            "AWS Secrets Manager",
+            "Not Stored (Manual Entry)"
+          ]
+        },
+        {
+          "name": "Usage Frequency",
+          "type": "singleSelect",
+          "options": ["High", "Medium", "Low", "Rarely"]
+        },
+        {
+          "name": "Business Critical",
+          "type": "checkbox"
+        },
+        {
+          "name": "Last Audit Date",
+          "type": "date"
+        },
+        {
+          "name": "Audit Status",
+          "type": "singleSelect",
+          "options": ["✅ Compliant", "⚠️ Needs Review", "❌ Non-Compliant"]
+        },
+        {
+          "name": "Notes",
+          "type": "longText"
+        }
+      ],
+      "sampleData": [
+        {
+          "Key Name": "Stripe Production API Key",
+          "Key Type": "Secret Key",
+          "Environment": "Production",
+          "Status": "🟢 Active",
+          "Rotation Schedule": "90 days",
+          "Access Level": "Full Access",
+          "Storage Location": "Vercel Secrets",
+          "Usage Frequency": "High",
+          "Business Critical": true,
+          "Last Audit Date": "2024-08-15",
+          "Audit Status": "✅ Compliant",
+          "Notes": "Primary payment processing key. Configured with webhook endpoints for real-time payment updates."
+        },
+        {
+          "Key Name": "HubSpot API Key",
+          "Key Type": "API Key",
+          "Environment": "Production",
+          "Status": "🟢 Active",
+          "Rotation Schedule": "1 year",
+          "Access Level": "Read/Write",
+          "Storage Location": "Environment Variables",
+          "Usage Frequency": "High",
+          "Business Critical": true,
+          "Last Audit Date": "2024-08-01",
+          "Audit Status": "✅ Compliant"
+        },
+        {
+          "Key Name": "ESPN API Key",
+          "Key Type": "API Key",
+          "Environment": "Production",
+          "Status": "🟢 Active", 
+          "Rotation Schedule": "Never",
+          "Access Level": "Read Only",
+          "Storage Location": "Environment Variables",
+          "Usage Frequency": "High",
+          "Business Critical": true,
+          "Last Audit Date": "2024-08-20",
+          "Audit Status": "✅ Compliant"
+        }
+      ]
+    },
+    "data_sync_logs": {
+      "name": "Data Sync Logs",
+      "description": "Track all data synchronization activities and results",
+      "fields": [
+        {
+          "name": "Sync ID",
+          "type": "autonumber",
+          "description": "Unique identifier for each sync operation"
+        },
+        {
+          "name": "Integration",
+          "type": "linkedRecord",
+          "linkedTable": "integrations"
+        },
+        {
+          "name": "Sync Type",
+          "type": "singleSelect",
+          "options": [
+            "Full Sync",
+            "Incremental Sync",
+            "Real-time Update",
+            "Manual Sync",
+            "Recovery Sync",
+            "Initial Setup"
+          ]
+        },
+        {
+          "name": "Start Time",
+          "type": "dateTime",
+          "required": true
+        },
+        {
+          "name": "End Time",
+          "type": "dateTime"
+        },
+        {
+          "name": "Duration (seconds)",
+          "type": "formula",
+          "formula": "DATETIME_DIFF({End Time}, {Start Time}, 'seconds')"
+        },
+        {
+          "name": "Status",
+          "type": "singleSelect",
+          "options": [
+            "🟢 Success",
+            "🟡 Warning",
+            "🔴 Error",
+            "🔵 In Progress",
+            "⚫ Cancelled"
+          ]
+        },
+        {
+          "name": "Records Processed",
+          "type": "number"
+        },
+        {
+          "name": "Records Added",
+          "type": "number"
+        },
+        {
+          "name": "Records Updated",
+          "type": "number"
+        },
+        {
+          "name": "Records Deleted",
+          "type": "number"
+        },
+        {
+          "name": "Errors Encountered",
+          "type": "number"
+        },
+        {
+          "name": "Error Details",
+          "type": "longText"
+        },
+        {
+          "name": "Performance Metrics",
+          "type": "longText",
+          "description": "Detailed performance and timing data"
+        },
+        {
+          "name": "Data Quality Score",
+          "type": "rating",
+          "max": 5
+        },
+        {
+          "name": "Triggered By",
+          "type": "singleSelect",
+          "options": ["Scheduled", "Manual", "Webhook", "System Event", "Error Recovery"]
+        }
+      ]
+    },
+    "system_health": {
+      "name": "System Health Monitoring",
+      "description": "Overall system health and performance monitoring",
+      "fields": [
+        {
+          "name": "Check Date",
+          "type": "dateTime",
+          "required": true
+        },
+        {
+          "name": "System Component",
+          "type": "singleSelect",
+          "options": [
+            "API Gateway",
+            "Database",
+            "Authentication Service",
+            "Payment Processing",
+            "Data Pipeline",
+            "Web Application",
+            "Analytics Engine",
+            "Notification System",
+            "File Storage",
+            "CDN"
+          ]
+        },
+        {
+          "name": "Health Status",
+          "type": "singleSelect",
+          "options": [
+            "🟢 Healthy",
+            "🟡 Degraded",
+            "🔴 Critical",
+            "⚫ Down"
+          ]
+        },
+        {
+          "name": "Response Time (ms)",
+          "type": "number"
+        },
+        {
+          "name": "Uptime (%)",
+          "type": "number"
+        },
+        {
+          "name": "CPU Usage (%)",
+          "type": "number"
+        },
+        {
+          "name": "Memory Usage (%)",
+          "type": "number"
+        },
+        {
+          "name": "Disk Usage (%)",
+          "type": "number"
+        },
+        {
+          "name": "Active Connections",
+          "type": "number"
+        },
+        {
+          "name": "Error Rate (%)",
+          "type": "number"
+        },
+        {
+          "name": "Alerts Generated",
+          "type": "number"
+        },
+        {
+          "name": "Issues Detected",
+          "type": "longText"
+        },
+        {
+          "name": "Auto-Resolution Applied",
+          "type": "checkbox"
+        },
+        {
+          "name": "Manual Intervention Required",
+          "type": "checkbox"
+        }
+      ]
+    }
+  },
+  "views": {
+    "integrations": [
+      {
+        "name": "Critical Systems",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Critical Integration",
+            "value": true
+          }
+        ],
+        "sorts": [
+          {
+            "field": "Connection Status",
+            "direction": "asc"
+          }
+        ]
+      },
+      {
+        "name": "Health Issues",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Connection Status",
+            "condition": "is one of",
+            "values": ["🟡 Warning", "🔴 Error", "⚫ Disconnected"]
+          }
+        ]
+      },
+      {
+        "name": "Production Systems",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Environment",
+            "value": "Production"
+          }
+        ]
+      }
+    ],
+    "workflows": [
+      {
+        "name": "Active Workflows",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Workflow Status",
+            "condition": "is one of",
+            "values": ["🟢 Active", "🟠 Testing"]
+          }
+        ]
+      },
+      {
+        "name": "Failed Workflows",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Workflow Status",
+            "value": "🔴 Error"
+          }
+        ]
+      }
+    ],
+    "api_keys": [
+      {
+        "name": "Expiring Soon",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Status",
+            "condition": "is one of",
+            "values": ["🟡 Expiring Soon", "🔴 Expired"]
+          }
+        ]
+      },
+      {
+        "name": "Production Keys",
+        "type": "grid", 
+        "filters": [
+          {
+            "field": "Environment",
+            "value": "Production"
+          },
+          {
+            "field": "Business Critical",
+            "value": true
+          }
+        ]
+      }
+    ]
+  },
+  "automations": [
+    {
+      "name": "Integration Failure Alert",
+      "trigger": "Field updated in Integrations",
+      "conditions": [
+        {
+          "field": "Connection Status",
+          "condition": "is one of",
+          "values": ["🔴 Error", "⚫ Disconnected"]
+        },
+        {
+          "field": "Critical Integration",
+          "value": true
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com",
+          "subject": "🚨 CRITICAL: {Integration Name} Integration Failed",
+          "body": "Integration: {Integration Name}\\nStatus: {Connection Status}\\nPlatform: {Platform/Service}\\nError Count: {Error Count (24h)}\\nSuccess Rate: {Success Rate (%)}%\\n\\nImmediate attention required - this is a business critical integration.\\n\\nNotes: {Notes}"
+        },
+        {
+          "type": "sendSlackMessage",
+          "channel": "#alerts",
+          "message": "🚨 CRITICAL INTEGRATION FAILURE: {Integration Name} is {Connection Status}"
+        }
+      ]
+    },
+    {
+      "name": "API Key Expiration Warning",
+      "trigger": "Field updated in API Keys",
+      "conditions": [
+        {
+          "field": "Status",
+          "value": "🟡 Expiring Soon"
+        },
+        {
+          "field": "Business Critical",
+          "value": true
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com",
+          "subject": "⚠️ API Key Expiring: {Key Name}",
+          "body": "API Key: {Key Name}\\nService: {Service/Platform}\\nExpires: {Expires Date}\\nRotation Schedule: {Rotation Schedule}\\n\\nRotation required to maintain service continuity."
+        }
+      ]
+    },
+    {
+      "name": "Workflow Failure Recovery",
+      "trigger": "Field updated in Automation Workflows",
+      "conditions": [
+        {
+          "field": "Workflow Status",
+          "value": "🔴 Error"
+        },
+        {
+          "field": "Business Impact",
+          "condition": "is one of",
+          "values": ["Critical", "High"]
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com",
+          "subject": "🚨 Workflow Failure: {Workflow Name}",
+          "body": "Workflow: {Workflow Name}\\nType: {Workflow Type}\\nLast Success: {Last Execution}\\nSuccess Rate: {Success Rate (%)}%\\nBusiness Impact: {Business Impact}\\n\\nError Handling: {Error Handling}\\n\\nImmediate investigation required."
+        },
+        {
+          "type": "updateRecord",
+          "field": "Workflow Status",
+          "value": "🟠 Testing"
+        }
+      ]
+    },
+    {
+      "name": "System Health Degradation Alert", 
+      "trigger": "Record created in System Health Monitoring",
+      "conditions": [
+        {
+          "field": "Health Status",
+          "condition": "is one of",
+          "values": ["🔴 Critical", "⚫ Down"]
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com",
+          "subject": "🚨 SYSTEM DOWN: {System Component}",
+          "body": "Component: {System Component}\\nStatus: {Health Status}\\nResponse Time: {Response Time (ms)}ms\\nUptime: {Uptime (%)}%\\nError Rate: {Error Rate (%)}%\\n\\nIssues: {Issues Detected}\\n\\nManual intervention required: {Manual Intervention Required}"
+        }
+      ]
+    }
+  ]
+}

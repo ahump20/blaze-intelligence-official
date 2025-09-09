@@ -1,0 +1,142 @@
+# Blaze Intelligence Production Configuration
+# Cloudflare Workers & Pages deployment configuration
+
+name = "blaze-intelligence"
+main = "api/blaze-api.js"
+compatibility_date = "2025-01-09"
+compatibility_flags = ["nodejs_compat"]
+node_compat = true
+
+# Environment variables
+[env.production]
+name = "blaze-intelligence-production"
+
+# Cloudflare Pages configuration
+[site]
+bucket = "./blaze-intelligence-production"
+
+# KV Namespaces for data storage
+[[kv_namespaces]]
+binding = "ANALYTICS_CACHE"
+id = "blaze_analytics_cache"
+
+[[kv_namespaces]]
+binding = "USER_DATA"
+id = "blaze_user_data"
+
+[[kv_namespaces]]
+binding = "RATE_LIMITING"
+id = "blaze_rate_limits"
+
+# R2 Buckets for large file storage
+[[r2_buckets]]
+binding = "DATA_STORAGE"
+bucket_name = "blaze-sports-data"
+
+[[r2_buckets]]
+binding = "MEDIA_ASSETS"
+bucket_name = "blaze-media-assets"
+
+# D1 Database for structured data
+[[d1_databases]]
+binding = "ANALYTICS_DB"
+database_name = "blaze-analytics"
+database_id = "analytics-db-id"
+
+# Durable Objects for real-time features
+[[durable_objects.bindings]]
+name = "LIVE_ANALYTICS"
+class_name = "LiveAnalytics"
+
+# Queue for background processing
+[[queues.producers]]
+queue = "analytics-processing"
+binding = "ANALYTICS_QUEUE"
+
+[[queues.consumers]]
+queue = "analytics-processing"
+max_batch_size = 100
+max_batch_timeout = 30
+
+# Cron triggers for data updates
+[[triggers.crons]]
+cron = "*/10 * * * *"  # Every 10 minutes
+handler = "updateLiveData"
+
+[[triggers.crons]]
+cron = "0 */6 * * *"   # Every 6 hours
+handler = "refreshPredictions"
+
+[[triggers.crons]]
+cron = "0 0 * * *"     # Daily at midnight
+handler = "generateReports"
+
+# Custom domains
+[[routes]]
+pattern = "blaze-intelligence.com/*"
+zone_name = "blaze-intelligence.com"
+
+[[routes]]
+pattern = "api.blaze-intelligence.com/*"
+zone_name = "blaze-intelligence.com"
+
+# Environment-specific configurations
+[env.staging]
+name = "blaze-intelligence-staging"
+routes = ["staging.blaze-intelligence.com/*"]
+
+[env.development]
+name = "blaze-intelligence-dev"
+kv_namespaces = []  # Use local KV for development
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "./"
+watch_dir = ["src", "api"]
+
+# Security settings
+[vars]
+ENVIRONMENT = "production"
+LOG_LEVEL = "info"
+MAX_REQUEST_SIZE = "10MB"
+CORS_ORIGINS = "https://blaze-intelligence.com,https://www.blaze-intelligence.com"
+
+# Secrets (set via wrangler secret put)
+# SPORTSRADAR_API_KEY - SportsRadar vault API key
+# RAPIDAPI_KEY - RapidAPI key for additional data sources
+# SCOREBOARD_API_BASE - Live scoreboard API base URL
+
+# Rate limiting configuration
+[rate_limiting]
+enabled = true
+requests_per_minute = 100
+burst_capacity = 200
+
+# Analytics configuration
+[analytics_engine_datasets]
+[[analytics_engine_datasets.bindings]]
+binding = "API_ANALYTICS"
+dataset = "blaze_api_usage"
+
+# WebSocket configuration for real-time features
+[websocket]
+max_connections = 1000
+idle_timeout = 300  # 5 minutes
+
+# Cache configuration
+[cache]
+default_ttl = 300      # 5 minutes
+max_ttl = 86400       # 24 hours
+browser_ttl = 3600    # 1 hour
+
+# Error handling
+[error_pages]
+404 = "404.html"
+500 = "500.html"
+
+# Development overrides
+[env.development.vars]
+ENVIRONMENT = "development"
+LOG_LEVEL = "debug"
+CORS_ORIGINS = "*"

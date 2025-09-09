@@ -1,0 +1,16 @@
+# Main site routing
+/dashboard           /blaze-intelligence-production.html    200
+/mobile              /blaze-intelligence-ios-app.html       200
+/app                 /blaze-intelligence-ios-app.html       200
+/championship        /blaze-intelligence-championship.html  200
+
+# Legacy redirects
+/blaze-intelligence-landing.html  /    301
+/index-ultimate.html              /    301
+
+# API endpoints
+/api/analytics/*     /.netlify/functions/blaze-analytics-api  200
+/api/health          /.netlify/functions/health-check        200
+
+# SPA fallback
+/*    /blaze-intelligence-production.html   200

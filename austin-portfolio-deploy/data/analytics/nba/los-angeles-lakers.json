@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-28T07:48:54.481Z",
+  "team": "Los Angeles Lakers",
+  "league": "NBA",
+  "division": "Pacific",
+  "conference": "Western",
+  "season": "2024-25",
+  "readiness": {
+    "overall": 84.4,
+    "offense": 84.5,
+    "defense": 80.1,
+    "rebounding": 80.4,
+    "depth": 82.3
+  },
+  "leverage": {
+    "current": 3.56,
+    "trend": "decreasing",
+    "championship_odds": 0.002
+  },
+  "efficiency_metrics": {
+    "offensive_rating": 109.8,
+    "defensive_rating": 109.3,
+    "net_rating": -5.4,
+    "pace": 103.8
+  },
+  "advanced_stats": {
+    "effective_fg_percentage": 57,
+    "turnover_rate": 13.6,
+    "offensive_rebound_rate": 28.7,
+    "free_throw_rate": 16.2
+  },
+  "metrics_count": 28
+}

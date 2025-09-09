@@ -1,0 +1,15 @@
+Your agent has done a good job laying the groundwork – the project builds and runs on Replit, the Express server is in place, and a polished landing page with season‑appropriate data is showing. The next steps should focus on production readiness, real data integration, and security. Specifically, I’d recommend instructing the agent to:
+	1.	Secure and clean the repository
+Rotate and remove any hard‑coded API keys or tokens. Store secrets in Replit’s environment variables and add .env to .gitignore. Run a secrets sweep (e.g. npx trufflehog filesystem --only-verified=false .) to ensure nothing sensitive remains in the codebase.
+	2.	Replace demo stats with live feeds
+Wire up actual sports data sources for college football, MLB and NFL rather than using placeholder figures. Create data‑adapter modules (one per sport) that fetch team and player stats from your licensed providers or public APIs, and cache results to avoid rate limits. Every widget should display the source and last‑updated timestamp.
+	3.	Add a backend proxy layer
+Expose your data adapters through /api routes on the Express server (or a Cloudflare Worker in production) so all third‑party API calls happen server‑side. Limit CORS to your production domains to protect the API keys.
+	4.	Strengthen production deployment
+Ensure the build works as a static bundle for deployment on Cloudflare Pages, with the Express server only for development. Add health‑check and metrics endpoints, and update README.md with deployment instructions and required environment variables.
+	5.	Polish the front‑end experience
+Lazy‑load the Three.js visualizations and heavy scripts to improve performance, ensure the founder headshot and other assets are optimized, and verify the site is accessible and responsive. Provide toggles for users to switch between college football, MLB and NFL views, and include clear footnotes explaining that the data reflects the 2025–2026 season.
+	6.	Implement monitoring and tests
+Set up error‑tracking (e.g. Sentry) via env vars, and add unit tests for the data adapters and simple end‑to‑end tests for the site. Add a basic GitHub Action to run builds and tests on each commit.
+
+These steps will make the site secure, reliable and ready for real users, while delivering live insights for the 2025–2026 college football, MLB and NFL seasons.

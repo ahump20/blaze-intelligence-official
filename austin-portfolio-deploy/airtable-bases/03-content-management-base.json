@@ -1,0 +1,581 @@
+{
+  "baseName": "Blaze Intelligence - Content Operations",
+  "description": "Marketing assets, case studies, proposals, and sales enablement materials",
+  "tables": {
+    "content_library": {
+      "name": "Content Library",
+      "description": "Master database of all marketing and sales content",
+      "fields": [
+        {
+          "name": "Content Title",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Content Type",
+          "type": "singleSelect",
+          "options": [
+            "Case Study",
+            "White Paper", 
+            "Product Demo",
+            "Competitive Analysis",
+            "Pricing Sheet",
+            "Proposal Template",
+            "ROI Calculator",
+            "Technical Specification",
+            "Marketing One-Pager",
+            "Blog Post",
+            "Video Content",
+            "Presentation Deck",
+            "Email Template",
+            "Social Media Post"
+          ],
+          "required": true
+        },
+        {
+          "name": "Target Audience",
+          "type": "multipleSelect",
+          "options": [
+            "General Managers",
+            "Analytics Directors",
+            "Coaches",
+            "Technical Teams",
+            "C-Suite Executives",
+            "Procurement",
+            "End Users",
+            "Media/Press",
+            "Investors",
+            "Partners"
+          ]
+        },
+        {
+          "name": "Sport Focus",
+          "type": "multipleSelect",
+          "options": [
+            "Multi-Sport",
+            "MLB",
+            "NFL", 
+            "NBA",
+            "NCAA Football",
+            "NCAA Baseball",
+            "High School Sports",
+            "Youth Baseball"
+          ]
+        },
+        {
+          "name": "Content Status",
+          "type": "singleSelect",
+          "options": [
+            "Planning",
+            "In Development",
+            "Review Required",
+            "Approved",
+            "Published",
+            "Needs Update",
+            "Archived"
+          ],
+          "required": true
+        },
+        {
+          "name": "File URL",
+          "type": "url"
+        },
+        {
+          "name": "Thumbnail",
+          "type": "attachment"
+        },
+        {
+          "name": "Description",
+          "type": "longText"
+        },
+        {
+          "name": "Key Messages",
+          "type": "multipleSelect",
+          "options": [
+            "67-80% Cost Savings",
+            "Vision AI Technology",
+            "Micro-Expression Analysis",
+            "Character Assessment",
+            "Real-time Processing",
+            "Multi-Sport Platform", 
+            "94.6% Accuracy",
+            "87ms Latency",
+            "2.8M+ Datapoints",
+            "Championship Results"
+          ]
+        },
+        {
+          "name": "Usage Count",
+          "type": "number",
+          "description": "Times content has been used/sent"
+        },
+        {
+          "name": "Last Used Date",
+          "type": "date"
+        },
+        {
+          "name": "Performance Rating",
+          "type": "rating",
+          "max": 5,
+          "description": "Effectiveness rating based on client feedback"
+        },
+        {
+          "name": "Created Date",
+          "type": "createdTime"
+        },
+        {
+          "name": "Created By",
+          "type": "singleSelect",
+          "options": ["Austin Humphrey", "Claude AI", "External Agency"],
+          "default": "Austin Humphrey"
+        },
+        {
+          "name": "Tags",
+          "type": "multipleSelect",
+          "options": [
+            "High Priority",
+            "Needs Translation",
+            "Video Required",
+            "Interactive",
+            "Data Heavy",
+            "Client Favorite",
+            "Competitive Intel",
+            "Technical Deep Dive"
+          ]
+        }
+      ],
+      "sampleData": [
+        {
+          "Content Title": "Cardinals Analytics ROI Case Study",
+          "Content Type": "Case Study",
+          "Target Audience": ["General Managers", "Analytics Directors"],
+          "Sport Focus": ["MLB"],
+          "Content Status": "Approved",
+          "Description": "Comprehensive analysis showing 67% cost savings vs Hudl Pro implementation with enhanced Vision AI capabilities and character assessment metrics.",
+          "Key Messages": ["67-80% Cost Savings", "Vision AI Technology", "Character Assessment"],
+          "Usage Count": 12,
+          "Performance Rating": 5,
+          "Created By": "Austin Humphrey",
+          "Tags": ["High Priority", "Client Favorite"]
+        },
+        {
+          "Content Title": "Multi-Sport Platform Overview",
+          "Content Type": "Marketing One-Pager",
+          "Target Audience": ["C-Suite Executives", "General Managers"],
+          "Sport Focus": ["Multi-Sport"],
+          "Content Status": "Published",
+          "Description": "Executive summary highlighting Blaze Intelligence's unique multi-sport capabilities, Vision AI technology, and competitive advantages.",
+          "Key Messages": ["Multi-Sport Platform", "Vision AI Technology", "Real-time Processing"],
+          "Usage Count": 8,
+          "Performance Rating": 4,
+          "Created By": "Austin Humphrey",
+          "Tags": ["High Priority"]
+        },
+        {
+          "Content Title": "Vision AI Technical Specifications",
+          "Content Type": "Technical Specification",
+          "Target Audience": ["Technical Teams", "Analytics Directors"],
+          "Sport Focus": ["Multi-Sport"],
+          "Content Status": "Approved",
+          "Description": "Detailed technical documentation of Vision AI capabilities including biomechanical analysis, micro-expression detection, and character assessment algorithms.",
+          "Key Messages": ["Vision AI Technology", "Micro-Expression Analysis", "94.6% Accuracy"],
+          "Usage Count": 6,
+          "Performance Rating": 5,
+          "Created By": "Austin Humphrey",
+          "Tags": ["Technical Deep Dive", "Data Heavy"]
+        },
+        {
+          "Content Title": "Competitive Pricing Analysis 2024",
+          "Content Type": "Competitive Analysis",
+          "Target Audience": ["General Managers", "Procurement"],
+          "Sport Focus": ["Multi-Sport"],
+          "Content Status": "Published", 
+          "Description": "Comprehensive pricing comparison showing 67-80% savings vs Hudl, Second Spectrum, and Synergy solutions with superior capabilities.",
+          "Key Messages": ["67-80% Cost Savings", "Championship Results"],
+          "Usage Count": 15,
+          "Performance Rating": 5,
+          "Created By": "Austin Humphrey",
+          "Tags": ["High Priority", "Competitive Intel"]
+        }
+      ]
+    },
+    "proposals": {
+      "name": "Proposals",
+      "description": "Custom proposals and client-specific documents",
+      "fields": [
+        {
+          "name": "Proposal Title",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Client Organization",
+          "type": "linkedRecord",
+          "linkedTable": "organizations"
+        },
+        {
+          "name": "Deal Reference",
+          "type": "linkedRecord", 
+          "linkedTable": "deals"
+        },
+        {
+          "name": "Proposal Type",
+          "type": "singleSelect",
+          "options": [
+            "Initial Proposal",
+            "Technical Response",
+            "Pricing Quote", 
+            "Statement of Work",
+            "Contract Amendment",
+            "Renewal Proposal"
+          ]
+        },
+        {
+          "name": "Proposal Status",
+          "type": "singleSelect",
+          "options": [
+            "Draft",
+            "Internal Review",
+            "Client Review",
+            "Negotiation",
+            "Approved",
+            "Declined",
+            "Expired"
+          ],
+          "required": true
+        },
+        {
+          "name": "Proposal Value",
+          "type": "currency"
+        },
+        {
+          "name": "Sent Date",
+          "type": "date"
+        },
+        {
+          "name": "Response Due Date",
+          "type": "date"
+        },
+        {
+          "name": "Document URL",
+          "type": "url"
+        },
+        {
+          "name": "Content Components",
+          "type": "linkedRecord",
+          "linkedTable": "content_library"
+        },
+        {
+          "name": "Custom Sections",
+          "type": "multipleSelect",
+          "options": [
+            "Executive Summary",
+            "Technical Architecture",
+            "Implementation Timeline",
+            "ROI Analysis",
+            "Case Studies",
+            "Pricing Details",
+            "Terms & Conditions",
+            "Support Structure",
+            "Success Metrics",
+            "Next Steps"
+          ]
+        },
+        {
+          "name": "Client Feedback",
+          "type": "longText"
+        },
+        {
+          "name": "Win Probability",
+          "type": "number",
+          "description": "Updated probability based on proposal reception"
+        }
+      ]
+    },
+    "campaigns": {
+      "name": "Marketing Campaigns",
+      "description": "Marketing campaign planning and content coordination",
+      "fields": [
+        {
+          "name": "Campaign Name",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Campaign Type",
+          "type": "singleSelect",
+          "options": [
+            "Product Launch",
+            "Thought Leadership",
+            "Lead Generation", 
+            "Client Testimonials",
+            "Competitive Positioning",
+            "Event Marketing",
+            "Partnership Announcement",
+            "Case Study Series"
+          ]
+        },
+        {
+          "name": "Target Audience",
+          "type": "multipleSelect",
+          "options": [
+            "MLB Organizations",
+            "NFL Organizations",
+            "NBA Organizations", 
+            "NCAA Programs",
+            "High School Coaches",
+            "Youth Organizations",
+            "Sports Media",
+            "Industry Analysts",
+            "Investors"
+          ]
+        },
+        {
+          "name": "Campaign Status",
+          "type": "singleSelect",
+          "options": [
+            "Planning",
+            "Content Creation",
+            "Review & Approval",
+            "Active",
+            "Paused",
+            "Completed",
+            "Analyzing Results"
+          ]
+        },
+        {
+          "name": "Launch Date",
+          "type": "date"
+        },
+        {
+          "name": "End Date",
+          "type": "date"
+        },
+        {
+          "name": "Budget",
+          "type": "currency"
+        },
+        {
+          "name": "Associated Content",
+          "type": "linkedRecord",
+          "linkedTable": "content_library"
+        },
+        {
+          "name": "Key Metrics",
+          "type": "multipleSelect",
+          "options": [
+            "Lead Generation",
+            "Website Traffic",
+            "Content Engagement",
+            "Brand Awareness",
+            "Deal Influence",
+            "Media Coverage",
+            "Social Shares",
+            "Demo Requests"
+          ]
+        },
+        {
+          "name": "Results Summary",
+          "type": "longText"
+        },
+        {
+          "name": "ROI",
+          "type": "number",
+          "description": "Campaign return on investment"
+        }
+      ]
+    },
+    "media_assets": {
+      "name": "Media Assets", 
+      "description": "Images, videos, graphics, and multimedia content",
+      "fields": [
+        {
+          "name": "Asset Name",
+          "type": "singleLineText",
+          "required": true
+        },
+        {
+          "name": "Asset Type",
+          "type": "singleSelect",
+          "options": [
+            "Logo/Branding",
+            "Product Screenshot",
+            "Demo Video",
+            "Infographic",
+            "Data Visualization",
+            "Team Photo",
+            "Event Photo",
+            "Social Media Graphic",
+            "Presentation Template",
+            "Website Asset"
+          ]
+        },
+        {
+          "name": "File Format",
+          "type": "multipleSelect",
+          "options": ["PNG", "JPG", "SVG", "PDF", "MP4", "MOV", "GIF", "PSD", "AI"]
+        },
+        {
+          "name": "Resolution/Size",
+          "type": "singleLineText"
+        },
+        {
+          "name": "Usage Rights",
+          "type": "singleSelect",
+          "options": ["Full Rights", "Licensed", "Stock Photo", "Client Provided", "Approval Required"]
+        },
+        {
+          "name": "File Location",
+          "type": "url"
+        },
+        {
+          "name": "Thumbnail Preview",
+          "type": "attachment"
+        },
+        {
+          "name": "Tags",
+          "type": "multipleSelect", 
+          "options": [
+            "Blaze Intelligence",
+            "Vision AI",
+            "Sports Analytics",
+            "Technology",
+            "Results/Data",
+            "Team Action",
+            "Professional",
+            "High Quality"
+          ]
+        },
+        {
+          "name": "Usage Count",
+          "type": "number"
+        },
+        {
+          "name": "Last Used",
+          "type": "date"
+        }
+      ]
+    }
+  },
+  "views": {
+    "content_library": [
+      {
+        "name": "High Priority Content",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Tags",
+            "condition": "contains",
+            "value": "High Priority"
+          },
+          {
+            "field": "Content Status",
+            "condition": "is one of",
+            "values": ["Approved", "Published"]
+          }
+        ],
+        "sorts": [
+          {
+            "field": "Performance Rating",
+            "direction": "desc"
+          }
+        ]
+      },
+      {
+        "name": "Needs Update",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Content Status",
+            "condition": "is one of", 
+            "values": ["Needs Update", "Review Required"]
+          }
+        ]
+      },
+      {
+        "name": "Client Favorites",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Tags",
+            "condition": "contains",
+            "value": "Client Favorite"
+          }
+        ],
+        "sorts": [
+          {
+            "field": "Usage Count",
+            "direction": "desc"
+          }
+        ]
+      }
+    ],
+    "proposals": [
+      {
+        "name": "Active Proposals",
+        "type": "grid",
+        "filters": [
+          {
+            "field": "Proposal Status",
+            "condition": "is one of",
+            "values": ["Client Review", "Negotiation", "Internal Review"]
+          }
+        ],
+        "sorts": [
+          {
+            "field": "Response Due Date",
+            "direction": "asc"
+          }
+        ]
+      }
+    ]
+  },
+  "automations": [
+    {
+      "name": "Content Performance Tracking",
+      "trigger": "Field updated in Content Library",
+      "conditions": [
+        {
+          "field": "Usage Count",
+          "condition": "is greater than",
+          "value": 10
+        },
+        {
+          "field": "Performance Rating",
+          "condition": "is greater than or equal to",
+          "value": 4
+        }
+      ],
+      "actions": [
+        {
+          "type": "updateRecord",
+          "field": "Tags",
+          "value": "Client Favorite"
+        }
+      ]
+    },
+    {
+      "name": "Proposal Follow-up Reminder",
+      "trigger": "Field updated in Proposals",
+      "conditions": [
+        {
+          "field": "Proposal Status",
+          "value": "Client Review"
+        },
+        {
+          "field": "Response Due Date",
+          "condition": "is within",
+          "value": "3 days"
+        }
+      ],
+      "actions": [
+        {
+          "type": "sendEmail",
+          "to": "ahump20@outlook.com", 
+          "subject": "Proposal Follow-up Due: {Client Organization}",
+          "body": "Proposal: {Proposal Title}\\nClient: {Client Organization}\\nValue: {Proposal Value}\\nDue Date: {Response Due Date}\\n\\nFollow-up required within 3 days."
+        }
+      ]
+    }
+  ]
+}

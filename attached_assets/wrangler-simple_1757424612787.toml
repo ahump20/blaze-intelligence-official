@@ -1,0 +1,19 @@
+# Blaze Intelligence API Worker
+name = "blaze-intelligence-api"
+main = "api/blaze-api.js"
+compatibility_date = "2025-01-09"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "blaze-intelligence-api-production"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+LOG_LEVEL = "info"
+CORS_ORIGINS = "https://blaze-intelligence.com,https://www.blaze-intelligence.com,https://76c9e5b9.blaze-intelligence.pages.dev"
+
+# Routes for custom domain
+[[routes]]
+pattern = "api.blaze-intelligence.com/*"
+zone_name = "blaze-intelligence.com"

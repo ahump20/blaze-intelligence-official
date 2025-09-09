@@ -1,0 +1,182 @@
+{
+  "document_type": "custom_proposal",
+  "client": "Texas Longhorns Athletics",
+  "generated_date": "2025-08-28T08:02:46.875Z",
+  "proposal": {
+    "client_name": "Texas Longhorns Athletics",
+    "proposal_date": "2025-08-28T08:02:46.873Z",
+    "recommended_tier": "growth",
+    "pricing": {
+      "annual_fee": 4988,
+      "monthly_equivalent": 416,
+      "setup_fee": 1500,
+      "total_year_1": 6488
+    },
+    "value_proposition": {
+      "cost_savings": {
+        "annual_savings": 14964,
+        "savings_percentage": 75,
+        "competitor_price": 19952
+      },
+      "roi_timeline": "4-6 months",
+      "key_benefits": [
+        "Real-time sports analytics across multiple leagues",
+        "Comprehensive NIL valuation and compliance tools",
+        "Advanced predictive modeling and insights",
+        "Seamless integration with existing workflows",
+        "Full API access for custom integrations"
+      ]
+    },
+    "included_features": [
+      "advanced_analytics",
+      "weekly_reports",
+      "nil_calculator",
+      "api_access"
+    ],
+    "service_levels": {
+      "data_refresh_frequency": "Every 15 minutes",
+      "support_level": "priority_email",
+      "max_teams": 10,
+      "uptime_sla": "99.9%"
+    },
+    "implementation": {
+      "timeline": {
+        "total_days": 14,
+        "phases": [
+          {
+            "phase": "Contract and Setup",
+            "days": 3
+          },
+          {
+            "phase": "Technical Integration",
+            "days": 6
+          },
+          {
+            "phase": "Testing and Training",
+            "days": 5
+          },
+          {
+            "phase": "Go-Live Support",
+            "days": 2
+          }
+        ]
+      },
+      "deliverables": [
+        "Customized analytics dashboard",
+        "Data integration setup",
+        "User training materials",
+        "Technical documentation",
+        "Go-live support",
+        "API access credentials and documentation",
+        "Custom dashboard configuration"
+      ],
+      "success_metrics": [
+        "Improve decision accuracy by 25%",
+        "Reduce data processing time by 60%",
+        "Increase actionable insights by 40%"
+      ]
+    },
+    "next_steps": [
+      "Schedule detailed demo and Q&A session",
+      "Finalize technical requirements and integrations",
+      "Review and execute service agreement",
+      "Begin technical onboarding process"
+    ]
+  },
+  "technical_specifications": {
+    "integration_plan": {
+      "required_integrations": [
+        "existing_crm",
+        "recruiting_database"
+      ],
+      "data_sources": [
+        "blaze_core_analytics",
+        "mlb_stats_api",
+        "perfect_game_data",
+        "nfl_api",
+        "college_football_data",
+        "nba_stats_api",
+        "ncaa_basketball_data",
+        "nil_market_data",
+        "recruiting_databases"
+      ],
+      "api_endpoints": [
+        "/api/analytics/teams/{team_id}",
+        "/api/analytics/players/{player_id}",
+        "/api/analytics/games/{game_id}",
+        "/api/data/real-time",
+        "/api/insights/predictive",
+        "/api/reports/custom",
+        "/api/nil/calculate",
+        "/api/recruiting/prospects"
+      ],
+      "authentication_setup": "oauth2_with_api_keys"
+    },
+    "infrastructure": {
+      "hosting": "cloudflare_pages_workers",
+      "database": "edge_sql_with_caching",
+      "monitoring": "sentry_with_custom_dashboard",
+      "backup_strategy": "automated_daily_with_point_in_time_recovery"
+    },
+    "security_measures": [
+      "End-to-end data encryption",
+      "Role-based access control",
+      "Regular security audits",
+      "Compliance with industry standards"
+    ],
+    "testing_plan": {
+      "unit_testing": "automated_test_suite",
+      "integration_testing": "client_specific_scenarios",
+      "user_acceptance_testing": "guided_client_validation",
+      "performance_testing": "load_and_stress_testing"
+    }
+  },
+  "success_framework": {
+    "key_metrics": [
+      {
+        "metric": "User Adoption Rate",
+        "target": "90% within 60 days",
+        "measurement": "Active users / Total licensed users"
+      },
+      {
+        "metric": "Time to First Insight",
+        "target": "< 24 hours",
+        "measurement": "Hours from login to first meaningful insight"
+      },
+      {
+        "metric": "Decision Accuracy Improvement",
+        "target": "25% improvement",
+        "measurement": "Before/after analysis of decision outcomes"
+      },
+      {
+        "metric": "Data Processing Efficiency",
+        "target": "60% time reduction",
+        "measurement": "Time to complete analysis tasks"
+      }
+    ],
+    "tracking_methods": [
+      "Built-in analytics dashboard",
+      "User behavior tracking",
+      "Client feedback surveys",
+      "Business outcome measurement"
+    ],
+    "review_schedule": [
+      {
+        "milestone": "30 days",
+        "focus": "adoption_and_training"
+      },
+      {
+        "milestone": "90 days",
+        "focus": "utilization_and_optimization"
+      },
+      {
+        "milestone": "180 days",
+        "focus": "business_impact_and_roi"
+      },
+      {
+        "milestone": "1 year",
+        "focus": "expansion_and_renewal"
+      }
+    ]
+  }
+}

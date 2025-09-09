@@ -1,0 +1,62 @@
+{
+  "timestamp": "2025-09-09T20:10:01.044Z",
+  "cardinals_readiness": {
+    "overall_score": 86.64500000000001,
+    "trend": "strong",
+    "momentum": {
+      "score": 70,
+      "category": "positive",
+      "description": "Strong positive momentum across multiple areas"
+    },
+    "component_breakdown": {
+      "offense": 87.1,
+      "defense": 88.5,
+      "pitching": 85.4,
+      "baserunning": 84.3
+    },
+    "key_metrics": {
+      "leverage_factor": 2.85,
+      "leverage_category": "high",
+      "strategic_outlook": "Strong position for confident decision-making and calculated risks"
+    }
+  },
+  "dashboard_widgets": {
+    "readiness_gauge": {
+      "value": 87,
+      "color": "#90EE90",
+      "status": "strong"
+    },
+    "leverage_indicator": {
+      "value": 2.85,
+      "category": "high",
+      "trend": "increasing",
+      "color": "#90EE90"
+    },
+    "momentum_arrow": {
+      "direction": "up",
+      "strength": 70,
+      "description": "Strong positive momentum across multiple areas"
+    }
+  },
+  "alerts": [
+    {
+      "type": "info",
+      "message": "Exceptional leverage opportunity window",
+      "priority": "medium"
+    }
+  ],
+  "recommendations": [
+    {
+      "category": "performance",
+      "priority": "medium",
+      "action": "Focus on baserunning development",
+      "expected_impact": "medium"
+    },
+    {
+      "category": "strategy",
+      "priority": "medium",
+      "action": "Consider aggressive strategic initiatives",
+      "expected_impact": "high"
+    }
+  ]
+}

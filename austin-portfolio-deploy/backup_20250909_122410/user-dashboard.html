@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard | Blaze Intelligence</title>
+    <meta name="description" content="Blaze Intelligence user dashboard with sports analytics powered by ChatGPT 5, Claude Opus 4.1, and Gemini 2.5 Pro">
+    
+    <style>
+        :root {
+            --primary-color: #BF5700;
+            --secondary-color: #9BCBEB;
+            --dark-bg: #0d0d0d;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #cccccc;
+            --text-dark: #999999;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --error-color: #e74c3c;
+            --chatgpt-color: #10a37f;
+            --claude-color: #d4a574;
+            --gemini-color: #4285f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-bg);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: rgba(0, 0, 0, 0.8);
+            border-right: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 2rem 1rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(191, 87, 0, 0.1);
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .welcome-message {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .subscription-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .subscription-badge.free {
+            background: rgba(153, 153, 153, 0.2);
+            color: #999;
+        }
+
+        .subscription-badge.starter {
+            background: rgba(39, 174, 96, 0.2);
+            color: var(--success-color);
+        }
+
+        .subscription-badge.professional {
+            background: rgba(191, 87, 0, 0.2);
+            color: var(--primary-color);
+        }
+
+        .subscription-badge.enterprise {
+            background: rgba(155, 203, 235, 0.2);
+            color: var(--secondary-color);
+        }
+
+        /* AI Models Integration Section */
+        .ai-models-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ai-models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-model-card {
+            background: var(--card-bg);
+            border: 2px solid;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, currentColor, transparent);
+            opacity: 0.5;
+        }
+
+        .ai-model-card.chatgpt {
+            border-color: var(--chatgpt-color);
+            color: var(--chatgpt-color);
+        }
+
+        .ai-model-card.claude {
+            border-color: var(--claude-color);
+            color: var(--claude-color);
+        }
+
+        .ai-model-card.gemini {
+            border-color: var(--gemini-color);
+            color: var(--gemini-color);
+        }
+
+        .ai-model-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .model-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .model-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .model-version {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .model-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .model-status.active {
+            background: rgba(39, 174, 96, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .model-status.premium {
+            background: rgba(191, 87, 0, 0.2);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .model-capabilities {
+            text-align: left;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .model-capabilities ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .model-capabilities li {
+            padding: 0.2rem 0;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .model-capabilities li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        /* Dashboard Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #a0470b;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(191, 87, 0, 0.1);
+            color: var(--primary-color);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(191, 87, 0, 0.2);
+        }
+
+        /* Development Notice */
+        .dev-notice {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .dev-notice strong {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+
+            .ai-models-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- Canonical Metrics Configuration -->
+    <script type="application/json" id="metrics">
+    {
+        "prediction_accuracy": "94.6%",
+        "response_latency": "<100ms",
+        "data_points": "2.8M+",
+        "events_per_second": "100K+",
+        "cost_savings": "67-80%",
+        "value_identified": "$42.3M",
+        "annual_subscription": "$1,188"
+}
+    </script>
+    <script src="/js/canonical-metrics.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">🔥 Blaze Intelligence</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#overview" class="nav-link active">
+                            📊 Overview
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#ai-models" class="nav-link">
+                            🤖 AI Models
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#analytics" class="nav-link">
+                            📈 Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#teams" class="nav-link">
+                            🏈 Teams
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#subscription" class="nav-link">
+                            💳 Subscription
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" class="nav-link">
+                            ⚙️ Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dev-notice">
+                <strong>Development Dashboard:</strong> Preview of user dashboard with integrated AI models. Full functionality available at platform launch (Q2 2025).
+            </div>
+
+            <div class="dashboard-header">
+                <div class="welcome-message">Welcome to Your Analytics Hub</div>
+                <div class="user-info">
+                    <span class="subscription-badge free" id="subscription-badge">Free Plan</span>
+                    <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <!-- AI Models Integration - The Core Feature -->
+            <div class="ai-models-section">
+                <h2 class="section-title">🤖 AI-Powered Sports Analytics</h2>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem;">
+                    Blaze Intelligence integrates the world's most advanced AI models for comprehensive sports analysis
+                </p>
+                
+                <div class="ai-models-grid">
+                    <!-- ChatGPT 5 -->
+                    <div class="ai-model-card chatgpt">
+                        <div class="model-icon">🧠</div>
+                        <div class="model-name">ChatGPT 5</div>
+                        <div class="model-version">Latest GPT-5 Model</div>
+                        <div class="model-status active">Active - All Plans</div>
+                        <div class="model-capabilities">
+                            <ul>
+                                <li>Advanced strategic game planning</li>
+                                <li>Complex reasoning for tactical decisions</li>
+                                <li>Natural language insights generation</li>
+                                <li>Real-time coaching recommendations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Claude Opus 4.1 -->
+                    <div class="ai-model-card claude">
+                        <div class="model-icon">🎯</div>
+                        <div class="model-name">Claude Opus 4.1</div>
+                        <div class="model-version">Anthropic's Most Capable Model</div>
+                        <div class="model-status premium" id="claude-status">Premium Plans</div>
+                        <div class="model-capabilities">
+                            <ul>
+                                <li>Deep analytical processing</li>
+                                <li>Comprehensive team evaluation</li>
+                                <li>Long-form scouting reports</li>
+                                <li>Advanced pattern recognition</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Gemini 2.5 Pro -->
+                    <div class="ai-model-card gemini">
+                        <div class="model-icon">🔍</div>
+                        <div class="model-name">Gemini 2.5 Pro</div>
+                        <div class="model-version">Google's Multimodal AI</div>
+                        <div class="model-status premium" id="gemini-status">Premium Plans</div>
+                        <div class="model-capabilities">
+                            <ul>
+                                <li>Multi-modal video analysis</li>
+                                <li>Visual pattern recognition</li>
+                                <li>Cross-platform data synthesis</li>
+                                <li>Advanced predictive modeling</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <button class="btn btn-primary" onclick="upgradeForPremiumModels()" id="upgrade-btn">
+                        🚀 Unlock Premium AI Models - Starting at $99/month
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="ai-analyses">Demo</div>
+                    <div class="stat-label">AI Analyses Generated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="teams-tracked">Beta</div>
+                    <div class="stat-label">Teams Being Tracked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="accuracy-score">TBD</div>
+                    <div class="stat-label">Prediction Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="api-calls">Dev</div>
+                    <div class="stat-label">API Calls This Month</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div style="background: var(--card-bg); border: 1px solid rgba(191, 87, 0, 0.3); border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Quick Actions</h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="generateAnalysis()">
+                        🔬 Generate Analysis
+                    </button>
+                    <button class="btn btn-secondary" onclick="manageSubscription()">
+                        💳 Manage Subscription
+                    </button>
+                    <button class="btn btn-secondary" onclick="viewTeams()">
+                        🏈 View Teams
+                    </button>
+                    <button class="btn btn-secondary" onclick="exportData()">
+                        📊 Export Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dashboard functionality
+        let currentUser = null;
+        
+        // Initialize dashboard
+        async function initializeDashboard() {
+            console.log('🔥 Blaze Intelligence Dashboard - AI Integration');
+            console.log('🤖 AI Models: ChatGPT 5, Claude Opus 4.1, Gemini 2.5 Pro');
+            
+            // Check authentication
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                // For demo, use guest mode
+                currentUser = {
+                    id: 'demo-user',
+                    name: 'Demo User',
+                    email: 'demo@blazeintelligence.com',
+                    subscription_tier: 'free',
+                    email_verified: true
+                };
+            }
+            
+            updateDashboard();
+        }
+        
+        // Update dashboard with user data
+        function updateDashboard() {
+            if (!currentUser) return;
+            
+            // Update welcome message
+            document.querySelector('.welcome-message').textContent = 
+                currentUser.name !== 'Demo User' ? 
+                `Welcome back, ${currentUser.name.split(' ')[0]}!` :
+                'Welcome to Your Analytics Hub';
+            
+            // Update subscription badge
+            const badge = document.getElementById('subscription-badge');
+            const tier = currentUser.subscription_tier;
+            badge.textContent = tier === 'free' ? 'Free Plan' : 
+                tier.charAt(0).toUpperCase() + tier.slice(1) + ' Plan';
+            badge.className = `subscription-badge ${tier}`;
+            
+            // Update AI model access
+            updateAIModelAccess();
+            
+            console.log('✅ Dashboard updated');
+        }
+        
+        // Update AI model access based on subscription
+        function updateAIModelAccess() {
+            const isPremium = currentUser?.subscription_tier !== 'free';
+            
+            // Claude status
+            const claudeStatus = document.getElementById('claude-status');
+            if (isPremium) {
+                claudeStatus.textContent = 'Active';
+                claudeStatus.className = 'model-status active';
+            }
+            
+            // Gemini status
+            const geminiStatus = document.getElementById('gemini-status');
+            if (isPremium) {
+                geminiStatus.textContent = 'Active';
+                geminiStatus.className = 'model-status active';
+            }
+            
+            // Update upgrade button
+            const upgradeBtn = document.getElementById('upgrade-btn');
+            if (isPremium) {
+                upgradeBtn.textContent = '✅ Premium AI Models Active';
+                upgradeBtn.onclick = null;
+                upgradeBtn.style.opacity = '0.7';
+            }
+        }
+        
+        // Navigation
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('nav-link')) {
+                e.preventDefault();
+                
+                // Update active state
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                e.target.classList.add('active');
+                
+                // Handle navigation
+                const section = e.target.getAttribute('href').substring(1);
+                console.log(`Navigating to: ${section}`);
+                showNotification(`${section.charAt(0).toUpperCase() + section.slice(1)} section coming soon!`, 'info');
+            }
+        });
+        
+        // Dashboard actions
+        function generateAnalysis() {
+            const models = ['ChatGPT 5'];
+            if (currentUser?.subscription_tier !== 'free') {
+                models.push('Claude Opus 4.1', 'Gemini 2.5 Pro');
+            }
+            
+            showNotification(`Generating analysis using: ${models.join(', ')}`, 'info');
+            console.log('🔬 Analysis generation with models:', models);
+        }
+        
+        function upgradeForPremiumModels() {
+            showNotification('Redirecting to subscription plans...', 'info');
+            setTimeout(() => {
+                window.location.href = '/#pricing';
+            }, 1500);
+        }
+        
+        function manageSubscription() {
+            if (currentUser?.subscription_tier === 'free') {
+                window.location.href = '/#pricing';
+            } else {
+                showNotification('Opening subscription portal...', 'info');
+            }
+        }
+        
+        function viewTeams() {
+            showNotification('Team analytics dashboard coming in Q2 2025!', 'info');
+        }
+        
+        function exportData() {
+            showNotification('Data export functionality coming soon!', 'info');
+        }
+        
+        function logout() {
+            localStorage.removeItem('authToken');
+            showNotification('Logged out successfully', 'success');
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1500);
+        }
+        
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                border-radius: 6px;
+                color: white;
+                font-weight: 600;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+                max-width: 400px;
+            `;
+            
+            const colors = {
+                success: 'var(--success-color)',
+                error: 'var(--error-color)',
+                warning: 'var(--warning-color)',
+                info: 'var(--primary-color)'
+            };
+            
+            notification.style.background = colors[type] || colors.info;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+        
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
+        
+        // Development logging
+        console.log('🚀 Blaze Intelligence User Dashboard');
+        console.log('🔥 AI Integration: ChatGPT 5, Claude Opus 4.1, Gemini 2.5 Pro');
+        console.log('📊 Status: Development preview with AI model integration');
+    </script>
+</body>
+</html>

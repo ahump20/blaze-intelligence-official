@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Executive Presentation - Baltimore Orioles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #DF4601;
+            --primary-black: #000000;
+            --dark-bg: #0a0a0a;
+            --light-gray: #f5f5f5;
+            --text-gray: #a0a0a0;
+            --success-green: #00d4aa;
+            --premium-gold: #ffd700;
+            --trust-blue: #0066cc;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Professional Navigation Bar */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .schedule-demo {
+            background: var(--primary-orange);
+            color: #ffffff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .schedule-demo:hover {
+            background: #ff5500;
+            transform: translateY(-2px);
+        }
+
+        /* Executive Hero Section */
+        .hero-executive {
+            margin-top: 60px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
+            overflow: hidden;
+        }
+
+        /* Subtle Professional Background */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--primary-orange) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--primary-orange) 0%, transparent 50%);
+        }
+
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        /* Trust Indicator */
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+            color: var(--trust-blue);
+        }
+
+        .trust-badge::before {
+            content: "✓";
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: var(--trust-blue);
+            color: white;
+            border-radius: 50%;
+            font-size: 10px;
+            line-height: 16px;
+            text-align: center;
+        }
+
+        /* Professional Headlines */
+        .hero-headline {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-headline .accent {
+            color: var(--primary-orange);
+        }
+
+        .hero-subheadline {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Value Proposition Cards */
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--premium-gold));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .value-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .value-metric {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-orange);
+            margin-bottom: 0.5rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .value-label {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-description {
+            font-size: 0.9rem;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+
+        /* ROI Calculator Section */
+        .roi-section {
+            background: linear-gradient(180deg, transparent, rgba(223, 70, 1, 0.05));
+            padding: 5rem 2rem;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            color: var(--primary-orange);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Professional Data Visualization */
+        .data-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            height: 400px;
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .insight-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .insight-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .insight-card.highlight {
+            border-color: var(--primary-orange);
+            background: rgba(223, 70, 1, 0.05);
+        }
+
+        .insight-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--success-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* Competitive Advantage Section */
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary-orange), var(--premium-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .advantage-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .advantage-description {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .proof-section {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .proof-logo {
+            height: 40px;
+            opacity: 0.6;
+            filter: grayscale(100%);
+            transition: all 0.3s;
+        }
+
+        .proof-item:hover .proof-logo {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(223, 70, 1, 0.03));
+        }
+
+        .cta-headline {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-orange);
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            background: #ff5500;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(223, 70, 1, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-orange);
+            background: rgba(223, 70, 1, 0.1);
+        }
+
+        /* Trust Indicators */
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .trust-icon {
+            color: var(--success-green);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-headline {
+                font-size: 2.5rem;
+            }
+            
+            .value-props {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .data-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .advantage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .proof-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Pulse Animation for Key Metrics */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <div class="logo">BLAZE INTELLIGENCE</div>
+            <div class="nav-links">
+                <a href="#roi" class="nav-link">ROI Analysis</a>
+                <a href="#advantage" class="nav-link">Competitive Edge</a>
+                <a href="#results" class="nav-link">Results</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#demo" class="schedule-demo">Schedule Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Executive Hero Section -->
+    <section class="hero-executive">
+        <div class="hero-bg"></div>
+        <div class="hero-content-wrapper fade-in">
+            <!-- Trust Indicator -->
+            <div class="trust-badge">
+                Proprietary Analytics Platform
+            </div>
+
+            <!-- Professional Headline -->
+            <h1 class="hero-headline">
+                The Only Analytics Platform<br>
+                <span class="accent">Built for Baltimore</span>
+            </h1>
+            
+            <p class="hero-subheadline">
+                Engineered specifically for organizations that fuse traditional scouting with cutting-edge analytics,
+                maximizing draft capital over free agent spending
+            </p>
+
+            <!-- Value Proposition Cards -->
+            <div class="value-props">
+                <div class="value-card">
+                    <div class="value-metric pulse">CFI</div>
+                    <div class="value-label">Camden Fit Index</div>
+                    <div class="value-description">Proprietary ballpark optimization model for Camden Yards</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-metric">9-20ft</div>
+                    <div class="value-label">Wall Moved In</div>
+                    <div class="value-description">Camden Yards left field wall adjustment for 2025 season</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-metric">AL East</div>
+                    <div class="value-label">Division Focus</div>
+                    <div class="value-description">Specialized analysis for divisional competition</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-metric">2025</div>
+                    <div class="value-label">Draft Focus</div>
+                    <div class="value-description">Targeted analysis for upcoming MLB draft</div>
+                </div>
+            </div>
+
+            <!-- Primary CTA -->
+            <div class="cta-buttons">
+                <a href="#demo" class="btn-primary">
+                    View Live Demo
+                    <span>→</span>
+                </a>
+                <a href="#roi" class="btn-secondary">Calculate Your ROI</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator Section -->
+    <section id="roi" class="roi-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Measurable Impact</div>
+                <h2 class="section-title">Camden Yards Wall Impact Analysis</h2>
+                <p class="section-subtitle">
+                    Understanding how the 2025 dimension changes affect player evaluation
+                </p>
+            </div>
+
+            <div class="data-grid">
+                <div class="chart-container">
+                    <h3 class="chart-title">Camden Yards 2025 Value Creation</h3>
+                    <canvas id="roiChart"></canvas>
+                </div>
+                <div class="insight-cards">
+                    <div class="insight-card highlight">
+                        <div class="insight-value">374-376ft</div>
+                        <div class="insight-label">New deepest wall points (was 384-398ft)</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-value">138 HR</div>
+                        <div class="insight-label">Lost over past 3 seasons to old wall</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-value">6-13ft</div>
+                        <div class="insight-label">Wall height variations (was 13ft uniform)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantage Section -->
+    <section id="advantage" class="section-container">
+        <div class="section-header">
+            <div class="section-label">Systematic Edge</div>
+            <h2 class="section-title">Division-Specific Intelligence</h2>
+            <p class="section-subtitle">
+                Exploit systematic blind spots in AL East rival evaluation models
+            </p>
+        </div>
+
+        <div class="advantage-grid">
+            <div class="advantage-card fade-in">
+                <div class="advantage-icon">📊</div>
+                <h3 class="advantage-title">Yale-Houston Philosophy</h3>
+                <p class="advantage-description">
+                    Built on the same fusion approach that transformed a 108-loss team into 
+                    World Series champions - now optimized for Baltimore
+                </p>
+            </div>
+            <div class="advantage-card fade-in">
+                <div class="advantage-icon">🎯</div>
+                <h3 class="advantage-title">Division Exploitation</h3>
+                <p class="advantage-description">
+                    Turn Yankees' power obsession, Red Sox's college preference, and Rays' cost constraints 
+                    into your competitive advantages
+                </p>
+            </div>
+            <div class="advantage-card fade-in">
+                <div class="advantage-icon">⚡</div>
+                <h3 class="advantage-title">Clarity Over Complexity</h3>
+                <p class="advantage-description">
+                    Pragmatic intelligence that assists human decision-makers - 
+                    matching your analytics department's proven philosophy
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="proof-section">
+        <div class="proof-grid">
+            <div class="proof-item">
+                <div style="font-size: 2rem; font-weight: 900; color: var(--primary-orange);">6</div>
+                <div style="color: var(--text-gray); margin-top: 0.5rem;">Proprietary Models</div>
+            </div>
+            <div class="proof-item">
+                <div style="font-size: 2rem; font-weight: 900; color: var(--primary-orange);">40</div>
+                <div style="color: var(--text-gray); margin-top: 0.5rem;">Prospects Analyzed</div>
+            </div>
+            <div class="proof-item">
+                <div style="font-size: 2rem; font-weight: 900; color: var(--primary-orange);">2025</div>
+                <div style="color: var(--text-gray); margin-top: 0.5rem;">Draft Focus</div>
+            </div>
+            <div class="proof-item">
+                <div style="font-size: 2rem; font-weight: 900; color: var(--primary-orange);">AL East</div>
+                <div style="color: var(--text-gray); margin-top: 0.5rem;">Specialized</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section id="demo" class="cta-section">
+        <h2 class="cta-headline">Ready to See Your Competitive Edge?</h2>
+        <p class="cta-subtitle">
+            Advanced analytics framework designed specifically for the Baltimore Orioles' competitive window
+        </p>
+        
+        <div class="cta-buttons">
+            <a href="https://bfae37db.blaze-intelligence.pages.dev/orioles-chad-tatum-live-demo.html" class="btn-primary">
+                Access Live Demo
+                <span>→</span>
+            </a>
+            <a href="mailto:ahump20@outlook.com" class="btn-secondary">Contact Our Team</a>
+        </div>
+
+        <div class="trust-indicators">
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>Proprietary Models</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>Draft Analysis</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>AL East Focus</span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // ROI Chart
+        const ctx = document.getElementById('roiChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(223, 70, 1, 0.8)');
+        gradient.addColorStop(1, 'rgba(223, 70, 1, 0.1)');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Current', 'Month 1', 'Month 3', 'Month 6', 'Year 1', 'Year 2'],
+                datasets: [{
+                    label: 'Cumulative Value Created',
+                    data: [0, 0.8, 1.6, 2.4, 3.2, 6.5],
+                    borderColor: '#DF4601',
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#DF4601',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: '#DF4601',
+                        borderWidth: 1,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + context.parsed.y + 'M in value created';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#a0a0a0',
+                            callback: function(value) {
+                                return '$' + value + 'M';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#a0a0a0'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.advantage-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

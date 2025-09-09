@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pressure Terminal™ | Real-Time Sports Analytics | Blaze Intelligence</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js and D3 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/public/css/professional-theme.css">
+    
+    <style>
+        :root {
+            --terminal-bg: #0A0E1B;
+            --terminal-card: #131823;
+            --terminal-border: #1E2530;
+            --terminal-green: #00FF88;
+            --terminal-red: #FF3366;
+            --terminal-yellow: #FFD700;
+            --terminal-blue: #00AAFF;
+            --terminal-orange: #FF6B1A;
+            --terminal-text: #E6F1FF;
+            --terminal-subtext: #8892B0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--terminal-bg);
+            color: var(--terminal-text);
+            overflow-x: hidden;
+        }
+        
+        /* Terminal Header */
+        .terminal-header {
+            background: linear-gradient(180deg, #0A0E1B 0%, #0F1318 100%);
+            border-bottom: 1px solid var(--terminal-border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .terminal-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .status-indicators {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+        }
+        
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-indicator.active {
+            background: var(--terminal-green);
+            box-shadow: 0 0 10px var(--terminal-green);
+        }
+        
+        .status-indicator.warning {
+            background: var(--terminal-yellow);
+            box-shadow: 0 0 10px var(--terminal-yellow);
+        }
+        
+        .status-indicator.error {
+            background: var(--terminal-red);
+            box-shadow: 0 0 10px var(--terminal-red);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .status-label {
+            color: var(--terminal-subtext);
+        }
+        
+        .status-value {
+            color: var(--terminal-text);
+            font-weight: 600;
+        }
+        
+        /* Terminal Controls */
+        .terminal-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .control-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 107, 26, 0.1);
+            border: 1px solid rgba(255, 107, 26, 0.3);
+            color: var(--terminal-orange);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 107, 26, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--terminal-orange);
+            color: var(--terminal-bg);
+        }
+        
+        /* Main Terminal Layout */
+        .terminal-container {
+            padding: 2rem;
+            padding-top: calc(70px + 80px + 2rem);
+        }
+        
+        .terminal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .terminal-panel {
+            background: var(--terminal-card);
+            border: 1px solid var(--terminal-border);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .panel-header {
+            background: linear-gradient(90deg, rgba(255, 107, 26, 0.1) 0%, transparent 100%);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--terminal-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .panel-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--terminal-text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .panel-badge {
+            padding: 0.25rem 0.5rem;
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--terminal-green);
+            border-radius: 4px;
+            font-size: 0.625rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .panel-content {
+            padding: 1.5rem;
+        }
+        
+        /* Pressure Stream */
+        .pressure-stream {
+            height: 300px;
+            position: relative;
+        }
+        
+        #pressureCanvas {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+        
+        /* Metrics Display */
+        .metrics-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .metric-item {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            border-left: 3px solid var(--terminal-orange);
+        }
+        
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--terminal-subtext);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--terminal-orange);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .metric-change {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .metric-change.positive {
+            color: var(--terminal-green);
+        }
+        
+        .metric-change.negative {
+            color: var(--terminal-red);
+        }
+        
+        /* Live Feed */
+        .live-feed {
+            max-height: 400px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            padding: 1rem;
+        }
+        
+        .feed-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        
+        .feed-item:hover {
+            background: rgba(255, 107, 26, 0.05);
+        }
+        
+        .feed-time {
+            font-size: 0.75rem;
+            color: var(--terminal-subtext);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .feed-content {
+            flex: 1;
+            margin: 0 1rem;
+            color: var(--terminal-text);
+        }
+        
+        .feed-value {
+            font-weight: 600;
+            color: var(--terminal-orange);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Heat Map */
+        .heatmap-container {
+            position: relative;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        #heatmapCanvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Command Line */
+        .command-line {
+            background: #000;
+            border: 1px solid var(--terminal-border);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .command-prompt {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--terminal-green);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+        }
+        
+        .command-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--terminal-text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            outline: none;
+        }
+        
+        .command-output {
+            margin-top: 1rem;
+            color: var(--terminal-subtext);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        /* Full Width Panels */
+        .terminal-panel.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 26, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            to { left: 100%; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .terminal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .terminal-status {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .metrics-display {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Navigation (reuse from main site) -->
+    <nav class="professional-nav" id="professionalNav">
+        <div class="nav-container">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <div class="nav-logo">
+                    <div class="nav-logo-icon">B</div>
+                    <div class="nav-logo-text">Blaze <span>Intelligence</span></div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/#platform" class="nav-link">Platform</a>
+                    <a href="/pressure-terminal" class="nav-link active">Pressure Terminal 🔥</a>
+                    <a href="/#analytics" class="nav-link">Analytics</a>
+                    <a href="/neural-coach" class="nav-link">Neural Coach™</a>
+                    <a href="/#digital-combine" class="nav-link">Digital Combine™</a>
+                    <a href="/#pricing" class="nav-link">Pricing</a>
+                    <a href="/live-demo" class="nav-link">Live Demo</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Terminal Header -->
+    <div class="terminal-header">
+        <div class="terminal-status">
+            <div class="status-indicators">
+                <div class="status-item">
+                    <span class="status-indicator active"></span>
+                    <span class="status-label">🟢 Demo Mode</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Response:</span>
+                    <span class="status-value" id="responseTime">73ms</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Sessions:</span>
+                    <span class="status-value" id="sessionCount">966</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Ingest:</span>
+                    <span class="status-value" id="ingestRate">137.6 QPS</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Grit Index:</span>
+                    <span class="status-value" id="gritIndex">—</span>
+                </div>
+            </div>
+            
+            <div class="terminal-controls">
+                <button class="control-btn active" onclick="switchView('live')">LIVE</button>
+                <button class="control-btn" onclick="switchView('replay')">REPLAY</button>
+                <button class="control-btn" onclick="switchView('predict')">PREDICT</button>
+                <button class="control-btn" onclick="exportData()">EXPORT</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Terminal Container -->
+    <div class="terminal-container">
+        <div class="terminal-grid">
+            <!-- Pressure Stream Panel -->
+            <div class="terminal-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class="fas fa-chart-line"></i>
+                        PRESSURE STREAM
+                    </div>
+                    <span class="panel-badge">60 FPS</span>
+                </div>
+                <div class="panel-content">
+                    <div class="pressure-stream">
+                        <canvas id="pressureCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Clutch Metrics Panel -->
+            <div class="terminal-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class="fas fa-fire"></i>
+                        CLUTCH METRICS
+                    </div>
+                    <span class="panel-badge">REAL-TIME</span>
+                </div>
+                <div class="panel-content">
+                    <div class="metrics-display">
+                        <div class="metric-item">
+                            <div class="metric-label">Pressure Index</div>
+                            <div class="metric-value">87.3</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i> +5.2%
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Clutch Factor</div>
+                            <div class="metric-value">94.6%</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i> +2.1%
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Win Probability</div>
+                            <div class="metric-value">72.8%</div>
+                            <div class="metric-change negative">
+                                <i class="fas fa-arrow-down"></i> -1.3%
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Momentum</div>
+                            <div class="metric-value">+12.5</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i> Rising
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Live Feed Panel -->
+            <div class="terminal-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class="fas fa-rss"></i>
+                        LIVE FEED
+                    </div>
+                    <span class="panel-badge">STREAMING</span>
+                </div>
+                <div class="panel-content">
+                    <div class="live-feed" id="liveFeed">
+                        <!-- Live feed items will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Heat Map Panel -->
+            <div class="terminal-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class="fas fa-th"></i>
+                        PRESSURE HEAT MAP
+                    </div>
+                    <span class="panel-badge">WEBGL</span>
+                </div>
+                <div class="panel-content">
+                    <div class="heatmap-container">
+                        <canvas id="heatmapCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Command Line Panel -->
+            <div class="terminal-panel full-width">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <i class="fas fa-terminal"></i>
+                        COMMAND LINE
+                    </div>
+                    <span class="panel-badge">INTERACTIVE</span>
+                </div>
+                <div class="panel-content">
+                    <div class="command-line">
+                        <div class="command-prompt">
+                            <span>blaze@pressure-terminal:~$</span>
+                            <input type="text" class="command-input" id="commandInput" placeholder="Enter command... (try 'help')" />
+                        </div>
+                        <div class="command-output" id="commandOutput"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize Pressure Stream Canvas
+        const pressureCanvas = document.getElementById('pressureCanvas');
+        const pressureCtx = pressureCanvas.getContext('2d');
+        let pressureData = [];
+        let animationFrame;
+        
+        // Set canvas size
+        function resizePressureCanvas() {
+            const rect = pressureCanvas.parentElement.getBoundingClientRect();
+            pressureCanvas.width = rect.width;
+            pressureCanvas.height = rect.height;
+        }
+        
+        resizePressureCanvas();
+        window.addEventListener('resize', resizePressureCanvas);
+        
+        // Generate pressure data
+        function generatePressureData() {
+            const now = Date.now();
+            const value = 50 + Math.sin(now / 1000) * 20 + Math.random() * 10;
+            pressureData.push({
+                time: now,
+                value: value,
+                clutch: value > 70
+            });
+            
+            // Keep only last 200 points
+            if (pressureData.length > 200) {
+                pressureData.shift();
+            }
+        }
+        
+        // Draw pressure stream
+        function drawPressureStream() {
+            pressureCtx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            pressureCtx.fillRect(0, 0, pressureCanvas.width, pressureCanvas.height);
+            
+            if (pressureData.length < 2) return;
+            
+            pressureCtx.strokeStyle = '#FF6B1A';
+            pressureCtx.lineWidth = 2;
+            pressureCtx.beginPath();
+            
+            pressureData.forEach((point, i) => {
+                const x = (i / (pressureData.length - 1)) * pressureCanvas.width;
+                const y = pressureCanvas.height - (point.value / 100) * pressureCanvas.height;
+                
+                if (i === 0) {
+                    pressureCtx.moveTo(x, y);
+                } else {
+                    pressureCtx.lineTo(x, y);
+                }
+                
+                // Add clutch indicators
+                if (point.clutch) {
+                    pressureCtx.fillStyle = '#00FF88';
+                    pressureCtx.fillRect(x - 2, y - 2, 4, 4);
+                }
+            });
+            
+            pressureCtx.stroke();
+        }
+        
+        // Animation loop
+        function animate() {
+            generatePressureData();
+            drawPressureStream();
+            updateLiveFeed();
+            updateMetrics();
+            animationFrame = requestAnimationFrame(animate);
+        }
+        
+        // Start animation
+        animate();
+        
+        // Update live feed
+        function updateLiveFeed() {
+            const feed = document.getElementById('liveFeed');
+            if (Math.random() > 0.95) {
+                const events = [
+                    'High pressure situation detected',
+                    'Clutch performance spike',
+                    'Momentum shift identified',
+                    'Critical moment approaching',
+                    'Performance threshold exceeded'
+                ];
+                
+                const event = events[Math.floor(Math.random() * events.length)];
+                const item = document.createElement('div');
+                item.className = 'feed-item';
+                item.innerHTML = `
+                    <span class="feed-time">${new Date().toLocaleTimeString()}</span>
+                    <span class="feed-content">${event}</span>
+                    <span class="feed-value">${(Math.random() * 100).toFixed(1)}</span>
+                `;
+                
+                feed.insertBefore(item, feed.firstChild);
+                
+                // Keep only last 10 items
+                while (feed.children.length > 10) {
+                    feed.removeChild(feed.lastChild);
+                }
+            }
+        }
+        
+        // Update metrics
+        function updateMetrics() {
+            if (Math.random() > 0.9) {
+                document.getElementById('responseTime').textContent = `${Math.floor(50 + Math.random() * 100)}ms`;
+                document.getElementById('sessionCount').textContent = Math.floor(900 + Math.random() * 200);
+                document.getElementById('ingestRate').textContent = `${(100 + Math.random() * 50).toFixed(1)} QPS`;
+            }
+        }
+        
+        // Initialize heat map
+        const heatmapCanvas = document.getElementById('heatmapCanvas');
+        const heatmapCtx = heatmapCanvas.getContext('2d');
+        
+        function drawHeatmap() {
+            const rect = heatmapCanvas.parentElement.getBoundingClientRect();
+            heatmapCanvas.width = rect.width;
+            heatmapCanvas.height = rect.height;
+            
+            const gridSize = 20;
+            const cols = Math.ceil(heatmapCanvas.width / gridSize);
+            const rows = Math.ceil(heatmapCanvas.height / gridSize);
+            
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    const intensity = Math.random();
+                    const hue = 30 - intensity * 30; // Orange to red
+                    heatmapCtx.fillStyle = `hsla(${hue}, 100%, 50%, ${intensity * 0.7})`;
+                    heatmapCtx.fillRect(i * gridSize, j * gridSize, gridSize - 1, gridSize - 1);
+                }
+            }
+        }
+        
+        drawHeatmap();
+        setInterval(drawHeatmap, 2000);
+        
+        // Command line functionality
+        const commandInput = document.getElementById('commandInput');
+        const commandOutput = document.getElementById('commandOutput');
+        
+        commandInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const command = commandInput.value.trim();
+                executeCommand(command);
+                commandInput.value = '';
+            }
+        });
+        
+        function executeCommand(command) {
+            const output = document.createElement('div');
+            output.style.marginBottom = '0.5rem';
+            
+            switch(command.toLowerCase()) {
+                case 'help':
+                    output.innerHTML = `Available commands:<br>
+                    - status: Show system status<br>
+                    - analyze [team]: Analyze team performance<br>
+                    - predict: Run prediction model<br>
+                    - clear: Clear command output`;
+                    break;
+                case 'status':
+                    output.innerHTML = `System Status: <span style="color: #00FF88;">OPERATIONAL</span><br>
+                    Uptime: 99.9%<br>
+                    Active Sessions: ${document.getElementById('sessionCount').textContent}`;
+                    break;
+                case 'clear':
+                    commandOutput.innerHTML = '';
+                    return;
+                default:
+                    output.innerHTML = `Command not recognized: ${command}`;
+            }
+            
+            commandOutput.appendChild(output);
+            commandOutput.scrollTop = commandOutput.scrollHeight;
+        }
+        
+        // View switching
+        function switchView(view) {
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Implement view switching logic here
+            console.log(`Switching to ${view} view`);
+        }
+        
+        // Export functionality
+        function exportData() {
+            const data = {
+                timestamp: new Date().toISOString(),
+                pressureData: pressureData.slice(-50),
+                metrics: {
+                    responseTime: document.getElementById('responseTime').textContent,
+                    sessions: document.getElementById('sessionCount').textContent,
+                    ingestRate: document.getElementById('ingestRate').textContent
+                }
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `pressure-terminal-${Date.now()}.json`;
+            a.click();
+        }
+        
+        // Update last update time
+        function updateLastUpdate() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
+            });
+            
+            const lastUpdate = document.getElementById('lastUpdate');
+            if (lastUpdate) {
+                lastUpdate.textContent = timeString;
+            }
+        }
+        
+        setInterval(updateLastUpdate, 1000);
+        updateLastUpdate();
+    </script>
+</body>
+</html>

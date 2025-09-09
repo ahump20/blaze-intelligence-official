@@ -1,0 +1,366 @@
+{
+  "customProperties": {
+    "contactProperties": [
+      {
+        "name": "sport_focus",
+        "label": "Primary Sport Focus",
+        "description": "Primary sport or sports the contact's organization focuses on",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Baseball", "value": "baseball"},
+          {"label": "Football", "value": "football"},
+          {"label": "Basketball", "value": "basketball"},
+          {"label": "Multi-Sport", "value": "multi_sport"},
+          {"label": "Other", "value": "other"}
+        ],
+        "groupName": "Sports Analytics Info"
+      },
+      {
+        "name": "organization_type",
+        "label": "Organization Type",
+        "description": "Type and level of sports organization",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Professional - MLB", "value": "professional_mlb"},
+          {"label": "Professional - NFL", "value": "professional_nfl"},
+          {"label": "Professional - NBA", "value": "professional_nba"},
+          {"label": "College - Power 5", "value": "power5_college"},
+          {"label": "College - Mid Major", "value": "mid_major_college"},
+          {"label": "College - Division 2", "value": "division2_college"},
+          {"label": "College - Division 3", "value": "division3_college"},
+          {"label": "Junior College", "value": "junior_college"},
+          {"label": "High School", "value": "high_school"},
+          {"label": "Youth Select", "value": "youth_select"},
+          {"label": "Perfect Game Affiliate", "value": "perfect_game_affiliate"},
+          {"label": "International Professional", "value": "international_professional"},
+          {"label": "KBO/NPB", "value": "kbo_npb"},
+          {"label": "Independent League", "value": "independent_league"},
+          {"label": "Other", "value": "other"}
+        ],
+        "groupName": "Sports Analytics Info"
+      },
+      {
+        "name": "analytics_budget_range",
+        "label": "Analytics Budget Range",
+        "description": "Annual budget range for sports analytics solutions",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "$250K+", "value": "250k_plus"},
+          {"label": "$100K - $249K", "value": "100k_249k"},
+          {"label": "$50K - $99K", "value": "50k_99k"},
+          {"label": "$25K - $49K", "value": "25k_49k"},
+          {"label": "$10K - $24K", "value": "10k_24k"},
+          {"label": "$5K - $9K", "value": "5k_9k"},
+          {"label": "Under $5K", "value": "under_5k"},
+          {"label": "Unknown", "value": "unknown"}
+        ],
+        "groupName": "Budget & Timeline"
+      },
+      {
+        "name": "implementation_timeline",
+        "label": "Implementation Timeline",
+        "description": "Desired timeline for analytics implementation",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Immediate (ASAP)", "value": "immediate"},
+          {"label": "30 Days", "value": "30_days"},
+          {"label": "60 Days", "value": "60_days"},
+          {"label": "90 Days", "value": "90_days"},
+          {"label": "6 Months", "value": "6_months"},
+          {"label": "12 Months", "value": "12_months"},
+          {"label": "Just Exploring", "value": "exploring"},
+          {"label": "No Timeline", "value": "no_timeline"}
+        ],
+        "groupName": "Budget & Timeline"
+      },
+      {
+        "name": "current_analytics_setup",
+        "label": "Current Analytics Setup",
+        "description": "Organization's existing analytics infrastructure",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "No Analytics Currently", "value": "no_analytics"},
+          {"label": "Basic Stats Only", "value": "basic_stats"},
+          {"label": "Spreadsheet-Based", "value": "spreadsheet_based"},
+          {"label": "Competitor Solution", "value": "competitor_solution"},
+          {"label": "Custom In-House", "value": "custom_in_house"},
+          {"label": "Enterprise Solution", "value": "enterprise_solution"}
+        ],
+        "groupName": "Technical Info"
+      },
+      {
+        "name": "decision_maker_access",
+        "label": "Decision Maker Access",
+        "description": "Level of access to key decision makers",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Direct Access", "value": "direct_access"},
+          {"label": "One Degree Away", "value": "one_degree"},
+          {"label": "Two Degrees Away", "value": "two_degrees"},
+          {"label": "Unknown", "value": "unknown"},
+          {"label": "No Access", "value": "no_access"}
+        ],
+        "groupName": "Sales Process"
+      },
+      {
+        "name": "pain_points",
+        "label": "Key Pain Points",
+        "description": "Primary challenges with current analytics approach",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {"label": "Slow Decision Making", "value": "slow_decisions"},
+          {"label": "Lack of Real-Time Data", "value": "no_realtime"},
+          {"label": "Poor ROI Visibility", "value": "poor_roi"},
+          {"label": "Manual Data Processing", "value": "manual_process"},
+          {"label": "Limited Insights", "value": "limited_insights"},
+          {"label": "High Costs", "value": "high_costs"},
+          {"label": "Integration Issues", "value": "integration_problems"},
+          {"label": "Compliance Concerns", "value": "compliance_issues"}
+        ],
+        "groupName": "Needs Assessment"
+      },
+      {
+        "name": "competitor_consideration",
+        "label": "Competitors Being Considered",
+        "description": "Other analytics solutions being evaluated",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {"label": "Hudl", "value": "hudl"},
+          {"label": "Second Spectrum", "value": "second_spectrum"},
+          {"label": "Stats Inc", "value": "stats_inc"},
+          {"label": "Synergy Sports", "value": "synergy_sports"},
+          {"label": "In-House Development", "value": "in_house"},
+          {"label": "Other", "value": "other"},
+          {"label": "None", "value": "none"}
+        ],
+        "groupName": "Competitive Analysis"
+      },
+      {
+        "name": "blaze_lead_score",
+        "label": "Blaze Lead Score",
+        "description": "Automated lead qualification score",
+        "type": "number",
+        "fieldType": "number",
+        "groupName": "Lead Scoring"
+      },
+      {
+        "name": "qualification_status",
+        "label": "Qualification Status",
+        "description": "Lead qualification tier based on scoring",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Hot Lead (75+)", "value": "hot_lead"},
+          {"label": "Warm Lead (50-74)", "value": "warm_lead"},
+          {"label": "Cold Lead (25-49)", "value": "cold_lead"},
+          {"label": "Disqualified (<25)", "value": "disqualified"},
+          {"label": "Not Scored", "value": "not_scored"}
+        ],
+        "groupName": "Lead Scoring"
+      },
+      {
+        "name": "referral_source",
+        "label": "Referral Source",
+        "description": "How the prospect found Blaze Intelligence",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Website - Organic", "value": "organic_web"},
+          {"label": "Website - Paid Search", "value": "paid_search"},
+          {"label": "LinkedIn", "value": "linkedin"},
+          {"label": "Industry Conference", "value": "conference"},
+          {"label": "Partner Referral", "value": "partner_referral"},
+          {"label": "Client Referral", "value": "client_referral"},
+          {"label": "Cold Outreach", "value": "cold_outreach"},
+          {"label": "Industry Publication", "value": "publication"},
+          {"label": "Other", "value": "other"}
+        ],
+        "groupName": "Source Tracking"
+      }
+    ],
+    "dealProperties": [
+      {
+        "name": "deal_tier",
+        "label": "Deal Tier",
+        "description": "Revenue tier classification for the opportunity",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Enterprise ($250K+)", "value": "enterprise"},
+          {"label": "Professional ($50K-$249K)", "value": "professional"},
+          {"label": "Collegiate ($25K-$49K)", "value": "collegiate"},
+          {"label": "Youth/Select ($10K-$24K)", "value": "youth_select"},
+          {"label": "Starter (<$10K)", "value": "starter"}
+        ],
+        "groupName": "Deal Classification"
+      },
+      {
+        "name": "contract_type",
+        "label": "Contract Type",
+        "description": "Type of engagement and contract structure",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Annual Subscription", "value": "annual_subscription"},
+          {"label": "Multi-Year Contract", "value": "multi_year"},
+          {"label": "Project-Based", "value": "project_based"},
+          {"label": "Pilot Program", "value": "pilot_program"},
+          {"label": "Custom Enterprise", "value": "custom_enterprise"}
+        ],
+        "groupName": "Contract Details"
+      },
+      {
+        "name": "services_included",
+        "label": "Services Included",
+        "description": "Blaze Intelligence services included in the deal",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "options": [
+          {"label": "Vision AI Analysis", "value": "vision_ai"},
+          {"label": "Real-Time Analytics", "value": "realtime_analytics"},
+          {"label": "Custom Dashboards", "value": "custom_dashboards"},
+          {"label": "API Access", "value": "api_access"},
+          {"label": "Training & Support", "value": "training_support"},
+          {"label": "Integration Services", "value": "integration_services"},
+          {"label": "Consulting Services", "value": "consulting"},
+          {"label": "White-Label Solution", "value": "white_label"}
+        ],
+        "groupName": "Solution Configuration"
+      },
+      {
+        "name": "competitive_savings",
+        "label": "Competitive Savings %",
+        "description": "Percentage savings vs competitor solutions",
+        "type": "number",
+        "fieldType": "number",
+        "groupName": "Value Proposition"
+      },
+      {
+        "name": "roi_projection",
+        "label": "ROI Projection %",
+        "description": "Projected return on investment percentage",
+        "type": "number",
+        "fieldType": "number",
+        "groupName": "Value Proposition"
+      },
+      {
+        "name": "implementation_complexity",
+        "label": "Implementation Complexity",
+        "description": "Technical complexity level for implementation",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Simple (Plug & Play)", "value": "simple"},
+          {"label": "Moderate (Some Integration)", "value": "moderate"},
+          {"label": "Complex (Custom Setup)", "value": "complex"},
+          {"label": "Enterprise (Full Integration)", "value": "enterprise"}
+        ],
+        "groupName": "Technical Requirements"
+      },
+      {
+        "name": "decision_committee",
+        "label": "Decision Committee Size",
+        "description": "Number of stakeholders involved in decision",
+        "type": "number",
+        "fieldType": "number",
+        "groupName": "Sales Process"
+      },
+      {
+        "name": "champion_identified",
+        "label": "Champion Identified",
+        "description": "Internal champion advocating for Blaze Intelligence",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "groupName": "Sales Process"
+      },
+      {
+        "name": "demo_completed",
+        "label": "Demo Completed",
+        "description": "Live platform demonstration has been completed",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "groupName": "Sales Process"
+      },
+      {
+        "name": "proposal_sent",
+        "label": "Proposal Sent Date",
+        "description": "Date when formal proposal was submitted",
+        "type": "date",
+        "fieldType": "date",
+        "groupName": "Timeline Tracking"
+      },
+      {
+        "name": "expected_close_date",
+        "label": "Expected Close Date",
+        "description": "Projected deal close date",
+        "type": "date",
+        "fieldType": "date",
+        "groupName": "Timeline Tracking"
+      },
+      {
+        "name": "contract_start_date",
+        "label": "Contract Start Date",
+        "description": "Planned service delivery start date",
+        "type": "date",
+        "fieldType": "date",
+        "groupName": "Timeline Tracking"
+      }
+    ],
+    "companyProperties": [
+      {
+        "name": "sports_organization",
+        "label": "Sports Organization",
+        "description": "Indicates if company is a sports organization",
+        "type": "bool",
+        "fieldType": "booleancheckbox",
+        "groupName": "Organization Classification"
+      },
+      {
+        "name": "league_affiliation",
+        "label": "League Affiliation",
+        "description": "Professional or amateur league affiliation",
+        "type": "string",
+        "fieldType": "text",
+        "groupName": "Sports Details"
+      },
+      {
+        "name": "team_market_size",
+        "label": "Market Size",
+        "description": "Size of the team's market/fan base",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Major Market (Top 10)", "value": "major_market"},
+          {"label": "Mid Market (11-25)", "value": "mid_market"},
+          {"label": "Small Market (26+)", "value": "small_market"},
+          {"label": "Regional/Local", "value": "regional"},
+          {"label": "Not Applicable", "value": "na"}
+        ],
+        "groupName": "Sports Details"
+      },
+      {
+        "name": "analytics_maturity",
+        "label": "Analytics Maturity Level",
+        "description": "Organization's current analytics sophistication",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {"label": "Advanced (AI/ML)", "value": "advanced"},
+          {"label": "Intermediate (BI Tools)", "value": "intermediate"},
+          {"label": "Basic (Reports/Dashboards)", "value": "basic"},
+          {"label": "Minimal (Excel/Manual)", "value": "minimal"},
+          {"label": "None", "value": "none"}
+        ],
+        "groupName": "Technical Profile"
+      }
+    ]
+  }
+}

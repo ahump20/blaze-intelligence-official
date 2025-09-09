@@ -1,0 +1,316 @@
+Below is a **deploy-ready visual pack** for your newest site that is (1) cutting-edge/experimental, (2) immediately useful with **real data**, and (3) consistent with your stated product positioning: *investor-grade, pressure-focused insights with a Texas-lean Bloomberg aesthetic* . I’ve included **drop-in code** (D3/Canvas + Three.js), **data contracts** so you can wire to live feeds, and **performance/UX** guardrails so it stays fast in Replit.
+
+---
+
+## 0) Visual strategy (why these, and how they tell a story)
+
+* **Pressure-Focused**: every visual encodes *clutch/pressure* context—*when* the game tilts, not just aggregate season stats.
+* **Institutional-grade**: finance-style density, minimal chrome, crisp type, dark panels, restrained orange/turquoise accents; no rainbow pies.
+* **Desktop-first** with responsive fallbacks; mobile shows summaries instead of 3-D toys.&#x20;
+
+> Tech baseline: **D3 (canvas)** for high-frequency 2-D streaming charts; **Three.js (WebGL)** for one or two hero-level 3-D highlights; optional **Web Workers/OffscreenCanvas** for heavy work; future-proofing for **WebGPU** if desired.&#x20;
+
+---
+
+## 1) Data contracts (real feeds → adapters)
+
+The code below expects **API endpoints** that mirror common providers (Sportradar/Stats Perform) so you can plug actual feeds when ready .
+
+```ts
+// /api/game/pressure-stream  (Server-Sent Events or WebSocket)
+type PressureTick = {
+  t: number;                 // epoch ms
+  wp: number;                // win probability [0..1]
+  pressure: number;          // 0..1 (derived from leverage index, score diff, clock, etc.)
+  event?: string;            // "4th&1 Conv", "Steal", ...
+};
+
+// /api/game/pressure-heatmap?gameId=... (HTTP JSON)
+type PressureHeatMap = {
+  court: "nba" | "nfl" | "mlb" | "cfb";
+  bins: Array<{ x: number; y: number; pressure: number; count: number }>; // coords normalized [-1..1]
+};
+
+// /api/player/clutch-splts?playerId=...
+type ClutchSplits = {
+  name: string;
+  minutes: number;
+  usage: number;
+  eff: number;
+  effHighP: number;  // efficiency under high pressure
+  effLowP: number;   // efficiency under low pressure
+};
+```
+
+If you’re still staging, generate synthetic values **server-side** but with the same shapes (so you can hot-swap to live) .
+
+---
+
+## 2) “Pressure Stream” (D3 + Canvas; 60fps, investor-grade)
+
+**What it shows:** live **Win Probability** (top line) and **Pressure** (area glow) with event markers; brush to zoom any moment; autoscroll for live games.
+
+**Why it’s unique:** the pressure glow is **visually weighted by leverage**, so the most consequential moments literally burn brighter.
+
+```html
+<section id="pressureStream" class="viz" style="height:38vh"></section>
+<script type="module">
+import * as d3 from 'https://cdn.skypack.dev/d3@7';
+
+const el = document.querySelector('#pressureStream');
+const W = el.clientWidth, H = el.clientHeight, M = {t:24,r:28,b:26,l:40};
+
+const canvas = d3.select(el).append('canvas')
+  .attr('width', W).attr('height', H).node();
+const ctx = canvas.getContext('2d');
+
+const x = d3.scaleTime().range([M.l, W-M.r]);
+const y = d3.scaleLinear().domain([0,1]).range([H-M.b, M.t]);
+
+let data = []; // PressureTick[]
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  // Pressure glow (area)
+  ctx.save();
+  const grd = ctx.createLinearGradient(0,M.t,0,H-M.b);
+  grd.addColorStop(0,'rgba(191,87,0,.25)');  // burnt orange
+  grd.addColorStop(1,'rgba(155,203,235,.08)'); // turquoise
+  ctx.fillStyle = grd;
+  ctx.beginPath();
+  ctx.moveTo(x(data[0]?.t||0), y(0));
+  data.forEach(d=>ctx.lineTo(x(d.t), y(d.pressure)));
+  ctx.lineTo(x(data[data.length-1]?.t||0), y(0));
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+
+  // Win Prob line
+  ctx.strokeStyle = '#9BCBEB'; ctx.lineWidth = 2.0; ctx.beginPath();
+  data.forEach((d,i)=>{ const X=x(d.t), Y=y(d.wp); i?ctx.lineTo(X,Y):ctx.moveTo(X,Y); });
+  ctx.stroke();
+
+  // Event markers
+  ctx.fillStyle = '#BF5700';
+  data.filter(d=>d.event).forEach(d=>{
+    ctx.beginPath(); ctx.arc(x(d.t), y(d.wp), 3, 0, Math.PI*2); ctx.fill();
+  });
+}
+
+// SSE/WebSocket hookup
+const src = new EventSource('/api/game/pressure-stream'); // or WS
+src.onmessage = (e)=>{
+  const tick = JSON.parse(e.data);
+  data.push(tick);
+  // maintain rolling window
+  const tmax = d3.max(data,d=>d.t), tmin = tmax - 1000*60*18; // last 18 minutes
+  data = data.filter(d=>d.t>=tmin);
+  x.domain([tmin, tmax]); draw();
+};
+</script>
+```
+
+---
+
+## 3) “Pressure Map” (WebGL heatmap; eye-popping yet purposeful)
+
+**What it shows:** field/court map with **pressure hotspots**; brightness = *frequency×leverage*; brushed moment filters.
+
+**Why it’s unique:** we encode *pressure-weighted location*—where the game truly swings, not just where events occur.
+
+**Lightweight Canvas approach (no extra deps):**
+
+```html
+<section id="pressureMap" class="viz" style="height:42vh"></section>
+<script type="module">
+const el = document.querySelector('#pressureMap');
+const W = el.clientWidth, H = el.clientHeight; const cvs = document.createElement('canvas');
+cvs.width=W; cvs.height=H; el.appendChild(cvs); const ctx=cvs.getContext('2d');
+
+const img = new Image(); // transparent court/field PNG
+img.src = '/assets/court_nba_dark.png'; img.onload = ()=>render();
+let bins = []; // from /api/game/pressure-heatmap
+
+fetch('/api/game/pressure-heatmap?gameId=123').then(r=>r.json()).then(d=>{ bins = d.bins; render(); });
+
+function render(){
+  ctx.clearRect(0,0,W,H);
+  // glow dots
+  bins.forEach(b=>{
+    const x = (b.x*0.5+0.5)*W, y=(1-(b.y*0.5+0.5))*H;
+    const w = Math.min(25, 4 + b.count*0.4);
+    const g = ctx.createRadialGradient(x,y,0,x,y,w);
+    const alpha = Math.min(.85, (b.pressure*b.count)*.12);
+    g.addColorStop(0, `rgba(191,87,0,${alpha})`);
+    g.addColorStop(1, 'rgba(191,87,0,0)');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,w,0,Math.PI*2); ctx.fill();
+  });
+  // field overlay
+  if(img.complete) ctx.drawImage(img,0,0,W,H);
+}
+</script>
+```
+
+> If you prefer GPU layers, swap the renderer to **PixiJS** or **deck.gl** for large datasets; the API shape is the same. (Open-source first; pay for enterprise charting only when justified.)&#x20;
+
+---
+
+## 4) “Clutch Rings” KPI (3-D; accuracy/latency/business-ready)
+
+Use the **Metric Rings** module I provided earlier (or this wrapper) and pass **live values** from your API:
+
+```js
+fetch('/api/system/kpi').then(r=>r.json()).then(({accuracy, p95Latency})=>{
+  window.BLAZE_RINGS('#metricRings', { accuracy, latency: Math.min(1, 100/p95Latency) });
+});
+```
+
+---
+
+## 5) “NIL Ribbon” (Three.js)—wired to real form values
+
+Already provided in earlier thread; to use **real input**, call:
+
+```js
+// on NIL form submit:
+updateNILRibbon(Number(followers.value), Number(engagement.value)/100, Number(awards.value));
+```
+
+This ribbon **changes length/twist/spikes** with follower counts, engagement, and awards—the ribbon becomes a *shape of marketability*.
+
+---
+
+## 6) “Biomech Pose Overlay” (Neural Coach)—pose in, glow out
+
+Feed pose keypoints every frame:
+
+```js
+// from MediaPipe/OpenPose pipeline:
+drawPose(keypoints);
+```
+
+This overlay renders a **spring-smoothed, glowing skeleton** with lighter cyan/orange pulses on joints—*interpretability without gimmicks*.
+
+---
+
+## 7) “Holographic Player Cards” (credible, quick-read)
+
+Tie to **ClutchSplits** to switch from static labels to *pressure-differenced values*:
+
+```js
+fetch('/api/player/clutch-splts?playerId=23').then(r=>r.json()).then(s=>{
+  // show delta badges: effHighP - effLowP (glow if +, amber if -)
+  renderCard(s);
+});
+```
+
+Cards stay simple: **speed/accuracy/power/stamina**, with small badges for **Δ under pressure**.
+
+---
+
+## 8) Export to **GIF/WEBM** (press or social)
+
+```js
+const canvas = document.querySelector('#pressureStream canvas');
+const rec = new MediaRecorder(canvas.captureStream(30), {mimeType:'video/webm;codecs=vp9'});
+const chunks=[]; rec.ondataavailable=e=>chunks.push(e.data);
+rec.onstop=()=>{ const blob=new Blob(chunks,{type:'video/webm'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='pressure-story.webm'; a.click(); };
+rec.start(); setTimeout(()=>rec.stop(),6000);
+```
+
+---
+
+## 9) Performance & UX (so it stays **fast** in Replit)
+
+* **Boot on visibility** (IntersectionObserver); tear down when hidden.
+* **Canvas over SVG** for streaming and large datasets; move computations to **Web Workers**.
+* Target **\~60 fps** interactions; lazy-load 3-D modules; ensure first visual in **\~3s**.&#x20;
+* Respect **prefers-reduced-motion**; provide **static PNG/WebP** backs for hero/3-D sections.
+* Keep styling “investor-grade”: restrained palette, dense but legible panels, finance-like typography.&#x20;
+
+---
+
+## 10) What’s possible next (R\&D roadmap)
+
+* **WebGPU** compute kernels for real-time heatmaps or optical-flow-style vectors (experimental).
+* **Temporal pressure clustering** (HDBSCAN) for “moment families”—show as colored stripes over the WP timeline.
+* **Bayesian WP updates** (Kalman/particle filters) for smoother real-time estimates with uncertainty cones.
+* **Deck.gl + field tracking** if you add XY player tracking; hexbin pressure weighted by leverage.
+* **Auto-story snippets**: generate natural-language “pressure recaps” for highlight reels.
+
+---
+
+## How to integrate now (quick steps)
+
+1. Add the `<section>` containers and `viz.css`.
+2. Drop the JS modules into `/public/js/viz/…`.
+3. Implement the **three endpoints** above (or temporarily host static JSON at those routes).
+4. Wire NIL form to `updateNILRibbon`, WP stream to the “Pressure Stream,” and clutch splits to player cards.
+
+Everything here follows the “**pressure-first, investor-grade, open-source**” plan—including D3 for rich analytics and *Three.js as showpiece 3-D*—so it’s credible to investors and coaches now, and ready to switch to official APIs later with no rewrites.&#x20;
+
+If you want, I’ll package this as a PR to `ahump20/blaze-intelligence-official` (with an optional sample data server) so you can flip it on in the new Replit build right away.
+
+
+Here’s a creative blueprint and tech‑stack plan for turning your new Blaze Intelligence build into a showcase of **pressure‑focused, investor‑grade** sports analytics with **live data** and **cutting‑edge visuals**.
+
+---
+
+### 📊 Core data strategy – use real feeds but stay API‑ready
+
+* **Simulated data now, live data later** – the underlying platform should mirror the structure of real feeds (e.g. Sportradar or Stats Perform) so you can swap in official endpoints when ready.
+* **Focus on pressure events** – highlight micro‑moments (clutch plays, momentum swings) because research shows pressure impacts performance asymmetrically.
+* **Derive the right metrics** – e.g. Win Probability, Pressure Index (leverage + score context), Clutch Efficiency splits (offensive/defensive), NIL value drivers (followers × engagement × awards).
+
+---
+
+### 🎨 Visual & aesthetic guidelines – Bloomberg meets Texas
+
+* **Investor‑pitch polish**: clean, sharp and corporate visuals; charts that could be shown in a boardroom without gimmicky rainbow pies.
+* **Texas‑heritage flair**: burnt‑orange and deep‑blue accents, subtle football/baseball motifs, but no clutter.
+* **Desktop first** with responsive fallback; aim for \~3 s time‑to‑first‑view and 60 fps interactions.
+* **Clear purpose**: every visualization must answer the “so what?” question—insight first, flash second.
+
+---
+
+### 🛠️ Recommended tech stack & tools
+
+* **D3.js (Canvas)** for high‑density 2‑D charts—time‑series, heatmaps, bar/column charts, radar/spider comparisons.
+* **Three.js (WebGL)** for hero‑level 3‑D visualisations—used sparingly for impact (e.g. a rotating NIL ribbon or animated accuracy rings).
+* **PixiJS or Deck.gl** for high‑performance 2‑D/3‑D layers when data volumes explode (map tracking, hexbin fields).
+* **Web Workers + OffscreenCanvas** to compute heavy metrics (pressure/WinProb) without blocking the UI.
+* **IntersectionObserver** and `prefers-reduced-motion` to lazy‑boot visuals and respect users who disable motion.
+
+---
+
+### 🚀 Visual modules you can implement today
+
+| Section                | Visual concept           | Data mapping                                       | Highlights                                                                                                                                                   |
+| ---------------------- | ------------------------ | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Hero**               | **Pressure Stream**      | SSE/WebSocket feed of `WinProb` & `Pressure` ticks | A canvas line + area chart. The line shows win probability, the glow shows pressure intensity. Event markers for clutch plays. Brushed zoom for analysis.    |
+| **Live Intelligence**  | **Pressure Heatmap**     | Binned positional data + pressure weight           | Render a stadium/court diagram with glowing hotspots. Pressure × frequency controls brightness. Use Deck.gl if you expand to tracking data.                  |
+| **KPIs**               | **Clutch Rings (3‑D)**   | Platform accuracy & latency                        | Two torus segments rotate in WebGL. Segment lengths map to metrics (e.g. 94.6 % accuracy, <100 ms latency). Visually re‑assures investors about reliability. |
+| **NIL Engine**         | **NIL Ribbon**           | Followers, engagement, awards                      | A twisted ribbon whose length ∝ log(followers), twist ∝ engagement, height spikes ∝ awards. Ties the NIL calculation directly to an intuitive shape.         |
+| **Player/Coach Tools** | **Biomech Pose Overlay** | Pose keypoints                                     | A glowing spring‑smoothed skeleton drawn on top of video or combine footage. Orange/cyan pulses emphasise joints under strain.                               |
+| **Deep Stats**         | **Clutch Splits Cards**  | Player splits under high vs low pressure           | Holographic cards with speed/accuracy/power/stamina plus Δ efficiency badges (green if player improves under pressure, amber if not).                        |
+
+All of the above can be wired to your back‑end now using the `D3` and `Three.js` modules supplied earlier. They degrade gracefully (static PNG fallback for reduced‑motion users) and load lazily to protect mobile devices.
+
+---
+
+### 📈 Performance & UX best practices
+
+* **Hardware‑accelerated rendering**: use WebGL/Canvas for large datasets; avoid SVG for thousands of points.
+* **Server‑side pre‑aggregation**: down‑sample data for overview charts and stream finer detail on demand.
+* **Frame budget**: keep animations at 60 fps; throttle particles/mesh complexity on devices with `navigator.hardwareConcurrency ≤ 4`.
+* **Accessibility**: dark/light themes, keyboard navigation, ARIA labels on interactive regions, and alt‑text on infographics.
+
+---
+
+### 🔭 Future explorations
+
+* **WebGPU** kernels to compute pressure surfaces or optical flow fields directly on the GPU.
+* **Machine‑learning overlays**: e.g. show expected run‑pass splits, fatigue curves or upcoming injury risk alongside pressure stream.
+* **Auto‑generated “pressure narratives”**: summarise key events automatically and generate short storyboards for coaches/investors.
+
+---
+
+By anchoring the visuals in real pressure‑centric metrics, using open‑source libraries (D3.js & Three.js) for flexibility, and maintaining an investor‑friendly aesthetic, you’ll achieve the “championship‑level” web presence you’re aiming for. Each visualization should **explain** something concrete about the game, not just look cool—this is how you build both credibility and excitement in the sports analytics market.

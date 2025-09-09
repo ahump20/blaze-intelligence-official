@@ -1,0 +1,425 @@
+{
+  "timestamp": "2025-08-28T08:02:46.873Z",
+  "client_id": "BLZ-texaslon-166874",
+  "onboarding_status": "in_progress",
+  "current_step": "needs_assessment",
+  "client_profile": {
+    "company_name": "Texas Longhorns Athletics",
+    "industry": "college_athletics",
+    "company_size": "growth",
+    "contact_info": {
+      "primary_contact": "Sarah Johnson",
+      "email": "sarah.johnson@texassports.com",
+      "phone": "(512) 555-0123",
+      "title": "Director of Analytics"
+    },
+    "requirements": {
+      "teams_to_analyze": 5,
+      "sports_focus": [
+        "football",
+        "basketball",
+        "baseball"
+      ],
+      "geographic_scope": "national",
+      "data_frequency_needs": "daily"
+    },
+    "budget_info": {
+      "annual_budget_range": "substantial_investment",
+      "decision_timeline": "45_days",
+      "budget_approval_process": "single_decision_maker"
+    },
+    "technical_requirements": {
+      "integration_needs": [
+        "existing_crm",
+        "recruiting_database"
+      ],
+      "api_access_required": true,
+      "custom_dashboard_needs": true,
+      "white_label_requirements": false
+    },
+    "recommended_tier": "growth",
+    "onboarding_complexity": "low"
+  },
+  "needs_assessment": {
+    "business_objectives": [
+      "Maximize recruiting effectiveness and ROI",
+      "Improve student-athlete retention and performance",
+      "Enhance NIL program management and compliance"
+    ],
+    "current_challenges": [
+      "Limited access to comprehensive sports data",
+      "Difficulty integrating data from multiple sources",
+      "Lack of real-time analytics capabilities",
+      "Insufficient tools for predictive analysis",
+      "Need for more actionable insights from existing data",
+      "Complex system integration requirements"
+    ],
+    "success_criteria": {
+      "quantitative": [
+        "Improve decision accuracy by 25%",
+        "Reduce data processing time by 60%",
+        "Increase actionable insights by 40%",
+        "Achieve 95% system uptime"
+      ],
+      "qualitative": [
+        "Enhance strategic decision-making confidence",
+        "Improve stakeholder satisfaction with analytics",
+        "Streamline reporting and communication",
+        "Establish data-driven culture"
+      ],
+      "timeline": {
+        "30_days": "Complete onboarding and initial training",
+        "90_days": "Achieve full system utilization",
+        "180_days": "Realize measurable business impact",
+        "1_year": "Achieve full ROI and expand usage"
+      }
+    },
+    "stakeholder_analysis": {
+      "primary_users": [
+        {
+          "role": "Analytics Manager",
+          "influence": "high",
+          "technical_level": "advanced"
+        },
+        {
+          "role": "Data Analysts",
+          "influence": "medium",
+          "technical_level": "advanced"
+        },
+        {
+          "role": "Decision Makers",
+          "influence": "high",
+          "technical_level": "basic"
+        }
+      ],
+      "decision_makers": [
+        {
+          "role": "Director of Analytics",
+          "influence": "high",
+          "budget_authority": true
+        }
+      ],
+      "influencers": [
+        {
+          "role": "IT Department",
+          "influence": "medium",
+          "concerns": [
+            "integration",
+            "security"
+          ]
+        },
+        {
+          "role": "End Users",
+          "influence": "medium",
+          "concerns": [
+            "usability",
+            "training"
+          ]
+        }
+      ]
+    },
+    "competitive_landscape": {
+      "current_solutions": [
+        "Excel/Google Sheets for basic analysis",
+        "Legacy sports analytics platforms",
+        "Custom internal tools",
+        "Manual data collection processes"
+      ],
+      "competitive_advantages": [
+        "67-80% cost savings vs traditional solutions",
+        "Real-time data integration and updates",
+        "Comprehensive multi-league coverage",
+        "Advanced NIL analytics capabilities",
+        "Automated insights generation"
+      ],
+      "switching_barriers": [
+        "Data migration complexity",
+        "User training requirements",
+        "Integration with existing workflows",
+        "Change management considerations"
+      ]
+    },
+    "technical_environment": {
+      "current_systems": [
+        "existing_crm",
+        "recruiting_database"
+      ],
+      "technical_constraints": {
+        "security_requirements": "standard",
+        "compliance_needs": [
+          "FERPA",
+          "NCAA"
+        ],
+        "scalability_requirements": "medium"
+      },
+      "integration_complexity": "low",
+      "api_readiness": true
+    },
+    "implementation_preferences": {
+      "deployment_preference": "cloud_hosted",
+      "training_preference": "virtual_intensive",
+      "support_preference": "priority_email",
+      "rollout_strategy": "full",
+      "customization_level": "dashboard_customization"
+    }
+  },
+  "proposal": {
+    "client_name": "Texas Longhorns Athletics",
+    "proposal_date": "2025-08-28T08:02:46.873Z",
+    "recommended_tier": "growth",
+    "pricing": {
+      "annual_fee": 4988,
+      "monthly_equivalent": 416,
+      "setup_fee": 1500,
+      "total_year_1": 6488
+    },
+    "value_proposition": {
+      "cost_savings": {
+        "annual_savings": 14964,
+        "savings_percentage": 75,
+        "competitor_price": 19952
+      },
+      "roi_timeline": "4-6 months",
+      "key_benefits": [
+        "Real-time sports analytics across multiple leagues",
+        "Comprehensive NIL valuation and compliance tools",
+        "Advanced predictive modeling and insights",
+        "Seamless integration with existing workflows",
+        "Full API access for custom integrations"
+      ]
+    },
+    "included_features": [
+      "advanced_analytics",
+      "weekly_reports",
+      "nil_calculator",
+      "api_access"
+    ],
+    "service_levels": {
+      "data_refresh_frequency": "Every 15 minutes",
+      "support_level": "priority_email",
+      "max_teams": 10,
+      "uptime_sla": "99.9%"
+    },
+    "implementation": {
+      "timeline": {
+        "total_days": 14,
+        "phases": [
+          {
+            "phase": "Contract and Setup",
+            "days": 3
+          },
+          {
+            "phase": "Technical Integration",
+            "days": 6
+          },
+          {
+            "phase": "Testing and Training",
+            "days": 5
+          },
+          {
+            "phase": "Go-Live Support",
+            "days": 2
+          }
+        ]
+      },
+      "deliverables": [
+        "Customized analytics dashboard",
+        "Data integration setup",
+        "User training materials",
+        "Technical documentation",
+        "Go-live support",
+        "API access credentials and documentation",
+        "Custom dashboard configuration"
+      ],
+      "success_metrics": [
+        "Improve decision accuracy by 25%",
+        "Reduce data processing time by 60%",
+        "Increase actionable insights by 40%"
+      ]
+    },
+    "next_steps": [
+      "Schedule detailed demo and Q&A session",
+      "Finalize technical requirements and integrations",
+      "Review and execute service agreement",
+      "Begin technical onboarding process"
+    ]
+  },
+  "technical_plan": {
+    "integration_plan": {
+      "required_integrations": [
+        "existing_crm",
+        "recruiting_database"
+      ],
+      "data_sources": [
+        "blaze_core_analytics",
+        "mlb_stats_api",
+        "perfect_game_data",
+        "nfl_api",
+        "college_football_data",
+        "nba_stats_api",
+        "ncaa_basketball_data",
+        "nil_market_data",
+        "recruiting_databases"
+      ],
+      "api_endpoints": [
+        "/api/analytics/teams/{team_id}",
+        "/api/analytics/players/{player_id}",
+        "/api/analytics/games/{game_id}",
+        "/api/data/real-time",
+        "/api/insights/predictive",
+        "/api/reports/custom",
+        "/api/nil/calculate",
+        "/api/recruiting/prospects"
+      ],
+      "authentication_setup": "oauth2_with_api_keys"
+    },
+    "infrastructure": {
+      "hosting": "cloudflare_pages_workers",
+      "database": "edge_sql_with_caching",
+      "monitoring": "sentry_with_custom_dashboard",
+      "backup_strategy": "automated_daily_with_point_in_time_recovery"
+    },
+    "security_measures": [
+      "End-to-end data encryption",
+      "Role-based access control",
+      "Regular security audits",
+      "Compliance with industry standards"
+    ],
+    "testing_plan": {
+      "unit_testing": "automated_test_suite",
+      "integration_testing": "client_specific_scenarios",
+      "user_acceptance_testing": "guided_client_validation",
+      "performance_testing": "load_and_stress_testing"
+    }
+  },
+  "training_plan": {
+    "training_type": "virtual_intensive",
+    "duration_hours": 28,
+    "modules": [
+      "Platform Overview and Navigation",
+      "Core Analytics Features",
+      "Report Generation and Customization",
+      "Data Interpretation and Insights",
+      "API Integration and Usage",
+      "NIL Calculator and Compliance",
+      "Dashboard Customization and Management"
+    ],
+    "materials": [
+      "Interactive training platform access",
+      "Video tutorial library",
+      "PDF user guides and references",
+      "Practice datasets for hands-on learning"
+    ],
+    "schedule": {
+      "total_sessions": 14,
+      "session_duration": "2 hours",
+      "frequency": "twice_per_week",
+      "estimated_completion": "7 weeks"
+    },
+    "success_metrics": [
+      "User competency assessments",
+      "Platform adoption rates",
+      "Support ticket reduction",
+      "User satisfaction scores"
+    ]
+  },
+  "success_metrics": {
+    "key_metrics": [
+      {
+        "metric": "User Adoption Rate",
+        "target": "90% within 60 days",
+        "measurement": "Active users / Total licensed users"
+      },
+      {
+        "metric": "Time to First Insight",
+        "target": "< 24 hours",
+        "measurement": "Hours from login to first meaningful insight"
+      },
+      {
+        "metric": "Decision Accuracy Improvement",
+        "target": "25% improvement",
+        "measurement": "Before/after analysis of decision outcomes"
+      },
+      {
+        "metric": "Data Processing Efficiency",
+        "target": "60% time reduction",
+        "measurement": "Time to complete analysis tasks"
+      }
+    ],
+    "tracking_methods": [
+      "Built-in analytics dashboard",
+      "User behavior tracking",
+      "Client feedback surveys",
+      "Business outcome measurement"
+    ],
+    "review_schedule": [
+      {
+        "milestone": "30 days",
+        "focus": "adoption_and_training"
+      },
+      {
+        "milestone": "90 days",
+        "focus": "utilization_and_optimization"
+      },
+      {
+        "milestone": "180 days",
+        "focus": "business_impact_and_roi"
+      },
+      {
+        "milestone": "1 year",
+        "focus": "expansion_and_renewal"
+      }
+    ]
+  },
+  "timeline": {
+    "total_duration": 14,
+    "key_milestones": [
+      {
+        "milestone": "Contract Signed",
+        "day": 0
+      },
+      {
+        "milestone": "Technical Setup Complete",
+        "day": 9
+      },
+      {
+        "milestone": "Training Complete",
+        "day": 12
+      },
+      {
+        "milestone": "Go-Live",
+        "day": 14
+      },
+      {
+        "milestone": "First Success Review",
+        "day": 44
+      }
+    ]
+  },
+  "next_actions": [
+    {
+      "action": "Schedule discovery call",
+      "owner": "blaze_team",
+      "timeline": "24-48 hours",
+      "priority": "high"
+    },
+    {
+      "action": "Prepare custom demo",
+      "owner": "blaze_team",
+      "timeline": "3-5 days",
+      "priority": "high"
+    },
+    {
+      "action": "Review technical requirements",
+      "owner": "client_technical_team",
+      "timeline": "1 week",
+      "priority": "medium"
+    },
+    {
+      "action": "Stakeholder alignment meeting",
+      "owner": "client_decision_makers",
+      "timeline": "1-2 weeks",
+      "priority": "medium"
+    }
+  ]
+}

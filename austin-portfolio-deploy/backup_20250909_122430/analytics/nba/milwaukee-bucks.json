@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-28T07:48:54.481Z",
+  "team": "Milwaukee Bucks",
+  "league": "NBA",
+  "division": "Central",
+  "conference": "Eastern",
+  "season": "2024-25",
+  "readiness": {
+    "overall": 89.7,
+    "offense": 92.2,
+    "defense": 91.6,
+    "rebounding": 92.6,
+    "depth": 89.6
+  },
+  "leverage": {
+    "current": 2.7,
+    "trend": "increasing",
+    "championship_odds": 0.008
+  },
+  "efficiency_metrics": {
+    "offensive_rating": 107.3,
+    "defensive_rating": 106.7,
+    "net_rating": -3.3,
+    "pace": 100.1
+  },
+  "advanced_stats": {
+    "effective_fg_percentage": 51.9,
+    "turnover_rate": 15,
+    "offensive_rebound_rate": 22.3,
+    "free_throw_rate": 22.9
+  },
+  "metrics_count": 28
+}

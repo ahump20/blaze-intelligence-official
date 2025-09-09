@@ -1,0 +1,26 @@
+{
+  "NBA advanced statistics": {
+    "last_updated": "2025-08-28T07:40:42.524Z",
+    "key_findings": [
+      "Shot quality metrics becoming primary evaluation tool",
+      "Real-time fatigue monitoring changing rotation strategies"
+    ],
+    "confidence": 85
+  },
+  "MLB analytics trends": {
+    "last_updated": "2025-08-28T07:45:48.731Z",
+    "key_findings": [
+      "Statcast data showing increased emphasis on launch angle optimization",
+      "Teams investing heavily in pitching biomechanics analysis"
+    ],
+    "confidence": 90
+  },
+  "High school sports recruiting": {
+    "last_updated": "2025-08-28T08:00:00.567Z",
+    "key_findings": [
+      "Video analysis platforms changing scouting workflows",
+      "Academic performance predictors in athletic success"
+    ],
+    "confidence": 92
+  }
+}

@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Blaze Intelligence — Platform Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/tokens.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+body {
+margin: 0;
+background: #0A0E27;
+color: #fff;
+font-family: 'Inter', system-ui, sans-serif;
+min-height: 100vh;
+position: relative;
+}
+
+#particles-bg {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 1;
+opacity: 0.3;
+}
+
+.content-wrapper {
+position: relative;
+z-index: 10;
+}
+
+.glass {
+background: rgba(255, 255, 255, 0.06);
+backdrop-filter: blur(16px);
+border: 1px solid rgba(255, 255, 255, 0.12);
+border-radius: 16px;
+transition: all 0.3s ease;
+}
+
+.glass:hover {
+background: rgba(255, 255, 255, 0.08);
+border-color: rgba(255, 107, 53, 0.4);
+transform: translateY(-2px);
+}
+
+.site-card {
+position: relative;
+overflow: hidden;
+padding: 24px;
+height: 100%;
+display: flex;
+flex-direction: column;
+}
+
+.site-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 4px;
+background: linear-gradient(90deg, var(--blaze-orange), #FFB86B);
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+.site-card:hover::before {
+opacity: 1;
+}
+
+.live-dot {
+width: 8px;
+height: 8px;
+background: #00FF88;
+border-radius: 50%;
+animation: pulse 2s infinite;
+display: inline-block;
+margin-right: 6px;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.6; transform: scale(0.95); }
+}
+
+.metric-badge {
+display: inline-flex;
+align-items: center;
+padding: 4px 12px;
+background: rgba(255, 107, 53, 0.15);
+border: 1px solid rgba(255, 107, 53, 0.3);
+border-radius: 100px;
+font-size: 12px;
+font-weight: 600;
+color: #FF8C35;
+margin-right: 8px;
+margin-bottom: 8px;
+}
+
+.tech-badge {
+display: inline-flex;
+align-items: center;
+padding: 3px 10px;
+background: rgba(0, 255, 255, 0.1);
+border: 1px solid rgba(0, 255, 255, 0.2);
+border-radius: 100px;
+font-size: 11px;
+font-weight: 500;
+color: #00FFFF;
+margin-right: 6px;
+}
+
+.header-gradient {
+background: linear-gradient(135deg, #0A0E27 0%, #1A1F3A 100%);
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-title {
+font-family: 'Space Grotesk', sans-serif;
+font-size: clamp(48px, 6vw, 72px);
+font-weight: 700;
+line-height: 1.1;
+background: linear-gradient(135deg, #FF6B35, #FFD700);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.status-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 16px;
+margin-top: 24px;
+}
+
+.status-card {
+text-align: center;
+padding: 20px;
+}
+
+.status-value {
+font-size: 32px;
+font-weight: 800;
+background: linear-gradient(135deg, #FF6B35, #FFB86B);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.progress-bar {
+height: 4px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 100px;
+overflow: hidden;
+margin-top: 8px;
+}
+
+.progress-fill {
+height: 100%;
+background: linear-gradient(90deg, #00FF88, #00FFFF);
+border-radius: 100px;
+transition: width 0.5s ease;
+}
+</style>
+</head>
+<body>
+<div id="particles-bg"></div>
+
+<div class="content-wrapper">
+<section class="max-w-7xl mx-auto px-6 py-16">
+<div class="text-center mb-12">
+<h1 class="hero-title mb-6">Platform Architecture</h1>
+<p class="text-xl text-gray-300 max-w-3xl mx-auto">
+Complete deployment ecosystem spanning championship analytics, 
+real-time dashboards, and AI-powered intelligence systems.
+</p>
+</div>
+
+<section class="max-w-7xl mx-auto px-6 py-12">
+<h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+<span class="text-orange-400">🏆</span>
+Primary Deployments
+</h2>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+<a href="https://9fb73261.blaze-intelligence.pages.dev/" target="_blank" class="glass site-card block">
+<div class="flex items-center gap-2 mb-3">
+<span class="live-dot"></span>
+<span class="text-xs text-green-400 font-semibold uppercase tracking-wider">Module</span>
+</div>
+<h3 class="text-2xl font-bold mb-3">Platform Demo</h3>
+<p class="text-gray-300 text-sm mb-4 flex-grow">
+Full marketing shell with pricing tiers, live dashboard, 
+Vision AI demo, and comprehensive feature showcase.
+</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="metric-badge">Complete Shell</span>
+<span class="metric-badge">Interactive</span>
+</div>
+<div class="flex flex-wrap gap-1">
+<span class="tech-badge">Pricing</span>
+<span class="tech-badge">Videos</span>
+<span class="tech-badge">CTAs</span>
+</div>
+</a>
+
+<section class="max-w-7xl mx-auto px-6 py-12">
+<h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+<span class="text-blue-400">📊</span>
+Feature Pages
+</h2>
+
+<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+<a href="/dashboard.html" class="glass p-5 block hover:border-orange-400/50">
+<h4 class="font-semibold mb-2">Live Dashboard</h4>
+<p class="text-gray-400 text-xs">Real-time analytics & charts</p>
+<div class="progress-bar mt-3">
+<div class="progress-fill" style="width: 100%"></div>
+</div>
+</a>
+
+<a href="/videos/" class="glass p-5 block hover:border-orange-400/50">
+<h4 class="font-semibold mb-2">Video Library</h4>
+<p class="text-gray-400 text-xs">44m AI lecture + demos</p>
+<div class="progress-bar mt-3">
+<div class="progress-fill" style="width: 100%"></div>
+</div>
+</a>
+
+<a href="/roi-calculator.html" class="glass p-5 block hover:border-orange-400/50">
+<h4 class="font-semibold mb-2">ROI Calculator</h4>
+<p class="text-gray-400 text-xs">67-80% savings analysis</p>
+<div class="progress-bar mt-3">
+<div class="progress-fill" style="width: 100%"></div>
+</div>
+</a>
+
+<a href="/methods.html" class="glass p-5 block hover:border-orange-400/50">
+<h4 class="font-semibold mb-2">Methods & Data</h4>
+<p class="text-gray-400 text-xs">Benchmark definitions</p>
+<div class="progress-bar mt-3">
+<div class="progress-fill" style="width: 95%"></div>
+</div>
+</a>
+
+<a href="/pricing.html" class="glass p-5 block hover:border-orange-400/50">
+<h4 class="font-semibold mb-2">Pricing</h4>
+<p class="text-gray-400 text-xs">Platform tiers & plans</p>
+<div class="progress-bar mt-3">
+<div class="progress-fill" style="width: 100%"></div>
+</div>
+</a>
+
+<a href="/blog/" class="glass p-5 block hover:border-orange-400/50">
+<h4 class="font-semibold mb-2">Blog</h4>
+<p class="text-gray-400 text-xs">Analytics insights</p>
+<div class="progress-bar mt-3">
+<div class="progress-fill" style="width: 85%"></div>
+</div>
+</a>
+
+<a href="/api-docs.html" class="glass p-5 block hover:border-orange-400/50">
+<h4 class="font-semibold mb-2">API Docs</h4>
+<p class="text-gray-400 text-xs">Integration guides</p>
+<div class="progress-bar mt-3">
+<div class="progress-fill" style="width: 90%"></div>
+</div>
+</a>
+
+<a href="/contact.html" class="glass p-5 block hover:border-orange-400/50">
+<h4 class="font-semibold mb-2">Contact</h4>
+<p class="text-gray-400 text-xs">Lead capture form</p>
+<div class="progress-bar mt-3">
+<div class="progress-fill" style="width: 100%"></div>
+</div>
+</a>
+</div>
+</section>
+
+<div class="glass p-6">
+<div class="text-cyan-400 text-2xl mb-3">⚡</div>
+<h3 class="text-xl font-semibold mb-3">Frontend Stack</h3>
+<ul class="space-y-2 text-sm text-gray-300">
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+Three.js particle animations
+</li>
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+Chart.js data visualizations
+</li>
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+Tailwind CSS + Glass UI
+</li>
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+GSAP scroll animations
+</li>
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+Video.js HLS streaming
+</li>
+</ul>
+</div>
+
+<div class="glass p-6">
+<div class="text-orange-400 text-2xl mb-3">📊</div>
+<h3 class="text-xl font-semibold mb-3">Data Pipeline</h3>
+<ul class="space-y-2 text-sm text-gray-300">
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+MLB/NFL/NBA/NCAA feeds
+</li>
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+Perfect Game youth data
+</li>
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+2.8M+ daily data points
+</li>
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+&lt;100ms response time
+</li>
+<li class="flex items-center gap-2">
+<span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+94.6% accuracy benchmark
+</li>
+</ul>
+</div>
+</div>
+</section>
+
+<footer class="border-t border-gray-800 mt-16 py-8">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<p class="text-gray-400 text-sm">
+© 2025 Blaze Intelligence • Championship Analytics Platform<br>
+<span class="text-xs">Built in Boerne, TX 🤠</span>
+</p>
+</div>
+</footer>
+</div>
+
+<script>
+// Three.js Background Particles
+function initParticles() {
+const container = document.getElementById('particles-bg');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+container.appendChild(renderer.domElement);
+
+// Create particle geometry
+const geometry = new THREE.BufferGeometry();
+const vertices = [];
+const colors = [];
+
+for (let i = 0; i < 500; i++) {
+vertices.push(
+Math.random() * 2000 - 1000,
+Math.random() * 2000 - 1000,
+Math.random() * 2000 - 1000
+);
+
+const color = new THREE.Color();
+color.setHSL(0.08 + Math.random() * 0.02, 0.8, 0.5);
+colors.push(color.r, color.g, color.b);
+}
+
+geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+const material = new THREE.PointsMaterial({
+size: 2,
+vertexColors: true,
+transparent: true,
+opacity: 0.6
+});
+
+const particles = new THREE.Points(geometry, material);
+scene.add(particles);
+
+camera.position.z = 800;
+
+// Animation loop
+function animate() {
+requestAnimationFrame(animate);
+particles.rotation.x += 0.0002;
+particles.rotation.y += 0.0003;
+renderer.render(scene, camera);
+}
+
+animate();
+
+// Handle resize
+window.addEventListener('resize', () => {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+});
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+initParticles();
+});
+</script>
+</body>
+</html>

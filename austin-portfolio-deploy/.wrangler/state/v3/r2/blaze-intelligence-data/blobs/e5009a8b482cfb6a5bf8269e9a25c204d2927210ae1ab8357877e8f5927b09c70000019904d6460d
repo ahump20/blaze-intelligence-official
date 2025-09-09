@@ -1,0 +1,79 @@
+{
+  "timestamp": "2025-08-28T07:45:43.203Z",
+  "version": "1.0.0",
+  "summary": {
+    "overall_status": "partial",
+    "healthy_agents": 1,
+    "total_agents": 3,
+    "system_health_score": 80
+  },
+  "agent_health": {
+    "cardinals-update": {
+      "name": "Cardinals Data Update",
+      "log_file": "cardinals.log",
+      "expected_frequency": 10,
+      "status": "healthy",
+      "last_run_minutes_ago": 6
+    },
+    "readiness-board": {
+      "name": "Cardinals Readiness Board",
+      "log_file": "readiness-board.log",
+      "expected_frequency": 10,
+      "status": "no_logs",
+      "error": "Log file not found"
+    },
+    "digital-autopilot": {
+      "name": "Digital-Combine Autopilot",
+      "log_file": "autopilot.log",
+      "expected_frequency": 30,
+      "status": "no_logs",
+      "error": "Log file not found"
+    }
+  },
+  "performance_metrics": {
+    "total_executions": 1,
+    "successful_executions": 1,
+    "failed_executions": 0,
+    "average_execution_time": 0,
+    "recent_performance": [
+      {
+        "timestamp": "2025-08-28T07:40:50.921Z",
+        "type": "autopilot",
+        "status": "healthy",
+        "confidence": 85
+      }
+    ],
+    "error_patterns": {},
+    "success_rate": 100
+  },
+  "system_health": {
+    "disk_space": "unknown",
+    "memory_usage": "unknown",
+    "data_files": "healthy",
+    "api_endpoints": "unknown",
+    "git_status": "not_git_repo",
+    "data_files_count": "4/4"
+  },
+  "recommendations": [
+    {
+      "type": "agent_health",
+      "priority": "high",
+      "message": "Some automation agents are not running properly",
+      "action": "Check cron configuration and agent logs"
+    }
+  ],
+  "alerts": [
+    {
+      "type": "error",
+      "agent": "readiness-board",
+      "message": "Cardinals Readiness Board is not functioning properly",
+      "details": "Log file not found"
+    },
+    {
+      "type": "error",
+      "agent": "digital-autopilot",
+      "message": "Digital-Combine Autopilot is not functioning properly",
+      "details": "Log file not found"
+    }
+  ]
+}

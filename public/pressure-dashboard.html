@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pressure Analytics | Blaze Intelligence</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Vis.js for Network Graph -->
+    <script src="https://unpkg.com/vis-network@latest/dist/vis-network.min.js"></script>
+    <link href="https://unpkg.com/vis-network@latest/dist/dist/vis-network.min.css" rel="stylesheet" />
+    
+    <!-- Custom Analytics Modules -->
+    <script src="/js/pressure-stream.js"></script>
+    <script src="/js/chemistry-network.js"></script>
+    <script src="/src/analytics/momentum-engine.js"></script>
+    <script src="/src/compliance/legal-notices.js"></script>
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --turquoise: #9BCBEB;
+            --dark-navy: #0A192F;
+            --darker-navy: #050F1F;
+            --light-navy: #112240;
+            --slate: #8892B0;
+            --light-slate: #A8B2D1;
+            --white: #E6F1FF;
+            --success: #64FFDA;
+            --warning: #FFB86C;
+            --error: #FF5555;
+            --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--darker-navy);
+            color: var(--slate);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Bloomberg Terminal Style Header */
+        .terminal-header {
+            background: linear-gradient(180deg, var(--dark-navy) 0%, var(--darker-navy) 100%);
+            border-bottom: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .terminal-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .terminal-logo h1 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+        }
+        
+        .terminal-status {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Dashboard Grid */
+        .dashboard-container {
+            margin-top: 4rem;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1rem;
+            max-width: 1920px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Pressure Stream Specific */
+        #pressureStreamViz {
+            min-height: 380px;
+            position: relative;
+        }
+        
+        /* Chemistry Network Specific */
+        #chemistryNetworkViz {
+            min-height: 500px;
+            position: relative;
+        }
+        
+        /* Legal Compliance Banner */
+        .compliance-banner {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 0.5rem 1rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--slate);
+            margin-bottom: 1rem;
+        }
+        
+        .viz-panel {
+            background: rgba(17, 34, 64, 0.4);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 4px;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .viz-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--burnt-orange), transparent);
+            animation: slideGlow 3s linear infinite;
+        }
+        
+        @keyframes slideGlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(136, 146, 176, 0.1);
+        }
+        
+        .panel-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--light-slate);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: var(--font-mono);
+        }
+        
+        .panel-metric {
+            font-size: 0.75rem;
+            color: var(--turquoise);
+            font-family: var(--font-mono);
+        }
+        
+        /* Specific Panel Sizes */
+        .pressure-stream-panel {
+            grid-column: span 8;
+            min-height: 380px;
+        }
+        
+        .pressure-map-panel {
+            grid-column: span 4;
+            min-height: 380px;
+        }
+        
+        .clutch-performance-panel {
+            grid-column: span 6;
+            min-height: 320px;
+        }
+        
+        .player-cards-panel {
+            grid-column: span 6;
+            min-height: 320px;
+        }
+        
+        .kpi-panel {
+            grid-column: span 3;
+            min-height: 180px;
+        }
+        
+        /* Canvas Styling */
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+            display: block;
+        }
+        
+        /* Player Cards */
+        .player-card {
+            background: rgba(17, 34, 64, 0.6);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .player-card:hover {
+            background: rgba(17, 34, 64, 0.8);
+            border-color: var(--burnt-orange);
+            transform: translateX(4px);
+        }
+        
+        .player-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .player-name {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 0.95rem;
+        }
+        
+        .player-stats {
+            font-size: 0.75rem;
+            color: var(--slate);
+            font-family: var(--font-mono);
+            margin-top: 0.25rem;
+        }
+        
+        .clutch-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .clutch-badge.elite {
+            background: rgba(191, 87, 0, 0.2);
+            color: var(--burnt-orange);
+            border: 1px solid var(--burnt-orange);
+        }
+        
+        .clutch-badge.solid {
+            background: rgba(155, 203, 235, 0.2);
+            color: var(--turquoise);
+            border: 1px solid var(--turquoise);
+        }
+        
+        .clutch-badge.developing {
+            background: rgba(136, 146, 176, 0.2);
+            color: var(--slate);
+            border: 1px solid var(--slate);
+        }
+        
+        /* KPI Cards */
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: var(--font-mono);
+            margin: 1rem 0;
+        }
+        
+        .kpi-label {
+            font-size: 0.75rem;
+            color: var(--slate);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .kpi-trend {
+            font-size: 0.875rem;
+            color: var(--success);
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .pressure-stream-panel { grid-column: span 12; }
+            .pressure-map-panel { grid-column: span 12; }
+            .clutch-performance-panel { grid-column: span 12; }
+            .player-cards-panel { grid-column: span 12; }
+            .kpi-panel { grid-column: span 6; }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .viz-panel {
+                grid-column: span 1 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bloomberg-style Terminal Header -->
+    <header class="terminal-header">
+        <div class="terminal-logo">
+            <h1>BLAZE</h1>
+            <span style="color: var(--slate); font-size: 0.875rem;">Pressure Analytics Terminal</span>
+        </div>
+        <div class="terminal-status">
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span>LIVE</span>
+            </div>
+            <div class="status-indicator">
+                <span style="color: var(--turquoise);">LAT: <142ms</span>
+            </div>
+            <div class="status-indicator">
+                <span style="color: var(--burnt-orange);">ACC: 94.6%</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Legal Compliance Banner -->
+    <div class="compliance-banner">
+        <i class="fas fa-info-circle"></i> All performance data is derived from publicly available statistics. 
+        <a href="#" onclick="LegalCompliance.fairUse.addDisclaimer(this.parentElement)" style="color: var(--burnt-orange);">View Legal Notices</a>
+    </div>
+    
+    <!-- Main Dashboard Grid -->
+    <div class="dashboard-container">
+        <!-- Pressure Stream Visualization (Bloomberg-Grade) -->
+        <div class="viz-panel pressure-stream-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Win Probability × Pressure Stream</h3>
+                <span class="panel-metric">REAL-TIME</span>
+            </div>
+            <div id="pressureStreamViz"></div>
+        </div>
+        
+        <!-- Team Chemistry Network -->
+        <div class="viz-panel chemistry-network-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Dynamic Chemistry Network</h3>
+                <span class="panel-metric">SYNERGY ANALYSIS</span>
+            </div>
+            <div id="chemistryNetworkViz"></div>
+        </div>
+        
+        <!-- Momentum Engine Predictions -->
+        <div class="viz-panel momentum-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Momentum Engine</h3>
+                <span class="panel-metric">BAYESIAN + XGBOOST</span>
+            </div>
+            <div id="momentumPredictions">
+                <div class="momentum-metrics">
+                    <div class="metric">
+                        <span class="metric-label">Win Probability</span>
+                        <span class="metric-value" id="winProb">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Momentum</span>
+                        <span class="metric-value" id="momentum">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Confidence</span>
+                        <span class="metric-value" id="confidence">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pressure Heatmap -->
+        <div class="viz-panel pressure-map-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Court Pressure Map</h3>
+                <span class="panel-metric">NBA</span>
+            </div>
+            <div id="pressureMap"></div>
+        </div>
+        
+        <!-- Clutch Performance -->
+        <div class="viz-panel clutch-performance-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Clutch Performance Matrix</h3>
+                <span class="panel-metric">HIGH LEVERAGE</span>
+            </div>
+            <div id="clutchMatrix"></div>
+        </div>
+        
+        <!-- Player Cards -->
+        <div class="viz-panel player-cards-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Elite Clutch Performers</h3>
+                <span class="panel-metric">TOP 5</span>
+            </div>
+            <div id="playerCards"></div>
+        </div>
+        
+        <!-- KPI Panels -->
+        <div class="viz-panel kpi-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Accuracy</h3>
+            </div>
+            <div class="kpi-value">94.6%</div>
+            <div class="kpi-label">Prediction Accuracy</div>
+            <div class="kpi-trend">↑ 2.3% vs Last Week</div>
+        </div>
+        
+        <div class="viz-panel kpi-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Volume</h3>
+            </div>
+            <div class="kpi-value">2.8M</div>
+            <div class="kpi-label">Data Points Processed</div>
+            <div class="kpi-trend">↑ 12% vs Yesterday</div>
+        </div>
+        
+        <div class="viz-panel kpi-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Latency</h3>
+            </div>
+            <div class="kpi-value"><150ms</div>
+            <div class="kpi-label">p95 Response Time</div>
+            <div class="kpi-trend">↓ 8ms Improvement</div>
+        </div>
+        
+        <div class="viz-panel kpi-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">Uptime</h3>
+            </div>
+            <div class="kpi-value">99.9%</div>
+            <div class="kpi-label">System Availability</div>
+            <div class="kpi-trend">30 Days No Incidents</div>
+        </div>
+    </div>
+    
+    <script>
+        // Pressure Stream Visualization (D3 + Canvas)
+        const initPressureStream = () => {
+            const container = document.querySelector('#pressureStream');
+            const rect = container.getBoundingClientRect();
+            const W = rect.width;
+            const H = 320;
+            const M = {t: 24, r: 28, b: 26, l: 40};
+            
+            // Create canvas
+            const canvas = d3.select(container)
+                .append('canvas')
+                .attr('width', W)
+                .attr('height', H)
+                .node();
+            const ctx = canvas.getContext('2d');
+            
+            // Scales
+            const x = d3.scaleTime().range([M.l, W - M.r]);
+            const y = d3.scaleLinear().domain([0, 1]).range([H - M.b, M.t]);
+            
+            let data = [];
+            
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                
+                if (data.length < 2) return;
+                
+                // Grid lines
+                ctx.strokeStyle = 'rgba(136, 146, 176, 0.1)';
+                ctx.lineWidth = 1;
+                for (let i = 0; i <= 10; i++) {
+                    const yPos = y(i / 10);
+                    ctx.beginPath();
+                    ctx.moveTo(M.l, yPos);
+                    ctx.lineTo(W - M.r, yPos);
+                    ctx.stroke();
+                }
+                
+                // Pressure glow (area)
+                ctx.save();
+                const grd = ctx.createLinearGradient(0, M.t, 0, H - M.b);
+                grd.addColorStop(0, 'rgba(191, 87, 0, 0.25)');
+                grd.addColorStop(1, 'rgba(155, 203, 235, 0.08)');
+                ctx.fillStyle = grd;
+                ctx.beginPath();
+                ctx.moveTo(x(data[0].t), y(0));
+                data.forEach(d => ctx.lineTo(x(d.t), y(d.pressure)));
+                ctx.lineTo(x(data[data.length - 1].t), y(0));
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+                
+                // Win Probability line
+                ctx.strokeStyle = '#9BCBEB';
+                ctx.lineWidth = 2.0;
+                ctx.beginPath();
+                data.forEach((d, i) => {
+                    const X = x(d.t);
+                    const Y = y(d.wp);
+                    i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+                });
+                ctx.stroke();
+                
+                // Event markers
+                ctx.fillStyle = '#BF5700';
+                data.filter(d => d.event).forEach(d => {
+                    ctx.beginPath();
+                    ctx.arc(x(d.t), y(d.wp), 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Event label
+                    ctx.save();
+                    ctx.font = '10px JetBrains Mono';
+                    ctx.fillStyle = 'rgba(191, 87, 0, 0.8)';
+                    ctx.fillText(d.event, x(d.t) + 5, y(d.wp) - 5);
+                    ctx.restore();
+                });
+                
+                // Axes
+                ctx.strokeStyle = 'rgba(136, 146, 176, 0.3)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(M.l, M.t);
+                ctx.lineTo(M.l, H - M.b);
+                ctx.lineTo(W - M.r, H - M.b);
+                ctx.stroke();
+                
+                // Y-axis labels
+                ctx.fillStyle = 'rgba(136, 146, 176, 0.8)';
+                ctx.font = '10px JetBrains Mono';
+                for (let i = 0; i <= 10; i += 2) {
+                    const yPos = y(i / 10);
+                    ctx.fillText(`${i * 10}%`, 5, yPos + 3);
+                }
+            }
+            
+            // Connect to SSE stream
+            const src = new EventSource('/api/game/pressure-stream');
+            src.onmessage = (e) => {
+                const tick = JSON.parse(e.data);
+                data.push(tick);
+                
+                // Maintain rolling window (last 3 minutes)
+                const tmax = d3.max(data, d => d.t);
+                const tmin = tmax - 1000 * 60 * 3;
+                data = data.filter(d => d.t >= tmin);
+                x.domain([tmin, tmax]);
+                
+                draw();
+            };
+            
+            // Initial draw
+            draw();
+        };
+        
+        // Pressure Heatmap
+        const initPressureMap = () => {
+            const container = document.querySelector('#pressureMap');
+            const rect = container.getBoundingClientRect();
+            const W = rect.width;
+            const H = 320;
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = W;
+            canvas.height = H;
+            container.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            
+            // Court background
+            const drawCourt = () => {
+                ctx.strokeStyle = 'rgba(155, 203, 235, 0.2)';
+                ctx.lineWidth = 2;
+                
+                // Court outline
+                ctx.strokeRect(W * 0.1, H * 0.1, W * 0.8, H * 0.8);
+                
+                // Three-point line
+                ctx.beginPath();
+                ctx.arc(W * 0.5, H * 0.5, W * 0.25, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                // Paint
+                ctx.strokeRect(W * 0.35, H * 0.3, W * 0.3, H * 0.4);
+            };
+            
+            // Fetch and render heatmap
+            fetch('/api/game/pressure-heatmap?gameId=123')
+                .then(r => r.json())
+                .then(data => {
+                    const render = () => {
+                        ctx.clearRect(0, 0, W, H);
+                        
+                        // Draw pressure dots
+                        data.bins.forEach(b => {
+                            const x = (b.x * 0.4 + 0.5) * W;
+                            const y = (1 - (b.y * 0.4 + 0.5)) * H;
+                            const radius = Math.min(25, 4 + b.count * 0.4);
+                            
+                            const g = ctx.createRadialGradient(x, y, 0, x, y, radius);
+                            const alpha = Math.min(0.85, (b.pressure * b.count) * 0.12);
+                            g.addColorStop(0, `rgba(191, 87, 0, ${alpha})`);
+                            g.addColorStop(1, 'rgba(191, 87, 0, 0)');
+                            
+                            ctx.fillStyle = g;
+                            ctx.beginPath();
+                            ctx.arc(x, y, radius, 0, Math.PI * 2);
+                            ctx.fill();
+                        });
+                        
+                        drawCourt();
+                    };
+                    
+                    render();
+                });
+        };
+        
+        // Clutch Performance Matrix
+        const initClutchMatrix = () => {
+            const container = d3.select('#clutchMatrix');
+            const W = container.node().getBoundingClientRect().width;
+            const H = 260;
+            
+            const svg = container.append('svg')
+                .attr('width', W)
+                .attr('height', H);
+            
+            // Sample data
+            const players = [
+                {name: 'LeBron', regular: 0.52, clutch: 0.58},
+                {name: 'Durant', regular: 0.54, clutch: 0.61},
+                {name: 'Curry', regular: 0.48, clutch: 0.55},
+                {name: 'Giannis', regular: 0.55, clutch: 0.52},
+                {name: 'Luka', regular: 0.46, clutch: 0.54}
+            ];
+            
+            const x = d3.scaleLinear()
+                .domain([0.4, 0.65])
+                .range([40, W - 40]);
+            
+            const y = d3.scaleLinear()
+                .domain([0.4, 0.65])
+                .range([H - 40, 20]);
+            
+            // Grid
+            svg.append('g')
+                .attr('class', 'grid')
+                .attr('transform', `translate(0,${H - 40})`)
+                .call(d3.axisBottom(x)
+                    .ticks(5)
+                    .tickSize(-H + 60)
+                    .tickFormat(''))
+                .style('stroke', 'rgba(136, 146, 176, 0.1)');
+            
+            // Diagonal line (no change)
+            svg.append('line')
+                .attr('x1', x(0.4))
+                .attr('y1', y(0.4))
+                .attr('x2', x(0.65))
+                .attr('y2', y(0.65))
+                .style('stroke', 'rgba(136, 146, 176, 0.3)')
+                .style('stroke-dasharray', '3,3');
+            
+            // Points
+            svg.selectAll('.player-point')
+                .data(players)
+                .enter().append('circle')
+                .attr('cx', d => x(d.regular))
+                .attr('cy', d => y(d.clutch))
+                .attr('r', 6)
+                .style('fill', d => d.clutch > d.regular ? '#BF5700' : '#9BCBEB')
+                .style('stroke', d => d.clutch > d.regular ? '#BF5700' : '#9BCBEB')
+                .style('stroke-width', 2)
+                .style('fill-opacity', 0.3);
+            
+            // Labels
+            svg.selectAll('.player-label')
+                .data(players)
+                .enter().append('text')
+                .attr('x', d => x(d.regular))
+                .attr('y', d => y(d.clutch) - 10)
+                .text(d => d.name)
+                .style('fill', '#E6F1FF')
+                .style('font-size', '11px')
+                .style('font-family', 'JetBrains Mono')
+                .style('text-anchor', 'middle');
+            
+            // Axes labels
+            svg.append('text')
+                .attr('x', W / 2)
+                .attr('y', H - 5)
+                .text('REGULAR EFFICIENCY →')
+                .style('fill', '#8892B0')
+                .style('font-size', '10px')
+                .style('font-family', 'JetBrains Mono')
+                .style('text-anchor', 'middle');
+            
+            svg.append('text')
+                .attr('transform', 'rotate(-90)')
+                .attr('x', -H / 2)
+                .attr('y', 12)
+                .text('CLUTCH EFFICIENCY →')
+                .style('fill', '#8892B0')
+                .style('font-size', '10px')
+                .style('font-family', 'JetBrains Mono')
+                .style('text-anchor', 'middle');
+        };
+        
+        // Player Cards
+        const initPlayerCards = () => {
+            fetch('/api/player/clutch-splits?playerId=1')
+                .then(r => r.json())
+                .then(data => {
+                    const container = document.querySelector('#playerCards');
+                    
+                    // Generate multiple players
+                    const players = [];
+                    for (let i = 1; i <= 5; i++) {
+                        fetch(`/api/player/clutch-splits?playerId=${i}`)
+                            .then(r => r.json())
+                            .then(player => {
+                                const card = document.createElement('div');
+                                card.className = 'player-card';
+                                
+                                const clutchDiff = player.effHighP - player.effLowP;
+                                const badgeClass = player.clutchRating.toLowerCase();
+                                
+                                card.innerHTML = `
+                                    <div class="player-info">
+                                        <div class="player-name">${player.name}</div>
+                                        <div class="player-stats">
+                                            ${player.lastGames.pts} PPG | ${player.lastGames.ast} AST | ${player.lastGames.reb} REB
+                                        </div>
+                                        <div class="player-stats" style="color: ${clutchDiff > 0 ? '#64FFDA' : '#FF5555'}">
+                                            Clutch Δ: ${clutchDiff > 0 ? '+' : ''}${(clutchDiff * 100).toFixed(1)}%
+                                        </div>
+                                    </div>
+                                    <div class="clutch-badge ${badgeClass}">${player.clutchRating}</div>
+                                `;
+                                
+                                container.appendChild(card);
+                            });
+                    }
+                });
+        };
+        
+        // Initialize all visualizations
+        window.addEventListener('DOMContentLoaded', () => {
+            initPressureStream();
+            initPressureMap();
+            initClutchMatrix();
+            initPlayerCards();
+        });
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            // Reinitialize on resize for responsive behavior
+            document.querySelector('#pressureStream').innerHTML = '';
+            document.querySelector('#pressureMap').innerHTML = '';
+            document.querySelector('#clutchMatrix').innerHTML = '';
+            
+            initPressureStream();
+            initPressureMap();
+            initClutchMatrix();
+        });
+    </script>
+</body>
+</html>

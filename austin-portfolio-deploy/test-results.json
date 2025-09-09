@@ -1,0 +1,112 @@
+{
+  "timestamp": "2025-09-02T00:06:03.321Z",
+  "duration": "1.33",
+  "results": {
+    "passed": 15,
+    "failed": 4,
+    "warnings": 1,
+    "tests": [
+      {
+        "name": "File: data/blaze-metrics.json",
+        "status": "pass",
+        "details": "Valid JSON, 6 keys"
+      },
+      {
+        "name": "File: data/dashboard-config.json",
+        "status": "pass",
+        "details": "Valid JSON, 5 keys"
+      },
+      {
+        "name": "File: data/youth-baseball/perfect-game-integration.json",
+        "status": "pass",
+        "details": "Valid JSON, 9 keys"
+      },
+      {
+        "name": "File: data/youth-baseball/recruiting-insights.json",
+        "status": "pass",
+        "details": "Valid JSON, 6 keys"
+      },
+      {
+        "name": "File: data/live/deployment-report.json",
+        "status": "pass",
+        "details": "Valid JSON, 5 keys"
+      },
+      {
+        "name": "Cardinals Roster",
+        "status": "pass",
+        "details": "Response in 422ms"
+      },
+      {
+        "name": "Current Season",
+        "status": "pass",
+        "details": "Response in 215ms"
+      },
+      {
+        "name": "Today's Games",
+        "status": "pass",
+        "details": "Response in 149ms"
+      },
+      {
+        "name": "Live: Blaze Metrics",
+        "status": "pass",
+        "details": "200 in 174ms"
+      },
+      {
+        "name": "Live: Dashboard Config",
+        "status": "pass",
+        "details": "200 in 71ms"
+      },
+      {
+        "name": "Live: Homepage",
+        "status": "fail",
+        "details": "Status 308"
+      },
+      {
+        "name": "Live: Dashboard",
+        "status": "fail",
+        "details": "Status 308"
+      },
+      {
+        "name": "Live: Vision AI Demo",
+        "status": "fail",
+        "details": "Status 308"
+      },
+      {
+        "name": "Live: Contact Form",
+        "status": "fail",
+        "details": "Status 308"
+      },
+      {
+        "name": "Data Freshness",
+        "status": "pass",
+        "details": "Updated 0 hours ago"
+      },
+      {
+        "name": "Data Consistency",
+        "status": "pass",
+        "details": "Scores aligned (diff: 0.6)"
+      },
+      {
+        "name": "Response Time",
+        "status": "warning",
+        "details": "87ms below target 100ms"
+      },
+      {
+        "name": "Accuracy Rate",
+        "status": "pass",
+        "details": "94.6% (target: 90%)"
+      },
+      {
+        "name": "Data Points",
+        "status": "pass",
+        "details": "2800000 (target: 2000000)"
+      },
+      {
+        "name": "Uptime",
+        "status": "pass",
+        "details": "99.98% (target: 99.9%)"
+      }
+    ]
+  },
+  "successRate": "75.0"
+}

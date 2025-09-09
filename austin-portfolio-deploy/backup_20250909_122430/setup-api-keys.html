@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - API Configuration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .config-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #BF5700;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(191, 87, 0, 0.3);
+        }
+        
+        h1 {
+            color: #BF5700;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .api-section {
+            margin-bottom: 25px;
+        }
+        
+        .api-section h3 {
+            color: #00B2A9;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #BF5700;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #BF5700, #FF7A00);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(191, 87, 0, 0.4);
+        }
+        
+        button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.5);
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .status.success {
+            background: rgba(0, 178, 169, 0.2);
+            border: 1px solid #00B2A9;
+            color: #00B2A9;
+            display: block;
+        }
+        
+        .status.error {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ff6666;
+            display: block;
+        }
+        
+        .status.info {
+            background: rgba(191, 87, 0, 0.2);
+            border: 1px solid #BF5700;
+            color: #FF7A00;
+            display: block;
+        }
+        
+        .current-status {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+        
+        .status-value {
+            font-weight: 600;
+        }
+        
+        .status-value.configured {
+            color: #00B2A9;
+        }
+        
+        .status-value.not-configured {
+            color: #ff6666;
+        }
+        
+        .divider {
+            height: 1px;
+            background: rgba(191, 87, 0, 0.3);
+            margin: 30px 0;
+        }
+        
+        .info-box {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .info-box a {
+            color: #BF5700;
+            text-decoration: none;
+        }
+        
+        .info-box a:hover {
+            text-decoration: underline;
+        }
+        
+        .toggle-visibility {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+        
+        .toggle-visibility:hover {
+            color: #BF5700;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="config-container">
+        <h1>🔧 Blaze Intelligence API Configuration</h1>
+        <p class="subtitle">Configure your sports data API keys for enhanced analytics</p>
+        
+        <div class="current-status">
+            <div class="status-item">
+                <span class="status-label">SportsRadar MLB</span>
+                <span class="status-value" id="mlb-status">Checking...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">SportsRadar NFL</span>
+                <span class="status-value" id="nfl-status">Checking...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">SportsRadar NBA</span>
+                <span class="status-value" id="nba-status">Checking...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">SportsRadar NCAA Football</span>
+                <span class="status-value" id="ncaaf-status">Checking...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Live Scoreboard API</span>
+                <span class="status-value" id="scoreboard-status">Checking...</span>
+            </div>
+        </div>
+        
+        <div class="info-box">
+            ℹ️ <strong>Note:</strong> API keys are stored securely in your browser's local storage and are never transmitted to our servers. 
+            For production use, we recommend using environment variables or a secure vault service.
+            <br><br>
+            📚 Get your SportsRadar API keys from <a href="https://developer.sportradar.com/" target="_blank">developer.sportradar.com</a>
+        </div>
+        
+        <div class="api-section">
+            <h3>⚾ SportsRadar MLB API</h3>
+            <div class="input-group">
+                <label for="mlb-key">MLB API Key</label>
+                <div class="input-wrapper">
+                    <input type="password" id="mlb-key" placeholder="Enter your MLB API key">
+                    <button class="toggle-visibility" onclick="toggleVisibility('mlb-key')">👁️</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="api-section">
+            <h3>🏈 SportsRadar NFL API</h3>
+            <div class="input-group">
+                <label for="nfl-key">NFL API Key</label>
+                <div class="input-wrapper">
+                    <input type="password" id="nfl-key" placeholder="Enter your NFL API key">
+                    <button class="toggle-visibility" onclick="toggleVisibility('nfl-key')">👁️</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="api-section">
+            <h3>🏀 SportsRadar NBA API</h3>
+            <div class="input-group">
+                <label for="nba-key">NBA API Key</label>
+                <div class="input-wrapper">
+                    <input type="password" id="nba-key" placeholder="Enter your NBA API key">
+                    <button class="toggle-visibility" onclick="toggleVisibility('nba-key')">👁️</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="api-section">
+            <h3>🎓 SportsRadar NCAA Football API</h3>
+            <div class="input-group">
+                <label for="ncaaf-key">NCAA Football API Key</label>
+                <div class="input-wrapper">
+                    <input type="password" id="ncaaf-key" placeholder="Enter your NCAA Football API key">
+                    <button class="toggle-visibility" onclick="toggleVisibility('ncaaf-key')">👁️</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="api-section">
+            <h3>📺 Live Scoreboard API (Optional)</h3>
+            <div class="input-group">
+                <label for="scoreboard-url">Scoreboard API URL</label>
+                <input type="text" id="scoreboard-url" placeholder="http://localhost:3000 (default)">
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button onclick="saveConfiguration()">💾 Save Configuration</button>
+            <button class="secondary" onclick="testConfiguration()">🔍 Test APIs</button>
+            <button class="secondary" onclick="clearConfiguration()">🗑️ Clear All</button>
+        </div>
+        
+        <div id="status-message" class="status"></div>
+    </div>
+    
+    <script>
+        // Check current configuration on load
+        window.addEventListener('DOMContentLoaded', () => {
+            checkCurrentConfiguration();
+            loadSavedKeys();
+        });
+        
+        function checkCurrentConfiguration() {
+            const sports = ['mlb', 'nfl', 'nba', 'ncaaf'];
+            sports.forEach(sport => {
+                const key = localStorage.getItem(`SPORTRADAR_${sport.toUpperCase()}_KEY`);
+                const statusEl = document.getElementById(`${sport}-status`);
+                if (key && key !== 'YOUR_' + sport.toUpperCase() + '_API_KEY') {
+                    statusEl.textContent = 'Configured';
+                    statusEl.className = 'status-value configured';
+                } else {
+                    statusEl.textContent = 'Not Configured';
+                    statusEl.className = 'status-value not-configured';
+                }
+            });
+            
+            // Check scoreboard API
+            const scoreboardUrl = localStorage.getItem('SCOREBOARD_API_URL');
+            const scoreboardStatus = document.getElementById('scoreboard-status');
+            if (scoreboardUrl) {
+                scoreboardStatus.textContent = 'Configured';
+                scoreboardStatus.className = 'status-value configured';
+            } else {
+                scoreboardStatus.textContent = 'Using Default';
+                scoreboardStatus.className = 'status-value configured';
+            }
+        }
+        
+        function loadSavedKeys() {
+            // Load saved keys (showing masked values)
+            const sports = ['mlb', 'nfl', 'nba', 'ncaaf'];
+            sports.forEach(sport => {
+                const key = localStorage.getItem(`SPORTRADAR_${sport.toUpperCase()}_KEY`);
+                if (key && key !== 'YOUR_' + sport.toUpperCase() + '_API_KEY') {
+                    const input = document.getElementById(`${sport}-key`);
+                    input.value = key;
+                }
+            });
+            
+            const scoreboardUrl = localStorage.getItem('SCOREBOARD_API_URL');
+            if (scoreboardUrl) {
+                document.getElementById('scoreboard-url').value = scoreboardUrl;
+            }
+        }
+        
+        function toggleVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+        
+        function saveConfiguration() {
+            const sports = ['mlb', 'nfl', 'nba', 'ncaaf'];
+            let savedCount = 0;
+            
+            sports.forEach(sport => {
+                const key = document.getElementById(`${sport}-key`).value.trim();
+                if (key) {
+                    localStorage.setItem(`SPORTRADAR_${sport.toUpperCase()}_KEY`, key);
+                    
+                    // Also save to vault format
+                    localStorage.setItem(`vault_sportradar_${sport}`, key);
+                    savedCount++;
+                }
+            });
+            
+            const scoreboardUrl = document.getElementById('scoreboard-url').value.trim();
+            if (scoreboardUrl) {
+                localStorage.setItem('SCOREBOARD_API_URL', scoreboardUrl);
+            }
+            
+            // Update BlazeAPIConfig if it exists
+            if (window.BlazeAPIConfig) {
+                window.BlazeAPIConfig.init();
+            }
+            
+            showStatus(`✅ Configuration saved successfully! ${savedCount} API keys configured.`, 'success');
+            checkCurrentConfiguration();
+        }
+        
+        async function testConfiguration() {
+            showStatus('🔍 Testing API configurations...', 'info');
+            
+            const results = [];
+            const sports = ['mlb', 'nfl', 'nba', 'ncaaf'];
+            
+            for (const sport of sports) {
+                const key = localStorage.getItem(`SPORTRADAR_${sport.toUpperCase()}_KEY`);
+                if (key && key !== 'YOUR_' + sport.toUpperCase() + '_API_KEY') {
+                    // Test the API key
+                    try {
+                        const endpoint = getSportsRadarTestEndpoint(sport);
+                        const response = await fetch(`${endpoint}?api_key=${key}`);
+                        
+                        if (response.ok) {
+                            results.push(`✅ ${sport.toUpperCase()}: Valid`);
+                        } else if (response.status === 403) {
+                            results.push(`❌ ${sport.toUpperCase()}: Invalid key`);
+                        } else {
+                            results.push(`⚠️ ${sport.toUpperCase()}: ${response.status}`);
+                        }
+                    } catch (error) {
+                        results.push(`❌ ${sport.toUpperCase()}: Network error`);
+                    }
+                }
+            }
+            
+            // Test scoreboard API
+            const scoreboardUrl = localStorage.getItem('SCOREBOARD_API_URL') || 'http://localhost:3000';
+            try {
+                const response = await fetch(`${scoreboardUrl}/mlb/get-game-count`);
+                if (response.ok) {
+                    results.push('✅ Scoreboard API: Connected');
+                } else {
+                    results.push('⚠️ Scoreboard API: Not available');
+                }
+            } catch (error) {
+                results.push('⚠️ Scoreboard API: Not reachable');
+            }
+            
+            showStatus(results.join('<br>'), results.some(r => r.includes('❌')) ? 'error' : 'success');
+        }
+        
+        function getSportsRadarTestEndpoint(sport) {
+            const endpoints = {
+                mlb: 'https://api.sportradar.us/mlb/trial/v7/en/games/' + new Date().toISOString().split('T')[0] + '/schedule.json',
+                nfl: 'https://api.sportradar.us/nfl/official/trial/v7/en/teams/hierarchy.json',
+                nba: 'https://api.sportradar.us/nba/trial/v8/en/seasons/2025/REG/standings.json',
+                ncaaf: 'https://api.sportradar.us/ncaafb/trial/v1/en/teams/FBS/hierarchy.json'
+            };
+            return endpoints[sport];
+        }
+        
+        function clearConfiguration() {
+            if (confirm('Are you sure you want to clear all API configurations?')) {
+                const sports = ['mlb', 'nfl', 'nba', 'ncaaf'];
+                sports.forEach(sport => {
+                    localStorage.removeItem(`SPORTRADAR_${sport.toUpperCase()}_KEY`);
+                    localStorage.removeItem(`vault_sportradar_${sport}`);
+                    document.getElementById(`${sport}-key`).value = '';
+                });
+                
+                localStorage.removeItem('SCOREBOARD_API_URL');
+                document.getElementById('scoreboard-url').value = '';
+                
+                showStatus('🗑️ All configurations cleared', 'info');
+                checkCurrentConfiguration();
+            }
+        }
+        
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status-message');
+            statusEl.innerHTML = message;
+            statusEl.className = `status ${type}`;
+            
+            if (type !== 'error') {
+                setTimeout(() => {
+                    statusEl.className = 'status';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>

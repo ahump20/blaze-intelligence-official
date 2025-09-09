@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lone Star Legends — Advanced 3D Baseball</title>
+    <meta name="description" content="Experience baseball like never before with advanced 3D biometric visualization, real-time motion capture, and AI-powered gameplay.">
+    
+    <!-- Three.js and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"></script>
+    
+    <!-- WebAssembly Physics Engine -->
+    <script src="https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.11.2/rapier.js"></script>
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --dark-burnt-orange: #8B3A00;
+            --black: #000000;
+            --white: #FFFFFF;
+            --field-green: #2d5a2d;
+            --dirt-brown: #8B4513;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(135deg, var(--black) 0%, #1a1a2e 100%);
+            color: var(--white);
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #game-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+        
+        /* HUD Overlay */
+        .game-hud {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .scoreboard {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--burnt-orange);
+            border-radius: 12px;
+            padding: 15px 30px;
+            pointer-events: auto;
+        }
+        
+        .score-row {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .team-name {
+            color: var(--burnt-orange);
+            min-width: 120px;
+        }
+        
+        .score {
+            font-size: 24px;
+            color: var(--white);
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        /* Biometric Dashboard */
+        .biometric-panel {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--burnt-orange);
+            border-radius: 8px;
+            padding: 20px;
+            pointer-events: auto;
+        }
+        
+        .biometric-title {
+            color: var(--burnt-orange);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .metric-value {
+            color: var(--burnt-orange);
+            font-weight: 600;
+        }
+        
+        /* Control Panel */
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            pointer-events: auto;
+        }
+        
+        .control-btn {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--dark-burnt-orange));
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(191, 87, 0, 0.4);
+        }
+        
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Pitch Analysis */
+        .pitch-analysis {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            width: 250px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--burnt-orange);
+            border-radius: 8px;
+            padding: 15px;
+            pointer-events: auto;
+        }
+        
+        .pitch-type {
+            color: var(--burnt-orange);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .velocity-reading {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--white);
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .trajectory-preview {
+            height: 60px;
+            background: rgba(191, 87, 0, 0.1);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Loading Screen */
+        .loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--black) 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .loading-logo {
+            font-size: 48px;
+            color: var(--burnt-orange);
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            color: var(--white);
+            margin-bottom: 30px;
+        }
+        
+        .loading-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--dark-burnt-orange));
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        /* VR/AR Toggle */
+        .vr-controls {
+            position: absolute;
+            top: 20px;
+            right: 340px;
+            display: flex;
+            gap: 10px;
+            pointer-events: auto;
+        }
+        
+        .vr-btn {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--burnt-orange);
+            color: var(--burnt-orange);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .vr-btn:hover {
+            background: var(--burnt-orange);
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .biometric-panel,
+            .pitch-analysis {
+                width: 200px;
+                padding: 10px;
+            }
+            
+            .controls {
+                flex-wrap: wrap;
+            }
+            
+            .control-btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Loading Screen -->
+        <div class="loading-screen" id="loading-screen">
+            <div class="loading-logo">🔥⚾</div>
+            <div class="loading-text">Loading Lone Star Legends...</div>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loading-progress"></div>
+            </div>
+        </div>
+        
+        <!-- 3D Canvas -->
+        <canvas id="game-canvas"></canvas>
+        
+        <!-- Game HUD -->
+        <div class="game-hud">
+            <!-- Scoreboard -->
+            <div class="scoreboard">
+                <div class="score-row">
+                    <span class="team-name">Texas Rangers</span>
+                    <span class="score" id="home-score">0</span>
+                    <span>-</span>
+                    <span class="score" id="away-score">0</span>
+                    <span class="team-name">Houston Astros</span>
+                </div>
+                <div style="font-size: 14px; text-align: center; margin-top: 5px; opacity: 0.8;">
+                    Inning <span id="inning">1</span> | <span id="inning-half">Top</span>
+                </div>
+            </div>
+            
+            <!-- VR/AR Controls -->
+            <div class="vr-controls">
+                <button class="vr-btn" id="vr-toggle">🥽 VR Mode</button>
+                <button class="vr-btn" id="ar-toggle">📱 AR Mode</button>
+            </div>
+            
+            <!-- Pitch Analysis Panel -->
+            <div class="pitch-analysis">
+                <div class="biometric-title">Live Analysis</div>
+                <div class="pitch-type" id="pitch-type">4-Seam Fastball</div>
+                <div class="velocity-reading" id="velocity">94.2 MPH</div>
+                <div class="metric-row">
+                    <span>Spin Rate:</span>
+                    <span class="metric-value" id="spin-rate">2,450 RPM</span>
+                </div>
+                <div class="metric-row">
+                    <span>Break:</span>
+                    <span class="metric-value" id="break">2.1" / 8.3"</span>
+                </div>
+                <div class="metric-row">
+                    <span>Release Point:</span>
+                    <span class="metric-value" id="release">6.2ft</span>
+                </div>
+                <div class="trajectory-preview" id="trajectory-preview"></div>
+            </div>
+            
+            <!-- Biometric Dashboard -->
+            <div class="biometric-panel">
+                <div class="biometric-title">Champion Metrics</div>
+                <div class="metric-row">
+                    <span>Clutch Gene:</span>
+                    <span class="metric-value" id="clutch-gene">8.7</span>
+                </div>
+                <div class="metric-row">
+                    <span>Flow State:</span>
+                    <span class="metric-value" id="flow-state">9.2</span>
+                </div>
+                <div class="metric-row">
+                    <span>Mental Fortress:</span>
+                    <span class="metric-value" id="mental-fortress">8.9</span>
+                </div>
+                <div class="metric-row">
+                    <span>Champion Aura:</span>
+                    <span class="metric-value" id="champion-aura">9.1</span>
+                </div>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--burnt-orange);">
+                    <div class="metric-row">
+                        <span>Heart Rate:</span>
+                        <span class="metric-value" id="heart-rate">142 BPM</span>
+                    </div>
+                    <div class="metric-row">
+                        <span>Muscle Tension:</span>
+                        <span class="metric-value" id="muscle-tension">72%</span>
+                    </div>
+                    <div class="metric-row">
+                        <span>Focus Level:</span>
+                        <span class="metric-value" id="focus-level">94%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Game Controls -->
+            <div class="controls">
+                <button class="control-btn" id="pitch-btn">Pitch</button>
+                <button class="control-btn" id="swing-btn">Swing</button>
+                <button class="control-btn" id="steal-btn" disabled>Steal</button>
+                <button class="control-btn" id="timeout-btn">Timeout</button>
+                <button class="control-btn" id="replay-btn">Replay</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game Engine Script -->
+    <script>
+        // Global game state
+        const GameState = {
+            scene: null,
+            camera: null,
+            renderer: null,
+            physics: null,
+            stadium: null,
+            players: {},
+            ball: null,
+            gameData: {
+                homeScore: 0,
+                awayScore: 0,
+                inning: 1,
+                inningHalf: 'Top',
+                outs: 0,
+                balls: 0,
+                strikes: 0
+            },
+            biometrics: {
+                clutchGene: 8.7,
+                flowState: 9.2,
+                mentalFortress: 8.9,
+                championAura: 9.1,
+                heartRate: 142,
+                muscleTension: 72,
+                focusLevel: 94
+            },
+            isVRMode: false,
+            isARMode: false,
+            animationMixers: [],
+            clock: new THREE.Clock()
+        };
+        
+        // Player positions (in feet from home plate)
+        const FIELD_POSITIONS = {
+            pitcher: { x: 0, z: 60.5, y: 0 },
+            catcher: { x: 0, z: -2, y: 0 },
+            firstBase: { x: 45, z: 45, y: 0 },
+            secondBase: { x: 0, z: 90, y: 0 },
+            thirdBase: { x: -45, z: 45, y: 0 },
+            shortstop: { x: -20, z: 60, y: 0 },
+            leftField: { x: -100, z: 150, y: 0 },
+            centerField: { x: 0, z: 180, y: 0 },
+            rightField: { x: 100, z: 150, y: 0 },
+            batter: { x: -2, z: 0, y: 0 }
+        };
+        
+        // Initialize the game
+        async function initGame() {
+            updateLoadingProgress(10, "Initializing 3D Engine...");
+            await initThreeJS();
+            
+            updateLoadingProgress(25, "Loading Physics Engine...");
+            await initPhysics();
+            
+            updateLoadingProgress(40, "Building Stadium...");
+            await buildStadium();
+            
+            updateLoadingProgress(60, "Creating Players...");
+            await createPlayers();
+            
+            updateLoadingProgress(80, "Setting up Biometrics...");
+            await initBiometrics();
+            
+            updateLoadingProgress(95, "Starting Game...");
+            await initGameLogic();
+            
+            updateLoadingProgress(100, "Ready to Play!");
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+                animate();
+            }, 500);
+        }
+        
+        function updateLoadingProgress(percent, text) {
+            document.getElementById('loading-progress').style.width = percent + '%';
+            document.querySelector('.loading-text').textContent = text;
+        }
+        
+        async function initThreeJS() {
+            // Create scene
+            GameState.scene = new THREE.Scene();
+            GameState.scene.fog = new THREE.Fog(0x87CEEB, 200, 1000); // Sky blue fog
+            
+            // Create camera
+            GameState.camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                2000
+            );
+            GameState.camera.position.set(0, 50, -100);
+            GameState.camera.lookAt(0, 0, 0);
+            
+            // Create renderer
+            GameState.renderer = new THREE.WebGLRenderer({
+                canvas: document.getElementById('game-canvas'),
+                antialias: true,
+                alpha: false
+            });
+            GameState.renderer.setSize(window.innerWidth, window.innerHeight);
+            GameState.renderer.shadowMap.enabled = true;
+            GameState.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            GameState.renderer.outputEncoding = THREE.sRGBEncoding;
+            GameState.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            GameState.renderer.toneMappingExposure = 1.2;
+            
+            // Add controls
+            const controls = new THREE.OrbitControls(GameState.camera, GameState.renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.maxPolarAngle = Math.PI / 2.2;
+            controls.minDistance = 20;
+            controls.maxDistance = 500;
+            GameState.controls = controls;
+            
+            // Add lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            GameState.scene.add(ambientLight);
+            
+            const sunLight = new THREE.DirectionalLight(0xffffff, 1.0);
+            sunLight.position.set(100, 200, 100);
+            sunLight.castShadow = true;
+            sunLight.shadow.mapSize.width = 4096;
+            sunLight.shadow.mapSize.height = 4096;
+            sunLight.shadow.camera.near = 0.5;
+            sunLight.shadow.camera.far = 500;
+            sunLight.shadow.camera.left = -200;
+            sunLight.shadow.camera.right = 200;
+            sunLight.shadow.camera.top = 200;
+            sunLight.shadow.camera.bottom = -200;
+            GameState.scene.add(sunLight);
+            
+            // Stadium lights
+            const stadiumLights = [
+                { pos: [-150, 80, -150], color: 0xffffff, intensity: 0.8 },
+                { pos: [150, 80, -150], color: 0xffffff, intensity: 0.8 },
+                { pos: [-150, 80, 150], color: 0xffffff, intensity: 0.8 },
+                { pos: [150, 80, 150], color: 0xffffff, intensity: 0.8 }
+            ];
+            
+            stadiumLights.forEach(light => {
+                const spotLight = new THREE.SpotLight(light.color, light.intensity, 400, Math.PI / 6, 0.1);
+                spotLight.position.set(...light.pos);
+                spotLight.target.position.set(0, 0, 0);
+                spotLight.castShadow = true;
+                GameState.scene.add(spotLight);
+                GameState.scene.add(spotLight.target);
+            });
+        }
+        
+        async function initPhysics() {
+            // Initialize Cannon.js physics
+            GameState.physics = new CANNON.World();
+            GameState.physics.gravity.set(0, -32.2, 0); // 32.2 ft/s² gravity
+            GameState.physics.broadphase = new CANNON.NaiveBroadphase();
+            GameState.physics.solver.iterations = 10;
+            
+            // Ground physics
+            const groundShape = new CANNON.Plane();
+            const groundBody = new CANNON.Body({ mass: 0 });
+            groundBody.addShape(groundShape);
+            groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+            GameState.physics.add(groundBody);
+        }
+        
+        async function buildStadium() {
+            // Stadium geometry
+            const stadium = new THREE.Group();
+            
+            // Grass field (outfield)
+            const grassGeometry = new THREE.CircleGeometry(200, 64);
+            const grassMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x2d5a2d,
+                transparent: true,
+                opacity: 0.9
+            });
+            const grass = new THREE.Mesh(grassGeometry, grassMaterial);
+            grass.rotation.x = -Math.PI / 2;
+            grass.receiveShadow = true;
+            stadium.add(grass);
+            
+            // Infield dirt
+            const infieldVertices = [
+                new THREE.Vector2(0, 0),     // Home plate
+                new THREE.Vector2(45, 45),   // First base
+                new THREE.Vector2(0, 90),    // Second base
+                new THREE.Vector2(-45, 45),  // Third base
+                new THREE.Vector2(0, 0)      // Back to home
+            ];
+            
+            const infieldShape = new THREE.Shape(infieldVertices);
+            const infieldGeometry = new THREE.ShapeGeometry(infieldShape);
+            const infieldMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x8B4513 
+            });
+            const infield = new THREE.Mesh(infieldGeometry, infieldMaterial);
+            infield.rotation.x = -Math.PI / 2;
+            infield.position.y = 0.1;
+            infield.receiveShadow = true;
+            stadium.add(infield);
+            
+            // Pitcher's mound
+            const moundGeometry = new THREE.CylinderGeometry(9, 9, 1.5, 32);
+            const moundMaterial = new THREE.MeshLambertMaterial({ color: 0x8B4513 });
+            const mound = new THREE.Mesh(moundGeometry, moundMaterial);
+            mound.position.set(0, 0.75, 60.5);
+            mound.receiveShadow = true;
+            stadium.add(mound);
+            
+            // Home plate
+            const plateGeometry = new THREE.BoxGeometry(1.5, 0.1, 1.5);
+            const plateMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+            const plate = new THREE.Mesh(plateGeometry, plateMaterial);
+            plate.position.set(0, 0.05, 0);
+            stadium.add(plate);
+            
+            // Bases
+            const basePositions = [
+                { x: 45, z: 45 },   // First base
+                { x: 0, z: 90 },    // Second base  
+                { x: -45, z: 45 }   // Third base
+            ];
+            
+            basePositions.forEach(pos => {
+                const baseGeometry = new THREE.BoxGeometry(1.5, 0.3, 1.5);
+                const baseMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+                const base = new THREE.Mesh(baseGeometry, baseMaterial);
+                base.position.set(pos.x, 0.15, pos.z);
+                base.castShadow = true;
+                stadium.add(base);
+            });
+            
+            // Outfield wall
+            const wallGeometry = new THREE.CylinderGeometry(190, 190, 12, 64, 1, true, 0, Math.PI);
+            const wallMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x2F4F2F,
+                side: THREE.DoubleSide 
+            });
+            const wall = new THREE.Mesh(wallGeometry, wallMaterial);
+            wall.position.set(0, 6, 0);
+            stadium.add(wall);
+            
+            // Stadium seating
+            for (let tier = 0; tier < 3; tier++) {
+                const seatGeometry = new THREE.CylinderGeometry(
+                    200 + (tier * 15), 
+                    200 + (tier * 15), 
+                    8, 
+                    64, 1, true, 0, Math.PI
+                );
+                const seatMaterial = new THREE.MeshLambertMaterial({ 
+                    color: tier % 2 === 0 ? 0x4682B4 : 0x1E90FF,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                const seats = new THREE.Mesh(seatGeometry, seatMaterial);
+                seats.position.set(0, 15 + (tier * 12), 0);
+                stadium.add(seats);
+            }
+            
+            // Scoreboard
+            const scoreboardGeometry = new THREE.BoxGeometry(40, 20, 2);
+            const scoreboardMaterial = new THREE.MeshLambertMaterial({ color: 0x000000 });
+            const scoreboard = new THREE.Mesh(scoreboardGeometry, scoreboardMaterial);
+            scoreboard.position.set(0, 25, 200);
+            stadium.add(scoreboard);
+            
+            GameState.stadium = stadium;
+            GameState.scene.add(stadium);
+        }
+        
+        async function createPlayers() {
+            GameState.players = {};
+            
+            // Create player models for each position
+            for (const [position, coords] of Object.entries(FIELD_POSITIONS)) {
+                const player = await createPlayerModel(position, coords);
+                GameState.players[position] = player;
+                GameState.scene.add(player.mesh);
+            }
+        }
+        
+        async function createPlayerModel(position, coords) {
+            // Player body (simplified for now, can be enhanced with GLTF models)
+            const playerGroup = new THREE.Group();
+            
+            // Body
+            const bodyGeometry = new THREE.CylinderGeometry(1, 1.5, 6, 8);
+            const bodyMaterial = new THREE.MeshLambertMaterial({ 
+                color: position === 'batter' ? 0x8B0000 : 0x4169E1 
+            });
+            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            body.position.y = 3;
+            body.castShadow = true;
+            playerGroup.add(body);
+            
+            // Head
+            const headGeometry = new THREE.SphereGeometry(1, 16, 16);
+            const headMaterial = new THREE.MeshLambertMaterial({ color: 0xFFDBCA });
+            const head = new THREE.Mesh(headGeometry, headMaterial);
+            head.position.y = 7;
+            head.castShadow = true;
+            playerGroup.add(head);
+            
+            // Hat
+            const hatGeometry = new THREE.CylinderGeometry(1.2, 1.2, 0.5, 16);
+            const hatMaterial = new THREE.MeshLambertMaterial({ 
+                color: position === 'batter' ? 0x8B0000 : 0x000080 
+            });
+            const hat = new THREE.Mesh(hatGeometry, hatMaterial);
+            hat.position.y = 7.8;
+            playerGroup.add(hat);
+            
+            // Position player
+            playerGroup.position.set(coords.x, coords.y, coords.z);
+            
+            // Add biometric effects
+            if (position === 'batter' || position === 'pitcher') {
+                addBiometricEffects(playerGroup, position);
+            }
+            
+            // AI behavior system
+            const aiSystem = new PlayerAI(position, coords);
+            
+            return {
+                mesh: playerGroup,
+                position: position,
+                homePosition: coords,
+                ai: aiSystem,
+                isActive: true,
+                stats: generatePlayerStats(position)
+            };
+        }
+        
+        function addBiometricEffects(playerGroup, position) {
+            // Champion Aura effect
+            const auraGeometry = new THREE.RingGeometry(2, 4, 32);
+            const auraMaterial = new THREE.MeshBasicMaterial({
+                color: 0xBF5700,
+                transparent: true,
+                opacity: 0.3,
+                side: THREE.DoubleSide
+            });
+            const aura = new THREE.Mesh(auraGeometry, auraMaterial);
+            aura.rotation.x = -Math.PI / 2;
+            aura.position.y = 0.1;
+            playerGroup.add(aura);
+            
+            // Flow state particles
+            const particleGeometry = new THREE.BufferGeometry();
+            const particleCount = 50;
+            const positions = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 10;
+            }
+            
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const particleMaterial = new THREE.PointsMaterial({
+                color: 0xBF5700,
+                size: 0.1,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const particles = new THREE.Points(particleGeometry, particleMaterial);
+            playerGroup.add(particles);
+            
+            // Animate particles
+            const animateParticles = () => {
+                const positions = particles.geometry.attributes.position.array;
+                for (let i = 1; i < positions.length; i += 3) {
+                    positions[i] += 0.02; // Move up
+                    if (positions[i] > 10) positions[i] = -10;
+                }
+                particles.geometry.attributes.position.needsUpdate = true;
+                requestAnimationFrame(animateParticles);
+            };
+            animateParticles();
+        }
+        
+        function generatePlayerStats(position) {
+            return {
+                clutchGene: 6 + Math.random() * 4,
+                flowState: 6 + Math.random() * 4,
+                mentalFortress: 6 + Math.random() * 4,
+                championAura: 6 + Math.random() * 4,
+                speed: 60 + Math.random() * 40,
+                fielding: 70 + Math.random() * 30,
+                batting: 60 + Math.random() * 40
+            };
+        }
+        
+        // Player AI System
+        class PlayerAI {
+            constructor(position, homePosition) {
+                this.position = position;
+                this.homePosition = homePosition;
+                this.currentTarget = null;
+                this.state = 'ready'; // ready, moving, fielding
+                this.reactionTime = 0.1 + Math.random() * 0.3;
+            }
+            
+            update(ball, gameState) {
+                if (!ball || this.position === 'batter') return;
+                
+                // Check if ball is in play
+                if (ball.inPlay) {
+                    this.reactToBall(ball);
+                } else {
+                    this.returnToPosition();
+                }
+            }
+            
+            reactToBall(ball) {
+                const ballPosition = ball.mesh.position;
+                const playerPosition = GameState.players[this.position].mesh.position;
+                
+                // Calculate distance to ball
+                const distance = ballPosition.distanceTo(playerPosition);
+                
+                // Determine if this player should field the ball
+                if (this.shouldFieldBall(ball, distance)) {
+                    this.moveTowardsBall(ball);
+                }
+            }
+            
+            shouldFieldBall(ball, distance) {
+                // Find closest fielder to ball
+                let closestDistance = Infinity;
+                let closestPlayer = null;
+                
+                Object.values(GameState.players).forEach(player => {
+                    if (player.position === 'batter' || player.position === 'pitcher') return;
+                    
+                    const playerDistance = ball.mesh.position.distanceTo(player.mesh.position);
+                    if (playerDistance < closestDistance) {
+                        closestDistance = playerDistance;
+                        closestPlayer = player;
+                    }
+                });
+                
+                return closestPlayer?.position === this.position;
+            }
+            
+            moveTowardsBall(ball) {
+                const player = GameState.players[this.position];
+                const ballPosition = ball.mesh.position;
+                const playerPosition = player.mesh.position;
+                
+                // Calculate movement direction
+                const direction = new THREE.Vector3()
+                    .subVectors(ballPosition, playerPosition)
+                    .normalize();
+                
+                // Move player (accounting for speed and reaction time)
+                const speed = player.stats.speed * 0.1;
+                player.mesh.position.add(direction.multiplyScalar(speed));
+                
+                // Rotate player to face ball
+                player.mesh.lookAt(ballPosition);
+                
+                this.state = 'fielding';
+            }
+            
+            returnToPosition() {
+                const player = GameState.players[this.position];
+                const homePos = new THREE.Vector3(
+                    this.homePosition.x,
+                    this.homePosition.y,
+                    this.homePosition.z
+                );
+                
+                const currentPos = player.mesh.position;
+                const distance = currentPos.distanceTo(homePos);
+                
+                if (distance > 2) {
+                    const direction = new THREE.Vector3()
+                        .subVectors(homePos, currentPos)
+                        .normalize();
+                    
+                    player.mesh.position.add(direction.multiplyScalar(0.1));
+                } else {
+                    this.state = 'ready';
+                }
+            }
+        }
+        
+        async function initBiometrics() {
+            // Initialize biometric data streaming (simulated)
+            setInterval(updateBiometrics, 1000);
+        }
+        
+        function updateBiometrics() {
+            // Simulate real-time biometric updates
+            GameState.biometrics.heartRate = 120 + Math.random() * 40;
+            GameState.biometrics.muscleTension = 60 + Math.random() * 30;
+            GameState.biometrics.focusLevel = 85 + Math.random() * 15;
+            
+            // Update Champion Enigma scores based on game situation
+            if (GameState.gameData.strikes === 2 || GameState.gameData.outs === 2) {
+                GameState.biometrics.clutchGene = Math.min(10, GameState.biometrics.clutchGene + 0.1);
+            }
+            
+            // Update UI
+            document.getElementById('heart-rate').textContent = Math.round(GameState.biometrics.heartRate) + ' BPM';
+            document.getElementById('muscle-tension').textContent = Math.round(GameState.biometrics.muscleTension) + '%';
+            document.getElementById('focus-level').textContent = Math.round(GameState.biometrics.focusLevel) + '%';
+            document.getElementById('clutch-gene').textContent = GameState.biometrics.clutchGene.toFixed(1);
+            document.getElementById('flow-state').textContent = GameState.biometrics.flowState.toFixed(1);
+            document.getElementById('mental-fortress').textContent = GameState.biometrics.mentalFortress.toFixed(1);
+            document.getElementById('champion-aura').textContent = GameState.biometrics.championAura.toFixed(1);
+        }
+        
+        async function initGameLogic() {
+            // Initialize game controls
+            document.getElementById('pitch-btn').addEventListener('click', pitch);
+            document.getElementById('swing-btn').addEventListener('click', swing);
+            document.getElementById('steal-btn').addEventListener('click', steal);
+            document.getElementById('timeout-btn').addEventListener('click', timeout);
+            document.getElementById('replay-btn').addEventListener('click', replay);
+            
+            // VR/AR controls
+            document.getElementById('vr-toggle').addEventListener('click', toggleVR);
+            document.getElementById('ar-toggle').addEventListener('click', toggleAR);
+            
+            // Create baseball
+            createBaseball();
+        }
+        
+        function createBaseball() {
+            const ballGeometry = new THREE.SphereGeometry(0.15, 16, 16);
+            const ballMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+            const ballMesh = new THREE.Mesh(ballGeometry, ballMaterial);
+            ballMesh.position.set(0, 1, 60.5);
+            ballMesh.castShadow = true;
+            
+            // Physics body
+            const ballShape = new CANNON.Sphere(0.15);
+            const ballBody = new CANNON.Body({ mass: 0.145 }); // 5.125 oz in kg
+            ballBody.addShape(ballShape);
+            ballBody.position.set(0, 1, 60.5);
+            
+            GameState.ball = {
+                mesh: ballMesh,
+                body: ballBody,
+                inPlay: false,
+                velocity: new THREE.Vector3()
+            };
+            
+            GameState.scene.add(ballMesh);
+            GameState.physics.add(ballBody);
+        }
+        
+        function pitch() {
+            if (GameState.ball.inPlay) return;
+            
+            const ball = GameState.ball;
+            const pitcher = GameState.players.pitcher;
+            
+            // Generate pitch characteristics
+            const pitchTypes = ['4-Seam Fastball', 'Curveball', 'Slider', 'Changeup', 'Sinker'];
+            const pitchType = pitchTypes[Math.floor(Math.random() * pitchTypes.length)];
+            const velocity = 85 + Math.random() * 15; // 85-100 mph
+            const spinRate = 2000 + Math.random() * 1000; // RPM
+            
+            // Update pitch analysis UI
+            document.getElementById('pitch-type').textContent = pitchType;
+            document.getElementById('velocity').textContent = velocity.toFixed(1) + ' MPH';
+            document.getElementById('spin-rate').textContent = Math.round(spinRate) + ' RPM';
+            
+            // Calculate pitch movement
+            const direction = new THREE.Vector3(
+                (Math.random() - 0.5) * 2, // Horizontal movement
+                -0.5 - Math.random() * 0.5, // Downward arc
+                -1 // Toward home plate
+            ).normalize();
+            
+            const speed = velocity * 1.467; // Convert MPH to ft/s
+            ball.velocity = direction.multiplyScalar(speed);
+            
+            // Apply physics
+            ball.body.velocity.set(ball.velocity.x, ball.velocity.y, ball.velocity.z);
+            ball.inPlay = true;
+            
+            // Animate pitcher
+            animatePitcher();
+        }
+        
+        function swing() {
+            if (!GameState.ball.inPlay) return;
+            
+            const ball = GameState.ball;
+            const batter = GameState.players.batter;
+            
+            // Check if ball is in hitting zone
+            const ballPosition = ball.mesh.position;
+            const batterPosition = batter.mesh.position;
+            
+            const distance = ballPosition.distanceTo(batterPosition);
+            
+            if (distance < 3 && ballPosition.z < 2 && ballPosition.z > -2) {
+                // Hit!
+                const exitVelocity = 90 + Math.random() * 20; // Exit velocity
+                const launchAngle = -10 + Math.random() * 50; // Launch angle
+                
+                // Calculate hit direction
+                const hitDirection = new THREE.Vector3(
+                    (Math.random() - 0.5) * 1.5,
+                    Math.sin(launchAngle * Math.PI / 180),
+                    1
+                ).normalize();
+                
+                const hitSpeed = exitVelocity * 1.467; // Convert to ft/s
+                ball.velocity = hitDirection.multiplyScalar(hitSpeed);
+                ball.body.velocity.set(ball.velocity.x, ball.velocity.y, ball.velocity.z);
+                
+                // Update game state
+                updateGameAfterHit();
+                
+                // Animate batter
+                animateBatter();
+            } else {
+                // Miss - strike
+                GameState.gameData.strikes++;
+                if (GameState.gameData.strikes >= 3) {
+                    strikeout();
+                }
+            }
+        }
+        
+        function animatePitcher() {
+            const pitcher = GameState.players.pitcher;
+            // Simple windup animation
+            pitcher.mesh.rotation.z = 0.2;
+            setTimeout(() => {
+                pitcher.mesh.rotation.z = -0.3;
+                setTimeout(() => {
+                    pitcher.mesh.rotation.z = 0;
+                }, 200);
+            }, 100);
+        }
+        
+        function animateBatter() {
+            const batter = GameState.players.batter;
+            // Swing animation
+            batter.mesh.rotation.y = -0.5;
+            setTimeout(() => {
+                batter.mesh.rotation.y = 0.5;
+                setTimeout(() => {
+                    batter.mesh.rotation.y = 0;
+                }, 300);
+            }, 100);
+        }
+        
+        function updateGameAfterHit() {
+            // Reset count
+            GameState.gameData.balls = 0;
+            GameState.gameData.strikes = 0;
+            
+            // Simple scoring logic
+            const random = Math.random();
+            if (random > 0.7) {
+                GameState.gameData.homeScore++;
+                document.getElementById('home-score').textContent = GameState.gameData.homeScore;
+            }
+        }
+        
+        function strikeout() {
+            GameState.gameData.outs++;
+            GameState.gameData.balls = 0;
+            GameState.gameData.strikes = 0;
+            
+            if (GameState.gameData.outs >= 3) {
+                nextInning();
+            }
+        }
+        
+        function nextInning() {
+            GameState.gameData.outs = 0;
+            
+            if (GameState.gameData.inningHalf === 'Top') {
+                GameState.gameData.inningHalf = 'Bottom';
+            } else {
+                GameState.gameData.inningHalf = 'Top';
+                GameState.gameData.inning++;
+            }
+            
+            document.getElementById('inning').textContent = GameState.gameData.inning;
+            document.getElementById('inning-half').textContent = GameState.gameData.inningHalf;
+            
+            // Reset ball
+            resetBall();
+        }
+        
+        function resetBall() {
+            GameState.ball.mesh.position.set(0, 1, 60.5);
+            GameState.ball.body.position.set(0, 1, 60.5);
+            GameState.ball.body.velocity.set(0, 0, 0);
+            GameState.ball.inPlay = false;
+        }
+        
+        function steal() {
+            // Implement base stealing logic
+            console.log('Steal attempt!');
+        }
+        
+        function timeout() {
+            // Pause game
+            console.log('Timeout called');
+        }
+        
+        function replay() {
+            // Show replay camera
+            console.log('Replay mode');
+        }
+        
+        function toggleVR() {
+            if ('xr' in navigator) {
+                navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
+                    if (supported) {
+                        GameState.renderer.xr.enabled = true;
+                        // VR implementation would go here
+                        console.log('VR Mode activated');
+                    }
+                });
+            }
+        }
+        
+        function toggleAR() {
+            if ('xr' in navigator) {
+                navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
+                    if (supported) {
+                        // AR implementation would go here
+                        console.log('AR Mode activated');
+                    }
+                });
+            }
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const delta = GameState.clock.getDelta();
+            
+            // Update physics
+            GameState.physics.step(1/60);
+            
+            // Sync ball mesh with physics
+            if (GameState.ball) {
+                GameState.ball.mesh.position.copy(GameState.ball.body.position);
+                GameState.ball.mesh.quaternion.copy(GameState.ball.body.quaternion);
+                
+                // Check if ball hits ground
+                if (GameState.ball.body.position.y < 0.15 && GameState.ball.inPlay) {
+                    GameState.ball.inPlay = false;
+                    setTimeout(resetBall, 2000);
+                }
+            }
+            
+            // Update AI players
+            Object.values(GameState.players).forEach(player => {
+                if (player.ai) {
+                    player.ai.update(GameState.ball, GameState.gameData);
+                }
+            });
+            
+            // Update controls
+            if (GameState.controls) {
+                GameState.controls.update();
+            }
+            
+            // Update animation mixers
+            GameState.animationMixers.forEach(mixer => {
+                mixer.update(delta);
+            });
+            
+            // Render scene
+            GameState.renderer.render(GameState.scene, GameState.camera);
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            GameState.camera.aspect = window.innerWidth / window.innerHeight;
+            GameState.camera.updateProjectionMatrix();
+            GameState.renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Start the game when page loads
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+</html>

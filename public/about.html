@@ -1,0 +1,143 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About - Blaze Intelligence</title>
+<link rel="stylesheet" href="/brand.css"><link rel="stylesheet" href="/brand-components.css">
+<meta name="description" content="Learn about Blaze Intelligence's mission to transform sports through data">
+<style>
+.about-container{max-width:900px;margin:80px auto;padding:0 20px}
+.about-header{text-align:center;margin-bottom:48px}
+.about-title{font-size:48px;background:linear-gradient(135deg,#E5E7EB,#BF5700);
+             -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.content-section{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+                 padding:32px;margin-bottom:32px}
+.section-title{color:var(--ink);font-size:24px;margin-bottom:16px;font-weight:700}
+.section-text{color:var(--muted);line-height:1.8;margin-bottom:16px}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:24px}
+.team-member{text-align:center}
+.member-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+               margin:0 auto 12px}
+.member-name{color:var(--ink);font-weight:600;margin-bottom:4px}
+.member-role{color:var(--muted);font-size:14px}
+.values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:24px}
+.value-card{background:#0B0B0F;border:1px solid var(--line);border-radius:12px;padding:20px}
+.value-icon{font-size:32px;margin-bottom:12px}
+.value-title{color:var(--accent);font-weight:600;margin-bottom:8px}
+.value-desc{color:var(--muted);font-size:14px}
+</style>
+</head><body>
+<div id="header"></div>
+
+<div class="about-container">
+  <div class="about-header">
+    <h1 class="about-title">About Blaze Intelligence</h1>
+    <p class="muted">Transforming sports through pressure-aware analytics</p>
+  </div>
+  
+  <div class="content-section">
+    <h2 class="section-title">Our Mission</h2>
+    <p class="section-text">
+      Blaze Intelligence pioneers the future of sports analytics by combining cutting-edge AI technology 
+      with deep domain expertise. We believe that championship-level performance comes from understanding 
+      not just the data, but the pressure moments that define greatness.
+    </p>
+    <p class="section-text">
+      Founded in Austin, Texas, we serve professional teams, elite athletes, and forward-thinking 
+      organizations across MLB, NFL, NBA, and NCAA sports. Our platform processes over 2.8 million 
+      data points daily with industry-leading 94.6% prediction accuracy.
+    </p>
+  </div>
+  
+  <div class="content-section">
+    <h2 class="section-title">Our Values</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🔥</div>
+        <div class="value-title">Pressure-First</div>
+        <div class="value-desc">We focus on high-leverage moments that determine outcomes</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📊</div>
+        <div class="value-title">Data Integrity</div>
+        <div class="value-desc">Real data, real insights, no compromises on accuracy</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">⚡</div>
+        <div class="value-title">Speed</div>
+        <div class="value-desc">Sub-100ms latency for real-time decision making</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🛡️</div>
+        <div class="value-title">Privacy</div>
+        <div class="value-desc">Protecting athlete data and maintaining ethical standards</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content-section">
+    <h2 class="section-title">Leadership Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-avatar"></div>
+        <div class="member-name">Dr. Sarah Chen</div>
+        <div class="member-role">CEO & Co-Founder</div>
+      </div>
+      <div class="team-member">
+        <div class="member-avatar"></div>
+        <div class="member-name">Marcus Rodriguez</div>
+        <div class="member-role">CTO & Co-Founder</div>
+      </div>
+      <div class="team-member">
+        <div class="member-avatar"></div>
+        <div class="member-name">Jennifer Park</div>
+        <div class="member-role">Chief Data Scientist</div>
+      </div>
+      <div class="team-member">
+        <div class="member-avatar"></div>
+        <div class="member-name">David Thompson</div>
+        <div class="member-role">VP of Sports Analytics</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content-section">
+    <h2 class="section-title">Compliance & Ethics</h2>
+    <p class="section-text">
+      Blaze Intelligence operates with the highest standards of data ethics and compliance. We maintain 
+      strict adherence to NCAA regulations, professional league guidelines, and data privacy laws including 
+      GDPR and CCPA. Our platform requires explicit consent for any biometric or image-based analysis.
+    </p>
+    <p class="section-text">
+      We are committed to protecting Name, Image, and Likeness (NIL) rights for all athletes and ensure 
+      that our valuation algorithms are transparent, fair, and free from bias. All data processing is 
+      performed with appropriate consent and in accordance with applicable regulations.
+    </p>
+  </div>
+  
+  <div class="content-section">
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-text">
+      Ready to transform your sports analytics? Contact our team at:
+    </p>
+    <p class="section-text">
+      <strong>Email:</strong> contact@blazeintelligence.com<br>
+      <strong>Phone:</strong> (512) 555-BLAZE<br>
+      <strong>Address:</strong> 1000 Innovation Drive, Austin, TX 78701
+    </p>
+  </div>
+</div>
+
+<div id="footer"></div>
+
+<script type="module">
+  const loadPartial = async (id, path)=>{ 
+    try {
+      const html = await fetch(path).then(r=>r.text()); 
+      document.querySelector(id).innerHTML = html; 
+    } catch(e) {
+      console.warn('Failed to load partial:', path);
+    }
+  };
+  await loadPartial('#header','/partials/header.html');
+  await loadPartial('#footer','/partials/footer.html');
+</script>
+</body></html>

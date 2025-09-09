@@ -1,0 +1,212 @@
+{
+  "environment_variables": {
+    "production": {
+      "stripe": {
+        "STRIPE_PUBLISHABLE_KEY": "pk_live_...",
+        "STRIPE_SECRET_KEY": "[Set via Cloudflare Dashboard - Encrypted]",
+        "STRIPE_WEBHOOK_SECRET": "[Set via Cloudflare Dashboard - Encrypted]",
+        "STRIPE_API_VERSION": "2023-10-16"
+      },
+      "square": {
+        "SQUARE_APPLICATION_ID": "[Set via Cloudflare Dashboard]",
+        "SQUARE_ACCESS_TOKEN": "[Set via Cloudflare Dashboard - Encrypted]",
+        "SQUARE_LOCATION_ID": "[Set via Cloudflare Dashboard]",
+        "SQUARE_ENVIRONMENT": "production"
+      },
+      "integrations": {
+        "HUBSPOT_API_KEY": "[Set via Cloudflare Dashboard - Encrypted]",
+        "HUBSPOT_OWNER_ID": "[Your HubSpot Owner ID]",
+        "AIRTABLE_API_KEY": "[Set via Cloudflare Dashboard - Encrypted]",
+        "AIRTABLE_BASE_ID": "[Your Airtable Base ID]",
+        "NOTION_API_KEY": "[Set via Cloudflare Dashboard - Encrypted]",
+        "NOTION_DATABASE_ID": "[Your Notion Database ID]",
+        "MAILGUN_API_KEY": "[Set via Cloudflare Dashboard - Encrypted]",
+        "MAILGUN_DOMAIN": "mg.blaze-intelligence.com"
+      },
+      "application": {
+        "BLAZE_BASE_URL": "https://blaze-intelligence.pages.dev",
+        "API_VERSION": "1.0.0",
+        "CACHE_TTL": "300"
+      }
+    },
+    "development": {
+      "stripe": {
+        "STRIPE_PUBLISHABLE_KEY": "pk_test_...",
+        "STRIPE_SECRET_KEY": "[Set in .env.local]",
+        "STRIPE_WEBHOOK_SECRET": "[Set in .env.local]",
+        "STRIPE_API_VERSION": "2023-10-16"
+      },
+      "square": {
+        "SQUARE_APPLICATION_ID": "sandbox-sq0idb-...",
+        "SQUARE_ACCESS_TOKEN": "[Set in .env.local]",
+        "SQUARE_LOCATION_ID": "sandbox-location-id",
+        "SQUARE_ENVIRONMENT": "sandbox"
+      },
+      "application": {
+        "BLAZE_BASE_URL": "http://localhost:3000",
+        "API_VERSION": "1.0.0-dev",
+        "CACHE_TTL": "60"
+      }
+    }
+  },
+  "required_secrets": [
+    {
+      "name": "STRIPE_SECRET_KEY",
+      "description": "Stripe secret key for payment processing",
+      "source": "Stripe Dashboard > Developers > API Keys",
+      "security": "encrypted"
+    },
+    {
+      "name": "STRIPE_WEBHOOK_SECRET",
+      "description": "Stripe webhook endpoint secret for signature verification",
+      "source": "Stripe Dashboard > Developers > Webhooks",
+      "security": "encrypted"
+    },
+    {
+      "name": "SQUARE_ACCESS_TOKEN",
+      "description": "Square access token for payment processing",
+      "source": "Square Developer Dashboard > Applications",
+      "security": "encrypted"
+    },
+    {
+      "name": "HUBSPOT_API_KEY",
+      "description": "HubSpot private app token for CRM integration",
+      "source": "HubSpot > Settings > Integrations > Private Apps",
+      "security": "encrypted"
+    },
+    {
+      "name": "AIRTABLE_API_KEY",
+      "description": "Airtable personal access token for data operations",
+      "source": "Airtable > Account > Personal Access Tokens",
+      "security": "encrypted"
+    },
+    {
+      "name": "NOTION_API_KEY",
+      "description": "Notion integration token for documentation",
+      "source": "Notion > Settings > Integrations",
+      "security": "encrypted"
+    },
+    {
+      "name": "MAILGUN_API_KEY",
+      "description": "Mailgun API key for email automation",
+      "source": "Mailgun Dashboard > Settings > API Keys",
+      "security": "encrypted"
+    }
+  ],
+  "webhook_endpoints": [
+    {
+      "service": "stripe",
+      "url": "https://blaze-intelligence.pages.dev/api/payment-processor/webhook",
+      "events": [
+        "checkout.session.completed",
+        "customer.subscription.created",
+        "customer.subscription.updated",
+        "customer.subscription.deleted",
+        "invoice.payment_succeeded",
+        "invoice.payment_failed"
+      ]
+    },
+    {
+      "service": "square",
+      "url": "https://blaze-intelligence.pages.dev/api/payment-processor/square-webhook",
+      "events": [
+        "payment.created",
+        "payment.updated",
+        "subscription.created",
+        "subscription.updated"
+      ]
+    }
+  ],
+  "deployment_checklist": [
+    {
+      "step": "Environment Variables",
+      "tasks": [
+        "Set all required secrets in Cloudflare Pages dashboard",
+        "Verify environment variable names match exactly",
+        "Test secret accessibility in preview deployments"
+      ]
+    },
+    {
+      "step": "Payment Provider Setup",
+      "tasks": [
+        "Configure Stripe products and prices",
+        "Set up Stripe webhook endpoints",
+        "Configure Square application settings",
+        "Test payment processing in sandbox mode"
+      ]
+    },
+    {
+      "step": "Integration Configuration",
+      "tasks": [
+        "Create HubSpot private app with required scopes",
+        "Set up Airtable base structure",
+        "Configure Notion database schema",
+        "Set up Mailgun domain and DNS records"
+      ]
+    },
+    {
+      "step": "API Deployment",
+      "tasks": [
+        "Deploy payment processor functions",
+        "Deploy subscription management endpoints",
+        "Deploy CRM integration handlers",
+        "Deploy onboarding automation"
+      ]
+    },
+    {
+      "step": "Testing & Validation",
+      "tasks": [
+        "Test complete payment flow end-to-end",
+        "Verify webhook handling and signature validation",
+        "Test CRM integration and data sync",
+        "Validate onboarding automation workflow"
+      ]
+    }
+  ],
+  "monitoring_setup": [
+    {
+      "service": "Sentry",
+      "purpose": "Error tracking and performance monitoring",
+      "configuration": "Set SENTRY_DSN in environment variables"
+    },
+    {
+      "service": "Cloudflare Analytics",
+      "purpose": "Request volume and performance tracking",
+      "configuration": "Enabled by default for Pages projects"
+    },
+    {
+      "service": "Custom Dashboard",
+      "purpose": "Revenue and subscription metrics",
+      "configuration": "Built-in revenue dashboard at /revenue-dashboard-live.html"
+    }
+  ],
+  "security_considerations": [
+    {
+      "area": "API Security",
+      "measures": [
+        "All secrets stored as encrypted environment variables",
+        "Webhook signature verification implemented",
+        "Rate limiting on payment endpoints",
+        "CORS properly configured for checkout flows"
+      ]
+    },
+    {
+      "area": "Data Protection",
+      "measures": [
+        "No card data stored locally (handled by Stripe/Square)",
+        "Customer PII encrypted in transit and at rest",
+        "Audit logs for all payment and subscription changes",
+        "Regular security scans and dependency updates"
+      ]
+    },
+    {
+      "area": "Compliance",
+      "measures": [
+        "PCI DSS compliance through payment processors",
+        "GDPR compliance for EU customers",
+        "SOC 2 compliance preparation",
+        "Regular penetration testing"
+      ]
+    }
+  ]
+}

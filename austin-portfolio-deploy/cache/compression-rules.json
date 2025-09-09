@@ -1,0 +1,17 @@
+{
+  "json_files": {
+    "enabled": true,
+    "min_size_bytes": 1024,
+    "compression_level": 6
+  },
+  "log_files": {
+    "enabled": true,
+    "min_size_bytes": 5120,
+    "compression_level": 9
+  },
+  "cache_files": {
+    "enabled": true,
+    "min_size_bytes": 512,
+    "compression_level": 4
+  }
+}

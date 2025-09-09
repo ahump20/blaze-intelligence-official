@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /functions/
+Disallow: /_headers
+Disallow: /_redirects
+
+Sitemap: https://blaze-intelligence.com/sitemap.xml

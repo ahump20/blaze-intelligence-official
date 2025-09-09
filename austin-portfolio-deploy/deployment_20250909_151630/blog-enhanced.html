@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics Hub • Blaze Intelligence</title>
+<meta name="description" content="Championship-level sports analytics, insights, and performance intelligence across MLB, NFL, NBA, and NCAA.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'burnt-orange': {
+'500': '#BF5700',
+'600': '#A0522D',
+},
+'neon': {
+'blue': '#00FFFF',
+'green': '#00FF00', 
+'orange': '#FF8C00',
+}
+}
+}
+}
+}
+</script>
+
+<style>
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+background: #0a0a0a;
+color: #e2e8f0;
+}
+
+.glass-card {
+background: rgba(30, 41, 59, 0.5);
+backdrop-filter: blur(15px);
+border: 1px solid rgba(51, 65, 85, 0.5);
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+overflow: hidden;
+}
+
+.glass-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 2px;
+background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.7), transparent);
+transition: left 0.5s ease;
+}
+
+.glass-card:hover::before {
+left: 100%;
+}
+
+.glass-card:hover {
+border-color: rgba(255, 140, 0, 0.5);
+transform: translateY(-4px);
+box-shadow: 0 20px 40px rgba(255, 140, 0, 0.15);
+}
+
+.neon-text {
+background: linear-gradient(135deg, #FF8C00 0%, #BF5700 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+filter: drop-shadow(0 0 20px rgba(255, 140, 0, 0.3));
+}
+
+.article-card {
+position: relative;
+overflow: hidden;
+transition: all 0.4s ease;
+}
+
+.article-card::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+height: 3px;
+background: linear-gradient(90deg, var(--accent-color), transparent);
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.3s ease;
+}
+
+.article-card:hover::after {
+transform: scaleX(1);
+}
+
+.metric-badge {
+background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(191, 87, 0, 0.1));
+border: 1px solid rgba(255, 140, 0, 0.3);
+backdrop-filter: blur(10px);
+transition: all 0.3s ease;
+}
+
+.metric-badge:hover {
+background: linear-gradient(135deg, rgba(255, 140, 0, 0.2), rgba(191, 87, 0, 0.2));
+border-color: rgba(255, 140, 0, 0.5);
+transform: scale(1.05);
+}
+
+.live-indicator {
+position: relative;
+}
+
+.live-indicator::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+width: 100%;
+height: 100%;
+background: currentColor;
+border-radius: 50%;
+transform: translate(-50%, -50%);
+animation: pulse 2s infinite;
+opacity: 0.3;
+}
+
+@keyframes pulse {
+0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+.trending-arrow {
+animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-5px); }
+}
+
+.video-thumbnail {
+position: relative;
+overflow: hidden;
+border-radius: 12px;
+}
+
+.video-thumbnail::before {
+content: '▶';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 3rem;
+color: white;
+background: rgba(0, 0, 0, 0.7);
+width: 80px;
+height: 80px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0.8;
+transition: all 0.3s ease;
+}
+
+.video-thumbnail:hover::before {
+opacity: 1;
+transform: translate(-50%, -50%) scale(1.1);
+}
+
+.filter-tab {
+position: relative;
+overflow: hidden;
+}
+
+.filter-tab.active {
+background: linear-gradient(135deg, rgba(255, 140, 0, 0.2), rgba(191, 87, 0, 0.2));
+border-color: rgba(255, 140, 0, 0.5);
+}
+
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 1rem;
+}
+
+.stat-card {
+background: rgba(15, 23, 42, 0.8);
+border: 1px solid rgba(51, 65, 85, 0.5);
+padding: 1rem;
+border-radius: 8px;
+transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+background: rgba(15, 23, 42, 0.9);
+border-color: rgba(255, 140, 0, 0.3);
+transform: translateY(-2px);
+}
+
+.insight-badge {
+display: inline-flex;
+align-items: center;
+gap: 0.25rem;
+padding: 0.25rem 0.75rem;
+background: rgba(16, 185, 129, 0.1);
+border: 1px solid rgba(16, 185, 129, 0.3);
+border-radius: 9999px;
+font-size: 0.75rem;
+transition: all 0.3s ease;
+}
+
+.insight-badge:hover {
+background: rgba(16, 185, 129, 0.2);
+border-color: rgba(16, 185, 129, 0.5);
+}
+
+.performance-chart {
+height: 200px;
+background: rgba(15, 23, 42, 0.8);
+border-radius: 8px;
+padding: 1rem;
+}
+
+@keyframes slideIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-in {
+animation: slideIn 0.6s ease forwards;
+}
+</style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100">
+<section class="relative py-16 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-orange-600/10 via-slate-900 to-blue-900/10"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+<div class="text-center mb-12">
+<h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+<span class="neon-text">Championship Analytics</span>
+<br>
+<span class="text-white">Intelligence Hub</span>
+</h1>
+<p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
+Real-time performance metrics, predictive analytics, and championship-level insights 
+powered by <strong>2.8M+ data points</strong> with <strong>94.6% accuracy</strong>
+</p>
+
+<div class="flex flex-wrap justify-center gap-3 mb-12">
+<button onclick="filterContent('all')" class="filter-tab active px-6 py-3 rounded-full bg-orange-500/20 text-orange-400 font-medium transition-all border border-orange-500/30">
+All Sports
+</button>
+<button onclick="filterContent('mlb')" class="filter-tab px-6 py-3 rounded-full bg-slate-800/50 text-slate-300 font-medium transition-all hover:bg-slate-700/50 border border-slate-700">
+<span class="inline-flex items-center gap-2">
+<span class="w-2 h-2 bg-red-500 rounded-full"></span>
+MLB
+</span>
+</button>
+<button onclick="filterContent('nfl')" class="filter-tab px-6 py-3 rounded-full bg-slate-800/50 text-slate-300 font-medium transition-all hover:bg-slate-700/50 border border-slate-700">
+<span class="inline-flex items-center gap-2">
+<span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+NFL
+</span>
+</button>
+<button onclick="filterContent('nba')" class="filter-tab px-6 py-3 rounded-full bg-slate-800/50 text-slate-300 font-medium transition-all hover:bg-slate-700/50 border border-slate-700">
+<span class="inline-flex items-center gap-2">
+<span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+NBA
+</span>
+</button>
+<button onclick="filterContent('ncaa')" class="filter-tab px-6 py-3 rounded-full bg-slate-800/50 text-slate-300 font-medium transition-all hover:bg-slate-700/50 border border-slate-700">
+<span class="inline-flex items-center gap-2">
+<span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+NCAA
+</span>
+</button>
+<button onclick="filterContent('youth')" class="filter-tab px-6 py-3 rounded-full bg-slate-800/50 text-slate-300 font-medium transition-all hover:bg-slate-700/50 border border-slate-700">
+<span class="inline-flex items-center gap-2">
+<span class="w-2 h-2 bg-green-500 rounded-full"></span>
+Youth/HS
+</span>
+</button>
+</div>
+</div>
+</section>
+
+<div class="glass-card p-6 rounded-2xl">
+<h3 class="text-xl font-bold text-white mb-4">Biomechanical Analysis</h3>
+<div class="video-thumbnail bg-gradient-to-br from-blue-600/20 to-purple-600/20 h-48 mb-4">
+<div class="glass-card p-6 rounded-2xl">
+<h3 class="text-xl font-bold text-white mb-4">Character & Grit Assessment</h3>
+<div class="video-thumbnail bg-gradient-to-br from-green-600/20 to-blue-600/20 h-48 mb-4">
+<section class="py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold text-white mb-8">Priority Lab Performance</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<article class="article-card glass-card p-6 rounded-2xl" style="--accent-color: #3B82F6;" data-sport="nfl">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+<span class="text-blue-400 font-bold">TEN</span>
+</div>
+<div>
+<h3 class="text-white font-semibold">Titans Analytics</h3>
+<p class="text-xs text-slate-400">Updated 15 mins ago</p>
+</div>
+</div>
+<span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+</div>
+
+<div class="mb-4">
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm text-slate-400">EPA/Play</span>
+<span class="text-xl font-bold text-white">+0.142</span>
+</div>
+<div class="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full" style="width: 71%"></div>
+</div>
+</div>
+
+<div class="grid grid-cols-2 gap-2 mb-4">
+<div class="text-center p-2 bg-slate-800/50 rounded">
+<div class="text-lg font-bold text-blue-400">#8</div>
+<div class="text-xs text-slate-400">AFC Rank</div>
+</div>
+<div class="text-center p-2 bg-slate-800/50 rounded">
+<div class="text-lg font-bold text-green-400">73%</div>
+<div class="text-xs text-slate-400">Win Prob</div>
+</div>
+</div>
+
+<div class="flex gap-2">
+<span class="insight-badge text-blue-400 border-blue-400/30 bg-blue-400/10">
+Playoff Hunt
+</span>
+</div>
+</article>
+
+<article class="article-card glass-card p-6 rounded-2xl" style="--accent-color: #06B6D4;" data-sport="nba">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-cyan-500/20 rounded-lg flex items-center justify-center">
+<span class="text-cyan-400 font-bold">MEM</span>
+</div>
+<div>
+<h3 class="text-white font-semibold">Grizzlies Grit</h3>
+<p class="text-xs text-slate-400">Updated 30 mins ago</p>
+</div>
+</div>
+<span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+</div>
+
+<div class="mb-4">
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm text-slate-400">Grit Index</span>
+<span class="text-xl font-bold text-white">94.2%</span>
+</div>
+<div class="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full" style="width: 94.2%"></div>
+</div>
+</div>
+
+<div class="grid grid-cols-2 gap-2 mb-4">
+<div class="text-center p-2 bg-slate-800/50 rounded">
+<div class="text-lg font-bold text-cyan-400">+8.4</div>
+<div class="text-xs text-slate-400">Net Rating</div>
+</div>
+<div class="text-center p-2 bg-slate-800/50 rounded">
+<div class="text-lg font-bold text-green-400">#2</div>
+<div class="text-xs text-slate-400">West Seed</div>
+</div>
+</div>
+
+<div class="flex gap-2">
+<span class="insight-badge text-cyan-400 border-cyan-400/30 bg-cyan-400/10">
+Championship DNA
+</span>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<div class="lg:col-span-2">
+<article class="glass-card p-8 rounded-2xl">
+<div class="flex gap-3 mb-4">
+<span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-xs font-medium">MLB</span>
+<span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-medium">FEATURED</span>
+</div>
+<h3 class="text-2xl font-bold text-white mb-4">
+Cardinals' Advanced Metrics Signal Championship Window Opening
+</h3>
+<p class="text-slate-300 mb-6">
+Deep dive into the Cardinals' 86.6% readiness score reveals exceptional leverage opportunities. 
+Our AI models predict a 2.85x leverage factor - the highest we've recorded this season. 
+Component breakdown shows offense at 87.1%, defense at 88.5%, with pitching stabilizing at 85.4%.
+</p>
+
+<div class="space-y-6">
+<article class="glass-card p-6 rounded-2xl" data-sport="nfl">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs font-medium">NFL</span>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">
+Titans EPA/Play Surge: Breaking Down the Numbers
+</h3>
+<p class="text-sm text-slate-300 mb-4">
+Tennessee's +0.142 EPA/play ranks 8th in AFC. Advanced analytics reveal...
+</p>
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-400">3 min read</span>
+<a href="#" class="text-blue-400 hover:text-blue-300 text-sm">
+View Report →
+</a>
+</div>
+</article>
+
+<article class="glass-card p-6 rounded-2xl" data-sport="ncaa">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-1 bg-orange-500/20 text-orange-400 rounded-full text-xs font-medium">NCAA</span>
+<span class="px-2 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs font-medium">NIL</span>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">
+Longhorns NIL Strategy: $4.2M Investment Analysis
+</h3>
+<p class="text-sm text-slate-300 mb-4">
+Breaking down Texas's elite recruiting class with 42 five-star targets...
+</p>
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-400">4 min read</span>
+<a href="#" class="text-orange-400 hover:text-orange-300 text-sm">
+Read Analysis →
+</a>
+</div>
+</article>
+
+<article class="glass-card p-6 rounded-2xl" data-sport="youth">
+<div class="flex gap-2 mb-3">
+<span class="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-medium">Youth</span>
+<span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs font-medium">Perfect Game</span>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">
+2026 Draft Class: Early Scouting Intelligence
+</h3>
+<p class="text-sm text-slate-300 mb-4">
+Perfect Game showcase data reveals emerging elite prospects...
+</p>
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-400">6 min read</span>
+<a href="#" class="text-green-400 hover:text-green-300 text-sm">
+View Scouting →
+</a>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-12 bg-slate-900/30">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold text-white mb-8">This Week's Analytics Schedule</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-7 gap-4">
+<div class="glass-card p-4 rounded-xl text-center">
+<div class="text-xs text-slate-400 mb-2">Monday</div>
+<div class="text-sm font-bold text-orange-400">MLB</div>
+<div class="text-xs text-slate-300">Weekly Projections</div>
+</div>
+<div class="glass-card p-4 rounded-xl text-center">
+<div class="text-xs text-slate-400 mb-2">Tuesday</div>
+<div class="text-sm font-bold text-blue-400">NFL</div>
+<div class="text-xs text-slate-300">EPA Analysis</div>
+</div>
+<div class="glass-card p-4 rounded-xl text-center">
+<div class="text-xs text-slate-400 mb-2">Wednesday</div>
+<div class="text-sm font-bold text-green-400">Youth</div>
+<div class="text-xs text-slate-300">Showcase Report</div>
+</div>
+<div class="glass-card p-4 rounded-xl text-center">
+<div class="text-xs text-slate-400 mb-2">Thursday</div>
+<div class="text-sm font-bold text-purple-400">NBA</div>
+<div class="text-xs text-slate-300">Advanced Stats</div>
+</div>
+<div class="glass-card p-4 rounded-xl text-center">
+<div class="text-xs text-slate-400 mb-2">Friday</div>
+<div class="text-sm font-bold text-orange-400">NCAA</div>
+<div class="text-xs text-slate-300">CFB Preview</div>
+</div>
+<div class="glass-card p-4 rounded-xl text-center border-2 border-orange-500/50">
+<div class="text-xs text-slate-400 mb-2">Saturday</div>
+<div class="text-sm font-bold text-orange-400">LIVE</div>
+<div class="text-xs text-slate-300">Game Day Intel</div>
+</div>
+<div class="glass-card p-4 rounded-xl text-center border-2 border-orange-500/50">
+<div class="text-xs text-slate-400 mb-2">Sunday</div>
+<div class="text-sm font-bold text-orange-400">LIVE</div>
+<div class="text-xs text-slate-300">Real-Time Feed</div>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="py-12 bg-black/50 border-t border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row items-center justify-between">
+<div class="text-center md:text-left mb-4 md:mb-0">
+<div class="text-2xl font-bold neon-text mb-2">BLAZE INTELLIGENCE</div>
+<div class="text-slate-400">Where cognitive performance meets quarterly performance.</div>
+</div>
+<div class="flex items-center gap-6">
+<a href="/methods" class="text-slate-400 hover:text-orange-400 text-sm">Methods & Definitions</a>
+<a href="https://x.com/BISportsIntel" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-orange-400 transition-colors">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+</svg>
+</a>
+<div class="text-slate-500 text-sm">© 2025 Blaze Intelligence</div>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+// Initialize charts and animations
+let charts = {};
+let activeFilter = 'all';
+
+document.addEventListener('DOMContentLoaded', function() {
+initializeCharts();
+startLiveUpdates();
+initializeAnimations();
+});
+
+// Initialize Cardinals Performance Chart
+function initializeCharts() {
+const ctx = document.getElementById('cardinalsPerformanceChart');
+if (ctx) {
+charts.cardinals = new Chart(ctx.getContext('2d'), {
+type: 'line',
+data: {
+labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+datasets: [{
+label: 'Readiness Score',
+data: [78, 81, 79, 83, 85, 86.6],
+borderColor: '#EF4444',
+backgroundColor: 'rgba(239, 68, 68, 0.1)',
+tension: 0.4,
+fill: true
+}, {
+label: 'Leverage Factor',
+data: [1.8, 2.1, 2.0, 2.3, 2.5, 2.85],
+borderColor: '#F97316',
+backgroundColor: 'rgba(249, 115, 22, 0.1)',
+tension: 0.4,
+fill: true,
+yAxisID: 'y1'
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: {
+legend: {
+labels: { color: '#E2E8F0' }
+}
+},
+scales: {
+x: {
+grid: { color: 'rgba(51, 65, 85, 0.3)' },
+ticks: { color: '#94A3B8' }
+},
+y: {
+position: 'left',
+grid: { color: 'rgba(51, 65, 85, 0.3)' },
+ticks: { color: '#94A3B8' }
+},
+y1: {
+position: 'right',
+grid: { drawOnChartArea: false },
+ticks: { color: '#94A3B8' }
+}
+}
+}
+});
+}
+}
+
+// Filter content by sport
+function filterContent(sport) {
+activeFilter = sport;
+
+// Update filter tabs
+document.querySelectorAll('.filter-tab').forEach(tab => {
+tab.classList.remove('active', 'bg-orange-500/20', 'text-orange-400', 'border-orange-500/30');
+tab.classList.add('bg-slate-800/50', 'text-slate-300', 'border-slate-700');
+});
+
+event.target.classList.add('active', 'bg-orange-500/20', 'text-orange-400', 'border-orange-500/30');
+event.target.classList.remove('bg-slate-800/50', 'text-slate-300', 'border-slate-700');
+
+// Filter articles
+const articles = document.querySelectorAll('[data-sport]');
+articles.forEach(article => {
+if (sport === 'all' || article.dataset.sport === sport) {
+article.style.display = 'block';
+gsap.fromTo(article, 
+{ opacity: 0, y: 20 }, 
+{ opacity: 1, y: 0, duration: 0.3 }
+);
+} else {
+article.style.display = 'none';
+}
+});
+}
+
+// Live updates simulation
+function startLiveUpdates() {
+setInterval(() => {
+// Update data points
+const dataPointsEl = document.getElementById('dataPoints');
+if (dataPointsEl) {
+const current = parseFloat(dataPointsEl.textContent.replace('M+', ''));
+const newValue = (current + Math.random() * 0.01).toFixed(2);
+dataPointsEl.textContent = newValue + 'M+';
+}
+
+// Update live indicators
+document.querySelectorAll('.live-indicator').forEach(indicator => {
+indicator.style.opacity = Math.random() > 0.5 ? '1' : '0.5';
+});
+
+// Update charts
+if (charts.cardinals) {
+const lastValue = charts.cardinals.data.datasets[0].data[5];
+const variation = (Math.random() - 0.5) * 2;
+charts.cardinals.data.datasets[0].data[5] = Math.min(100, Math.max(0, lastValue + variation));
+charts.cardinals.update('none');
+}
+}, 3000);
+}
+
+// Initialize animations
+function initializeAnimations() {
+// Stagger article animations
+gsap.fromTo('.article-card', 
+{ opacity: 0, y: 30 }, 
+{ opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }
+);
+
+// Hero text animation
+gsap.fromTo('h1', 
+{ opacity: 0, y: 20 }, 
+{ opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
+);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "cardinals_data": {
+    "structure_type": "indexed_json",
+    "indexes": [
+      "timestamp",
+      "readiness.overall",
+      "leverage.current"
+    ],
+    "compression": true,
+    "cache_keys": [
+      "latest",
+      "hourly_avg",
+      "daily_trend"
+    ]
+  },
+  "league_data": {
+    "structure_type": "partitioned_json",
+    "partitions": [
+      "league",
+      "team",
+      "date"
+    ],
+    "aggregation_levels": [
+      "team",
+      "division",
+      "conference"
+    ],
+    "cache_strategy": "write_through"
+  },
+  "research_insights": {
+    "structure_type": "document_store",
+    "full_text_index": true,
+    "categorization": [
+      "topic",
+      "confidence",
+      "timestamp"
+    ],
+    "retention_policy": "30_days"
+  }
+}
