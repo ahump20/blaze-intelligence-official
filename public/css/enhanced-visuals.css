@@ -368,6 +368,32 @@
     }
 }
 
+/* Performance Optimizations */
+.hero {
+    contain: layout style paint;
+    will-change: transform;
+}
+
+#hero-canvas {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+.glass-card {
+    contain: layout style;
+    transform: translateZ(0);
+}
+
+/* Reduce layout shift */
+.metric-card {
+    min-height: 120px;
+}
+
+.chart-container {
+    min-height: 300px;
+}
+
 /* Mobile Optimizations */
 @media (max-width: 768px) {
     .hero {
@@ -383,7 +409,17 @@
     }
     
     #hero-canvas {
-        opacity: 0.5; /* Reduce intensity on mobile */
+        opacity: 0.3; /* Further reduce intensity on mobile */
+        will-change: auto; /* Disable will-change on mobile for better performance */
+    }
+    
+    /* Disable complex animations on mobile */
+    .float {
+        animation: none;
+    }
+    
+    .gradient-text {
+        animation: none;
     }
 }
 

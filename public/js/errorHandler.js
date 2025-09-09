@@ -7,21 +7,28 @@
         const reason = event.reason;
         
         // Suppress common development errors to prevent console spam
-        if (reason && (
-            reason.toString().includes('gateway') ||
-            reason.toString().includes('Failed to fetch') ||
-            reason.toString().includes('NetworkError') ||
-            reason.toString().includes('API key') ||
-            reason.toString().includes('not configured') ||
-            reason.toString().includes('mlb_live_games') ||
-            reason.toString().includes('cache') ||
-            reason.toString().includes('fetch') ||
-            reason.toString().includes('AbortError') ||
-            reason.toString().includes('TypeError') ||
-            reason.message === '' ||
-            !reason.toString() ||
-            typeof reason === 'object' && Object.keys(reason).length === 0
-        )) {
+        if (!reason || 
+            reason === null ||
+            reason === undefined ||
+            reason === '' ||
+            (typeof reason === 'object' && Object.keys(reason).length === 0) ||
+            (reason.toString && !reason.toString()) ||
+            (reason.toString && reason.toString() === '') ||
+            (reason.toString && reason.toString() === '[object Object]') ||
+            (reason.toString && (
+                reason.toString().includes('gateway') ||
+                reason.toString().includes('Failed to fetch') ||
+                reason.toString().includes('NetworkError') ||
+                reason.toString().includes('API key') ||
+                reason.toString().includes('not configured') ||
+                reason.toString().includes('mlb_live_games') ||
+                reason.toString().includes('cache') ||
+                reason.toString().includes('fetch') ||
+                reason.toString().includes('AbortError') ||
+                reason.toString().includes('TypeError') ||
+                reason.toString().includes('Script error') ||
+                reason.toString().includes('Non-Error promise rejection')
+            ))) {
             event.preventDefault();
             return;
         }
