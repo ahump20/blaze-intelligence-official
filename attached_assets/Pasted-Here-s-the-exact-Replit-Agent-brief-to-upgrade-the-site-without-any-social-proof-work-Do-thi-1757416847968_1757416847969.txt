@@ -1,0 +1,65 @@
+Here’s the exact Replit Agent brief to **upgrade the site without any social-proof work**.
+
+**Do this in order.**
+
+1. **Swap all demo counters for real data (Cardinals first).**
+
+* Add server route `GET /api/mlb/cardinals/summary` using MLB Stats/Statcast fetch with caching.
+* Mount to the dashboard tiles and charts; if the API 429s or returns empty, display “Demo Mode” badge and keep UI responsive.
+* Files to create/use: `cardinals-real-data-integration.js`, `frontend-real-data-integration.js`.&#x20;
+
+2. **Wire the Digital-Combine feed behind the scenes.**
+
+* Stand up a cron/worker that writes `data/analytics/cardinals/*.json` plus a compact `site/src/data/readiness.json` for the homepage tile.
+* Surface only the metrics; no case studies, no logos.
+* Use the provided agent manifests as the spec for artifacts and schedules. &#x20;
+
+3. **Performance hardening.**
+
+* Reduce any auto-sync or background polling to ≥5 min; debounce UI refresh; cache API responses 300s; lazy-load Three.js sections below the fold; code-split vendor libs.
+* Ship skeleton loaders + friendly errors for every async panel.
+* File to use: `performance-optimization-fixes.js`.&#x20;
+
+4. **Brand-standards compliance (no testimonials).**
+
+* Add a “Methods & Definitions” page. Link every headline metric (e.g., “94.6% accuracy”, “<100 ms”) to it.
+* Display transparent, fixed pricing on the pricing section (\$1,188/yr for Pro), and keep the competitor table factual and neutral.
+* Remove or gate any claim that lacks a methods anchor.
+* File to use: `brand-standards-compliance.js`. Reference the existing competitive-analysis layout for column structure.&#x20;
+
+5. **Instrumentation and ops (quiet, no badges).**
+
+* Add Sentry (frontend) and simple server logs; wire a health endpoint used by agents.
+* Add GA4 or lightweight analytics; do not render “as seen in” or trust-badge UI.
+* Keep secrets in `.env`, not committed. Use CSP with strict `script-src` for CDN libs.
+* Infra/schema references for local services and metrics storage are already defined. &#x20;
+
+6. **SEO & accessibility.**
+
+* Generate `sitemap.xml` and `robots.txt`; ensure unique `<title>`/`<meta description>` per page.
+* Add `aria-*` and visible focus states to nav/buttons; ensure color-contrast ≥ WCAG AA.
+* Keep OpenGraph/Twitter cards generic (no client logos).
+
+7. **Content automation (metrics only).**
+
+* Enable these two agents and nothing that publishes quotes/logos:
+
+  * **Digital-Combine Autopilot** → writes MD/JSON artifacts and pushes Pages deploys.
+  * **Cardinals Readiness Board** → refreshes `readiness.json` every 10 min.
+* Set required env vars per manifests and point artifacts to the repo paths the site reads. &#x20;
+
+8. **Pages to touch.**
+
+* Integration/command-center pages: ensure tiles pull from the new APIs and render “Demo Mode” when offline. Keep all visuals; remove any placeholder “client logo” rows. &#x20;
+
+**Minimal Replit Agent prompt you can paste:**
+
+> Implement real-data, performance, and compliance upgrades with **no social-proof UI**.
+>
+> 1. Add `/api/mlb/cardinals/summary` with 300s cache and hook dashboard tiles/charts to it; on failure show “Demo Mode”. Use `cardinals-real-data-integration.js` + `frontend-real-data-integration.js`.&#x20;
+> 2. Schedule Digital-Combine and Cardinals-Readiness agents; write artifacts to `data/analytics/cardinals/*.json` and `site/src/data/readiness.json`; expose `GET /api/health`. &#x20;
+> 3. Apply perf fixes: throttle all sync ≥5 min, add client cache, lazy-load heavy bundles, code-split, skeletons, and error toasts. Use `performance-optimization-fixes.js`.&#x20;
+> 4. Enforce brand standards: add “Methods & Definitions”; link every headline metric; show \$1,188/yr; keep competitor table factual; strip any badges/quotes. Use `brand-standards-compliance.js`.&#x20;
+> 5. Add Sentry + GA4, strong CSP, `.env` secrets; keep docker/schema refs for future services. &#x20;
+
+That upgrades the site’s truthfulness, speed, and data depth while **omitting testimonials, logos, or case-study blocks**.
