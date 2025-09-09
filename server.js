@@ -196,6 +196,10 @@ app.get('/pressure-dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'pressure-dashboard.html'));
 });
 
+app.get('/pressure-terminal', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'pressure-terminal.html'));
+});
+
 app.get('/neural-coach', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'neural-coach.html'));
 });
