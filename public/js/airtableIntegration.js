@@ -543,6 +543,183 @@ class AirtableIntegration {
                 line-height: 1.5;
             }
             
+            /* Contact Form Section Styles */
+            .contact-form-section {
+                padding: 120px 50px;
+                background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            }
+            
+            .contact-form-content {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .contact-form-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+                margin-top: 60px;
+            }
+            
+            .contact-form-left h3 {
+                color: #BF5700;
+                font-size: 28px;
+                font-weight: 700;
+                margin-bottom: 30px;
+            }
+            
+            .benefits-list {
+                margin-bottom: 40px;
+            }
+            
+            .benefit-item {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 20px;
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 16px;
+            }
+            
+            .benefit-icon {
+                font-size: 20px;
+            }
+            
+            .austin-contact-info h4 {
+                color: #BF5700;
+                font-size: 22px;
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+            
+            .austin-contact-details p {
+                color: rgba(255, 255, 255, 0.8);
+                margin-bottom: 8px;
+                line-height: 1.5;
+            }
+            
+            .austin-contact-details a {
+                color: #FFFFFF;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            
+            .austin-contact-details a:hover {
+                color: #BF5700;
+            }
+            
+            .demo-request-form {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 40px;
+            }
+            
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            
+            .form-group {
+                margin-bottom: 25px;
+            }
+            
+            .form-group label {
+                display: block;
+                color: #BF5700;
+                font-weight: 600;
+                margin-bottom: 8px;
+                font-size: 14px;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 12px 16px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 8px;
+                color: #FFFFFF;
+                font-size: 16px;
+                transition: all 0.3s ease;
+            }
+            
+            .form-group input:focus,
+            .form-group select:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: #BF5700;
+                box-shadow: 0 0 0 2px rgba(191, 87, 0, 0.2);
+            }
+            
+            .checkbox-label {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                cursor: pointer;
+                color: rgba(255, 255, 255, 0.8);
+            }
+            
+            .checkbox-label input[type="checkbox"] {
+                width: auto;
+            }
+            
+            .form-submit-btn {
+                background: linear-gradient(135deg, #BF5700 0%, #FF6B35 100%);
+                color: white;
+                border: none;
+                padding: 16px 40px;
+                border-radius: 12px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            .form-submit-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(191, 87, 0, 0.4);
+            }
+            
+            .form-success {
+                text-align: center;
+                padding: 30px;
+                background: rgba(0, 255, 0, 0.1);
+                border: 1px solid rgba(0, 255, 0, 0.3);
+                border-radius: 15px;
+                margin-top: 20px;
+            }
+            
+            .success-icon {
+                font-size: 48px;
+                margin-bottom: 15px;
+            }
+            
+            .form-success h4 {
+                color: #00ff00;
+                margin-bottom: 10px;
+            }
+            
+            .form-success p {
+                color: rgba(255, 255, 255, 0.8);
+                margin: 0;
+            }
+            
+            @media (max-width: 768px) {
+                .contact-form-grid {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
+                
+                .form-row {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
             .insights-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
