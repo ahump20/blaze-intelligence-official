@@ -3,101 +3,101 @@
 
 class SportsDataService {
     constructor() {
-        // College Football Teams (Top 25 programs)
+        // College Football Teams (2025-2026 Season Top Rankings)
         this.cfbTeams = [
-            { id: 1, name: 'University of Texas', abbr: 'TEX', conference: 'SEC', wins: 12, losses: 2, ranking: 3 },
-            { id: 2, name: 'Texas A&M University', abbr: 'TAMU', conference: 'SEC', wins: 9, losses: 4, ranking: 15 },
-            { id: 3, name: 'Baylor University', abbr: 'BAY', conference: 'Big 12', wins: 8, losses: 5, ranking: 22 },
-            { id: 4, name: 'Texas Tech University', abbr: 'TTU', conference: 'Big 12', wins: 8, losses: 5, ranking: 24 },
-            { id: 5, name: 'Georgia Bulldogs', abbr: 'UGA', conference: 'SEC', wins: 11, losses: 2, ranking: 2 },
-            { id: 6, name: 'Michigan Wolverines', abbr: 'MICH', conference: 'Big Ten', wins: 15, losses: 0, ranking: 1 },
-            { id: 7, name: 'Washington Huskies', abbr: 'WASH', conference: 'Pac-12', wins: 14, losses: 1, ranking: 4 },
-            { id: 8, name: 'Florida State Seminoles', abbr: 'FSU', conference: 'ACC', wins: 13, losses: 1, ranking: 5 }
+            { id: 1, name: 'University of Texas', abbr: 'TEX', conference: 'SEC', wins: 8, losses: 1, ranking: 1 },
+            { id: 2, name: 'Texas A&M University', abbr: 'TAMU', conference: 'SEC', wins: 7, losses: 2, ranking: 8 },
+            { id: 3, name: 'Baylor University', abbr: 'BAY', conference: 'Big 12', wins: 6, losses: 3, ranking: 18 },
+            { id: 4, name: 'Texas Tech University', abbr: 'TTU', conference: 'Big 12', wins: 5, losses: 4, ranking: 25 },
+            { id: 5, name: 'Georgia Bulldogs', abbr: 'UGA', conference: 'SEC', wins: 8, losses: 1, ranking: 2 },
+            { id: 6, name: 'Oregon Ducks', abbr: 'ORE', conference: 'Big Ten', wins: 8, losses: 1, ranking: 3 },
+            { id: 7, name: 'Penn State Nittany Lions', abbr: 'PSU', conference: 'Big Ten', wins: 7, losses: 2, ranking: 4 },
+            { id: 8, name: 'Notre Dame Fighting Irish', abbr: 'ND', conference: 'Independent', wins: 8, losses: 1, ranking: 5 }
         ];
 
-        // College Football Players (Top performers)
+        // College Football Players (2025-2026 Season Top Performers)
         this.cfbPlayers = [
             {
                 id: 1,
-                name: 'Jaylen Daniels',
-                team: 'LSU',
-                position: 'QB',
-                year: 'Senior',
-                stats: {
-                    passingYards: 3812,
-                    passingTDs: 40,
-                    interceptions: 4,
-                    rushingYards: 1134,
-                    rushingTDs: 10,
-                    qbr: 91.2,
-                    completionPct: 72.2
-                },
-                projections: {
-                    nextGame: { passingYards: 315, rushingYards: 85, totalTDs: 4 },
-                    seasonEnd: { passingYards: 4100, totalTDs: 52 }
-                },
-                awards: ['Heisman Winner 2023'],
-                injuryRisk: 8
-            },
-            {
-                id: 2,
-                name: 'Caleb Williams',
-                team: 'USC',
-                position: 'QB',
-                year: 'Junior',
-                stats: {
-                    passingYards: 4537,
-                    passingTDs: 42,
-                    interceptions: 5,
-                    rushingYards: 142,
-                    rushingTDs: 5,
-                    qbr: 89.5,
-                    completionPct: 68.6
-                },
-                projections: {
-                    nextGame: { passingYards: 340, rushingYards: 25, totalTDs: 3 },
-                    seasonEnd: { passingYards: 4200, totalTDs: 47 }
-                },
-                awards: ['Heisman Finalist 2023'],
-                injuryRisk: 12
-            },
-            {
-                id: 3,
                 name: 'Quinn Ewers',
                 team: 'TEX',
                 position: 'QB',
-                year: 'Sophomore',
+                year: 'Senior',
                 stats: {
-                    passingYards: 3479,
-                    passingTDs: 22,
-                    interceptions: 6,
-                    rushingYards: -26,
-                    rushingTDs: 1,
-                    qbr: 84.2,
-                    completionPct: 69.2
+                    passingYards: 2847,
+                    passingTDs: 28,
+                    interceptions: 3,
+                    rushingYards: 125,
+                    rushingTDs: 4,
+                    qbr: 92.8,
+                    completionPct: 71.4
                 },
                 projections: {
-                    nextGame: { passingYards: 285, rushingYards: 5, totalTDs: 2 },
-                    seasonEnd: { passingYards: 3800, totalTDs: 25 }
+                    nextGame: { passingYards: 325, rushingYards: 15, totalTDs: 3 },
+                    seasonEnd: { passingYards: 3800, totalTDs: 38 }
                 },
-                awards: ['Big 12 Offensive Player of the Year'],
+                awards: ['2025 SEC Offensive Player of the Year'],
+                injuryRisk: 5
+            },
+            {
+                id: 2,
+                name: 'Carson Beck',
+                team: 'UGA',
+                position: 'QB',
+                year: 'Senior',
+                stats: {
+                    passingYards: 2654,
+                    passingTDs: 24,
+                    interceptions: 7,
+                    rushingYards: 89,
+                    rushingTDs: 2,
+                    qbr: 88.3,
+                    completionPct: 67.8
+                },
+                projections: {
+                    nextGame: { passingYards: 295, rushingYards: 10, totalTDs: 2 },
+                    seasonEnd: { passingYards: 3500, totalTDs: 32 }
+                },
+                awards: ['SEC Championship Game MVP 2024'],
+                injuryRisk: 8
+            },
+            {
+                id: 3,
+                name: 'Dillon Gabriel',
+                team: 'ORE',
+                position: 'QB',
+                year: 'Senior',
+                stats: {
+                    passingYards: 2921,
+                    passingTDs: 26,
+                    interceptions: 4,
+                    rushingYards: 168,
+                    rushingTDs: 6,
+                    qbr: 90.1,
+                    completionPct: 69.7
+                },
+                projections: {
+                    nextGame: { passingYards: 310, rushingYards: 20, totalTDs: 3 },
+                    seasonEnd: { passingYards: 3650, totalTDs: 36 }
+                },
+                awards: ['Big Ten Offensive Player of the Year 2025'],
                 injuryRisk: 6
             }
         ];
 
-        // MLB Teams (Current season)
+        // MLB Teams (2025 Season - Spring Training/Early Season)
         this.mlbTeams = [
-            { id: 1, name: 'Houston Astros', abbr: 'HOU', league: 'AL', division: 'West', wins: 90, losses: 72, pct: .556, streak: 'W2' },
-            { id: 2, name: 'Texas Rangers', abbr: 'TEX', league: 'AL', division: 'West', wins: 90, losses: 72, pct: .556, streak: 'W3' },
-            { id: 3, name: 'Atlanta Braves', abbr: 'ATL', league: 'NL', division: 'East', wins: 104, losses: 58, pct: .642, streak: 'W1' },
-            { id: 4, name: 'Los Angeles Dodgers', abbr: 'LAD', league: 'NL', division: 'West', wins: 100, losses: 62, pct: .617, streak: 'L1' },
-            { id: 5, name: 'Baltimore Orioles', abbr: 'BAL', league: 'AL', division: 'East', wins: 101, losses: 61, pct: .623, streak: 'W2' },
-            { id: 6, name: 'Tampa Bay Rays', abbr: 'TB', league: 'AL', division: 'East', wins: 99, losses: 63, pct: .611, streak: 'W1' },
-            { id: 7, name: 'Milwaukee Brewers', abbr: 'MIL', league: 'NL', division: 'Central', wins: 92, losses: 70, pct: .568, streak: 'L2' },
-            { id: 8, name: 'Arizona Diamondbacks', abbr: 'ARI', league: 'NL', division: 'West', wins: 84, losses: 78, pct: .519, streak: 'W5' }
+            { id: 1, name: 'Houston Astros', abbr: 'HOU', league: 'AL', division: 'West', wins: 15, losses: 8, pct: .652, streak: 'W3' },
+            { id: 2, name: 'Texas Rangers', abbr: 'TEX', league: 'AL', division: 'West', wins: 14, losses: 9, pct: .609, streak: 'W2' },
+            { id: 3, name: 'Atlanta Braves', abbr: 'ATL', league: 'NL', division: 'East', wins: 16, losses: 7, pct: .696, streak: 'W4' },
+            { id: 4, name: 'Los Angeles Dodgers', abbr: 'LAD', league: 'NL', division: 'West', wins: 17, losses: 6, pct: .739, streak: 'W1' },
+            { id: 5, name: 'Baltimore Orioles', abbr: 'BAL', league: 'AL', division: 'East', wins: 13, losses: 10, pct: .565, streak: 'L1' },
+            { id: 6, name: 'Tampa Bay Rays', abbr: 'TB', league: 'AL', division: 'East', wins: 12, losses: 11, pct: .522, streak: 'W2' },
+            { id: 7, name: 'Milwaukee Brewers', abbr: 'MIL', league: 'NL', division: 'Central', wins: 11, losses: 12, pct: .478, streak: 'L1' },
+            { id: 8, name: 'Arizona Diamondbacks', abbr: 'ARI', league: 'NL', division: 'West', wins: 10, losses: 13, pct: .435, streak: 'L2' }
         ];
 
-        // MLB Players (Top performers)
+        // MLB Players (2025 Season Early Stats)
         this.mlbPlayers = [
             {
                 id: 1,
@@ -105,18 +105,18 @@ class SportsDataService {
                 team: 'ATL',
                 position: 'OF',
                 stats: {
-                    avg: .337,
-                    hr: 41,
-                    rbi: 106,
-                    sb: 73,
-                    ops: 1.012,
-                    war: 8.3
+                    avg: .348,
+                    hr: 6,
+                    rbi: 18,
+                    sb: 12,
+                    ops: 1.089,
+                    war: 1.8
                 },
                 projections: {
-                    nextGame: { hits: 2, hr: 0.3, rbi: 1.2, sb: 0.4 },
-                    seasonEnd: { hr: 45, sb: 80, avg: .340 }
+                    nextGame: { hits: 2.1, hr: 0.35, rbi: 1.4, sb: 0.5 },
+                    seasonEnd: { hr: 48, sb: 75, avg: .335 }
                 },
-                injuryRisk: 15
+                injuryRisk: 10
             },
             {
                 id: 2,
@@ -124,18 +124,18 @@ class SportsDataService {
                 team: 'LAD',
                 position: 'OF',
                 stats: {
-                    avg: .307,
-                    hr: 39,
-                    rbi: 107,
-                    sb: 16,
-                    ops: .905,
-                    war: 8.3
+                    avg: .321,
+                    hr: 5,
+                    rbi: 15,
+                    sb: 3,
+                    ops: .956,
+                    war: 1.6
                 },
                 projections: {
-                    nextGame: { hits: 1.8, hr: 0.25, rbi: 1.1, sb: 0.1 },
-                    seasonEnd: { hr: 42, rbi: 115, avg: .310 }
+                    nextGame: { hits: 1.9, hr: 0.28, rbi: 1.2, sb: 0.15 },
+                    seasonEnd: { hr: 35, rbi: 105, avg: .315 }
                 },
-                injuryRisk: 8
+                injuryRisk: 6
             },
             {
                 id: 3,
@@ -143,34 +143,34 @@ class SportsDataService {
                 team: 'HOU',
                 position: '2B',
                 stats: {
-                    avg: .304,
-                    hr: 15,
-                    rbi: 69,
-                    sb: 18,
-                    ops: .823,
-                    war: 4.1
+                    avg: .286,
+                    hr: 3,
+                    rbi: 12,
+                    sb: 4,
+                    ops: .812,
+                    war: 0.9
                 },
                 projections: {
-                    nextGame: { hits: 1.5, hr: 0.1, rbi: 0.8, sb: 0.2 },
-                    seasonEnd: { hr: 18, rbi: 75, avg: .306 }
+                    nextGame: { hits: 1.4, hr: 0.12, rbi: 0.9, sb: 0.25 },
+                    seasonEnd: { hr: 20, rbi: 80, avg: .295 }
                 },
-                injuryRisk: 12
+                injuryRisk: 14
             }
         ];
 
-        // NFL Teams (Current season)
+        // NFL Teams (2025-2026 Season Current Records)
         this.nflTeams = [
-            { id: 1, name: 'Dallas Cowboys', abbr: 'DAL', conference: 'NFC', division: 'East', wins: 12, losses: 5, pct: .706, streak: 'W2' },
-            { id: 2, name: 'Houston Texans', abbr: 'HOU', conference: 'AFC', division: 'South', wins: 10, losses: 7, pct: .588, streak: 'W1' },
-            { id: 3, name: 'Kansas City Chiefs', abbr: 'KC', conference: 'AFC', division: 'West', wins: 11, losses: 6, pct: .647, streak: 'W3' },
-            { id: 4, name: 'San Francisco 49ers', abbr: 'SF', conference: 'NFC', division: 'West', wins: 12, losses: 5, pct: .706, streak: 'W1' },
-            { id: 5, name: 'Buffalo Bills', abbr: 'BUF', conference: 'AFC', division: 'East', wins: 14, losses: 3, pct: .824, streak: 'W4' },
-            { id: 6, name: 'Miami Dolphins', abbr: 'MIA', conference: 'AFC', division: 'East', wins: 11, losses: 6, pct: .647, streak: 'L1' },
-            { id: 7, name: 'Philadelphia Eagles', abbr: 'PHI', conference: 'NFC', division: 'East', wins: 11, losses: 6, pct: .647, streak: 'W2' },
-            { id: 8, name: 'Baltimore Ravens', abbr: 'BAL', conference: 'AFC', division: 'North', wins: 13, losses: 4, pct: .765, streak: 'W1' }
+            { id: 1, name: 'Dallas Cowboys', abbr: 'DAL', conference: 'NFC', division: 'East', wins: 7, losses: 2, pct: .778, streak: 'W4' },
+            { id: 2, name: 'Houston Texans', abbr: 'HOU', conference: 'AFC', division: 'South', wins: 6, losses: 3, pct: .667, streak: 'W2' },
+            { id: 3, name: 'Kansas City Chiefs', abbr: 'KC', conference: 'AFC', division: 'West', wins: 8, losses: 1, pct: .889, streak: 'W6' },
+            { id: 4, name: 'San Francisco 49ers', abbr: 'SF', conference: 'NFC', division: 'West', wins: 5, losses: 4, pct: .556, streak: 'L1' },
+            { id: 5, name: 'Buffalo Bills', abbr: 'BUF', conference: 'AFC', division: 'East', wins: 7, losses: 2, pct: .778, streak: 'W3' },
+            { id: 6, name: 'Miami Dolphins', abbr: 'MIA', conference: 'AFC', division: 'East', wins: 3, losses: 6, pct: .333, streak: 'L3' },
+            { id: 7, name: 'Philadelphia Eagles', abbr: 'PHI', conference: 'NFC', division: 'East', wins: 6, losses: 3, pct: .667, streak: 'W1' },
+            { id: 8, name: 'Baltimore Ravens', abbr: 'BAL', conference: 'AFC', division: 'North', wins: 7, losses: 2, pct: .778, streak: 'W2' }
         ];
 
-        // NFL Players (Top performers)
+        // NFL Players (2025-2026 Season Current Stats)
         this.nflPlayers = [
             {
                 id: 1,
@@ -178,19 +178,19 @@ class SportsDataService {
                 team: 'DAL',
                 position: 'QB',
                 stats: {
-                    passingYards: 4516,
-                    passingTDs: 36,
-                    interceptions: 9,
-                    rushingYards: 105,
-                    rushingTDs: 2,
-                    qbr: 105.9,
-                    completionPct: 69.5
+                    passingYards: 2184,
+                    passingTDs: 18,
+                    interceptions: 4,
+                    rushingYards: 67,
+                    rushingTDs: 3,
+                    qbr: 112.3,
+                    completionPct: 72.1
                 },
                 projections: {
-                    nextGame: { passingYards: 285, passingTDs: 2.1, interceptions: 0.5 },
-                    seasonEnd: { passingYards: 4800, passingTDs: 38 }
+                    nextGame: { passingYards: 295, passingTDs: 2.3, interceptions: 0.4 },
+                    seasonEnd: { passingYards: 4650, passingTDs: 42 }
                 },
-                injuryRisk: 10
+                injuryRisk: 8
             },
             {
                 id: 2,
@@ -198,19 +198,19 @@ class SportsDataService {
                 team: 'BUF',
                 position: 'QB',
                 stats: {
-                    passingYards: 4306,
-                    passingTDs: 29,
-                    interceptions: 18,
-                    rushingYards: 523,
-                    rushingTDs: 15,
-                    qbr: 92.2,
-                    completionPct: 66.5
+                    passingYards: 2098,
+                    passingTDs: 15,
+                    interceptions: 6,
+                    rushingYards: 285,
+                    rushingTDs: 8,
+                    qbr: 96.8,
+                    completionPct: 68.2
                 },
                 projections: {
-                    nextGame: { passingYards: 275, rushingYards: 35, totalTDs: 2.8 },
-                    seasonEnd: { passingYards: 4500, totalTDs: 46 }
+                    nextGame: { passingYards: 280, rushingYards: 45, totalTDs: 3.1 },
+                    seasonEnd: { passingYards: 4200, totalTDs: 48 }
                 },
-                injuryRisk: 15
+                injuryRisk: 12
             },
             {
                 id: 3,
@@ -218,17 +218,17 @@ class SportsDataService {
                 team: 'DAL',
                 position: 'WR',
                 stats: {
-                    receptions: 135,
-                    receivingYards: 1749,
-                    receivingTDs: 12,
-                    targets: 181,
-                    yardsPerReception: 13.0
+                    receptions: 58,
+                    receivingYards: 842,
+                    receivingTDs: 7,
+                    targets: 82,
+                    yardsPerReception: 14.5
                 },
                 projections: {
-                    nextGame: { receptions: 8, receivingYards: 105, receivingTDs: 0.7 },
-                    seasonEnd: { receptions: 140, receivingYards: 1800 }
+                    nextGame: { receptions: 7, receivingYards: 115, receivingTDs: 0.8 },
+                    seasonEnd: { receptions: 105, receivingYards: 1650 }
                 },
-                injuryRisk: 8
+                injuryRisk: 6
             },
             {
                 id: 4,
@@ -236,19 +236,19 @@ class SportsDataService {
                 team: 'BAL',
                 position: 'QB',
                 stats: {
-                    passingYards: 3678,
-                    passingTDs: 24,
-                    interceptions: 7,
-                    rushingYards: 821,
-                    rushingTDs: 5,
-                    qbr: 99.7,
-                    completionPct: 67.2
+                    passingYards: 1892,
+                    passingTDs: 14,
+                    interceptions: 3,
+                    rushingYards: 456,
+                    rushingTDs: 6,
+                    qbr: 102.4,
+                    completionPct: 69.8
                 },
                 projections: {
-                    nextGame: { passingYards: 235, rushingYards: 65, totalTDs: 2.2 },
-                    seasonEnd: { passingYards: 3900, rushingYards: 900 }
+                    nextGame: { passingYards: 245, rushingYards: 75, totalTDs: 2.4 },
+                    seasonEnd: { passingYards: 3800, rushingYards: 950 }
                 },
-                injuryRisk: 18
+                injuryRisk: 15
             }
         ];
 

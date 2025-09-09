@@ -580,33 +580,45 @@ class BlazeDataIntegration {
 
     simulateDataUpdate() {
         // Simulate real-time data changes
-        if (this.players) {
-            // Update players from all sports
-            Object.keys(this.players).forEach(sport => {
-                if (this.players[sport] && Array.isArray(this.players[sport])) {
-                    this.players[sport].forEach(player => {
-                        // Small random fluctuations in stats
-                        if (Math.random() > 0.8) {
-                            // Update stats based on sport
-                            if (player.stats.passingYards !== undefined) {
-                                player.stats.passingYards += Math.floor(Math.random() * 20 - 10);
-                            }
-                            if (player.stats.avg !== undefined) {
-                                player.stats.avg += (Math.random() - 0.5) * 0.01;
-                            }
-                            if (player.stats.receptions !== undefined) {
-                                player.stats.receptions += Math.random() > 0.9 ? 1 : 0;
-                            }
-                            
-                            // Update trending
-                            const rand = Math.random();
-                            if (rand > 0.8) player.trending = 'up';
-                            else if (rand < 0.2) player.trending = 'down';
-                            else player.trending = 'stable';
-                        }
-                    });
-                }
-            });
+        if (this.players && typeof this.players === 'object') {
+            // Handle both array and object structures
+            if (Array.isArray(this.players)) {
+                // Legacy array structure
+                this.players.forEach(player => {
+                    this.updatePlayerStats(player);
+                });
+            } else {
+                // New multi-sport object structure
+                Object.keys(this.players).forEach(sport => {
+                    if (this.players[sport] && Array.isArray(this.players[sport])) {
+                        this.players[sport].forEach(player => {
+                            this.updatePlayerStats(player);
+                        });
+                    }
+                });
+            }
+        }
+    }
+
+    updatePlayerStats(player) {
+        // Small random fluctuations in stats
+        if (Math.random() > 0.8) {
+            // Update stats based on sport
+            if (player.stats.passingYards !== undefined) {
+                player.stats.passingYards += Math.floor(Math.random() * 20 - 10);
+            }
+            if (player.stats.avg !== undefined) {
+                player.stats.avg += (Math.random() - 0.5) * 0.01;
+            }
+            if (player.stats.receptions !== undefined) {
+                player.stats.receptions += Math.random() > 0.9 ? 1 : 0;
+            }
+            
+            // Update trending
+            const rand = Math.random();
+            if (rand > 0.8) player.trending = 'up';
+            else if (rand < 0.2) player.trending = 'down';
+            else player.trending = 'stable';
         }
     }
 
