@@ -49,11 +49,11 @@ ALLOWED_ORIGINS=http://localhost:3000,https://blazeintelligence.com
 DATABASE_URL=postgresql://user:password@localhost:5432/blaze_intelligence
 
 # API Keys - Real Integrations
-OPENAI_API_KEY=sk-your-openai-api-key
-ANTHROPIC_API_KEY=sk-ant-your-anthropic-key
-STRIPE_SECRET_KEY=sk_test_your-stripe-secret-key
-STRIPE_WEBHOOK_SECRET=whsec_your-webhook-secret
-STRIPE_PUBLISHABLE_KEY=pk_test_your-publishable-key
+OPENAI_API_KEY=your-openai-api-key-here
+ANTHROPIC_API_KEY=your-anthropic-key-here
+STRIPE_SECRET_KEY=your-stripe-secret-key-here
+STRIPE_WEBHOOK_SECRET=your-webhook-secret-here
+STRIPE_PUBLISHABLE_KEY=your-publishable-key-here
 
 # Future Integrations (Placeholder)
 PERFECTGAME_API_KEY=your-perfect-game-key
