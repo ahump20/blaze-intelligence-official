@@ -8,7 +8,12 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build:android": "./scripts/build-android.sh",
+    "build:ios": "./scripts/build-ios.sh",
+    "deploy:dev": "./scripts/deploy.sh both development",
+    "deploy:staging": "./scripts/deploy.sh both staging",
+    "deploy:prod": "./scripts/deploy.sh both production"
   },
   "dependencies": {
     "react": "18.2.0",

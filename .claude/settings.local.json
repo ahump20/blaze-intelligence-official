@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(npx react-native init:*)",
-      "Bash(npx @react-native-community/cli:*)"
+      "Bash(npx @react-native-community/cli:*)",
+      "Bash(chmod:*)",
+      "Bash(npm run test:*)"
     ]
   }
 }
