@@ -12,25 +12,56 @@
   "keywords": [
     "sports",
     "analytics",
-    "AI",
-    "performance",
-    "tracking",
-    "baseball",
-    "football",
-    "basketball"
+    "championship",
+    "ai",
+    "machine-learning",
+    "performance"
   ],
-  "author": "Blaze Intelligence",
-  "license": "ISC",
+  "author": "Austin Humphrey",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "wrangler": "^4.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.min.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "bugs": {
+    "url": "https://github.com/austinhumphrey/blaze-intelligence-website/issues"
+  },
+  "homepage": "https://github.com/austinhumphrey/blaze-intelligence-website#readme",
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.30.0",
-    "@balldontlie/sdk": "^1.0.0",
-    "@types/node": "^24.3.1",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.9",
-    "axios": "^1.7.9",
-    "bcryptjs": "^2.4.3",
-    "compression": "^1.7.4",
-    "cookie-parser": "^1.4.6",
+    "@anthropic-ai/sdk": "^0.61.0",
+    "@balldontlie/sdk": "^1.2.2",
+    "@notionhq/client": "^4.0.2",
+    "@sendgrid/mail": "^8.1.5",
+    "aos": "^2.3.4",
+    "axios": "^1.11.0",
+    "bcryptjs": "^3.0.2",
+    "chart.js": "^4.5.0",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
@@ -54,8 +85,5 @@
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0",
     "ws": "^8.18.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
   }
 }

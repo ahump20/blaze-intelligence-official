@@ -1,33 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "node",
-    "lib": ["ES2022", "DOM"],
-    "strict": true,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve",
-    "declaration": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "types": ["@cloudflare/workers-types", "@types/jest"],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.test.ts",
-    "**/*.spec.ts"
-  ]
+    "strict": false
+  }
 }

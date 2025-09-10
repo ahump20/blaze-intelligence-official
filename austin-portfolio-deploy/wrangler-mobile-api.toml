@@ -1,0 +1,61 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "blaze-mobile-api"
+main = "api/mobile-app-endpoints.js"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.development]
+name = "blaze-mobile-api-dev"
+route = "dev-api.blaze-intelligence.com/*"
+
+[env.staging] 
+name = "blaze-mobile-api-staging"
+route = "staging-api.blaze-intelligence.com/*"
+
+[env.production]
+name = "blaze-mobile-api-prod"
+route = "api.blaze-intelligence.com/*"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "development"
+API_VERSION = "1.0.0"
+CORS_ORIGINS = "capacitor://localhost,ionic://localhost,http://localhost"
+
+[env.development.vars]
+ENVIRONMENT = "development"
+LOG_LEVEL = "debug"
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+LOG_LEVEL = "info"
+
+[env.production.vars]
+ENVIRONMENT = "production"
+LOG_LEVEL = "warn"
+
+# KV Namespaces for session storage
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "blaze_mobile_sessions"
+preview_id = "blaze_mobile_sessions_preview"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "blaze_mobile_cache"
+preview_id = "blaze_mobile_cache_preview"
+
+# R2 buckets for video storage
+[[r2_buckets]]
+binding = "VIDEOS"
+bucket_name = "blaze-mobile-videos"
+
+# D1 database for user data
+[[d1_databases]]
+binding = "DB"
+database_name = "blaze-mobile-db"
+database_id = "your-d1-database-id"
+
+# Analytics
+[analytics_engine_datasets]
+binding = "ANALYTICS"

@@ -1,9 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "mcp__ide__getDiagnostics"
-    ],
-    "deny": [],
-    "ask": []
+      "Bash(npx react-native init:*)",
+      "Bash(npx @react-native-community/cli:*)",
+      "Bash(chmod:*)",
+      "Bash(npm run test:*)"
+    ]
   }
 }
