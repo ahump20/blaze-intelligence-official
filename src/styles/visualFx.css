@@ -1,0 +1,80 @@
+.specular-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  --mx: 50%;
+  --my: 50%;
+}
+
+.specular-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(191, 87, 0, 0.08) 45%, rgba(0, 0, 0, 0.35));
+  opacity: 0.4;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.specular-card:hover::before {
+  opacity: 0.6;
+}
+
+.specular-card::after {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 45%);
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  filter: url('#specular-card-filter');
+  transition: opacity 0.4s ease;
+}
+
+.specular-card:hover::after {
+  opacity: 0.9;
+}
+
+.specular-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.pressure-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.pressure-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+
+.pressure-glow canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.fx-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .specular-card::after {
+    display: none;
+  }
+
+  .pressure-glow {
+    opacity: 0.55;
+  }
+}
