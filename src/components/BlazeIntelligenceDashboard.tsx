@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { ChartBarIcon, BoltIcon, UserGroupIcon, DocumentTextIcon, ArrowTrendingUpIcon, PlayIcon, HomeIcon, UsersIcon, ClockIcon, CogIcon, FolderIcon, PhoneIcon, BeakerIcon } from '@heroicons/react/24/outline';
+import {
+  ChartBarIcon,
+  BoltIcon,
+  UserGroupIcon,
+  ArrowTrendingUpIcon,
+  PlayIcon,
+  HomeIcon,
+  UsersIcon,
+  ClockIcon,
+  CogIcon,
+  FolderIcon,
+  PhoneIcon,
+  BeakerIcon,
+} from '@heroicons/react/24/outline';
 import TrackmanAnalytics from './TrackmanAnalytics';
+import LivePressureGlow from './LivePressureGlow';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
 interface GameData {
   id: string;
@@ -25,6 +40,58 @@ const BlazeIntelligenceDashboard: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState('overview');
   const [liveGames, setLiveGames] = useState<GameData[]>([]);
   const [topPlayers, setTopPlayers] = useState<PlayerStats[]>([]);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion || typeof document === 'undefined') {
+      return;
+    }
+
+    const cards = Array.from(
+      document.querySelectorAll<HTMLElement>('.specular-card')
+    );
+
+    cards.forEach((card) => {
+      card.style.setProperty('--mx', '50%');
+      card.style.setProperty('--my', '50%');
+    });
+
+    let frame = 0;
+
+    const updateCards = (event: PointerEvent) => {
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) {
+          return;
+        }
+        const relativeX = ((event.clientX - rect.left) / rect.width) * 100;
+        const relativeY = ((event.clientY - rect.top) / rect.height) * 100;
+        const clampedX = Math.min(Math.max(relativeX, 0), 100);
+        const clampedY = Math.min(Math.max(relativeY, 0), 100);
+        card.style.setProperty('--mx', `${clampedX}%`);
+        card.style.setProperty('--my', `${clampedY}%`);
+      });
+    };
+
+    const handlePointer = (event: PointerEvent) => {
+      if (frame) {
+        return;
+      }
+      frame = window.requestAnimationFrame(() => {
+        updateCards(event);
+        frame = 0;
+      });
+    };
+
+    document.addEventListener('pointermove', handlePointer, { passive: true });
+
+    return () => {
+      document.removeEventListener('pointermove', handlePointer);
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+    };
+  }, [prefersReducedMotion, selectedTab, liveGames.length, topPlayers.length]);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -77,6 +144,18 @@ const BlazeIntelligenceDashboard: React.FC = () => {
     { id: 'trackman', name: 'Trackman', icon: <BeakerIcon className="h-5 w-5" /> },
     { id: 'contact', name: 'Contact', icon: <PhoneIcon className="h-5 w-5" /> }
   ];
+
+  const pressurePoints = liveGames.map((game) => ({
+    id: game.id,
+    intensity: game.status === 'Live' ? 1 : 0.35,
+  }));
+
+  const activeLiveGames = liveGames.filter((game) => game.status === 'Live');
+  const marqueeLabel = activeLiveGames.length
+    ? activeLiveGames.map((game) => `${game.awayTeam} @ ${game.homeTeam}`).join(' • ')
+    : "Monitoring today's slate";
+  const nextScheduledGame = liveGames.find((game) => game.status !== 'Live');
+  const highestPressureGame = activeLiveGames[0] ?? null;
 
   return (
     <div className="min-h-screen" style={{ 
@@ -313,7 +392,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="glass-effect p-6 text-center rounded-lg hover-lift transition-transform"
+                    className="glass-effect specular-card p-6 text-center rounded-lg hover-lift transition-transform"
                   >
                     <div className="flex items-center justify-between mb-4">
                       <div style={{ color: '#BF5700' }}>{feature.icon}</div>
@@ -341,7 +420,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                 Latest <span style={{ color: '#BF5700' }}>Projects</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div className="glass-effect p-6 flex flex-col rounded-lg hover-lift transition-transform">
+                <div className="glass-effect specular-card p-6 flex flex-col rounded-lg hover-lift transition-transform">
                   <img src="https://austin-humphrey-portfolio.pages.dev/images/biometrics.jpeg" alt="Biometric Sports Analyzer" className="rounded mb-4" />
                   <h3 className="text-xl font-bold mb-2">Biometric Sports Analyzer</h3>
                   <p className="flex-grow text-sm leading-relaxed">Interactive dashboard for analyzing athlete biometric data, providing insights into performance, fatigue and injury risk.</p>
@@ -353,7 +432,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                     Read More
                   </a>
                 </div>
-                <div className="glass-effect p-6 flex flex-col rounded-lg hover-lift transition-transform">
+                <div className="glass-effect specular-card p-6 flex flex-col rounded-lg hover-lift transition-transform">
                   <img src="https://austin-humphrey-portfolio.pages.dev/images/claude.png" alt="AI‑Powered Code Review" className="rounded mb-4" />
                   <h3 className="text-xl font-bold mb-2">AI‑Powered Code Review</h3>
                   <p className="flex-grow text-sm leading-relaxed">A GitHub Action that uses generative AI to automatically review pull requests, providing feedback on code quality and style.</p>
@@ -365,7 +444,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                     View on GitHub
                   </a>
                 </div>
-                <div className="glass-effect p-6 flex flex-col rounded-lg hover-lift transition-transform">
+                <div className="glass-effect specular-card p-6 flex flex-col rounded-lg hover-lift transition-transform">
                   <img src="https://austin-humphrey-portfolio.pages.dev/images/whisper.png" alt="AI Audio Transcription" className="rounded mb-4" />
                   <h3 className="text-xl font-bold mb-2">AI Audio Transcription</h3>
                   <p className="flex-grow text-sm leading-relaxed">Implementing OpenAI's Whisper model for high‑accuracy, multilingual audio transcription—ideal for interviews and media content.</p>
@@ -388,35 +467,89 @@ const BlazeIntelligenceDashboard: React.FC = () => {
               <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 Live <span style={{ color: '#BF5700' }}>Data</span>
               </h2>
-              <div className="grid gap-6">
-                {liveGames.map((game) => (
-                  <div key={game.id} className="glass-effect rounded-xl p-6 hover-lift">
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center space-x-4">
-                        <div className="text-xl font-mono" style={{ color: '#EAEAEA' }}>
-                          {game.awayTeam} @ {game.homeTeam}
+              <div className="space-y-6">
+                <div className="pressure-shell glass-effect specular-card rounded-2xl">
+                  <LivePressureGlow points={pressurePoints} />
+                  <div className="relative z-10 p-6 md:p-8 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                    <div className="text-left md:max-w-2xl">
+                      <h3 className="text-2xl font-bold mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                        Live Pressure Stream
+                      </h3>
+                      <p className="text-sm md:text-base leading-relaxed" style={{ color: '#EAEAEA' }}>
+                        Ambient leverage glow across today's matchups. Highlights intensify around live games and cool as the slate slows down.
+                      </p>
+                      <p className="mt-3 text-xs md:text-sm font-mono uppercase tracking-wider" style={{ color: '#FFA500' }}>
+                        {marqueeLabel}
+                      </p>
+                    </div>
+                    <div className="grid gap-2 text-sm text-gray-200 md:text-right">
+                      <div>
+                        <span className="block text-xs uppercase tracking-[0.25em]" style={{ color: '#FFA500' }}>
+                          Now Tracking
+                        </span>
+                        <span className="text-lg font-semibold" style={{ color: '#EAEAEA' }}>
+                          {activeLiveGames.length > 0
+                            ? `${activeLiveGames.length} live matchup${activeLiveGames.length > 1 ? 's' : ''}`
+                            : 'Standby'}
+                        </span>
+                      </div>
+                      {highestPressureGame && (
+                        <div>
+                          <span className="block text-xs uppercase tracking-[0.25em]" style={{ color: '#BF5700' }}>
+                            Hot Zone
+                          </span>
+                          <span className="font-mono" style={{ color: '#EAEAEA' }}>
+                            {highestPressureGame.awayTeam} @ {highestPressureGame.homeTeam}
+                          </span>
                         </div>
-                        {game.status === 'Live' && (
-                          <div className="flex items-center space-x-2">
-                            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                            <span className="text-red-400 text-sm font-medium">LIVE</span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold" style={{ color: '#BF5700' }}>{game.score}</div>
-                        {game.inning && (
-                          <div className="text-sm" style={{ color: '#FFA500' }}>{game.inning}</div>
-                        )}
-                      </div>
+                      )}
+                      {nextScheduledGame && (
+                        <div>
+                          <span className="block text-xs uppercase tracking-[0.25em]" style={{ color: '#BF5700' }}>
+                            On Deck
+                          </span>
+                          <span className="font-mono" style={{ color: '#EAEAEA' }}>
+                            {nextScheduledGame.awayTeam} @ {nextScheduledGame.homeTeam}
+                          </span>
+                        </div>
+                      )}
+                      <p className="text-xs text-gray-400">
+                        Glow budget &le;4.5ms per frame. Honors prefers-reduced-motion.
+                      </p>
                     </div>
                   </div>
-                ))}
+                </div>
+
+                <div className="grid gap-6">
+                  {liveGames.map((game) => (
+                    <div key={game.id} className="glass-effect specular-card rounded-xl p-6 hover-lift">
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center space-x-4">
+                          <div className="text-xl font-mono" style={{ color: '#EAEAEA' }}>
+                            {game.awayTeam} @ {game.homeTeam}
+                          </div>
+                          {game.status === 'Live' && (
+                            <div className="flex items-center space-x-2">
+                              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                              <span className="text-red-400 text-sm font-medium">LIVE</span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold" style={{ color: '#BF5700' }}>{game.score}</div>
+                          {game.inning && (
+                            <div className="text-sm" style={{ color: '#FFA500' }}>{game.inning}</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Stats Dashboard */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                <div className="glass-effect rounded-xl p-6">
+                <div className="glass-effect specular-card rounded-xl p-6">
                   <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>System Status</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between">
@@ -438,7 +571,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="glass-effect rounded-xl p-6">
+                <div className="glass-effect specular-card rounded-xl p-6">
                   <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Today's Stats</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between">
@@ -460,7 +593,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="glass-effect rounded-xl p-6">
+                <div className="glass-effect specular-card rounded-xl p-6">
                   <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Performance</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between">
@@ -492,7 +625,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
               <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 Advanced <span style={{ color: '#BF5700' }}>Analytics</span>
               </h2>
-              <div className="glass-effect rounded-xl p-6 mb-8">
+              <div className="glass-effect specular-card rounded-xl p-6 mb-8">
                 <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Today's Key Metrics</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center">
@@ -520,7 +653,7 @@ const BlazeIntelligenceDashboard: React.FC = () => {
                   Top <span style={{ color: '#BF5700' }}>Players</span>
                 </h3>
                 {topPlayers.map((player, index) => (
-                  <div key={index} className="glass-effect rounded-xl p-6 hover-lift">
+                  <div key={index} className="glass-effect specular-card rounded-xl p-6 hover-lift">
                     <div className="flex justify-between items-center">
                       <div>
                         <h3 className="text-lg font-semibold">{player.name}</h3>
