@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/runner/work/blaze-intelligence-official/blaze-intelligence-official/logs/.3342e3ccee7f34796b880197b56ec270bffe2415-audit.json",
+    "files": [
+        {
+            "date": 1757857866924,
+            "name": "/home/runner/work/blaze-intelligence-official/blaze-intelligence-official/logs/combined-2025-09-14.log",
+            "hash": "0a388df3b7fbf93df12db5abd945cd83b626d2b358c452182f939ceb449efeaf"
+        }
+    ],
+    "hashType": "sha256"
+}

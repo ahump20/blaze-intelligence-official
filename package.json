@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --testPathIgnorePatterns=/austin-portfolio-deploy/",
+    "test:watch": "jest --watch --testPathIgnorePatterns=/austin-portfolio-deploy/",
+    "test:coverage": "jest --coverage --testPathIgnorePatterns=/austin-portfolio-deploy/"
   },
   "keywords": [
     "sports",
@@ -39,7 +41,17 @@
         "lines": 80,
         "statements": 80
       }
-    }
+    },
+    "modulePathIgnorePatterns": [
+      "<rootDir>/austin-portfolio-deploy/",
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/austin-portfolio-deploy/",
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
+    ]
   },
   "engines": {
     "node": ">=18.0.0"

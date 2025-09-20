@@ -72,10 +72,10 @@
   },
   "pricing": {
     "blaze": {
-      "youth": 540,
-      "highSchool": 1440,
-      "college": 1560,
-      "professional": 7200
+      "youth": 348,
+      "highSchool": 1188,
+      "college": 3588,
+      "professional": 11988
     },
     "competitors": {
       "hudl": {
@@ -93,30 +93,30 @@
       "youth": {
         "competitor": "hudl",
         "tier": "assist",
-        "blazePrice": 540,
+        "blazePrice": 348,
         "competitorPrice": 1800,
-        "savingsPercentage": 70.0
+        "savingsPercentage": 80.7
       },
       "highSchool": {
         "competitor": "hudl", 
         "tier": "pro",
-        "blazePrice": 1440,
+        "blazePrice": 1188,
         "competitorPrice": 4800,
-        "savingsPercentage": 70.0
+        "savingsPercentage": 75.3
       },
       "college": {
         "competitor": "synergy",
-        "tier": "basic", 
-        "blazePrice": 1560,
-        "competitorPrice": 2400,
-        "savingsPercentage": 35.0
+        "tier": "advanced", 
+        "blazePrice": 3588,
+        "competitorPrice": 6000,
+        "savingsPercentage": 40.2
       },
       "professional": {
-        "competitor": "hudl",
-        "tier": "elite",
-        "blazePrice": 7200,
-        "competitorPrice": 9600,
-        "savingsPercentage": 25.0
+        "competitor": "synergy",
+        "tier": "enterprise",
+        "blazePrice": 11988,
+        "competitorPrice": 15000,
+        "savingsPercentage": 20.1
       }
     },
     "calculations": {
